@@ -4,7 +4,7 @@ This repository contains OpenAPI specs for public-facing Airship APIs.
 
 ## What the contents are for
 
-We use these specs internally to generate our [API documentation](https://docs.airship.com/api/), but they can be used for other purposes such as payload validation, API client automation using tools such as [Postman](https://www.postman.com/), or even the creation of mock servers. For more information about the OpenAPI specification and available tooling, see:
+We use these specs internally to generate our [API documentation](https://docs.airship.com/api/), but they can be used for other purposes such as payload validation, API client automation using tools such as [Postman](https://www.postman.com/airship-api), or even the creation of mock servers. For more information about the OpenAPI specification and available tooling, see:
 
 * [OpenAPI Guide](https://swagger.io/docs/specification/about/)
 * [OpenAPI Tools Aggregator](https://openapi.tools/)
