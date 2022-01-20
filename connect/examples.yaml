@@ -1,0 +1,2165 @@
+components:
+  schemas:
+    api_initiate_opt_in:
+      - description: Example API-initiated Opt-In Event
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "a11d6d6b-bdd1-4f3d-97d3-591993945425",
+                  "offset": "1000005312986",
+                  "occurred": "2019-07-10T17:11:48.923Z",
+                  "processed": "2019-07-10T17:11:49.151Z",
+                  "device": {
+                      "channel": "35eb0446-0c75-44ec-ba9e-81d7250e0e06",
+                      "device_type": "SMS"
+                  },
+                  "body": {
+                      "event_type": "api_initiate_opt_in",
+                      "identifiers": {
+                          "sender": "18338647425",
+                          "msisdn": "15035508427"
+                      }
+                  },
+                  "type": "COMPLIANCE"
+              }
+    associatedPush:
+      - description: Push Sent to an Audience at a Defined date-time
+        examples:
+          - lang: json
+            source: |
+              {
+                "push_id": "6e3339ce-529c-42e4-a2f6-7546f81c9828",
+                "time": "2015-07-30T21:03:37.631Z"
+              }
+      - description: >-
+          Push Event Fullfilled at a Relative Time (local/best-time) or as a
+          Part of a Grouped Operation
+        examples:
+          - lang: json
+            source: |
+              {
+                "push_id": "6e3339ce-529c-42e4-a2f6-7546f81c9828",
+                "time": "2015-07-30T21:03:37.631Z"
+              }
+    attribute_operation:
+      - description: Example Attribute Operation Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "00000173-bb88-8804-b6ec-a40f4ae36648",
+                "offset": "1000059326194",
+                "occurred": "2020-08-04T22:12:33.924Z",
+                "processed": "2020-08-04T22:12:37.672Z",
+                "device": {
+                    "android_channel": "b57f0e3c-da10-4a2b-99d2-5fe2cb30cad3",
+                    "channel": "b57f0e3c-da10-4a2b-99d2-5fe2cb30cad3",
+                    "device_type": "ANDROID",
+                    "named_user_id": "cool_user",
+                    "attributes": {
+                      "locale_variant": "",
+                      "app_version": "2020-02-10T222436-staging",
+                      "device_model": "Pixel 2 XL",
+                      "connection_type": "WIFI",
+                      "app_package_name": "com.urbanairship.goat.staging",
+                      "iana_timezone": "America/Los_Angeles",
+                      "push_opt_in": "true",
+                      "locale_country_code": "US",
+                      "device_os": "10",
+                      "locale_timezone": "-25200",
+                      "locale_language_code": "en",
+                      "location_enabled": "false",
+                      "background_push_enabled": "true",
+                      "ua_sdk_version": "12.2.0",
+                      "location_permission": "NOT_ALLOWED"
+                    }
+                },
+                "body": {
+                    "set": [
+                      {
+                          "key": "first_name",
+                          "value": "Pierre"
+                      }
+                    ]
+                },
+                "type": "ATTRIBUTE_OPERATION"
+              }
+    bounce:
+      - description: Example Email Bounce Event
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
+                  "offset": "1000001778910",
+                  "occurred": "2018-11-28T00:02:41.794Z",
+                  "processed": "2018-11-28T00:02:45.270Z",
+                  "device": {
+                      "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
+                      "device_type": "EMAIL",
+                      "delivery_address": "bademail@baddomain.com"
+                  },
+                  "body": {
+                      "event_type": "bounce",
+                      "properties": {
+                          "bounce_event_type": "bounce",
+                          "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
+                          "subject": "Red Means Go",
+                          "email": "bademail@baddomain.com",
+                          "bounce_class": "10"
+                      }
+                  },
+                  "type": "COMPLIANCE"
+              }
+    carrier_deactivation:
+      - description: Example SMS carrier_deactivation Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "carrier_deactivation",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    close:
+      - description: Example Close Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                  }
+                },
+                "body": {
+                  "session_id": "61acb6c9-527b-4632-b789-a3e6085b094e"
+                },
+                "type": "CLOSE"
+              }
+    compliance:
+      - description: Example Compliance Event Stream
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
+                "offset": "1000001778910",
+                "occurred": "2018-11-28T00:02:41.794Z",
+                "processed": "2018-11-28T00:02:45.270Z",
+                "device": {
+                    "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
+                    "device_type": "EMAIL",
+                    "delivery_address": "bogus@email.com"
+                },
+                "body": {
+                    "event_type": "bounce",
+                    "properties": {
+                        "bounce_event_type": "bounce",
+                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
+                        "subject": "You there?",
+                        "email": "bogus@email.com",
+                        "bounce_class": "10"
+                    }
+                },
+                "type": "COMPLIANCE"
+              }
+    control:
+      - description: Example Control Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id" : "ff76bb85-74bc-4511-a3bf-11b6117784db",
+                "type": "CONTROL",
+                "offset": "MTIzNQ",
+                "occurred": "2015-05-03T02:32:12.088Z",
+                "processed": "2015-05-03T12:12:43.180Z",
+                "device": {
+                    "channel":"a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "device_type":"ANDROID",
+                    "android_channel": "a61448e1-be63-43ee-84eb-19446ba743f0"
+                  },
+                "body:" {
+                  "push_id": "c91d9e1b-605f-4bad-a45d-cdf3e6e0773f",
+                  "group_id": "3eec7de4-4b19-436e-ad15-88278f9ddb82"
+                  }
+                }
+    custom:
+      - description: Example Custom Event from API (Shoe Sale)
+        examples:
+          - lang: json
+            source: |
+              {
+                "name" : "shoe-purchase",
+                "value" : 239.85,
+                "source": "api"
+                "transaction" : "Selling all the shoes",
+                "session_id": "cfe467a6-ca70-40dd-8c1f-07b2f644935e",
+                "properties": {
+                  "description": "Sneaker purchase",
+                  "brand": "Victory Sneakers",
+                  "colors": ["red","blue"],
+                  "items": [
+                    {
+                        "text": "New Line Sneakers",
+                        "price": "$ 79.95"
+                    },
+                    {
+                        "text": "Old Line Sneakers",
+                        "price": "$ 79.95"
+                    },
+                    {
+                        "text": "Blue Line Sneakers",
+                        "price": "$ 79.95"
+                    }
+                  ],
+                  "name": "Hugh Manbeing",
+                  "userLocation": {
+                    "state": "CO",
+                    "zip": "80202"
+                  }
+                }
+              }
+      - description: Example Custom Event from SDK (Shoe Sale)
+        examples:
+          - lang: json
+            source: |
+              {
+                "name" : "shoe-purchase",
+                "value" : 60.000000,
+                "source": "sdk"
+                "interaction_type" : "Landing Page",
+                "interaction_id" : "d01d0380-da2e-11e3-8519-90e2ba299b38",
+                "customer_id" : "George@hotmail.com",
+                "transaction" : "Selling all the shoes",
+                "session_id": "cfe467a6-ca70-40dd-8c1f-07b2f644935e",
+                "last_delivered": {
+                  "push_id": "6e3339ce-529c-42e4-a2f6-7546f81c9828"
+                },
+                "triggering_push": {
+                  "push_id": "c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06",
+                  "group_id": "8ea2abd6-dbc7-475a-9c57-fb31c7e2999b"
+                },
+                "properties": {
+                  "coolest-identifier": "123-cool-cat-321",
+                  "ltv": false,
+                  "category": "womens_shoes",
+                  "id": 1267,
+                  "description": "plaid canvas",
+                  "brand": "hipster",
+                  "new_item": true
+                }
+              }
+    custom_keyword_response:
+      - description: Example Custom Keyword Response Event
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "34464823-b48c-4ed3-8849-03933f29d057",
+                  "offset": "1000005313855",
+                  "occurred": "2019-07-11T00:24:39.203Z",
+                  "processed": "2019-07-11T00:24:40.128Z",
+                  "device": {
+                      "channel": "ec71312b-42e4-4bcd-b742-581a84941793",
+                      "device_type": "SMS",
+                      "delivery_address": "15035508427",
+                      "identifiers": {
+                          "sender": "18338647425"
+                      }
+                  },
+                  "body": {
+                      "event_type": "custom_keyword_response",
+                      "identifiers": {
+                          "sender": "18338647425",
+                          "msisdn": "15035508427"
+                      },
+                      "properties": {
+                          "inbound_message": "coupon",
+                          "outbound_message": "Thanks! Here is your coupon! https:\/\/wallet-api.urbanairship.com\/v1\/pass\/adaptive\/M1kTVOcyXm"
+                      }
+                  },
+                  "type": "COMPLIANCE"
+              }
+    delivery_report:
+      - description: Example Delivery Report Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "body": {
+                  "interaction_type": "delivery_report",
+                  "name": "dispatched",
+                  "properties": {
+                    "sender": 15551234567,
+                    "vendor": "CLX",
+                    "vendorDeliveryId": "FENhObMKbCjMOwtw"
+                  },
+                  "source": "API",
+                  "triggering_push": {
+                    "campaigns": {
+                      "categories": [
+                        "New Users"
+                      ]
+                    },
+                    "push_id": "9323b708-7741-4a85-8b1b-e55ad8ce64fc"
+                  }
+                },
+                "device": {
+                  "channel": "db7576c7-6b3d-4f07-b13a-ea3824fea262",
+                  "delivery_address": "15558675309",
+                  "device_type": "SMS"
+                },
+                "id": "48af12e8-6920-4e4e-bef8-b5a6918eec35",
+                "occurred": "2019-01-31T17:45:38.700Z",
+                "offset": "1000002098217",
+                "processed": "2019-01-31T17:45:41.285Z",
+                "type": "CUSTOM"
+              }
+    devices:
+      - description: Example Device Information Object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "channel": "a6b392d6-3b0d-4c00-98ef-5cb91d51268a",
+                  "device_type": "IOS",
+                  "named_user_id": "Albert",
+                  "identifiers": {
+                    "com.urbanairship.idfa": "9D55CAC8-79E3-4567-8A99-8465B7A12868",
+                    "com.urbanairship.gimbal.aii": "c5720f06-516a-4b91-b7bb-53523fc43a3d",
+                    "cid": 123554,
+                    "com.urbanairship.limited_ad_tracking_enabled": "false"
+                  },
+                  "attributes": {
+                    "package_name": "com.company_name.app_name",
+                    "version": "1.0.0",
+                    "ua_library": "7.0.2"
+                  }
+                }
+    emailBounceEvent:
+      - description: Example email bounce custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@email.com"
+                },
+                "body": {
+                    "name": "bounce",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                      "sender": "baseball@sports.com",
+                      "subject": "Baseball Season is Almost Here!",
+                      "email": "new.subscriber@email.com",
+                      "bounce_event_type": "bounce",
+                      "bounce_class": "10",
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    emailClickEvent:
+      - description: Example email click custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@email.com"
+                },
+                "body": {
+                    "name": "click",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                        "sender": "baseball@sports.com",
+                        "subject": "Baseball Season is Almost Here!",
+                        "email": "new.subscriber@email.com",
+                        "link_name": "Click here for baseball updates",
+                        "link_url": "http://www.urbanairship.com",
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    emailCreateAndSend:
+      - description: Example Email create_and_send Event
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "adf8794c-c3c3-4507-9ea3-1a554ed4b94f",
+                  "offset": "1000001778141",
+                  "occurred": "2018-11-27T23:20:12.167Z",
+                  "processed": "2018-11-27T23:20:12.443Z",
+                  "device": {
+                      "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                      "device_type": "EMAIL",
+                      "delivery_address": "new.address@subscriber.com"
+                  },
+                  "body": {
+                      "event_type": "create_and_send",
+                      "identifiers": {
+                          "address": "new.address@subscriber.com.com"
+                      },
+                      "properties": {
+                          "channel_registered": "true",
+                          "commercial_opted_in": "2018-10-12T12:12:12"
+                      }
+                  },
+                  "type": "COMPLIANCE"
+                }
+    emailDelayEvent:
+      - description: Example email delivery custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "addressResponding4xx@email.com"
+                },
+                "body": {
+                    "name": "delay",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                        "sender": "baseball@sports.com",
+                        "subject": "Baseball Season is Almost Here!",
+                        "email": "addressResponding4xx@email.com"
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    emailDeliveryEvent:
+      - description: Example email delivery custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@email.com"
+                },
+                "body": {
+                    "name": "delivery",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                        "sender": "baseball@sports.com",
+                        "subject": "Baseball Season is Almost Here!",
+                        "email": "new.subscriber@email.com"
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    emailEventBody:
+      - description: Example Email Compliance Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
+                "offset": "1000001778910",
+                "occurred": "2018-11-28T00:02:41.794Z",
+                "processed": "2018-11-28T00:02:45.270Z",
+                "device": {
+                    "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
+                    "device_type": "EMAIL",
+                    "delivery_address": "bogus@email.com"
+                },
+                "body": {
+                    "event_type": "bounce",
+                    "properties": {
+                        "bounce_event_type": "bounce",
+                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
+                        "subject": "You there?",
+                        "email": "bogus@email.com",
+                        "bounce_class": "10"
+                    }
+                },
+                "type": "COMPLIANCE"
+              }
+    emailInitialOpenEvent:
+      - description: Example email initial_open custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "544da998-9338-4506-8564-8adf7b2597cf",
+                "offset": "1000032367699",
+                "occurred": "2020-07-29T20:26:03.000Z",
+                "processed": "2020-07-29T20:27:47.780Z",
+                "device": {
+                  "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                  "device_type": "EMAIL",
+                  "delivery_address": "new.subscriber@email.com",
+                  "named_user_id": "a_person"
+                },
+                "body": {
+                  "name": "initial_open",
+                  "triggering_push": {
+                    "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99"
+                  },
+                  "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                  "source": "API",
+                  "properties": {
+                    "sender": "baseball@sports.com",
+                    "subject": "Baseball Season is Almost Here!",
+                    "email": "new.subscriber@email.com"
+                  }
+                },
+                "type": "CUSTOM"
+              }
+    emailInjectionEvent:
+      - description: Example email injection custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@email.com"
+                },
+                "body": {
+                    "name": "injection",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                        "sender": "baseball@sports.com",
+                        "subject": "Baseball Season is Almost Here!",
+                        "email": "new.subscriber@email.com"
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    emailOpenEvent:
+      - description: Example email open custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@email.com"
+                },
+                "body": {
+                    "name": "open",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                        "sender": "baseball@sports.com",
+                        "subject": "Baseball Season is Almost Here!",
+                        "email": "new.subscriber@email.com"
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    emailUnsubscribeLinkEvent:
+      - description: Example email unsubscribe link custom event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "2cf89e3a-2458-4c2d-8fcf-11f593b1b85e",
+                "offset": "1000001778145",
+                "occurred": "2019-02-27T23:20:14.000Z",
+                "processed": "2019-02-27T23:20:49.347Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@email.com"
+                },
+                "body": {
+                    "name": "unsubscribe",
+                    "triggering_push": {
+                        "push_id": "bd5b54a8-84bd-40bc-aa84-8315f9300a99",
+                        "campaigns": {
+                            "categories": [
+                                "new",
+                                "Baseball Fan"
+                            ]
+                        }
+                    },
+                    "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
+                    "source": "API",
+                    "properties": {
+                      "unsubscribe_event_type": "link_unsubscribe"
+                    }
+                },
+                "type": "CUSTOM"
+              }
+    eventStream:
+      - description: Example Response Object
+        examples:
+          - lang: json
+            source: |
+              {
+                 "id": "8e50350e-dd9f-41af-b98e-b0e5d4b27dea",
+                 "type": "SEND",
+                 "offset": "NTIxMDM1",
+                 "occurred": "2015-05-02T02:31:22.088Z",
+                 "processed": "2015-05-02T02:32:43.181Z",
+                 "device": {
+                    "channel": "5117f2a7-ba58-4981-9456-169959511d1a",
+                    "device_type": "IOS"
+                 },
+                 "body": {
+                    "push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e",
+                    "alerting": true
+                 }
+              }
+              {
+                "device": {
+                  "channel": "820e4493-e4c9-4577-99bc-a98180599f73",
+                  "delivery_address": "new.user@urbanairship.com",
+                  "device_type": "EMAIL"
+                },
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "FIRST_OPT_IN"
+              }
+      - description: mobile_originated_sms Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_originated_sms",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "join",
+                    "outbound_message": "Thanks for joining!",
+                    "keyword": "join"
+                  }
+                },
+                "type": "MOBILE_ORIGINATED"
+              }
+    filters:
+      - description: Device Filter
+        examples:
+          - lang: json
+            source: |
+              {
+                 "devices": [
+                     {
+                         "channel": "195adec2-fa70-4e62-b978-78ede2827597"
+                     },
+                     {
+                         "named_user_id": "George"
+                     }
+                 ]
+              }
+      - description: >-
+          Example Notification Filter - Include All Events Pertaining to a Push
+          ID
+        examples:
+          - lang: json
+            source: |
+              {"push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e"}
+      - description: >-
+          Example Notification Filter - Include all events pertaining to a
+          pipeline or PLT Push (Defined by Group ID)
+        examples:
+          - lang: json
+            source: |
+              {"group_id": "b7f7c9e0-64d6-4f44-9d74-d32ef5437ccf"}
+    first_open:
+      - description: Example FIRST_OPEN Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                },
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "FIRST_OPEN"
+              }
+    first_opt_in:
+      - description: Example FIRST_OPT_IN Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "device": {
+                  "channel": "820e4493-e4c9-4577-99bc-a98180599f73",
+                  "delivery_address": "new.user@urbanairship.com",
+                  "device_type": "EMAIL"
+                },
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "FIRST_OPT_IN"
+              }
+    in_app_message_display:
+      - description: Example In-App Message Display Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "68be9eba-3f3e-4763-bbd1-c921a164af1b",
+                    "group_id": "49e59f68-d58c-4a2f-86ab-112f52e3c5d2",
+                    "variant_id": 5,
+                    "session_id": "cfe467a6-ca70-40dd-8c1f-07b2f644935e",
+                    "triggering_push": {
+                      "push_id": "18c0f649-2330-4fb0-a9fa-ad029f5f4e0e",
+                      "group_id": "c4c89025-0d25-434c-8040-283990585f01"
+                    }
+                  },
+                "type": "IN_APP_MESSAGE_DISPLAY"
+              }
+    in_app_message_expiration:
+      - description: Example In-App Message Expiration Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "910fea50-5d42-1159-b702-024288f4e1d3",
+                "offset": "1000022468589",
+                "occurred": "2019-04-03T18:59:02.246Z",
+                "processed": "2019-04-03T19:10:26.301Z",
+                "device": {
+                  "android_channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "device_type": "ANDROID",
+                  "identifiers": {
+                    "com.urbanairship.gimbal.aii": "2471037d-71d8-4229-a40f-df719f1af914",
+                    "session_id": "54204a73-7a95-4ffc-8051-bf230d086e19",
+                    "GA_CID": "90d56c80-f31f-49fd-87b0-20deb3d2602a"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "dev",
+                    "device_model": "Android SDK built for x86",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "9",
+                    "locale_timezone": "-25200",
+                    "carrier": "Android",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "9.7.0",
+                    "location_permission": "NOT_ALLOWED"
+                  }
+                },
+                "body": {
+                  "push_id": "a1fe5f2a-1d51-4f3a-a77b-35018031741d",
+                  "session_id": "3514bd74-bfa8-149e-9c12-a44794994ca8",
+                  "type": "EXPIRED",
+                  "time_expired": "1970-01-01T00:00:00.000Z"
+                },
+                "type": "IN_APP_MESSAGE_EXPIRATION"
+              }
+    in_app_message_resolution:
+      - description: Example In-App Message Resolution Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "910fea50-5d42-1159-b702-024288f4e1d3",
+                "offset": "1000022468589",
+                "occurred": "2019-04-03T18:59:02.246Z",
+                "processed": "2019-04-03T19:10:26.301Z",
+                "device": {
+                  "android_channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "device_type": "ANDROID",
+                  "identifiers": {
+                    "com.urbanairship.gimbal.aii": "2471037d-71d8-4229-a40f-df719f1af914",
+                    "session_id": "54204a73-7a95-4ffc-8051-bf230d086e19",
+                    "GA_CID": "90d56c80-f31f-49fd-87b0-20deb3d2602a"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "dev",
+                    "device_model": "Android SDK built for x86",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "9",
+                    "locale_timezone": "-25200",
+                    "carrier": "Android",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "9.7.0",
+                    "location_permission": "NOT_ALLOWED"
+                  }
+                },
+                "body": {
+                 "push_id": "86ee0a6e-a46a-4bbe-a3d1-804891baaee4",
+                 "group_id": "68991b8d-0d6b-4e05-bc62-2cdec2085c18",
+                 "time_sent": "2019-03-03T19:10:26.301Z",
+                 "type": "BUTTON_CLICK",
+                 "button_id": "yes",
+                 "button_description": "Yes",
+                 "button_group": "ua_yes_no_background",
+                 "duration": 10000000000
+                },
+                "type": "IN_APP_MESSAGE_RESOLUTION"
+              }
+    location:
+      - description: Example LOCATION Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "910fea50-5d42-1159-b702-024288f4e1d3",
+                "offset": "1000022468589",
+                "occurred": "2019-04-03T18:59:02.246Z",
+                "processed": "2019-04-03T19:10:26.301Z",
+                "device": {
+                  "android_channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "device_type": "ANDROID",
+                  "identifiers": {
+                    "com.urbanairship.gimbal.aii": "2471037d-71d8-4229-a40f-df719f1af914",
+                    "session_id": "54204a73-7a95-4ffc-8051-bf230d086e19",
+                    "GA_CID": "90d56c80-f31f-49fd-87b0-20deb3d2602a"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "dev",
+                    "device_model": "Android SDK built for x86",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "9",
+                    "locale_timezone": "-25200",
+                    "carrier": "Android",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "9.7.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                  }
+                },
+                "body": {
+                  "latitude": "51.5033630",
+                  "longitude": "-0.1276250",
+                  "foreground": true,
+                  "session_id": "ecd3741d-92c4-469b-b42c-888e40a121d3"
+                },
+                "type": "LOCATION"
+              }
+    mobile_create_channel:
+      - description: Example SMS mobile_create_channel Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_create_channel",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "JOIN",
+                    "outbound_message": "Your order number is #123456789. Text 'JOIN' to learn about new offers from us.",
+                    "keyword": "JOIN"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    mobile_keyword_matched:
+      - description: Example SMS mobile_keyword_matched Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_keyword_matched",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "join",
+                    "outbound_message": "Wanna join the club?",
+                    "keyword": "JOIN"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    mobile_keyword_unmatched:
+      - description: Example SMS mobile_keyword_unmatched Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_keyword_unmatched",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "@%#!&@&#",
+                    "outbound_message": "Wanna join the club?"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    mobile_opt_in:
+      - description: Example SMS mobile_opt_in Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_opt_in",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "y",
+                    "outbound_message": "Do you want to get text alerts from us?",
+                    "keyword": "Y"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    mobile_opt_out:
+      - description: Example SMS mobile_opt_out Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_opt_out",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "STOP",
+                    "outbound_message": "Text STOP to opt out of text messages from us.",
+                    "keyword": "STOP"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    mobile_originated:
+      - description: Example Mobile-Originated SMS Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_originated_sms",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "inbound_message": "join",
+                    "outbound_message": "Thanks for joining!",
+                    "keyword": "join"
+                  }
+                },
+                "type": "MOBILE_ORIGINATED"
+              }
+    mobile_originated_sms:
+      - description: mobile_originated_sms Event Body
+        examples:
+          - lang: json
+            source: |
+              {
+                "event_type": "mobile_originated_sms",
+                "identifiers": {
+                  "sender": "15558675309",
+                  "msisdn": "15558968663"
+                },
+                "properties": {
+                  "inbound_message": "join",
+                  "outbound_message": "Thanks for joining!",
+                  "keyword": "join"
+                }
+              }
+    mobile_terminated_message:
+      - description: Example mobile_terminated_message Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "mobile_terminated_message",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    open:
+      - description: Example Open Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "910fea50-5d42-1159-b702-024288f4e1d3",
+                "offset": "1000022468589",
+                "occurred": "2019-04-03T18:59:02.246Z",
+                "processed": "2019-04-03T19:10:26.301Z",
+                "device": {
+                  "android_channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "device_type": "ANDROID",
+                  "identifiers": {
+                    "com.urbanairship.gimbal.aii": "2471037d-71d8-4229-a40f-df719f1af914",
+                    "session_id": "54204a73-7a95-4ffc-8051-bf230d086e19",
+                    "GA_CID": "90d56c80-f31f-49fd-87b0-20deb3d2602a"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "1037.04c13d-master",
+                    "device_model": "Nokia 6.1",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "9",
+                    "locale_timezone": "-25200",
+                    "carrier": "Android",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "9.7.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                "body": {
+                  "last_delivered": {
+                      "push_id": "6e3339ce-529c-42e4-a2f6-7546f81c9828",
+                      "time": "2015-07-30T21:03:37.631Z"
+                  },
+                  "triggering_push": {
+                      "push_id": "c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06",
+                      "group_id": "8ea2abd6-dbc7-475a-9c57-fb31c7e2999b",
+                      "variant_id": 1
+                  },
+                  "session_id": "ad4ad05a-17f4-4eab-9c6f-d3f7fbf3cc25"
+                },
+                "type": "OPEN"
+              }
+    opted_out:
+      - description: Example SMS opted_out Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "opted_out",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    push_body:
+      - description: Example Push Body Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "910fea50-5d42-1159-b702-024288f4e1d3",
+                "offset": "1000022468589",
+                "occurred": "2019-04-03T18:59:02.246Z",
+                "processed": "2019-04-03T19:10:26.301Z",
+                "body": {
+                  "push_id": "233f8109-bf56-4d95-a8bf-6f28e9d270a4",
+                  "campaigns": {
+                    "categories": [
+                        "hello",
+                        "numberwang",
+                        "first message"
+                    ]
+                  },
+                  "resource": "PUSH",
+                  "trimmed": false,
+                  "payload": "eyJkZXZpY2VfdHlwZXMiOiBbImFuZHJvaWQiLCAiaW9zIl0sICJub3RpZmljYXRpb24iOiB7ImFuZHJvaWQiOiB7fSwgImlvcyI6IHsiYmFkZ2UiOiAiKzEifSwgImFsZXJ0IjogIklUIFdJTEwgV09SSyEifSwgImF1ZGllbmNlIjogImFsbCJ9"
+                },
+                "type": "PUSH_BODY"
+              }
+    region:
+      - description: Example Region Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "910fea50-5d42-1159-b702-024288f4e1d3",
+                "offset": "1000022468589",
+                "occurred": "2019-04-03T18:59:02.246Z",
+                "processed": "2019-04-03T19:10:26.301Z",
+                "device": {
+                  "android_channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "channel": "364a4e3f-170a-4f26-b0a1-11b280377dfe",
+                  "device_type": "ANDROID",
+                  "identifiers": {
+                    "com.urbanairship.gimbal.aii": "2471037d-71d8-4229-a40f-df719f1af914",
+                    "session_id": "54204a73-7a95-4ffc-8051-bf230d086e19",
+                    "GA_CID": "90d56c80-f31f-49fd-87b0-20deb3d2602a"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "dev",
+                    "device_model": "Android SDK built for x86",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "9",
+                    "locale_timezone": "-25200",
+                    "carrier": "Android",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "9.7.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                  }
+                },
+                "body":{
+                  "action": "enter",
+                  "region_id": "fb542343-9a43-450a-be7f-43bed95057ff",
+                  "session_id": "0a50fdb9-dfa9-4e0e-8373-4f0c5c7137c7",
+                  "name": "Coolest Place",
+                  "source_info": {
+                      "source": "Gimbal",
+                      "region_id": "a vendor identifier"
+                  }
+                },
+                "type": "REGION"
+              }
+    registration:
+      - description: Example Email Registration Event
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "8058bfd3-9081-4f48-845c-809bf5462ca4",
+                  "offset": "1000000739139",
+                  "occurred": "2018-12-18T21:24:11.836Z",
+                  "processed": "2018-12-18T21:24:12.608Z",
+                  "device": {
+                      "channel": "93f32fb8-0e40-440b-8944-2f9ef933ca88",
+                      "device_type": "EMAIL"
+                  },
+                  "body": {
+                      "event_type": "registration",
+                      "identifiers": {
+                          "address": "new.user@subscriber.com"
+                      },
+                      "properties": {
+                          "commercial_opted_in": "2018-10-20T12:00:00.000Z",
+                          "registration_type": "create"
+                      }
+                  },
+                  "type": "COMPLIANCE"
+                }
+    rich_delete:
+      - description: Example Event Body - Indicates the `push_id` that was deleted
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "ca2948b0-56ea-11e9-88dc-a142740a77e1",
+                "offset": "1000022469540",
+                "occurred": "2019-04-04T15:03:22.545Z",
+                "processed": "2019-04-04T15:12:54.657Z",
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                  "named_user_id": "coolusername",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "837645C4-BD17-455C-96A3-999E1290EFA7",
+                    "GA_CID": "d12b5b66-d0c6-40f6-923f-ea039e3e8297",
+                    "com.urbanairship.idfa": "9610438A-6AEF-4113-BB99-2F64CB56ED2F",
+                    "com.urbanairship.vendor": "F2519C6C-A724-4343-80C7-1F1E42C53DFF"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone8,1",
+                    "connection_type": "CELL",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "Europe/London",
+                    "push_opt_in": "true",
+                    "locale_country_code": "GB",
+                    "device_os": "12.1.4",
+                    "locale_timezone": "3600",
+                    "carrier": "Three",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "FOREGROUND_ALLOWED"
+                  }
+                },
+                "body": {
+                  "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801"
+                },
+                "type": "RICH_DELETE"
+              }
+    rich_delivery:
+      - description: Example Event Body — Indicates the `push_id` That reached the user
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "83848900-54ac-11e9-a132-024278224c1c",
+                "offset": "1000022466003",
+                "occurred": "2019-04-01T18:32:32.912Z",
+                "processed": "2019-04-01T18:32:33.031Z",
+                "device": {
+                  "android_channel": "1de67612-94bc-4d02-85b0-37ede154a9d7",
+                  "channel": "1de67612-94bc-4d02-85b0-37ede154a9d7",
+                  "device_type": "ANDROID"
+                },
+                "body": {
+                  "push_id": "1a7d774c-1659-4104-b594-2f7ec739c92d"
+                },
+                "type": "RICH_DELIVERY"
+              }
+    rich_read:
+      - description: Example Event Body — Indicates the `push_id` that the user read
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "ca2948b0-56ea-11e9-88dc-a142740a77e1",
+                "offset": "1000022469540",
+                "occurred": "2019-04-04T15:03:22.545Z",
+                "processed": "2019-04-04T15:12:54.657Z",
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                  "named_user_id": "coolusername",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "837645C4-BD17-455C-96A3-999E1290EFA7",
+                    "GA_CID": "d12b5b66-d0c6-40f6-923f-ea039e3e8297",
+                    "com.urbanairship.idfa": "9610438A-6AEF-4113-BB99-2F64CB56ED2F",
+                    "com.urbanairship.vendor": "F2519C6C-A724-4343-80C7-1F1E42C53DFF"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone8,1",
+                    "connection_type": "CELL",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "Europe/London",
+                    "push_opt_in": "true",
+                    "locale_country_code": "GB",
+                    "device_os": "12.1.4",
+                    "locale_timezone": "3600",
+                    "carrier": "Three",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "FOREGROUND_ALLOWED"
+                  }
+                },
+                "body": {
+                  "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801"
+                  "time": "2019-03-04T15:12:54.657Z"
+                },
+                "type": "RICH_READ"
+              }
+    screen_viewed:
+      - description: Example SMS Create-and-Send Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "ios_channel": "c1ca5af6-b014-46f9-8566-33f5f52c7b19",
+                  "channel": "c9cb18f7-b814-40f9-8566-33f5f52c7c48",
+                  "device_type": "IOS",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B1E00276-98BE-4B38-9077-FB2E90EFBE1B",
+                    "GA_CID": "1fa021e7-8298-4f92-bee0-07cb95eecfdd",
+                    "com.urbanairship.idfa": "1821a235-CD43-4ED8-8633-3BD3B991FA25",
+                    "com.urbanairship.vendor": "164d552C-F5F0-4C83-B529-321667C8E48A"
+                  },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "550",
+                    "device_model": "iPhone9,1",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "Europe/Berlin",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "12.2",
+                    "locale_timezone": "7200",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.2",
+                    "location_permission": "FOREGROUND_ALLOWED"
+                  }
+                },
+                "body": {
+                  "duration": 13933,
+                  "viewed_screen": "home",
+                  "previous_screen": "message_center",
+                  "session_id": "a26102f9-7fb2-451d-a65c-56e9394cf726"
+                },
+                "type": "SCREEN_VIEWED"
+              }
+    send:
+      - description: Example Send Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "ca2948b0-56ea-11e9-88dc-a142740a77e1",
+                "offset": "1000022469540",
+                "occurred": "2019-04-04T15:03:22.545Z",
+                "processed": "2019-04-04T15:12:54.657Z",
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                  "named_user_id": "coolusername",
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone8,1",
+                    "connection_type": "CELL",
+                    "app_package_name": "com.urbanairship.goat",
+                    "iana_timezone": "Europe/London",
+                    "push_opt_in": "true",
+                    "locale_country_code": "GB",
+                    "device_os": "12.1.4",
+                    "locale_timezone": "3600",
+                    "carrier": "Three",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "FOREGROUND_ALLOWED"
+                  }
+                },
+                "body": {
+                  "variant_id": 1,
+                  "push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e",
+                  "alerting": true,
+                  "campaigns": {
+                      "categories": [
+                        "hello",
+                        "numberwang",
+                        "first message"
+                      ]
+                    },
+                  "context": {
+                    "triggered_by": "custom_event",
+                    "event_uuid": "03669090-f934-45e2-a443-c75f6304ae6c",
+                    "transaction": "886f53d4-3e0f-46d7-930e-c2792dac6e0a",
+                    "interaction_id": "hello"
+                    }
+                  },
+                "type": "SEND"
+              }
+    send_aborted:
+      - description: Example SEND_ABORTED Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "fc06bf54-619b-4fda-9345-d8f9f8e891ef",
+                "occurred": "2021-02-26T20:50:21.12Z",
+                "offset": "1000001215643",
+                "processed": "2021-02-26T20:50:49.64Z",
+                "type": "SEND_ABORTED",
+                "device": {
+                  "android_channel": "e664fb42-d1a7-4956-9907-88c49394ae70",
+                  "channel": "e664fb42-d1a7-4956-9907-88c49394ae70",
+                  "device_type": "ANDROID",
+                  },
+                "body": {
+                  "push_id": "26ea5408-a1ec-4771-b4f0-e86d45c03f8a",
+                  "group_id": "3795a26d-2d74-462b-b228-ca3ed31ef7b1",
+                  "reason": "FEED_RESOLVE_FAILURE"
+                }
+              }
+    send_rejected:
+      - description: Example SEND_REJECTED Event Body
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "SEND_REJECTED",
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                  },
+                "body": {
+                  "variant_id": 1,
+                  "push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e",
+                  "campaigns" : {
+                    "categories" : ["hello", "first message"]
+                  }
+                }
+              }
+    short_link_click:
+      - description: Example short_link_click Event
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "31549b7d-a435-4b04-abca-69bfd4fb6aaa",
+                  "offset": "1000005313850",
+                  "occurred": "2019-07-10T23:18:57.465Z",
+                  "processed": "2019-07-10T23:18:58.148Z",
+                  "device": {
+                      "channel": "ec71312b-42e4-4bcd-b742-581a84941793",
+                      "device_type": "SMS",
+                      "delivery_address": "15551234567",
+                      "identifiers": {
+                          "sender": "15558647425"
+                      },
+                      "attributes": {
+                          "web_user_agent_string": "Mozilla\/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit\/537.36 (KHTML, like Gecko) Chrome\/75.0.3770.100 Safari\/537.36"
+                      }
+                  },
+                  "body": {
+                      "push_id": "f4b4201a-70e2-4a8d-bc8f-f35ddfa7d0e7",
+                      "group_id": "47f01bbf-2efa-4743-acd8-fd1023a36744",
+                      "properties": {
+                        "original_url": "https://docs.airship.com/api/connect#schemas-short_link_click"
+                      }
+                  },
+                  "type": "SHORT_LINK_CLICK"
+              }
+    smsCreateAndSend:
+      - description: Example SMS create_and_send Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "create_and_send",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "opted_in": "2018-12-03T19:31:10.000Z",
+                    "channel_registered": "true"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    smsEventBody:
+      - description: Example SMS Compliance Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "registration",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "opted_in": "2018-12-03T19:31:10.000Z",
+                    "registration_type": "created"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    smsRegistered:
+      - description: Example SMS Registration Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "registration",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "opted_in": "2018-12-03T19:31:10.000Z",
+                    "registration_type": "created"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    sms_uninstalled:
+      - description: Example SMS uninstalled Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663"
+                },
+                "body": {
+                  "event_type": "uninstall",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+    subscription:
+      - description: Example Subscription Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "62f3b7ac-4048-4f22-a0b5-22c01ef172a9",
+                "offset": "1000022265027",
+                "occurred": "2019-04-01T13:00:23.186Z",
+                "processed": "2019-04-01T13:00:23.456Z",
+                "device": {
+                  "channel": "6b46c724-494b-4491-9fe7-1b903d266110",
+                  "device_type": "EMAIL",
+                  "delivery_address": "user+43679@urbanairship.com.sink.sparkpostmail.com"
+                },
+                "body": {
+                  "event_type":"registration",
+                  "identifiers": {
+                    "address":"new.subscription@emaildomain.com"
+                  },
+                  "properties":{
+                    "commercial_opted_in":"2019-01-04T20:56:00.000Z",
+                    "transactional_opted_in":"2019-01-04T20:56:00.000Z"
+                    }
+                },
+                "type": "SUBSCRIPTION"
+              }
+    subset:
+      - description: Subset `SAMPLE`
+        examples:
+          - lang: json
+            source: |
+              {
+                "type": "SAMPLE",
+                "proportion": 0.1
+              }
+      - description: Subset `PARTITION`
+        examples:
+          - lang: json
+            source: |
+              {
+                "type": "PARTITION",
+                "count": 10,
+                "selection": 0
+              }
+    tag_change:
+      - description: Example Tag Change Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "SEND_REJECTED",
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                  },
+                "body":{
+                  "add": {
+                      "crm": [
+                        "partner",
+                        "active"
+                      ],
+                      "loyalty": [
+                        "silver_member"
+                      ]
+                  },
+                  "remove": {
+                      "device": [
+                        "shoe_buyer"
+                      ]
+                  },
+                  "current": {
+                      "crm": [
+                        "partner",
+                        "active",
+                        "new_user"
+                      ],
+                      "loyalty": [
+                        "silver_member",
+                        "special_offers"
+                      ],
+                      "device": [
+                        "san_francisco",
+                        "sports"
+                      ]
+                    }
+                  },
+                "type": "TAG_CHANGE"
+              }
+    uninstall:
+      - description: Example Uninstall Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "UNINSTALL",
+                "device": {
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS",
+                  },
+                "body":{
+                  "decay": false
+                  }
+                "type": "UNINSTALL"
+              }
+    unsubscribe:
+      - description: Example Email Unsubscribe Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "bd8c90d6-5704-4438-8075-7530d06c4cba",
+                "offset": "1000001778792",
+                "occurred": "2018-11-27T23:47:54.641Z",
+                "processed": "2018-11-27T23:47:55.516Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "former.user@unsubscriber.com"
+                },
+                "body": {
+                    "event_type": "registration",
+                    "properties": {
+                        "message_type": "commercial",
+                        "registration_type": "unsubscribe"
+                    }
+                },
+                "type": "COMPLIANCE"
+              }
+    web_click:
+      - description: Example Web Click Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "c91efbfa-14b1-401a-9002-54730b5cdcda",
+                "offset": "1000024775634",
+                "occurred": "2019-04-05T20:11:36.696Z",
+                "processed": "2019-04-05T20:11:37.179Z",
+                "device": {
+                  "channel": "bd054c5b-d614-46a1-a843-6ca330c66489",
+                  "device_type": "WEB",
+                  "attributes": {
+                    "web_browser_type": "desktop",
+                    "push_opt_in": "true",
+                    "iana_timezone": "America/Los_Angeles",
+                    "locale_country_code": "US",
+                    "locale_timezone": "-25200",
+                    "web_browser_version": "chrome-73",
+                    "locale_language_code": "en",
+                    "web_browser_name": "chrome",
+                    "ua_sdk_version": "1.1.0",
+                    "web_user_agent_string": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
+                  }
+                },
+                "body": {
+                  "push_id": "c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06"
+                },
+                "type": "WEB_CLICK"
+              }
+    web_session:
+      - description: Example Web Session Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "c91efbfa-14b1-401a-9002-54730b5cdcda",
+                "offset": "1000024775634",
+                "occurred": "2019-04-05T20:11:36.696Z",
+                "processed": "2019-04-05T20:11:37.179Z",
+                "device": {
+                  "channel": "bd054c5b-d614-46a1-a843-6ca330c66489",
+                  "device_type": "WEB",
+                  "attributes": {
+                    "web_browser_type": "desktop",
+                    "push_opt_in": "true",
+                    "iana_timezone": "America/Los_Angeles",
+                    "locale_country_code": "US",
+                    "locale_timezone": "-25200",
+                    "web_browser_version": "chrome-73",
+                    "locale_language_code": "en",
+                    "web_browser_name": "chrome",
+                    "ua_sdk_version": "1.1.0",
+                    "web_user_agent_string": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.86 Safari/537.36"
+                  }
+                },
+                "body": {
+                  "session_id": "e8350094-dd62-4d36-a7a0-f1b0a221de93",
+                  "last_delivered": {
+                      "push_id": "c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06"
+                    }
+                  },
+                "type": "WEB_SESSION"
+              }
+paths:
+  /api/events:
+    post:
+      - description: Connect Request
+        examples:
+          - lang: http
+            source: |
+              POST /api/events HTTP/1.1
+              Authorization: Bearer <authorization token>
+              X-UA-Appkey: <appkey>
+              Content-Type: application/json
+
+              {
+                  "filters": [
+                      {
+                          "device_types": [
+                              "android",
+                              "amazon"
+                          ],
+                          "devices": [
+                              {
+                                  "channel": "5b389366-7caf-43e2-a19c-6159c7ea9936"
+                              },
+                              {
+                                  "channel": "c8044c8a-d5fa-4e58-91d4-54d0f70b7409"
+                              },
+                              {
+                                  "named_user_id": "George"
+                              }
+                          ],
+                          "latency": 20000000
+                      },
+                      {
+                          "notifications": [
+                              {
+                                  "group_id": "a30abf06-7878-4096-9535-b50ac0ad6e8e"
+                              }
+                          ],
+                          "types": [
+                              "OPEN"
+                          ]
+                      }
+                  ],
+                  "resume_offset": "MTAwMDAwMDAyMjg1NA",
+                  "subset": {
+                      "proportion": 0.3,
+                      "type": "SAMPLE"
+                  }
+              }
+      - description: Example Response
+        examples:
+          - lang: json
+            source: >
+              Status: 200
+
+              Content-encoding: gzip
+
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+
+              {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type":
+              "UNINSTALL", "offset": "MTIzNQ", "occurred":
+              "2015-05-03T02:32:12.088Z", "processed":
+              "2015-05-03T12:12:43.180Z", "device":
+              {"channel":"a61448e1-be63-43ee-84eb-19446ba743f0",
+              "device_type":"ANDROID", "android_channel":
+              "a61448e1-be63-43ee-84eb-19446ba743f0"}}
+
+              {"id" : "8e50350e-dd9f-41af-b98e-b0e5d4b27dea","type":
+              "SEND","offset": "NTIxMDM1","occurred":
+              "2015-05-02T02:31:22.088Z","processed":
+              "2015-05-02T02:32:43.181Z","device":
+              {"channel":"5117f2a7-ba58-4981-9456-169959511d1a",
+              "device_type":"IOS", "ios_channel":
+              "5117f2a7-ba58-4981-9456-169959511d1a" },"body": {"push_id":
+              "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e", "alerting": true}}
+
+              {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type":
+              "UNINSTALL", "offset": "MTIzNQ", "occurred":
+              "2015-05-03T02:32:12.088Z", "processed":
+              "2015-05-03T12:12:43.180Z", "device":
+              {"channel":"a61448e1-be63-43ee-84eb-19446ba743f0",
+              "device_type":"ANDROID", "android_channel":
+              "a61448e1-be63-43ee-84eb-19446ba743f0"}}
+
+              {"device":{"channel":"820e4493-e4c9-4577-99bc-a98180599f73","delivery_address":"new.user@urbanairship.com","device_type":"EMAIL"},"id":"00000169-4a14-67b2-1ddd-d9e733622c3a","occurred":"2019-03-04T19:00:45.106Z","offset":"1000001260057","processed":"2019-03-04T19:00:47.094Z","type":"FIRST_OPT_IN"}
+  /api/events/general:
+    post:
+      - description: Compliance Event Stream Request
+        examples:
+          - lang: http
+            source: |
+              POST /api/events/general HTTP/1.1
+              Authorization: Basic <master authorization string>
+              X-UA-Appkey: <appkey>
+
+              {
+                "start":"LATEST",
+                "enable_offset_updates": true
+              }
+      - description: Example Response
+        examples:
+          - lang: json
+            source: |
+              Status: 200
+              Content-encoding: gzip
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
+                "offset": "1000001778910",
+                "occurred": "2018-11-28T00:02:41.794Z",
+                "processed": "2018-11-28T00:02:45.270Z",
+                "device": {
+                    "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
+                    "device_type": "EMAIL",
+                    "delivery_address": "bogus@email.com"
+                },
+                "body": {
+                    "event_type": "bounce",
+                    "properties": {
+                        "bounce_event_type": "bounce",
+                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
+                        "subject": "You there?",
+                        "email": "bogus@email.com",
+                        "bounce_class": "10"
+                    }
+                },
+                "type": "COMPLIANCE"
+              }
