@@ -63,11 +63,20 @@
       ],
       "amazonOverrideWithTemplate": [
         {
-          "description": "Android Override With a Template",
+          "description": "Amazon Override With a Template",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"amazon\": {\n      \"template\": {\n         \"fields\": {\n            \"title\": \"Shoe sale on {{level}} floor!\",\n            \"alert\": \"All the shoes are on sale {{name}}!\",\n            \"summary\": \"Don't miss out!\",\n            \"icon\": \"shoes\",\n            \"icon_color\": \"{{iconColor}}\"\n         }\n      }\n   }\n}\n"
+              "source": "{\n   \"amazon\": {\n      \"title\": \"Shoe sale on {{level}} floor!\",\n      \"alert\": \"All the shoes are on sale {{name}}!\",\n      \"summary\": \"Don't miss out!\",\n      \"icon\": \"shoes\",\n      \"icon_color\": \"{{iconColor}}\"\n   }\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Amazon Override With a template_id",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"amazon\": {\n       \"template\": {\n           \"template_id\": \"608f1f6c-8860-c617-a803-b187b491568e\"\n       }\n   }\n}\n"
             }
           ]
         }
@@ -98,7 +107,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"android\": {\n      \"template\": {\n            \"fields\": {\n               \"title\": \"Shoe sale on {{level}} floor!\",\n               \"alert\": \"All the shoes are on sale {{name}}!\",\n               \"summary\": \"Don't miss out!\",\n               \"icon\": \"shoes\",\n               \"icon_color\": \"{{iconColor}}\"\n            }\n      },\n      \"extra\": {\n            \"url\": \"http://example.com\",\n            \"story_id\": \"1234\",\n            \"moar\": \"{\\\"key\\\": \\\"value\\\"}\"\n      },\n      \"notification_channel\": \"promos\"\n   }\n}\n"
+              "source": "{\n   \"android\": {\n      \"title\": \"Shoe sale on {{level}} floor!\",\n      \"alert\": \"All the shoes are on sale {{name}}!\",\n      \"summary\": \"Don't miss out!\",\n      \"icon\": \"shoes\",\n      \"icon_color\": \"{{iconColor}}\",\n      \"extra\": {\n            \"url\": \"http://example.com\",\n            \"story_id\": \"1234\",\n            \"moar\": \"{\\\"key\\\": \\\"value\\\"}\"\n      },\n      \"notification_channel\": \"promos\"\n   }\n}\n"
             }
           ]
         },
@@ -223,6 +232,28 @@
           ]
         }
       ],
+      "contactSubscriptionListObject": [
+        {
+          "description": "Example Contact Subscription Lists Object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"list_ids\": [\"example_listId-2\", \"example_listId-4\"],\n   \"scope\": \"app\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "contactsScopedBatchItem": [
+        {
+          "description": "Example Scoped Batch item",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"scope\": [\"web\", \"email\", \"app\"],\n   \"subscription_lists\": {\n      \"subscribe\": [\"subscription_1\", \"subscription_2\"],\n      \"unsubscribe\": [\"subscription_3\"]\n   }\n}\n"
+            }
+          ]
+        }
+      ],
       "customEventObject": [
         {
           "description": "Example Event",
@@ -282,7 +313,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_address\": \"new@email.com\",\n        \"ua_commercial_opted_in\": \"2020-11-29T10:34:22\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"email\" ],\n  \"notification\" : {\n    \"email\": {\n      \"message_type\": \"commercial\",\n      \"sender_name\": \"Airship\",\n      \"sender_address\": \"team@airship.com\",\n      \"reply_to\": \"no-reply@airship.com\",\n      \"template\": {\n        \"variable_details\": [\n          {\n            \"key\": \"name\",\n            \"default_value\": \"you\"\n          }\n        ],\n        \"fields\": {\n          \"subject\": \"Hi {{customer.first_name}}, your products are ready!\",\n          \"plaintext_body\": \"Hi {{customer.first_name}},/n Your order is ready for pickup at our {{customer.location}} store!/n Your order:/n {{#each cart}}{{this.qty}}x {{this.name}}/n{{/each}} Thanks,/n Your local AwesomeStore.\"\n        }\n      }\n    }\n  }\n}\n"
+              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_address\": \"new@email.com\",\n        \"ua_commercial_opted_in\": \"2020-11-29T10:34:22\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"email\" ],\n  \"notification\" : {\n    \"email\": {\n      \"message_type\": \"commercial\",\n      \"sender_name\": \"Airship\",\n      \"sender_address\": \"team@airship.com\",\n      \"reply_to\": \"no-reply@airship.com\",\n      \"subject\": \"Hi {{customer.first_name}}, your products are ready!\",\n      \"plaintext_body\": \"Hi {{customer.first_name}},/n Your order is ready for pickup at our {{customer.location}} store!/n Your order:/n {{#each cart}}{{this.qty}}x {{this.name}}/n{{/each}} Thanks,/n Your local AwesomeStore.\"\n    }\n  }\n}\n"
             }
           ]
         },
@@ -444,7 +475,16 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"ios\": {\n      \"thread_id\": \"sfGiants_news\",\n      \"template\": {\n         \"fields\": {\n            \"title\": \"{{NAME}} Throws a Perfect Game\",\n            \"body\": \"{{NAME}} stymies the {{OTHER_TEAM}} for San Francisco's first perfect game in franchise history.\",\n            \"subtitle\": \"San Francisco Giants {{DATE}}\"\n         }\n      },\n      \"sound\": \"strike-call\",\n      \"media_attachment\": {\n         \"content\": {\n            \"title\": \"Kevin Gausman\",\n            \"body\": \"Gausman strikes out Justin Turner\"\n         },\n         \"options\": {\n            \"crop\": {\n               \"height\": 0.5,\n               \"width\": 0.5,\n               \"x\": 0.25,\n               \"y\": 0.25\n            },\n            \"time\": 15\n         },\n         \"url\": \"https://media.giphy.com/media/6nJmrhlu4aL1m/giphy.gif\"\n      },\n      \"mutable_content\": 1\n   }\n}\n"
+              "source": "{\n   \"ios\": {\n      \"thread_id\": \"sfGiants_news\",\n      \"title\": \"{{NAME}} Throws a Perfect Game\",\n      \"body\": \"{{NAME}} stymies the {{OTHER_TEAM}} for San Francisco's first perfect game in franchise history.\",\n      \"subtitle\": \"San Francisco Giants {{DATE}}\",\n      \"sound\": \"strike-call\",\n      \"media_attachment\": {\n         \"content\": {\n            \"title\": \"Kevin Gausman\",\n            \"body\": \"Gausman strikes out Justin Turner\"\n         },\n         \"options\": {\n            \"crop\": {\n               \"height\": 0.5,\n               \"width\": 0.5,\n               \"x\": 0.25,\n               \"y\": 0.25\n            },\n            \"time\": 15\n         },\n         \"url\": \"https://media.giphy.com/media/6nJmrhlu4aL1m/giphy.gif\"\n      },\n      \"mutable_content\": 1\n   }\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "iOS Override With a template_id",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"ios\": {\n      \"template\": {\n            \"template_id\": \"608f1f6c-8860-c617-a803-b187b491568e\"\n      }\n   }\n}\n"
             }
           ]
         }
@@ -499,7 +539,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"message\": {\n      \"template\": {\n         \"fields\": {\n            \"title\": \"Save on {{product}} through {{end_date}}!\",\n            \"body\": \"<html><body><h1>here's a cool {{offer}}</h1> etc...</html>\"\n         }\n      },\n      \"content_type\": \"text/html\",\n      \"expiry\": \"2020-04-01T12:00:00\",\n      \"extra\": {\n         \"offer_id\": \"608f1f6c-8860-c617-a803-b187b491568e\"\n      },\n      \"icons\": {\n         \"list_icon\": \"http://cdn.example.com/message.png\"\n      }\n   }\n}\n"
+              "source": "{\n   \"message\": {\n      \"title\": \"Save on {{product}} through {{end_date}}!\",\n      \"body\": \"<html><body><h1>here's a cool {{offer}}</h1> etc...</html>\",\n      \"content_type\": \"text/html\",\n      \"expiry\": \"2020-04-01T12:00:00\",\n      \"extra\": {\n         \"offer_id\": \"608f1f6c-8860-c617-a803-b187b491568e\"\n      },\n      \"icons\": {\n         \"list_icon\": \"http://cdn.example.com/message.png\"\n      }\n   }\n}\n"
             }
           ]
         }
@@ -532,7 +572,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"delivery_image\": \"url\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\",\n        },\n        \"order\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"mms\" ],\n  \"notification\" : {\n    \"mms\" : {\n      \"template\" : {\n        \"fields\" : {\n          \"subject\" : \"Your order is on the way!\",\n          \"slide_1_text\": \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} just shipped.\",\n          \"fallback text\": \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} just shipped\",\n        }\n      }\n      \"slides\": [\n        {\n          \"media\": {\n            \"url\": \"https://www.deliveryimage.com/order12345.jpg\",\n            \"content_type\": \"image/jpeg\",\n            \"content_length\": 123100\n          }\n        }\n      ]\n    }\n  }\n}\n"
+              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"delivery_image\": \"url\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"order\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"mms\" ],\n  \"notification\" : {\n    \"mms\" : {\n      \"subject\" : \"Your order is on the way!\",\n      \"fallback_text\": \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} just shipped\",\n      \"slides\": [\n        {\n          \"media\": {\n            \"url\": \"https://www.deliveryimage.com/order12345.jpg\",\n            \"content_type\": \"image/jpeg\",\n            \"content_length\": 123100\n          },\n          \"text\": \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} just shipped.\"\n        }\n      ]\n    }\n  }\n}\n"
             }
           ]
         },
@@ -541,7 +581,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"delivery_image\": \"https://www.deliveryimage.com/order12345.jpg\",\n        \"content-length\": \"1234567\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"order\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"mms\" ],\n  \"notification\" : {\n    \"mms\" : {\n      \"template\" : {\n        \"fields\" : {\n          \"subject\": \"Your order is on the way!\",\n          \"slide_1_text\" : \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} was delivered!\",\n          \"fallback_text\": \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} was delivered!\"\n        }\n      },\n      \"slides\": [\n        {\n          \"media\": {\n            \"url\": \"https://www.deliveryimage.com/order12345.jpg\",\n            \"content_type\": \"image/jpeg\",\n            \"content_length\": 123100\n          }\n        }\n      ]\n    }\n  }\n}\n"
+              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"delivery_image\": \"https://www.deliveryimage.com/order12345.jpg\",\n        \"content-length\": \"1234567\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"order\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"mms\" ],\n  \"notification\" : {\n    \"mms\" : {\n      \"subject\": \"Your order is on the way!\",\n      \"fallback_text\": \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} was delivered!\",\n      \"slides\": [\n        {\n          \"media\": {\n            \"url\": \"https://www.deliveryimage.com/order12345.jpg\",\n            \"content_type\": \"image/jpeg\",\n            \"content_length\": 123100\n          },\n          \"text\" : \"Hi, {{customer.first_name}}, your {{#each order}}{{order.name}}{{/each}} was delivered!\"\n        }\n      ]\n    }\n  }\n}\n"
             }
           ]
         },
@@ -561,7 +601,40 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"named_user\": {\n      \"named_user_id\": \"user-id-1234\",\n      \"tags\": {\n        \"loyalty program\": [\n            \"silver-member\",\n            \"ten-plus-years\",\n            \"valued-customer\"\n        ],\n        \"crm id\": [\n            \"abc-123-def-456\"\n        ]\n      },\n      \"attributes\": {\n        \"item_purchased\": \"Fur removal tool\",\n        \"cats_name\": \"Sammy\",\n        \"pets_age\": 12\n      },\n      \"user_attributes\": {\n        \"ua_country\": \"US\",\n        \"ua_language\": \"en\",\n        \"ua_tz\": \"America/Los_Angeles\"\n      },\n      \"channels\": [\n        {\n            \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd4\",\n            \"device_type\": \"ios\",\n            \"installed\": true,\n            \"opt_in\": true,\n            \"push_address\": \"FFFF\",\n            \"created\": \"2020-04-08T20:41:06\",\n            \"last_registration\": \"2020-05-01T18:00:27\",\n            \"tags\": [\n              \"meow\"\n            ]\n        }\n      ]\n  }\n}\n"
+              "source": "{\n  \"named_user\": {\n      \"named_user_id\": \"user-id-1234\",\n      \"tags\": {\n        \"loyalty program\": [\n            \"silver-member\",\n            \"ten-plus-years\",\n            \"valued-customer\"\n        ],\n        \"crm id\": [\n            \"abc-123-def-456\"\n        ]\n      },\n      \"subscription_lists\": [\n        {\n          \"list_ids\": [\"example_listId-1\", \"example_listId-5\"],\n          \"scope\": \"web\"\n        },\n        {\n          \"list_ids\": [\"example_listId-2\", \"example_listId-3\"],\n          \"scope\": \"app\"\n        },\n        {\n          \"list_ids\": [\"example_listId-2\"],\n          \"scope\": \"web\"\n        },\n        {\n          \"list_ids\": [\"example_listId-3\"],\n          \"scope\": \"email\"\n        },\n        {\n          \"list_ids\": [\"example_listId-4\"],\n          \"scope\": \"sms\"\n        }\n      ],\n      \"attributes\": {\n        \"item_purchased\": \"Fur removal tool\",\n        \"cats_name\": \"Sammy\",\n        \"pets_age\": 12\n      },\n      \"user_attributes\": {\n        \"ua_country\": \"US\",\n        \"ua_language\": \"en\",\n        \"ua_tz\": \"America/Los_Angeles\"\n      },\n      \"channels\": [\n        {\n            \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd4\",\n            \"device_type\": \"ios\",\n            \"installed\": true,\n            \"opt_in\": true,\n            \"push_address\": \"FFFF\",\n            \"created\": \"2020-04-08T20:41:06\",\n            \"last_registration\": \"2020-05-01T18:00:27\",\n            \"tags\": [\n              \"meow\"\n            ]\n        }\n      ]\n  }\n}\n"
+            }
+          ]
+        }
+      ],
+      "namedUserScopedBatch": [
+        {
+          "description": "Example Scoped Batch",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "[\n  {\n    \"scope\": [\"app\"],\n    \"subscription_lists\": {\n        \"subscribe\": [\"stickers\", \"gifs\"],\n        \"unsubscribe\": [\"cookies\"]\n    }\n  }\n]\n"
+            }
+          ]
+        }
+      ],
+      "namedUserSubscriptionListItem": [
+        {
+          "description": "Example Subscription List Item",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"list_ids\": [\"example_listId-2\", \"example_listId-3\"],\n  \"scope\": \"app\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "namedUserSubscriptionListsObject": [
+        {
+          "description": "Example Subscription Lists object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"subscribe\": [\"stickers\", \"gifs\"],\n    \"unsubscribe\": [\"cookies\"]\n}\n"
             }
           ]
         }
@@ -614,7 +687,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"audience\" : {\n    \"create_and_send\": [\n      {\n        \"ua_address\" : \"36d5a261-0454-40f5-b952-942c4b2b0f22\",\n        \"name\": \"Perry\"\n      }\n    ]\n  },\n  \"device_types\" : [ \"open::smart_fridge\" ],\n  \"notification\" : {\n      \"open::smart_fridge\": {\n          \"template\": {\n              \"fields\": {\n                  \"alert\" : \"Hey {{name}}, you're out of ice cream!\"\n              }\n          }\n      }\n  },\n  \"campaigns\": {\n      \"categories\": [\"needs_ice_cream\", \"cookies_and_cream\"]\n  }\n}\n"
+              "source": "{\n  \"audience\" : {\n    \"create_and_send\": [\n      {\n        \"ua_address\" : \"36d5a261-0454-40f5-b952-942c4b2b0f22\",\n        \"name\": \"Perry\"\n      }\n    ]\n  },\n  \"device_types\" : [ \"open::smart_fridge\" ],\n  \"notification\" : {\n      \"open::smart_fridge\": {\n          \"alert\" : \"Hey {{name}}, you're out of ice cream!\"\n      }\n  },\n  \"campaigns\": {\n      \"categories\": [\"needs_ice_cream\", \"cookies_and_cream\"]\n  }\n}\n"
             }
           ]
         }
@@ -763,6 +836,17 @@
           ]
         }
       ],
+      "scopedBatchItem": [
+        {
+          "description": "Example Scoped Batch item",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"scope\": [\"app\"],\n    \"subscription_lists\": {\n        \"subscribe\": [\"stickers\", \"gifs\"],\n        \"unsubscribe\": [\"cookies\"]\n    }\n}\n"
+            }
+          ]
+        }
+      ],
       "sms": [
         {
           "description": "Example Object",
@@ -791,7 +875,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\",\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"sms\" ],\n  \"notification\" : {\n    \"sms\" : {\n      \"template\" : {\n        \"fields\" : {\n          \"alert\" : \"Hi, {{customer.first_name}}, your {{#each cart}}{{this.name}}{{/each}} are ready to pickup at our {{customer.location}} location!\"\n        }\n      }\n    }\n  },\n  \"campaigns\" : {\n    \"categories\" : [ \"order-pickup\" ]\n  }\n}\n"
+              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"sms\" ],\n  \"notification\" : {\n    \"sms\" : {\n      \"alert\" : \"Hi, {{customer.first_name}}, your {{#each cart}}{{this.name}}{{/each}} are ready to pickup at our {{customer.location}} location!\"\n    }\n  },\n  \"campaigns\" : {\n    \"categories\" : [ \"order-pickup\" ]\n  }\n}\n"
             }
           ]
         },
@@ -800,7 +884,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\",\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"sms\" ],\n  \"notification\" : {\n    \"sms\" : {\n      \"template\" : {\n        \"template_id\": \"9335bb2a-2a45-456c-8b53-42af7898236a\"\n      }\n    }\n  }\n}\n"
+              "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"US:12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"sms\" ],\n  \"notification\" : {\n    \"sms\" : {\n      \"template\" : {\n        \"template_id\": \"9335bb2a-2a45-456c-8b53-42af7898236a\"\n      }\n    }\n  }\n}\n"
             }
           ]
         }
@@ -823,6 +907,17 @@
             {
               "lang": "json",
               "source": "{\n  \"action\": \"subscribe\",\n  \"list_id\": \"exciting_news\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "subscriptionListResultObject": [
+        {
+          "description": "Example Subscription List Result Object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"list_id\": \"example_listId-2\",\n   \"name\": \"A nice readable name 2\",\n   \"description\": \"A very nice description for you.\",\n   \"channel_types\": [\"app\", \"web\"]\n}\n"
             }
           ]
         }
@@ -926,7 +1021,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"web\": {\n      \"template\": {\n         \"fields\": {\n            \"alert\": \"Vote now, {{name}}!\",\n            \"title\": \"Geese? Or ducks!\",\n            \"icon\": \"{{icon}}\"\n         }\n      },\n      \"require_interaction\": true,\n      \"buttons\": [\n         {\n            \"id\": \"yes\",\n            \"label\": \"Yes\",\n            \"actions\": {\n               \"open\": {\n                  \"type\": \"home\"\n               },\n               \"add_tag\": [\"new_tag\"]\n            }\n         },\n         {\n         \"id\": \"no\",\n         \"label\": \"No\"\n         }\n      ],\n      \"extra\": {\n         \"story_id\": \"1234\",\n         \"moar\": \"{\\\"key\\\": \\\"value\\\"}\"\n      }\n   }\n}\n"
+              "source": "{\n   \"web\": {\n      \"alert\": \"Vote now, {{name}}!\",\n      \"title\": \"Geese? Or ducks!\",\n      \"icon\": \"{{icon}}\",\n      \"require_interaction\": true,\n      \"buttons\": [\n         {\n            \"id\": \"yes\",\n            \"label\": \"Yes\",\n            \"actions\": {\n               \"open\": {\n                  \"type\": \"home\"\n               },\n               \"add_tag\": [\"new_tag\"]\n            }\n         },\n         {\n         \"id\": \"no\",\n         \"label\": \"No\"\n         }\n      ],\n      \"extra\": {\n         \"story_id\": \"1234\",\n         \"moar\": \"{\\\"key\\\": \\\"value\\\"}\"\n      }\n   }\n}\n"
             }
           ]
         },
@@ -964,6 +1059,14 @@
               "source": "POST /attachments HTTP/1.1\nAuthorization: Bearer <authorization token>\nContent-Type: application/json\nAccept: application/vnd.urbanairship+json; version=3\n\n{\n  \"filename\": \"rickroll.png\",\n  \"content_type\": \"text/plain; charset=\\\"UTF-8\\\"\",\n  \"data\": \"iVBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8...\"\n}\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n        \nEmailAttachmentRequest emailAttachmentRequest = EmailAttachmentRequest.newRequest()\n        .setContentType(\"text/plain; charset=\\\"UTF-8\\\"\")\n        .setData(\"iBORw0KGgoAAAANSUhEUgAAAQAAAAEACAIAAADTED8xAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8...\")\n        .setFilename(\"rickroll.png\");\n\nResponse<EmailAttachmentResponse> response = client.execute(emailAttachmentRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nattachment = ua.EmailAttachment(\n  airship=airship,\n  filename='rickroll.png', \n  content_type='image/png; charset=\\\"UTF-8\\\"\"', \n  filepath='path/to/never_gonna.png'\n)\nresponse = attachment.post()\n\nprint(response.attachment_ids)\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 201 Accepted\nData-Attribute: attachment_id\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true,\n    \"attachment_ids\": [\n        \"b0c46a8d-b701-441b-9d6e-147c183b28ca\"\n    ]\n}\n"
             }
@@ -982,8 +1085,16 @@
               "source": "GET /api/attribute-lists HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nlisting = ua.AttributeList.list(airship=airship)\n\nlisting.json()\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nData-Attribute: lists\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"lists\": [\n      {\n        \"name\": \"ua_attributes_my_list\",\n        \"description\": \"My first list\",\n        \"extra\": {\n            \"filename\": \"list.csv\",\n            \"source\": \"crm\"\n        },\n        \"created\": \"2020-05-13T21:41:25\",\n        \"last_updated\": \"2020-05-13T21:45:17\",\n        \"channel_count\": 0,\n        \"error_path\": \"https://go.urbanairship.com/api/attribute-lists/ua_attributes_my_list/errors\",\n        \"status\": \"ready\"\n      },\n      {\n        \"name\": \"ua_attributes_another_list\",\n        \"description\": \"My second list\",\n        \"extra\": {\n            \"filename\": \"list2.csv\",\n            \"source\": \"api\"\n        },\n        \"created\": \"2020-05-14T21:41:25\",\n        \"last_updated\": \"2020-05-14T21:45:17\",\n        \"channel_count\": 0,\n        \"error_path\": \"https://go.urbanairship.com/api/attribute-lists/ua_attributes_another_list/errors\",\n        \"status\": \"ready\"\n      }\n  ]\n}\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nAttributeListsListingRequest attributeListsListingRequest = AttributeListsListingRequest.newRequest();\nResponse<AttributeListsListingResponse> response = client.execute(attributeListsListingRequest);\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -998,8 +1109,16 @@
               "source": "POST /api/attribute-lists HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"name\": \"ua_attributes_my_new_list\",\n  \"description\": \"First of many attributes lists!\",\n  \"extra\": {\n      \"filename\": \"attributes.csv\",\n      \"source\": \"CRM\"\n  }\n}\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n        \nAttributeListsCreateRequest attributeListsCreateRequest = AttributeListsCreateRequest.newRequest(\"ua_attributes_list\")\n        .setDescription(\"ua_attributes_list\")\n        .addExtra(\"filename\", \"attributes.csv\")\n        .addExtra(\"source\",\"crm\");\n\nResponse<String> response = client.execute(attributeListsCreateRequest);\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 201 Created\nContent-Type: application/json\nLocation: https://go.urbanairship.com/api/attribute-lists/ua_attributes_foobar\n\n{\n  \"ok\" : true\n}\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nattribute_list = ua.AttributeList(\n  airship=airship, \n  list_name=\"ua_attributes_my_new_list\", \n  description=\"First of many attributes lists!\", \n  extra={\n      \"filename\": \"attributes.csv\",\n      \"source\": \"CRM\"\n  }\n)\n\nattribute_list.create()\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -1016,6 +1135,14 @@
               "source": "PUT /api/attribute-lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: text/csv\n\nchannel_id,Magic Score,Preferred Sport\nc543f3a3-bc1d-4830-8dee-7532c6a23b9a,100,Basketball\n6ba360a0-1f73-4ee7-861e-95f6c1ed6410,,Basketball\n15410d17-687c-46fa-bbd9-f255741a1523,2,Football\nc2c64ef7-8f5c-470e-915f-f5e3da04e1df,22.1,Rugby\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n        \nFile dataDirectory = new File(\"src/data\");\nString filePath = dataDirectory.getAbsolutePath() + \"/attributes_list.csv\";\nAttributeListsUploadRequest attributeListsUploadRequest = AttributeListsUploadRequest.newRequest(\"ua_attributes_list\", filePath);\n\nResponse<String> response = client.execute(attributeListsUploadRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nattribute_list = ua.AttributeList(\n  airship=airship, \n  list_name=\"ua_attributes_cool_list\", \n  description=\"example list\", \n)\n\nattribute_list.upload(file_path=\"path/to/file.csv\")\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 202 Accepted\nContent-Type: application/json\n\n{\n  \"ok\" : true\n}\n"
             }
@@ -1028,6 +1155,10 @@
             {
               "lang": "HTTP",
               "source": "PUT /api/attribute-lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: text/csv\n\nmsisdn,sms_sender,firstName\n5035556789,18588675309,Jane\n4155551212,18588675309,Rory\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nattribute_list = ua.AttributeList(\n  airship=airship, \n  list_name=\"foobar\", \n  description=\"example list\", \n)\n\nattribute_list.upload(file_path=\"path/to/sms_file.csv\")\n"
             },
             {
               "lang": "HTTP",
@@ -1045,6 +1176,14 @@
             {
               "lang": "HTTP",
               "source": "GET /api/lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+csv; version=3\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nAttributeListsErrorsRequest attributeListsErrorsRequest = AttributeListsErrorsRequest.newRequest(\"foobar\");\nResponse<String> response = client.execute(attributeListsErrorsRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nattribute_list = ua.AttributeList(\n  airship=airship, \n  list_name=\"foobar\", \n  description=\"example list\", \n)\n\nerrors = attribute_list.get_errors()\n"
             },
             {
               "lang": "HTTP",
@@ -1095,6 +1234,10 @@
               "source": "POST /api/channels/attributes HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"audience\": {\n       \"android_channel\": [\"13863b3c-f860-4bbf-a9f1-4d785379b8a2\"]\n    },\n    \"attributes\": [\n       {\n             \"action\": \"set\",\n             \"key\": \"major_league\",\n             \"value\": \"sf_giants\"\n       },\n       {\n             \"action\": \"remove\",\n             \"key\": \"minor_league\"\n       },\n       {\n             \"action\": \"set\",\n             \"key\": \"position\",\n             \"value\": \"LF\"\n       }\n    ]\n}\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nset_major_league = ua.Attribute(\n                      action=\"set\", \n                      key=\"major_league\", \n                      value=\"sf_giants\")\n\n remove_minor_league = ua.Attribute(\n                         action=\"remove\",\n                         key=\"minor_league\")\n\n set_position = ua.Attribute(\n                   action=\"set\",\n                   key=\"position\",\n                   value=\"LF\")\n\n modifications = ua.ModifyAttributes(\n                   airship=airship,\n                   attributes=[set_major_league,\n                               remove_minor_league,\n                               set_position]\n                   channel=\"13863b3c-f860-4bbf-a9f1-4d785379b8a2\"\n                )\n \n modifications.send()\n"
+            },
+            {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nAttribute setMajorLeague = Attribute.newBuilder()\n        .setAction(AttributeAction.SET)\n        .setKey(\"major_league\")\n        .setValue(\"sf_giants\")\n        .build();\n\nAttribute removeMinorLeague = Attribute.newBuilder()\n        .setAction(AttributeAction.REMOVE)\n        .setKey(\"minor_league\")\n        .build();\n\nAttribute setPosition = Attribute.newBuilder()\n        .setAction(AttributeAction.SET)\n        .setKey(\"position\")\n        .setValue(\"LF\")\n        .build();\n\nChannelAttributesPayload payload = ChannelAttributesPayload.newBuilder()\n        .addAttribute(setMajorLeague)\n        .addAttribute(removeMinorLeague)\n        .addAttribute(setPosition)\n        .setAudience(AttributeAudience.newBuilder()\n                .addDeviceId(AttributeAudienceType.ANDROID_CHANNEL, \"13863b3c-f860-4bbf-a9f1-4d785379b8a2\")\n                .build())\n        .build();\n\nChannelAttributesRequest request = ChannelAttributesRequest.newRequest(payload);\nResponse<ChannelAttributesResponse> response = client.execute(request);\n"
             },
@@ -1127,7 +1270,7 @@
             },
             {
               "lang": "java",
-              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nRegisterEmailChannel emailChannel = RegisterEmailChannel.newBuilder()\n        .setAddress(\"name@example.com\")\n        .setEmailOptInLevel(OptInLevel.EMAIL_COMMERCIAL_OPTED_IN, \"2020-10-28T10:34:22\")\n        .build();\n\nRegisterEmailChannelRequest request = RegisterEmailChannelRequest.newRequest(emailChannel);\nResponse<EmailChannelResponse> response = client.execute(request);\n"
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nRegisterEmailChannel emailChannel = RegisterEmailChannel.newBuilder()\n        .setAddress(\"name@example.com\")\n        .setEmailOptInLevel(OptInLevel.EMAIL_COMMERCIAL_OPTED_IN, \"2020-10-28T10:34:22\")\n        .setEmailOptInMode(OptInMode.CLASSIC)\n        .addProperty(\"interests\",\"newletter\")\n        .build();\n\nRegisterEmailChannelRequest request = RegisterEmailChannelRequest.newRequest(emailChannel);\nResponse<EmailChannelResponse> response = client.execute(request);\n"
             },
             {
               "lang": "python",
@@ -1212,6 +1355,14 @@
               "source": "GET /api/channels/email/name%40domain.com HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n        \nChannelRequest channelRequest = ChannelRequest.newEmailLookupRequest(\"name@domain.com\");\nResponse<ChannelResponse> response = client.execute(channelRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nresponse = ua.Email.lookup(airship=airship, address=\"name@domain.com\")\n"
+            },
+            {
               "lang": "ruby",
               "source": "require 'urbanairship'\n\nUA = Urbanairship\nairship = UA::Client.new(key: '<app key>', secret: '<master secret>')\n\nemail_channel = UA::Email.new(client: airship)\nemail_channel.address = 'name@domain.com'\nemail_channel.lookup\n"
             },
@@ -1230,6 +1381,14 @@
             {
               "lang": "HTTP",
               "source": "PUT /api/channels/email/251d3318-b3cb-4e9f-876a-ea3bfa6e47bd HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n {\n     \"channel\" : {\n        \"type\": \"email\",\n        \"address\": \"tommy@example.com\",\n        \"commercial_opted_in\": \"2020-10-28T10:34:22\"\n     }\n  }\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n        \nUpdateEmailChannel updateEmailChannel = UpdateEmailChannel.newBuilder()\n        .setAddress(\"name@domain.com\")\n        .setEmailOptInLevel(OptInLevel.EMAIL_COMMERCIAL_OPTED_IN, \"2021-10-28T10:34:22\")\n        .setEmailOptInLevel(OptInLevel.EMAIL_TRANSACTIONAL_OPTED_IN,\"2021-10-28T10:34:22\")\n        .build();\n\nUpdateEmailChannelRequest updateEmailChannelRequest = UpdateEmailChannelRequest.newRequest(\"6c8f1d3a-64d8-4ef9-b7a1-9b128013327e\", updateEmailChannel);\nResponse<EmailChannelResponse> response = client.execute(updateEmailChannelRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nemail = ua.Email(\n  address=\"tommy@example.com\",\n  commercial_opted_in=\"2020-10-28T10:34:22\"\n)\n\nresponse = email.update(channel_id=\"251d3318-b3cb-4e9f-876a-ea3bfa6e47bd\")\n"
             },
             {
               "lang": "ruby",
@@ -1284,6 +1443,10 @@
               "source": "POST /api/channels/open/tags HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n {\n  \"audience\": {\n      \"address\": \"Number Four\",\n      \"open_platform_name\": \"cylon\"\n  },\n  \"add\": {\n    \"my_fav_tag_group1\": [\"tag1\", \"tag2\", \"tag3\"],\n    \"my_fav_tag_group2\": [\"tag1\", \"tag2\", \"tag3\"],\n    \"my_fav_tag_group3\": [\"tag1\", \"tag2\", \"tag3\"]\n  }\n }\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nOpenChannelTagRequest openChannelTagRequest =  OpenChannelTagRequest.newRequest()\n        .addOpenChannel(\"Number Four\",\"cyclon\")\n        .addTags(\"CRM_Delux\", Set.of(\"tag1\",\"tag2\"))\n        .removeTags(\"CRM_Delux\",  Set.of(\"tag3\",\"tag4\"));\nResponse<String> response = client.execute(openChannelTagRequest);\n"
+            },
+            {
               "lang": "python",
               "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\nmy_channel = ua.OpenChannel(airship).lookup(\n    'df6a6b50-9843-0304-d5a5-743f246a4946'\n)\nmy_channel.tags = ['tag1', 'tag2']\nresp = my_channel.update()\n"
             },
@@ -1308,6 +1471,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/channels/open/uninstall HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"address\": \"Number Four\",\n  \"open_platform_name\": \"cylon\"\n}\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nOpenChannelUninstallRequest openChannelUninstallRequest = OpenChannelUninstallRequest.newRequest(\"Number Four\",\"cyclon\");\nResponse<String> response = client.execute(openChannelUninstallRequest);\n"
             },
             {
               "lang": "python",
@@ -1449,6 +1616,14 @@
               "source": "PUT /api/channels/sms/{channel_id} HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"msisdn\": \"15035556789\",\n  \"sender\": \"US:12345\",\n  \"opted_in\": \"2020-02-13T11:58:59\",\n  \"timezone\": \"America/Los_Angeles\",\n  \"locale_country\": \"US\",\n  \"locale_language\": \"en\"\n}\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nUpdateSmsChannel updateSmsChannel = UpdateSmsChannel.newBuilder()\n        .setMsisdn(\"13609048615\")\n        .setSender(\"17372004196\")\n        .setOptedIn(DateTime.parse(\"2021-10-11T02:03:03\"))\n        .setLocaleCountry(\"US\")\n        .setLocaleLanguage(\"en\")\n        .setTimeZone(\"America/Los_Angeles\")\n        .build();\n\nUpdateSmsChannelRequest updateSmsChannelRequest = UpdateSmsChannelRequest.newRequest(\"308303cf-9c10-4d71-9bc2-d9f3a671ed0c\", updateSmsChannel);\n\nResponse<String> response = client.execute(updateSmsChannelRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nsms = ua.Sms(airship=airship, \n        sender=\"US:12345\", \n        msisdn=\"15035556789\", \n        opted_in=\"2021-02-13T11:58:59\", \n        locale_country=\"us\", \n        locale_language=\"en\", \n        timezone=\"America/Los_Angeles\")\n\n# change properties to update\nsms.locale_country = \"fr\"\nsms.opted_in = \"2020-02-13T11:58:59\"\n\nresponse = sms.update()\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"ok\": true,\n}\n"
             }
@@ -1465,6 +1640,10 @@
             {
               "lang": "HTTP",
               "source": "GET /api/channels/sms/15035556789/12345 HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nChannelRequest channelRequest = ChannelRequest.newSmsLookupRequest(\"15035556789\",\"12345\");\nResponse <ChannelResponse> response = client.execute(channelRequest);\n"
             },
             {
               "lang": "python",
@@ -1491,6 +1670,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/channels/subscription_lists HTTP/1.1\nAuthorization: Basic <App Auth>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"subscription_lists\": [\n      {\n         \"action\":\"subscribe\",\n         \"list_id\":\"intriguing_ideas\"\n      },\n      {\n         \"action\":\"unsubscribe\",\n         \"list_id\":\"animal_facts\"\n      }\n   ],\n   \"audience\": {\n      \"ios_channel\": [\n         \"b8f9b663-0a3b-cf45-587a-be880946e881\"\n      ],\n      \"email_address\": [\n         \"homer@springfield.net\",\n         \"nick@nite.org\"\n      ]\n   }\n}\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nsubscription_list = ua.SubscriptionList(airship)\n\nsubscription_list.subscribe(list_id=\"intriguing_ideas\",\n                            audience=ua.email(\"nick@nite.org\")\n                           )\n\nsubscription_list.unsubscribe(list_id=\"animal_facts\", \n                              audience=ua.ios_channel(\n                                 \"b8f9b663-0a3b-cf45-587a-be880946e881\"\n                                 )\n                              )\n"
             },
             {
               "lang": "java",
@@ -1550,7 +1733,7 @@
             },
             {
               "lang": "java",
-              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\n Set<ChannelUninstallDevice> channels = ImmutableSet.of(\n       new ChannelUninstallDevice(\"00f74677-4616-4958-bd91-30e949814d2c\", ChannelUninstallType.IOS),\n       new ChannelUninstallDevice(\"007f7156-9b82-4cb6-a2f9-e2c8e7fce13d\", ChannelUninstallType.ANDROID)\n );\n\n ChannelUninstallPayload payload = ChannelUninstallPayload.newBuilder()\n       .setChannels(channels)\n       .build();\n\n ChannelUninstallRequest request = ChannelUninstallRequest.newRequest(payload);\n Response<ChannelUninstallResponse> response = client.execute(request);\n"
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\n Set<ChannelUninstallDevice> channels = ImmutableSet.of(\n       new ChannelUninstallDevice(\"00f74677-4616-4958-bd91-30e949814d2c\", ChannelUninstallDeviceType.IOS),\n       new ChannelUninstallDevice(\"007f7156-9b82-4cb6-a2f9-e2c8e7fce13d\", ChannelUninstallDeviceType.ANDROID)\n );\n\n ChannelUninstallPayload payload = ChannelUninstallPayload.newBuilder()\n       .setChannels(channels)\n       .build();\n\n ChannelUninstallRequest request = ChannelUninstallRequest.newRequest(payload);\n Response<ChannelUninstallResponse> response = client.execute(request);\n"
             },
             {
               "lang": "HTTP",
@@ -1585,6 +1768,24 @@
             {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"9c36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n      \"device_type\": \"ios\",\n      \"installed\": true,\n      \"opt_in\": false,\n      \"background\": true,\n      \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n      \"created\": \"2020-08-08T20:41:06\",\n      \"last_registration\": \"2020-05-01T18:00:27\",\n      \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n      \"alias\": null,\n      \"tags\": [\n         \"tag1\",\n         \"tag2\"\n      ],\n      \"tag_groups\": {\n         \"tag_group_1\": [\"tag1\", \"tag2\"],\n         \"tag_group_2\": [\"tag1\", \"tag2\"]\n      },\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": null,\n            \"end\": null\n         },\n         \"tz\": \"America/Los_Angeles\"\n      }\n   }\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/contacts/scoped/{contact_id}": {
+      "post": [
+        {
+          "description": "Example: Scoped Contact Batch Operations\n",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/contacts/scoped/77721a11-7ffa-4362-9bdb-f27ca891f9de HTTP/1.1\nAuthorization: Basic <application or master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"scoped\": [{\n    \"scope\": [\"web\", \"email\", \"app\"],\n    \"subscription_lists\": {\n      \"subscribe\": [\"subscription_1\", \"subscription_2\"],\n      \"unsubscribe\": [\"subscription_3\"]\n    }\n  }]\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -1675,6 +1876,10 @@
               "source": "POST /api/custom-events HTTP/1.1\nAuthorization: Bearer <authorization token>\nX-UA-Appkey: <application key>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n[\n   {\n      \"occurred\": \"2020-05-02T02:31:22\",\n      \"user\": {\n         \"named_user_id\": \"hugh.manbeing\"\n      },\n      \"body\": {\n         \"name\": \"purchased\",\n         \"value\": 239.85,\n         \"transaction\": \"886f53d4-3e0f-46d7-930e-c2792dac6e0a\",\n         \"interaction_id\": \"your.store/us/en_us/pd/shoe/pid-11046546/pgid-10978234\",\n         \"interaction_type\": \"url\",\n         \"properties\": {\n            \"description\": \"Sneaker purchase\",\n            \"brand\": \"Victory Sneakers\",\n            \"colors\": [\n             \"red\",\n             \"blue\"\n            ],\n            \"items\": [\n               {\n                  \"text\": \"New Line Sneakers\",\n                  \"price\": \"$ 79.95\"\n               },\n               {\n                  \"text\": \"Old Line Sneakers\",\n                  \"price\": \"$ 79.95\"\n               },\n               {\n                  \"text\": \"Blue Line Sneakers\",\n                  \"price\": \"$ 79.95\"\n               }\n            ],\n            \"name\": \"Hugh Manbeing\",\n            \"userLocation\": {\n               \"state\": \"CO\",\n               \"zip\": \"80202\"\n            }\n         },\n         \"session_id\": \"22404b07-3f8f-4e42-a4ff-a996c18fa9f1\"\n      }\n   }\n]\n"
             },
             {
+              "lang": "python",
+              "source": "import datetime\nimport urbanairship as ua\n\nairship = ua.Airship(key=<app_key>, token=<bearer_token>)\n\nevent = ua.CustomEvent(\n   airship=airship,\n   name='purchased', \n   user=ua.named_user(\"hugh.manbeing\")\n)\n\nevent.session_id = \"22404b07-3f8f-4e42-a4ff-a996c18fa9f1\"\nevent.occurred = datetime(2020, 5, 2, 2, 31, 22)\nevent.interaction_id = \"your.store/us/en_us/pd/shoe/pid-11046546/pgid-10978234\"\nevent.interaction_type = \"url\"\nevent.value = 239.84\nevent.transaction = \"886f53d4-3e0f-46d7-930e-c2792dac6e0a\"\nevent.session_id = \"22404b07-3f8f-4e42-a4ff-a996c18fa9f1\"\nevent.properties = {\"key\":\"value\", \"another\": {\"this\":\"nested\"}}\n\nresponse = event.send()\n"
+            },
+            {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .setBearerToken(\"<bearer token>\")\n        .build();\n\nCustomEventUser customEventUser = CustomEventUser.newBuilder()\n        .setNamedUserId(\"hugh.manbeing\")\n        .build();\n\nCustomEventPropertyValue customEventProperty = CustomEventPropertyValue.of(\"Victory Sneakers\");\n\nList<CustomEventPropertyValue> items = new ArrayList<>();\nitems.add(CustomEventPropertyValue.of(\"New Line Sneakers\"));\nitems.add(CustomEventPropertyValue.of(\"Old Line Sneakers\"));\n\nDateTime occurred = new DateTime(2020, 05, 02, 02, 31, 22, DateTimeZone.UTC);\n\nCustomEventBody customEventBody = CustomEventBody.newBuilder()\n        .setName(\"purchased\")\n        .addPropertiesEntry(\"brand\", customEventProperty)\n        .addPropertiesEntry(\"items\", CustomEventPropertyValue.of(items))\n        .build();\n\nCustomEventPayload customEventPayload = CustomEventPayload.newBuilder()\n        .setCustomEventBody(customEventBody)\n        .setCustomEventUser(customEventUser)\n        .setOccurred(occurred)\n        .build();\n\nCustomEventRequest customEventRequest = CustomEventRequest.newRequest(customEventPayload);\nResponse<CustomEventResponse> response = client.execute(customEventRequest);\n"
             },
@@ -1755,6 +1960,10 @@
               "source": "GET /api/experiments/scheduled HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\nairship = ua.Airship('<app key>', '<master secret>')\nab_test = ua.ABTest(airship)\nresponse = ab_test.list_scheduled_experiment()\n"
+            },
+            {
               "lang": "ruby",
               "source": "require 'urbanairship'\n\nUA = Urbanairship\nairship = UA::Client.new(key: '<app key>', secret: '<master secret>')\n\nab_test = UA::AbTest.new(client: airship)\nab_test.list_scheduled_ab_test\n"
             },
@@ -1779,6 +1988,10 @@
             {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nExperimentDeleteRequest request = ExperimentDeleteRequest.newRequest(\"0f7704e9-5dc0-4f7d-9964-e89055701b0a\");\nResponse<ExperimentResponse> response = client.execute(request);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nab_test = ua.ABTest(airship)\nab_test.experiment_id = \"0f7704e9-5dc0-4f7d-9964-e89055701b0a\"\n\nresponse = ab_test.delete()\n"
             },
             {
               "lang": "ruby",
@@ -2071,6 +2284,10 @@
               "source": "GET /api/lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+csv; version=3\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\ncsv = ua.StaticList.download(airship=airship, list_name=\"foobar\")\n"
+            },
+            {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nStaticListDownloadRequest request = StaticListDownloadRequest.newRequest(\"foobar\");\nResponse<String> response = client.execute(request);\n"
             },
@@ -2134,7 +2351,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"named_user\": {\n      \"named_user_id\": \"user-456\",\n      \"tags\": {\n        \"my_fav_tag_group\": [\n            \"tag1\",\n            \"tag2\"\n        ]\n      },\n      \"attributes\": {\n        \"item_purchased\": \"Fur removal tool\",\n        \"cats_name\": \"Sammy\",\n        \"pets_age\": 12\n      },\n      \"user_attributes\": {\n        \"ua_country\": \"US\",\n        \"ua_language\": \"en\",\n        \"ua_tz\": \"America/Los_Angeles\"\n      },\n      \"channels\": [\n        {\n            \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd4\",\n            \"device_type\": \"ios\",\n            \"installed\": true,\n            \"opt_in\": true,\n            \"push_address\": \"FFFF\",\n            \"created\": \"2020-04-08T20:41:06\",\n            \"last_registration\": \"2020-05-01T18:00:27\",\n            \"tags\": [\n              \"meow\"\n            ]\n        }\n      ]\n  }\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"named_user\": {\n      \"named_user_id\": \"user-456\",\n      \"tags\": {\n        \"my_fav_tag_group\": [\n            \"tag1\",\n            \"tag2\"\n        ]\n      },\n      \"subscription_lists\": [\n        {\n          \"list_ids\": [\"example_listId-1\", \"example_listId-5\"],\n          \"scope\": \"web\"\n        },\n        {\n          \"list_ids\": [\"example_listId-2\", \"example_listId-3\"],\n          \"scope\": \"app\"\n        },\n        {\n          \"list_ids\": [\"example_listId-2\"],\n          \"scope\": \"web\"\n        },\n        {\n          \"list_ids\": [\"example_listId-3\"],\n          \"scope\": \"email\"\n        },\n        {\n          \"list_ids\": [\"example_listId-4\"],\n          \"scope\": \"sms\"\n        }\n      ],\n      \"attributes\": {\n        \"item_purchased\": \"Fur removal tool\",\n        \"cats_name\": \"Sammy\",\n        \"pets_age\": 12\n      },\n      \"user_attributes\": {\n        \"ua_country\": \"US\",\n        \"ua_language\": \"en\",\n        \"ua_tz\": \"America/Los_Angeles\"\n      },\n      \"channels\": [\n        {\n            \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd4\",\n            \"device_type\": \"ios\",\n            \"installed\": true,\n            \"opt_in\": true,\n            \"push_address\": \"FFFF\",\n            \"created\": \"2020-04-08T20:41:06\",\n            \"last_registration\": \"2020-05-01T18:00:27\",\n            \"tags\": [\n              \"meow\"\n            ]\n        }\n      ]\n  }\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -2160,7 +2377,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nData-Attribute: named_users\nLink: <https://go.urbanairship.com/api/named_users?start=user-1234>; rel=next\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"next_page\": \"https://go.urbanairship.com/api/named_users?start=user-1234\",\n   \"named_users\": [\n      {\n         \"named_user_id\": \"user-id-1234\",\n         \"tags\": {\n            \"crm\": [\"tag1\", \"tag2\"]\n         },\n         \"channels\": [\n            {\n               \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd5\",\n               \"device_type\": \"ios\",\n               \"installed\": true,\n               \"opt_in\": true,\n               \"push_address\": \"FFFF\",\n               \"created\": \"2020-04-08T20:41:06\",\n               \"last_registration\": \"2020-05-01T18:00:27\",\n               \"alias\": \"xxxx\",\n               \"tags\": [\"asdf\"],\n               \"ios\": {\n                  \"badge\": 0,\n                  \"quiettime\": {\n                     \"start\": \"22:00\",\n                     \"end\": \"06:00\"\n                  },\n                  \"tz\": \"America/Los_Angeles\"\n               }\n            }\n         ]\n      }\n   ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nData-Attribute: named_users\nLink: <https://go.urbanairship.com/api/named_users?start=user-1234>; rel=next\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"next_page\": \"https://go.urbanairship.com/api/named_users?start=user-1234\",\n   \"named_users\": [\n      {\n         \"named_user_id\": \"user-id-1234\",\n         \"tags\": {\n            \"my_fav_tag_group\": [\"tag1\", \"tag2\"]\n         },\n         \"subscription_lists\": [\n         {\n            \"list_ids\": [\"example_listId-1\", \"example_listId-5\"],\n            \"scope\": \"web\"\n         },\n         {\n            \"list_ids\": [\"example_listId-2\", \"example_listId-3\"],\n            \"scope\": \"app\"\n         },\n         {\n            \"list_ids\": [\"example_listId-2\"],\n            \"scope\": \"web\"\n         },\n         {\n            \"list_ids\": [\"example_listId-3\"],\n            \"scope\": \"email\"\n         }\n         ],\n         \"attributes\":{\n            \"item_purchased\":\"Fur removal tool\",\n            \"cats_name\":\"fluffy butt\",\n            \"pets_age\":2\n         },\n         \"user_attributes\": {\n            \"ua_country\": \"US\",\n            \"ua_language\": \"en\",\n            \"ua_tz\": \"America/Los_Angeles\"\n         },\n         \"channels\": [\n            {\n               \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd5\",\n               \"device_type\": \"ios\",\n               \"installed\": true,\n               \"opt_in\": true,\n               \"push_address\": \"FFFF\",\n               \"created\": \"2020-04-08T20:41:06\",\n               \"last_registration\": \"2020-05-01T18:00:27\",\n               \"alias\": \"xxxx\",\n               \"tags\": [\"asdf\"],\n               \"ios\": {\n                  \"badge\": 0,\n                  \"quiettime\": {\n                     \"start\": \"22:00\",\n                     \"end\": \"06:00\"\n                  },\n                  \"tz\": \"America/Los_Angeles\"\n               }\n            }\n         ]\n      }\n   ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -2221,6 +2438,10 @@
               "source": "POST /api/named_users/associate HTTP/1.1\nAuthorization: Basic <application or master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"email_address\": \"monopoly.man@boardwalk.com\",\n   \"named_user_id\": \"user-id-1234\"\n}\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\nnamed_user = ua.NamedUser(airship=airship, named_user_id=\"user-id-1234\")\nresp = named_user.email_associate(email_address=\"monopoly.man@boardwalk.com\")\n"
+            },
+            {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nNamedUserRequest request = NamedUserRequest.newAssociationRequest()\n        .setChannel(\"em6a6b50-9843-0304-d5a5-743f246a4946\", ChannelType.EMAIL)\n        .setNamedUserId(\"user-id-1234\");\n\nResponse<String> response = client.execute(request);\n"
             },
@@ -2269,12 +2490,34 @@
               "source": "POST /api/named_users/disassociate HTTP/1.1\nAuthorization: Basic <application or master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"email_address\": \"monopoly.man@gotojail.com\",\n   \"named_user_id\": \"user-id-1234\"\n}\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\nnamed_user = ua.NamedUser(airship=airship, named_user_id=\"user-id-1234\")\nresp = named_user.email_disassociate(email_address=\"monopoly.man@gotojail.com\")\n"
+            },
+            {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nNamedUserRequest request = NamedUserRequest.newDisassociationRequest()\n        .setChannel(\"em6a6b50-9843-0304-d5a5-743f246a4946\", ChannelType.EMAIL)\n        .setNamedUserId(\"user-id-1234\");\n\nResponse<String> response = client.execute(request);\n"
             },
             {
               "lang": "ruby",
               "source": "require 'urbanairship'\n\nUA = Urbanairship\nairship = UA::Client.new(key: '<app key>', secret: '<master secret>')\n\nnamed_user = UA::NamedUser.new(client: airship)\nnamed_user.disassociate(channel_id: 'em6a6b50-9843-0304-d5a5-743f246a4946')\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/named_users/scoped/{named_user_id}": {
+      "post": [
+        {
+          "description": "Example: Named User Scoped Batch Operations\n",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/named_users/scoped/b8f9b663-0a3b-cf45-587a-be880946e881 HTTP/1.1\nAuthorization: Basic <application or master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"scoped\": [\n      {\n          \"scope\": [\"app\"],\n          \"subscription_lists\": {\n              \"subscribe\": [\"stickers\", \"gifs\"],\n              \"unsubscribe\": [\"cookies\"]\n          }\n      },\n      {\n          \"scope\": [\"web\"],\n          \"subscription_lists\": {\n              \"subscribe\": [\"daily_snacks\", \"brunch\"],\n              \"unsubscribe\": [\"promotions\"]\n          }\n      }\n   ]\n}\n"
             },
             {
               "lang": "HTTP",
@@ -2325,6 +2568,10 @@
               "source": "POST /api/named_users/uninstall HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"named_user_id\": [\"user-id-1234\",\"user-id-5678\"]\n}\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nresponse = ua.NamedUser.uninstall(\n            airship=airship, \n            named_users=[\"user-id-1234\", \"user-id-5678\"]\n          )\n"
+            },
+            {
               "lang": "ruby",
               "source": "require 'urbanairship'\n\nUA = Urbanairship\nairship = UA::Client.new(key: '<app key>', secret: '<master secret>')\n\nnamed_user_uninstall = UA::NamedUserUninstaller.new(client: airship)\nnamed_user_uninstall.named_user_ids = ['user-id-1234']\nnamed_user_uninstall.uninstall\n"
             },
@@ -2349,6 +2596,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/named_users/john_doe HTTP/1.1\nAuthorization: Basic <application or master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"associate\": [\n      {\n        \"email_address\": \"john@company.com\"\n      },\n      {\n        \"channel_id\": \"f5346fa3-99f1-496d-be37-2895ef58f5a5\",\n        \"device_type\": \"sms\"\n      }\n  ],\n  \"tags\": {\n      \"set\": {\n          \"subscription_status\": [\"gold\"],\n          \"favorites\" : [\"sports\", \"stocks\"]\n      }\n  },\n  \"attributes\": [\n    {\n      \"action\": \"set\",\n      \"key\": \"name\",\n      \"value\": \"John\"\n    }\n  ]\n}\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nassociate = [\n  {\"email_address\": \"john@company.com\"}, \n  {\"channel_id\": \"f5346fa3-99f1-496d-be37-2895ef58f5a5\", \"device_type\": \"sms\"}\n]\ntags = {\n  \"set\": {\n      \"subscription_status\": [\"gold\"],\n      \"favorites\" : [\"sports\", \"stocks\"]\n      }\n}\nattributes = [\n    {\n      \"action\": \"set\",\n      \"key\": \"name\",\n      \"value\": \"John\"\n    }\n  ]\n\nnamed_user = ua.NamedUser(\n  airship=airship, \n  named_user_id=\"john_doe\"\n)\n\nresponse = named_user.update(\n  associate=associate, \n  tags=tags, \n  attributes=attributes\n)\n"
             },
             {
               "lang": "java",
@@ -2572,7 +2823,7 @@
             },
             {
               "lang": "python",
-              "source": "import urbanairship as ua\nairship = ua.Airship('<app key>', '<master secret>')\npush = airship.create_push()\npush.audience = ua.ios_channel('9c36e8c7-5a73-47c0-9716-99fd3d4197d5')\npush.notification = ua.notification(alert='Hello!')\npush.device_types = ua.device_types('ios')\npush.send()\n"
+              "source": "import urbanairship as ua\n\nairship = ua.Airship(key=\"<app key>\", secret=\"<master secret>\", location=\"<us|eu>\")\n\npush = airship.create_push()\npush.audience = ua.ios_channel('9c36e8c7-5a73-47c0-9716-99fd3d4197d5')\npush.notification = ua.notification(alert='Hello!')\npush.device_types = ua.device_types('ios')\npush.send()\n"
             },
             {
               "lang": "ruby",
@@ -2591,6 +2842,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/push HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"device_types\": [ \"ios\", \"android\" ],\n   \"audience\": {\n      \"tag\": \"needs_a_greeting\",\n      \"group\": \"new_customer\"\n   },\n   \"notification\": {\n      \"alert\": \"Hi!\"\n   },\n   \"localizations\": [\n       {\n          \"language\": \"de\",\n          \"country\": \"AT\",\n          \"notification\": {\n             \"alert\": \"Grüss Gott\"\n          }\n       },\n       {\n          \"language\": \"de\",\n          \"country\": \"DE\",\n          \"notification\": {\n             \"alert\": \"Guten Tag\"\n          }\n       }\n    ]\n }\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship(key=\"<app key>\", secret=\"<master secret>\", location=\"<us|eu>\")\n\npush = airship.create_push()\n\npush.audience = ua.tag_group(tag_group=\"new_customer\", tag=\"needs_a_greeting\")\npush.notification = ua.notification(alert='Hello!')\npush.localizations = [\n   ua.localization(country='at', language='de', notification=ua.notification(alert=\"Grüss Gott\")),\n   ua.localization(country='de', language='de', notification=ua.notification(alert=\"Guten Tag\")),\n]\npush.device_types = ua.device_types('ios')\npush.send()\n"
             },
             {
               "lang": "java",
@@ -2631,6 +2886,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/push/validate HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"audience\": {\n        \"ios_channel\": \"9c36e8c7-5a73-47c0-9716-99fd3d4197d5\"\n    },\n    \"notification\": {\n        \"alert\": \"Hello!\"\n    },\n    \"device_types\": [ \"ios\" ]\n}\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship(key=\"<app key>\", secret=\"<master secret>\", location=\"<us|eu>\")\n\npush = airship.create_push()\npush.audience = ua.ios_channel('9c36e8c7-5a73-47c0-9716-99fd3d4197d5')\npush.notification = ua.notification(alert='Hello!')\npush.device_types = ua.device_types('ios')\npush.validate()\n"
             },
             {
               "lang": "java",
@@ -2721,6 +2980,14 @@
               "source": "GET /api/reports/events?start=2020-08-01T10:00:00.000Z&end=2020-08-15T20:00:00.000Z&precision=MONTHLY&page_size=20 HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nDateTime startDate = DateTime.parse(\"2022-01-01T10:00:00\");\nDateTime endDate =  DateTime.parse(\"2023-01-01T10:00:00\");\n\nCustomEventsDetailsListingRequest customEventsDetailsListingRequest = CustomEventsDetailsListingRequest\n        .newRequest(startDate, endDate)\n        .setPageSize(10)\n        .setPrecision(Precision.MONTHLY)\n        .setPage(2);\n\nResponse<CustomEventsDetailsListingResponse> response = client.execute(customEventsDetailsListingRequest);\nList<CustomEventsDetailResponse> customEventsDetailResponses = response.getBody().get().getEvents().get();\n"
+            },
+            {
+              "lang": "python",
+              "source": "from datetime import datetime\nimport urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\nstart_date = datetime(2020, 8, 1)\nend_date = datetime(2020, 8, 15)\nfor event in ua.CustomEventsList(airship, start_date, end_date, precision=\"MONTHLY\"):\n  print(event)\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true,\n    \"total_value\": 2,\n    \"total_count\": 709,\n    \"next_page\": \"https://go.urbanairship.com/api/reports/events?start=2020-08-01T10:00:00.000Z&end=2020-08-15T20:00:00.000Z&precision=MONTHLY&page_size=20&page=2\",\n    \"events\": [\n        {\n            \"name\": \"banner_image\",\n            \"conversion\": \"indirect\",\n            \"location\": \"ua_mcrap\",\n            \"count\": 1,\n            \"value\": 1\n        },\n        {\n            \"name\": \"bounce\",\n            \"conversion\": \"direct\",\n            \"location\": \"custom\",\n            \"count\": 23,\n            \"value\": 0\n        },\n        {\n            \"name\": \"button-click-Do it \",\n            \"conversion\": \"direct\",\n            \"location\": \"in_app_message\",\n            \"count\": 1,\n            \"value\": 0\n        },\n        {\n            \"name\": \"button-click-Get Notifications\",\n            \"conversion\": \"unattributed\",\n            \"location\": \"in_app_message\",\n            \"count\": 3,\n            \"value\": 0\n        },\n        {\n            \"name\": \"button-click-RATE NOW\",\n            \"conversion\": \"direct\",\n            \"location\": \"in_app_message\",\n            \"count\": 1,\n            \"value\": 0\n        },\n        {\n            \"name\": \"button-click-Rate the app.\",\n            \"conversion\": \"direct\",\n            \"location\": \"in_app_message\",\n            \"count\": 1,\n            \"value\": 0\n        }\n    ]\n}\n"
             }
@@ -2739,6 +3006,10 @@
               "source": "GET /api/reports/experiment/detail/b43ae1b2-3ff6-4c02-adb2-79deac0bbb19/2 HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nexperiment_report = ua.ExperimentReport(airship)\nvariant_report = experiment_report.get_variant(\n  push_id=\"b43ae1b2-3ff6-4c02-adb2-79deac0bbb19\",\n  variant=2\n)\nprint(variant_report)\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"app_key\": \"some_app_key\",\n    \"experiment_id\": \"a7806815-6483-4cb9-9d74-bc3b4f3dc1b8\",\n    \"push_id\": \"b43ae1b2-3ff6-4c02-adb2-79deac0bbb19\",\n    \"created\": \"2020-02-25 23:03:12\",\n    \"variant\": 2,\n    \"variant_name\": \"thing_two\",\n    \"sends\": 64,\n    \"direct_responses\": 3,\n    \"influenced_responses\": 1,\n    \"platforms\": {\n        \"android\": {\n            \"direct_responses\": 0,\n            \"influenced_responses\": 0,\n            \"sends\": 22\n        },\n        \"ios\": {\n            \"direct_responses\": 0,\n            \"influenced_responses\": 1,\n            \"sends\": 36\n        },\n        \"amazon\": {\n            \"direct_responses\": 0,\n            \"influenced_responses\": 0,\n            \"sends\": 0\n        },\n        \"web\": {\n            \"direct_responses\": 3,\n            \"indirect_responses\": 0,\n            \"sends\": 6\n        }\n    }\n}\n"
             }
@@ -2755,6 +3026,10 @@
             {
               "lang": "HTTP",
               "source": "GET /api/reports/experiment/overview/b43ae1b2-3ff6-4c02-adb2-79deac0bbb19 HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nexperiment_report = ua.ExperimentReport(airship)\noverview_report = experiment_report.get_overview(\n                    push_id=\"b43ae1b2-3ff6-4c02-adb2-79deac0bbb19\"\n                  )\nprint(overview_report)\n"
             },
             {
               "lang": "HTTP",
@@ -3015,6 +3290,10 @@
               "source": "GET /api/reports/web/interaction?app_key=ZGIwZTY3YjEtZTRiMi00ZG&start=2020-05-01%2010:00&end=2020-05-03%2020:00&precision=HOURLY HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
+              "lang": "python",
+              "source": "import datetime\nimport urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nfor response in ua.WebResponseReport(\n  airship=airship,\n  start_date=datetime.datetime(2020, 5, 1),\n  end_date=datetime.datetime(2020, 5, 3),\n  precision=\"HOURLY\"\n):\n  print(response)\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"app_key\": \"ZGIwZTY3YjEtZTRiMi00ZG\",\n   \"end\": \"2020-05-03 00:00:00\",\n   \"precision\": \"HOURLY\",\n   \"start\": \"2020-05-01 00:00:00\",\n   \"total_counts\": [\n      {\"counts\": {\"clicks\": 36, \"sessions\": 55 }, \"date\": \"2020-05-01 10:00:00\"},\n      {\"counts\": {\"clicks\": 50, \"sessions\": 79 }, \"date\": \"2020-05-01 11:00:00\"},\n      {\"...\"},\n      {\"...\"},\n      {\"counts\": {\"clicks\": 67, \"sessions\": 75 }, \"date\": \"2020-05-03 20:00:00\"}\n  ]\n}\n"
             }
@@ -3066,7 +3345,7 @@
             },
             {
               "lang": "python",
-              "source": "import datetime\nimport urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\nsched = airship.create_scheduled_push()\nsched.name = 'Morning People'\nsched.schedule = ua.scheduled_time(\n  datetime.datetime.utcnow() + datetime.timedelta(minutes=60)\n)\nsched.push = airship.create_push()\nsched.push.audience = ua.tag('earlyBirds')\nsched.push.notification = ua.notification(alert='Good Day Sunshine')\nsched.push.device_types = ['ios', 'android']\nsched.send()\n\nresponse = sched.send()\nprint ('Created schedule. URL:', response.schedule_url)\n"
+              "source": "import datetime\nimport urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\nsched = airship.create_scheduled_push()\nsched.name = 'Morning People'\nsched.schedule = ua.scheduled_time(\n  datetime.datetime.(2020, 6, 3, 9, 15, 0)\n)\nsched.push = airship.create_push()\nsched.push.audience = ua.tag('earlyBirds')\nsched.push.notification = ua.notification(alert='Good Day Sunshine')\nsched.push.device_types = ['ios', 'android']\nsched.send()\n\nresponse = sched.send()\nprint ('Created schedule. URL:', response.schedule_url)\n"
             },
             {
               "lang": "ruby",
@@ -3081,6 +3360,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/schedules HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n[\n  {\n    \"name\": \"Greetings\",\n    \"schedule\": {\n        \"best_time\": {\n          \"send_date\": \"2020-11-15\"\n        }\n    },\n    \"push\": {\n        \"device_types\": [\n          \"ios\",\n          \"android\"\n        ],\n        \"audience\": {\n          \"tag\": \"needs_a_greeting\",\n          \"group\": \"new_customer\"\n        },\n        \"notification\": {\n          \"alert\": \"Hi!\"\n        },\n        \"localizations\": [\n          {\n              \"language\": \"de\",\n              \"country\": \"AT\",\n              \"notification\": {\n                \"alert\": \"Grüss Gott\"\n              }\n          },\n          {\n              \"language\": \"de\",\n              \"country\": \"DE\",\n              \"notification\": {\n                \"alert\": \"Guten Tag\"\n              }\n          }\n        ]\n    }\n  }\n]\n"
+            },
+            {
+              "lang": "python",
+              "source": "import datetime\nimport urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nsched = airship.create_scheduled_push()\nsched.name = 'Greetings'\nsched.schedule = ua.best_time(datetime.datetime(2020, 11, 15))\n\nsched.push = airship.create_push()\nsched.push.audience = ua.tag_group(tag_group=\"new_customer\", tag=\"needs_a_greeting\")\nsched.push.notification = ua.notification(alert='Good Day!')\nsched.push.device_types = ['ios', 'android']\nsched.push.localizations = [\n    ua.localization(country='at', language='de', notification=ua.notification(alert=\"Grüss Gott\")),\n    ua.localization(country='de', language='de', notification=ua.notification(alert=\"Guten Tag\")),\n ]\n\nresponse = sched.send()\nprint ('Created schedule. URL:', response.schedule_url)\n"
             },
             {
               "lang": "java",
@@ -3107,6 +3390,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/schedules/create-and-send HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"schedule\": {\n    \"scheduled_time\" : \"2020-11-11T12:00:00\"\n  },\n  \"name\" : \"scheduled winter sale email\",\n  \"push\" : {\n    \"audience\": {\n      \"create_and_send\" : [\n        {\n          \"ua_address\": \"new@email.com\",\n          \"ua_commercial_opted_in\": \"2020-11-29T10:34:22\"\n        },\n        {\n          \"ua_address\" : \"ben@icetown.com\",\n          \"ua_commercial_opted_in\": \"2020-11-29T12:45:10\"\n        }\n      ]\n    },\n    \"device_types\" : [ \"email\" ],\n    \"notification\" : {\n      \"email\": {\n        \"subject\": \"Welcome to the Winter Sale! \",\n        \"html_body\": \"<h1>Seasons Greetings</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\\\"1\\\" title=\\\"unsubscribe\\\" href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\">Unsubscribe</a></p>\",\n        \"plaintext_body\": \"Greetings! Check out our latest winter deals! [[ua-unsubscribe href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\"]]\",\n        \"message_type\": \"commercial\",\n        \"sender_name\": \"Airship\",\n        \"sender_address\": \"team@airship.com\",\n        \"reply_to\": \"no-reply@airship.com\"\n      }\n    },\n    \"campaigns\": {\n        \"categories\": [\"winter sale\", \"west coast\"]\n    }\n  }\n}\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nString htmlBodyString = \"<h1>Seasons Greetings</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\\\"1\\\" title=\\\"unsubscribe\\\" href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\">Unsubscribe</a></p>\";\nString plaintextBodyString = \"Greetings! Check out our latest winter deals! [[ua-unsubscribe href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\"]]\";\n\nEmailChannel newChannel = EmailChannel.newBuilder()\n        .setAddress(\"new@email.com\")\n        .setCommertialOptedIn(DateTime.parse(\"2020-11-29T10:34:22Z\"))\n        .build();\n\nEmailChannel benChannel = EmailChannel.newBuilder()\n        .setAddress(\"ben@icetown.com\")\n        .setTransactionalOptedIn(DateTime.parse(\"2020-11-29T12:45:10Z\"))\n        .build();\n\nCreateAndSendAudience audience = new CreateAndSendAudience(EmailChannels.newBuilder()\n        .addChannel(newChannel)\n        .addChannel(benChannel)\n        .build());\n\nCreateAndSendEmailPayload createAndSendEmailPayload = CreateAndSendEmailPayload.newBuilder()\n        .setSubject(\"Welcome to the Winter Sale! \")\n        .setHtmlBody(htmlBodyString)\n        .setPlaintextBody(plaintextBodyString)\n        .setMessageType(MessageType.TRANSACTIONAL)\n        .setSenderName(\"Airship\")\n        .setSenderAddress(\"team@airship.com\")\n        .setReplyTo(\"no-reply@airship.com\")\n        .build();\n\nNotification notification = Notification.newBuilder()\n        .addDeviceTypeOverride(DeviceType.EMAIL, createAndSendEmailPayload)\n        .build();\n\nCampaigns campaign = Campaigns.newBuilder()\n        .addCategory(\"winter sale\")\n        .addCategory(\"west coast\")\n        .build();\n\nCreateAndSendPayload payload = CreateAndSendPayload.newBuilder()\n        .setAudience(audience)\n        .setNotification(notification)\n        .setCampaigns(campaign)\n        .build();\n\nCreateAndSendSchedulePayload schedulePayload = CreateAndSendSchedulePayload.newBuilder()\n        .setPayload(payload)\n        .setScheduleTime(DateTime.parse(\"2020-11-11T12:00:00\"))\n        .setName(\"scheduled winter sale email\")\n        .build();\n\nCreateAndSendScheduleRequest scheduleRequest = CreateAndSendScheduleRequest.newRequest(schedulePayload)\nResponse<String> response = client.execute(scheduleRequest);\n"
             },
             {
               "lang": "ruby",
@@ -3213,6 +3500,10 @@
               "source": "POST /api/schedules/5cde3564-ead8-9743-63af-821e12337812/pause HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nsched = ua.ScheduledPush(airship)\nsched.url = \"http://go.urbanairship/api/schedules/5cde3564-ead8-9743-63af-821e12337812\"\n\nsched.pause()\n"
+            },
+            {
               "lang": "java",
               "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nScheduleStatusRequest pauseRequest = ScheduleStatusRequest.pauseScheduleRequest(\"68b2d71f-1c10-4592-bd96-2725aee0ae57\");\nResponse<String> pauseResponse = client.execute(pauseRequest);      \n"
             }
@@ -3229,6 +3520,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/schedules/5cde3564-ead8-9743-63af-821e12337812/resume HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nsched = ua.ScheduledPush(airship)\nsched.url = \"http://go.urbanairship/api/schedules/5cde3564-ead8-9743-63af-821e12337812\"\n\nsched.resume()\n"
             },
             {
               "lang": "java",
@@ -3391,6 +3686,14 @@
             {
               "lang": "HTTP",
               "source": "POST /api/sms/custom-response HTTP/1.1\nAuthorization: Bearer <authorization token>\nX-UA-Appkey: <app key>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"sms\" : {\n      \"alert\": \"Your balance is $1234.56. Go to https://www.mybank.com/myaccount/my-balance?ua-tag-add=balance_prefs:sms to see more about your account.\",\n      \"shorten_links\": true\n  },\n  \"mobile_originated_id\" : \"28883743-4868-4083-ab5d-77ac4542531a\"\n}\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setBearerToken(\"<token>\")\n        .build();\n\nCustomSmsResponseSmsPayload customSmsResponseChannelSms = CustomSmsResponseSmsPayload.newBuilder()\n        .setAlert(\"Your balance is $1234.56. Go to https://www.mybank.com/myaccount/my-balance?ua-tag-add=balance_prefs:sms to see more about your account.\")\n        .setMobileOriginatedId(\"28883743-4868-4083-ab5d-77ac4542531a\")\n        .setShortenLinks(true)\n        .build();\n\nCustomSmsResponseRequest customSmsResponseRequest = CustomSmsResponseRequest.newRequest(customSmsResponseChannelSms);\nResponse<CustomSmsResponseResponse> response = client.execute(customSmsResponseRequest);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship(key=<app key>, token=<bearer_token>)\n\ncustom_response = ua.SmsCustomResponse(\n  airship=airship,\n  mobile_originated_id=\"28883743-4868-4083-ab5d-77ac4542531a\"\n)\n\ncustom_response.sms = ua.sms(\n  alert=\"Your balance is $1234.56. Go to https://www.mybank.com/myaccount/my-balance?ua-tag-add=balance_prefs:sms to see more about your account.\",\n  shorten_links=True,\n)\n\nr = custom_response.send()\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -3401,6 +3704,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/sms/custom-response HTTP/1.1\nAuthorization: Bearer <bearer token>\nX-UA-Appkey: <app key>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"mms\" : {\n    \"fallback_text\": \"See fun cat pics at https://example.com/cat/pics/12345678\",\n    \"slides\": [\n      {\n        \"media\": {\n          \"url\": \"https://example.com/cat/pics/12345678.gif\",\n          \"content_type\": \"image/gif\",\n          \"content_length\": 23098\n        }\n      }\n    ],\n    \"shorten_links\": true\n  },\n  \"mobile_originated_id\" : \"3e1e4fb3-2d3c-431e-96bf-9b235a12f84b\"\n}\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setBearerToken(\"<token>\")\n        .build();\n\nMmsSlides mmsSlides = MmsSlides.newBuilder()\n        .setText(\"Test\")\n        .setMediaUrl(\"https://example.com/cat/pics/12345678.gif\")\n        .setMediaContentType(\"image/gif\")\n        .setMediaContentLength(23098)\n        .build();\n\nCustomSmsResponseMmsPayload customSmsResponseMmsPayload = CustomSmsResponseMmsPayload.newBuilder()\n        .setFallbackText(\"See fun cat pics at https://example.com/cat/pics/12345678\")\n        .setMobileOriginatedId(\"28883743-4868-4083-ab5d-77ac4542531a\")\n        .setSlides(mmsSlides)\n        .build();\n\nCustomSmsResponseRequest customSmsResponseRequest = customSmsResponseRequest.newRequest(customSmsResponseMmsPayload);\nResponse<CustomSmsResponseResponse> response = client.execute(customSmsResponseRequest);\n"
             },
             {
               "lang": "HTTP",
@@ -3420,6 +3727,14 @@
               "source": "POST /api/sms/15035556789/keywords HTTP/1.1\nUser-Agent: Apache-HttpAsyncClient/4.0.1 (java 1.5)\nContent-Type: application/json\nAuthorization: Basic <user:pass>\nConnection: close\n\n{\n  \"keyword\" : \"stop\",\n  \"sender_ids\" : [ \"US:54321\", \"1234\"]\n}\n"
             },
             {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nKeywordInteractionRequest request = KeywordInteractionRequest.newRequest(\"15035556789\")\n        .addKeyword(\"stop\")\n        .addSenderId(\"US:54321\")\n        .addSenderId(\"1234\");\n\nResponse<CustomSmsResponseResponse> response = client.execute(request);\n"
+            },
+            {
+              "lang": "python",
+              "source": "import datetime\nimport urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\ninteraction = ua.KeywordInteraction(\n                airship=airship,\n                keyword=\"stop\",\n                sender_ids=[\"US:54321\", \"1234\"]\n                timestamp=datetime.datetime(2021, 10, 8, 12, 0, 0)\n              )\nresponse = interaction.post()\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"ok\": true\n}\n"
             }
@@ -3434,6 +3749,185 @@
               "source": "HTTP/1.1 400 Bad Request\nContent-Type: application/json\n\n{\n  \"ok\" : false,\n  \"error\" : \"The following sender(s) are not configured for the 'stop' keyword: ['US:1234']\",\n  \"error_code\" : 400\n}\n"
             }
           ]
+        }
+      ]
+    },
+    "/api/subscription_lists": {
+      "get": [
+        {
+          "description": "Example",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/subscription_lists HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3;\n\n{\n   \"ok\" : true,\n   \"subscription_lists\": [\n       {\n           \"list_id\": \"example_listId-1\",\n           \"name\": \"A nice name readable name 1\",\n           \"channel_types\": [\"email\"]\n       },\n       {\n           \"list_id\": \"example_listId-2\",\n           \"name\": \"A nice readable name 2\",\n           \"description\": \"A very nice description for you.\",\n           \"channel_types\": [\"app\", \"web\"]\n       }\n   ]\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/subscription_lists/contacts/{contact_id}": {
+      "get": [
+        {
+          "description": "Example",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/subscription_lists/contacts/dc51e541-6d14-43fa-824b-700def260f64 HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3;\n\n{\n   \"ok\" : true,\n   \"subscription_lists\": [\n      {\n         \"list_ids\": [\"example_listId-2\", \"example_listId-4\"],\n         \"scope\": \"app\"\n      },\n      {\n         \"list_ids\": [\"example_listId-2\"],\n         \"scope\": \"web\"\n      }\n   ],\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/tag-lists": {
+      "get": [
+        {
+          "description": "Example",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/tag-lists HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\nlisting = ua.TagList.list(airship=airship)\n\nlisting.json()\n"
+            },
+            {
+              "lang": "ruby",
+              "source": "require 'urbanairship'\nUA = Urbanairship\nairship = UA::Client.new(key: 'app_key', secret: 'master_secret')\n\ntag_list = UA::TagList.new(client: airship)\nlist_response = tag_list.list\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nTagListListingRequest tagListListingRequest = TagListListingRequest.newRequest();\nResponse<TagListListingResponse> response = client.execute(tagListListingRequest);\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nData-Tag: lists\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\" : true,\n  \"lists\" : [\n    {\n      \"name\" : \"ua_tags_foo\",\n      \"description\" : \"\",\n      \"extra\" : { \"key\": \"value\" },\n      \"add\":{\n        \"tag-group-name\": [\n          \"tag-value\"\n        ],\n        \"tag-group-name2\": [\n          \"tag-value2a\",\n          \"tag-velue2b\"\n        ]\n      },\n      \"remove\": {\n        \"tag-group-name3\": [\n          \"tag-value\"\n        ]\n      },\n      \"set\": {\n        \"tag-group-name4\": [\n          \"tag-value\"\n        ]\n      }\n      \"created\" : \"2013-08-08T20:41:06\",\n      \"last_updated\" : \"2014-05-01T18:00:27\",\n      \"channel_count\" : 0,\n      \"mutation_success_count\": 1000,\n      \"mutation_error_count\": 10,\n      \"error_path\":  \"https://go.urbanairship.com/api/tag-lists/users_a/errors\",\n      \"status\" : \"ready\"\n    },\n    {\n      \"...\" : \"...\"\n    }\n  ]\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ],
+      "post": [
+        {
+          "description": "Example",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/tag-lists HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"name\":\"ua_tags_foobar\",\n  \"description\":\"Description of the file being uploaded\",\n  \"extra\":{\n      \"key\":\"value\",\n      \"another\":\"etc...\"\n  },\n  \"add\":{\n      \"tag-group-name\":[\n        \"tag-value\"\n      ],\n      \"tag-group-name2\":[\n        \"tag-value2a\",\n        \"tag-velue2b\"\n      ]\n  },\n  \"remove\":{\n      \"tag-group-name3\":[\n        \"tag-value\"\n      ]\n  },\n  \"set\":{\n      \"tag-group-name4\":[\n        \"tag-value\"\n      ]\n  }\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 201 Created\nContent-Type: application/json\nLocation: https://go.urbanairship.com/api/tag-lists/ua_tags_foobar\n\n{\n  \"ok\" : true\n}\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\ntag_list = ua.TagList(\n  airship=airship, \n  list_name=\"ua_tags_my_new_list\", \n  description=\"First of many tags lists!\", \n  extra={\n      \"filename\": \"tags.csv\",\n      \"source\": \"CRM\"\n  }\n)\n\ntag_list.create()\n"
+            },
+            {
+              "lang": "ruby",
+              "source": "require 'urbanairship'\nUA = Urbanairship\nairship = UA::Client.new(key: 'app_key', secret: 'master_secret')\ntags = {'tag_group_name': ['tag1', 'tag2']}\n\ntag_list = UA::TagList.new(client: airship)\ntag_list.name = 'ua_tags_list_name'\ntag_list.create(description: 'description', extra: {'key': 'value'}, add: tags)\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nTagListRequest tagListRequest = TagListRequest.newRequest()\n        .setName(\"ua_tags_my_new_list\");\n        .setDescription(\"First of many tags lists!\")\n        .addTags(\"tag_group1\", ImmutableSet.of(\"tag1\",\"tag2\"))\n        .removeTags(\"tag_group2\", ImmutableSet.of(\"tag3\",\"tag4\"))\n        .setTags(\"tag_group3\", ImmutableSet.of(\"tag4\",\"tag5\"))\n        .addExtra(\"test\",\"value\")\nResponse<String> response = client.execute(tagListRequest);\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/tag-lists/{list_name}/csv": {
+      "put": [
+        {
+          "description": "Example",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "PUT /api/tag-lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: text/csv\n\nchannel_id\nc543f3a3-bc1d-4830-8dee-7532c6a23b9a\n6ba360a0-1f73-4ee7-861e-95f6c1ed6410\n15410d17-687c-46fa-bbd9-f255741a1523\nc2c64ef7-8f5c-470e-915f-f5e3da04e1df\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\ntag_list = ua.TagList(\n  airship=airship, \n  list_name=\"ua_tags_cool_list\", \n  description=\"example list\", \n)\n\ntag_list.upload(file_path=\"path/to/file.csv\")\n"
+            },
+            {
+              "lang": "ruby",
+              "source": "require 'urbanairship'\nUA = Urbanairship\nairship = UA::Client.new(key: 'app_key', secret: 'master_secret')\n\ntag_list = UA::TagList.new(client: airship)\ntag_list.name = 'ua_tags_list_name'\ntag_list.upload(csv_file: 'file_content', gzip: true)\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n        \nTagListUploadRequest tagListUploadRequest = TagListUploadRequest.newRequest(\"ua_tags_cool_list\", \"path/to/file.csv\");\nResponse<String> response = client.execute(tagListUploadRequest);\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/json\n\n{\n  \"ok\" : true\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        },
+        {
+          "description": "Tag List CSV upload for SMS",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "PUT /api/tag-lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: text/csv\n\nmsisdn,sms_sender,firstName\n5035556789,18588675309,Jane\n4155551212,18588675309,Rory\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\ntag_list = ua.TagList(\n  airship=airship, \n  list_name=\"foobar\", \n  description=\"example list\", \n)\n\ntag_list.upload(file_path=\"path/to/sms_file.csv\")\n"
+            },
+            {
+              "lang": "ruby",
+              "source": "require 'urbanairship'\nUA = Urbanairship\nairship = UA::Client.new(key: 'app_key', secret: 'master_secret')\n\ntag_list = UA::TagList.new(client: airship)\ntag_list.name = 'ua_tags_list_name'\ntag_list.upload(csv_file: 'sms_file_content', gzip: true)\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nTagListUploadRequest tagListUploadRequest = TagListUploadRequest.newRequest(\"ua_tags_cool_list\", \"path/to/sms_file.csv.csv\");\nResponse<String> response = client.execute(tagListUploadRequest);\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/json\n\n{\n  \"ok\" : true\n}\n"
+            }
+          ]
+        }
+      ]
+    },
+    "/api/tag-lists/{list_name}/errors": {
+      "get": [
+        {
+          "description": "Example",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/tag-lists/foobar/csv HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+csv; version=3\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship('<app key>', '<master secret>')\n\ntag_list = ua.TagList(\n  airship=airship, \n  list_name=\"foobar\", \n  description=\"example list\", \n)\n\nerrors = tag_list.get_errors()\n"
+            },
+            {
+              "lang": "ruby",
+              "source": "require 'urbanairship'\nUA = Urbanairship\nairship = UA::Client.new(key: 'app_key', secret: 'master_secret')\n\ntag_list = UA::TagList.new(client: airship)\nerror_csv = tag_list.errors\n"
+            },
+            {
+              "lang": "java",
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nTagListErrorsRequest request = TagListErrorsRequest.newRequest(\"foobar\");\nResponse<String> response = client.execute(request);\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: text/csv\n\n8b4de669-16f1-4e71-9a1f-0c62a8235a65,ERROR,\"Unknown channel\"\nabcd,ERROR,\"Invalid msisdn\"\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
         }
       ]
     },
@@ -3648,6 +4142,10 @@
             {
               "lang": "HTTP",
               "source": "DELETE /api/user/messages/(push_id) HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "python",
+              "source": "import urbanairship as ua\n\nairship = ua.Airship(key=\"<app key>\", secret=\"<master secret>\", location=\"<us|eu>\")\n\nua.Push.message_center_delete(airship=airship, \n                              push_id=\"941086fd-f7db-493b-a8a7-1f5a7dc6aae4\")\n"
             },
             {
               "lang": "java",

@@ -68,7 +68,7 @@
                   "type": "object"
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -200,7 +200,7 @@
                   "type": "object"
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -332,7 +332,7 @@
                   "type": "object"
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -465,7 +465,7 @@
                   "type": "object"
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -617,7 +617,7 @@
                   ]
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -766,7 +766,7 @@
                   ]
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -892,7 +892,7 @@
                   "type": "object"
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"
@@ -1329,7 +1329,7 @@
                   "type": "object"
                 },
                 "session_id": {
-                  "description": "Represents the “session” of user activity. Absent if the application was initialized while backgrounded.",
+                  "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
                   "format": "uuid",
                   "title": "Session ID",
                   "type": "string"

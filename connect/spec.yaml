@@ -457,7 +457,7 @@ components:
           properties:
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -790,7 +790,7 @@ components:
                       type: object
                     session_id:
                       description: >-
-                        Represents the “session” of user activity. Absent if the
+                        Represents the "session" of user activity. Absent if the
                         application was initialized while backgrounded.
                       format: uuid
                       title: Session ID
@@ -1303,7 +1303,7 @@ components:
                   type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -1438,7 +1438,7 @@ components:
                   type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -1647,7 +1647,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -1772,7 +1772,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -1874,8 +1874,8 @@ components:
       x-schema-tag: Custom Email Events
     emailInitialOpenEvent:
       description: >
-        Occurs when a recipient first opens an email, rendering a tracking pixel
-        at the top of the email.
+        Occurs when a recipient opens an email, rendering a tracking pixel at
+        the top of the email.
       properties:
         body:
           properties:
@@ -1897,7 +1897,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -2025,7 +2025,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -2152,7 +2152,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -2273,7 +2273,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -2602,7 +2602,7 @@ components:
               type: string
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -2790,7 +2790,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -2969,7 +2969,7 @@ components:
               type: string
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -3120,7 +3120,7 @@ components:
               type: string
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -3909,7 +3909,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -4264,7 +4264,7 @@ components:
               type: string
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -4617,7 +4617,7 @@ components:
               type: string
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
@@ -5956,7 +5956,7 @@ components:
               type: object
             session_id:
               description: >-
-                Represents the “session” of user activity. Absent if the
+                Represents the "session" of user activity. Absent if the
                 application was initialized while backgrounded.
               format: uuid
               title: Session ID
