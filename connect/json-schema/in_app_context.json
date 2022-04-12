@@ -1,0 +1,97 @@
+{
+  "description": "Only available on Pager, Form, and Button Tap Events. The context provides the view state when a button, pager, or form interaction occurs.\n",
+  "properties": {
+    "reporting_context": {
+      "description": "Describes the content types of the in-app automation. Can be expanded to provide any data for reporting.",
+      "properties": {
+        "content_types": {
+          "items": {
+            "enum": [
+              "scene",
+              "survey"
+            ],
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "state": {
+      "description": "Can contain the current view state of pager and form.",
+      "properties": {
+        "form": {
+          "properties": {
+            "form_identifier": {
+              "description": "Is the form controller identifier.",
+              "format": "uuid",
+              "type": "string"
+            },
+            "response_type": {
+              "description": "Current possible values are `nps` or `user_feedback`.",
+              "enum": [
+                "nps",
+                "user_feedback"
+              ],
+              "type": "string"
+            },
+            "submitted": {
+              "description": "True if the form has been submitted.",
+              "type": "boolean"
+            },
+            "type": {
+              "description": "The form type.",
+              "enum": [
+                "nps",
+                "form"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "form_identifier",
+            "submitted"
+          ],
+          "type": "object"
+        },
+        "pager": {
+          "properties": {
+            "completed": {
+              "description": "True if the user reached the end of the pager.",
+              "type": "boolean"
+            },
+            "identifier": {
+              "description": "Is the pager controller identifier.",
+              "format": "uuid",
+              "type": "string"
+            },
+            "page_count": {
+              "description": "Total number of pages.",
+              "type": "number"
+            },
+            "page_identifier": {
+              "description": "The current page identifier.",
+              "format": "uuid",
+              "type": "string"
+            },
+            "page_index": {
+              "description": "Is the current pager index.",
+              "type": "number"
+            }
+          },
+          "required": [
+            "identifier",
+            "page_identifier",
+            "page_index",
+            "page_count"
+          ],
+          "type": "object"
+        }
+      },
+      "type": "object"
+    }
+  },
+  "title": "In-App Context",
+  "type": "object",
+  "x-schema-tag": "Events"
+}

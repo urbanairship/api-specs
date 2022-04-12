@@ -917,7 +917,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"list_id\": \"example_listId-2\",\n   \"name\": \"A nice readable name 2\",\n   \"description\": \"A very nice description for you.\",\n   \"channel_types\": [\"app\", \"web\"]\n}\n"
+              "source": "{\n   \"list_id\": \"example_listId-2\",\n   \"name\": \"A nice readable name 2\",\n   \"description\": \"A very nice description for you.\",\n   \"scopes\": [\"app\", \"web\"]\n}\n"
             }
           ]
         }
@@ -3763,7 +3763,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3;\n\n{\n   \"ok\" : true,\n   \"subscription_lists\": [\n       {\n           \"list_id\": \"example_listId-1\",\n           \"name\": \"A nice name readable name 1\",\n           \"channel_types\": [\"email\"]\n       },\n       {\n           \"list_id\": \"example_listId-2\",\n           \"name\": \"A nice readable name 2\",\n           \"description\": \"A very nice description for you.\",\n           \"channel_types\": [\"app\", \"web\"]\n       }\n   ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3;\n\n{\n   \"ok\" : true,\n   \"subscription_lists\": [\n       {\n           \"list_id\": \"example_listId-1\",\n           \"name\": \"A nice readable name 1\",\n           \"scopes\": [\"email\"]\n       },\n       {\n           \"list_id\": \"example_listId-2\",\n           \"name\": \"A nice readable name 2\",\n           \"description\": \"A very nice description for you.\",\n           \"scopes\": [\"app\", \"web\"]\n       }\n   ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true

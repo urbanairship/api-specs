@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when an In-App Message is cleared from the display, either by user action or timeout. Because this event pertains to an individual device, the device information object will be present.\n",
+  "description": "Events that occur related to the display and completion behavior of a scene or survey.\n",
   "properties": {
     "body": {
       "properties": {
@@ -7,17 +7,30 @@
           "description": "An identifier defined by the application if the In-App Message was created by the application logic, not the UA system. If this field is present, the event body will not contain `push_id`, `group_id`,  `variant_id`, or `triggering_push` fields.",
           "type": "string"
         },
-        "button_description": {
-          "description": "The title of the button the user interacted with. Present if `type` is set to `BUTTON_CLICK`.",
-          "type": "string"
+        "campaigns": {
+          "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
+          "properties": {
+            "categories": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "title": "Campaigns Object",
+          "type": "object"
         },
-        "button_id": {
-          "description": "A unique identifier for the button. Present if `type` is set to `BUTTON_CLICK`.",
+        "event_name": {
+          "description": "Name of experiences event.\n",
+          "enum": [
+            "scene_displayed",
+            "scene_completed",
+            "scene_incomplete",
+            "survey_displayed",
+            "survey_submitted",
+            "survey_not_submitted"
+          ],
           "type": "string"
-        },
-        "duration": {
-          "description": "The number of milliseconds that the user was on the screen.",
-          "type": "integer"
         },
         "group_id": {
           "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
@@ -37,8 +50,16 @@
           "title": "Session ID",
           "type": "string"
         },
+        "survey_type": {
+          "description": "Only present for survey events.",
+          "enum": [
+            "nps",
+            "user_feedback"
+          ],
+          "type": "string"
+        },
         "time_sent": {
-          "description": "The date-time when the in-app message payload was sent to the device.",
+          "description": "An ISO 8601 datetime, in UTC, when the event occurred. May be absent.",
           "type": "string"
         },
         "triggering_push": {
@@ -84,16 +105,6 @@
           ],
           "title": "Associated Push",
           "type": "object"
-        },
-        "type": {
-          "description": "Indicates how the In-App Message was resolved.\n\n* 'BUTTON_CLICK': The user clicked/tapped a button in the message. This type is accompanied by additional fields.\n* 'MESSAGE_CLICK': The user clicked/tapped a part of the message, but not a button.\n* 'TIMED_OUT': The user ignored the notification, and it dismissed itself after an interval of time.\n* 'USER_DISMISSED': The user clicked/tapped \"X\" to close the message or closed it using the swipe gesture.",
-          "enum": [
-            "BUTTON_CLICK",
-            "MESSAGE_CLICK",
-            "TIMED_OUT",
-            "USER_DISMISSED"
-          ],
-          "type": "string"
         },
         "variant_id": {
           "description": "The ID of the variant that a push is associated with, if the push was a part of an A/B test (experiment).",
@@ -287,7 +298,7 @@
     },
     "type": {
       "enum": [
-        "IN_APP_MESSAGE_RESOLUTION"
+        "IN_APP_EXPERIENCES"
       ],
       "type": "string"
     }
@@ -300,7 +311,7 @@
     "processed",
     "body"
   ],
-  "title": "In-App Message Resolution",
+  "title": "In-App Experiences",
   "type": "object",
   "x-schema-tag": "Events"
 }

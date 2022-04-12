@@ -845,6 +845,315 @@ components:
                 "processed": "2019-03-04T19:00:47.094Z",
                 "type": "FIRST_OPT_IN"
               }
+    in_app_button_tap:
+      - description: Example In-App Button Tap
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "a9a5912c-2526-4383-b516-711c58aff900",
+                    "group_id": "a9a5912c-2526-4383-b516-711c58aff900",
+                    "session_id": "94e8caed-9b82-4166-b585-a01eed933855",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "survey"
+                        ]
+                      },
+                      "state": {
+                        "form": {
+                          "form_identifier": "870db95f-3715-4c98-8047-2871c175d003",
+                          "submitted": true,
+                          "type": "nps",
+                          "response_type": "nps"
+                        },
+                        "pager": {
+                          "identifier": "9e051354-185b-4d4d-888a-885def2e6b7a",
+                          "page_identifier": "32f4fc47-74ee-41c6-8e16-c9e0aa364101",
+                          "page_index": 1,
+                          "page_count": 2,
+                          "completed": true
+                        }
+                      }
+                    },
+                    "button_id": "dismiss_button"
+                  },
+                "type": "IN_APP_BUTTON_TAP"
+              }
+    in_app_context:
+      - description: Example In-App context
+        examples:
+          - lang: json
+            source: |
+              {
+                "reporting_context": {
+                  "content_types": [
+                    "survey"
+                  ]
+                },
+                "state": {
+                  "form": {
+                    "form_identifier": "870db95f-3715-4c98-8047-2871c175d003",
+                    "submitted": false,
+                    "type": "nps",
+                    "response_type": "nps"
+                  },
+                  "pager": {
+                    "identifier": "9e051354-185b-4d4d-888a-885def2e6b7a",
+                    "page_identifier": "992e5540-7144-474c-b666-2671814b3b19",
+                    "page_index": 0,
+                    "page_count": 2,
+                    "completed": false
+                  }
+                }
+              }
+    in_app_experiences:
+      - description: Example In-App Experiences Event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "event_name": "scene_displayed",
+                    "time_sent": "2022-03-11T08:40:56.592Z",
+                    "session_id": "20162c5f-36c8-1808-6fc6-8eb836d7f7f2",
+                    "push_id": "2e12bc7b-04f2-3487-1480-44269b04c131",
+                    "group_id": "2e12bc7b-04f2-3487-1480-44269b04c131",
+                    "triggering_push": {
+                      "push_id": "5cc872d5-708d-dffb-0959-991b014dcd2d",
+                      "time": "2022-03-11T08:40:56.692Z"
+                    }
+                  },
+                "type": "IN_APP_EXPERIENCES"
+              }
+    in_app_form_display:
+      - description: Example In-App Form Display
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "56d72d43-5567-4c94-887a-05b46ca9ef3e",
+                    "group_id": "56d72d43-5567-4c94-887a-05b46ca9ef3e",
+                    "session_id": "1347589f-0608-4198-b170-bfb46271877a",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "survey"
+                        ]
+                      },
+                      "state": {
+                        "form": {
+                          "form_identifier": "434b918f-6a00-496f-963c-f54923a67abf",
+                          "submitted": false,
+                          "type": "nps",
+                          "response_type": "nps"
+                        }
+                      }
+                    },
+                    "type": "DISPLAY",
+                    "forms": [
+                      {
+                        "form_id": "434b918f-6a00-496f-963c-f54923a67abf"
+                      }
+                    ]
+                  },
+                "type": "IN_APP_FORM_DISPLAY"
+              }
+    in_app_form_result:
+      - description: Example In-App Form Result
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "683b395d-7abf-40f9-be49-4b64debfbd22",
+                    "group_id": "683b395d-7abf-40f9-be49-4b64debfbd22",
+                    "session_id": "d05323b3-8176-406d-aff5-5194341f4a5c",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "survey"
+                        ]
+                      },
+                      "state": {
+                        "form": {
+                          "form_identifier": "316e8ed4-277e-408b-9c47-a6bd7a4251c5",
+                          "submitted": false,
+                          "type": "nps",
+                          "response_type": "nps"
+                        }
+                      }
+                    },
+                    "type": "RESULT",
+                    "forms": [
+                      {
+                        "form_id": "316e8ed4-277e-408b-9c47-a6bd7a4251c5",
+                        "type": "nps",
+                        "response_type": "nps",
+                        "nps": {
+                          "question_id": "b6563a26-a927-4ff2-af8a-08d94d8b84a3",
+                          "score": 9,
+                          "audience_category": "PROMOTER"
+                        },
+                        "responses": [
+                          {
+                            "question_id": "b6563a26-a927-4ff2-af8a-08d94d8b84a3",
+                            "type": "score",
+                            "value": "9"
+                          },
+                          {
+                            "question_id": "c867cf61-398f-443c-b991-443fa8aff4b9",
+                            "type": "text_input",
+                            "value": "Hello, world"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                "type": "IN_APP_FORM_RESULT"
+              }
     in_app_message_display:
       - description: Example In-App Message Display Event
         examples:
@@ -989,10 +1298,296 @@ components:
                  "type": "BUTTON_CLICK",
                  "button_id": "yes",
                  "button_description": "Yes",
-                 "button_group": "ua_yes_no_background",
                  "duration": 10000000000
                 },
                 "type": "IN_APP_MESSAGE_RESOLUTION"
+              }
+    in_app_page_swipe:
+      - description: Example In-App Page Swipe
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "91baacc8-1ebf-411d-a77a-ee036c44e7ce",
+                    "group_id": "91baacc8-1ebf-411d-a77a-ee036c44e7ce",
+                    "session_id": "a135087c-ba97-4b87-ac1d-a216f2cccb7c",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "scene"
+                        ]
+                      },
+                      "state": {
+                        "pager": {
+                          "identifier": "302e80f2-1f9d-4e0d-890d-ff54196189d9",
+                          "page_identifier": "c3c6fe17-1c47-4f52-bff9-f95ed8a14072",
+                          "page_index": 1,
+                          "page_count": 3,
+                          "completed": true
+                        }
+                      }
+                    },
+                    "pager_identifier": "302e80f2-1f9d-4e0d-890d-ff54196189d9",
+                    "from_page_identifier": "c3c6fe17-1c47-4f52-bff9-f95ed8a14072",
+                    "from_page_index": 1,
+                    "to_page_identifier": "2ecb1788-30b9-4d8f-a267-38f687fc6e8b",
+                    "to_page_index": 0
+                  },
+                "type": "IN_APP_PAGE_SWIPE"
+              }
+    in_app_page_view:
+      - description: Example In-App Page View
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "d2482092-a0f5-4ec0-bf0a-f17a1657d1b0",
+                    "group_id": "d2482092-a0f5-4ec0-bf0a-f17a1657d1b0",
+                    "session_id": "65be61ee-dc60-47ec-b9d3-ebc469e0523b",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "scene"
+                        ]
+                      },
+                      "state": {
+                        "pager": {
+                          "identifier": "f4d3d085-010b-4c2b-9e4d-574112b892ed",
+                          "page_identifier": "e55e6d8e-f04d-43f1-939c-822a1dd5a5e3",
+                          "page_index": 0,
+                          "page_count": 1,
+                          "completed": true
+                        }
+                      }
+                    },
+                    "pager_identifier": "f4d3d085-010b-4c2b-9e4d-574112b892ed",
+                    "page_identifier": "e55e6d8e-f04d-43f1-939c-822a1dd5a5e3",
+                    "page_index": 0,
+                    "page_count": 1,
+                    "viewed_count": 1,
+                    "completed": true
+                  },
+                "type": "IN_APP_PAGE_VIEW"
+              }
+    in_app_pager_completed:
+      - description: Example In-App Pager Completed
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "a9a5912c-2526-4383-b516-711c58aff900",
+                    "group_id": "a9a5912c-2526-4383-b516-711c58aff900",
+                    "session_id": "94e8caed-9b82-4166-b585-a01eed933855",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "survey"
+                        ]
+                      },
+                      "state": {
+                        "form": {
+                          "form_identifier": "870db95f-3715-4c98-8047-2871c175d003",
+                          "submitted": true,
+                          "type": "nps",
+                          "response_type": "nps"
+                        },
+                        "pager": {
+                          "identifier": "9e051354-185b-4d4d-888a-885def2e6b7a",
+                          "page_identifier": "32f4fc47-74ee-41c6-8e16-c9e0aa364101",
+                          "page_index": 1,
+                          "page_count": 2,
+                          "completed": true
+                        }
+                      }
+                    },
+                    "pager_identifier": "9e051354-185b-4d4d-888a-885def2e6b7a",
+                    "page_identifier": "32f4fc47-74ee-41c6-8e16-c9e0aa364101",
+                    "page_index": 1,
+                    "page_count": 2
+                  },
+                "type": "IN_APP_PAGER_COMPLETED"
+              }
+    in_app_pager_summary:
+      - description: Example In-App Pager Summary
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "51dd7c1c-5621-11e9-9601-0242539d70ef",
+                "offset": "1000022467557",
+                "occurred": "2019-03-29T21:42:21.245Z",
+                "processed": "2019-04-03T15:10:23.828Z",
+                "device": {
+                  "ios_channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "channel": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                  "device_type": "IOS",
+                  "named_user_id": "cooluser",
+                  "identifiers": {
+                    "com.urbanairship.limited_ad_tracking_enabled": "true",
+                    "session_id": "B147E0CE-272E-4047-A79C-30D02A2F213D",
+                    "GA_CID": "a61448e1-be63-43ee-84eb-19446ba743f0",
+                    "com.urbanairship.idfa": "A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F",
+                    "com.urbanairship.vendor": "ED496B1A-43F1-45A9-A7C1-80125DE8A5B1"
+                    },
+                  "attributes": {
+                    "locale_variant": "",
+                    "app_version": "542",
+                    "device_model": "iPhone7,2",
+                    "connection_type": "WIFI",
+                    "app_package_name": "com.urbanairship.appname",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "11.4",
+                    "locale_timezone": "-25200",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "location_enabled": "false",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "10.2.0",
+                    "location_permission": "ALWAYS_ALLOWED"
+                    }
+                  },
+                  "body": {
+                    "push_id": "898c0cde-02d8-4674-8c3a-91183aab8b7b",
+                    "group_id": "898c0cde-02d8-4674-8c3a-91183aab8b7b",
+                    "session_id": "393ae595-bb43-48a2-9878-996e11581754",
+                    "context": {
+                      "reporting_context": {
+                        "content_types": [
+                          "scene"
+                        ]
+                      },
+                      "state": {
+                        "pager": {
+                          "identifier": "7cb3bd21-060c-46d6-9e88-fb0b5376897e",
+                          "page_identifier": "7888b6dd-0a33-420d-a596-1342dca84fcf",
+                          "page_index": 0,
+                          "page_count": 1,
+                          "completed": false
+                        }
+                      }
+                    },
+                    "pager_identifier": "7cb3bd21-060c-46d6-9e88-fb0b5376897e",
+                    "page_count": 1,
+                    "completed": false,
+                    "viewed_pages": [
+                      {
+                        "page_identifier": "7888b6dd-0a33-420d-a596-1342dca84fcf",
+                        "page_index": 0,
+                        "display_time_ms": 33019
+                      }
+                    ]
+                  },
+                "type": "IN_APP_PAGER_SUMMARY"
               }
     location:
       - description: Example LOCATION Event

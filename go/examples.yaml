@@ -2042,7 +2042,7 @@ components:
                  "list_id": "example_listId-2",
                  "name": "A nice readable name 2",
                  "description": "A very nice description for you.",
-                 "channel_types": ["app", "web"]
+                 "scopes": ["app", "web"]
               }
     tagGroupObject:
       - description: A simple tag group that has 2 tags associated with the group tags.
@@ -10735,14 +10735,14 @@ paths:
                  "subscription_lists": [
                      {
                          "list_id": "example_listId-1",
-                         "name": "A nice name readable name 1",
-                         "channel_types": ["email"]
+                         "name": "A nice readable name 1",
+                         "scopes": ["email"]
                      },
                      {
                          "list_id": "example_listId-2",
                          "name": "A nice readable name 2",
                          "description": "A very nice description for you.",
-                         "channel_types": ["app", "web"]
+                         "scopes": ["app", "web"]
                      }
                  ]
               }

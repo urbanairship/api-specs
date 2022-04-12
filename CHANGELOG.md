@@ -1,5 +1,12 @@
 # Airship API Specs Changelog
 
+Version 3 (April 8, 2022)
+
+### Changes
+
+- Added Support for Scenes and Surveys to RTDS
+- Removed button groups from In-App Message data references
+
 ## Version 2 (March 24, 2022)
 
 ### Changes
