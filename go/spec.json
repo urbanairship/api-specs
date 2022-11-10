@@ -6379,7 +6379,6 @@
                                   "type": "array"
                                 }
                               },
-                              "title": "Days of the week",
                               "type": "object"
                             }
                           ]
@@ -7332,6 +7331,12 @@
       }
     }
   },
+  "title": "Days of the week",
+
+
+
+
+
   "info": {
     "description": "\nAirship provides a number of REST API endpoints collectively known as the Airship API\nVersion 3, in support of our messaging product lines and related features. Version 3 is the\ncurrent and only supported version of the Airship API.\n\n### API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in JSON\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Version Syntax\n\nYou must specify the version of the API you are using with the Accept HTTP header.\nIf you do not specify an API version in the Accept header, a 406: is returned.\n\nThe content type used is a vendor-specific media type\n([see RFC 4288](https://tools.ietf.org/html/rfc4288)), and must be specified as follows: `application/vnd.urbanairship+json; version=3`.\n\n### Transport Layer Security\n\nAs of October 6, 2020, Airship supports only TLS (Transport Layer Security) version 1.2 and 1.3 in our APIs, in accordance with [PCI Security Standards Council](https://www.pcisecuritystandards.org/) recommendations.\n\nIf your API integration utilizes TLS 1.0 or 1.1, [contact our Support team](https://support.airship.com) for assistance migrating to TLS 1.2 or 1.3.\n\n### Delivery Speed Options\n\nThe Airship push API is designed for extremely high throughput to ensure\ndelivery to your entire audience as fast as possible. Depending on the size and/or\ncomplexity of your audience and the urgency of the message, you may find that you need to either\nslow down or speed up the delivery. To that end, we offer the following add-on\nservices: _Boost_ and _Throttling_.\n\n_If you are interested in enabling push boost or throttling for your app, please contact support@urbanairship.com._\n\n#### Boost\n\n_Boost_ optimizes your segmented messages through parallel processing. Consider adding\nBoost if your notifications are extremely time-sensitive. Boost is a paid add-on. Contact\nyour Account Manager for details.\n\n#### Throttling\n\nFor less time-sensitive messages, our standard delivery speed may cause undue pressure\non your internal systems or APIs, e.g., when millions of users open your app at the\nsame time. _Throttling_ allows you to tune\ndelivery to a level that doesn't put strain on those systems.\n",
     "title": "Airship API",

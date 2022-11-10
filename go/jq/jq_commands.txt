@@ -1,0 +1,11 @@
+## https://manpages.ubuntu.com/manpages/xenial/man1/jq.1.html
+
+## converts schema object to key  value pairs
+jq `.components.schemas | to_entries`
+
+
+## converts to field keys
+jq `.components.schemas | keys`
+
+
+

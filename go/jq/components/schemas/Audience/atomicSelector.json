@@ -1,0 +1,496 @@
+{
+  "description": "Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a channel ID or metadata that maps to the device (or multiple devices) such as a tag.",
+  "oneOf": [
+    {
+      "description": "The simplest selector, which targets the entire audience.",
+      "enum": [
+        "all"
+      ],
+      "title": "All Selector",
+      "type": "string"
+    },
+    {
+      "description": "A tag is an arbitrary bit of metadata used for targeting devices. A tag specifier may or may not have an associated group declaration, indicating a `tag group` the tag belongs to, for example {\"tag\": \"silver-member\", \"group\": \"loyalty\"}. If no tag group is specified, the default `device` group is used.",
+      "example": [
+        {
+          "tag": [
+            "Federer fan",
+            "Messi fan"
+          ]
+        },
+        {
+          "group": "Loyalty",
+          "tag": [
+            "silver",
+            "ten-plus"
+          ]
+        }
+      ],
+      "properties": {
+        "group": {
+          "type": "string"
+        },
+        "tag": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "example": [
+                "hello",
+                "world"
+              ],
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "tag"
+      ],
+      "title": "Tag Selector",
+      "type": "object"
+    },
+    {
+      "description": "The segment ID.",
+      "properties": {
+        "segment": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "segment"
+      ],
+      "title": "Segment Selector",
+      "type": "object"
+    },
+    {
+      "description": "The unique channel identifier used to target a web device, i.e., web browser.",
+      "properties": {
+        "channel": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "channel"
+      ],
+      "title": "Channel Selector",
+      "type": "object"
+    },
+    {
+      "description": "A `named_user` is an alternate, non-unique name, mapped to a user profile in a different database, e.g., CRM, that can be used to target devices associated with that profile.",
+      "example": [
+        "john_doe",
+        "ID#998877"
+      ],
+      "properties": {
+        "named_user": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "example": [
+                "hello",
+                "world"
+              ],
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "named_user"
+      ],
+      "title": "Named User Selector",
+      "type": "object"
+    },
+    {
+      "description": "The unique channel identifier used to target an Amazon device.",
+      "properties": {
+        "amazon_channel": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "amazon_channel"
+      ],
+      "title": "Amazon Channel Selector",
+      "type": "object"
+    },
+    {
+      "description": "The unique channel identifier used to target an Android device.",
+      "properties": {
+        "android_channel": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "android_channel"
+      ],
+      "title": "Android Channel Selector",
+      "type": "object"
+    },
+    {
+      "description": "The unique channel identifier used to target a device on an open platform.",
+      "properties": {
+        "open_channel": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "open_channel"
+      ],
+      "title": "Open Channel Selector",
+      "type": "object"
+    },
+    {
+      "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
+      "properties": {
+        "sms_sender": {
+          "oneOf": [
+            {
+              "maxLength": 16,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "items": {
+                "maxLength": 16,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "sms_sender"
+      ],
+      "title": "SMS Sender Selector",
+      "type": "string"
+    },
+    {
+      "description": "Selects a single SMS device. The `msisdn` must be `opted_in` to receive notifications.",
+      "properties": {
+        "msisdn": {
+          "description": "The recipient phone number.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "sender": {
+          "description": "The sender that the app is configured to send SMS messages from.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "required": [
+        "sender",
+        "msisdn"
+      ],
+      "title": "SMS ID Selector",
+      "type": "object"
+    },
+    {
+      "description": "A `static_list` is a subset of your audience defined by a CSV file containing channel IDs or Named Users.",
+      "example": [
+        "preferred_customers"
+      ],
+      "properties": {
+        "static_list": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "example": [
+                "hello",
+                "world"
+              ],
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "static_list"
+      ],
+      "title": "Static List Selector",
+      "type": "object"
+    },
+    {
+      "description": "An single instance or array of [subscription list IDs](#schemas-subscriptionlistobject-list_id).",
+      "example": [
+        "monthly_newsletter"
+      ],
+      "properties": {
+        "subscription_list": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "example": [
+                "strange_facts",
+                "cool_newsletter"
+              ],
+              "items": {
+                "maxLength": 32,
+                "minLength": 1,
+                "type": "string"
+              },
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "subscription_list"
+      ],
+      "title": "Subscription List Selector",
+      "type": "object"
+    },
+    {
+      "$ref": "#/components/schemas/textAttribute"
+    },
+    {
+      "$ref": "#/components/schemas/numberAttribute"
+    },
+    {
+      "$ref": "#/components/schemas/dateAttribute"
+    },
+    {
+      "deprecated": true,
+      "description": "Deprecated. A legacy mechanism used for mapping devices to a customer ID, e.g., a CRM identifier. Superseded by `named_user`.",
+      "properties": {
+        "alias": {
+          "oneOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "example": [
+                "hello",
+                "world"
+              ],
+              "items": {
+                "maxLength": 128,
+                "minLength": 1,
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "alias"
+      ],
+      "title": "Alias Selector",
+      "type": "object"
+    },
+    {
+      "deprecated": true,
+      "description": "A legacy identifier for targeting Android and Windows devices, superseded by `android_channel`.",
+      "properties": {
+        "apid": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "apid"
+      ],
+      "title": "APID Selector",
+      "type": "object"
+    },
+    {
+      "description": "The unique identifier used to target a Windows device using the Window Push Notification Service (WNS).",
+      "properties": {
+        "wns": {
+          "oneOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "example": [
+                "00256e0b-b02f-4f12-a77f-4c3d57078330",
+                "f59970d3-3d42-4584-907e-f5c57f5d46a1"
+              ],
+              "items": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "maxItems": 100,
+              "minItems": 1,
+              "type": "array"
+            }
+          ]
+        }
+      },
+      "required": [
+        "wms"
+      ],
+      "title": "WNS Selector",
+      "type": "object"
+    },
+    {
+      "$ref": "#/components/schemas/activityObject"
+    },
+    {
+      "description": "A special selector used in Pipelines to indicate that the audience of the push is composed of the device or devices that activated the trigger. See [Pipeline Objects](#schema-tag-pipeline-objects) for more information.",
+      "enum": [
+        "triggered"
+      ],
+      "title": "Triggered Selector",
+      "type": "string"
+    }
+  ],
+  "title": "Atomic Selector",
+  "type": "object",
+  "x-schema-tag": "Audience Selection"
+}
