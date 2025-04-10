@@ -2217,9 +2217,6 @@
               "and": {
                 "items": {
                   "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/complexEventSelector"
-                    }
                   ]
                 },
                 "type": "array"
@@ -2234,9 +2231,6 @@
               "or": {
                 "items": {
                   "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/complexEventSelector"
-                    }
                   ]
                 },
                 "type": "array"
@@ -2326,9 +2320,6 @@
                 "items": {
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/compoundSelector"
-                    },
-                    {
                       "$ref": "#/components/schemas/atomicSelector"
                     }
                   ]
@@ -2348,9 +2339,6 @@
                 "items": {
                   "oneOf": [
                     {
-                      "$ref": "#/components/schemas/compoundSelector"
-                    },
-                    {
                       "$ref": "#/components/schemas/atomicSelector"
                     }
                   ]
@@ -2368,9 +2356,6 @@
             "properties": {
               "NOT": {
                 "oneOf": [
-                  {
-                    "$ref": "#/components/schemas/compoundSelector"
-                  },
                   {
                     "$ref": "#/components/schemas/atomicSelector"
                   }
