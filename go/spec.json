@@ -1471,7 +1471,7 @@
             "type": "object"
           },
           {
-            "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
+            "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
             "properties": {
               "sms_sender": {
                 "oneOf": [
@@ -2217,6 +2217,9 @@
               "and": {
                 "items": {
                   "oneOf": [
+                    {
+                      "type": "array"
+                    }
                   ]
                 },
                 "type": "array"
@@ -2231,9 +2234,11 @@
               "or": {
                 "items": {
                   "oneOf": [
+                    {
+                      "type": "array"
+                    }
                   ]
-                },
-                "type": "array"
+                }
               }
             },
             "title": "OR Selector",
@@ -4659,7 +4664,7 @@
                       "type": "string"
                     },
                     "ua_sender": {
-                      "description": "The long or short code your SMS messages are sent from. You can prefix short codes with an ISO 3166 country code — `US:12345`.",
+                      "description": "The long or short code your SMS messages are sent from. You can prefix short codes with an ISO 3166 country code — `US:12345`.",
                       "type": "string"
                     }
                   },
@@ -6518,7 +6523,7 @@
                       "type": "string"
                     },
                     "ua_sender": {
-                      "description": "The long or short code your SMS messages are sent from. You can prefix short codes with an ISO 3166 country code — `US:12345`.",
+                      "description": "The long or short code your SMS messages are sent from. You can prefix short codes with an ISO 3166 country code — `US:12345`.",
                       "type": "string"
                     }
                   },
@@ -7274,8 +7279,7 @@
             "description": "A persistent application tile content update.",
             "properties": {
               "binding": {
-                "items": {
-                },
+                "items": {},
                 "type": "array"
               }
             },
@@ -7405,12 +7409,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create Email Attachment",
@@ -7453,12 +7455,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Retrieve Lists",
@@ -7523,12 +7523,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create Attributes List",
@@ -7593,12 +7591,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Upload Attribute List",
@@ -7643,12 +7639,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Download list errors",
@@ -7709,12 +7703,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Channel Listing",
@@ -7978,16 +7970,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Set or Remove Attributes on Channels",
@@ -8139,12 +8128,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Register Email Channel",
@@ -8246,12 +8233,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Email Tags",
@@ -8308,12 +8293,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Uninstall Email Channel",
@@ -8357,12 +8340,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Lookup an Email Address",
@@ -8502,12 +8483,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update an Email Channel",
@@ -8686,12 +8665,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Register New / Update Channel",
@@ -8808,12 +8785,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Open Channel Tags",
@@ -8878,12 +8853,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Uninstall Open Channels",
@@ -8927,7 +8900,7 @@
                     "type": "string"
                   },
                   "sender": {
-                    "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
+                    "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
                     "properties": {
                       "sms_sender": {
                         "oneOf": [
@@ -9151,12 +9124,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Register SMS Channel",
@@ -9185,7 +9156,7 @@
                     "type": "string"
                   },
                   "sender": {
-                    "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
+                    "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
                     "properties": {
                       "sms_sender": {
                         "oneOf": [
@@ -9276,12 +9247,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Opt-out of SMS messages",
@@ -9309,7 +9278,7 @@
                     "type": "string"
                   },
                   "sender": {
-                    "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
+                    "description": "A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.",
                     "properties": {
                       "sms_sender": {
                         "oneOf": [
@@ -9400,12 +9369,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Uninstall SMS Channel",
@@ -9544,12 +9511,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update SMS Channel",
@@ -9574,7 +9539,7 @@
             }
           },
           {
-            "description": "A long or short code the app is configured to send from. If your app uses the same shortcode for audiences in different countries, prepend the country code to the short code with a colon — `US:12345`.",
+            "description": "A long or short code the app is configured to send from. If your app uses the same shortcode for audiences in different countries, prepend the country code to the short code with a colon — `US:12345`.",
             "in": "path",
             "name": "sender",
             "required": true,
@@ -9700,12 +9665,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Subscribe or Unsubscribe Channels to/from Subscription Lists",
@@ -9868,16 +9831,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Channel Tags",
@@ -9959,12 +9919,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Uninstall Channels",
@@ -10008,16 +9966,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Channel Lookup",
@@ -10171,12 +10126,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create and Send",
@@ -10258,12 +10211,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Validate Create and Send Payload",
@@ -10370,8 +10321,7 @@
         },
         "security": [
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Add Custom Events",
@@ -10451,8 +10401,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Experiment Listing",
@@ -10558,8 +10507,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Create Experiment (A/B Test)",
@@ -10638,8 +10586,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Scheduled Experiment Listing",
@@ -10687,8 +10634,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Delete Experiment",
@@ -10780,8 +10726,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Validate Experiment",
@@ -10822,8 +10767,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Experiment Lookup",
@@ -11002,8 +10946,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Create a New Feed",
@@ -11031,8 +10974,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Delete a Feed",
@@ -11124,8 +11066,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Feed Details",
@@ -11289,8 +11230,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Update a Feed",
@@ -11332,12 +11272,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "All Lists",
@@ -11401,12 +11339,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create List",
@@ -11453,12 +11389,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Delete a List",
@@ -11500,12 +11434,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Get a Single List",
@@ -11577,12 +11509,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update list metadata",
@@ -11609,8 +11539,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Download a list of channels",
@@ -11672,12 +11601,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update list contents",
@@ -11747,12 +11674,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Named User Listing or Lookup",
@@ -11867,16 +11792,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Named Users Association",
@@ -11942,16 +11864,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Named Users Disassociation",
@@ -12012,16 +11931,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Named User Scoped Batch Operations",
@@ -12154,16 +12070,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Named Users Tags",
@@ -12231,8 +12144,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Named Users Uninstall",
@@ -12333,16 +12245,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Named User Update",
@@ -12412,16 +12321,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Set or Remove Attributes on Named Users",
@@ -12545,12 +12451,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "List Existing Pipelines",
@@ -12694,12 +12598,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create Pipeline (Automated Message)",
@@ -12768,12 +12670,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "List Deleted Pipelines",
@@ -12852,12 +12752,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Validate Pipeline",
@@ -12885,12 +12783,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Delete Pipeline",
@@ -12980,12 +12876,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Individual Pipeline Lookup",
@@ -13066,12 +12960,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update Pipeline",
@@ -13207,12 +13099,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Send a Push",
@@ -13295,12 +13185,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Validate Push",
@@ -13386,8 +13274,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Region Listing",
@@ -13440,8 +13327,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Region Lookup",
@@ -13590,12 +13476,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Devices Report",
@@ -13749,12 +13633,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Custom Events Detail Listing",
@@ -13891,12 +13773,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Experiment Variant Report",
@@ -14046,12 +13926,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Experiment Overview Report",
@@ -14168,12 +14046,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "App Opens Report",
@@ -14277,12 +14153,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Opt-in Report",
@@ -14386,12 +14260,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Opt-out Report",
@@ -14514,12 +14386,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Response Report",
@@ -14670,12 +14540,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Response Listing",
@@ -14773,12 +14641,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Individual Push Response Statistics",
@@ -14895,12 +14761,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Push Report",
@@ -15004,12 +14868,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Time in App Report",
@@ -15147,12 +15009,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Web Response Report",
@@ -15230,12 +15090,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "List Schedules",
@@ -15394,12 +15252,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Schedule a Notification",
@@ -15578,12 +15434,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Schedule a Create and Send Operation",
@@ -15613,12 +15467,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Delete Schedule",
@@ -15645,12 +15497,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "List a Specific Schedule",
@@ -15770,12 +15620,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update Schedule",
@@ -15872,12 +15720,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Pause a schedule",
@@ -15975,12 +15821,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Resume a schedule",
@@ -16063,12 +15907,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Segment Listing",
@@ -16178,12 +16020,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create Segment",
@@ -16209,12 +16049,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Delete Segment",
@@ -16271,12 +16109,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Segment Lookup",
@@ -16372,12 +16208,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Update Segment",
@@ -16518,8 +16352,7 @@
         },
         "security": [
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Custom SMS Response",
@@ -16613,16 +16446,13 @@
         },
         "security": [
           {
-            "basicAppAuth": [
-            ]
+            "basicAppAuth": []
           },
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Manually Trigger a Keyword Interaction",
@@ -16664,12 +16494,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Subscription Lists Listing",
@@ -16711,12 +16539,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Retrieve Lists",
@@ -16781,12 +16607,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Create a Tag List",
@@ -16852,12 +16676,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Upload Tag List",
@@ -16903,12 +16725,10 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           },
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Download List Errors",
@@ -17020,8 +16840,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "List Templates",
@@ -17119,8 +16938,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Create Template",
@@ -17220,8 +17038,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Push to Template",
@@ -17287,8 +17104,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Validate A Template",
@@ -17485,8 +17301,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Schedule a Templated Push",
@@ -17530,8 +17345,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Delete Template",
@@ -17571,8 +17385,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Look up a Template",
@@ -17668,8 +17481,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Update Template",
@@ -17704,8 +17516,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Delete Message from Inbox",
