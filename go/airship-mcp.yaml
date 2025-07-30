@@ -1,0 +1,3047 @@
+openapi: 3.0.0
+info:
+  title: Airship API
+  version: V3
+  description: 'Airship provides a number of REST API endpoints collectively known as the Airship API Version 3, in support of our messaging product lines and related features.
+
+    This spec includes the most commonly used operations from the full Airship API.
+
+    '
+servers:
+  - description: The base URL for Airship's North American cloud site.
+    url: https://go.urbanairship.com
+  - description: The base URL for Airship's European cloud site.
+    url: https://go.airship.eu
+paths:
+  /api/push:
+    post:
+      operationId: createPush
+      summary: Send a push notification
+      description: Send a push notification to a specified audience
+      tags:
+        - Push
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pushObject'
+      responses:
+        '202':
+          description: Push accepted for processing
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/pushResponse'
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+  /api/push/validate:
+    post:
+      operationId: validatePush
+      summary: Validate a push payload
+      description: Validate a push payload without sending
+      tags:
+        - Push
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/pushObject'
+      responses:
+        '200':
+          description: Payload is valid
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/okResponseObject'
+        '400':
+          $ref: '#/components/responses/400'
+  /api/channels:
+    get:
+      operationId: listChannels
+      summary: List channels
+      description: List all channels
+      tags:
+        - Channels
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+        - name: start
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Channel list
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/channelListResponse'
+  /api/channels/{channel_id}:
+    get:
+      operationId: getChannel
+      summary: Get channel
+      description: Get details for a specific channel
+      tags:
+        - Channels
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: channel_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Channel details
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/channelResponse'
+        '404':
+          $ref: '#/components/responses/404'
+  /api/channels/tags:
+    post:
+      operationId: updateChannelTags
+      summary: Update channel tags
+      description: Add, remove, or set tags on channels
+      tags:
+        - Channels
+        - Tags
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/channelTagsObject'
+      responses:
+        '200':
+          description: Tags updated
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/okResponseObject'
+  /api/channels/email:
+    post:
+      operationId: createEmailChannel
+      summary: Create email channel
+      description: Register a new email channel
+      tags:
+        - Email
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/emailChannelObject'
+      responses:
+        '201':
+          description: Channel created
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/channelResponse'
+  /api/channels/sms:
+    post:
+      operationId: registerSmsChannel
+      summary: Register SMS channel
+      description: Register a new SMS channel
+      tags:
+        - SMS
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/smsRegistrationObject'
+      responses:
+        '201':
+          description: Channel created
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/channelResponse'
+  /api/schedules:
+    get:
+      operationId: listSchedules
+      summary: List schedules
+      description: List all scheduled notifications
+      tags:
+        - Schedules
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Schedule list
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/scheduleListResponse'
+    post:
+      operationId: createSchedule
+      summary: Schedule notification
+      description: Schedule a notification for future delivery
+      tags:
+        - Schedules
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/scheduleObject'
+      responses:
+        '201':
+          description: Schedule created
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/scheduleResponse'
+  /api/schedules/{schedule_id}:
+    get:
+      operationId: getSchedule
+      summary: Get schedule
+      description: Get a specific schedule
+      tags:
+        - Schedules
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: schedule_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Schedule details
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/scheduleObject'
+    delete:
+      operationId: deleteSchedule
+      summary: Delete schedule
+      description: Delete a scheduled notification
+      tags:
+        - Schedules
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: schedule_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Schedule deleted
+  /api/named_users:
+    get:
+      operationId: listNamedUsers
+      summary: List named users
+      description: List all named users
+      tags:
+        - Named Users
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Named user list
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/namedUserListResponse'
+  /api/named_users/{named_user_id}:
+    post:
+      operationId: updateNamedUser
+      summary: Create or update named user
+      description: Create a new named user or update an existing one
+      tags:
+        - Named Users
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: named_user_id
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/namedUserUpdateObject'
+      responses:
+        '200':
+          description: Named user updated
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/okResponseObject'
+  /api/named_users/associate:
+    post:
+      operationId: associateNamedUser
+      summary: Associate channels with named user
+      description: Associate channels with a named user
+      tags:
+        - Named Users
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/namedUserAssociationObject'
+      responses:
+        '200':
+          description: Association successful
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/okResponseObject'
+  /api/segments:
+    get:
+      operationId: listSegments
+      summary: List segments
+      description: List all segments
+      tags:
+        - Segments
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Segment list
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/segmentListResponse'
+    post:
+      operationId: createSegment
+      summary: Create segment
+      description: Create a new segment
+      tags:
+        - Segments
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/segmentObject'
+      responses:
+        '201':
+          description: Segment created
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/segmentResponse'
+  /api/lists:
+    get:
+      operationId: getLists
+      summary: Get all lists
+      description: Get metadata for all lists
+      tags:
+        - Static Lists
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: List metadata
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/listMetadataResponse'
+    post:
+      operationId: createList
+      summary: Create a list
+      description: Create a new list
+      tags:
+        - Static Lists
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/listObject'
+      responses:
+        '201':
+          description: List created
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/okResponseObject'
+  /api/templates:
+    get:
+      operationId: listTemplates
+      summary: List templates
+      description: List all templates
+      tags:
+        - Templates
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 100
+      responses:
+        '200':
+          description: Template list
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/templateListResponse'
+    post:
+      operationId: createTemplate
+      summary: Create template
+      description: Create a new template
+      tags:
+        - Templates
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/templateObject'
+      responses:
+        '201':
+          description: Template created
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/templateResponse'
+  /api/reports/sends:
+    get:
+      operationId: getSendsReport
+      summary: Get sends report
+      description: Get push sends report
+      tags:
+        - Reports
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: start
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: end
+          in: query
+          required: true
+          schema:
+            type: string
+            format: date-time
+        - name: precision
+          in: query
+          schema:
+            type: string
+            enum:
+              - HOURLY
+              - DAILY
+              - MONTHLY
+      responses:
+        '200':
+          description: Sends report
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                $ref: '#/components/schemas/reportResponse'
+  /api/create-and-send:
+    post:
+      description: 'Send a notification to an audience of SMS, email, or open channel addresses and simultaneously register new addresses in the `audience` as new channels. Addresses that are not yet associated with channels are registered as new channels. Addresses in the payload that are already registered to a `channel_id` and are either `opted_in` or have an `opted_in` value in the payload that is newer than the `opted_out` value associated with a channel will receive the notification, but are not re-registered as new channels.
+
+        You cannot update `opted_in` values for existing channels through this endpoint.
+
+        '
+      requestBody:
+        content:
+          application/json:
+            example:
+              audience:
+                create_and_send:
+                  - ua_address: '{{email_address}}'
+                    ua_commercial_opted_in: '2020-11-29T10:34:22'
+              campaigns:
+                categories:
+                  - winter sale
+                  - west coast
+              device_types:
+                - email
+              notification:
+                email:
+                  html_body: <h1>Seasons Greetings</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe="1" title="unsubscribe" href="http://unsubscribe.urbanairship.com/email/success.html">Unsubscribe</a></p>
+                  message_type: commercial
+                  plaintext_body: Greetings! Check out our latest winter deals! [[ua-unsubscribe href="http://unsubscribe.urbanairship.com/email/success.html"]]
+                  reply_to: no-reply@airship.com
+                  sender_address: '{{sender_email_address}}'
+                  sender_name: Airship
+                  subject: 'Welcome to the Winter Sale! '
+            schema:
+              oneOf:
+                - $ref: '#/components/schemas/email'
+                - $ref: '#/components/schemas/sms'
+                - $ref: '#/components/schemas/mms'
+                - $ref: '#/components/schemas/open'
+      responses:
+        '202':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                description: A push response contains a list of identifiers for the notifications sent in the request.
+                properties:
+                  content_urls:
+                    description: An array of URLs where the push payload contains a landing page action.
+                    items:
+                      format: uri
+                      pattern: ^https.*:\/\/.+
+                      type: string
+                    maxItems: 100
+                    minItems: 0
+                    type: array
+                  localized_ids:
+                    description: An array of identifiers used for reporting. Each ID represents a localized message (push object with `localizations` array).
+                    items:
+                      format: uuid
+                      type: string
+                    type: array
+                  message_ids:
+                    description: An array of message IDs, each uniquely identifying a Message Center message.
+                    items:
+                      type: string
+                    type: array
+                  ok:
+                    description: Success.
+                    type: boolean
+                  operation_id:
+                    description: A unique string identifying the operation, useful for reporting and troubleshooting.
+                    example: ef625038-70a3-41f1-826f-57bc11dd625a
+                    format: uuid
+                    type: string
+                  push_ids:
+                    description: An array of push IDs, each uniquely indentifying a push.
+                    example:
+                      - 00256e0b-b02f-4f12-a77f-4c3d57078330
+                      - f59970d3-3d42-4584-907e-f5c57f5d46a1
+                    items:
+                      format: uuid
+                      type: string
+                    maxItems: 100
+                    minItems: 1
+                    type: array
+                type: object
+          description: Because this operation sends messages, a successful response is nearly identical to a `/api/push` response.
+        '400':
+          $ref: '#/components/responses/400'
+          description: You can only create-and-send to a single platform per request. Attempting to register channels and send notifications for multiple `device_types` in the same request will cause a 400 response.
+        '401':
+          $ref: '#/components/responses/401'
+        '413':
+          $ref: '#/components/responses/413'
+          description: The request included a payload larger than the maximum size of 5MiB.
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Create and Send
+      tags:
+        - Create and Send
+      x-warning: Duplicate addresses in the `create-and-send` array might receive redundant notifications, or fewer notifications than expected. You should remove duplicate addresses from your request before sending a create-and-send notification.
+      operationId: createCreateandsend
+  /api/create-and-send/validate:
+    post:
+      description: Validate a create-and-send payload. This endpoint will not create channels or send notifications; it only parses and validates your payload.
+      requestBody:
+        content:
+          application/json:
+            example:
+              audience:
+                create_and_send:
+                  - ua_address: '{{email_address}}'
+                    ua_commercial_opted_in: '2020-11-29T10:34:22'
+              campaigns:
+                categories:
+                  - winter sale
+                  - west coast
+              device_types:
+                - email
+              notification:
+                email:
+                  html_body: <h1>Seasons Greetings</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe="1" title="unsubscribe" href="http://unsubscribe.urbanairship.com/email/success.html">Unsubscribe</a></p>
+                  message_type: commercial
+                  plaintext_body: Greetings! Check out our latest winter deals! [[ua-unsubscribe href="http://unsubscribe.urbanairship.com/email/success.html"]]
+                  reply_to: no-reply@airship.com
+                  sender_address: '{{sender_email_address}}'
+                  sender_name: Airship
+                  subject: 'Welcome to the Winter Sale! '
+            schema:
+              discriminator:
+                propertyName: device_types
+              oneOf:
+                - $ref: '#/components/schemas/email'
+                - $ref: '#/components/schemas/sms'
+                - $ref: '#/components/schemas/mms'
+                - $ref: '#/components/schemas/open'
+      responses:
+        '200':
+          $ref: '#/components/responses/200'
+        '400':
+          $ref: '#/components/responses/400'
+        '413':
+          $ref: '#/components/responses/413'
+          description: The request included a payload larger than the maximum size of 5MiB.
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Validate Create and Send Payload
+      tags:
+        - Create and Send
+      operationId: createCreateandsendValidate
+  /api/schedules/create-and-send:
+    post:
+      description: 'Schedule a notification to an audience of SMS, email, or open channel addresses and simultaneously register those addresses as new channels. Addresses that are not yet associated with channels are registered as new channels. Addresses in the payload that are already registered to a `channel_id` and are either `opted_in` or have an `opted_in` value in the payload that is newer than the `opted_out` value associated with a channel will receive the notification, but are not re-registered as new channels.
+
+
+        You cannot update `opted_in` values for existing channels through this endpoint.
+
+        '
+      requestBody:
+        content:
+          application/json:
+            example:
+              name: scheduled winter sale email
+              push:
+                audience:
+                  create_and_send:
+                    - ua_address: '{{email_address}}'
+                      ua_commercial_opted_in: '2020-11-29T10:34:22'
+                campaigns:
+                  categories:
+                    - winter sale
+                    - west coast
+                device_types:
+                  - email
+                notification:
+                  email:
+                    html_body: <h1>Seasons Greetings</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe="1" title="unsubscribe" href="http://unsubscribe.urbanairship.com/email/success.html">Unsubscribe</a></p>
+                    message_type: commercial
+                    plaintext_body: Greetings! Check out our latest winter deals! [[ua-unsubscribe href="http://unsubscribe.urbanairship.com/email/success.html"]]
+                    reply_to: no-reply@airship.com
+                    sender_address: '{{sender_email_address}}'
+                    sender_name: Airship
+                    subject: 'Welcome to the Winter Sale! '
+              schedule:
+                scheduled_time: '{{sched_1m}}'
+            schema:
+              properties:
+                name:
+                  description: A name for the schedule.
+                  type: string
+                push:
+                  discriminator:
+                    propertyName: device_types
+                  oneOf:
+                    - $ref: '#/components/schemas/email'
+                    - $ref: '#/components/schemas/sms'
+                    - $ref: '#/components/schemas/mms'
+                    - $ref: '#/components/schemas/open'
+                schedule:
+                  description: Similar to other schedule objects. However, create-and-send requests support `scheduled_time` only.
+                  properties:
+                    scheduled_time:
+                      description: The date and time when you want to perform your create-and-send operation. Users will receive the notification as soon as possible after the specified datetime.
+                      format: datetime
+                      type: string
+                  required:
+                    - scheduled_time
+                  type: object
+              required:
+                - schedule
+                - push
+              type: object
+        description: The request is much like other create-and-send operations, with a leading `schedule` object. The standard create-and-send payload sits inside a `push` object.
+      responses:
+        '202':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                description: A push response contains a list of identifiers for the notifications sent in the request.
+                properties:
+                  content_urls:
+                    description: An array of URLs where the push payload contains a landing page action.
+                    items:
+                      format: uri
+                      pattern: ^https.*:\/\/.+
+                      type: string
+                    maxItems: 100
+                    minItems: 0
+                    type: array
+                  localized_ids:
+                    description: An array of identifiers used for reporting. Each ID represents a localized message (push object with `localizations` array).
+                    items:
+                      format: uuid
+                      type: string
+                    type: array
+                  message_ids:
+                    description: An array of message IDs, each uniquely identifying a Message Center message.
+                    items:
+                      type: string
+                    type: array
+                  ok:
+                    description: Success.
+                    type: boolean
+                  operation_id:
+                    description: A unique string identifying the operation, useful for reporting and troubleshooting.
+                    example: ef625038-70a3-41f1-826f-57bc11dd625a
+                    format: uuid
+                    type: string
+                  push_ids:
+                    description: An array of push IDs, each uniquely indentifying a push.
+                    example:
+                      - 00256e0b-b02f-4f12-a77f-4c3d57078330
+                      - f59970d3-3d42-4584-907e-f5c57f5d46a1
+                    items:
+                      format: uuid
+                      type: string
+                    maxItems: 100
+                    minItems: 1
+                    type: array
+                type: object
+          description: Because this operation sends messages, a successful response is nearly identical to a `/api/push` response.
+        '400':
+          $ref: '#/components/responses/400'
+          description: You can only create-and-send to a single platform per request. Attempting to register channels and send notifications for multiple `device_types` in the same request will cause a 400 response.
+        '401':
+          $ref: '#/components/responses/401'
+        '413':
+          $ref: '#/components/responses/413'
+          description: The request included a payload larger than the maximum size of 5MiB.
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Schedule a Create and Send Operation
+      tags:
+        - Create and Send
+      x-warning: Duplicate addresses in the `create-and-send` array might receive redundant notifications, or fewer notifications than expected. You should remove duplicate addresses from your request before scheduling a create-and-send notification.
+      operationId: createSchedulesCreateandsend
+  /api/custom-events:
+    post:
+      description: 'Submit an externally-generated custom event, associated with a channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Journeys and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).
+
+        '
+      requestBody:
+        content:
+          application/json:
+            example:
+              - body:
+                  interaction_id: your.store/us/en_us/pd/shoe/pid-11046546/pgid-10978234
+                  interaction_type: url
+                  name: purchased
+                  properties:
+                    brand: Victory Sneakers
+                    colors:
+                      - red
+                      - blue
+                    description: Sneaker purchase
+                    items:
+                      - price: $ 79.95
+                        text: New Line Sneakers
+                      - price: $ 79.95
+                        text: Old Line Sneakers
+                      - price: $ 79.95
+                        text: Blue Line Sneakers
+                    name: Hugh Manbeing
+                    userLocation:
+                      state: CO
+                      zip: '80202'
+                  session_id: 22404b07-3f8f-4e42-a4ff-a996c18fa9f1
+                  transaction: 886f53d4-3e0f-46d7-930e-c2792dac6e0a
+                  value: 239.85
+                occurred: '{{yesterday_date_time}}'
+                user:
+                  named_user_id: '{{named_user_id}}'
+            schema:
+              items:
+                $ref: '#/components/schemas/customEventObject'
+              maxItems: 100
+              minItems: 1
+              type: array
+        description: An array of custom event objects.
+      responses:
+        '200':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  ok:
+                    description: Success.
+                    type: boolean
+                  operation_id:
+                    description: A unique string identifying the API interaction. You can use the `operation_id` in support requests if something goes wrong.
+                    example: ef625038-70a3-41f1-826f-57bc11dd625a
+                    format: uuid
+                    type: string
+                type: object
+          description: Returned on success.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      security:
+        - bearerAuth: []
+      summary: Add Custom Events
+      tags:
+        - Custom Events
+      x-note: '* Requests complete validation before returning a response.
+
+        * Requests are authenticated with a bearer token which can provide access to this resource alone, or to this resource and others.
+
+        * Requests are rate limited to 500 events per second per app.
+
+        * The `name` value inside `body` must not contain any uppercase characters, or the event will be rejected with a 400 status code.
+
+        '
+      operationId: createCustomevents
+  /api/attachments:
+    post:
+      description: 'Create attachments by `POST`ing to the attachments URI. The body of the request must be a JSON object describing and including the contents of a file to attach.
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                content_type:
+                  description: 'The mimetype of the uploaded file including the charset parameter, if needed. Example: `"text/plain; charset=\"UTF-8\""`
+
+                    '
+                  maxLength: 100
+                  type: string
+                data:
+                  description: 'Base64-encoded bytes of the file contents representing a maximum of 2.5 MiB of data when decoded. Padding with `=` chars is optional.
+
+                    '
+                  type: string
+                filename:
+                  description: 'The name of the uploaded file (max 255 UTF-8 bytes). Multiple files with the same name are allowed in separate requests.
+
+                    '
+                  type: string
+              required:
+                - filename
+                - content_type
+                - data
+              type: object
+      responses:
+        '201':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                description: The response body for an email attachment creation request.
+                properties:
+                  attachment_id:
+                    description: The attachment ID for a newly-created attachment. Reference this ID in the `attachments` list in the [Email override](#schemas-emailoverrideobject).
+                    items:
+                      type: string
+                    type: array
+                  ok:
+                    description: Either `true` or `false`. Represents if the operation completed successfully or not. If false, other properties defined here will not necessarily be present.
+                    type: boolean
+                type: object
+          description: The email attachment was created. The response body will contain the IDs of the created attachments.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: The application does not have the proper entitlement to create attachments.
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Create Email Attachment
+      tags:
+        - Email
+      x-important: '* Attachments can be used for `transactional` sends only, not `commercial`.
+
+
+        * Attachments cannot be used in Automations.
+
+
+        * Attachment size is limited to 2.5MB per attachment, with a 20MB content size limit on each message, including content body and all attachments.
+
+
+        * Attachment count is limited to 10 per email.
+
+
+        * Sending attachments with malicious content is strictly prohibited. This is enforced in part by blocking file types with .bat and .exe extensions.
+
+
+        * Attachments have a TTL (Time To Live) of 60 days.
+
+        '
+      operationId: createAttachments
+  /api/channels/email/uninstall:
+    post:
+      description: '**Removes an email address from Airship. Use with caution.** If the uninstalled email address opts-in again, it might generate a new channel_id. If a user generates a new `channel_id` when they opt-in again, the new `channel_id` cannot be reassociated with any opt-in information, tags, named users, Performance Analytics reports, or other information from the that belonged to the previously-uninstalled email channel.'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                email_address:
+                  description: The email address of the channel to uninstall.
+                  example: name@example.com
+                  type: string
+              required:
+                - email_address
+              type: object
+        description: An email address of the channel to uninstall.
+      responses:
+        '202':
+          content:
+            application/vnd.urbanairship+json; version=3;:
+              schema:
+                $ref: '#/components/schemas/okResponseObject'
+          description: Returns OK for success.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Uninstall Email Channel
+      tags:
+        - Email
+      operationId: createChannelsEmailUninstall
+  /api/channels/sms/opt-out:
+    post:
+      description: 'This will mark an SMS channel as opted-out (inactive) and it will not receive alerts even when they are addressed in the future. To opt the user back in, call the registration function again with a valid `opted_in` value.
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                msisdn:
+                  description: The mobile phone number you want to opt-out of SMS messages. Must be numeric characters only, without leading zeros. 15 digits maximum.
+                  maxLength: 15
+                  pattern: ^[0-9]*$
+                  type: string
+                sender:
+                  description: A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.
+                  properties:
+                    sms_sender:
+                      oneOf:
+                        - maxLength: 16
+                          minLength: 1
+                          type: string
+                        - items:
+                            maxLength: 16
+                            minLength: 1
+                            type: string
+                          maxItems: 100
+                          minItems: 1
+                          type: array
+                  required:
+                    - sms_sender
+                  title: SMS Sender Selector
+                  type: string
+              required:
+                - msisdn
+                - sender
+              type: object
+      responses:
+        '202':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  ok:
+                    description: If true, the operation completed successfully.
+                    type: boolean
+                type: object
+          description: The msisdn/channel is opted-out of SMS notifications.
+        '400':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  details:
+                    properties:
+                      error:
+                        description: Specific error message that explains why the request was unsuccessful.
+                        type: string
+                    type: object
+                  error:
+                    description: Returned with 40x responses; explains why the request was unsuccessful.
+                    type: string
+                  error_code:
+                    description: The 5-digit Airship error code, pointing to a more specific error than the HTTP Status.
+                    type: integer
+                  ok:
+                    description: If false, the request was unsuccessful.
+                    type: boolean
+                type: object
+          description: The request body is not valid.
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Opt-out of SMS messages
+      tags:
+        - SMS
+      operationId: createChannelsSmsOptout
+  /api/channels/sms/uninstall:
+    post:
+      description: '**Removes phone numbers and accompanying data from Airship. Use with caution.** Uninstalling an SMS channel will prevent you from retrieving opt-in and opt-out history for the corresponding msisdn. If the uninstalled msisdn opts-in again, it will generate a new channel_id. The new channel_id cannot be reassociated with any opt-in information, tags, named users, Performance Analytics reports, or other information from the uninstalled SMS channel.
+
+        '
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                msisdn:
+                  description: The mobile phone number you want to remove from the Airship system. Must be numeric characters only, without leading zeros. 15 digits maximum.
+                  maxLength: 15
+                  pattern: ^[0-9]*$
+                  type: string
+                sender:
+                  description: A long or short code the app is configured to send from. When using a short code, prepend the ISO 3166-1 alpha-2 formatted country code to the short code with a colon, e.g.: `US:12345`. Failing to provide the country code will only cause an error if your app contains multiple short code senders for different countries. See the [ISO 3166 browsing tool](https://www.iso.org/obp/ui/#search) to locate the proper alpha-2 country code.
+                  properties:
+                    sms_sender:
+                      oneOf:
+                        - maxLength: 16
+                          minLength: 1
+                          type: string
+                        - items:
+                            maxLength: 16
+                            minLength: 1
+                            type: string
+                          maxItems: 100
+                          minItems: 1
+                          type: array
+                  required:
+                    - sms_sender
+                  title: SMS Sender Selector
+                  type: string
+              required:
+                - msisdn
+                - sender
+              type: object
+      responses:
+        '202':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  ok:
+                    description: If true, the operation was successful.
+                    type: boolean
+                type: object
+          description: The SMS channel and all information associated with the msisdn is uninstalled.
+        '400':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  details:
+                    properties:
+                      error:
+                        description: Specific error message that explains why the request was unsuccessful.
+                        type: string
+                    type: object
+                  error:
+                    description: Returned with 40x responses; explains why the request was unsuccessful.
+                    type: string
+                  error_code:
+                    description: The 5-digit Airship error code, pointing to a more specific error than the HTTP Status.
+                    type: integer
+                  ok:
+                    description: If false, the request was unsuccessful.
+                    type: boolean
+                type: object
+          description: The request body is not valid.
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Uninstall SMS Channel
+      tags:
+        - SMS
+      operationId: createChannelsSmsUninstall
+  /api/sms/custom-response:
+    post:
+      description: 'Respond to a mobile originated message based on a keyword consumed by your custom-response webhook, using a mobile-originated ID. See [Inbound Message Handling](https://docs.airship.com/platform/sms/inbound-message-handling/) for information about setting up a custom response webhook server.
+
+
+        This endpoint requires bearer authorization.
+
+        '
+      parameters:
+        - $ref: '#/components/parameters/appKeyHeader'
+      requestBody:
+        content:
+          application/json:
+            example:
+              mobile_originated_id: 28883743-4868-4083-ab5d-77ac4542531a
+              sms:
+                alert: Your balance is $1234.56. Go to https://www.mybank.com/myaccount/my-balance?ua-tag-add=balance_prefs:sms to see more about your account.
+                shorten_links: true
+            schema:
+              oneOf:
+                - properties:
+                    mobile_originated_id:
+                      description: 'The identifier that you received through your SMS webhook corresponding to the mobile-originated message that you''re issuing a custom response to. The `mobile_originated_id` is valid for 10 minutes from the `received_timestamp` in the payload sent to your webhook server''s `/inbound-sms` endpoint.
+
+                        '
+                      format: uuid
+                      type: string
+                    sms:
+                      properties:
+                        alert:
+                          description: Your custom SMS message.
+                          type: string
+                        shorten_links:
+                          default: false
+                          description: 'If true, Airship will shorten http/https links (space delimited) in the message text fields, producing unique, 25 character URLs for each member of your audience. Airship produces `short_link_click` events in the Real-Time Data Stream for each link that a user engages with.
+
+
+                            When this setting is enabled, you can add or remove tags from users who click your links by adding query strings to your URLs. You can serialize tag operations with `&`:
+
+                            * `?ua-tag-add=tag_group:tag&another_group:tag2` — adds a tag in `tag_group` to the `channel_id`.
+
+                            * `?ua-tag-remove=tag_group:tag&another_group:tag2` — removes a tag in `tag group` from the `channel_id`.
+
+                            '
+                          type: boolean
+                      required:
+                        - alert
+                      type: object
+                  required:
+                    - sms
+                    - mobile_originated_id
+                  type: object
+                - properties:
+                    mms:
+                      $ref: '#/components/schemas/mmsOverrideObject'
+                    mobile_originated_id:
+                      description: 'The identifier that you received through your SMS webhook corresponding to the mobile-originated message that you''re issuing a custom response to. The `mobile_originated_id` is valid for 10 minutes from the `received_timestamp` in the payload sent to your webhook server''s `/inbound-sms` endpoint.
+
+                        '
+                      format: uuid
+                      type: string
+                  required:
+                    - mms
+                    - mobile_originated_id
+                  type: object
+      responses:
+        '200':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  ok:
+                    description: If `true`, your request was successful.
+                    type: boolean
+                  operation_id:
+                    description: A unique identifier for an operation; you can use this identifier to find the operation for troubleshooting purposes.
+                    format: uuid
+                    title: Operation ID
+                    type: string
+                  push_id:
+                    description: A unique identifier for a push operation.
+                    format: uuid
+                    title: Push ID
+                    type: string
+                type: object
+          description: The operation was successful.
+        '404':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  error:
+                    description: A plain-text explanation of the error.
+                    type: string
+                  ok:
+                    description: If false, your request was unsuccessful.
+                    type: boolean
+                  operation_id:
+                    description: A unique identifier for an operation; you can use this identifier to find the operation for troubleshooting purposes.
+                    format: uuid
+                    title: Operation ID
+                    type: string
+                type: object
+          description: The mobile_originated_id could not be found.
+      security:
+        - bearerAuth: []
+      summary: Custom SMS Response
+      tags:
+        - SMS
+      operationId: createSmsCustomresponse
+  /api/sms/{msisdn}/keywords:
+    post:
+      description: 'Trigger Mobile Originated (MO) keyword interactions on behalf of an MSISDN.
+
+        '
+      parameters:
+        - $ref: '#/components/parameters/appKeyHeader'
+        - description: The identifier for the SMS channel you want to trigger a mobile originated keyword from.
+          in: path
+          name: msisdn
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            example:
+              keyword: stop
+              sender_ids:
+                - US:54321
+                - '1234'
+            schema:
+              properties:
+                keyword:
+                  description: The keyword you want to trigger an action for.
+                  type: string
+                sender_ids:
+                  description: The sender IDs with keyword actions that you want to test. Airship returns a 400 if the `keyword` is not configured for one or more of the senders in the array.
+                  items:
+                    type: string
+                  minItems: 1
+                  type: array
+                timestamp:
+                  description: The ISO8601 date-time when the MO keyword was sent. If absent, Airship uses the server-time of your request.
+                  type: string
+              required:
+                - keyword
+                - sender_ids
+              type: object
+      responses:
+        '200':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  ok:
+                    description: If `true`, your request was successful.
+                    type: boolean
+                type: object
+          description: The operation was successful.
+        '400':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: 'The operation was not successful. If the request is formatted correctly, one or more `sender_ids` does not exist or the keyword is not configured for one or more of the `sender_ids`.
+
+            '
+      security:
+        - basicAppAuth: []
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Manually Trigger a Keyword Interaction
+      tags:
+        - SMS
+      operationId: createSmsKeywords
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Use "App {app_key}:{master_secret}" base64-encoded
+  responses:
+    '400':
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/errorResponse'
+    '401':
+      description: Unauthorized
+      content:
+        text/plain:
+          schema:
+            $ref: '#/components/schemas/errorResponse'
+    '404':
+      description: Not Found
+      content:
+        application/vnd.urbanairship+json:
+          schema:
+            $ref: '#/components/schemas/errorResponse'
+    '413':
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/error'
+      description: Returned when the request is too large to be processed.
+    '200':
+      content:
+        application/vnd.urbanairship+json; version=3:
+          schema:
+            $ref: '#/components/schemas/okResponseObject'
+      description: Everything worked as expected.
+  schemas:
+    errorResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: false
+        error:
+          type: string
+        error_code:
+          type: integer
+        details:
+          type: object
+    okResponseObject:
+      type: object
+      properties:
+        ok:
+          type: boolean
+          example: true
+        operation_id:
+          type: string
+    pushObject:
+      type: object
+      required:
+        - audience
+        - notification
+      properties:
+        audience:
+          $ref: '#/components/schemas/audienceObject'
+        notification:
+          $ref: '#/components/schemas/notificationObject'
+        device_types:
+          type: array
+          items:
+            type: string
+            enum:
+              - ios
+              - android
+              - amazon
+              - web
+              - sms
+              - email
+              - open
+    audienceObject:
+      type: object
+      properties:
+        tag:
+          type: string
+        channel:
+          type: string
+        named_user:
+          type: string
+        segment:
+          type: string
+    notificationObject:
+      type: object
+      properties:
+        alert:
+          type: string
+        ios:
+          type: object
+        android:
+          type: object
+        web:
+          type: object
+    pushResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        operation_id:
+          type: string
+        push_ids:
+          type: array
+          items:
+            type: string
+    channelObject:
+      type: object
+      properties:
+        channel_id:
+          type: string
+        device_type:
+          type: string
+        installed:
+          type: boolean
+        opt_in:
+          type: boolean
+        created:
+          type: string
+          format: date-time
+        last_registration:
+          type: string
+          format: date-time
+        tags:
+          type: array
+          items:
+            type: string
+    channelListResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/channelObject'
+        next_page:
+          type: string
+    channelResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        channel:
+          $ref: '#/components/schemas/channelObject'
+    channelTagsObject:
+      type: object
+      properties:
+        audience:
+          $ref: '#/components/schemas/audienceObject'
+        add:
+          type: object
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+        remove:
+          type: object
+          properties:
+            tags:
+              type: array
+              items:
+                type: string
+    emailChannelObject:
+      type: object
+      required:
+        - address
+        - type
+      properties:
+        address:
+          type: string
+          format: email
+        type:
+          type: string
+          enum:
+            - email
+        opt_in_mode:
+          type: string
+          enum:
+            - classic
+            - double
+        commercial_opted_in:
+          type: string
+          format: date-time
+    smsRegistrationObject:
+      type: object
+      required:
+        - msisdn
+        - sender
+      properties:
+        msisdn:
+          type: string
+        sender:
+          type: string
+        opted_in:
+          type: string
+          format: date-time
+    scheduleObject:
+      type: object
+      required:
+        - schedule
+        - push
+      properties:
+        schedule:
+          type: object
+          required:
+            - scheduled_time
+          properties:
+            scheduled_time:
+              type: string
+              format: date-time
+        name:
+          type: string
+        push:
+          $ref: '#/components/schemas/pushObject'
+    scheduleListResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/scheduleObject'
+        next_page:
+          type: string
+    scheduleResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        operation_id:
+          type: string
+        schedule_urls:
+          type: array
+          items:
+            type: string
+    namedUserObject:
+      type: object
+      properties:
+        named_user_id:
+          type: string
+        created:
+          type: string
+          format: date-time
+        modified:
+          type: string
+          format: date-time
+        tags:
+          type: object
+        channels:
+          type: array
+          items:
+            $ref: '#/components/schemas/channelObject'
+    namedUserListResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        named_users:
+          type: array
+          items:
+            $ref: '#/components/schemas/namedUserObject'
+        next_page:
+          type: string
+    namedUserUpdateObject:
+      type: object
+      properties:
+        tags:
+          type: object
+          properties:
+            add:
+              type: array
+              items:
+                type: string
+            remove:
+              type: array
+              items:
+                type: string
+    namedUserAssociationObject:
+      type: object
+      required:
+        - named_user_id
+      properties:
+        named_user_id:
+          type: string
+        channel_id:
+          type: string
+        device_type:
+          type: string
+    segmentObject:
+      type: object
+      required:
+        - display_name
+        - criteria
+      properties:
+        display_name:
+          type: string
+        criteria:
+          type: object
+    segmentListResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        segments:
+          type: array
+          items:
+            $ref: '#/components/schemas/segmentObject'
+        next_page:
+          type: string
+    segmentResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        operation_id:
+          type: string
+    listObject:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        extra:
+          type: object
+    listMetadataResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        lists:
+          type: array
+          items:
+            $ref: '#/components/schemas/listObject'
+    templateObject:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+        description:
+          type: string
+        push:
+          $ref: '#/components/schemas/pushObject'
+    templateListResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        templates:
+          type: array
+          items:
+            $ref: '#/components/schemas/templateObject'
+        next_page:
+          type: string
+    templateResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        operation_id:
+          type: string
+        template_id:
+          type: string
+    reportResponse:
+      type: object
+      properties:
+        ok:
+          type: boolean
+        sends:
+          type: array
+          items:
+            type: object
+            properties:
+              date:
+                type: string
+              ios:
+                type: integer
+              android:
+                type: integer
+              total:
+                type: integer
+    error:
+      description: Errors returned with 4xx responses. Errors include as much information as possible to help you understand the reason for the failure.
+      properties:
+        details:
+          description: Provides information relating to the specific `error_code` when possible. For `400` errors, this object may include the `path` and `location` of validation failures.
+          properties:
+            error:
+              description: Specific information about the semantic error, helping you better understand why the request failed.
+              type: string
+            location:
+              description: The specific line and column where the validation error occured, if known.
+              properties:
+                column:
+                  description: The column containing the semantic error.
+                  type: integer
+                line:
+                  description: The line containing the semantic error.
+                  type: integer
+              type: object
+            path:
+              description: The path to the key containing the validation error.
+              type: string
+          type: object
+        error:
+          description: a plain-text explanation of the error
+          type: string
+        error_code:
+          description: the Airship error code. This is normally the http error code appended with a 2-digit identifier, helping provide more specific details about the error.
+          example: 40401
+          type: integer
+        ok:
+          description: 2xx responses return `true`; 4xx responses return `false`
+          example: false
+          type: boolean
+      required:
+        - ok
+        - error
+      title: Error Response
+      type: object
+      x-note: it's a good idea to log whenever you receive a non-2XX response. For best results, log the entire request and response, including headers. This information will help you or Support fix the issue.
+      x-schema-tag: Response Format
+    sms:
+      description: The payload for a create and send operation to SMS channels. When registering and sending to SMS channels, `device_types` must be set to `sms`.
+      properties:
+        audience:
+          description: The SMS information and opt in parameters for the channels you want to register and send to.
+          properties:
+            create_and_send:
+              description: 'Each object in the array represents channel you want to register and push to. Channel registration fields are prefixed with `ua_` and have the same requirements as the [SMS channel registration endpoint](/api/channels/sms/post).
+
+
+
+                All other fields represent variables if `notification` specifies a `template`.'
+              items:
+                additionalProperties:
+                  description: 'Like substitutions in the [template merge data object](#schemas-pushtemplatepayload), you can provide additional keys and values representing variables in your notification `template`. Variable keys can be any type of value, including arrays, objects, etc. Your variable keys **must not** be prefixed with `ua_`. See the [Push Template Payload](#schemas-pushtemplatepayload) for more information about template substitutions.
+
+                    '
+                  title: Substitutions
+                properties:
+                  ua_msisdn:
+                    description: The phone number of a mobile device. Entries with `ua_msisdn` values that are not reachable by `ua_sender` values will be **silenty dropped.**
+                    type: string
+                  ua_opted_in:
+                    description: 'The date/time when the user (msisdn) opted in to messages from the sender. If this date-time is newer than an `opted_out` value on the channel, the channel will receive your message, but Airship will not update the channel''s opt-in status or value.
+
+                      '
+                    format: datetime
+                    type: string
+                  ua_sender:
+                    description: The long or short code your SMS messages are sent from. You can prefix short codes with an ISO 3166 country code — `US:12345`.
+                    type: string
+                required:
+                  - ua_msisdn
+                  - ua_sender
+                  - ua_opted_in
+                type: object
+              maxItems: 1000
+              type: array
+          required:
+            - create_and_send
+          title: SMS Audience for Create and Send Payloads
+          type: object
+        campaigns:
+          $ref: '#/components/schemas/campaignsObject'
+        device_types:
+          description: The platform you want to register channels for and send notifications to.
+          items:
+            enum:
+              - email
+              - mms
+              - sms
+              - open::<open_platform_name>
+            maxItems: 1
+            type: string
+          type: array
+        notification:
+          description: An `alert` notification or a platform override matching the value in `device types`. A notification with a platform override that does not match your `device_types` will result in a 400 error.
+          properties:
+            sms:
+              oneOf:
+                - $ref: '#/components/schemas/smsOverrideObject'
+                - $ref: '#/components/schemas/smsOverrideWithTemplate'
+          type: object
+      required:
+        - audience
+        - device_types
+        - notification
+      title: Create and Send to SMS Channels
+      type: object
+      x-schema-tag: Create and Send
+    campaignsObject:
+      description: An object specifying custom campaign categories related to the notification.
+      properties:
+        categories:
+          description: Array of strings representing the campaigns you wish to associate with the notification. Must have between 1 to 10 items in the array with a 64 character/byte maximum per item.
+          example:
+            - shoes
+            - running
+            - summer 2017
+          items:
+            maxLength: 64
+            type: string
+          maxItems: 10
+          minItems: 1
+          type: array
+      required:
+        - categories
+      title: Campaigns Object
+      type: object
+    smsOverrideObject:
+      description: Provides override options when `sms` is one of the `device_types` specified in the payload.
+      properties:
+        alert:
+          description: Overrides the alert provided at the top level of the notification for SMS channels. The maximum length of an SMS alert is 1600 characters.
+          maxLength: 1600
+          type: string
+        expiry:
+          description: 'The time after which Airship will stop trying to deliver an SMS message. The maximum expiry period is 48 hours; this is also the default expiry period.
+
+            '
+          oneOf:
+            - description: An absolute ISO UTC timestamp. The timestamp must be within the next 48 hours.
+              example: '2018-03-01T12:00:00'
+              type: string
+            - description: Number of seconds from now.
+              maximum: 172800
+              type: integer
+        shorten_links:
+          default: false
+          description: 'If true, Airship will shorten http/https links (space delimited) in the message text fields, producing unique, 25 character URLs for each member of your audience. Airship produces `short_link_click` events in the Real-Time Data Stream for each link that a user engages with.
+
+
+            When this setting is enabled, you can add or remove tags from users who click your links by adding query strings to your URLs. You can serialize tag operations with `&`:
+
+            * `?ua-tag-add=tag_group:tag&another_group:tag2` — adds a tag in `tag_group` to the `channel_id`.
+
+            * `?ua-tag-remove=tag_group:tag&another_group:tag2` — removes a tag in `tag group` from the `channel_id`.
+
+            '
+          type: boolean
+      title: SMS Platform Overrides
+      type: object
+      x-schema-tag: Platform Overrides
+    smsOverrideWithTemplate:
+      description: 'Notification fields specific to SMS messages with an inline template for use in a `/api/create-and-send` payload. Using a template enables you to provide and populate variables in your notification. You can also add conditional statements based on those variables, determining message text that to send to each member of your audience. Conditionals begin with `{{#operator}}` and end with `{{/operator}}`. For more information, see [Dynamic Content](/guides/messaging/user-guide/personalization/dynamic-content).
+
+        '
+      properties:
+        expiry:
+          description: Delivery expiration, as either absolute ISO UTC timestamp, or number of seconds from now.
+          oneOf:
+            - description: Number of seconds from now. When the delivery platform supports it, a value of zero (0) indicates that the message should be delivered immediately and never stored for later attempts.
+              example: 3600
+              type: integer
+            - description: An absolute ISO UTC timestamp.
+              example: '2018-03-01T12:00:00'
+              type: string
+          title: Expiry
+          type: object
+        template:
+          description: Specify a `template_id` created in the Airship UI or use an inline template.
+          oneOf:
+            - properties:
+                template_id:
+                  description: The `ID` of a template that you created in the Airship UI. You can find template IDs in *Messages » Content » Templates* in the dashboard.
+                  format: uuid
+                  type: string
+              required:
+                - template_id
+              type: object
+            - properties:
+                fields:
+                  description: The template you want to construct for the message. Provide variables in the template in double curly brackets — `{{variable_name}}`. The variable name must be a case-sensitive match of a key in your `create-and-send` objects to be replaced as a part of the template.
+                  properties:
+                    alert:
+                      description: The notification you want to send to an SMS audience.
+                      type: string
+                  type: object
+              type: object
+      required:
+        - template
+      title: SMS Notification with Template
+      type: object
+      x-schema-tag: Platform Overrides with Templates
+    mmsOverrideObject:
+      description: 'Provides the content for a push to MMS channels. If `sms` is in the `device_type` array, your request may include this object.
+
+        It cannot be combined with an SMS Platform Override as a single push can only include either an SMS or MMS payload.
+
+        '
+      properties:
+        fallback_text:
+          description: 'If a member of your audience cannot receive MMS messages, they will receive your fallback text with a link to the original content.
+
+            '
+          maxLength: 160
+          minLength: 1
+          type: string
+        shorten_links:
+          default: false
+          description: 'If true, Airship will shorten http/https links (space delimited) in the message text fields, producing unique, 25 character URLs for each member of your audience. Airship produces `short_link_click` events in the Real-Time Data Stream for each link that a user engages with.
+
+
+            When this setting is enabled, you can add or remove tags from users who click your links by adding query strings to your URLs. You can serialize tag operations with `&`:
+
+            * `?ua-tag-add=tag_group:tag&another_group:tag2` — adds a tag in `tag_group` to the `channel_id`.
+
+            * `?ua-tag-remove=tag_group:tag&another_group:tag2` — removes a tag in `tag group` from the `channel_id`.
+
+            '
+          type: boolean
+        slides:
+          description: 'An array containing a single slide object. A slide is a multimedia object.
+
+            '
+          items:
+            properties:
+              media:
+                description: Contains information about the media you want to send.
+                properties:
+                  content_length:
+                    description: 'The length of the attachment in bytes. Maximum size is 2MB or 2000000 bytes for image/jpeg and image/png, 1024000 bytes for image/gif,
+
+                      and 2048000 bytes for text/vcard. While this is optional, it is recommended since pushes will get dropped if the content size is incorrect.
+
+                      '
+                    type: integer
+                  content_type:
+                    description: The MIME type of the image specified in the URL. The MIME type must match the extension in the `url`.
+                    enum:
+                      - image/jpeg
+                      - image/gif
+                      - image/png
+                      - text/vcard
+                    type: string
+                  url:
+                    description: 'The http or https URL of the media attachment for the slide. The URL must end in one of `.gif`, `.jpeg`, `.jpg`, `.png`, or `.vcf` (case-insensitive).
+
+
+                      While the `content_length` field is optional, your image must still be under 2MB for JPEGs and PNGs, 1 MB for GIFs, or 2048000 bytes for text/vcard.
+
+                      '
+                    maxLength: 2000
+                    type: string
+                required:
+                  - url
+                  - content_type
+                type: object
+              text:
+                description: 'Text that you want to display along with the media attachment. The order of media and text in the message is not guaranteed.
+
+                  '
+                maxLength: 5000
+                minLength: 0
+                type: string
+            required:
+              - media
+            type: object
+          maxItems: 1
+          minItems: 1
+          type: array
+        subject:
+          description: 'The subject for the MMS message, normally displayed in bold. The subject might not appear for recipients if the Sender is a Toll-Free number.
+
+            '
+          maxLength: 80
+          minLength: 0
+          type: string
+      required:
+        - fallback_text
+        - slides
+      title: MMS Platform Overrides
+      type: object
+      x-schema-tag: Platform Overrides
+    open:
+      description: When registering and sending to open channels, the `device_type` must be set to `open::<open_channel_name>`.
+      properties:
+        audience:
+          description: The open channels and opt-in information for the channels you want to register and send to.
+          properties:
+            create_and_send:
+              description: Each object in the array represents channel you want to register and push to. Channel registration fields are prefixed with `ua_` and have the same requirements as open channel registration.
+              items:
+                additionalProperties:
+                  description: 'Like substitutions in the [template merge data object](#schemas-pushtemplatepayload), you can provide additional keys and values representing variables in your notification `template`. Variable keys can be any type of value, including arrays, objects, etc. Your variable keys **must not** be prefixed with `ua_`. See the [Push Template Payload](#schemas-pushtemplatepayload) for more information about template substitutions.
+
+                    '
+                  title: Substitutions
+                properties:
+                  ua_address:
+                    description: The address that you want to populate the channel's `address` field.  See the channel object for more information.
+                    type: string
+                required:
+                  - ua_address
+                type: object
+              maxItems: 1000
+              type: array
+          required:
+            - create_and_send
+          title: Open Audience for Create and Send Payloads
+          type: object
+        campaigns:
+          $ref: '#/components/schemas/campaignsObject'
+        device_types:
+          description: The platform you want to register channels for and send notifications to.
+          items:
+            enum:
+              - email
+              - mms
+              - sms
+              - open::<open_platform_name>
+            maxItems: 1
+            type: string
+          type: array
+        notification:
+          description: An `alert` notification or a platform override matching the valie in `device types`. A notification with a platform override that does not match your `device_types` will result in a 400 error.
+          properties:
+            open::open_platform_name:
+              $ref: '#/components/schemas/openChannelOverrideWithTemplate'
+          type: object
+      required:
+        - audience
+        - device_types
+        - notification
+      title: Create and Send to Open Channels
+      type: object
+      x-schema-tag: Create and Send
+    openChannelOverrideWithTemplate:
+      description: 'Use a `template` with an open channel-specific message. You can reference a template by ID, or use `{{handlebars}}` directly in your message.
+
+        '
+      properties:
+        extra:
+          additionalProperties:
+            type: string
+          description: A JSON dictionary of string-to-string key-value pairs. If you wish to pass structured data in an extra key, it must be JSON-encoded as a string.
+          example:
+            en: English
+            fr: French
+          title: Extra
+          type: object
+        interactive:
+          $ref: '#/components/schemas/interactiveObject'
+        template:
+          oneOf:
+            - properties:
+                template_id:
+                  description: The `ID` of a template that you created in the Airship UI. You can find template IDs in *Messages » Content » Templates* in the dashboard.
+                  format: uuid
+                  type: string
+              type: object
+            - properties:
+                fields:
+                  properties:
+                    alert:
+                      description: Override the alert value provided at the top level, if any.
+                      type: string
+                    media_attachment:
+                      description: A URI for an image or video somewhere on the internet.
+                      format: uri
+                      type: string
+                    summary:
+                      description: A string value for providing a content summary.
+                      type: string
+                    title:
+                      description: A string representing the title of the notification.
+                      type: string
+                  type: object
+              type: object
+      required:
+        - template
+      title: Open Channel Override with Template
+      type: object
+      x-schema-tag: Platform Overrides with Templates
+    interactiveObject:
+      description: 'An interactive notification.
+
+
+        Attempting to specify an interactive payload for an unsupported device type will result in an HTTP 400 response.'
+      properties:
+        button_actions:
+          description: An object containing keys that must be the button IDs for the specified interactive notification type. If the notification type begins with 'ua_', the keys must match exactly the button IDs for that type or a strict subset. The names of the button IDs cannot be validated for custom notifications.
+          oneOf:
+            - description: Yes/No button action
+              properties:
+                'no':
+                  $ref: '#/components/schemas/actionsObject'
+                'yes':
+                  $ref: '#/components/schemas/actionsObject'
+              title: Yes/No
+              type: object
+            - description: Accept/decline button action
+              properties:
+                accept:
+                  $ref: '#/components/schemas/actionsObject'
+                decline:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Accept/Decline
+              type: object
+            - description: Shop now button action
+              properties:
+                shop_now:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Shop Now
+              type: object
+            - description: Buy now button action
+              properties:
+                buy_now:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Buy Now
+              type: object
+            - description: Follow button action
+              properties:
+                follow:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Follow
+              type: object
+            - description: Opt in button action
+              properties:
+                opt_in:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Opt In
+              type: object
+            - description: Unfollow button action
+              properties:
+                unfollow:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Unfollow
+              type: object
+            - description: Opt out button action
+              properties:
+                opt_out:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Opt Out
+              type: object
+            - description: Opt in/remind button action
+              properties:
+                opt_in:
+                  $ref: '#/components/schemas/actionsObject'
+                remind:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Opt In/Remind
+              type: object
+            - description: Remind button action
+              properties:
+                remind:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Remind
+              type: object
+            - description: More info button action
+              properties:
+                more_info:
+                  $ref: '#/components/schemas/actionsObject'
+              title: More Info
+              type: object
+            - description: Download button action
+              properties:
+                download:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Download
+              type: object
+            - description: Share button action
+              properties:
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Share
+              type: object
+            - description: Download/share button action
+              properties:
+                download:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Download/Share
+              type: object
+            - description: Remind/share button action
+              properties:
+                remind:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Remind/Share
+              type: object
+            - description: Opt in/share button action
+              properties:
+                opt_in:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Opt In/Share
+              type: object
+            - description: Opt out/share button action
+              properties:
+                opt_out:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Opt Out/Share
+              type: object
+            - description: Follow/share button action
+              properties:
+                follow:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Follow/Share
+              type: object
+            - description: Unfollow/share button action
+              properties:
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+                unfollow:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Unfollow/Share
+              type: object
+            - description: Shop now/share button action
+              properties:
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+                shop_now:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Shop Now/Share
+              type: object
+            - description: Buy now/share button action
+              properties:
+                buy_now:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Buy Now/Share
+              type: object
+            - description: More like/less like button action
+              properties:
+                less_like:
+                  $ref: '#/components/schemas/actionsObject'
+                more_like:
+                  $ref: '#/components/schemas/actionsObject'
+              title: More Like/Less Like
+              type: object
+            - description: Like/dislike button action
+              properties:
+                dislike:
+                  $ref: '#/components/schemas/actionsObject'
+                like:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Like/Dislike
+              type: object
+            - description: Like button action
+              properties:
+                like:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Like
+              type: object
+            - description: Like/share button action
+              properties:
+                like:
+                  $ref: '#/components/schemas/actionsObject'
+                share:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Like/Share
+              type: object
+            - description: Add to calendar/remind button action
+              properties:
+                add_calendar:
+                  $ref: '#/components/schemas/actionsObject'
+                remind:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Add to Calendar/Remind
+              type: object
+            - description: Add button action
+              properties:
+                add:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Add
+              type: object
+            - description: Save button action
+              properties:
+                save:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Save
+              type: object
+            - description: Follow/Save button action
+              properties:
+                follow:
+                  $ref: '#/components/schemas/actionsObject'
+                save:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Follow/Save
+              type: object
+            - description: Rate button action
+              properties:
+                rate:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Rate
+              type: object
+            - description: Rate/remind button action
+              properties:
+                rate:
+                  $ref: '#/components/schemas/actionsObject'
+                remind:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Rate/Remind
+              type: object
+            - description: Search button action
+              properties:
+                search:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Search
+              type: object
+            - description: Book button action
+              properties:
+                book:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Book
+              type: object
+            - description: Happy/Sad button action
+              properties:
+                happy:
+                  $ref: '#/components/schemas/actionsObject'
+                sad:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Happy/Sad
+              type: object
+            - description: Up/down button action
+              properties:
+                down:
+                  $ref: '#/components/schemas/actionsObject'
+                up:
+                  $ref: '#/components/schemas/actionsObject'
+              title: Up/Down
+              type: object
+            - additionalProperties:
+                $ref: '#/components/schemas/actionsObject'
+              description: Custom button action
+              title: Custom Action
+              type: object
+        type:
+          description: A string that specifies the name of either a predefined or a custom-defined interactive notification type. Predefined types are prefixed with 'ua_'.
+          enum:
+            - ua_yes_no_foreground
+            - ua_yes_no_background
+            - ua_accept_decline_foreground
+            - ua_accept_decline_background
+            - ua_shop_now
+            - ua_buy_now
+            - ua_follow
+            - ua_opt_in
+            - ua_unfollow
+            - ua_opt_out
+            - ua_opt_in_remind
+            - ua_remind_me_later
+            - ua_more_info
+            - ua_download
+            - ua_share
+            - ua_download_share
+            - ua_remind_share
+            - ua_opt_in_share
+            - ua_opt_out_share
+            - ua_follow_share
+            - ua_unfollow_share
+            - ua_shop_now_share
+            - ua_buy_now_share
+            - ua_more_like_less_like
+            - ua_like_dislike
+            - ua_like
+            - ua_like_share
+            - ua_add_calendar_remind
+            - ua_add
+            - ua_save
+            - ua_follow_save
+            - ua_rate
+            - ua_rate_remind
+            - ua_search
+            - ua_book
+            - ua_icons_happy_sad
+            - ua_icons_up_down
+            - <custom_defined_interactive_notification_type>
+          example: ua_yes_no_foreground
+          title: Interactive Notification Type ID
+          type: string
+      required:
+        - type
+      title: Interactive Notification Object
+      type: object
+    actionsObject:
+      description: Describes Actions to be performed by the SDK when a user interacts with the notification. You can personalize message actions using [handlebars](../../guides/messaging/user-guide/personalization/dynamic-content).
+      properties:
+        add_tag:
+          description: An array of tags.
+          example:
+            - Federer fan
+            - Messi fan
+          items:
+            maxLength: 128
+            minLength: 1
+            type: string
+          maxItems: 100
+          minItems: 0
+          type: array
+        app_defined:
+          additionalProperties:
+            title: Application-Defined Action Payload
+            type: object
+          description: A map of registered action names to payloads as defined by the app or SDK. Some of these actions are supported as their own property on the Actions object, but be aware that their registered names in the SDK may be different. For a summary of the actions registered by the SDK, including usage information, see the [iOS](https://docs.airship.com/platform/ios/actions/#ios-available-actions) and [Android](https://docs.airship.com/platform/android/actions/#android-available-actions) docs.
+          type: object
+        open:
+          description: 'Open action. When a user interacts with the notification, opens one of: URL, deep link, or landing page as described in the associated `content` property.'
+          oneOf:
+            - description: Opens a URL or passes a string for use as a custom action.
+              properties:
+                content:
+                  description: Any string. A URL string that starts with either 'http' or 'https' will open a URL or a string that starts with 'tel:' followed by a sequence of numbers will open the phone app.
+                  example: https://docs.urbanairship.com
+                  type: string
+                type:
+                  enum:
+                    - url
+                  type: string
+              required:
+                - type
+                - content
+              title: Open URL Action
+              type: object
+            - description: Opens a deep link.
+              properties:
+                content:
+                  description: A non-blank string.
+                  maxLength: 1024
+                  minLength: 1
+                  type: string
+                fallback_url:
+                  description: A URL that can be used on platforms that don't have full support for the otherwise defined action.
+                  example: https://docs.urbanairship.com
+                  format: url
+                  pattern: ^http.*:\/\/.+
+                  title: Fallback URL
+                  type: string
+                type:
+                  enum:
+                    - deep_link
+                  type: string
+              required:
+                - type
+                - content
+              title: Open Deep Link Action
+              type: object
+            - description: Opens a landing page.
+              properties:
+                content:
+                  properties:
+                    body:
+                      description: A string containing content which will be uploaded to our internal content hosting system.
+                      example: <html>content</html>
+                      maxLength: 8192
+                      minLength: 1
+                      type: string
+                    content_encoding:
+                      description: A string specifying the encoding of the text in the `body` attribute, which must be 'utf-8' or 'base64'. Defaults to 'utf-8'.
+                      enum:
+                        - utf-8
+                        - base64
+                      type: string
+                    content_type:
+                      description: A non-blank string, which must be a MIME type.
+                      example: text/html
+                      maxLength: 128
+                      minLength: 1
+                      type: string
+                  required:
+                    - body
+                    - content_type
+                  type: object
+                type:
+                  enum:
+                    - landing_page
+                  type: string
+              required:
+                - type
+                - content
+              title: Open Landing Page
+              type: object
+          type: object
+        remove_tag:
+          description: An array of tags.
+          example:
+            - Federer fan
+            - Messi fan
+          items:
+            maxLength: 128
+            minLength: 1
+            type: string
+          maxItems: 100
+          minItems: 0
+          type: array
+        share:
+          description: String indicating the text that will populate the share action.
+          example: Hey guys check this out!
+          maxLength: 1024
+          minLength: 1
+          type: string
+      title: Actions
+    customEventObject:
+      description: Defines a custom event.
+      properties:
+        body:
+          description: Contains information about your custom event. While only the event `name` is required, it is recommended that you provide as much information in this object as possible, so that your event is relevant and informative.
+          properties:
+            interaction_id:
+              description: The identifier defining where the event occurred. In a traditional website, this would be the path and query string from the URL. In a single page app that uses hash routing, it would be the path, query string, and fragment identifier.
+              example: your.store/us/en_us/pd/shoe/pid-11046546/pgid-10978234
+              type: string
+            interaction_type:
+              description: Describes the type of interaction that triggered the event, e.g., 'url', 'social', 'email'. This should almost always be 'url' for web events. Airship can separate events with the same `name` by `interaction_type`, providing greater insight into custom events.
+              example: url
+              type: string
+            name:
+              description: 'A plain-text name for the event. Airship’s analytics systems will roll up events with the same `name`, providing counts and total value associated with the event.
+
+                This value cannot contain upper-case characters. If the `name` contains upper-case characters, you will receive a 400 response.
+
+                '
+              example: purchased
+              pattern: '[^A-Z\s]'
+              type: string
+            properties:
+              additionalProperties: true
+              description: An object containing custom event properties. You can use handlebars to access custom event properties in templates or messages triggered by the custom event. Items in the `properties` object are limited to a 255 character maximum string length.
+              example:
+                category: mens shoes
+              type: object
+            session_id:
+              description: The user session during which the event occurred. You must supply and maintain session identifiers.
+              example: 22404b07-3f8f-4e42-a4ff-a996c18fa9f1
+              type: string
+            transaction:
+              description: If the event is one in a series representing a single transaction, use the transaction field to tie events together.
+              example: 886f53d4-3e0f-46d7-930e-c2792dac6e0a
+              type: string
+            value:
+              default: 0
+              description: If the event is associated with a count or amount, the 'value' field carries that information. Airship will treats this field as a representation of money; mathematical operations will use fixed precision representations of this field. The `value` field respects six digits of precision to the right of the decimal point. This field is optional; if empty, its value will default to zero.
+              example: 120.49
+              type: number
+          required:
+            - name
+          type: object
+        occurred:
+          description: The date and time when the event occurred. Events must have occurred within the past 90 days. You cannot provide a future date-time. If omitted, current date-time is used.
+          type: string
+        user:
+          description: Contains the Airship channel identifier for the user who triggered the event.
+          oneOf:
+            - properties:
+                named_user_id:
+                  description: The named user associated with the event.
+                  example: tommy_tutone
+                  type: string
+              title: Named User
+              type: object
+            - properties:
+                amazon_channel:
+                  description: The unique channel identifier for an Amazon device.
+                  example: 3c070fc0-e976-4563-b088-ec8946176a01
+                  format: uuid
+                  type: string
+              title: Amazon Channel
+              type: object
+            - properties:
+                android_channel:
+                  description: The unique channel identifier for an Android device.
+                  example: 8bb5df16-bcca-4a55-ba71-8417525732f5
+                  format: uuid
+                  type: string
+              title: Android Channel
+              type: object
+            - properties:
+                ios_channel:
+                  description: The unique channel identifier for an iOS device.
+                  example: f59970d3-3d42-4584-907e-f5c57f5d46a1
+                  format: uuid
+                  type: string
+              title: iOS Channel
+              type: object
+            - properties:
+                web_channel:
+                  description: The unique channel identifier for a web device.
+                  example: 9c36e8c7-5a73-47c0-9716-99fd3d4197d5
+                  format: uuid
+                  type: string
+              title: Web Channel
+              type: object
+            - properties:
+                channel:
+                  description: Airship canonical identifier for a user. Airship will determine the device.
+                  example: 000ecc30-1e5d-47ed-b12e-11e2eb960db0
+                  format: uuid
+                  type: string
+              title: Generic Channel
+              type: object
+      required:
+        - user
+        - body
+      title: Custom Event object
+      type: object
+    mms:
+      description: 'The payload for a create and send operation that registers SMS channels and sends a multimedia payload (MMS). When sending an MMS payload, `device_types` must be set to `mms`.
+
+        '
+      properties:
+        audience:
+          description: The SMS information and opt in parameters for the channels you want to register and send to.
+          properties:
+            create_and_send:
+              description: 'Each object in the array represents channel you want to register and push to. Channel registration fields are prefixed with `ua_` and have the same requirements as the [SMS channel registration endpoint](/api/channels/sms/post).
+
+
+
+                All other fields represent variables if `notification` specifies a `template`.'
+              items:
+                additionalProperties:
+                  description: 'Like substitutions in the [template merge data object](#schemas-pushtemplatepayload), you can provide additional keys and values representing variables in your notification `template`. Variable keys can be any type of value, including arrays, objects, etc. Your variable keys **must not** be prefixed with `ua_`. See the [Push Template Payload](#schemas-pushtemplatepayload) for more information about template substitutions.
+
+                    '
+                  title: Substitutions
+                properties:
+                  ua_msisdn:
+                    description: The phone number of a mobile device. Entries with `ua_msisdn` values that are not reachable by `ua_sender` values will be **silenty dropped.**
+                    type: string
+                  ua_opted_in:
+                    description: 'The date/time when the user (msisdn) opted in to messages from the sender. If this date-time is newer than an `opted_out` value on the channel, the channel will receive your message, but Airship will not update the channel''s opt-in status or value.
+
+                      '
+                    format: datetime
+                    type: string
+                  ua_sender:
+                    description: The long or short code your SMS messages are sent from. You can prefix short codes with an ISO 3166 country code — `US:12345`.
+                    type: string
+                required:
+                  - ua_msisdn
+                  - ua_sender
+                  - ua_opted_in
+                type: object
+              maxItems: 1000
+              type: array
+          required:
+            - create_and_send
+          title: SMS Audience for Create and Send Payloads
+          type: object
+        device_types:
+          description: The platform you want to register channels for and send notifications to.
+          items:
+            enum:
+              - email
+              - mms
+              - sms
+              - open::<open_platform_name>
+            maxItems: 1
+            type: string
+          type: array
+        notification:
+          properties:
+            mms:
+              description: A platform override for MMS messages; `device_types` must be set to `mms`. A notification with a platform override that does not match your `device_types` will result in a 400 error.
+              oneOf:
+                - $ref: '#/components/schemas/mmsOverrideObject'
+                - $ref: '#/components/schemas/mmsOverrideWithTemplate'
+          required:
+            - mms
+          type: object
+      required:
+        - audience
+        - device_types
+        - notification
+      title: Create and Send MMS Notification
+      type: object
+      x-schema-tag: Create and Send
+    mmsOverrideWithTemplate:
+      description: 'Template and notification overrides for a create and send payload with `device_types` set to `mms`. With a template, you can provide and populate variables and conditional statements based on those variables. Conditionals begin with `{{#operator}}` and end with `{{/operator}}`. For more information, see [Dynamic Content](/guides/messaging/user-guide/personalization/dynamic-content).
+
+        '
+      properties:
+        slides:
+          description: 'An array containing a single slide object. A slide is a multimedia object.
+
+            '
+          items:
+            properties:
+              media:
+                properties:
+                  content_length:
+                    description: 'The length of the attachment in bytes. Maximum size is 2MB or 2000000 bytes for image/jpeg and image/png, 1024000 bytes for image/gif,
+
+                      and 2048000 bytes for text/vcard. While this is optional, it is recommended since pushes will get dropped if the content size is incorrect.
+
+                      '
+                    type: integer
+                  content_type:
+                    description: The MIME type of the image specified in the URL. The MIME type must match the extension in the `url`.
+                    enum:
+                      - image/jpeg
+                      - image/gif
+                      - image/png
+                      - text/vcard
+                    type: string
+                  url:
+                    description: 'The HTTP or HTTPS URL of the media attachment for the slide. The URL must end in one of `.gif`, `.jpeg`, `.jpg`, `.png`, or `.vcf` (case-insensitive).
+
+
+                      While the `content_length` field is optional, your image must still be under 2MB for JPEGs and PNGs, 1 MB for GIFs, or 2048000 bytes for text/vcard.
+
+                      '
+                    maxLength: 2000
+                    type: string
+                required:
+                  - url
+                  - content_type
+                type: object
+            required:
+              - media
+            type: object
+          maxItems: 1
+          minItems: 1
+          type: array
+        template:
+          description: Specify a `template_id` created in the Airship UI or use an inline template.
+          oneOf:
+            - properties:
+                template_id:
+                  description: The `ID` of a template that you created in the Airship UI. You can find template IDs in *Messages » Content » Templates* in the dashboard.
+                  format: uuid
+                  type: string
+              required:
+                - template_id
+              type: object
+            - properties:
+                fields:
+                  properties:
+                    fallback_text:
+                      description: 'If a member of your audience cannot receive MMS messages, they will receive your fallback text with a link to the original content.
+
+                        '
+                      maxLength: 160
+                      minLength: 1
+                      type: string
+                    subject:
+                      description: 'The subject for the MMS message, normally displayed in bold. The subject might not appear for recipients if the Sender is a Toll-Free number.
+
+                        '
+                      maxLength: 80
+                      minLength: 0
+                      type: string
+                    text:
+                      description: 'Text that you want to display along with the media attachment. The order of media and text in the message is not guaranteed.
+
+                        '
+                      maxLength: 5000
+                      minLength: 0
+                  type: object
+              type: object
+      title: MMS Notification with Inline Template
+      type: object
+      x-schema-tag: Platform Overrides with Templates
+    email:
+      description: The payload for a create and send operation to email channels. When registering and sending to email channels, `device_types` must be set to `email`.
+      properties:
+        audience:
+          description: The email addresses and opt in agreements for the channels you want to register and send to.
+          properties:
+            create_and_send:
+              description: 'Each object in the array represents a channel you want push to and/or register. Channel registration fields are prefixed with `ua_` and have the same requirements as the [email registration endpoint](#operation-api-channels-email-post).
+
+
+
+                You cannot provide optional channel registration fields using this endpoint (like `locale_language` for email channels). All other fields represent variables if `notification` specifies a `template`.'
+              items:
+                additionalProperties:
+                  description: 'Like substitutions in the [template merge data object](#schemas-pushtemplatepayload), you can provide additional keys and values representing variables in your notification `template`. Variable keys can be any type of value, including arrays, objects, etc. Your variable keys **must not** be prefixed with `ua_`. See [Email Notification Object with Inline Template](#schemas-emailoverridewithtemplate) for more information about template substitutions.
+
+                    '
+                  title: Substitutions
+                description: Create-and-send email channel registration and template `substitutions`; each object in the array represents a channel.
+                properties:
+                  ua_address:
+                    description: The email address you want to register.
+                    type: string
+                  ua_commercial_opted_in:
+                    description: The date-time when the email address gave permission to receive commercial emails. If this date-time is newer than a `commercial_opted_out` value on the channel, the channel will receive your message but Airship will not update the channel's opt-in status or value.
+                    type: string
+                  ua_transactional_opted_in:
+                    description: The date-time when the email address gave permission to receive transactional emails. Transactional emails do not require this value, but you can set it if you want it to appear in email channel listings.
+                    type: string
+                required:
+                  - ua_address
+                type: object
+              maxItems: 1000
+              type: array
+          required:
+            - create_and_send
+          title: EmailAudience for Create and Send Payloads
+          type: object
+        campaigns:
+          $ref: '#/components/schemas/campaignsObject'
+        device_types:
+          description: The platform you want to register channels for and send notifications to.
+          items:
+            enum:
+              - email
+              - mms
+              - sms
+              - open::<open_platform_name>
+            maxItems: 1
+            type: string
+          type: array
+        notification:
+          description: An `alert` notification or a platform override matching the valie in `device types`. A notification with a platform override that does not match your `device_types` will result in a 400 error.
+          properties:
+            email:
+              description: You can either provide the standard object that you would provide when performing a `/api/push` to an email platform, or you can provide some of the email platform override fields along with an inline template.
+              oneOf:
+                - $ref: '#/components/schemas/emailOverrideObject'
+                - $ref: '#/components/schemas/emailOverrideWithTemplate'
+          type: object
+      required:
+        - audience
+        - device_types
+        - notification
+      title: Create and Send to Email Channels
+      type: object
+      x-schema-tag: Create and Send
+    emailOverrideObject:
+      description: Notification fields specific to email messages. This object is required when email is enabled for an appkey and `email` is specified in the payload’s `device_types` field.
+      properties:
+        attachments:
+          description: 'Optional list of objects, each containing an `id` string which represents an email attachment.
+
+
+            See [Email Attachments](#operation-api-attachments-post)
+
+            '
+          items:
+            description: A key/value pair representing an existing email attachment.
+            properties:
+              id:
+                description: The email attachment id.
+                type: string
+            required:
+              - id
+            type: object
+          minItems: 1
+          type: array
+        bcc:
+          description: An array of email addresses that you want to blind copy on this email. Contact your Account Manager to enable BCC addresses. Using addresses that your Airship Account Manager has not enabled for BCC will return a 400.
+          items:
+            format: email address
+            type: string
+          type: array
+        bypass_opt_in_level:
+          description: You can set this toggle when `message_type` is set to `transactional` to send a business critical email. If true, the message will be sent to your entire audience, ignoring `transactional_opted_out` status.
+          type: boolean
+        click_tracking:
+          default: true
+          description: 'True by default. Set to `false` to prevent click tracking for GDPR compliance.
+
+            '
+          type: boolean
+        html_body:
+          description: 'The rich-text html body of the email, **no larger than 100kb**.
+
+            * When `"message_type": "commercial"`, the body must contain an unsubscribe
+
+            link in the format *\<a data-ua-unsubscribe="1" title="unsubscribe">Unsubscribe\</a>*.
+
+            You can send the user to a custom "goodbye" page by providing an href
+
+            attribute in the link: *\<a data-ua-unsubscribe="1" title="unsubscribe"
+
+            href="YOUR_URL">Unsubscribe\</a>*. If your unsubscribe link includes an
+
+            `href`, Airship unsubscribes the user before redirecting to your page.
+
+            * See: [Email image recommendations](../../guides/messaging/user-guide/messages/content/media-guidelines/#email).
+
+            '
+          example: <h1>Greetings</h1><p>Hello!</p><p><a data-ua-unsubscribe="1" title="unsubscribe" href="http://unsubscribe.urbanairship.com/email/success.html">Unsubscribe</a></p>
+          type: string
+        message_type:
+          description: Must be `transactional` or `commercial`.
+          enum:
+            - transactional
+            - commercial
+          example: commercial
+          type: string
+        open_tracking:
+          default: true
+          description: 'True by default. Set to `false` to prevent "open" tracking for GDPR compliance.
+
+            '
+          type: boolean
+        plaintext_body:
+          description: 'The plain text body of the email, **no larger than 100kb**.
+
+
+
+            When `"message_type": "commercial"`, the body must contain a *[[ua_unsubscribe]]*
+
+            link, which will be replaced by the unsubscribe link in Airship.
+
+            You can send the user to a custom "goodbye" page by providing an href
+
+            in the format *[[ua-unsubscribe href="your url here"]]*. If you include an `href`, Airship unsubscribes the user before redirecting to your page.
+
+            '
+          example: Greetings. Hello there! [[ua-unsubscribe]]
+          type: string
+        reply_to:
+          description: 'The reply-to address.
+
+            '
+          example: no-reply@mycompany.com
+          type: string
+        sender_address:
+          description: 'The email address of the sender. The domain of the email must be enabled in the email provider at the delivery tier (ie: Sparkpost).'
+          example: no-reply@mycompany.com
+          type: string
+        sender_name:
+          description: The common name for the sender, visible to email recipients.
+          example: My Company
+          type: string
+        subject:
+          description: The subject line of the email.
+          example: Test Email
+          type: string
+      required:
+        - message_type
+        - subject
+        - plaintext_body
+        - sender_name
+        - sender_address
+        - reply_to
+      title: Email Override
+      type: object
+      x-schema-tag: Platform Overrides
+    emailOverrideWithTemplate:
+      description: Notification fields specific to email messages with an inline template for use in a `/api/create-and-send` payload. Using a template enables you to provide and populate variables in your notification. You can also add conditional statements based on those variables, determining message text that to send to each member of your audience. Conditionals begin with `{{#operator}}` and end with `{{/operator}}`. For more information, see [Dynamic Content](/guides/messaging/user-guide/personalization/dynamic-content).
+      properties:
+        bcc:
+          description: An array of email addresses that you want to blind copy on this email. Contact your Account Manager to enable BCC addresses. Using addresses that your Airship Account Manager has not enabled for BCC will return a 400.
+          items:
+            format: email address
+            type: string
+          type: array
+        click_tracking:
+          default: true
+          description: 'True by default. Set to `false` to prevent click tracking for GDPR compliance.
+
+            '
+          type: boolean
+        message_type:
+          description: The type of email you are sending, `transactional` or `commercial`.
+          enum:
+            - transactional
+            - commercial
+          example: commercial
+          type: string
+        open_tracking:
+          default: true
+          description: 'True by default. Set to `false` to prevent "open" tracking for GDPR compliance.
+
+            '
+          type: boolean
+        reply_to:
+          description: The reply-to address.
+          example: no-reply@mycompany.com
+          type: string
+        sender_address:
+          description: The email address of the sender. The domain of the email must be enabled in the email provider at the delivery tier.
+          example: no-reply@mycompany.com
+          type: string
+        sender_name:
+          description: The common name for the sender, visible to email recipients.
+          example: My Company
+          type: string
+        template:
+          description: Specify a `template_id` created in the Airship UI or use an inline template.
+          oneOf:
+            - properties:
+                template_id:
+                  description: The `ID` of a template that you created in the Airship UI. You can find template IDs in *Messages » Content » Templates* in the dashboard.
+                  format: uuid
+                  type: string
+              required:
+                - template_id
+              type: object
+            - properties:
+                fields:
+                  description: The template you want to construct for the message. Provide variables in the template in double curly brackets — `{{variable_name}}`. The variable name must be a case-sensitive match of a key in your `create-and-send` objects to be replaced as a part of the template.
+                  properties:
+                    plaintext_body:
+                      description: 'The plain text body of the email you want to send.
+
+
+
+                        When `"message_type": "commercial"`, the body must contain a `[[ua_unsubscribe]]` link, which will be replaced by the unsubscribe link in Airship. You can send the user to a custom "goodbye" page by providing an href in the format `[[ua-unsubscribe href="your url here"]]`'
+                      type: string
+                    subject:
+                      description: The subject line of the email you want to send.
+                      type: string
+                  required:
+                    - subject
+                    - plaintext_body
+                  type: object
+              required:
+                - fields
+              type: object
+      required:
+        - message_type
+        - sender_name
+        - sender_address
+        - reply_to
+        - template
+      title: Email Notification with Template
+      type: object
+      x-schema-tag: Platform Overrides with Templates
+  parameters:
+    appKeyHeader:
+      in: header
+      name: X-UA-Appkey
+      required: true
+      schema:
+        description: The application key.
+        title: Airship App Key header
+        type: string
