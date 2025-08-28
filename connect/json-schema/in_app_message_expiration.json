@@ -1,14 +1,14 @@
 {
-  "description": "Occurs when a new message has taken the place of another message, a message has passed its expiration, or because displaying the message in-app would be redundant. This event type may be latent; it is not emitted until the app becomes active.\n",
+  "description": "Occurs when a new In-App Automation or Scene message has taken the place of another message, a message has passed its expiration, or because displaying the message in-app would be redundant. This event type may be latent. It is not emitted until the app becomes active.\n",
   "properties": {
     "body": {
       "properties": {
         "app_defined_id": {
-          "description": "An identifier defined by the application if the In-App Message was created by the application logic, not the UA system. If this field is present, the event body will not contain `push_id`, `group_id`,  `variant_id`, or `triggering_push` fields.",
+          "description": "An identifier defined by the application if the in-app message was created by the application logic, not Airship. If this field is present, the event body will not contain `push_id`, `group_id`,  `variant_id`, or `triggering_push` fields.",
           "type": "string"
         },
         "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
           "type": "string"
@@ -36,7 +36,7 @@
               "type": "object"
             },
             "group_id": {
-              "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+              "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
               "format": "uuid",
               "title": "Group ID",
               "type": "string"
@@ -60,7 +60,7 @@
           "required": [
             "push_id"
           ],
-          "title": "Associated Push",
+          "title": "Associated push",
           "type": "object"
         },
         "session_id": {
@@ -94,7 +94,7 @@
               "type": "object"
             },
             "group_id": {
-              "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+              "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
               "format": "uuid",
               "title": "Group ID",
               "type": "string"
@@ -118,11 +118,11 @@
           "required": [
             "push_id"
           ],
-          "title": "Associated Push",
+          "title": "Associated push",
           "type": "object"
         },
         "type": {
-          "description": "Indicates how the In-App Message expired.\n\n* `REPLACED`: The In-App message was replaced by a more current one. If type is `REPLACED`, the `replacing_push` key will be present.\n* `EXPIRED`: The In-App message exceeded it’s expiration date. If type is `EXPIRED`, then the `time` key will be present.\n* `ALREADY_DISPLAYED`: The message was opened directly (either from the lock screen or notification center). The Airship SDK will NOT display it again in the app, because the user is guaranteed to have seen it.",
+          "description": "Indicates how the in-app message expired.\n\n* `REPLACED`: The in-app message was replaced by a more current one. If type is `REPLACED`, the `replacing_push` key will be present.\n* `EXPIRED`: The in-app message exceeded its expiration date. If type is `EXPIRED`, then the `time` key will be present.\n* `ALREADY_DISPLAYED`: The message was opened directly (either from the lock screen or notification center). The Airship SDK will NOT display it again in the app, because the user is guaranteed to have seen it.",
           "enum": [
             "REPLACED",
             "EXPIRED",
@@ -169,7 +169,7 @@
     "processed",
     "body"
   ],
-  "title": "In-App Message Expiration",
+  "title": "In-app message expiration",
   "type": "object",
   "x-schema-tag": "Events"
 }

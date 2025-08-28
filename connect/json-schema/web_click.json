@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when user interacts with a web notification, e.g. clicked on or tapped it. Web Click events have a device attribute on the event indicating the channel that was the target of the notification. The body of a Web Click Event is an Associated Push object.\n",
+  "description": "Occurs when a user interacts with a web notification, e.g., clicked or tapped it. Web Click events have a device attribute on the event indicating the channel that was the target of the notification. The body of a Web Click Event is an associated push object.\n",
   "properties": {
     "body": {
       "description": "The specific `push_id` and accompanying identifiers associated with an event. An associated push helps you trace an event to the original notification or operation.\n\nAn associated push object may specify a `time`, if the push was a singular operation sent at a defined time. Otherwise, the object will include a `group_id` if the push was sent at a relative time (`best_time` or `local_time`) an automation pipeline, or another operation resulting in multiple `push_id`s.",
@@ -18,7 +18,7 @@
           "type": "object"
         },
         "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
           "type": "string"
@@ -42,7 +42,7 @@
       "required": [
         "push_id"
       ],
-      "title": "Associated Push",
+      "title": "Associated push",
       "type": "object"
     },
     "device": {
@@ -101,7 +101,7 @@
           "type": "string"
         },
         "named_user_id": {
-          "description": "the named user identifier for the device.",
+          "description": "The Named User identifier for the device.",
           "type": "string"
         }
       },
@@ -109,9 +109,9 @@
         "channel",
         "device_type"
       ],
-      "title": "Web Device Information without Locale",
+      "title": "Web device information without locale",
       "type": "object",
-      "x-schema-tag": "Device Information"
+      "x-schema-tag": "Device information"
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
@@ -134,6 +134,22 @@
         "WEB_CLICK"
       ],
       "type": "string"
+    },
+    "user": {
+      "description": "The current state of the user when the event is emitted, including the contact ID and an optional named user ID.",
+      "properties": {
+        "contact_id": {
+          "description": "The Contact identifier for the device.",
+          "type": "string"
+        },
+        "named_user_id": {
+          "description": "The Named User identifier for the device.",
+          "type": "string"
+        }
+      },
+      "title": "User",
+      "type": "object",
+      "x-schema-tag": "User information"
     }
   },
   "required": [
@@ -144,7 +160,7 @@
     "processed",
     "body"
   ],
-  "title": "Web Click Event",
+  "title": "Web click event",
   "type": "object",
   "x-schema-tag": "Events"
 }

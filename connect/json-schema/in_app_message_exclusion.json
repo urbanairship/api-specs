@@ -1,8 +1,12 @@
 {
-  "description": "Occurs when a user deletes a Message Center message from their inbox.",
+  "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](../../guides/messaging/project/config/ban-lists/).\n",
   "properties": {
     "body": {
       "properties": {
+        "app_defined_id": {
+          "description": "An identifier defined by the application if the in-app message was created by the application logic, not the Airship system. If this field is present, the event body will not contain `push_id`, `group_id`,  `variant_id`, or `triggering_push` fields.",
+          "type": "string"
+        },
         "group_id": {
           "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
@@ -14,6 +18,72 @@
           "format": "uuid",
           "title": "Push ID",
           "type": "string"
+        },
+        "session_id": {
+          "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
+          "format": "uuid",
+          "title": "Session ID",
+          "type": "string"
+        },
+        "time_sent": {
+          "description": "The date-time when the in-app message payload was sent to the device.",
+          "type": "string"
+        },
+        "triggering_push": {
+          "description": "The specific `push_id` and accompanying identifiers associated with an event. An associated push helps you trace an event to the original notification or operation.\n\nAn associated push object may specify a `time`, if the push was a singular operation sent at a defined time. Otherwise, the object will include a `group_id` if the push was sent at a relative time (`best_time` or `local_time`) an automation pipeline, or another operation resulting in multiple `push_id`s.",
+          "properties": {
+            "campaigns": {
+              "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
+              "properties": {
+                "categories": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "title": "Campaigns Object",
+              "type": "object"
+            },
+            "group_id": {
+              "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+              "format": "uuid",
+              "title": "Group ID",
+              "type": "string"
+            },
+            "push_id": {
+              "description": "A unique identifier for a push operation.",
+              "format": "uuid",
+              "title": "Push ID",
+              "type": "string"
+            },
+            "time": {
+              "description": "The UTC time when the push occurred.",
+              "type": "string"
+            },
+            "variant_id": {
+              "description": "The ID of the variant that a push is associated with, if the push was a part of an A/B test (experiment).",
+              "title": "Variant ID",
+              "type": "integer"
+            }
+          },
+          "required": [
+            "push_id"
+          ],
+          "title": "Associated push",
+          "type": "object"
+        },
+        "type": {
+          "description": "Indicates that the in-app message was not displayed on a device because the channel or Named User was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or Named User is on a project's [Ban List](../../guides/messaging/project/config/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a Ban List occurs.",
+          "enum": [
+            "AUDIENCE_CHECK_EXCLUDED"
+          ],
+          "type": "string"
+        },
+        "variant_id": {
+          "description": "The ID of the variant that a push is associated with, if the push was a part of an A/B test (experiment).",
+          "title": "Variant ID",
+          "type": "integer"
         }
       },
       "type": "object"
@@ -202,7 +272,7 @@
     },
     "type": {
       "enum": [
-        "RICH_DELETE"
+        "IN_APP_MESSAGE_EXCLUSION"
       ],
       "type": "string"
     },
@@ -231,7 +301,7 @@
     "processed",
     "body"
   ],
-  "title": "Rich delete",
+  "title": "In-app message exclusion",
   "type": "object",
   "x-schema-tag": "Events"
 }

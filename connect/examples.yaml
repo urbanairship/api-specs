@@ -1,7 +1,7 @@
 components:
   schemas:
     api_initiate_opt_in:
-      - description: Example API-initiated Opt-In Event
+      - description: Example SMS API-initiated opt-in event
         examples:
           - lang: json
             source: |
@@ -23,18 +23,47 @@ components:
                   },
                   "type": "COMPLIANCE"
               }
-    associatedPush:
-      - description: Push Sent to an Audience at a Defined date-time
+    appdevices:
+      - description: Example device information object
         examples:
           - lang: json
             source: |
               {
-                "push_id": "6e3339ce-529c-42e4-a2f6-7546f81c9828",
-                "time": "2015-07-30T21:03:37.631Z"
-              }
+                  "channel": "a6b392d6-3b0d-4c00-98ef-5cb91d51268a",
+                  "device_type": "IOS",
+                  "named_user_id": "Albert",
+                  "identifiers": {
+                    "com.urbanairship.idfa": "fb0d01e0-9e21-4466-9217-8eacfd2b81c7",
+                    "com.urbanairship.gimbal.aii": "c5720f06-516a-4b91-b7bb-53523fc43a3d",
+                    "com.urbanairship.limited_ad_tracking_enabled": "false"
+                  },
+                  "attributes": {
+                    "app_package_name": "com.company_name.app_name",
+                    "app_version": "1.0.0",
+                    "ua_sdk_version": "7.0.2"
+                  }
+                }
+    array_matcher:
       - description: >-
-          Push Event Fullfilled at a Relative Time (local/best-time) or as a
-          Part of a Grouped Operation
+          Example find only push body objects with the campaign category
+          "spring_sale"
+        examples:
+          - lang: json
+            source: |
+              {
+                "filters": {
+                  "types": ["PUSH_BODY"],
+                  "predicates": {
+                    "key": "categories",
+                    "scope": ["body", "campaigns"],
+                    "value": {
+                      "array_contains": { "value": {"equals": "spring_sale"} }
+                    }
+                  }
+                }
+              }  
+    associatedPush:
+      - description: Push sent to an audience at a defined date-time
         examples:
           - lang: json
             source: |
@@ -43,7 +72,7 @@ components:
                 "time": "2015-07-30T21:03:37.631Z"
               }
     attribute_operation:
-      - description: Example Attribute Operation Event
+      - description: Example Attribute operation event
         examples:
           - lang: json
             source: |
@@ -62,7 +91,7 @@ components:
                       "app_version": "2020-02-10T222436-staging",
                       "device_model": "Pixel 2 XL",
                       "connection_type": "WIFI",
-                      "app_package_name": "com.urbanairship.goat.staging",
+                      "app_package_name": "com.company_name.app_name",
                       "iana_timezone": "America/Los_Angeles",
                       "push_opt_in": "true",
                       "locale_country_code": "US",
@@ -75,6 +104,10 @@ components:
                       "location_permission": "NOT_ALLOWED"
                     }
                 },
+                "user": {
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "cool_user"
+                },
                 "body": {
                     "set": [
                       {
@@ -86,7 +119,7 @@ components:
                 "type": "ATTRIBUTE_OPERATION"
               }
     bounce:
-      - description: Example Email Bounce Event
+      - description: Example email bounce event
         examples:
           - lang: json
             source: |
@@ -98,22 +131,22 @@ components:
                   "device": {
                       "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
                       "device_type": "EMAIL",
-                      "delivery_address": "bademail@baddomain.com"
+                      "delivery_address": "bademail@example.com"
                   },
                   "body": {
                       "event_type": "bounce",
                       "properties": {
                           "bounce_event_type": "bounce",
-                          "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
+                          "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@example.com",
                           "subject": "Red Means Go",
-                          "email": "bademail@baddomain.com",
+                          "email": "bademail@example.com",
                           "bounce_class": "10"
                       }
                   },
                   "type": "COMPLIANCE"
               }
     carrier_deactivation:
-      - description: Example SMS carrier_deactivation Event
+      - description: Example SMS carrier_deactivation event
         examples:
           - lang: json
             source: |
@@ -137,7 +170,7 @@ components:
                 "type": "COMPLIANCE"
               }
     close:
-      - description: Example Close Event
+      - description: Example close event
         examples:
           - lang: json
             source: |
@@ -163,7 +196,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -177,40 +210,52 @@ components:
                     "location_permission": "ALWAYS_ALLOWED"
                   }
                 },
+                "user": {
+                  "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
+                },
                 "body": {
                   "session_id": "61acb6c9-527b-4632-b789-a3e6085b094e"
                 },
                 "type": "CLOSE"
               }
-    compliance:
-      - description: Example Compliance Event Stream
+    complianceRequestFilters:
+      - description: Example compliance request filter
         examples:
           - lang: json
             source: |
               {
-                "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
-                "offset": "1000001778910",
-                "occurred": "2018-11-28T00:02:41.794Z",
-                "processed": "2018-11-28T00:02:45.270Z",
+                "device_types": ["email"],
+                "latency": 120000,          
+              }
+    contact_change:
+      - description: Example contact change event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "fe882bd1-e0b9-11ea-bc35-0242f70dd9ff",
+                "offset": "1000076075647",
+                "occurred": "2024-09-25T19:03:13.903Z",
+                "processed": "2024-09-25T19:03:14.426Z",
+                "user": {
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "mini_me"
+                },
                 "device": {
-                    "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
-                    "device_type": "EMAIL",
-                    "delivery_address": "bogus@email.com"
+                  "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
+                  "device_type": "IOS"
                 },
                 "body": {
-                    "event_type": "bounce",
-                    "properties": {
-                        "bounce_event_type": "bounce",
-                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
-                        "subject": "You there?",
-                        "email": "bogus@email.com",
-                        "bounce_class": "10"
-                    }
+                  "change_type": "DISSOCIATION",
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "mini_me",
+                  "channel_id": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
                 },
-                "type": "COMPLIANCE"
+                "type": "CONTACT_CHANGE"
               }
     control:
-      - description: Example Control Event
+      - description: Example control event
         examples:
           - lang: json
             source: |
@@ -225,20 +270,93 @@ components:
                     "device_type":"ANDROID",
                     "android_channel": "a61448e1-be63-43ee-84eb-19446ba743f0"
                   },
+                "user": {
+                    "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                    "named_user_id": "mini_me"
+                  },
                 "body:" {
                   "push_id": "c91d9e1b-605f-4bad-a45d-cdf3e6e0773f",
                   "group_id": "3eec7de4-4b19-436e-ad15-88278f9ddb82"
                   }
                 }
     custom:
-      - description: Example Custom Event from API (Shoe Sale)
+      - description: Example Custom Event (entire payload on Android channel)
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "4f42e8d0-a010-11ee-ae53-000000a91ace",
+                "offset": "1009810398823",
+                "occurred": "2023-12-21T14:50:35.077Z",
+                "processed": "2023-12-21T14:50:40.843Z",
+                "device": {
+                  "android_channel": "ac1960b9-24b6-4851-b907-b9e64f071890",
+                  "channel": "ac1960b9-24b6-4851-b907-b9e64f071890",
+                  "device_type": "ANDROID",
+                  "named_user_id": "c2cbc6e5145763ec58a4d85dfa4323aacc40afea",
+                  "attributes": {
+                    "locale_variant": "",
+                    "connection_type": "CELL",
+                    "device_model": "M2101K9G",
+                    "app_version": "18.4.2",
+                    "app_package_name": "com.company_name.app_name",
+                    "iana_timezone": "Europe/Paris",
+                    "push_opt_in": "true",
+                    "locale_country_code": "FR",
+                    "device_os": "12",
+                    "locale_timezone": "3600",
+                    "carrier": "Orange F",
+                    "locale_language_code": "fr",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "16.9.2"
+                  }
+                },
+                "body": {
+                  "name": "purchased",
+                  "value": 239.85,
+                  "transaction": "886f53d4-3e0f-46d7-930e-c2792dac6e0a",
+                  "interaction_id": "your.store/us/en_us/pd/shoe/pid-11046546/pgid-10978234",
+                  "interaction_type": "url",
+                  "properties": {
+                    "description": "Sneaker purchase",
+                    "brand": "Victory Sneakers",
+                    "colors": [
+                      "red",
+                      "blue"
+                    ],
+                    "items": [
+                      {
+                        "text": "New Line Sneakers",
+                        "price": "$ 79.95"
+                      },
+                      {
+                        "text": "Old Line Sneakers",
+                        "price": "$ 79.95"
+                      },
+                      {
+                        "text": "Blue Line Sneakers",
+                        "price": "$ 79.95"
+                      }
+                    ],
+                    "name": "Hugh Manbeing",
+                    "userLocation": {
+                      "state": "CO",
+                      "zip": "80202"
+                    }
+                  }
+                },
+                "session_id": "adc0e12e-dfe8-4375-8121-5b21dbab87f4",
+                "source": "SDK",
+                "type": "CUSTOM"
+              }
+      - description: Example Custom Event from API (shoe sale)
         examples:
           - lang: json
             source: |
               {
                 "name" : "shoe-purchase",
                 "value" : 239.85,
-                "source": "api"
+                "source": "api",
                 "transaction" : "Selling all the shoes",
                 "session_id": "cfe467a6-ca70-40dd-8c1f-07b2f644935e",
                 "properties": {
@@ -266,17 +384,17 @@ components:
                   }
                 }
               }
-      - description: Example Custom Event from SDK (Shoe Sale)
+      - description: Example Custom Event from SDK (shoe sale)
         examples:
           - lang: json
             source: |
               {
                 "name" : "shoe-purchase",
                 "value" : 60.000000,
-                "source": "sdk"
+                "source": "sdk",
                 "interaction_type" : "Landing Page",
                 "interaction_id" : "d01d0380-da2e-11e3-8519-90e2ba299b38",
-                "customer_id" : "George@hotmail.com",
+                "customer_id" : "George@example.com",
                 "transaction" : "Selling all the shoes",
                 "session_id": "cfe467a6-ca70-40dd-8c1f-07b2f644935e",
                 "last_delivered": {
@@ -297,7 +415,7 @@ components:
                 }
               }
     custom_keyword_response:
-      - description: Example Custom Keyword Response Event
+      - description: Example SMS custom keyword response event
         examples:
           - lang: json
             source: |
@@ -328,7 +446,7 @@ components:
                   "type": "COMPLIANCE"
               }
     delivery_report:
-      - description: Example Delivery Report Event
+      - description: Example SMS delivery report Custom Event
         examples:
           - lang: json
             source: |
@@ -362,29 +480,8 @@ components:
                 "processed": "2019-01-31T17:45:41.285Z",
                 "type": "CUSTOM"
               }
-    devices:
-      - description: Example Device Information Object
-        examples:
-          - lang: json
-            source: |
-              {
-                  "channel": "a6b392d6-3b0d-4c00-98ef-5cb91d51268a",
-                  "device_type": "IOS",
-                  "named_user_id": "Albert",
-                  "identifiers": {
-                    "com.urbanairship.idfa": "9D55CAC8-79E3-4567-8A99-8465B7A12868",
-                    "com.urbanairship.gimbal.aii": "c5720f06-516a-4b91-b7bb-53523fc43a3d",
-                    "cid": 123554,
-                    "com.urbanairship.limited_ad_tracking_enabled": "false"
-                  },
-                  "attributes": {
-                    "package_name": "com.company_name.app_name",
-                    "version": "1.0.0",
-                    "ua_library": "7.0.2"
-                  }
-                }
     emailBounceEvent:
-      - description: Example email bounce custom event
+      - description: Example email bounce Custom Event
         examples:
           - lang: json
             source: |
@@ -396,7 +493,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "new.subscriber@email.com"
+                    "delivery_address": "new.subscriber@example.com"
                 },
                 "body": {
                     "name": "bounce",
@@ -412,9 +509,9 @@ components:
                     "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                     "source": "API",
                     "properties": {
-                      "sender": "baseball@sports.com",
+                      "sender": "baseball@example.com",
                       "subject": "Baseball Season is Almost Here!",
-                      "email": "new.subscriber@email.com",
+                      "email": "new.subscriber@example.com",
                       "bounce_event_type": "bounce",
                       "bounce_class": "10",
                     }
@@ -422,7 +519,7 @@ components:
                 "type": "CUSTOM"
               }
     emailClickEvent:
-      - description: Example email click custom event
+      - description: Example email click Custom Event
         examples:
           - lang: json
             source: |
@@ -434,7 +531,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "new.subscriber@email.com"
+                    "delivery_address": "new.subscriber@example.com"
                 },
                 "body": {
                     "name": "click",
@@ -450,17 +547,24 @@ components:
                     "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                     "source": "API",
                     "properties": {
-                        "sender": "baseball@sports.com",
+                        "sender": "baseball@example.com",
                         "subject": "Baseball Season is Almost Here!",
-                        "email": "new.subscriber@email.com",
-                        "link_name": "Click here for baseball updates",
-                        "link_url": "http://www.urbanairship.com",
+                        "email": "new.subscriber@example.com",
+                        "link_name": "Homepage",
+                        "link_url": "https://www.example.com",
+                        "os_family": "Android",
+                        "is_mobile": "true",
+                        "device_brand": "Motorola",
+                        "os_version": "11",
+                        "device_family": "moto g stylus",
+                        "is_prefetched": "false",
+                        "agent_family": "Chrome"
                     }
                 },
                 "type": "CUSTOM"
               }
     emailCreateAndSend:
-      - description: Example Email create_and_send Event
+      - description: Example email Create and Send event
         examples:
           - lang: json
             source: |
@@ -472,12 +576,12 @@ components:
                   "device": {
                       "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                       "device_type": "EMAIL",
-                      "delivery_address": "new.address@subscriber.com"
+                      "delivery_address": "new.address@example.com"
                   },
                   "body": {
                       "event_type": "create_and_send",
                       "identifiers": {
-                          "address": "new.address@subscriber.com.com"
+                          "address": "new.address@example.com"
                       },
                       "properties": {
                           "channel_registered": "true",
@@ -487,7 +591,7 @@ components:
                   "type": "COMPLIANCE"
                 }
     emailDelayEvent:
-      - description: Example email delivery custom event
+      - description: Example email delay Custom Event
         examples:
           - lang: json
             source: |
@@ -499,7 +603,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "addressResponding4xx@email.com"
+                    "delivery_address": "addressResponding4xx@example.com"
                 },
                 "body": {
                     "name": "delay",
@@ -515,15 +619,15 @@ components:
                     "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                     "source": "API",
                     "properties": {
-                        "sender": "baseball@sports.com",
+                        "sender": "baseball@example.com",
                         "subject": "Baseball Season is Almost Here!",
-                        "email": "addressResponding4xx@email.com"
+                        "email": "addressResponding4xx@example.com"
                     }
                 },
                 "type": "CUSTOM"
               }
     emailDeliveryEvent:
-      - description: Example email delivery custom event
+      - description: Example email delivery Custom Event
         examples:
           - lang: json
             source: |
@@ -535,7 +639,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "new.subscriber@email.com"
+                    "delivery_address": "new.subscriber@example.com"
                 },
                 "body": {
                     "name": "delivery",
@@ -551,42 +655,15 @@ components:
                     "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                     "source": "API",
                     "properties": {
-                        "sender": "baseball@sports.com",
+                        "sender": "baseball@example.com",
                         "subject": "Baseball Season is Almost Here!",
-                        "email": "new.subscriber@email.com"
+                        "email": "new.subscriber@example.com"
                     }
                 },
                 "type": "CUSTOM"
               }
-    emailEventBody:
-      - description: Example Email Compliance Event
-        examples:
-          - lang: json
-            source: |
-              {
-                "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
-                "offset": "1000001778910",
-                "occurred": "2018-11-28T00:02:41.794Z",
-                "processed": "2018-11-28T00:02:45.270Z",
-                "device": {
-                    "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
-                    "device_type": "EMAIL",
-                    "delivery_address": "bogus@email.com"
-                },
-                "body": {
-                    "event_type": "bounce",
-                    "properties": {
-                        "bounce_event_type": "bounce",
-                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
-                        "subject": "You there?",
-                        "email": "bogus@email.com",
-                        "bounce_class": "10"
-                    }
-                },
-                "type": "COMPLIANCE"
-              }
     emailInitialOpenEvent:
-      - description: Example email initial_open custom event
+      - description: Example email initial_open Custom Event
         examples:
           - lang: json
             source: |
@@ -598,7 +675,7 @@ components:
                 "device": {
                   "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                   "device_type": "EMAIL",
-                  "delivery_address": "new.subscriber@email.com",
+                  "delivery_address": "new.subscriber@example.com",
                   "named_user_id": "a_person"
                 },
                 "body": {
@@ -609,15 +686,22 @@ components:
                   "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                   "source": "API",
                   "properties": {
-                    "sender": "baseball@sports.com",
+                    "sender": "baseball@example.com",
                     "subject": "Baseball Season is Almost Here!",
-                    "email": "new.subscriber@email.com"
+                    "email": "new.subscriber@example.com",
+                    "os_family": "Android",
+                    "is_mobile": "true",
+                    "device_brand": "Motorola",
+                    "os_version": "11",
+                    "device_family": "moto g stylus",
+                    "is_prefetched": "false",
+                    "agent_family": "Chrome"
                   }
                 },
                 "type": "CUSTOM"
               }
     emailInjectionEvent:
-      - description: Example email injection custom event
+      - description: Example email injection Custom Event
         examples:
           - lang: json
             source: |
@@ -629,7 +713,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "new.subscriber@email.com"
+                    "delivery_address": "new.subscriber@example.com"
                 },
                 "body": {
                     "name": "injection",
@@ -645,15 +729,15 @@ components:
                     "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                     "source": "API",
                     "properties": {
-                        "sender": "baseball@sports.com",
+                        "sender": "baseball@example.com",
                         "subject": "Baseball Season is Almost Here!",
-                        "email": "new.subscriber@email.com"
+                        "email": "new.subscriber@example.com"
                     }
                 },
                 "type": "CUSTOM"
               }
     emailOpenEvent:
-      - description: Example email open custom event
+      - description: Example email open Custom Event
         examples:
           - lang: json
             source: |
@@ -665,7 +749,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "new.subscriber@email.com"
+                    "delivery_address": "new.subscriber@example.com"
                 },
                 "body": {
                     "name": "open",
@@ -681,15 +765,22 @@ components:
                     "session_id": "19e09be8-a586-4ff8-940f-1a4084d928e9",
                     "source": "API",
                     "properties": {
-                        "sender": "baseball@sports.com",
+                        "sender": "baseball@example.com",
                         "subject": "Baseball Season is Almost Here!",
-                        "email": "new.subscriber@email.com"
+                        "email": "new.subscriber@example.com",
+                        "os_family": "Android",
+                        "is_mobile": "true",
+                        "device_brand": "Motorola",
+                        "os_version": "11",
+                        "device_family": "moto g stylus",
+                        "is_prefetched": "false",
+                        "agent_family": "Chrome"
                     }
                 },
                 "type": "CUSTOM"
               }
     emailUnsubscribeLinkEvent:
-      - description: Example email unsubscribe link custom event
+      - description: Example email unsubscribe link Custom Event
         examples:
           - lang: json
             source: |
@@ -701,7 +792,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "new.subscriber@email.com"
+                    "delivery_address": "new.subscriber@example.com"
                 },
                 "body": {
                     "name": "unsubscribe",
@@ -722,97 +813,115 @@ components:
                 },
                 "type": "CUSTOM"
               }
-    eventStream:
-      - description: Example Response Object
+    equals_matcher:
+      - description: Example find SMS delivery errors with equals matcher
         examples:
           - lang: json
             source: |
               {
-                 "id": "8e50350e-dd9f-41af-b98e-b0e5d4b27dea",
-                 "type": "SEND",
-                 "offset": "NTIxMDM1",
-                 "occurred": "2015-05-02T02:31:22.088Z",
-                 "processed": "2015-05-02T02:32:43.181Z",
-                 "device": {
-                    "channel": "5117f2a7-ba58-4981-9456-169959511d1a",
-                    "device_type": "IOS"
-                 },
-                 "body": {
-                    "push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e",
-                    "alerting": true
-                 }
+                "filters": [
+                  {
+                    "device_types": ["sms"],
+                    "types": ["CUSTOM"],
+                    "predicates": [
+                      {
+                        "and": [
+                          {
+                            "key": "interaction_type",
+                            "scope": ["body"],
+                            "value": {"equals": "delivery_report"}
+                          },
+                          {
+                            "not": {
+                              "key": "name",
+                              "scope": ["body"],
+                              "value": {"equals": "delivered"}
+                            }
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
-              {
-                "device": {
-                  "channel": "820e4493-e4c9-4577-99bc-a98180599f73",
-                  "delivery_address": "new.user@urbanairship.com",
-                  "device_type": "EMAIL"
-                },
-                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
-                "occurred": "2019-03-04T19:00:45.106Z",
-                "offset": "1000001260057",
-                "processed": "2019-03-04T19:00:47.094Z",
-                "type": "FIRST_OPT_IN"
-              }
-      - description: mobile_originated_sms Event
+    eventsRequestFilters:
+      - description: Example filter
         examples:
           - lang: json
             source: |
               {
-                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
-                "offset": "1000000701505",
-                "occurred": "2018-12-03T19:31:10.000Z",
-                "processed": "2018-12-03T19:31:11.302Z",
+                "device_types": ["ios"],
+                "latency": 120000,
+                "notifications": {"push_id": "fae0658c-930e-4f66-bc78-80f46222bc8c"},
+                "types": ["OPEN", "SEND"],
+                "devices": [{"named_user_id": "VIP Customer"}]
+              }
+          - lang: json
+            source: |
+              {
+                "device_types": ["ios"],
+                "latency": 120000,
+                "notifications": {"push_id": "af03151e-5ad5-4e30-bbd2-bda28312b3c7"},
+                "types": ["RICH_READ"],
+                "users": [{"named_user_id": "best_customer"}]
+              }
+          - lang: json
+            source: |
+              {
+                "device_types": ["ios"],
+                "latency": 300,
+                "notifications": {"push_id": "6626393d-5d42-4de5-a31d-e24e819876ac"},
+                "types": ["CLOSE"],
+                "users": [{"contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"}]
+              }
+      - description: Example Predicate filter
+        examples:
+          - lang: json
+            source: |
+              {
+                "predicates": [
+                {
+                  "and": [
+                    {
+                      "key": "type",
+                      "value": {
+                        "equals": "CUSTOM"
+                      }
+                    },
+                    {
+                      "scope": "body",
+                      "key": "name",
+                      "value": {
+                        "equals": "initial_open"
+                      }
+                    }
+                  ]
+                }
+                ]
+              }
+    feature_flag_interaction:
+      - description: Example Feature Flag interaction event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id":"c3d0543b-c8cd-4eaa-8fda-5dbfa70257ae",
+                "offset":"1000197715722",
+                "occurred":"2023-09-15T19:12:56.000Z",
+                "processed":"2023-09-21T23:02:39.419Z",
                 "device": {
-                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
-                  "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "channel":"8c36e8c7-5a73-47c0-9716-99fd3d4197d5",
+                  "device_type":"WEB"
                 },
                 "body": {
-                  "event_type": "mobile_originated_sms",
-                  "identifiers": {
-                    "sender": "15558675309",
-                    "msisdn": "15558968663"
-                  },
-                  "properties": {
-                    "inbound_message": "join",
-                    "outbound_message": "Thanks for joining!",
-                    "keyword": "join"
-                  }
+                  "flag_id":"27f26d85-0550-4df5-85f0-7022fa7a5925",
+                  "flag_name":"rad_flag_name",
+                  "eligible":true
                 },
-                "type": "MOBILE_ORIGINATED"
+                "type":"FEATURE_FLAG_INTERACTION"
               }
-    filters:
-      - description: Device Filter
-        examples:
-          - lang: json
-            source: |
-              {
-                 "devices": [
-                     {
-                         "channel": "195adec2-fa70-4e62-b978-78ede2827597"
-                     },
-                     {
-                         "named_user_id": "George"
-                     }
-                 ]
-              }
-      - description: >-
-          Example Notification Filter - Include All Events Pertaining to a Push
-          ID
-        examples:
-          - lang: json
-            source: |
-              {"push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e"}
-      - description: >-
-          Example Notification Filter - Include all events pertaining to a
-          pipeline or PLT Push (Defined by Group ID)
-        examples:
-          - lang: json
-            source: |
-              {"group_id": "b7f7c9e0-64d6-4f44-9d74-d32ef5437ccf"}
     first_open:
-      - description: Example FIRST_OPEN Event
+      - description: Example first open event
         examples:
           - lang: json
             source: |
@@ -829,7 +938,7 @@ components:
                 "type": "FIRST_OPEN"
               }
     first_opt_in:
-      - description: Example FIRST_OPT_IN Event
+      - description: Example first opt-in event
         examples:
           - lang: json
             source: |
@@ -846,7 +955,7 @@ components:
                 "type": "FIRST_OPT_IN"
               }
     in_app_button_tap:
-      - description: Example In-App Button Tap
+      - description: Example in-app button tap event
         examples:
           - lang: json
             source: |
@@ -872,7 +981,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -890,6 +999,15 @@ components:
                     "push_id": "a9a5912c-2526-4383-b516-711c58aff900",
                     "group_id": "a9a5912c-2526-4383-b516-711c58aff900",
                     "session_id": "94e8caed-9b82-4166-b585-a01eed933855",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -917,7 +1035,7 @@ components:
                 "type": "IN_APP_BUTTON_TAP"
               }
     in_app_context:
-      - description: Example In-App context
+      - description: Example in-app context
         examples:
           - lang: json
             source: |
@@ -941,10 +1059,9 @@ components:
                     "page_count": 2,
                     "completed": false
                   }
-                }
               }
     in_app_experiences:
-      - description: Example In-App Experiences Event
+      - description: Example in-app experiences event
         examples:
           - lang: json
             source: |
@@ -970,7 +1087,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -992,13 +1109,18 @@ components:
                     "group_id": "2e12bc7b-04f2-3487-1480-44269b04c131",
                     "triggering_push": {
                       "push_id": "5cc872d5-708d-dffb-0959-991b014dcd2d",
-                      "time": "2022-03-11T08:40:56.692Z"
+                      "time": "2022-03-11T08:40:56.692Z",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
                     }
                   },
                 "type": "IN_APP_EXPERIENCES"
               }
     in_app_form_display:
-      - description: Example In-App Form Display
+      - description: Example in-app form display event
         examples:
           - lang: json
             source: |
@@ -1024,7 +1146,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1042,6 +1164,15 @@ components:
                     "push_id": "56d72d43-5567-4c94-887a-05b46ca9ef3e",
                     "group_id": "56d72d43-5567-4c94-887a-05b46ca9ef3e",
                     "session_id": "1347589f-0608-4198-b170-bfb46271877a",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -1067,7 +1198,7 @@ components:
                 "type": "IN_APP_FORM_DISPLAY"
               }
     in_app_form_result:
-      - description: Example In-App Form Result
+      - description: Example in-app form result event
         examples:
           - lang: json
             source: |
@@ -1093,7 +1224,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1111,6 +1242,15 @@ components:
                     "push_id": "683b395d-7abf-40f9-be49-4b64debfbd22",
                     "group_id": "683b395d-7abf-40f9-be49-4b64debfbd22",
                     "session_id": "d05323b3-8176-406d-aff5-5194341f4a5c",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -1154,8 +1294,53 @@ components:
                   },
                 "type": "IN_APP_FORM_RESULT"
               }
+    in_app_message_control:
+      - description: Example in-app message control event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "e9e281d0-2b39-11ee-ac42-00000a91ace1",
+                "offset": "1000194023208",
+                "occurred": "2023-07-25T22:22:40.262Z",
+                "processed": "2023-07-25T22:23:43.464Z",
+                "device": {
+                  "ios_channel": "414a7c7c-c3c5-4a9f-b1de-ebd5a85104e0",
+                  "channel": "414a7c7c-c3c5-4a9f-b1de-ebd5a85104e0",
+                  "device_type": "IOS",
+                  "attributes": {
+                    "locale_variant": "",
+                    "connection_type": "WIFI",
+                    "device_model": "arm64",
+                    "app_version": "1.0",
+                    "app_package_name": "com.company_name.app_name",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "17.0",
+                    "locale_timezone": "-25200",
+                    "locale_language_code": "en",
+                    "background_push_enabled": "true",
+                    "ua_sdk_version": "17.1.0"
+                  }
+                },
+                "body": {
+                  "push_id": "6fc3b3a7-d860-4acd-b80d-82af02b5b0fa",
+                  "group_id": "6fc3b3a7-d860-4acd-b80d-82af02b5b0fa",
+                  "session_id": "f31c3769-8517-402a-8ae6-cdb323f5ec22",
+                  "context": {
+                    "reporting_context": {
+                      "content_types": [
+                        "scene"
+                      ]
+                    }
+                  },
+                  "type": "CONTROL"
+                },
+                "type": "IN_APP_MESSAGE_CONTROL"
+              }
     in_app_message_display:
-      - description: Example In-App Message Display Event
+      - description: Example in-app message display event
         examples:
           - lang: json
             source: |
@@ -1181,7 +1366,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1202,13 +1387,115 @@ components:
                     "session_id": "cfe467a6-ca70-40dd-8c1f-07b2f644935e",
                     "triggering_push": {
                       "push_id": "18c0f649-2330-4fb0-a9fa-ad029f5f4e0e",
-                      "group_id": "c4c89025-0d25-434c-8040-283990585f01"
+                      "group_id": "c4c89025-0d25-434c-8040-283990585f01",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
                     }
                   },
                 "type": "IN_APP_MESSAGE_DISPLAY"
               }
+      - description: Example in-app message display event with context
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "c7b97941-5d1d-11ee-b7be-00000a91ace6",
+                  "offset": "1004335885834",
+                  "occurred": "2023-09-27T10:08:14.965Z",
+                  "processed": "2023-09-27T10:08:18.230Z",
+                  "device":
+                  {
+                      "android_channel": "3e75f0be-f312-413f-90c0-81d628410514",
+                      "channel": "3e75f0be-f312-413f-90c0-81d628410514",
+                      "device_type": "ANDROID",
+                      "named_user_id": "exampleuser",
+                      "attributes":
+                      {
+                          "locale_variant": "",
+                          "connection_type": "CELL",
+                          "device_model": "SM-G981B",
+                          "app_version": "13.13.3",
+                          "app_package_name": "com.company_name.app_name",
+                          "iana_timezone": "Europe/Paris",
+                          "push_opt_in": "true",
+                          "locale_country_code": "FR",
+                          "device_os": "13",
+                          "locale_timezone": "7200",
+                          "carrier": "F-Bouygues Telecom",
+                          "locale_language_code": "fr",
+                          "background_push_enabled": "true",
+                          "ua_sdk_version": "16.4.0"
+                      }
+                  },
+                  "body":
+                  {
+                      "push_id": "0390bd82-c28f-44cb-98d9-3f9b7eef939d",
+                      "group_id": "0390bd82-c28f-44cb-98d9-3f9b7eef939d",
+                      "campaigns":
+                      {
+                          "categories":
+                          [
+                              "WELCOME_SERIES"
+                          ]
+                      },
+                      "context": {
+                        "reporting_context": {
+                          "content_types": [
+                            "scene"
+                          ]
+                        }
+                      },
+                      "session_id": "6e11b019-4da0-4c66-8063-92ec2ce4ee36"
+                  },
+                  "type": "IN_APP_MESSAGE_DISPLAY"
+              }
+    in_app_message_exclusion:
+      - description: Example in-app message exclusion event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "7fff2560-1d33-11ef-b484-0000a91acec5",
+                "offset":"1000215341033",
+                "occurred":"2024-05-28T20:47:20.183Z",
+                "processed":"2024-05-28T20:47:31.090Z",
+                "device": {
+                  "android_channel": "88663749-a19d-4daf-8d4c-09fc4cf03a12",
+                  "channel":"87663620-a99d-4daf-8f4c-88fc4cf03af4",
+                  "device_type": "ANDROID",
+                  "named_user_id": "cool_named_user",
+                  "attributes": {
+                    "locale_variant": "",
+                    "connection_type": "WIFI",
+                    "device_model": "DE2123",
+                    "app_version": "2024-05-25T040548",
+                    "app_package_name": "com.package.example",
+                    "iana_timezone": "America/Los_Angeles",
+                    "push_opt_in": "true",
+                    "locale_country_code": "US",
+                    "device_os": "120",
+                    "locale_timezone": "-27000",
+                    "carrier": "AT&T",
+                    "locale_language_code": "en",
+                    "background_push_enabled": "false",
+                    "ua_sdk_version":"18.0.0"
+                  }
+                },
+                "body": {
+                  "push_id": "be711edb-d16d-465e-8091-a831041e2e53",
+                  "group_id":"be711edb-d16d-465e-8091-a831041e2e53",
+                  "session_id":"e8e72fa2-bfbc-405d-af85-8b428c8e38d9",
+                  "context": {
+                  },
+                  "type":"AUDIENCE_CHECK_EXCLUDED"
+                },
+                "type":"IN_APP_MESSAGE_EXCLUSION"
+              }
     in_app_message_expiration:
-      - description: Example In-App Message Expiration Event
+      - description: Example in-app message expiration event
         examples:
           - lang: json
             source: |
@@ -1231,7 +1518,7 @@ components:
                     "app_version": "dev",
                     "device_model": "Android SDK built for x86",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1248,13 +1535,22 @@ components:
                 "body": {
                   "push_id": "a1fe5f2a-1d51-4f3a-a77b-35018031741d",
                   "session_id": "3514bd74-bfa8-149e-9c12-a44794994ca8",
+                  "triggering_push": {
+                    "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                    "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                    "campaigns": {
+                      "categories": [
+                        "welcome_series"
+                      ]
+                    }
+                  },
                   "type": "EXPIRED",
                   "time_expired": "1970-01-01T00:00:00.000Z"
                 },
                 "type": "IN_APP_MESSAGE_EXPIRATION"
               }
     in_app_message_resolution:
-      - description: Example In-App Message Resolution Event
+      - description: Example in-app message resolution event
         examples:
           - lang: json
             source: |
@@ -1277,7 +1573,7 @@ components:
                     "app_version": "dev",
                     "device_model": "Android SDK built for x86",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1292,18 +1588,86 @@ components:
                   }
                 },
                 "body": {
-                 "push_id": "86ee0a6e-a46a-4bbe-a3d1-804891baaee4",
-                 "group_id": "68991b8d-0d6b-4e05-bc62-2cdec2085c18",
-                 "time_sent": "2019-03-03T19:10:26.301Z",
-                 "type": "BUTTON_CLICK",
-                 "button_id": "yes",
-                 "button_description": "Yes",
-                 "duration": 10000000000
+                  "push_id": "86ee0a6e-a46a-4bbe-a3d1-804891baaee4",
+                  "group_id": "68991b8d-0d6b-4e05-bc62-2cdec2085c18",
+                  "triggering_push": {
+                    "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                    "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                    "campaigns": {
+                      "categories": [
+                        "welcome_series"
+                      ]
+                    }
+                  },
+                  "time_sent": "2019-03-03T19:10:26.301Z",
+                  "type": "BUTTON_CLICK",
+                  "button_id": "yes",
+                  "button_group": "",
+                  "button_description": "Yes",
+                  "duration": 10000000000
                 },
                 "type": "IN_APP_MESSAGE_RESOLUTION"
               }
+      - description: Example in-app message resolution event with context
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "a0bc5c50-6d34-11ee-95dc-0000a91aced1",
+                  "offset": "1064988067725",
+                  "occurred": "2023-10-17T21:32:01.243Z",
+                  "processed": "2023-10-17T21:32:10.638Z",
+                  "device":
+                  {
+                      "ios_channel": "870c200f-d0e7-4e45-bd99-5b290c80b6a7",
+                      "channel": "870c200f-d0e7-4e45-bd99-5b290c80b6a7",
+                      "device_type": "IOS",
+                      "named_user_id": "exampleuser",
+                      "attributes":
+                      {
+                          "locale_variant": "",
+                          "connection_type": "WIFI",
+                          "device_model": "iPhone15,2",
+                          "app_version": "15.8.1",
+                          "app_package_name": "com.company_name.app_name",
+                          "iana_timezone": "America/New_York",
+                          "push_opt_in": "false",
+                          "locale_country_code": "US",
+                          "device_os": "16.6.1",
+                          "locale_timezone": "-14400",
+                          "carrier": "AT&T",
+                          "locale_language_code": "en",
+                          "background_push_enabled": "true",
+                          "ua_sdk_version": "16.12.0"
+                      }
+                  },
+                  "body":
+                  {
+                      "push_id": "4015241b-2e71-43d8-85a0-cd500e97c15d",
+                      "group_id": "4015241b-2e71-43d8-85a0-cd500e97c15d",
+                      "campaigns":
+                      {
+                          "categories":
+                          [
+                              "OfferLevel45",
+                              "VIP_OFFER"
+                          ]
+                      },
+                      "context": {
+                        "reporting_context": {
+                          "content_types": [
+                            "scene"
+                          ]
+                        }
+                      },
+                      "session_id": "832e65de-453e-426d-a4a3-bd70ab0f827e",
+                      "type": "USER_DISMISSED",
+                      "duration": 2503
+                  },
+                  "type": "IN_APP_MESSAGE_RESOLUTION"
+              }
     in_app_page_swipe:
-      - description: Example In-App Page Swipe
+      - description: Example in-app page swipe event
         examples:
           - lang: json
             source: |
@@ -1329,7 +1693,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1347,6 +1711,15 @@ components:
                     "push_id": "91baacc8-1ebf-411d-a77a-ee036c44e7ce",
                     "group_id": "91baacc8-1ebf-411d-a77a-ee036c44e7ce",
                     "session_id": "a135087c-ba97-4b87-ac1d-a216f2cccb7c",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -1372,7 +1745,7 @@ components:
                 "type": "IN_APP_PAGE_SWIPE"
               }
     in_app_page_view:
-      - description: Example In-App Page View
+      - description: Example in-app page view event
         examples:
           - lang: json
             source: |
@@ -1398,7 +1771,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1416,6 +1789,15 @@ components:
                     "push_id": "d2482092-a0f5-4ec0-bf0a-f17a1657d1b0",
                     "group_id": "d2482092-a0f5-4ec0-bf0a-f17a1657d1b0",
                     "session_id": "65be61ee-dc60-47ec-b9d3-ebc469e0523b",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -1442,7 +1824,7 @@ components:
                 "type": "IN_APP_PAGE_VIEW"
               }
     in_app_pager_completed:
-      - description: Example In-App Pager Completed
+      - description: Example in-app pager completed event
         examples:
           - lang: json
             source: |
@@ -1468,7 +1850,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1486,6 +1868,15 @@ components:
                     "push_id": "a9a5912c-2526-4383-b516-711c58aff900",
                     "group_id": "a9a5912c-2526-4383-b516-711c58aff900",
                     "session_id": "94e8caed-9b82-4166-b585-a01eed933855",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -1516,7 +1907,7 @@ components:
                 "type": "IN_APP_PAGER_COMPLETED"
               }
     in_app_pager_summary:
-      - description: Example In-App Pager Summary
+      - description: Example in-app pager summary event
         examples:
           - lang: json
             source: |
@@ -1542,7 +1933,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone7,2",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.appname",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1560,6 +1951,15 @@ components:
                     "push_id": "898c0cde-02d8-4674-8c3a-91183aab8b7b",
                     "group_id": "898c0cde-02d8-4674-8c3a-91183aab8b7b",
                     "session_id": "393ae595-bb43-48a2-9878-996e11581754",
+                    "triggering_push": {
+                      "push_id": "a183f051-7d69-11ed-86d9-0242dc3f670b",
+                      "group_id": "8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a",
+                      "campaigns": {
+                        "categories": [
+                          "welcome_series"
+                        ]
+                      }
+                    },                    
                     "context": {
                       "reporting_context": {
                         "content_types": [
@@ -1589,8 +1989,29 @@ components:
                   },
                 "type": "IN_APP_PAGER_SUMMARY"
               }
+    json_predicate:
+      - description: >-
+          Example JSON Predicate to filter the stream to only Android Open
+          events
+        examples:
+          - lang: json
+            source: |
+              {
+                "filters": {
+                  "predicates": {
+                    "and": [
+                      {
+                        "scope": ["device"],
+                        "key": "device_type",
+                        "value": {"equals": "ANDROID"}
+                      },
+                      { "key": "type", "value": {"equals": "OPEN"} }
+                    ]
+                  }
+                }
+              }
     location:
-      - description: Example LOCATION Event
+      - description: Example location event
         examples:
           - lang: json
             source: |
@@ -1613,7 +2034,7 @@ components:
                     "app_version": "dev",
                     "device_model": "Android SDK built for x86",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1636,7 +2057,7 @@ components:
                 "type": "LOCATION"
               }
     mobile_create_channel:
-      - description: Example SMS mobile_create_channel Event
+      - description: Example SMS mobile_create_channel event
         examples:
           - lang: json
             source: |
@@ -1665,7 +2086,7 @@ components:
                 "type": "COMPLIANCE"
               }
     mobile_keyword_matched:
-      - description: Example SMS mobile_keyword_matched Event
+      - description: Example SMS mobile_keyword_matched event
         examples:
           - lang: json
             source: |
@@ -1694,7 +2115,7 @@ components:
                 "type": "COMPLIANCE"
               }
     mobile_keyword_unmatched:
-      - description: Example SMS mobile_keyword_unmatched Event
+      - description: Example SMS mobile_keyword_unmatched event
         examples:
           - lang: json
             source: |
@@ -1722,7 +2143,7 @@ components:
                 "type": "COMPLIANCE"
               }
     mobile_opt_in:
-      - description: Example SMS mobile_opt_in Event
+      - description: Example SMS mobile_opt_in event
         examples:
           - lang: json
             source: |
@@ -1751,7 +2172,7 @@ components:
                 "type": "COMPLIANCE"
               }
     mobile_opt_out:
-      - description: Example SMS mobile_opt_out Event
+      - description: Example SMS mobile_opt_out event
         examples:
           - lang: json
             source: |
@@ -1780,7 +2201,7 @@ components:
                 "type": "COMPLIANCE"
               }
     mobile_originated:
-      - description: Example Mobile-Originated SMS Event
+      - description: Example mobile-originated SMS event
         examples:
           - lang: json
             source: |
@@ -1809,7 +2230,7 @@ components:
                 "type": "MOBILE_ORIGINATED"
               }
     mobile_originated_sms:
-      - description: mobile_originated_sms Event Body
+      - description: Example mobile_originated_sms event body
         examples:
           - lang: json
             source: |
@@ -1826,7 +2247,7 @@ components:
                 }
               }
     mobile_terminated_message:
-      - description: Example mobile_terminated_message Event
+      - description: Example SMS mobile_terminated_message event
         examples:
           - lang: json
             source: |
@@ -1837,8 +2258,7 @@ components:
                 "processed": "2018-12-03T19:31:11.302Z",
                 "device": {
                   "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
-                  "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "device_type": "SMS"
                 },
                 "body": {
                   "event_type": "mobile_terminated_message",
@@ -1849,8 +2269,37 @@ components:
                 },
                 "type": "COMPLIANCE"
               }
+    numeric_matcher:
+      - description: >-
+          Example find custom events with name "purchase" and a "value" of at
+          least 100
+        examples:
+          - lang: json
+            source: |
+              {
+                "filters": [
+                  {
+                    "types": ["CUSTOM"],
+                    "predicates": [
+                      {
+                        "and": [
+                          { "key": "value",
+                            "scope": ["body"],
+                            "value": {"at_least": 100}
+                          },
+                          {
+                            "key": "name",
+                            "scope": ["body"],
+                            "value": {"equals": "purchase"}
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
     open:
-      - description: Example Open Event
+      - description: Example open event
         examples:
           - lang: json
             source: |
@@ -1873,7 +2322,7 @@ components:
                     "app_version": "1037.04c13d-master",
                     "device_model": "Nokia 6.1",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -1886,6 +2335,9 @@ components:
                     "ua_sdk_version": "9.7.0",
                     "location_permission": "ALWAYS_ALLOWED"
                     }
+                  },
+                "user": {
+                    "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
                   },
                 "body": {
                   "last_delivered": {
@@ -1902,7 +2354,7 @@ components:
                 "type": "OPEN"
               }
     opted_out:
-      - description: Example SMS opted_out Event
+      - description: Example SMS opted_out event
         examples:
           - lang: json
             source: |
@@ -1914,7 +2366,8 @@ components:
                 "device": {
                   "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
                   "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "delivery_address": "15558968663",
+                  "identifiers": { "sender": "15558675309" }
                 },
                 "body": {
                   "event_type": "opted_out",
@@ -1925,8 +2378,23 @@ components:
                 },
                 "type": "COMPLIANCE"
               }
+    presence_matcher:
+      - description: Example find only direct open events
+        examples:
+          - lang: json
+            source: |
+              {
+                "filters": {
+                  "types": ["OPEN"],
+                  "predicates": {
+                    "key": "triggering_push",
+                    "scope": ["body"],
+                    "value": {"is_present": true}
+                  }
+                }
+              }
     push_body:
-      - description: Example Push Body Event
+      - description: Example push body event
         examples:
           - lang: json
             source: |
@@ -1951,7 +2419,7 @@ components:
                 "type": "PUSH_BODY"
               }
     region:
-      - description: Example Region Event
+      - description: Example region event
         examples:
           - lang: json
             source: |
@@ -1974,7 +2442,7 @@ components:
                     "app_version": "dev",
                     "device_model": "Android SDK built for x86",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "America/Los_Angeles",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -2001,7 +2469,7 @@ components:
                 "type": "REGION"
               }
     registration:
-      - description: Example Email Registration Event
+      - description: Example email registration event
         examples:
           - lang: json
             source: |
@@ -2017,7 +2485,7 @@ components:
                   "body": {
                       "event_type": "registration",
                       "identifiers": {
-                          "address": "new.user@subscriber.com"
+                          "address": "new.user@example.com"
                       },
                       "properties": {
                           "commercial_opted_in": "2018-10-20T12:00:00.000Z",
@@ -2026,8 +2494,35 @@ components:
                   },
                   "type": "COMPLIANCE"
                 }
+    rich_control:
+      - description: >-
+          Example event body - message not delivered due to user being in a
+          control group
+        examples:
+          - lang: json
+            source: |
+              {
+                "id" : "e97ef291-eb48-6614-a9f4-9138244a9144",
+                "offset" : "-1099401623",
+                "occurred" : "2024-11-05T23:47:55.473Z",
+                "processed" : "2024-11-05T23:47:55.473Z",
+                "device" : {
+                  "ios_channel" : "564f958c-806f-bdaf-340b-1a25867d1c6a",
+                  "channel" : "564f958c-806f-bdaf-340b-1a25867d1c6a",
+                  "device_type" : "IOS"
+                },
+                "user": {
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "mini_me"
+                },
+                "body" : {
+                  "push_id" : "62fd4bac-a85a-0e18-00b4-9e59339bece5",
+                  "group_id" : "da16d1c2-7d8f-9ade-ff14-05ce696ba042"
+                },
+                "type" : "RICH_CONTROL"
+              }
     rich_delete:
-      - description: Example Event Body - Indicates the `push_id` that was deleted
+      - description: Example event body - indicates the `push_id` that was deleted
         examples:
           - lang: json
             source: |
@@ -2053,7 +2548,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone8,1",
                     "connection_type": "CELL",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "Europe/London",
                     "push_opt_in": "true",
                     "locale_country_code": "GB",
@@ -2067,13 +2562,17 @@ components:
                     "location_permission": "FOREGROUND_ALLOWED"
                   }
                 },
+                "user": {
+                    "named_user_id": "coolusername",
+                    "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
+                  },
                 "body": {
                   "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801"
                 },
                 "type": "RICH_DELETE"
               }
     rich_delivery:
-      - description: Example Event Body — Indicates the `push_id` That reached the user
+      - description: Example event body — indicates the `push_id` that reached the user
         examples:
           - lang: json
             source: |
@@ -2087,13 +2586,16 @@ components:
                   "channel": "1de67612-94bc-4d02-85b0-37ede154a9d7",
                   "device_type": "ANDROID"
                 },
+                "user": {
+                  "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
+                },
                 "body": {
                   "push_id": "1a7d774c-1659-4104-b594-2f7ec739c92d"
                 },
                 "type": "RICH_DELIVERY"
               }
     rich_read:
-      - description: Example Event Body — Indicates the `push_id` that the user read
+      - description: Example event body — indicates the `push_id` that the user read
         examples:
           - lang: json
             source: |
@@ -2119,7 +2621,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone8,1",
                     "connection_type": "CELL",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "Europe/London",
                     "push_opt_in": "true",
                     "locale_country_code": "GB",
@@ -2133,14 +2635,18 @@ components:
                     "location_permission": "FOREGROUND_ALLOWED"
                   }
                 },
+                "user": {
+                  "named_user_id": "coolusername",
+                  "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
+                },
                 "body": {
-                  "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801"
+                  "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801",
                   "time": "2019-03-04T15:12:54.657Z"
                 },
                 "type": "RICH_READ"
               }
     screen_viewed:
-      - description: Example SMS Create-and-Send Event
+      - description: Example screen viewed event
         examples:
           - lang: json
             source: |
@@ -2165,7 +2671,7 @@ components:
                     "app_version": "550",
                     "device_model": "iPhone9,1",
                     "connection_type": "WIFI",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "Europe/Berlin",
                     "push_opt_in": "true",
                     "locale_country_code": "US",
@@ -2187,7 +2693,7 @@ components:
                 "type": "SCREEN_VIEWED"
               }
     send:
-      - description: Example Send Event
+      - description: Example send event
         examples:
           - lang: json
             source: |
@@ -2206,7 +2712,7 @@ components:
                     "app_version": "542",
                     "device_model": "iPhone8,1",
                     "connection_type": "CELL",
-                    "app_package_name": "com.urbanairship.goat",
+                    "app_package_name": "com.company_name.app_name",
                     "iana_timezone": "Europe/London",
                     "push_opt_in": "true",
                     "locale_country_code": "GB",
@@ -2219,6 +2725,10 @@ components:
                     "ua_sdk_version": "10.2.0",
                     "location_permission": "FOREGROUND_ALLOWED"
                   }
+                },
+                "user": {
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "coolusername"
                 },
                 "body": {
                   "variant_id": 1,
@@ -2241,7 +2751,7 @@ components:
                 "type": "SEND"
               }
     send_aborted:
-      - description: Example SEND_ABORTED Event
+      - description: Example send aborted event
         examples:
           - lang: json
             source: |
@@ -2262,8 +2772,29 @@ components:
                   "reason": "FEED_RESOLVE_FAILURE"
                 }
               }
+      - description: Example send aborted event due to Ban List
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "fc06bf54-619b-4fda-9345-d8f9f8e891ef",
+                "occurred": "2021-02-26T20:50:21.12Z",
+                "offset": "1000001215643",
+                "processed": "2021-02-26T20:50:49.64Z",
+                "type": "SEND_ABORTED",
+                "device": {
+                  "android_channel": "e664fb42-d1a7-4956-9907-88c49394ae70",
+                  "channel": "e664fb42-d1a7-4956-9907-88c49394ae70",
+                  "device_type": "ANDROID",
+                  },
+                "body": {
+                  "push_id": "26ea5408-a1ec-4771-b4f0-e86d45c03f8a",
+                  "group_id": "3795a26d-2d74-462b-b228-ca3ed31ef7b1",
+                  "reason": "FEED_BANNED_RESPONSE"
+                }
+              }
     send_rejected:
-      - description: Example SEND_REJECTED Event Body
+      - description: Example send rejected event body
         examples:
           - lang: json
             source: |
@@ -2281,13 +2812,14 @@ components:
                 "body": {
                   "variant_id": 1,
                   "push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e",
+                  "status": "BadDeviceToken",
                   "campaigns" : {
                     "categories" : ["hello", "first message"]
                   }
                 }
               }
     short_link_click:
-      - description: Example short_link_click Event
+      - description: Example short_link_click event
         examples:
           - lang: json
             source: |
@@ -2317,7 +2849,7 @@ components:
                   "type": "SHORT_LINK_CLICK"
               }
     smsCreateAndSend:
-      - description: Example SMS create_and_send Event
+      - description: Example SMS Create and Send event
         examples:
           - lang: json
             source: |
@@ -2344,8 +2876,8 @@ components:
                 },
                 "type": "COMPLIANCE"
               }
-    smsEventBody:
-      - description: Example SMS Compliance Event
+    smsRegistered:
+      - description: Example SMS registration event
         examples:
           - lang: json
             source: |
@@ -2356,8 +2888,7 @@ components:
                 "processed": "2018-12-03T19:31:11.302Z",
                 "device": {
                   "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
-                  "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "device_type": "SMS"
                 },
                 "body": {
                   "event_type": "registration",
@@ -2367,13 +2898,13 @@ components:
                   },
                   "properties": {
                     "opted_in": "2018-12-03T19:31:10.000Z",
-                    "registration_type": "created"
+                    "registration_type": "create"
                   }
                 },
                 "type": "COMPLIANCE"
               }
-    smsRegistered:
-      - description: Example SMS Registration Event
+    smsUpdated:
+      - description: Example SMS update event
         examples:
           - lang: json
             source: |
@@ -2385,7 +2916,10 @@ components:
                 "device": {
                   "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
                   "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "delivery_address": "15558968663",
+                  "identifiers": {
+                    "sender": "15558675309"
+                  }
                 },
                 "body": {
                   "event_type": "registration",
@@ -2394,14 +2928,13 @@ components:
                     "msisdn": "15558968663"
                   },
                   "properties": {
-                    "opted_in": "2018-12-03T19:31:10.000Z",
-                    "registration_type": "created"
+                    "registration_type": "update"
                   }
                 },
                 "type": "COMPLIANCE"
               }
     sms_uninstalled:
-      - description: Example SMS uninstalled Event
+      - description: Example SMS uninstalled event
         examples:
           - lang: json
             source: |
@@ -2413,7 +2946,10 @@ components:
                 "device": {
                   "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
                   "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "delivery_address": "15558968663",
+                  "identifiers": {
+                    "sender": "15558675309"
+                  }
                 },
                 "body": {
                   "event_type": "uninstall",
@@ -2425,7 +2961,7 @@ components:
                 "type": "COMPLIANCE"
               }
     subscription:
-      - description: Example Subscription Event
+      - description: Example subscription event
         examples:
           - lang: json
             source: |
@@ -2442,14 +2978,40 @@ components:
                 "body": {
                   "event_type":"registration",
                   "identifiers": {
-                    "address":"new.subscription@emaildomain.com"
+                    "address":"new.subscription@example.com"
                   },
                   "properties":{
                     "commercial_opted_in":"2019-01-04T20:56:00.000Z",
-                    "transactional_opted_in":"2019-01-04T20:56:00.000Z"
+                    "transactional_opted_in":"2019-01-04T20:56:00.000Z",
+                    "click_tracking_opted_out":"2019-01-04T20:56:00.000Z",
+                    "open_tracking_opted_out":"2019-01-04T20:56:00.000Z"
                     }
                 },
                 "type": "SUBSCRIPTION"
+              }
+    subscription_list:
+      - description: Example Subscription List event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "62f3b7ac-4048-4f22-a0b5-22c01ef172a9",
+                "offset": "1000022265027",
+                "occurred": "2019-04-01T13:00:23.186Z",
+                "processed": "2019-04-01T13:00:23.456Z",
+                "device": {
+                  "channel": "6b46c724-494b-4491-9fe7-1b903d266110",
+                  "device_type": "EMAIL",
+                  "delivery_address": "user+43679@urbanairship.com.sink.sparkpostmail.com"
+                },
+                "user": {
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "mini_me"
+                },
+                "body": {
+                  "enrolled": ["cool_deals"]
+                },
+                "type": "SUBSCRIPTION_LIST"
               }
     subset:
       - description: Subset `SAMPLE`
@@ -2470,7 +3032,7 @@ components:
                 "selection": 0
               }
     tag_change:
-      - description: Example Tag Change Event
+      - description: Example tag change event
         examples:
           - lang: json
             source: |
@@ -2479,12 +3041,15 @@ components:
                 "occurred": "2019-03-04T19:00:45.106Z",
                 "offset": "1000001260057",
                 "processed": "2019-03-04T19:00:47.094Z",
-                "type": "SEND_REJECTED",
                 "device": {
                   "ios_channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
                   "channel": "1ef235f0-03d5-1384-893e-a19b5cd0d110",
                   "device_type": "IOS",
                   },
+                "user": {
+                  "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
+                  "named_user_id": "mini_me"
+                },
                 "body":{
                   "add": {
                       "crm": [
@@ -2519,7 +3084,7 @@ components:
                 "type": "TAG_CHANGE"
               }
     uninstall:
-      - description: Example Uninstall Event
+      - description: Example uninstall event
         examples:
           - lang: json
             source: |
@@ -2536,11 +3101,11 @@ components:
                   },
                 "body":{
                   "decay": false
-                  }
+                  },
                 "type": "UNINSTALL"
               }
     unsubscribe:
-      - description: Example Email Unsubscribe Event
+      - description: Example email unsubscribe event
         examples:
           - lang: json
             source: |
@@ -2552,7 +3117,7 @@ components:
                 "device": {
                     "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
                     "device_type": "EMAIL",
-                    "delivery_address": "former.user@unsubscriber.com"
+                    "delivery_address": "former.user@example.com"
                 },
                 "body": {
                     "event_type": "registration",
@@ -2563,8 +3128,39 @@ components:
                 },
                 "type": "COMPLIANCE"
               }
+    version_matcher:
+      - description: >-
+          Example find custom events of type "purchase" performed by Android
+          users on app versions between 18.4.1 and 19.2.3
+        examples:
+          - lang: json
+            source: |
+              {
+                "filters": [
+                  {
+                    "device_types": ["android"],
+                    "types": ["CUSTOM"],
+                    "predicates": [
+                      {
+                        "and": [
+                          {
+                            "key": "app_version",
+                            "scope": ["device", "attributes"],
+                            "value": {"version_matches": "[18.4.1,19.2.3]"}
+                          },
+                          {
+                            "key": "name",
+                            "scope": ["body"],
+                            "value": {"equals": "purchase"}
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
     web_click:
-      - description: Example Web Click Event
+      - description: Example web click event
         examples:
           - lang: json
             source: |
@@ -2595,7 +3191,7 @@ components:
                 "type": "WEB_CLICK"
               }
     web_session:
-      - description: Example Web Session Event
+      - description: Example web session event
         examples:
           - lang: json
             source: |
@@ -2631,13 +3227,14 @@ components:
 paths:
   /api/events:
     post:
-      - description: Connect Request
+      - description: Example event stream request
         examples:
           - lang: http
             source: |
               POST /api/events HTTP/1.1
               Authorization: Bearer <authorization token>
               X-UA-Appkey: <appkey>
+              Accept: application/vnd.urbanairship+x-ndjson; version=3;
               Content-Type: application/json
 
               {
@@ -2677,15 +3274,15 @@ paths:
                       "type": "SAMPLE"
                   }
               }
-      - description: Example Response
+      - description: Response
         examples:
-          - lang: json
+          - lang: HTTP
             source: >
-              Status: 200
+              HTTP/1.1 200 OK
 
               Content-encoding: gzip
 
-              Content-Type: application/vnd.urbanairship+json; version=3
+              Content-Type: application/vnd.urbanairship+json; version=3;
 
 
               {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type":
@@ -2714,27 +3311,60 @@ paths:
               "a61448e1-be63-43ee-84eb-19446ba743f0"}}
 
               {"device":{"channel":"820e4493-e4c9-4577-99bc-a98180599f73","delivery_address":"new.user@urbanairship.com","device_type":"EMAIL"},"id":"00000169-4a14-67b2-1ddd-d9e733622c3a","occurred":"2019-03-04T19:00:45.106Z","offset":"1000001260057","processed":"2019-03-04T19:00:47.094Z","type":"FIRST_OPT_IN"}
+      - description: Response object
+        examples:
+          - lang: json
+            source: |
+              {
+                 "id": "8e50350e-dd9f-41af-b98e-b0e5d4b27dea",
+                 "type": "SEND",
+                 "offset": "NTIxMDM1",
+                 "occurred": "2015-05-02T02:31:22.088Z",
+                 "processed": "2015-05-02T02:32:43.181Z",
+                 "device": {
+                    "channel": "5117f2a7-ba58-4981-9456-169959511d1a",
+                    "device_type": "IOS"
+                 },
+                 "body": {
+                    "push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e",
+                    "alerting": true
+                 }
+              }
+              {
+                "device": {
+                  "channel": "820e4493-e4c9-4577-99bc-a98180599f73",
+                  "delivery_address": "new.user@urbanairship.com",
+                  "device_type": "EMAIL"
+                },
+                "id": "00000169-4a14-67b2-1ddd-d9e733622c3a",
+                "occurred": "2019-03-04T19:00:45.106Z",
+                "offset": "1000001260057",
+                "processed": "2019-03-04T19:00:47.094Z",
+                "type": "FIRST_OPT_IN"
+              }
   /api/events/general:
     post:
-      - description: Compliance Event Stream Request
+      - description: Example compliance event stream request
         examples:
           - lang: http
             source: |
               POST /api/events/general HTTP/1.1
               Authorization: Basic <master authorization string>
               X-UA-Appkey: <appkey>
+              Accept: application/vnd.urbanairship+x-ndjson; version=3;
+              Content-Type: application/json
 
               {
                 "start":"LATEST",
                 "enable_offset_updates": true
               }
-      - description: Example Response
+      - description: Response
         examples:
-          - lang: json
+          - lang: HTTP
             source: |
-              Status: 200
+              HTTP/1.1 200 OK
               Content-encoding: gzip
-              Content-Type: application/vnd.urbanairship+json; version=3
+              Content-Type: application/vnd.urbanairship+json; version=3;
 
               {
                 "id": "9781ff2e-fa4a-4fa8-bd9d-41f318c48963",
@@ -2744,15 +3374,15 @@ paths:
                 "device": {
                     "channel": "5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b",
                     "device_type": "EMAIL",
-                    "delivery_address": "bogus@email.com"
+                    "delivery_address": "bogus@example.com"
                 },
                 "body": {
                     "event_type": "bounce",
                     "properties": {
                         "bounce_event_type": "bounce",
-                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com",
+                        "sender": "msprvs1=17870ayYKWpBI=bounces-179492-4@example.com",
                         "subject": "You there?",
-                        "email": "bogus@email.com",
+                        "email": "bogus@example.com",
                         "bounce_class": "10"
                     }
                 },

@@ -17,7 +17,7 @@
           "type": "object"
         },
         "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
           "type": "string"
@@ -122,7 +122,7 @@
     "processed",
     "body"
   ],
-  "title": "Short Link Click Event",
+  "title": "Short link click event",
   "type": "object",
   "x-schema-tag": "Events"
 }
