@@ -3,7 +3,7 @@
     "schemas": {
       "api_initiate_opt_in": [
         {
-          "description": "Example API-initiated Opt-In Event",
+          "description": "Example SMS API-initiated opt-in event",
           "examples": [
             {
               "lang": "json",
@@ -12,18 +12,31 @@
           ]
         }
       ],
-      "associatedPush": [
+      "appdevices": [
         {
-          "description": "Push Sent to an Audience at a Defined date-time",
+          "description": "Example device information object",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"push_id\": \"6e3339ce-529c-42e4-a2f6-7546f81c9828\",\n  \"time\": \"2015-07-30T21:03:37.631Z\"\n}\n"
+              "source": "{\n    \"channel\": \"a6b392d6-3b0d-4c00-98ef-5cb91d51268a\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"Albert\",\n    \"identifiers\": {\n      \"com.urbanairship.idfa\": \"fb0d01e0-9e21-4466-9217-8eacfd2b81c7\",\n      \"com.urbanairship.gimbal.aii\": \"c5720f06-516a-4b91-b7bb-53523fc43a3d\",\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"false\"\n    },\n    \"attributes\": {\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"app_version\": \"1.0.0\",\n      \"ua_sdk_version\": \"7.0.2\"\n    }\n  }\n"
             }
           ]
-        },
+        }
+      ],
+      "array_matcher": [
         {
-          "description": "Push Event Fullfilled at a Relative Time (local/best-time) or as a Part of a Grouped Operation",
+          "description": "Example find only push body objects with the campaign category \"spring_sale\"",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"filters\": {\n    \"types\": [\"PUSH_BODY\"],\n    \"predicates\": {\n      \"key\": \"categories\",\n      \"scope\": [\"body\", \"campaigns\"],\n      \"value\": {\n        \"array_contains\": { \"value\": {\"equals\": \"spring_sale\"} }\n      }\n    }\n  }\n}  \n"
+            }
+          ]
+        }
+      ],
+      "associatedPush": [
+        {
+          "description": "Push sent to an audience at a defined date-time",
           "examples": [
             {
               "lang": "json",
@@ -34,29 +47,29 @@
       ],
       "attribute_operation": [
         {
-          "description": "Example Attribute Operation Event",
+          "description": "Example Attribute operation event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"00000173-bb88-8804-b6ec-a40f4ae36648\",\n  \"offset\": \"1000059326194\",\n  \"occurred\": \"2020-08-04T22:12:33.924Z\",\n  \"processed\": \"2020-08-04T22:12:37.672Z\",\n  \"device\": {\n      \"android_channel\": \"b57f0e3c-da10-4a2b-99d2-5fe2cb30cad3\",\n      \"channel\": \"b57f0e3c-da10-4a2b-99d2-5fe2cb30cad3\",\n      \"device_type\": \"ANDROID\",\n      \"named_user_id\": \"cool_user\",\n      \"attributes\": {\n        \"locale_variant\": \"\",\n        \"app_version\": \"2020-02-10T222436-staging\",\n        \"device_model\": \"Pixel 2 XL\",\n        \"connection_type\": \"WIFI\",\n        \"app_package_name\": \"com.urbanairship.goat.staging\",\n        \"iana_timezone\": \"America/Los_Angeles\",\n        \"push_opt_in\": \"true\",\n        \"locale_country_code\": \"US\",\n        \"device_os\": \"10\",\n        \"locale_timezone\": \"-25200\",\n        \"locale_language_code\": \"en\",\n        \"location_enabled\": \"false\",\n        \"background_push_enabled\": \"true\",\n        \"ua_sdk_version\": \"12.2.0\",\n        \"location_permission\": \"NOT_ALLOWED\"\n      }\n  },\n  \"body\": {\n      \"set\": [\n        {\n            \"key\": \"first_name\",\n            \"value\": \"Pierre\"\n        }\n      ]\n  },\n  \"type\": \"ATTRIBUTE_OPERATION\"\n}\n"
+              "source": "{\n  \"id\": \"00000173-bb88-8804-b6ec-a40f4ae36648\",\n  \"offset\": \"1000059326194\",\n  \"occurred\": \"2020-08-04T22:12:33.924Z\",\n  \"processed\": \"2020-08-04T22:12:37.672Z\",\n  \"device\": {\n      \"android_channel\": \"b57f0e3c-da10-4a2b-99d2-5fe2cb30cad3\",\n      \"channel\": \"b57f0e3c-da10-4a2b-99d2-5fe2cb30cad3\",\n      \"device_type\": \"ANDROID\",\n      \"named_user_id\": \"cool_user\",\n      \"attributes\": {\n        \"locale_variant\": \"\",\n        \"app_version\": \"2020-02-10T222436-staging\",\n        \"device_model\": \"Pixel 2 XL\",\n        \"connection_type\": \"WIFI\",\n        \"app_package_name\": \"com.company_name.app_name\",\n        \"iana_timezone\": \"America/Los_Angeles\",\n        \"push_opt_in\": \"true\",\n        \"locale_country_code\": \"US\",\n        \"device_os\": \"10\",\n        \"locale_timezone\": \"-25200\",\n        \"locale_language_code\": \"en\",\n        \"location_enabled\": \"false\",\n        \"background_push_enabled\": \"true\",\n        \"ua_sdk_version\": \"12.2.0\",\n        \"location_permission\": \"NOT_ALLOWED\"\n      }\n  },\n  \"user\": {\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"cool_user\"\n  },\n  \"body\": {\n      \"set\": [\n        {\n            \"key\": \"first_name\",\n            \"value\": \"Pierre\"\n        }\n      ]\n  },\n  \"type\": \"ATTRIBUTE_OPERATION\"\n}\n"
             }
           ]
         }
       ],
       "bounce": [
         {
-          "description": "Example Email Bounce Event",
+          "description": "Example email bounce event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n    \"id\": \"9781ff2e-fa4a-4fa8-bd9d-41f318c48963\",\n    \"offset\": \"1000001778910\",\n    \"occurred\": \"2018-11-28T00:02:41.794Z\",\n    \"processed\": \"2018-11-28T00:02:45.270Z\",\n    \"device\": {\n        \"channel\": \"5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b\",\n        \"device_type\": \"EMAIL\",\n        \"delivery_address\": \"bademail@baddomain.com\"\n    },\n    \"body\": {\n        \"event_type\": \"bounce\",\n        \"properties\": {\n            \"bounce_event_type\": \"bounce\",\n            \"sender\": \"msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com\",\n            \"subject\": \"Red Means Go\",\n            \"email\": \"bademail@baddomain.com\",\n            \"bounce_class\": \"10\"\n        }\n    },\n    \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n    \"id\": \"9781ff2e-fa4a-4fa8-bd9d-41f318c48963\",\n    \"offset\": \"1000001778910\",\n    \"occurred\": \"2018-11-28T00:02:41.794Z\",\n    \"processed\": \"2018-11-28T00:02:45.270Z\",\n    \"device\": {\n        \"channel\": \"5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b\",\n        \"device_type\": \"EMAIL\",\n        \"delivery_address\": \"bademail@example.com\"\n    },\n    \"body\": {\n        \"event_type\": \"bounce\",\n        \"properties\": {\n            \"bounce_event_type\": \"bounce\",\n            \"sender\": \"msprvs1=17870ayYKWpBI=bounces-179492-4@example.com\",\n            \"subject\": \"Red Means Go\",\n            \"email\": \"bademail@example.com\",\n            \"bounce_class\": \"10\"\n        }\n    },\n    \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
       ],
       "carrier_deactivation": [
         {
-          "description": "Example SMS carrier_deactivation Event",
+          "description": "Example SMS carrier_deactivation event",
           "examples": [
             {
               "lang": "json",
@@ -67,60 +80,80 @@
       ],
       "close": [
         {
-          "description": "Example Close Event",
+          "description": "Example close event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"session_id\": \"61acb6c9-527b-4632-b789-a3e6085b094e\"\n  },\n  \"type\": \"CLOSE\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n    }\n  },\n  \"user\": {\n    \"contact_id\": \"982B35f2-0375-6384-893e-a19b5cd5R771\"\n  },\n  \"body\": {\n    \"session_id\": \"61acb6c9-527b-4632-b789-a3e6085b094e\"\n  },\n  \"type\": \"CLOSE\"\n}\n"
             }
           ]
         }
       ],
-      "compliance": [
+      "complianceRequestFilters": [
         {
-          "description": "Example Compliance Event Stream",
+          "description": "Example compliance request filter",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"9781ff2e-fa4a-4fa8-bd9d-41f318c48963\",\n  \"offset\": \"1000001778910\",\n  \"occurred\": \"2018-11-28T00:02:41.794Z\",\n  \"processed\": \"2018-11-28T00:02:45.270Z\",\n  \"device\": {\n      \"channel\": \"5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"bogus@email.com\"\n  },\n  \"body\": {\n      \"event_type\": \"bounce\",\n      \"properties\": {\n          \"bounce_event_type\": \"bounce\",\n          \"sender\": \"msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com\",\n          \"subject\": \"You there?\",\n          \"email\": \"bogus@email.com\",\n          \"bounce_class\": \"10\"\n      }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"device_types\": [\"email\"],\n  \"latency\": 120000,          \n}\n"
+            }
+          ]
+        }
+      ],
+      "contact_change": [
+        {
+          "description": "Example contact change event",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"fe882bd1-e0b9-11ea-bc35-0242f70dd9ff\",\n  \"offset\": \"1000076075647\",\n  \"occurred\": \"2024-09-25T19:03:13.903Z\",\n  \"processed\": \"2024-09-25T19:03:14.426Z\",\n  \"user\": {\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"mini_me\"\n  },\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\"\n  },\n  \"body\": {\n    \"change_type\": \"DISSOCIATION\",\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"mini_me\",\n    \"channel_id\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n  },\n  \"type\": \"CONTACT_CHANGE\"\n}\n"
             }
           ]
         }
       ],
       "control": [
         {
-          "description": "Example Control Event",
+          "description": "Example control event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\" : \"ff76bb85-74bc-4511-a3bf-11b6117784db\",\n  \"type\": \"CONTROL\",\n  \"offset\": \"MTIzNQ\",\n  \"occurred\": \"2015-05-03T02:32:12.088Z\",\n  \"processed\": \"2015-05-03T12:12:43.180Z\",\n  \"device\": {\n      \"channel\":\"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"device_type\":\"ANDROID\",\n      \"android_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\"\n    },\n  \"body:\" {\n    \"push_id\": \"c91d9e1b-605f-4bad-a45d-cdf3e6e0773f\",\n    \"group_id\": \"3eec7de4-4b19-436e-ad15-88278f9ddb82\"\n    }\n  }\n"
+              "source": "{\n  \"id\" : \"ff76bb85-74bc-4511-a3bf-11b6117784db\",\n  \"type\": \"CONTROL\",\n  \"offset\": \"MTIzNQ\",\n  \"occurred\": \"2015-05-03T02:32:12.088Z\",\n  \"processed\": \"2015-05-03T12:12:43.180Z\",\n  \"device\": {\n      \"channel\":\"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"device_type\":\"ANDROID\",\n      \"android_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\"\n    },\n  \"user\": {\n      \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n      \"named_user_id\": \"mini_me\"\n    },\n  \"body:\" {\n    \"push_id\": \"c91d9e1b-605f-4bad-a45d-cdf3e6e0773f\",\n    \"group_id\": \"3eec7de4-4b19-436e-ad15-88278f9ddb82\"\n    }\n  }\n"
             }
           ]
         }
       ],
       "custom": [
         {
-          "description": "Example Custom Event from API (Shoe Sale)",
+          "description": "Example Custom Event (entire payload on Android channel)",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"name\" : \"shoe-purchase\",\n  \"value\" : 239.85,\n  \"source\": \"api\"\n  \"transaction\" : \"Selling all the shoes\",\n  \"session_id\": \"cfe467a6-ca70-40dd-8c1f-07b2f644935e\",\n  \"properties\": {\n    \"description\": \"Sneaker purchase\",\n    \"brand\": \"Victory Sneakers\",\n    \"colors\": [\"red\",\"blue\"],\n    \"items\": [\n      {\n          \"text\": \"New Line Sneakers\",\n          \"price\": \"$ 79.95\"\n      },\n      {\n          \"text\": \"Old Line Sneakers\",\n          \"price\": \"$ 79.95\"\n      },\n      {\n          \"text\": \"Blue Line Sneakers\",\n          \"price\": \"$ 79.95\"\n      }\n    ],\n    \"name\": \"Hugh Manbeing\",\n    \"userLocation\": {\n      \"state\": \"CO\",\n      \"zip\": \"80202\"\n    }\n  }\n}\n"
+              "source": "{\n  \"id\": \"4f42e8d0-a010-11ee-ae53-000000a91ace\",\n  \"offset\": \"1009810398823\",\n  \"occurred\": \"2023-12-21T14:50:35.077Z\",\n  \"processed\": \"2023-12-21T14:50:40.843Z\",\n  \"device\": {\n    \"android_channel\": \"ac1960b9-24b6-4851-b907-b9e64f071890\",\n    \"channel\": \"ac1960b9-24b6-4851-b907-b9e64f071890\",\n    \"device_type\": \"ANDROID\",\n    \"named_user_id\": \"c2cbc6e5145763ec58a4d85dfa4323aacc40afea\",\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"connection_type\": \"CELL\",\n      \"device_model\": \"M2101K9G\",\n      \"app_version\": \"18.4.2\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"Europe/Paris\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"FR\",\n      \"device_os\": \"12\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Orange F\",\n      \"locale_language_code\": \"fr\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"16.9.2\"\n    }\n  },\n  \"body\": {\n    \"name\": \"purchased\",\n    \"value\": 239.85,\n    \"transaction\": \"886f53d4-3e0f-46d7-930e-c2792dac6e0a\",\n    \"interaction_id\": \"your.store/us/en_us/pd/shoe/pid-11046546/pgid-10978234\",\n    \"interaction_type\": \"url\",\n    \"properties\": {\n      \"description\": \"Sneaker purchase\",\n      \"brand\": \"Victory Sneakers\",\n      \"colors\": [\n        \"red\",\n        \"blue\"\n      ],\n      \"items\": [\n        {\n          \"text\": \"New Line Sneakers\",\n          \"price\": \"$ 79.95\"\n        },\n        {\n          \"text\": \"Old Line Sneakers\",\n          \"price\": \"$ 79.95\"\n        },\n        {\n          \"text\": \"Blue Line Sneakers\",\n          \"price\": \"$ 79.95\"\n        }\n      ],\n      \"name\": \"Hugh Manbeing\",\n      \"userLocation\": {\n        \"state\": \"CO\",\n        \"zip\": \"80202\"\n      }\n    }\n  },\n  \"session_id\": \"adc0e12e-dfe8-4375-8121-5b21dbab87f4\",\n  \"source\": \"SDK\",\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         },
         {
-          "description": "Example Custom Event from SDK (Shoe Sale)",
+          "description": "Example Custom Event from API (shoe sale)",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"name\" : \"shoe-purchase\",\n  \"value\" : 60.000000,\n  \"source\": \"sdk\"\n  \"interaction_type\" : \"Landing Page\",\n  \"interaction_id\" : \"d01d0380-da2e-11e3-8519-90e2ba299b38\",\n  \"customer_id\" : \"George@hotmail.com\",\n  \"transaction\" : \"Selling all the shoes\",\n  \"session_id\": \"cfe467a6-ca70-40dd-8c1f-07b2f644935e\",\n  \"last_delivered\": {\n    \"push_id\": \"6e3339ce-529c-42e4-a2f6-7546f81c9828\"\n  },\n  \"triggering_push\": {\n    \"push_id\": \"c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06\",\n    \"group_id\": \"8ea2abd6-dbc7-475a-9c57-fb31c7e2999b\"\n  },\n  \"properties\": {\n    \"coolest-identifier\": \"123-cool-cat-321\",\n    \"ltv\": false,\n    \"category\": \"womens_shoes\",\n    \"id\": 1267,\n    \"description\": \"plaid canvas\",\n    \"brand\": \"hipster\",\n    \"new_item\": true\n  }\n}\n"
+              "source": "{\n  \"name\" : \"shoe-purchase\",\n  \"value\" : 239.85,\n  \"source\": \"api\",\n  \"transaction\" : \"Selling all the shoes\",\n  \"session_id\": \"cfe467a6-ca70-40dd-8c1f-07b2f644935e\",\n  \"properties\": {\n    \"description\": \"Sneaker purchase\",\n    \"brand\": \"Victory Sneakers\",\n    \"colors\": [\"red\",\"blue\"],\n    \"items\": [\n      {\n          \"text\": \"New Line Sneakers\",\n          \"price\": \"$ 79.95\"\n      },\n      {\n          \"text\": \"Old Line Sneakers\",\n          \"price\": \"$ 79.95\"\n      },\n      {\n          \"text\": \"Blue Line Sneakers\",\n          \"price\": \"$ 79.95\"\n      }\n    ],\n    \"name\": \"Hugh Manbeing\",\n    \"userLocation\": {\n      \"state\": \"CO\",\n      \"zip\": \"80202\"\n    }\n  }\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example Custom Event from SDK (shoe sale)",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"name\" : \"shoe-purchase\",\n  \"value\" : 60.000000,\n  \"source\": \"sdk\",\n  \"interaction_type\" : \"Landing Page\",\n  \"interaction_id\" : \"d01d0380-da2e-11e3-8519-90e2ba299b38\",\n  \"customer_id\" : \"George@example.com\",\n  \"transaction\" : \"Selling all the shoes\",\n  \"session_id\": \"cfe467a6-ca70-40dd-8c1f-07b2f644935e\",\n  \"last_delivered\": {\n    \"push_id\": \"6e3339ce-529c-42e4-a2f6-7546f81c9828\"\n  },\n  \"triggering_push\": {\n    \"push_id\": \"c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06\",\n    \"group_id\": \"8ea2abd6-dbc7-475a-9c57-fb31c7e2999b\"\n  },\n  \"properties\": {\n    \"coolest-identifier\": \"123-cool-cat-321\",\n    \"ltv\": false,\n    \"category\": \"womens_shoes\",\n    \"id\": 1267,\n    \"description\": \"plaid canvas\",\n    \"brand\": \"hipster\",\n    \"new_item\": true\n  }\n}\n"
             }
           ]
         }
       ],
       "custom_keyword_response": [
         {
-          "description": "Example Custom Keyword Response Event",
+          "description": "Example SMS custom keyword response event",
           "examples": [
             {
               "lang": "json",
@@ -131,7 +164,7 @@
       ],
       "delivery_report": [
         {
-          "description": "Example Delivery Report Event",
+          "description": "Example SMS delivery report Custom Event",
           "examples": [
             {
               "lang": "json",
@@ -140,179 +173,158 @@
           ]
         }
       ],
-      "devices": [
-        {
-          "description": "Example Device Information Object",
-          "examples": [
-            {
-              "lang": "json",
-              "source": "{\n    \"channel\": \"a6b392d6-3b0d-4c00-98ef-5cb91d51268a\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"Albert\",\n    \"identifiers\": {\n      \"com.urbanairship.idfa\": \"9D55CAC8-79E3-4567-8A99-8465B7A12868\",\n      \"com.urbanairship.gimbal.aii\": \"c5720f06-516a-4b91-b7bb-53523fc43a3d\",\n      \"cid\": 123554,\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"false\"\n    },\n    \"attributes\": {\n      \"package_name\": \"com.company_name.app_name\",\n      \"version\": \"1.0.0\",\n      \"ua_library\": \"7.0.2\"\n    }\n  }\n"
-            }
-          ]
-        }
-      ],
       "emailBounceEvent": [
         {
-          "description": "Example email bounce custom event",
+          "description": "Example email bounce Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@email.com\"\n  },\n  \"body\": {\n      \"name\": \"bounce\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n        \"sender\": \"baseball@sports.com\",\n        \"subject\": \"Baseball Season is Almost Here!\",\n        \"email\": \"new.subscriber@email.com\",\n        \"bounce_event_type\": \"bounce\",\n        \"bounce_class\": \"10\",\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@example.com\"\n  },\n  \"body\": {\n      \"name\": \"bounce\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n        \"sender\": \"baseball@example.com\",\n        \"subject\": \"Baseball Season is Almost Here!\",\n        \"email\": \"new.subscriber@example.com\",\n        \"bounce_event_type\": \"bounce\",\n        \"bounce_class\": \"10\",\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailClickEvent": [
         {
-          "description": "Example email click custom event",
+          "description": "Example email click Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@email.com\"\n  },\n  \"body\": {\n      \"name\": \"click\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@sports.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@email.com\",\n          \"link_name\": \"Click here for baseball updates\",\n          \"link_url\": \"http://www.urbanairship.com\",\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@example.com\"\n  },\n  \"body\": {\n      \"name\": \"click\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@example.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@example.com\",\n          \"link_name\": \"Homepage\",\n          \"link_url\": \"https://www.example.com\",\n          \"os_family\": \"Android\",\n          \"is_mobile\": \"true\",\n          \"device_brand\": \"Motorola\",\n          \"os_version\": \"11\",\n          \"device_family\": \"moto g stylus\",\n          \"is_prefetched\": \"false\",\n          \"agent_family\": \"Chrome\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailCreateAndSend": [
         {
-          "description": "Example Email create_and_send Event",
+          "description": "Example email Create and Send event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n    \"id\": \"adf8794c-c3c3-4507-9ea3-1a554ed4b94f\",\n    \"offset\": \"1000001778141\",\n    \"occurred\": \"2018-11-27T23:20:12.167Z\",\n    \"processed\": \"2018-11-27T23:20:12.443Z\",\n    \"device\": {\n        \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n        \"device_type\": \"EMAIL\",\n        \"delivery_address\": \"new.address@subscriber.com\"\n    },\n    \"body\": {\n        \"event_type\": \"create_and_send\",\n        \"identifiers\": {\n            \"address\": \"new.address@subscriber.com.com\"\n        },\n        \"properties\": {\n            \"channel_registered\": \"true\",\n            \"commercial_opted_in\": \"2018-10-12T12:12:12\"\n        }\n    },\n    \"type\": \"COMPLIANCE\"\n  }\n"
+              "source": "{\n    \"id\": \"adf8794c-c3c3-4507-9ea3-1a554ed4b94f\",\n    \"offset\": \"1000001778141\",\n    \"occurred\": \"2018-11-27T23:20:12.167Z\",\n    \"processed\": \"2018-11-27T23:20:12.443Z\",\n    \"device\": {\n        \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n        \"device_type\": \"EMAIL\",\n        \"delivery_address\": \"new.address@example.com\"\n    },\n    \"body\": {\n        \"event_type\": \"create_and_send\",\n        \"identifiers\": {\n            \"address\": \"new.address@example.com\"\n        },\n        \"properties\": {\n            \"channel_registered\": \"true\",\n            \"commercial_opted_in\": \"2018-10-12T12:12:12\"\n        }\n    },\n    \"type\": \"COMPLIANCE\"\n  }\n"
             }
           ]
         }
       ],
       "emailDelayEvent": [
         {
-          "description": "Example email delivery custom event",
+          "description": "Example email delay Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"addressResponding4xx@email.com\"\n  },\n  \"body\": {\n      \"name\": \"delay\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@sports.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"addressResponding4xx@email.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"addressResponding4xx@example.com\"\n  },\n  \"body\": {\n      \"name\": \"delay\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@example.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"addressResponding4xx@example.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailDeliveryEvent": [
         {
-          "description": "Example email delivery custom event",
+          "description": "Example email delivery Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@email.com\"\n  },\n  \"body\": {\n      \"name\": \"delivery\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@sports.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@email.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
-            }
-          ]
-        }
-      ],
-      "emailEventBody": [
-        {
-          "description": "Example Email Compliance Event",
-          "examples": [
-            {
-              "lang": "json",
-              "source": "{\n  \"id\": \"9781ff2e-fa4a-4fa8-bd9d-41f318c48963\",\n  \"offset\": \"1000001778910\",\n  \"occurred\": \"2018-11-28T00:02:41.794Z\",\n  \"processed\": \"2018-11-28T00:02:45.270Z\",\n  \"device\": {\n      \"channel\": \"5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"bogus@email.com\"\n  },\n  \"body\": {\n      \"event_type\": \"bounce\",\n      \"properties\": {\n          \"bounce_event_type\": \"bounce\",\n          \"sender\": \"msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com\",\n          \"subject\": \"You there?\",\n          \"email\": \"bogus@email.com\",\n          \"bounce_class\": \"10\"\n      }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@example.com\"\n  },\n  \"body\": {\n      \"name\": \"delivery\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@example.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@example.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailInitialOpenEvent": [
         {
-          "description": "Example email initial_open custom event",
+          "description": "Example email initial_open Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"544da998-9338-4506-8564-8adf7b2597cf\",\n  \"offset\": \"1000032367699\",\n  \"occurred\": \"2020-07-29T20:26:03.000Z\",\n  \"processed\": \"2020-07-29T20:27:47.780Z\",\n  \"device\": {\n    \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n    \"device_type\": \"EMAIL\",\n    \"delivery_address\": \"new.subscriber@email.com\",\n    \"named_user_id\": \"a_person\"\n  },\n  \"body\": {\n    \"name\": \"initial_open\",\n    \"triggering_push\": {\n      \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\"\n    },\n    \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n    \"source\": \"API\",\n    \"properties\": {\n      \"sender\": \"baseball@sports.com\",\n      \"subject\": \"Baseball Season is Almost Here!\",\n      \"email\": \"new.subscriber@email.com\"\n    }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"544da998-9338-4506-8564-8adf7b2597cf\",\n  \"offset\": \"1000032367699\",\n  \"occurred\": \"2020-07-29T20:26:03.000Z\",\n  \"processed\": \"2020-07-29T20:27:47.780Z\",\n  \"device\": {\n    \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n    \"device_type\": \"EMAIL\",\n    \"delivery_address\": \"new.subscriber@example.com\",\n    \"named_user_id\": \"a_person\"\n  },\n  \"body\": {\n    \"name\": \"initial_open\",\n    \"triggering_push\": {\n      \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\"\n    },\n    \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n    \"source\": \"API\",\n    \"properties\": {\n      \"sender\": \"baseball@example.com\",\n      \"subject\": \"Baseball Season is Almost Here!\",\n      \"email\": \"new.subscriber@example.com\",\n      \"os_family\": \"Android\",\n      \"is_mobile\": \"true\",\n      \"device_brand\": \"Motorola\",\n      \"os_version\": \"11\",\n      \"device_family\": \"moto g stylus\",\n      \"is_prefetched\": \"false\",\n      \"agent_family\": \"Chrome\"\n    }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailInjectionEvent": [
         {
-          "description": "Example email injection custom event",
+          "description": "Example email injection Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@email.com\"\n  },\n  \"body\": {\n      \"name\": \"injection\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@sports.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@email.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@example.com\"\n  },\n  \"body\": {\n      \"name\": \"injection\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@example.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@example.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailOpenEvent": [
         {
-          "description": "Example email open custom event",
+          "description": "Example email open Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@email.com\"\n  },\n  \"body\": {\n      \"name\": \"open\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@sports.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@email.com\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@example.com\"\n  },\n  \"body\": {\n      \"name\": \"open\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n          \"sender\": \"baseball@example.com\",\n          \"subject\": \"Baseball Season is Almost Here!\",\n          \"email\": \"new.subscriber@example.com\",\n          \"os_family\": \"Android\",\n          \"is_mobile\": \"true\",\n          \"device_brand\": \"Motorola\",\n          \"os_version\": \"11\",\n          \"device_family\": \"moto g stylus\",\n          \"is_prefetched\": \"false\",\n          \"agent_family\": \"Chrome\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
       "emailUnsubscribeLinkEvent": [
         {
-          "description": "Example email unsubscribe link custom event",
+          "description": "Example email unsubscribe link Custom Event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@email.com\"\n  },\n  \"body\": {\n      \"name\": \"unsubscribe\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n        \"unsubscribe_event_type\": \"link_unsubscribe\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"id\": \"2cf89e3a-2458-4c2d-8fcf-11f593b1b85e\",\n  \"offset\": \"1000001778145\",\n  \"occurred\": \"2019-02-27T23:20:14.000Z\",\n  \"processed\": \"2019-02-27T23:20:49.347Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"new.subscriber@example.com\"\n  },\n  \"body\": {\n      \"name\": \"unsubscribe\",\n      \"triggering_push\": {\n          \"push_id\": \"bd5b54a8-84bd-40bc-aa84-8315f9300a99\",\n          \"campaigns\": {\n              \"categories\": [\n                  \"new\",\n                  \"Baseball Fan\"\n              ]\n          }\n      },\n      \"session_id\": \"19e09be8-a586-4ff8-940f-1a4084d928e9\",\n      \"source\": \"API\",\n      \"properties\": {\n        \"unsubscribe_event_type\": \"link_unsubscribe\"\n      }\n  },\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
       ],
-      "eventStream": [
+      "equals_matcher": [
         {
-          "description": "Example Response Object",
+          "description": "Example find SMS delivery errors with equals matcher",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"id\": \"8e50350e-dd9f-41af-b98e-b0e5d4b27dea\",\n   \"type\": \"SEND\",\n   \"offset\": \"NTIxMDM1\",\n   \"occurred\": \"2015-05-02T02:31:22.088Z\",\n   \"processed\": \"2015-05-02T02:32:43.181Z\",\n   \"device\": {\n      \"channel\": \"5117f2a7-ba58-4981-9456-169959511d1a\",\n      \"device_type\": \"IOS\"\n   },\n   \"body\": {\n      \"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\",\n      \"alerting\": true\n   }\n}\n{\n  \"device\": {\n    \"channel\": \"820e4493-e4c9-4577-99bc-a98180599f73\",\n    \"delivery_address\": \"new.user@urbanairship.com\",\n    \"device_type\": \"EMAIL\"\n  },\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"FIRST_OPT_IN\"\n}\n"
-            }
-          ]
-        },
-        {
-          "description": "mobile_originated_sms Event",
-          "examples": [
-            {
-              "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_originated_sms\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Thanks for joining!\",\n      \"keyword\": \"join\"\n    }\n  },\n  \"type\": \"MOBILE_ORIGINATED\"\n}\n"
+              "source": "{\n  \"filters\": [\n    {\n      \"device_types\": [\"sms\"],\n      \"types\": [\"CUSTOM\"],\n      \"predicates\": [\n        {\n          \"and\": [\n            {\n              \"key\": \"interaction_type\",\n              \"scope\": [\"body\"],\n              \"value\": {\"equals\": \"delivery_report\"}\n            },\n            {\n              \"not\": {\n                \"key\": \"name\",\n                \"scope\": [\"body\"],\n                \"value\": {\"equals\": \"delivered\"}\n              }\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}\n"
             }
           ]
         }
       ],
-      "filters": [
+      "eventsRequestFilters": [
         {
-          "description": "Device Filter",
+          "description": "Example filter",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"devices\": [\n       {\n           \"channel\": \"195adec2-fa70-4e62-b978-78ede2827597\"\n       },\n       {\n           \"named_user_id\": \"George\"\n       }\n   ]\n}\n"
+              "source": "{\n  \"device_types\": [\"ios\"],\n  \"latency\": 120000,\n  \"notifications\": {\"push_id\": \"fae0658c-930e-4f66-bc78-80f46222bc8c\"},\n  \"types\": [\"OPEN\", \"SEND\"],\n  \"devices\": [{\"named_user_id\": \"VIP Customer\"}]\n}\n"
+            },
+            {
+              "lang": "json",
+              "source": "{\n  \"device_types\": [\"ios\"],\n  \"latency\": 120000,\n  \"notifications\": {\"push_id\": \"af03151e-5ad5-4e30-bbd2-bda28312b3c7\"},\n  \"types\": [\"RICH_READ\"],\n  \"users\": [{\"named_user_id\": \"best_customer\"}]\n}\n"
+            },
+            {
+              "lang": "json",
+              "source": "{\n  \"device_types\": [\"ios\"],\n  \"latency\": 300,\n  \"notifications\": {\"push_id\": \"6626393d-5d42-4de5-a31d-e24e819876ac\"},\n  \"types\": [\"CLOSE\"],\n  \"users\": [{\"contact_id\": \"982B35f2-0375-6384-893e-a19b5cd5R771\"}]\n}\n"
             }
           ]
         },
         {
-          "description": "Example Notification Filter - Include All Events Pertaining to a Push ID",
+          "description": "Example Predicate filter",
           "examples": [
             {
               "lang": "json",
-              "source": "{\"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\"}\n"
+              "source": "{\n  \"predicates\": [\n  {\n    \"and\": [\n      {\n        \"key\": \"type\",\n        \"value\": {\n          \"equals\": \"CUSTOM\"\n        }\n      },\n      {\n        \"scope\": \"body\",\n        \"key\": \"name\",\n        \"value\": {\n          \"equals\": \"initial_open\"\n        }\n      }\n    ]\n  }\n  ]\n}\n"
             }
           ]
-        },
+        }
+      ],
+      "feature_flag_interaction": [
         {
-          "description": "Example Notification Filter - Include all events pertaining to a pipeline or PLT Push (Defined by Group ID)",
+          "description": "Example Feature Flag interaction event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\"group_id\": \"b7f7c9e0-64d6-4f44-9d74-d32ef5437ccf\"}\n"
+              "source": "{\n  \"id\":\"c3d0543b-c8cd-4eaa-8fda-5dbfa70257ae\",\n  \"offset\":\"1000197715722\",\n  \"occurred\":\"2023-09-15T19:12:56.000Z\",\n  \"processed\":\"2023-09-21T23:02:39.419Z\",\n  \"device\": {\n    \"channel\":\"8c36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n    \"device_type\":\"WEB\"\n  },\n  \"body\": {\n    \"flag_id\":\"27f26d85-0550-4df5-85f0-7022fa7a5925\",\n    \"flag_name\":\"rad_flag_name\",\n    \"eligible\":true\n  },\n  \"type\":\"FEATURE_FLAG_INTERACTION\"\n}\n"
             }
           ]
         }
       ],
       "first_open": [
         {
-          "description": "Example FIRST_OPEN Event",
+          "description": "Example first open event",
           "examples": [
             {
               "lang": "json",
@@ -323,7 +335,7 @@
       ],
       "first_opt_in": [
         {
-          "description": "Example FIRST_OPT_IN Event",
+          "description": "Example first opt-in event",
           "examples": [
             {
               "lang": "json",
@@ -334,150 +346,201 @@
       ],
       "in_app_button_tap": [
         {
-          "description": "Example In-App Button Tap",
+          "description": "Example in-app button tap event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"group_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"session_id\": \"94e8caed-9b82-4166-b585-a01eed933855\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"870db95f-3715-4c98-8047-2871c175d003\",\n            \"submitted\": true,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          },\n          \"pager\": {\n            \"identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n            \"page_identifier\": \"32f4fc47-74ee-41c6-8e16-c9e0aa364101\",\n            \"page_index\": 1,\n            \"page_count\": 2,\n            \"completed\": true\n          }\n        }\n      },\n      \"button_id\": \"dismiss_button\"\n    },\n  \"type\": \"IN_APP_BUTTON_TAP\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"group_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"session_id\": \"94e8caed-9b82-4166-b585-a01eed933855\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"870db95f-3715-4c98-8047-2871c175d003\",\n            \"submitted\": true,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          },\n          \"pager\": {\n            \"identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n            \"page_identifier\": \"32f4fc47-74ee-41c6-8e16-c9e0aa364101\",\n            \"page_index\": 1,\n            \"page_count\": 2,\n            \"completed\": true\n          }\n        }\n      },\n      \"button_id\": \"dismiss_button\"\n    },\n  \"type\": \"IN_APP_BUTTON_TAP\"\n}\n"
             }
           ]
         }
       ],
       "in_app_context": [
         {
-          "description": "Example In-App context",
+          "description": "Example in-app context",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"reporting_context\": {\n    \"content_types\": [\n      \"survey\"\n    ]\n  },\n  \"state\": {\n    \"form\": {\n      \"form_identifier\": \"870db95f-3715-4c98-8047-2871c175d003\",\n      \"submitted\": false,\n      \"type\": \"nps\",\n      \"response_type\": \"nps\"\n    },\n    \"pager\": {\n      \"identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n      \"page_identifier\": \"992e5540-7144-474c-b666-2671814b3b19\",\n      \"page_index\": 0,\n      \"page_count\": 2,\n      \"completed\": false\n    }\n  }\n}\n"
+              "source": "{\n  \"reporting_context\": {\n    \"content_types\": [\n      \"survey\"\n    ]\n  },\n  \"state\": {\n    \"form\": {\n      \"form_identifier\": \"870db95f-3715-4c98-8047-2871c175d003\",\n      \"submitted\": false,\n      \"type\": \"nps\",\n      \"response_type\": \"nps\"\n    },\n    \"pager\": {\n      \"identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n      \"page_identifier\": \"992e5540-7144-474c-b666-2671814b3b19\",\n      \"page_index\": 0,\n      \"page_count\": 2,\n      \"completed\": false\n    }\n}\n"
             }
           ]
         }
       ],
       "in_app_experiences": [
         {
-          "description": "Example In-App Experiences Event",
+          "description": "Example in-app experiences event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"event_name\": \"scene_displayed\",\n      \"time_sent\": \"2022-03-11T08:40:56.592Z\",\n      \"session_id\": \"20162c5f-36c8-1808-6fc6-8eb836d7f7f2\",\n      \"push_id\": \"2e12bc7b-04f2-3487-1480-44269b04c131\",\n      \"group_id\": \"2e12bc7b-04f2-3487-1480-44269b04c131\",\n      \"triggering_push\": {\n        \"push_id\": \"5cc872d5-708d-dffb-0959-991b014dcd2d\",\n        \"time\": \"2022-03-11T08:40:56.692Z\"\n      }\n    },\n  \"type\": \"IN_APP_EXPERIENCES\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"event_name\": \"scene_displayed\",\n      \"time_sent\": \"2022-03-11T08:40:56.592Z\",\n      \"session_id\": \"20162c5f-36c8-1808-6fc6-8eb836d7f7f2\",\n      \"push_id\": \"2e12bc7b-04f2-3487-1480-44269b04c131\",\n      \"group_id\": \"2e12bc7b-04f2-3487-1480-44269b04c131\",\n      \"triggering_push\": {\n        \"push_id\": \"5cc872d5-708d-dffb-0959-991b014dcd2d\",\n        \"time\": \"2022-03-11T08:40:56.692Z\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      }\n    },\n  \"type\": \"IN_APP_EXPERIENCES\"\n}\n"
             }
           ]
         }
       ],
       "in_app_form_display": [
         {
-          "description": "Example In-App Form Display",
+          "description": "Example in-app form display event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"56d72d43-5567-4c94-887a-05b46ca9ef3e\",\n      \"group_id\": \"56d72d43-5567-4c94-887a-05b46ca9ef3e\",\n      \"session_id\": \"1347589f-0608-4198-b170-bfb46271877a\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"434b918f-6a00-496f-963c-f54923a67abf\",\n            \"submitted\": false,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          }\n        }\n      },\n      \"type\": \"DISPLAY\",\n      \"forms\": [\n        {\n          \"form_id\": \"434b918f-6a00-496f-963c-f54923a67abf\"\n        }\n      ]\n    },\n  \"type\": \"IN_APP_FORM_DISPLAY\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"56d72d43-5567-4c94-887a-05b46ca9ef3e\",\n      \"group_id\": \"56d72d43-5567-4c94-887a-05b46ca9ef3e\",\n      \"session_id\": \"1347589f-0608-4198-b170-bfb46271877a\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"434b918f-6a00-496f-963c-f54923a67abf\",\n            \"submitted\": false,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          }\n        }\n      },\n      \"type\": \"DISPLAY\",\n      \"forms\": [\n        {\n          \"form_id\": \"434b918f-6a00-496f-963c-f54923a67abf\"\n        }\n      ]\n    },\n  \"type\": \"IN_APP_FORM_DISPLAY\"\n}\n"
             }
           ]
         }
       ],
       "in_app_form_result": [
         {
-          "description": "Example In-App Form Result",
+          "description": "Example in-app form result event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"683b395d-7abf-40f9-be49-4b64debfbd22\",\n      \"group_id\": \"683b395d-7abf-40f9-be49-4b64debfbd22\",\n      \"session_id\": \"d05323b3-8176-406d-aff5-5194341f4a5c\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"316e8ed4-277e-408b-9c47-a6bd7a4251c5\",\n            \"submitted\": false,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          }\n        }\n      },\n      \"type\": \"RESULT\",\n      \"forms\": [\n        {\n          \"form_id\": \"316e8ed4-277e-408b-9c47-a6bd7a4251c5\",\n          \"type\": \"nps\",\n          \"response_type\": \"nps\",\n          \"nps\": {\n            \"question_id\": \"b6563a26-a927-4ff2-af8a-08d94d8b84a3\",\n            \"score\": 9,\n            \"audience_category\": \"PROMOTER\"\n          },\n          \"responses\": [\n            {\n              \"question_id\": \"b6563a26-a927-4ff2-af8a-08d94d8b84a3\",\n              \"type\": \"score\",\n              \"value\": \"9\"\n            },\n            {\n              \"question_id\": \"c867cf61-398f-443c-b991-443fa8aff4b9\",\n              \"type\": \"text_input\",\n              \"value\": \"Hello, world\"\n            }\n          ]\n        }\n      ]\n    },\n  \"type\": \"IN_APP_FORM_RESULT\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"683b395d-7abf-40f9-be49-4b64debfbd22\",\n      \"group_id\": \"683b395d-7abf-40f9-be49-4b64debfbd22\",\n      \"session_id\": \"d05323b3-8176-406d-aff5-5194341f4a5c\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"316e8ed4-277e-408b-9c47-a6bd7a4251c5\",\n            \"submitted\": false,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          }\n        }\n      },\n      \"type\": \"RESULT\",\n      \"forms\": [\n        {\n          \"form_id\": \"316e8ed4-277e-408b-9c47-a6bd7a4251c5\",\n          \"type\": \"nps\",\n          \"response_type\": \"nps\",\n          \"nps\": {\n            \"question_id\": \"b6563a26-a927-4ff2-af8a-08d94d8b84a3\",\n            \"score\": 9,\n            \"audience_category\": \"PROMOTER\"\n          },\n          \"responses\": [\n            {\n              \"question_id\": \"b6563a26-a927-4ff2-af8a-08d94d8b84a3\",\n              \"type\": \"score\",\n              \"value\": \"9\"\n            },\n            {\n              \"question_id\": \"c867cf61-398f-443c-b991-443fa8aff4b9\",\n              \"type\": \"text_input\",\n              \"value\": \"Hello, world\"\n            }\n          ]\n        }\n      ]\n    },\n  \"type\": \"IN_APP_FORM_RESULT\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "in_app_message_control": [
+        {
+          "description": "Example in-app message control event",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"e9e281d0-2b39-11ee-ac42-00000a91ace1\",\n  \"offset\": \"1000194023208\",\n  \"occurred\": \"2023-07-25T22:22:40.262Z\",\n  \"processed\": \"2023-07-25T22:23:43.464Z\",\n  \"device\": {\n    \"ios_channel\": \"414a7c7c-c3c5-4a9f-b1de-ebd5a85104e0\",\n    \"channel\": \"414a7c7c-c3c5-4a9f-b1de-ebd5a85104e0\",\n    \"device_type\": \"IOS\",\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"connection_type\": \"WIFI\",\n      \"device_model\": \"arm64\",\n      \"app_version\": \"1.0\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"17.0\",\n      \"locale_timezone\": \"-25200\",\n      \"locale_language_code\": \"en\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"17.1.0\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"6fc3b3a7-d860-4acd-b80d-82af02b5b0fa\",\n    \"group_id\": \"6fc3b3a7-d860-4acd-b80d-82af02b5b0fa\",\n    \"session_id\": \"f31c3769-8517-402a-8ae6-cdb323f5ec22\",\n    \"context\": {\n      \"reporting_context\": {\n        \"content_types\": [\n          \"scene\"\n        ]\n      }\n    },\n    \"type\": \"CONTROL\"\n  },\n  \"type\": \"IN_APP_MESSAGE_CONTROL\"\n}\n"
             }
           ]
         }
       ],
       "in_app_message_display": [
         {
-          "description": "Example In-App Message Display Event",
+          "description": "Example in-app message display event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"68be9eba-3f3e-4763-bbd1-c921a164af1b\",\n      \"group_id\": \"49e59f68-d58c-4a2f-86ab-112f52e3c5d2\",\n      \"variant_id\": 5,\n      \"session_id\": \"cfe467a6-ca70-40dd-8c1f-07b2f644935e\",\n      \"triggering_push\": {\n        \"push_id\": \"18c0f649-2330-4fb0-a9fa-ad029f5f4e0e\",\n        \"group_id\": \"c4c89025-0d25-434c-8040-283990585f01\"\n      }\n    },\n  \"type\": \"IN_APP_MESSAGE_DISPLAY\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"68be9eba-3f3e-4763-bbd1-c921a164af1b\",\n      \"group_id\": \"49e59f68-d58c-4a2f-86ab-112f52e3c5d2\",\n      \"variant_id\": 5,\n      \"session_id\": \"cfe467a6-ca70-40dd-8c1f-07b2f644935e\",\n      \"triggering_push\": {\n        \"push_id\": \"18c0f649-2330-4fb0-a9fa-ad029f5f4e0e\",\n        \"group_id\": \"c4c89025-0d25-434c-8040-283990585f01\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      }\n    },\n  \"type\": \"IN_APP_MESSAGE_DISPLAY\"\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example in-app message display event with context",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"id\": \"c7b97941-5d1d-11ee-b7be-00000a91ace6\",\n    \"offset\": \"1004335885834\",\n    \"occurred\": \"2023-09-27T10:08:14.965Z\",\n    \"processed\": \"2023-09-27T10:08:18.230Z\",\n    \"device\":\n    {\n        \"android_channel\": \"3e75f0be-f312-413f-90c0-81d628410514\",\n        \"channel\": \"3e75f0be-f312-413f-90c0-81d628410514\",\n        \"device_type\": \"ANDROID\",\n        \"named_user_id\": \"exampleuser\",\n        \"attributes\":\n        {\n            \"locale_variant\": \"\",\n            \"connection_type\": \"CELL\",\n            \"device_model\": \"SM-G981B\",\n            \"app_version\": \"13.13.3\",\n            \"app_package_name\": \"com.company_name.app_name\",\n            \"iana_timezone\": \"Europe/Paris\",\n            \"push_opt_in\": \"true\",\n            \"locale_country_code\": \"FR\",\n            \"device_os\": \"13\",\n            \"locale_timezone\": \"7200\",\n            \"carrier\": \"F-Bouygues Telecom\",\n            \"locale_language_code\": \"fr\",\n            \"background_push_enabled\": \"true\",\n            \"ua_sdk_version\": \"16.4.0\"\n        }\n    },\n    \"body\":\n    {\n        \"push_id\": \"0390bd82-c28f-44cb-98d9-3f9b7eef939d\",\n        \"group_id\": \"0390bd82-c28f-44cb-98d9-3f9b7eef939d\",\n        \"campaigns\":\n        {\n            \"categories\":\n            [\n                \"WELCOME_SERIES\"\n            ]\n        },\n        \"context\": {\n          \"reporting_context\": {\n            \"content_types\": [\n              \"scene\"\n            ]\n          }\n        },\n        \"session_id\": \"6e11b019-4da0-4c66-8063-92ec2ce4ee36\"\n    },\n    \"type\": \"IN_APP_MESSAGE_DISPLAY\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "in_app_message_exclusion": [
+        {
+          "description": "Example in-app message exclusion event",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"7fff2560-1d33-11ef-b484-0000a91acec5\",\n  \"offset\":\"1000215341033\",\n  \"occurred\":\"2024-05-28T20:47:20.183Z\",\n  \"processed\":\"2024-05-28T20:47:31.090Z\",\n  \"device\": {\n    \"android_channel\": \"88663749-a19d-4daf-8d4c-09fc4cf03a12\",\n    \"channel\":\"87663620-a99d-4daf-8f4c-88fc4cf03af4\",\n    \"device_type\": \"ANDROID\",\n    \"named_user_id\": \"cool_named_user\",\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"connection_type\": \"WIFI\",\n      \"device_model\": \"DE2123\",\n      \"app_version\": \"2024-05-25T040548\",\n      \"app_package_name\": \"com.package.example\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"120\",\n      \"locale_timezone\": \"-27000\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"background_push_enabled\": \"false\",\n      \"ua_sdk_version\":\"18.0.0\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"be711edb-d16d-465e-8091-a831041e2e53\",\n    \"group_id\":\"be711edb-d16d-465e-8091-a831041e2e53\",\n    \"session_id\":\"e8e72fa2-bfbc-405d-af85-8b428c8e38d9\",\n    \"context\": {\n    },\n    \"type\":\"AUDIENCE_CHECK_EXCLUDED\"\n  },\n  \"type\":\"IN_APP_MESSAGE_EXCLUSION\"\n}\n"
             }
           ]
         }
       ],
       "in_app_message_expiration": [
         {
-          "description": "Example In-App Message Expiration Event",
+          "description": "Example in-app message expiration event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"NOT_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"a1fe5f2a-1d51-4f3a-a77b-35018031741d\",\n    \"session_id\": \"3514bd74-bfa8-149e-9c12-a44794994ca8\",\n    \"type\": \"EXPIRED\",\n    \"time_expired\": \"1970-01-01T00:00:00.000Z\"\n  },\n  \"type\": \"IN_APP_MESSAGE_EXPIRATION\"\n}\n"
+              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"NOT_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"a1fe5f2a-1d51-4f3a-a77b-35018031741d\",\n    \"session_id\": \"3514bd74-bfa8-149e-9c12-a44794994ca8\",\n    \"triggering_push\": {\n      \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n      \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n      \"campaigns\": {\n        \"categories\": [\n          \"welcome_series\"\n        ]\n      }\n    },\n    \"type\": \"EXPIRED\",\n    \"time_expired\": \"1970-01-01T00:00:00.000Z\"\n  },\n  \"type\": \"IN_APP_MESSAGE_EXPIRATION\"\n}\n"
             }
           ]
         }
       ],
       "in_app_message_resolution": [
         {
-          "description": "Example In-App Message Resolution Event",
+          "description": "Example in-app message resolution event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"NOT_ALLOWED\"\n    }\n  },\n  \"body\": {\n   \"push_id\": \"86ee0a6e-a46a-4bbe-a3d1-804891baaee4\",\n   \"group_id\": \"68991b8d-0d6b-4e05-bc62-2cdec2085c18\",\n   \"time_sent\": \"2019-03-03T19:10:26.301Z\",\n   \"type\": \"BUTTON_CLICK\",\n   \"button_id\": \"yes\",\n   \"button_description\": \"Yes\",\n   \"duration\": 10000000000\n  },\n  \"type\": \"IN_APP_MESSAGE_RESOLUTION\"\n}\n"
+              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"NOT_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"86ee0a6e-a46a-4bbe-a3d1-804891baaee4\",\n    \"group_id\": \"68991b8d-0d6b-4e05-bc62-2cdec2085c18\",\n    \"triggering_push\": {\n      \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n      \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n      \"campaigns\": {\n        \"categories\": [\n          \"welcome_series\"\n        ]\n      }\n    },\n    \"time_sent\": \"2019-03-03T19:10:26.301Z\",\n    \"type\": \"BUTTON_CLICK\",\n    \"button_id\": \"yes\",\n    \"button_group\": \"\",\n    \"button_description\": \"Yes\",\n    \"duration\": 10000000000\n  },\n  \"type\": \"IN_APP_MESSAGE_RESOLUTION\"\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example in-app message resolution event with context",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"id\": \"a0bc5c50-6d34-11ee-95dc-0000a91aced1\",\n    \"offset\": \"1064988067725\",\n    \"occurred\": \"2023-10-17T21:32:01.243Z\",\n    \"processed\": \"2023-10-17T21:32:10.638Z\",\n    \"device\":\n    {\n        \"ios_channel\": \"870c200f-d0e7-4e45-bd99-5b290c80b6a7\",\n        \"channel\": \"870c200f-d0e7-4e45-bd99-5b290c80b6a7\",\n        \"device_type\": \"IOS\",\n        \"named_user_id\": \"exampleuser\",\n        \"attributes\":\n        {\n            \"locale_variant\": \"\",\n            \"connection_type\": \"WIFI\",\n            \"device_model\": \"iPhone15,2\",\n            \"app_version\": \"15.8.1\",\n            \"app_package_name\": \"com.company_name.app_name\",\n            \"iana_timezone\": \"America/New_York\",\n            \"push_opt_in\": \"false\",\n            \"locale_country_code\": \"US\",\n            \"device_os\": \"16.6.1\",\n            \"locale_timezone\": \"-14400\",\n            \"carrier\": \"AT&T\",\n            \"locale_language_code\": \"en\",\n            \"background_push_enabled\": \"true\",\n            \"ua_sdk_version\": \"16.12.0\"\n        }\n    },\n    \"body\":\n    {\n        \"push_id\": \"4015241b-2e71-43d8-85a0-cd500e97c15d\",\n        \"group_id\": \"4015241b-2e71-43d8-85a0-cd500e97c15d\",\n        \"campaigns\":\n        {\n            \"categories\":\n            [\n                \"OfferLevel45\",\n                \"VIP_OFFER\"\n            ]\n        },\n        \"context\": {\n          \"reporting_context\": {\n            \"content_types\": [\n              \"scene\"\n            ]\n          }\n        },\n        \"session_id\": \"832e65de-453e-426d-a4a3-bd70ab0f827e\",\n        \"type\": \"USER_DISMISSED\",\n        \"duration\": 2503\n    },\n    \"type\": \"IN_APP_MESSAGE_RESOLUTION\"\n}\n"
             }
           ]
         }
       ],
       "in_app_page_swipe": [
         {
-          "description": "Example In-App Page Swipe",
+          "description": "Example in-app page swipe event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"91baacc8-1ebf-411d-a77a-ee036c44e7ce\",\n      \"group_id\": \"91baacc8-1ebf-411d-a77a-ee036c44e7ce\",\n      \"session_id\": \"a135087c-ba97-4b87-ac1d-a216f2cccb7c\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"scene\"\n          ]\n        },\n        \"state\": {\n          \"pager\": {\n            \"identifier\": \"302e80f2-1f9d-4e0d-890d-ff54196189d9\",\n            \"page_identifier\": \"c3c6fe17-1c47-4f52-bff9-f95ed8a14072\",\n            \"page_index\": 1,\n            \"page_count\": 3,\n            \"completed\": true\n          }\n        }\n      },\n      \"pager_identifier\": \"302e80f2-1f9d-4e0d-890d-ff54196189d9\",\n      \"from_page_identifier\": \"c3c6fe17-1c47-4f52-bff9-f95ed8a14072\",\n      \"from_page_index\": 1,\n      \"to_page_identifier\": \"2ecb1788-30b9-4d8f-a267-38f687fc6e8b\",\n      \"to_page_index\": 0\n    },\n  \"type\": \"IN_APP_PAGE_SWIPE\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"91baacc8-1ebf-411d-a77a-ee036c44e7ce\",\n      \"group_id\": \"91baacc8-1ebf-411d-a77a-ee036c44e7ce\",\n      \"session_id\": \"a135087c-ba97-4b87-ac1d-a216f2cccb7c\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"scene\"\n          ]\n        },\n        \"state\": {\n          \"pager\": {\n            \"identifier\": \"302e80f2-1f9d-4e0d-890d-ff54196189d9\",\n            \"page_identifier\": \"c3c6fe17-1c47-4f52-bff9-f95ed8a14072\",\n            \"page_index\": 1,\n            \"page_count\": 3,\n            \"completed\": true\n          }\n        }\n      },\n      \"pager_identifier\": \"302e80f2-1f9d-4e0d-890d-ff54196189d9\",\n      \"from_page_identifier\": \"c3c6fe17-1c47-4f52-bff9-f95ed8a14072\",\n      \"from_page_index\": 1,\n      \"to_page_identifier\": \"2ecb1788-30b9-4d8f-a267-38f687fc6e8b\",\n      \"to_page_index\": 0\n    },\n  \"type\": \"IN_APP_PAGE_SWIPE\"\n}\n"
             }
           ]
         }
       ],
       "in_app_page_view": [
         {
-          "description": "Example In-App Page View",
+          "description": "Example in-app page view event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"d2482092-a0f5-4ec0-bf0a-f17a1657d1b0\",\n      \"group_id\": \"d2482092-a0f5-4ec0-bf0a-f17a1657d1b0\",\n      \"session_id\": \"65be61ee-dc60-47ec-b9d3-ebc469e0523b\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"scene\"\n          ]\n        },\n        \"state\": {\n          \"pager\": {\n            \"identifier\": \"f4d3d085-010b-4c2b-9e4d-574112b892ed\",\n            \"page_identifier\": \"e55e6d8e-f04d-43f1-939c-822a1dd5a5e3\",\n            \"page_index\": 0,\n            \"page_count\": 1,\n            \"completed\": true\n          }\n        }\n      },\n      \"pager_identifier\": \"f4d3d085-010b-4c2b-9e4d-574112b892ed\",\n      \"page_identifier\": \"e55e6d8e-f04d-43f1-939c-822a1dd5a5e3\",\n      \"page_index\": 0,\n      \"page_count\": 1,\n      \"viewed_count\": 1,\n      \"completed\": true\n    },\n  \"type\": \"IN_APP_PAGE_VIEW\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"d2482092-a0f5-4ec0-bf0a-f17a1657d1b0\",\n      \"group_id\": \"d2482092-a0f5-4ec0-bf0a-f17a1657d1b0\",\n      \"session_id\": \"65be61ee-dc60-47ec-b9d3-ebc469e0523b\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"scene\"\n          ]\n        },\n        \"state\": {\n          \"pager\": {\n            \"identifier\": \"f4d3d085-010b-4c2b-9e4d-574112b892ed\",\n            \"page_identifier\": \"e55e6d8e-f04d-43f1-939c-822a1dd5a5e3\",\n            \"page_index\": 0,\n            \"page_count\": 1,\n            \"completed\": true\n          }\n        }\n      },\n      \"pager_identifier\": \"f4d3d085-010b-4c2b-9e4d-574112b892ed\",\n      \"page_identifier\": \"e55e6d8e-f04d-43f1-939c-822a1dd5a5e3\",\n      \"page_index\": 0,\n      \"page_count\": 1,\n      \"viewed_count\": 1,\n      \"completed\": true\n    },\n  \"type\": \"IN_APP_PAGE_VIEW\"\n}\n"
             }
           ]
         }
       ],
       "in_app_pager_completed": [
         {
-          "description": "Example In-App Pager Completed",
+          "description": "Example in-app pager completed event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"group_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"session_id\": \"94e8caed-9b82-4166-b585-a01eed933855\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"870db95f-3715-4c98-8047-2871c175d003\",\n            \"submitted\": true,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          },\n          \"pager\": {\n            \"identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n            \"page_identifier\": \"32f4fc47-74ee-41c6-8e16-c9e0aa364101\",\n            \"page_index\": 1,\n            \"page_count\": 2,\n            \"completed\": true\n          }\n        }\n      },\n      \"pager_identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n      \"page_identifier\": \"32f4fc47-74ee-41c6-8e16-c9e0aa364101\",\n      \"page_index\": 1,\n      \"page_count\": 2\n    },\n  \"type\": \"IN_APP_PAGER_COMPLETED\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"group_id\": \"a9a5912c-2526-4383-b516-711c58aff900\",\n      \"session_id\": \"94e8caed-9b82-4166-b585-a01eed933855\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"survey\"\n          ]\n        },\n        \"state\": {\n          \"form\": {\n            \"form_identifier\": \"870db95f-3715-4c98-8047-2871c175d003\",\n            \"submitted\": true,\n            \"type\": \"nps\",\n            \"response_type\": \"nps\"\n          },\n          \"pager\": {\n            \"identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n            \"page_identifier\": \"32f4fc47-74ee-41c6-8e16-c9e0aa364101\",\n            \"page_index\": 1,\n            \"page_count\": 2,\n            \"completed\": true\n          }\n        }\n      },\n      \"pager_identifier\": \"9e051354-185b-4d4d-888a-885def2e6b7a\",\n      \"page_identifier\": \"32f4fc47-74ee-41c6-8e16-c9e0aa364101\",\n      \"page_index\": 1,\n      \"page_count\": 2\n    },\n  \"type\": \"IN_APP_PAGER_COMPLETED\"\n}\n"
             }
           ]
         }
       ],
       "in_app_pager_summary": [
         {
-          "description": "Example In-App Pager Summary",
+          "description": "Example in-app pager summary event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.appname\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"898c0cde-02d8-4674-8c3a-91183aab8b7b\",\n      \"group_id\": \"898c0cde-02d8-4674-8c3a-91183aab8b7b\",\n      \"session_id\": \"393ae595-bb43-48a2-9878-996e11581754\",\n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"scene\"\n          ]\n        },\n        \"state\": {\n          \"pager\": {\n            \"identifier\": \"7cb3bd21-060c-46d6-9e88-fb0b5376897e\",\n            \"page_identifier\": \"7888b6dd-0a33-420d-a596-1342dca84fcf\",\n            \"page_index\": 0,\n            \"page_count\": 1,\n            \"completed\": false\n          }\n        }\n      },\n      \"pager_identifier\": \"7cb3bd21-060c-46d6-9e88-fb0b5376897e\",\n      \"page_count\": 1,\n      \"completed\": false,\n      \"viewed_pages\": [\n        {\n          \"page_identifier\": \"7888b6dd-0a33-420d-a596-1342dca84fcf\",\n          \"page_index\": 0,\n          \"display_time_ms\": 33019\n        }\n      ]\n    },\n  \"type\": \"IN_APP_PAGER_SUMMARY\"\n}\n"
+              "source": "{\n  \"id\": \"51dd7c1c-5621-11e9-9601-0242539d70ef\",\n  \"offset\": \"1000022467557\",\n  \"occurred\": \"2019-03-29T21:42:21.245Z\",\n  \"processed\": \"2019-04-03T15:10:23.828Z\",\n  \"device\": {\n    \"ios_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"cooluser\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B147E0CE-272E-4047-A79C-30D02A2F213D\",\n      \"GA_CID\": \"a61448e1-be63-43ee-84eb-19446ba743f0\",\n      \"com.urbanairship.idfa\": \"A76E6F83-4F4A-47E2-BFDD-72BED91D2D1F\",\n      \"com.urbanairship.vendor\": \"ED496B1A-43F1-45A9-A7C1-80125DE8A5B1\"\n      },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone7,2\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"11.4\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"AT&T\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n    \"body\": {\n      \"push_id\": \"898c0cde-02d8-4674-8c3a-91183aab8b7b\",\n      \"group_id\": \"898c0cde-02d8-4674-8c3a-91183aab8b7b\",\n      \"session_id\": \"393ae595-bb43-48a2-9878-996e11581754\",\n      \"triggering_push\": {\n        \"push_id\": \"a183f051-7d69-11ed-86d9-0242dc3f670b\",\n        \"group_id\": \"8e7cfac3-cfd3-4f4f-a9a1-d766de9b063a\",\n        \"campaigns\": {\n          \"categories\": [\n            \"welcome_series\"\n          ]\n        }\n      },                    \n      \"context\": {\n        \"reporting_context\": {\n          \"content_types\": [\n            \"scene\"\n          ]\n        },\n        \"state\": {\n          \"pager\": {\n            \"identifier\": \"7cb3bd21-060c-46d6-9e88-fb0b5376897e\",\n            \"page_identifier\": \"7888b6dd-0a33-420d-a596-1342dca84fcf\",\n            \"page_index\": 0,\n            \"page_count\": 1,\n            \"completed\": false\n          }\n        }\n      },\n      \"pager_identifier\": \"7cb3bd21-060c-46d6-9e88-fb0b5376897e\",\n      \"page_count\": 1,\n      \"completed\": false,\n      \"viewed_pages\": [\n        {\n          \"page_identifier\": \"7888b6dd-0a33-420d-a596-1342dca84fcf\",\n          \"page_index\": 0,\n          \"display_time_ms\": 33019\n        }\n      ]\n    },\n  \"type\": \"IN_APP_PAGER_SUMMARY\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "json_predicate": [
+        {
+          "description": "Example JSON Predicate to filter the stream to only Android Open events",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"filters\": {\n    \"predicates\": {\n      \"and\": [\n        {\n          \"scope\": [\"device\"],\n          \"key\": \"device_type\",\n          \"value\": {\"equals\": \"ANDROID\"}\n        },\n        { \"key\": \"type\", \"value\": {\"equals\": \"OPEN\"} }\n      ]\n    }\n  }\n}\n"
             }
           ]
         }
       ],
       "location": [
         {
-          "description": "Example LOCATION Event",
+          "description": "Example location event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"latitude\": \"51.5033630\",\n    \"longitude\": \"-0.1276250\",\n    \"foreground\": true,\n    \"session_id\": \"ecd3741d-92c4-469b-b42c-888e40a121d3\"\n  },\n  \"type\": \"LOCATION\"\n}\n"
+              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"latitude\": \"51.5033630\",\n    \"longitude\": \"-0.1276250\",\n    \"foreground\": true,\n    \"session_id\": \"ecd3741d-92c4-469b-b42c-888e40a121d3\"\n  },\n  \"type\": \"LOCATION\"\n}\n"
             }
           ]
         }
       ],
       "mobile_create_channel": [
         {
-          "description": "Example SMS mobile_create_channel Event",
+          "description": "Example SMS mobile_create_channel event",
           "examples": [
             {
               "lang": "json",
@@ -488,7 +551,7 @@
       ],
       "mobile_keyword_matched": [
         {
-          "description": "Example SMS mobile_keyword_matched Event",
+          "description": "Example SMS mobile_keyword_matched event",
           "examples": [
             {
               "lang": "json",
@@ -499,7 +562,7 @@
       ],
       "mobile_keyword_unmatched": [
         {
-          "description": "Example SMS mobile_keyword_unmatched Event",
+          "description": "Example SMS mobile_keyword_unmatched event",
           "examples": [
             {
               "lang": "json",
@@ -510,7 +573,7 @@
       ],
       "mobile_opt_in": [
         {
-          "description": "Example SMS mobile_opt_in Event",
+          "description": "Example SMS mobile_opt_in event",
           "examples": [
             {
               "lang": "json",
@@ -521,7 +584,7 @@
       ],
       "mobile_opt_out": [
         {
-          "description": "Example SMS mobile_opt_out Event",
+          "description": "Example SMS mobile_opt_out event",
           "examples": [
             {
               "lang": "json",
@@ -532,7 +595,7 @@
       ],
       "mobile_originated": [
         {
-          "description": "Example Mobile-Originated SMS Event",
+          "description": "Example mobile-originated SMS event",
           "examples": [
             {
               "lang": "json",
@@ -543,7 +606,7 @@
       ],
       "mobile_originated_sms": [
         {
-          "description": "mobile_originated_sms Event Body",
+          "description": "Example mobile_originated_sms event body",
           "examples": [
             {
               "lang": "json",
@@ -554,40 +617,62 @@
       ],
       "mobile_terminated_message": [
         {
-          "description": "Example mobile_terminated_message Event",
+          "description": "Example SMS mobile_terminated_message event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_terminated_message\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_terminated_message\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "numeric_matcher": [
+        {
+          "description": "Example find custom events with name \"purchase\" and a \"value\" of at least 100",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"filters\": [\n    {\n      \"types\": [\"CUSTOM\"],\n      \"predicates\": [\n        {\n          \"and\": [\n            { \"key\": \"value\",\n              \"scope\": [\"body\"],\n              \"value\": {\"at_least\": 100}\n            },\n            {\n              \"key\": \"name\",\n              \"scope\": [\"body\"],\n              \"value\": {\"equals\": \"purchase\"}\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}\n"
             }
           ]
         }
       ],
       "open": [
         {
-          "description": "Example Open Event",
+          "description": "Example open event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"1037.04c13d-master\",\n      \"device_model\": \"Nokia 6.1\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n  \"body\": {\n    \"last_delivered\": {\n        \"push_id\": \"6e3339ce-529c-42e4-a2f6-7546f81c9828\",\n        \"time\": \"2015-07-30T21:03:37.631Z\"\n    },\n    \"triggering_push\": {\n        \"push_id\": \"c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06\",\n        \"group_id\": \"8ea2abd6-dbc7-475a-9c57-fb31c7e2999b\",\n        \"variant_id\": 1\n    },\n    \"session_id\": \"ad4ad05a-17f4-4eab-9c6f-d3f7fbf3cc25\"\n  },\n  \"type\": \"OPEN\"\n}\n"
+              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"1037.04c13d-master\",\n      \"device_model\": \"Nokia 6.1\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n      }\n    },\n  \"user\": {\n      \"contact_id\": \"982B35f2-0375-6384-893e-a19b5cd5R771\"\n    },\n  \"body\": {\n    \"last_delivered\": {\n        \"push_id\": \"6e3339ce-529c-42e4-a2f6-7546f81c9828\",\n        \"time\": \"2015-07-30T21:03:37.631Z\"\n    },\n    \"triggering_push\": {\n        \"push_id\": \"c2f6c5c5-f353-49c0-b5f7-6e87cf9b1a06\",\n        \"group_id\": \"8ea2abd6-dbc7-475a-9c57-fb31c7e2999b\",\n        \"variant_id\": 1\n    },\n    \"session_id\": \"ad4ad05a-17f4-4eab-9c6f-d3f7fbf3cc25\"\n  },\n  \"type\": \"OPEN\"\n}\n"
             }
           ]
         }
       ],
       "opted_out": [
         {
-          "description": "Example SMS opted_out Event",
+          "description": "Example SMS opted_out event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"opted_out\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": { \"sender\": \"15558675309\" }\n  },\n  \"body\": {\n    \"event_type\": \"opted_out\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "presence_matcher": [
+        {
+          "description": "Example find only direct open events",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"filters\": {\n    \"types\": [\"OPEN\"],\n    \"predicates\": {\n      \"key\": \"triggering_push\",\n      \"scope\": [\"body\"],\n      \"value\": {\"is_present\": true}\n    }\n  }\n}\n"
             }
           ]
         }
       ],
       "push_body": [
         {
-          "description": "Example Push Body Event",
+          "description": "Example push body event",
           "examples": [
             {
               "lang": "json",
@@ -598,106 +683,126 @@
       ],
       "region": [
         {
-          "description": "Example Region Event",
+          "description": "Example region event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n    }\n  },\n  \"body\":{\n    \"action\": \"enter\",\n    \"region_id\": \"fb542343-9a43-450a-be7f-43bed95057ff\",\n    \"session_id\": \"0a50fdb9-dfa9-4e0e-8373-4f0c5c7137c7\",\n    \"name\": \"Coolest Place\",\n    \"source_info\": {\n        \"source\": \"Gimbal\",\n        \"region_id\": \"a vendor identifier\"\n    }\n  },\n  \"type\": \"REGION\"\n}\n"
+              "source": "{\n  \"id\": \"910fea50-5d42-1159-b702-024288f4e1d3\",\n  \"offset\": \"1000022468589\",\n  \"occurred\": \"2019-04-03T18:59:02.246Z\",\n  \"processed\": \"2019-04-03T19:10:26.301Z\",\n  \"device\": {\n    \"android_channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"channel\": \"364a4e3f-170a-4f26-b0a1-11b280377dfe\",\n    \"device_type\": \"ANDROID\",\n    \"identifiers\": {\n      \"com.urbanairship.gimbal.aii\": \"2471037d-71d8-4229-a40f-df719f1af914\",\n      \"session_id\": \"54204a73-7a95-4ffc-8051-bf230d086e19\",\n      \"GA_CID\": \"90d56c80-f31f-49fd-87b0-20deb3d2602a\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"dev\",\n      \"device_model\": \"Android SDK built for x86\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"America/Los_Angeles\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"9\",\n      \"locale_timezone\": \"-25200\",\n      \"carrier\": \"Android\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"9.7.0\",\n      \"location_permission\": \"ALWAYS_ALLOWED\"\n    }\n  },\n  \"body\":{\n    \"action\": \"enter\",\n    \"region_id\": \"fb542343-9a43-450a-be7f-43bed95057ff\",\n    \"session_id\": \"0a50fdb9-dfa9-4e0e-8373-4f0c5c7137c7\",\n    \"name\": \"Coolest Place\",\n    \"source_info\": {\n        \"source\": \"Gimbal\",\n        \"region_id\": \"a vendor identifier\"\n    }\n  },\n  \"type\": \"REGION\"\n}\n"
             }
           ]
         }
       ],
       "registration": [
         {
-          "description": "Example Email Registration Event",
+          "description": "Example email registration event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n    \"id\": \"8058bfd3-9081-4f48-845c-809bf5462ca4\",\n    \"offset\": \"1000000739139\",\n    \"occurred\": \"2018-12-18T21:24:11.836Z\",\n    \"processed\": \"2018-12-18T21:24:12.608Z\",\n    \"device\": {\n        \"channel\": \"93f32fb8-0e40-440b-8944-2f9ef933ca88\",\n        \"device_type\": \"EMAIL\"\n    },\n    \"body\": {\n        \"event_type\": \"registration\",\n        \"identifiers\": {\n            \"address\": \"new.user@subscriber.com\"\n        },\n        \"properties\": {\n            \"commercial_opted_in\": \"2018-10-20T12:00:00.000Z\",\n            \"registration_type\": \"create\"\n        }\n    },\n    \"type\": \"COMPLIANCE\"\n  }\n"
+              "source": "{\n    \"id\": \"8058bfd3-9081-4f48-845c-809bf5462ca4\",\n    \"offset\": \"1000000739139\",\n    \"occurred\": \"2018-12-18T21:24:11.836Z\",\n    \"processed\": \"2018-12-18T21:24:12.608Z\",\n    \"device\": {\n        \"channel\": \"93f32fb8-0e40-440b-8944-2f9ef933ca88\",\n        \"device_type\": \"EMAIL\"\n    },\n    \"body\": {\n        \"event_type\": \"registration\",\n        \"identifiers\": {\n            \"address\": \"new.user@example.com\"\n        },\n        \"properties\": {\n            \"commercial_opted_in\": \"2018-10-20T12:00:00.000Z\",\n            \"registration_type\": \"create\"\n        }\n    },\n    \"type\": \"COMPLIANCE\"\n  }\n"
+            }
+          ]
+        }
+      ],
+      "rich_control": [
+        {
+          "description": "Example event body - message not delivered due to user being in a control group",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\" : \"e97ef291-eb48-6614-a9f4-9138244a9144\",\n  \"offset\" : \"-1099401623\",\n  \"occurred\" : \"2024-11-05T23:47:55.473Z\",\n  \"processed\" : \"2024-11-05T23:47:55.473Z\",\n  \"device\" : {\n    \"ios_channel\" : \"564f958c-806f-bdaf-340b-1a25867d1c6a\",\n    \"channel\" : \"564f958c-806f-bdaf-340b-1a25867d1c6a\",\n    \"device_type\" : \"IOS\"\n  },\n  \"user\": {\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"mini_me\"\n  },\n  \"body\" : {\n    \"push_id\" : \"62fd4bac-a85a-0e18-00b4-9e59339bece5\",\n    \"group_id\" : \"da16d1c2-7d8f-9ade-ff14-05ce696ba042\"\n  },\n  \"type\" : \"RICH_CONTROL\"\n}\n"
             }
           ]
         }
       ],
       "rich_delete": [
         {
-          "description": "Example Event Body - Indicates the `push_id` that was deleted",
+          "description": "Example event body - indicates the `push_id` that was deleted",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"ca2948b0-56ea-11e9-88dc-a142740a77e1\",\n  \"offset\": \"1000022469540\",\n  \"occurred\": \"2019-04-04T15:03:22.545Z\",\n  \"processed\": \"2019-04-04T15:12:54.657Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"coolusername\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"837645C4-BD17-455C-96A3-999E1290EFA7\",\n      \"GA_CID\": \"d12b5b66-d0c6-40f6-923f-ea039e3e8297\",\n      \"com.urbanairship.idfa\": \"9610438A-6AEF-4113-BB99-2F64CB56ED2F\",\n      \"com.urbanairship.vendor\": \"F2519C6C-A724-4343-80C7-1F1E42C53DFF\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone8,1\",\n      \"connection_type\": \"CELL\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"Europe/London\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"GB\",\n      \"device_os\": \"12.1.4\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Three\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"1bf2A1a1-4069-11e9-abf1-024297609801\"\n  },\n  \"type\": \"RICH_DELETE\"\n}\n"
+              "source": "{\n  \"id\": \"ca2948b0-56ea-11e9-88dc-a142740a77e1\",\n  \"offset\": \"1000022469540\",\n  \"occurred\": \"2019-04-04T15:03:22.545Z\",\n  \"processed\": \"2019-04-04T15:12:54.657Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"coolusername\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"837645C4-BD17-455C-96A3-999E1290EFA7\",\n      \"GA_CID\": \"d12b5b66-d0c6-40f6-923f-ea039e3e8297\",\n      \"com.urbanairship.idfa\": \"9610438A-6AEF-4113-BB99-2F64CB56ED2F\",\n      \"com.urbanairship.vendor\": \"F2519C6C-A724-4343-80C7-1F1E42C53DFF\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone8,1\",\n      \"connection_type\": \"CELL\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"Europe/London\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"GB\",\n      \"device_os\": \"12.1.4\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Three\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"user\": {\n      \"named_user_id\": \"coolusername\",\n      \"contact_id\": \"982B35f2-0375-6384-893e-a19b5cd5R771\"\n    },\n  \"body\": {\n    \"push_id\": \"1bf2A1a1-4069-11e9-abf1-024297609801\"\n  },\n  \"type\": \"RICH_DELETE\"\n}\n"
             }
           ]
         }
       ],
       "rich_delivery": [
         {
-          "description": "Example Event Body — Indicates the `push_id` That reached the user",
+          "description": "Example event body — indicates the `push_id` that reached the user",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"83848900-54ac-11e9-a132-024278224c1c\",\n  \"offset\": \"1000022466003\",\n  \"occurred\": \"2019-04-01T18:32:32.912Z\",\n  \"processed\": \"2019-04-01T18:32:33.031Z\",\n  \"device\": {\n    \"android_channel\": \"1de67612-94bc-4d02-85b0-37ede154a9d7\",\n    \"channel\": \"1de67612-94bc-4d02-85b0-37ede154a9d7\",\n    \"device_type\": \"ANDROID\"\n  },\n  \"body\": {\n    \"push_id\": \"1a7d774c-1659-4104-b594-2f7ec739c92d\"\n  },\n  \"type\": \"RICH_DELIVERY\"\n}\n"
+              "source": "{\n  \"id\": \"83848900-54ac-11e9-a132-024278224c1c\",\n  \"offset\": \"1000022466003\",\n  \"occurred\": \"2019-04-01T18:32:32.912Z\",\n  \"processed\": \"2019-04-01T18:32:33.031Z\",\n  \"device\": {\n    \"android_channel\": \"1de67612-94bc-4d02-85b0-37ede154a9d7\",\n    \"channel\": \"1de67612-94bc-4d02-85b0-37ede154a9d7\",\n    \"device_type\": \"ANDROID\"\n  },\n  \"user\": {\n    \"contact_id\": \"982B35f2-0375-6384-893e-a19b5cd5R771\"\n  },\n  \"body\": {\n    \"push_id\": \"1a7d774c-1659-4104-b594-2f7ec739c92d\"\n  },\n  \"type\": \"RICH_DELIVERY\"\n}\n"
             }
           ]
         }
       ],
       "rich_read": [
         {
-          "description": "Example Event Body — Indicates the `push_id` that the user read",
+          "description": "Example event body — indicates the `push_id` that the user read",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"ca2948b0-56ea-11e9-88dc-a142740a77e1\",\n  \"offset\": \"1000022469540\",\n  \"occurred\": \"2019-04-04T15:03:22.545Z\",\n  \"processed\": \"2019-04-04T15:12:54.657Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"coolusername\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"837645C4-BD17-455C-96A3-999E1290EFA7\",\n      \"GA_CID\": \"d12b5b66-d0c6-40f6-923f-ea039e3e8297\",\n      \"com.urbanairship.idfa\": \"9610438A-6AEF-4113-BB99-2F64CB56ED2F\",\n      \"com.urbanairship.vendor\": \"F2519C6C-A724-4343-80C7-1F1E42C53DFF\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone8,1\",\n      \"connection_type\": \"CELL\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"Europe/London\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"GB\",\n      \"device_os\": \"12.1.4\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Three\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"push_id\": \"1bf2A1a1-4069-11e9-abf1-024297609801\"\n    \"time\": \"2019-03-04T15:12:54.657Z\"\n  },\n  \"type\": \"RICH_READ\"\n}\n"
+              "source": "{\n  \"id\": \"ca2948b0-56ea-11e9-88dc-a142740a77e1\",\n  \"offset\": \"1000022469540\",\n  \"occurred\": \"2019-04-04T15:03:22.545Z\",\n  \"processed\": \"2019-04-04T15:12:54.657Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"coolusername\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"837645C4-BD17-455C-96A3-999E1290EFA7\",\n      \"GA_CID\": \"d12b5b66-d0c6-40f6-923f-ea039e3e8297\",\n      \"com.urbanairship.idfa\": \"9610438A-6AEF-4113-BB99-2F64CB56ED2F\",\n      \"com.urbanairship.vendor\": \"F2519C6C-A724-4343-80C7-1F1E42C53DFF\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone8,1\",\n      \"connection_type\": \"CELL\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"Europe/London\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"GB\",\n      \"device_os\": \"12.1.4\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Three\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"user\": {\n    \"named_user_id\": \"coolusername\",\n    \"contact_id\": \"982B35f2-0375-6384-893e-a19b5cd5R771\"\n  },\n  \"body\": {\n    \"push_id\": \"1bf2A1a1-4069-11e9-abf1-024297609801\",\n    \"time\": \"2019-03-04T15:12:54.657Z\"\n  },\n  \"type\": \"RICH_READ\"\n}\n"
             }
           ]
         }
       ],
       "screen_viewed": [
         {
-          "description": "Example SMS Create-and-Send Event",
+          "description": "Example screen viewed event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"ios_channel\": \"c1ca5af6-b014-46f9-8566-33f5f52c7b19\",\n    \"channel\": \"c9cb18f7-b814-40f9-8566-33f5f52c7c48\",\n    \"device_type\": \"IOS\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B1E00276-98BE-4B38-9077-FB2E90EFBE1B\",\n      \"GA_CID\": \"1fa021e7-8298-4f92-bee0-07cb95eecfdd\",\n      \"com.urbanairship.idfa\": \"1821a235-CD43-4ED8-8633-3BD3B991FA25\",\n      \"com.urbanairship.vendor\": \"164d552C-F5F0-4C83-B529-321667C8E48A\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"550\",\n      \"device_model\": \"iPhone9,1\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"Europe/Berlin\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"12.2\",\n      \"locale_timezone\": \"7200\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.2\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"duration\": 13933,\n    \"viewed_screen\": \"home\",\n    \"previous_screen\": \"message_center\",\n    \"session_id\": \"a26102f9-7fb2-451d-a65c-56e9394cf726\"\n  },\n  \"type\": \"SCREEN_VIEWED\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"ios_channel\": \"c1ca5af6-b014-46f9-8566-33f5f52c7b19\",\n    \"channel\": \"c9cb18f7-b814-40f9-8566-33f5f52c7c48\",\n    \"device_type\": \"IOS\",\n    \"identifiers\": {\n      \"com.urbanairship.limited_ad_tracking_enabled\": \"true\",\n      \"session_id\": \"B1E00276-98BE-4B38-9077-FB2E90EFBE1B\",\n      \"GA_CID\": \"1fa021e7-8298-4f92-bee0-07cb95eecfdd\",\n      \"com.urbanairship.idfa\": \"1821a235-CD43-4ED8-8633-3BD3B991FA25\",\n      \"com.urbanairship.vendor\": \"164d552C-F5F0-4C83-B529-321667C8E48A\"\n    },\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"550\",\n      \"device_model\": \"iPhone9,1\",\n      \"connection_type\": \"WIFI\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"Europe/Berlin\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"US\",\n      \"device_os\": \"12.2\",\n      \"locale_timezone\": \"7200\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.2\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"duration\": 13933,\n    \"viewed_screen\": \"home\",\n    \"previous_screen\": \"message_center\",\n    \"session_id\": \"a26102f9-7fb2-451d-a65c-56e9394cf726\"\n  },\n  \"type\": \"SCREEN_VIEWED\"\n}\n"
             }
           ]
         }
       ],
       "send": [
         {
-          "description": "Example Send Event",
+          "description": "Example send event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"ca2948b0-56ea-11e9-88dc-a142740a77e1\",\n  \"offset\": \"1000022469540\",\n  \"occurred\": \"2019-04-04T15:03:22.545Z\",\n  \"processed\": \"2019-04-04T15:12:54.657Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"coolusername\",\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone8,1\",\n      \"connection_type\": \"CELL\",\n      \"app_package_name\": \"com.urbanairship.goat\",\n      \"iana_timezone\": \"Europe/London\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"GB\",\n      \"device_os\": \"12.1.4\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Three\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"body\": {\n    \"variant_id\": 1,\n    \"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\",\n    \"alerting\": true,\n    \"campaigns\": {\n        \"categories\": [\n          \"hello\",\n          \"numberwang\",\n          \"first message\"\n        ]\n      },\n    \"context\": {\n      \"triggered_by\": \"custom_event\",\n      \"event_uuid\": \"03669090-f934-45e2-a443-c75f6304ae6c\",\n      \"transaction\": \"886f53d4-3e0f-46d7-930e-c2792dac6e0a\",\n      \"interaction_id\": \"hello\"\n      }\n    },\n  \"type\": \"SEND\"\n}\n"
+              "source": "{\n  \"id\": \"ca2948b0-56ea-11e9-88dc-a142740a77e1\",\n  \"offset\": \"1000022469540\",\n  \"occurred\": \"2019-04-04T15:03:22.545Z\",\n  \"processed\": \"2019-04-04T15:12:54.657Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    \"named_user_id\": \"coolusername\",\n    \"attributes\": {\n      \"locale_variant\": \"\",\n      \"app_version\": \"542\",\n      \"device_model\": \"iPhone8,1\",\n      \"connection_type\": \"CELL\",\n      \"app_package_name\": \"com.company_name.app_name\",\n      \"iana_timezone\": \"Europe/London\",\n      \"push_opt_in\": \"true\",\n      \"locale_country_code\": \"GB\",\n      \"device_os\": \"12.1.4\",\n      \"locale_timezone\": \"3600\",\n      \"carrier\": \"Three\",\n      \"locale_language_code\": \"en\",\n      \"location_enabled\": \"false\",\n      \"background_push_enabled\": \"true\",\n      \"ua_sdk_version\": \"10.2.0\",\n      \"location_permission\": \"FOREGROUND_ALLOWED\"\n    }\n  },\n  \"user\": {\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"coolusername\"\n  },\n  \"body\": {\n    \"variant_id\": 1,\n    \"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\",\n    \"alerting\": true,\n    \"campaigns\": {\n        \"categories\": [\n          \"hello\",\n          \"numberwang\",\n          \"first message\"\n        ]\n      },\n    \"context\": {\n      \"triggered_by\": \"custom_event\",\n      \"event_uuid\": \"03669090-f934-45e2-a443-c75f6304ae6c\",\n      \"transaction\": \"886f53d4-3e0f-46d7-930e-c2792dac6e0a\",\n      \"interaction_id\": \"hello\"\n      }\n    },\n  \"type\": \"SEND\"\n}\n"
             }
           ]
         }
       ],
       "send_aborted": [
         {
-          "description": "Example SEND_ABORTED Event",
+          "description": "Example send aborted event",
           "examples": [
             {
               "lang": "json",
               "source": "{\n  \"id\": \"fc06bf54-619b-4fda-9345-d8f9f8e891ef\",\n  \"occurred\": \"2021-02-26T20:50:21.12Z\",\n  \"offset\": \"1000001215643\",\n  \"processed\": \"2021-02-26T20:50:49.64Z\",\n  \"type\": \"SEND_ABORTED\",\n  \"device\": {\n    \"android_channel\": \"e664fb42-d1a7-4956-9907-88c49394ae70\",\n    \"channel\": \"e664fb42-d1a7-4956-9907-88c49394ae70\",\n    \"device_type\": \"ANDROID\",\n    },\n  \"body\": {\n    \"push_id\": \"26ea5408-a1ec-4771-b4f0-e86d45c03f8a\",\n    \"group_id\": \"3795a26d-2d74-462b-b228-ca3ed31ef7b1\",\n    \"reason\": \"FEED_RESOLVE_FAILURE\"\n  }\n}\n"
             }
           ]
+        },
+        {
+          "description": "Example send aborted event due to Ban List",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"fc06bf54-619b-4fda-9345-d8f9f8e891ef\",\n  \"occurred\": \"2021-02-26T20:50:21.12Z\",\n  \"offset\": \"1000001215643\",\n  \"processed\": \"2021-02-26T20:50:49.64Z\",\n  \"type\": \"SEND_ABORTED\",\n  \"device\": {\n    \"android_channel\": \"e664fb42-d1a7-4956-9907-88c49394ae70\",\n    \"channel\": \"e664fb42-d1a7-4956-9907-88c49394ae70\",\n    \"device_type\": \"ANDROID\",\n    },\n  \"body\": {\n    \"push_id\": \"26ea5408-a1ec-4771-b4f0-e86d45c03f8a\",\n    \"group_id\": \"3795a26d-2d74-462b-b228-ca3ed31ef7b1\",\n    \"reason\": \"FEED_BANNED_RESPONSE\"\n  }\n}\n"
+            }
+          ]
         }
       ],
       "send_rejected": [
         {
-          "description": "Example SEND_REJECTED Event Body",
+          "description": "Example send rejected event body",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"SEND_REJECTED\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    },\n  \"body\": {\n    \"variant_id\": 1,\n    \"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\",\n    \"campaigns\" : {\n      \"categories\" : [\"hello\", \"first message\"]\n    }\n  }\n}\n"
+              "source": "{\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"SEND_REJECTED\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    },\n  \"body\": {\n    \"variant_id\": 1,\n    \"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\",\n    \"status\": \"BadDeviceToken\",\n    \"campaigns\" : {\n      \"categories\" : [\"hello\", \"first message\"]\n    }\n  }\n}\n"
             }
           ]
         }
       ],
       "short_link_click": [
         {
-          "description": "Example short_link_click Event",
+          "description": "Example short_link_click event",
           "examples": [
             {
               "lang": "json",
@@ -708,7 +813,7 @@
       ],
       "smsCreateAndSend": [
         {
-          "description": "Example SMS create_and_send Event",
+          "description": "Example SMS Create and Send event",
           "examples": [
             {
               "lang": "json",
@@ -717,46 +822,57 @@
           ]
         }
       ],
-      "smsEventBody": [
+      "smsRegistered": [
         {
-          "description": "Example SMS Compliance Event",
+          "description": "Example SMS registration event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"created\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"create\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
       ],
-      "smsRegistered": [
+      "smsUpdated": [
         {
-          "description": "Example SMS Registration Event",
+          "description": "Example SMS update event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"created\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"registration_type\": \"update\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
       ],
       "sms_uninstalled": [
         {
-          "description": "Example SMS uninstalled Event",
+          "description": "Example SMS uninstalled event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"uninstall\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"uninstall\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
       ],
       "subscription": [
         {
-          "description": "Example Subscription Event",
+          "description": "Example subscription event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"62f3b7ac-4048-4f22-a0b5-22c01ef172a9\",\n  \"offset\": \"1000022265027\",\n  \"occurred\": \"2019-04-01T13:00:23.186Z\",\n  \"processed\": \"2019-04-01T13:00:23.456Z\",\n  \"device\": {\n    \"channel\": \"6b46c724-494b-4491-9fe7-1b903d266110\",\n    \"device_type\": \"EMAIL\",\n    \"delivery_address\": \"user+43679@urbanairship.com.sink.sparkpostmail.com\"\n  },\n  \"body\": {\n    \"event_type\":\"registration\",\n    \"identifiers\": {\n      \"address\":\"new.subscription@emaildomain.com\"\n    },\n    \"properties\":{\n      \"commercial_opted_in\":\"2019-01-04T20:56:00.000Z\",\n      \"transactional_opted_in\":\"2019-01-04T20:56:00.000Z\"\n      }\n  },\n  \"type\": \"SUBSCRIPTION\"\n}\n"
+              "source": "{\n  \"id\": \"62f3b7ac-4048-4f22-a0b5-22c01ef172a9\",\n  \"offset\": \"1000022265027\",\n  \"occurred\": \"2019-04-01T13:00:23.186Z\",\n  \"processed\": \"2019-04-01T13:00:23.456Z\",\n  \"device\": {\n    \"channel\": \"6b46c724-494b-4491-9fe7-1b903d266110\",\n    \"device_type\": \"EMAIL\",\n    \"delivery_address\": \"user+43679@urbanairship.com.sink.sparkpostmail.com\"\n  },\n  \"body\": {\n    \"event_type\":\"registration\",\n    \"identifiers\": {\n      \"address\":\"new.subscription@example.com\"\n    },\n    \"properties\":{\n      \"commercial_opted_in\":\"2019-01-04T20:56:00.000Z\",\n      \"transactional_opted_in\":\"2019-01-04T20:56:00.000Z\",\n      \"click_tracking_opted_out\":\"2019-01-04T20:56:00.000Z\",\n      \"open_tracking_opted_out\":\"2019-01-04T20:56:00.000Z\"\n      }\n  },\n  \"type\": \"SUBSCRIPTION\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "subscription_list": [
+        {
+          "description": "Example Subscription List event",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"62f3b7ac-4048-4f22-a0b5-22c01ef172a9\",\n  \"offset\": \"1000022265027\",\n  \"occurred\": \"2019-04-01T13:00:23.186Z\",\n  \"processed\": \"2019-04-01T13:00:23.456Z\",\n  \"device\": {\n    \"channel\": \"6b46c724-494b-4491-9fe7-1b903d266110\",\n    \"device_type\": \"EMAIL\",\n    \"delivery_address\": \"user+43679@urbanairship.com.sink.sparkpostmail.com\"\n  },\n  \"user\": {\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"mini_me\"\n  },\n  \"body\": {\n    \"enrolled\": [\"cool_deals\"]\n  },\n  \"type\": \"SUBSCRIPTION_LIST\"\n}\n"
             }
           ]
         }
@@ -783,40 +899,51 @@
       ],
       "tag_change": [
         {
-          "description": "Example Tag Change Event",
+          "description": "Example tag change event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"SEND_REJECTED\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    },\n  \"body\":{\n    \"add\": {\n        \"crm\": [\n          \"partner\",\n          \"active\"\n        ],\n        \"loyalty\": [\n          \"silver_member\"\n        ]\n    },\n    \"remove\": {\n        \"device\": [\n          \"shoe_buyer\"\n        ]\n    },\n    \"current\": {\n        \"crm\": [\n          \"partner\",\n          \"active\",\n          \"new_user\"\n        ],\n        \"loyalty\": [\n          \"silver_member\",\n          \"special_offers\"\n        ],\n        \"device\": [\n          \"san_francisco\",\n          \"sports\"\n        ]\n      }\n    },\n  \"type\": \"TAG_CHANGE\"\n}\n"
+              "source": "{\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    },\n  \"user\": {\n    \"contact_id\": \"6b5ca2a2-c1f1-4119-9617-2d5bff0db09d\",\n    \"named_user_id\": \"mini_me\"\n  },\n  \"body\":{\n    \"add\": {\n        \"crm\": [\n          \"partner\",\n          \"active\"\n        ],\n        \"loyalty\": [\n          \"silver_member\"\n        ]\n    },\n    \"remove\": {\n        \"device\": [\n          \"shoe_buyer\"\n        ]\n    },\n    \"current\": {\n        \"crm\": [\n          \"partner\",\n          \"active\",\n          \"new_user\"\n        ],\n        \"loyalty\": [\n          \"silver_member\",\n          \"special_offers\"\n        ],\n        \"device\": [\n          \"san_francisco\",\n          \"sports\"\n        ]\n      }\n    },\n  \"type\": \"TAG_CHANGE\"\n}\n"
             }
           ]
         }
       ],
       "uninstall": [
         {
-          "description": "Example Uninstall Event",
+          "description": "Example uninstall event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"UNINSTALL\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    },\n  \"body\":{\n    \"decay\": false\n    }\n  \"type\": \"UNINSTALL\"\n}\n"
+              "source": "{\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"UNINSTALL\",\n  \"device\": {\n    \"ios_channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"channel\": \"1ef235f0-03d5-1384-893e-a19b5cd0d110\",\n    \"device_type\": \"IOS\",\n    },\n  \"body\":{\n    \"decay\": false\n    },\n  \"type\": \"UNINSTALL\"\n}\n"
             }
           ]
         }
       ],
       "unsubscribe": [
         {
-          "description": "Example Email Unsubscribe Event",
+          "description": "Example email unsubscribe event",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"bd8c90d6-5704-4438-8075-7530d06c4cba\",\n  \"offset\": \"1000001778792\",\n  \"occurred\": \"2018-11-27T23:47:54.641Z\",\n  \"processed\": \"2018-11-27T23:47:55.516Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"former.user@unsubscriber.com\"\n  },\n  \"body\": {\n      \"event_type\": \"registration\",\n      \"properties\": {\n          \"message_type\": \"commercial\",\n          \"registration_type\": \"unsubscribe\"\n      }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"bd8c90d6-5704-4438-8075-7530d06c4cba\",\n  \"offset\": \"1000001778792\",\n  \"occurred\": \"2018-11-27T23:47:54.641Z\",\n  \"processed\": \"2018-11-27T23:47:55.516Z\",\n  \"device\": {\n      \"channel\": \"b8519372-54ff-456d-9819-7faa92fe8b9d\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"former.user@example.com\"\n  },\n  \"body\": {\n      \"event_type\": \"registration\",\n      \"properties\": {\n          \"message_type\": \"commercial\",\n          \"registration_type\": \"unsubscribe\"\n      }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        }
+      ],
+      "version_matcher": [
+        {
+          "description": "Example find custom events of type \"purchase\" performed by Android users on app versions between 18.4.1 and 19.2.3",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"filters\": [\n    {\n      \"device_types\": [\"android\"],\n      \"types\": [\"CUSTOM\"],\n      \"predicates\": [\n        {\n          \"and\": [\n            {\n              \"key\": \"app_version\",\n              \"scope\": [\"device\", \"attributes\"],\n              \"value\": {\"version_matches\": \"[18.4.1,19.2.3]\"}\n            },\n            {\n              \"key\": \"name\",\n              \"scope\": [\"body\"],\n              \"value\": {\"equals\": \"purchase\"}\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}\n"
             }
           ]
         }
       ],
       "web_click": [
         {
-          "description": "Example Web Click Event",
+          "description": "Example web click event",
           "examples": [
             {
               "lang": "json",
@@ -827,7 +954,7 @@
       ],
       "web_session": [
         {
-          "description": "Example Web Session Event",
+          "description": "Example web session event",
           "examples": [
             {
               "lang": "json",
@@ -842,20 +969,29 @@
     "/api/events": {
       "post": [
         {
-          "description": "Connect Request",
+          "description": "Example event stream request",
           "examples": [
             {
               "lang": "http",
-              "source": "POST /api/events HTTP/1.1\nAuthorization: Bearer <authorization token>\nX-UA-Appkey: <appkey>\nContent-Type: application/json\n\n{\n    \"filters\": [\n        {\n            \"device_types\": [\n                \"android\",\n                \"amazon\"\n            ],\n            \"devices\": [\n                {\n                    \"channel\": \"5b389366-7caf-43e2-a19c-6159c7ea9936\"\n                },\n                {\n                    \"channel\": \"c8044c8a-d5fa-4e58-91d4-54d0f70b7409\"\n                },\n                {\n                    \"named_user_id\": \"George\"\n                }\n            ],\n            \"latency\": 20000000\n        },\n        {\n            \"notifications\": [\n                {\n                    \"group_id\": \"a30abf06-7878-4096-9535-b50ac0ad6e8e\"\n                }\n            ],\n            \"types\": [\n                \"OPEN\"\n            ]\n        }\n    ],\n    \"resume_offset\": \"MTAwMDAwMDAyMjg1NA\",\n    \"subset\": {\n        \"proportion\": 0.3,\n        \"type\": \"SAMPLE\"\n    }\n}\n"
+              "source": "POST /api/events HTTP/1.1\nAuthorization: Bearer <authorization token>\nX-UA-Appkey: <appkey>\nAccept: application/vnd.urbanairship+x-ndjson; version=3;\nContent-Type: application/json\n\n{\n    \"filters\": [\n        {\n            \"device_types\": [\n                \"android\",\n                \"amazon\"\n            ],\n            \"devices\": [\n                {\n                    \"channel\": \"5b389366-7caf-43e2-a19c-6159c7ea9936\"\n                },\n                {\n                    \"channel\": \"c8044c8a-d5fa-4e58-91d4-54d0f70b7409\"\n                },\n                {\n                    \"named_user_id\": \"George\"\n                }\n            ],\n            \"latency\": 20000000\n        },\n        {\n            \"notifications\": [\n                {\n                    \"group_id\": \"a30abf06-7878-4096-9535-b50ac0ad6e8e\"\n                }\n            ],\n            \"types\": [\n                \"OPEN\"\n            ]\n        }\n    ],\n    \"resume_offset\": \"MTAwMDAwMDAyMjg1NA\",\n    \"subset\": {\n        \"proportion\": 0.3,\n        \"type\": \"SAMPLE\"\n    }\n}\n"
             }
           ]
         },
         {
-          "description": "Example Response",
+          "description": "Response",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-encoding: gzip\nContent-Type: application/vnd.urbanairship+json; version=3;\n\n{\"id\" : \"ff76bb85-74bc-4511-a3bf-11b6117784db\", \"type\": \"UNINSTALL\", \"offset\": \"MTIzNQ\", \"occurred\": \"2015-05-03T02:32:12.088Z\", \"processed\": \"2015-05-03T12:12:43.180Z\", \"device\": {\"channel\":\"a61448e1-be63-43ee-84eb-19446ba743f0\", \"device_type\":\"ANDROID\", \"android_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\"}}\n{\"id\" : \"8e50350e-dd9f-41af-b98e-b0e5d4b27dea\",\"type\": \"SEND\",\"offset\": \"NTIxMDM1\",\"occurred\": \"2015-05-02T02:31:22.088Z\",\"processed\": \"2015-05-02T02:32:43.181Z\",\"device\": {\"channel\":\"5117f2a7-ba58-4981-9456-169959511d1a\", \"device_type\":\"IOS\", \"ios_channel\": \"5117f2a7-ba58-4981-9456-169959511d1a\" },\"body\": {\"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\", \"alerting\": true}}\n{\"id\" : \"ff76bb85-74bc-4511-a3bf-11b6117784db\", \"type\": \"UNINSTALL\", \"offset\": \"MTIzNQ\", \"occurred\": \"2015-05-03T02:32:12.088Z\", \"processed\": \"2015-05-03T12:12:43.180Z\", \"device\": {\"channel\":\"a61448e1-be63-43ee-84eb-19446ba743f0\", \"device_type\":\"ANDROID\", \"android_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\"}}\n{\"device\":{\"channel\":\"820e4493-e4c9-4577-99bc-a98180599f73\",\"delivery_address\":\"new.user@urbanairship.com\",\"device_type\":\"EMAIL\"},\"id\":\"00000169-4a14-67b2-1ddd-d9e733622c3a\",\"occurred\":\"2019-03-04T19:00:45.106Z\",\"offset\":\"1000001260057\",\"processed\":\"2019-03-04T19:00:47.094Z\",\"type\":\"FIRST_OPT_IN\"}\n"
+            }
+          ]
+        },
+        {
+          "description": "Response object",
           "examples": [
             {
               "lang": "json",
-              "source": "Status: 200\nContent-encoding: gzip\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\"id\" : \"ff76bb85-74bc-4511-a3bf-11b6117784db\", \"type\": \"UNINSTALL\", \"offset\": \"MTIzNQ\", \"occurred\": \"2015-05-03T02:32:12.088Z\", \"processed\": \"2015-05-03T12:12:43.180Z\", \"device\": {\"channel\":\"a61448e1-be63-43ee-84eb-19446ba743f0\", \"device_type\":\"ANDROID\", \"android_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\"}}\n{\"id\" : \"8e50350e-dd9f-41af-b98e-b0e5d4b27dea\",\"type\": \"SEND\",\"offset\": \"NTIxMDM1\",\"occurred\": \"2015-05-02T02:31:22.088Z\",\"processed\": \"2015-05-02T02:32:43.181Z\",\"device\": {\"channel\":\"5117f2a7-ba58-4981-9456-169959511d1a\", \"device_type\":\"IOS\", \"ios_channel\": \"5117f2a7-ba58-4981-9456-169959511d1a\" },\"body\": {\"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\", \"alerting\": true}}\n{\"id\" : \"ff76bb85-74bc-4511-a3bf-11b6117784db\", \"type\": \"UNINSTALL\", \"offset\": \"MTIzNQ\", \"occurred\": \"2015-05-03T02:32:12.088Z\", \"processed\": \"2015-05-03T12:12:43.180Z\", \"device\": {\"channel\":\"a61448e1-be63-43ee-84eb-19446ba743f0\", \"device_type\":\"ANDROID\", \"android_channel\": \"a61448e1-be63-43ee-84eb-19446ba743f0\"}}\n{\"device\":{\"channel\":\"820e4493-e4c9-4577-99bc-a98180599f73\",\"delivery_address\":\"new.user@urbanairship.com\",\"device_type\":\"EMAIL\"},\"id\":\"00000169-4a14-67b2-1ddd-d9e733622c3a\",\"occurred\":\"2019-03-04T19:00:45.106Z\",\"offset\":\"1000001260057\",\"processed\":\"2019-03-04T19:00:47.094Z\",\"type\":\"FIRST_OPT_IN\"}\n"
+              "source": "{\n   \"id\": \"8e50350e-dd9f-41af-b98e-b0e5d4b27dea\",\n   \"type\": \"SEND\",\n   \"offset\": \"NTIxMDM1\",\n   \"occurred\": \"2015-05-02T02:31:22.088Z\",\n   \"processed\": \"2015-05-02T02:32:43.181Z\",\n   \"device\": {\n      \"channel\": \"5117f2a7-ba58-4981-9456-169959511d1a\",\n      \"device_type\": \"IOS\"\n   },\n   \"body\": {\n      \"push_id\": \"0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e\",\n      \"alerting\": true\n   }\n}\n{\n  \"device\": {\n    \"channel\": \"820e4493-e4c9-4577-99bc-a98180599f73\",\n    \"delivery_address\": \"new.user@urbanairship.com\",\n    \"device_type\": \"EMAIL\"\n  },\n  \"id\": \"00000169-4a14-67b2-1ddd-d9e733622c3a\",\n  \"occurred\": \"2019-03-04T19:00:45.106Z\",\n  \"offset\": \"1000001260057\",\n  \"processed\": \"2019-03-04T19:00:47.094Z\",\n  \"type\": \"FIRST_OPT_IN\"\n}\n"
             }
           ]
         }
@@ -864,20 +1000,20 @@
     "/api/events/general": {
       "post": [
         {
-          "description": "Compliance Event Stream Request",
+          "description": "Example compliance event stream request",
           "examples": [
             {
               "lang": "http",
-              "source": "POST /api/events/general HTTP/1.1\nAuthorization: Basic <master authorization string>\nX-UA-Appkey: <appkey>\n\n{\n  \"start\":\"LATEST\",\n  \"enable_offset_updates\": true\n}\n"
+              "source": "POST /api/events/general HTTP/1.1\nAuthorization: Basic <master authorization string>\nX-UA-Appkey: <appkey>\nAccept: application/vnd.urbanairship+x-ndjson; version=3;\nContent-Type: application/json\n\n{\n  \"start\":\"LATEST\",\n  \"enable_offset_updates\": true\n}\n"
             }
           ]
         },
         {
-          "description": "Example Response",
+          "description": "Response",
           "examples": [
             {
-              "lang": "json",
-              "source": "Status: 200\nContent-encoding: gzip\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"id\": \"9781ff2e-fa4a-4fa8-bd9d-41f318c48963\",\n  \"offset\": \"1000001778910\",\n  \"occurred\": \"2018-11-28T00:02:41.794Z\",\n  \"processed\": \"2018-11-28T00:02:45.270Z\",\n  \"device\": {\n      \"channel\": \"5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"bogus@email.com\"\n  },\n  \"body\": {\n      \"event_type\": \"bounce\",\n      \"properties\": {\n          \"bounce_event_type\": \"bounce\",\n          \"sender\": \"msprvs1=17870ayYKWpBI=bounces-179492-4@spmailtechnolo.com\",\n          \"subject\": \"You there?\",\n          \"email\": \"bogus@email.com\",\n          \"bounce_class\": \"10\"\n      }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-encoding: gzip\nContent-Type: application/vnd.urbanairship+json; version=3;\n\n{\n  \"id\": \"9781ff2e-fa4a-4fa8-bd9d-41f318c48963\",\n  \"offset\": \"1000001778910\",\n  \"occurred\": \"2018-11-28T00:02:41.794Z\",\n  \"processed\": \"2018-11-28T00:02:45.270Z\",\n  \"device\": {\n      \"channel\": \"5a39b6d8-0a5a-4c2b-a4a0-3d4a71e5254b\",\n      \"device_type\": \"EMAIL\",\n      \"delivery_address\": \"bogus@example.com\"\n  },\n  \"body\": {\n      \"event_type\": \"bounce\",\n      \"properties\": {\n          \"bounce_event_type\": \"bounce\",\n          \"sender\": \"msprvs1=17870ayYKWpBI=bounces-179492-4@example.com\",\n          \"subject\": \"You there?\",\n          \"email\": \"bogus@example.com\",\n          \"bounce_class\": \"10\"\n      }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }

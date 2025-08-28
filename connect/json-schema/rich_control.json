@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when a user deletes a Message Center message from their inbox.",
+  "description": "Occurs when a Message Center message is not delivered to a user because they are in a control group for a [Sequence A/B test](../../guides/messaging/experimentation/a-b-tests/sequences/) or [Holdout Experiment](../../guides/messaging/experimentation/holdout-experiments/).",
   "properties": {
     "body": {
       "properties": {
@@ -184,6 +184,11 @@
       "type": "object",
       "x-schema-tag": "Device information"
     },
+    "experiment_id": {
+      "description": "ID for the requested experiment.",
+      "format": "uuid",
+      "type": "string"
+    },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
       "type": "string"
@@ -202,7 +207,7 @@
     },
     "type": {
       "enum": [
-        "RICH_DELETE"
+        "RICH_CONTROL"
       ],
       "type": "string"
     },
@@ -231,7 +236,7 @@
     "processed",
     "body"
   ],
-  "title": "Rich delete",
+  "title": "Rich control",
   "type": "object",
   "x-schema-tag": "Events"
 }

@@ -1,17 +1,17 @@
 {
-  "description": "This event appears in the stream when a channel is first opted in. This event is specific to email (commercial), sms and open channels.",
+  "description": "This event appears in the stream when a channel is first opted in. This event is specific to email (commercial), SMS, and open channels.",
   "properties": {
     "device": {
       "oneOf": [
         {
-          "description": "Information about the SMS or Email device related to an event.",
+          "description": "Information about the SMS or email device related to an event.",
           "properties": {
             "channel": {
-              "description": "the channel identifier",
+              "description": "The channel identifier.",
               "type": "string"
             },
             "delivery_address": {
-              "description": "* If 'device_type' is 'SMS', this field shows the MSISDN.\n* If `device_type` is `EMAIL`, this field shows the email address.\n",
+              "description": "* If `device_type` is `SMS`, this field shows the MSISDN.\n* If `device_type` is `EMAIL`, this field shows the email address.\n",
               "type": "string"
             },
             "device_type": {
@@ -23,7 +23,7 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The named user the channel is associated with.",
+              "description": "The Named User the channel is associated with.",
               "type": "string"
             }
           },
@@ -31,9 +31,9 @@
             "channel",
             "device_type"
           ],
-          "title": "Device Information for SMS and Email",
+          "title": "Device information for SMS and email",
           "type": "object",
-          "x-schema-tag": "Device Information"
+          "x-schema-tag": "Device information"
         },
         {
           "description": "Information about open channel users.",
@@ -50,7 +50,7 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "the named user identifier for the device.",
+              "description": "The Named User identifier for the device.",
               "type": "string"
             },
             "open_platform_name": {
@@ -58,9 +58,9 @@
               "type": "string"
             }
           },
-          "title": "Open Channel Device Information",
+          "title": "Open channel device information",
           "type": "object",
-          "x-schema-tag": "Device Information"
+          "x-schema-tag": "Device information"
         }
       ]
     },

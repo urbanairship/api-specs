@@ -1,6 +1,12 @@
 # Airship API Specs Changelog
 
-Version 3 (April 8, 2022)
+## Version 4 (August 28, 2025)
+
+### Changes
+
+- Updated to latest specs
+
+## Version 3 (April 8, 2022)
 
 ### Changes
 

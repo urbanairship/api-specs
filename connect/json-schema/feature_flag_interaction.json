@@ -1,35 +1,32 @@
 {
-  "description": "Occurs when a device is excluded from a push because it was arbitrarily selected as a member of a control group for a [Message A/B test](../../guides/messaging/experimentation/a-b-tests/messages/), [Sequence A/B test](../../guides/messaging/experimentation/a-b-tests/sequences/), or [Holdout Experiment](../../guides/messaging/experimentation/holdout-experiments/).\n",
+  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/messaging/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the Feature Flag audience and had access to the feature.\n",
   "properties": {
     "body": {
       "properties": {
-        "campaigns": {
-          "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
-          "properties": {
-            "categories": {
-              "items": {
-                "type": "string"
-              },
-              "type": "array"
-            }
-          },
-          "title": "Campaigns Object",
-          "type": "object"
+        "eligible": {
+          "description": "Indicates whether or not the user was in the Feature Flag audience and had access to the feature. `true` means the user was in the Feature Flag audience and had access to the feature.",
+          "type": "boolean"
         },
-        "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
-          "format": "uuid",
-          "title": "Group ID",
+        "flag_id": {
+          "description": "A UUID that is associated with a feature flag.",
           "type": "string"
         },
-        "push_id": {
-          "description": "A unique identifier for a push operation.",
-          "format": "uuid",
-          "title": "Push ID",
+        "flag_name": {
+          "description": "The name of a feature flag.",
+          "type": "string"
+        },
+        "variant_id": {
+          "description": "The UUID of the A/B test variant, if available.",
           "type": "string"
         }
       },
-      "type": "object"
+      "required": [
+        "flag_id",
+        "flag_name",
+        "eligible"
+      ],
+      "type": "object",
+      "x-schema-tag": "Event Body"
     },
     "device": {
       "oneOf": [
@@ -303,25 +300,9 @@
     },
     "type": {
       "enum": [
-        "CONTROL"
+        "FEATURE_FLAG_INTERACTION"
       ],
       "type": "string"
-    },
-    "user": {
-      "description": "The current state of the user when the event is emitted, including the contact ID and an optional named user ID.",
-      "properties": {
-        "contact_id": {
-          "description": "The Contact identifier for the device.",
-          "type": "string"
-        },
-        "named_user_id": {
-          "description": "The Named User identifier for the device.",
-          "type": "string"
-        }
-      },
-      "title": "User",
-      "type": "object",
-      "x-schema-tag": "User information"
     }
   },
   "required": [
@@ -332,7 +313,7 @@
     "processed",
     "body"
   ],
-  "title": "Control",
+  "title": "Feature Flag interaction event",
   "type": "object",
   "x-schema-tag": "Events"
 }

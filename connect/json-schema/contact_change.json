@@ -1,18 +1,27 @@
 {
-  "description": "Occurs when a user deletes a Message Center message from their inbox.",
+  "description": "Occurs when a contact is uninstalled, associated with a channel or Named User, or dissociated from a \nchannel or Named User.\n",
   "properties": {
     "body": {
       "properties": {
-        "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
-          "format": "uuid",
-          "title": "Group ID",
+        "change_type": {
+          "description": "Describes the reason the contact change event was emitted.\n\n* `ASSOCIATION`: The contact was associated to a channel or Named User.\n* `DISSOCIATION`: The contact was dissociated from a channel or Named User.\n* `UNINSTALL`: The contact was uninstalled.",
+          "enum": [
+            "ASSOCIATION",
+            "DISSOCIATION",
+            "UNINSTALL"
+          ],
           "type": "string"
         },
-        "push_id": {
-          "description": "A unique identifier for a push operation.",
-          "format": "uuid",
-          "title": "Push ID",
+        "channel_id": {
+          "description": "The ID of the channel that was associated or dissociated from the contact, depending on the change event\ntype.\n",
+          "type": "string"
+        },
+        "contact_id": {
+          "description": "The ID of the contact related to the change event.",
+          "type": "string"
+        },
+        "named_user_id": {
+          "description": "An optional string that represents the Named User ID related to the change event.",
           "type": "string"
         }
       },
@@ -202,7 +211,7 @@
     },
     "type": {
       "enum": [
-        "RICH_DELETE"
+        "CONTACT_CHANGE"
       ],
       "type": "string"
     },
@@ -223,15 +232,7 @@
       "x-schema-tag": "User information"
     }
   },
-  "required": [
-    "id",
-    "device",
-    "type",
-    "occurred",
-    "processed",
-    "body"
-  ],
-  "title": "Rich delete",
+  "title": "Contact change",
   "type": "object",
   "x-schema-tag": "Events"
 }

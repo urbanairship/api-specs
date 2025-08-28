@@ -96,7 +96,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -120,7 +120,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -133,25 +133,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -167,9 +167,9 @@
             "device",
             "body"
           ],
-          "title": "Email Delivery Event",
+          "title": "Email delivery event",
           "type": "object",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
           "description": "This event occurs when the provider (SparkPost) receives a message — typically when a member of the audience responds to an email.",
@@ -228,7 +228,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -252,7 +252,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -265,25 +265,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -299,9 +299,9 @@
             "device",
             "body"
           ],
-          "title": "Email Injection Event",
+          "title": "Email injection event",
           "type": "object",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
           "description": "Occurs when a recipient opens an email, rendering a tracking pixel at the bottom of the message. If a message is truncated by a client or email provider, a user may have to open it in a separate window to render the tracking pixel (and register this event).\n",
@@ -315,21 +315,58 @@
                   "type": "string"
                 },
                 "properties": {
-                  "properties": {
-                    "email": {
-                      "description": "The recipient's email address.",
-                      "type": "string"
+                  "allOf": [
+                    {
+                      "properties": {
+                        "email": {
+                          "description": "The recipient's email address.",
+                          "type": "string"
+                        },
+                        "sender": {
+                          "description": "The sender of the email specified by the event.",
+                          "type": "string"
+                        },
+                        "subject": {
+                          "description": "The subject line of the email specified by the event.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
                     },
-                    "sender": {
-                      "description": "The sender of the email specified by the event.",
-                      "type": "string"
-                    },
-                    "subject": {
-                      "description": "The subject line of the email specified by the event.",
-                      "type": "string"
+                    {
+                      "properties": {
+                        "agent_family": {
+                          "description": "The name of the family of user agent software used to access the email, e.g., WebKit",
+                          "type": "string"
+                        },
+                        "device_brand": {
+                          "description": "The brand of the device that was used to access the user agent software, e.g., Samsung or Apple.",
+                          "type": "string"
+                        },
+                        "device_family": {
+                          "description": "The name of the device used to access the user agent software.",
+                          "type": "string"
+                        },
+                        "is_mobile": {
+                          "description": "Indicates whether or not the user agent is from a mobile device.",
+                          "type": "boolean"
+                        },
+                        "is_prefetched": {
+                          "description": "Indicates if this event was likely prefetched, for example through Apple MPP. This field does not apply to clicks. The value returned in click events is always false.",
+                          "type": "boolean"
+                        },
+                        "os_family": {
+                          "description": "The name of the operating system used to access the user agent software.",
+                          "type": "string"
+                        },
+                        "os_version": {
+                          "description": "The version of the operating system used to access the user agent software.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
                     }
-                  },
-                  "type": "object"
+                  ]
                 },
                 "session_id": {
                   "description": "Represents the \"session\" of user activity. Absent if the application was initialized while backgrounded.",
@@ -360,7 +397,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -384,7 +421,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -397,25 +434,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -431,10 +468,10 @@
             "device",
             "body"
           ],
-          "title": "Email Open Event",
+          "title": "Email open event",
           "type": "object",
           "x-note": "This event requires images to load in the email client. If a user blocks images in their email client, Airship will not register this event.",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
           "description": "Occurs when a mailbox provider temporarily rejects an email. In general, this event indicates that the provider will attempt to resend the message.\n",
@@ -493,7 +530,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -517,7 +554,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -530,25 +567,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -564,9 +601,9 @@
             "device",
             "body"
           ],
-          "title": "Email Delay Event",
+          "title": "Email delay event",
           "type": "object",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
           "description": "Occurs when an email could not be delivered to an address. The `bounce_class` provides additional information about the reason your message bounced. This event occurs in conjunction with a similar `COMPLIANCE` event.\n",
@@ -601,7 +638,7 @@
                     {
                       "properties": {
                         "bounce_class": {
-                          "description": "A number between 1 and 100 that represents the specific reason the email abounced.",
+                          "description": "A number between 1 and 100 that represents the specific reason the email bounced.",
                           "format": "(100)|[1-9]\\d?",
                           "type": "string"
                         },
@@ -645,7 +682,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -669,7 +706,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -682,25 +719,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -716,12 +753,12 @@
             "device",
             "body"
           ],
-          "title": "Email Bounce Event",
+          "title": "Email bounce event",
           "type": "object",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
-          "description": "Occurs when a recipient clicks a tracked link in a message. Tracked links are redirected through the provider's click-tracking server to record the event.",
+          "description": "Occurs when a recipient clicks a tracked link in a message. Tracked links are redirected through the provider's click-tracking server to record the event. Only HTTP and HTTPS links are tracked. Unsubscribe link clicks do not trigger this event.",
           "properties": {
             "body": {
               "properties": {
@@ -753,11 +790,44 @@
                     {
                       "properties": {
                         "link_name": {
-                          "description": "The link text that the user clicked.",
+                          "description": "The [name of the link](../../guides/messaging/messages/content/email/#link-names), if set.",
                           "type": "string"
                         },
                         "link_url": {
                           "description": "The URL of the link that the user clicked.",
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "properties": {
+                        "agent_family": {
+                          "description": "The name of the family of user agent software used to access the email, e.g., WebKit",
+                          "type": "string"
+                        },
+                        "device_brand": {
+                          "description": "The brand of the device that was used to access the user agent software, e.g., Samsung or Apple.",
+                          "type": "string"
+                        },
+                        "device_family": {
+                          "description": "The name of the device used to access the user agent software.",
+                          "type": "string"
+                        },
+                        "is_mobile": {
+                          "description": "Indicates whether or not the user agent is from a mobile device.",
+                          "type": "boolean"
+                        },
+                        "is_prefetched": {
+                          "description": "Indicates if this event was likely prefetched, for example through Apple MPP. This field does not apply to clicks. The value returned in click events is always false.",
+                          "type": "boolean"
+                        },
+                        "os_family": {
+                          "description": "The name of the operating system used to access the user agent software.",
+                          "type": "string"
+                        },
+                        "os_version": {
+                          "description": "The version of the operating system used to access the user agent software.",
                           "type": "string"
                         }
                       },
@@ -794,7 +864,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -818,7 +888,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -831,25 +901,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -865,9 +935,9 @@
             "device",
             "body"
           ],
-          "title": "Email Click Event",
+          "title": "Email click event",
           "type": "object",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
           "description": "Occurs when a user clicks an unsubscribe link in an email you sent.",
@@ -920,7 +990,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -944,7 +1014,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 }
               },
@@ -957,25 +1027,25 @@
               "type": "object"
             },
             "device": {
-              "description": "Holds information about the email \"device\" (an individual email channel) the event occurred against.",
+              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
                   "type": "string"
                 },
                 "delivery_address": {
-                  "description": "The email address of the channel the event occured against.",
+                  "description": "The email address of the channel the event occurred against.",
                   "type": "string"
                 },
                 "device_type": {
-                  "description": "email compliance events use the EMAIL device type.",
+                  "description": "Email compliance events use the `EMAIL` device type.",
                   "enum": [
                     "EMAIL"
                   ],
                   "type": "string"
                 },
                 "named_user": {
-                  "description": "The named user that the channel is associated with; appears only if the channel is associated with a named user.",
+                  "description": "The Named User that the channel is associated with; appears only if the channel is associated with a Named User.",
                   "type": "string"
                 }
               },
@@ -991,12 +1061,12 @@
             "device",
             "body"
           ],
-          "title": "Email Unsubscribe Link Event",
+          "title": "Email unsubscribe link event",
           "type": "object",
-          "x-schema-tag": "Custom Email Events"
+          "x-schema-tag": "Custom email events"
         },
         {
-          "description": "Delivery reports are custom events sent from our third-party SMS providers.\nThese events report the status of your message between the provider and your audience up to, and including, delivery.\n",
+          "description": "Delivery reports are Custom Events sent from our third-party SMS providers.\nThese events report the status of your message between the provider and your audience up to, and including, delivery.\n",
           "properties": {
             "body": {
               "properties": {
@@ -1030,6 +1100,10 @@
                           "description": "An error code from the short message service center, if applicable.",
                           "type": "string"
                         },
+                        "is_rcs": {
+                          "description": "A boolean describing if the message was delivered as RCS or not.",
+                          "type": "boolean"
+                        },
                         "sender": {
                           "description": "The number or short code that the message originated from.",
                           "type": "string"
@@ -1038,7 +1112,7 @@
                           "description": "The delivery service for the message.",
                           "enum": [
                             "CLX",
-                            "TYNTEC"
+                            "TWILIO"
                           ],
                           "type": "string"
                         },
@@ -1069,6 +1143,10 @@
                         "handset": {
                           "description": "The profile of the handset that received the message. This information is only present if the `result_status` is `N102`.",
                           "type": "string"
+                        },
+                        "is_rcs": {
+                          "description": "A boolean describing if the message was delivered as RCS or not.",
+                          "type": "boolean"
                         },
                         "result_code": {
                           "description": "A status code from the vendor, if applicable.",
@@ -1105,7 +1183,7 @@
                           "type": "string"
                         },
                         "tracking_Id": {
-                          "description": "An ID assigned by the delivery service (CLX Only).",
+                          "description": "An ID assigned by the delivery service (CLX only).",
                           "type": "string"
                         },
                         "vendor": {
@@ -1150,7 +1228,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -1181,7 +1259,7 @@
               "type": "object"
             },
             "device": {
-              "description": "Device properties for Custom events with the `delivery_report` interaction type always specify an SMS device.",
+              "description": "Device properties for Custom Events with the `delivery_report` interaction type always specify an SMS device.",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
@@ -1237,16 +1315,16 @@
             "device",
             "body"
           ],
-          "title": "SMS Delivery Report",
+          "title": "SMS delivery report",
           "type": "object",
-          "x-schema-tag": "Custom SMS Events"
+          "x-schema-tag": "Custom SMS events"
         },
         {
           "properties": {
             "body": {
               "properties": {
                 "customer_id": {
-                  "description": "An external customer-side id, such as an email address. Absent if empty.",
+                  "description": "An external customer-side ID, such as an email address. Absent if empty.",
                   "type": "string"
                 },
                 "interaction_id": {
@@ -1254,11 +1332,13 @@
                   "type": "string"
                 },
                 "interaction_type": {
-                  "description": "The type of interaction as set by the UA SDK. Values determine whether the interaction triggered an event from the message center (`ua_mcrap`), a landing page (`ua_landing_page`), or an interactive notification (`ua_interactive_notification`).",
+                  "description": "The type of interaction as set by the Airship SDK. Values determine whether the interaction triggered an event from the Message Center (`ua_mcrap`), a landing page (`ua_landing_page`), an interactive notification (`ua_interactive_notification`), or a button tap (`ua_button_tap`).\n\n  Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](../../guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.",
                   "enum": [
                     "ua_mcrap",
                     "ua_landing_page",
-                    "ua_interactive_notification"
+                    "ua_interactive_notification",
+                    "ua_button_tap",
+                    "ua_button_tap-<custom name>"
                   ],
                   "type": "string"
                 },
@@ -1279,7 +1359,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -1303,7 +1383,6 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
                   "type": "object"
                 },
                 "name": {
@@ -1324,7 +1403,7 @@
                 },
                 "properties": {
                   "additionalProperties": true,
-                  "description": "Supports up to 100 key/value pairs that describe custom event properties. If the event has no custom properties, this field is absent.",
+                  "description": "Supports up to 100 key/value pairs that describe Custom Event properties. If the event has no custom properties, this field is absent.",
                   "maxProperties": 100,
                   "type": "object"
                 },
@@ -1335,7 +1414,7 @@
                   "type": "string"
                 },
                 "source": {
-                  "description": "The event source. `SDK` indicates an event sent from the UA SDK. `API` indicates an event created by request against the [Server Side Custom Events API]{{< relref \"api/ua/#server-side-custom-events\" >}}.",
+                  "description": "The event source. `SDK` indicates an event sent from the Airship SDK. `API` indicates an event created by request against the [Custom Events API](../../api/ua/#tag-custom-events).",
                   "enum": [
                     "SDK",
                     "API"
@@ -1364,7 +1443,7 @@
                       "type": "object"
                     },
                     "group_id": {
-                      "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                       "format": "uuid",
                       "title": "Group ID",
                       "type": "string"
@@ -1388,7 +1467,7 @@
                   "required": [
                     "push_id"
                   ],
-                  "title": "Associated Push",
+                  "title": "Associated push",
                   "type": "object"
                 },
                 "value": {
@@ -1404,6 +1483,7 @@
               "type": "object"
             },
             "device": {
+              "description": "Device information related to the event. Either the `channel` or `named_user_id` is required. The `named_user_id` is required for Custom Events sent via the API, else `channel` is required.\n",
               "properties": {
                 "channel": {
                   "description": "The unique, platform-agnostic channel identifier for a device.",
@@ -1420,6 +1500,10 @@
                     "EMAIL",
                     "SMS"
                   ],
+                  "type": "string"
+                },
+                "named_user_id": {
+                  "description": "The Named User identifier for a device.",
                   "type": "string"
                 }
               },
@@ -1440,7 +1524,7 @@
       ]
     }
   ],
-  "description": "Represents custom events that are either emmitted from the Airship SDK or submitted through the Custom Events API. You can configure custom events yourself. There are also several CUSTOM-type events for email and SMS that are defined by Airship.\n\nIn general, you can expect device information if the event source is `SDK` or if the event is one of the defined email or SMS events (as defined by `event_type`).\n",
+  "description": "Represents Custom Events that are either emitted from the Airship SDK or submitted through the Custom Events API. You can configure Custom Events yourself. There are also several CUSTOM-type events for email and SMS that are defined by Airship.\n\nIn general, you can expect device information if the event source is `SDK` or if the event is one of the defined email or SMS events (as defined by `event_type`).\n",
   "title": "Custom",
   "x-schema-tag": "Events"
 }

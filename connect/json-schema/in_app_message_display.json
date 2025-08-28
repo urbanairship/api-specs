@@ -1,14 +1,123 @@
 {
-  "description": "Occurs when an in-app message is displayed to a user. Because the event pertains to a specific device, the device information object will be populated.\n",
+  "description": "Occurs when an In-App Automation or Scene is displayed to a user. Because the event pertains to a specific device, the device information object will be populated.\n",
   "properties": {
     "body": {
       "properties": {
         "app_defined_id": {
-          "description": "An identifier defined by the application if the In-App Message was created by the application logic, not the UA system. If this field is present, the event body will not contain `push_id`, `group_id`,  `variant_id`, or `triggering_push` fields.",
+          "description": "An identifier defined by the application if the in-app message was created by the application logic, not Airship. If this field is present, the event body will not contain `push_id`, `group_id`,  `variant_id`, or `triggering_push` fields.",
           "type": "string"
         },
+        "campaigns": {
+          "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
+          "properties": {
+            "categories": {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            }
+          },
+          "title": "Campaigns Object",
+          "type": "object"
+        },
+        "context": {
+          "description": "The context provides the view state when a button, pager, or form interaction occurs.\n",
+          "properties": {
+            "reporting_context": {
+              "description": "Describes the content types of the in-app automation. Can be expanded to provide any data for reporting.",
+              "properties": {
+                "content_types": {
+                  "items": {
+                    "enum": [
+                      "scene",
+                      "survey"
+                    ],
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            },
+            "state": {
+              "description": "Can contain the current view state of pager and form.",
+              "properties": {
+                "form": {
+                  "properties": {
+                    "form_identifier": {
+                      "description": "Is the form controller identifier.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "response_type": {
+                      "description": "The type survey response type.",
+                      "enum": [
+                        "nps",
+                        "user_feedback"
+                      ],
+                      "type": "string"
+                    },
+                    "submitted": {
+                      "description": "True if the form has been submitted.",
+                      "type": "boolean"
+                    },
+                    "type": {
+                      "description": "The form type.",
+                      "enum": [
+                        "nps",
+                        "form"
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "form_identifier",
+                    "submitted"
+                  ],
+                  "type": "object"
+                },
+                "pager": {
+                  "properties": {
+                    "completed": {
+                      "description": "True if the user reached the end of the pager.",
+                      "type": "boolean"
+                    },
+                    "identifier": {
+                      "description": "Is the pager controller identifier.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "page_count": {
+                      "description": "Total number of pages.",
+                      "type": "number"
+                    },
+                    "page_identifier": {
+                      "description": "The current page identifier.",
+                      "format": "uuid",
+                      "type": "string"
+                    },
+                    "page_index": {
+                      "description": "Is the current pager index.",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "identifier",
+                    "page_identifier",
+                    "page_index",
+                    "page_count"
+                  ],
+                  "type": "object"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "title": "In-app context",
+          "type": "object"
+        },
         "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
           "type": "string"
@@ -42,7 +151,7 @@
               "type": "object"
             },
             "group_id": {
-              "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+              "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
               "format": "uuid",
               "title": "Group ID",
               "type": "string"
@@ -66,7 +175,7 @@
           "required": [
             "push_id"
           ],
-          "title": "Associated Push",
+          "title": "Associated push",
           "type": "object"
         },
         "variant_id": {
@@ -81,11 +190,11 @@
       "description": "Information about app users generated by the SDK.",
       "properties": {
         "amazon_channel": {
-          "description": "The identifier for an Amazon channel. In general, this is also the same value as the \"channel\"",
+          "description": "The identifier for a Fire OS channel. In general, this is also the same value as the `channel`.",
           "type": "string"
         },
         "android_channel": {
-          "description": "The identifier for an Android channel. In general, this is also the same value as the \"channel\"",
+          "description": "The identifier for an Android channel. In general, this is also the same value as the `channel`.",
           "type": "string"
         },
         "attributes": {
@@ -134,19 +243,19 @@
               "type": "string"
             },
             "locale_country_code": {
-              "description": "The ISO-3166-1 country code as defined in device settings.",
+              "description": "The ISO 3166-1 country code as defined in device settings.",
               "type": "string"
             },
             "locale_language_code": {
-              "description": "The ISO-639-1 two-letter language code reflecting the language that the device is set to.",
+              "description": "The ISO 639-1 two-letter language code reflecting the language that the device is set to.",
               "type": "string"
             },
             "locale_timezone": {
-              "description": "The device's timezone offset in seconds from UTC.",
+              "description": "The device's time zone offset in seconds from UTC.",
               "type": "string"
             },
             "locale_variant": {
-              "description": "The language variant",
+              "description": "The language variant.",
               "type": "string"
             },
             "location_enabled": {
@@ -196,7 +305,7 @@
           "description": "Identifying information specific to app devices.",
           "properties": {
             "com.urbanairship.aaid": {
-              "description": "Android/Amazon ad identifier",
+              "description": "Android/Fire OS ad identifier",
               "format": "uuid",
               "type": "string"
             },
@@ -227,11 +336,11 @@
           "type": "object"
         },
         "ios_channel": {
-          "description": "The identifier for an iOS channel. In general, this is also the same value as the \"channel\"",
+          "description": "The identifier for an iOS channel. In general, this is also the same value as the `channel`.",
           "type": "string"
         },
         "named_user_id": {
-          "description": "the named user identifier for the device.",
+          "description": "The Named User identifier for the device.",
           "type": "string"
         }
       },
@@ -239,9 +348,9 @@
         "device_type",
         "channel"
       ],
-      "title": "App Device Information",
+      "title": "App device information",
       "type": "object",
-      "x-schema-tag": "Device Information"
+      "x-schema-tag": "Device information"
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
@@ -264,6 +373,22 @@
         "IN_APP_MESSAGE_DISPLAY"
       ],
       "type": "string"
+    },
+    "user": {
+      "description": "The current state of the user when the event is emitted, including the contact ID and an optional named user ID.",
+      "properties": {
+        "contact_id": {
+          "description": "The Contact identifier for the device.",
+          "type": "string"
+        },
+        "named_user_id": {
+          "description": "The Named User identifier for the device.",
+          "type": "string"
+        }
+      },
+      "title": "User",
+      "type": "object",
+      "x-schema-tag": "User information"
     }
   },
   "required": [
@@ -274,7 +399,7 @@
     "processed",
     "body"
   ],
-  "title": "In-App Message Display",
+  "title": "In-app message display",
   "type": "object",
   "x-schema-tag": "Events"
 }

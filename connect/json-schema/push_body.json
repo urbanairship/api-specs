@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when you initiate a push, automation, or journey.\n\nAirship fulfills delivery over a time interval with a number of child pushes, each with a unique Push ID and a common Group ID. There is no guarantee that push body events (defined in Push Body Event) for the child pushes fulfilling a group will appear in the stream.\n\n**Note:** When you start, pause, or publish a journey, Airship emits a `push_body` event for the journey itself, and each message contained within the journey (i.e. messages +1). After you start a journey, Airship does not issue subsequent `push_body` events for the journey unless you pause or publish changes to the journey.\n",
+  "description": "Occurs when you initiate a push, automation, or sequence.\n\nAirship fulfills delivery over a time interval with a number of child pushes, each with a unique Push ID and a common Group ID. There is no guarantee that push body events (defined in Push Body Event) for the child pushes fulfilling a group will appear in the stream.\n\n**Note:** When you start, pause, or publish a sequence, Airship emits a `push_body` event for the sequence itself, and each message contained within the sequence (i.e., messages +1). After you start a sequence, Airship does not issue subsequent `push_body` events for the sequence unless you pause or publish changes to the sequence.\n",
   "properties": {
     "body": {
       "properties": {
@@ -17,7 +17,7 @@
           "type": "object"
         },
         "group_id": {
-          "description": "Identifies a push specification delivered over an interval of time, e.g. multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
           "type": "string"
@@ -33,7 +33,7 @@
           "type": "string"
         },
         "resource": {
-          "description": "Describes the type of push, helping you interpret the JSON response. Values pertain to the push \"type\".",
+          "description": "Describes the type of push, helping you interpret the JSON response. Values pertain to the push `type`.",
           "enum": [
             "PIPELINES",
             "SCHEDULES",
@@ -78,7 +78,7 @@
       "type": "string"
     }
   },
-  "title": "Push Body",
+  "title": "Push body",
   "type": "object",
   "x-schema-tag": "Events"
 }
