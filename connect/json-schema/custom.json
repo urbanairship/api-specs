@@ -790,7 +790,7 @@
                     {
                       "properties": {
                         "link_name": {
-                          "description": "The [name of the link](../../guides/messaging/messages/content/email/#link-names), if set.",
+                          "description": "The [name of the link](https://docs.airship.com/guides/messaging/messages/content/email/#link-names), if set.",
                           "type": "string"
                         },
                         "link_url": {
@@ -1320,6 +1320,171 @@
           "x-schema-tag": "Custom SMS events"
         },
         {
+          "description": "Read reports are Custom Events sent when an RCS message is marked as read. These events use the `delivery_report` interaction type with a `name` of `read`. See [RCS branded senders](https://docs.airship.com/developer/api-integrations/sms/rcs/).\n",
+          "properties": {
+            "body": {
+              "properties": {
+                "interaction_type": {
+                  "enum": [
+                    "delivery_report"
+                  ],
+                  "type": "string"
+                },
+                "name": {
+                  "description": "Indicates the event is an RCS read.",
+                  "enum": [
+                    "read"
+                  ],
+                  "type": "string"
+                },
+                "properties": {
+                  "properties": {
+                    "is_rcs": {
+                      "description": "A boolean describing whether the message was delivered as RCS.",
+                      "type": "boolean"
+                    },
+                    "number_of_message_parts": {
+                      "description": "The number of message parts delivered.",
+                      "type": "number"
+                    },
+                    "recipient_country_code": {
+                      "description": "The country code of the message recipient.",
+                      "type": "string"
+                    },
+                    "sender": {
+                      "description": "The number or short code that the message originated from.",
+                      "type": "string"
+                    },
+                    "vendor": {
+                      "description": "The delivery service for the message.",
+                      "enum": [
+                        "CLX",
+                        "TWILIO"
+                      ],
+                      "type": "string"
+                    },
+                    "vendorDeliveryId": {
+                      "description": "A unique identifier for the message from the SMS vendor.",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "sender",
+                    "vendor",
+                    "vendorDeliveryId"
+                  ],
+                  "type": "object"
+                },
+                "source": {
+                  "enum": [
+                    "API"
+                  ],
+                  "type": "string"
+                },
+                "triggering_push": {
+                  "description": "Identifies the push notification that caused the event.",
+                  "properties": {
+                    "campaigns": {
+                      "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
+                      "properties": {
+                        "categories": {
+                          "items": {
+                            "type": "string"
+                          },
+                          "type": "array"
+                        }
+                      },
+                      "title": "Campaigns Object",
+                      "type": "object"
+                    },
+                    "group_id": {
+                      "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                      "format": "uuid",
+                      "title": "Group ID",
+                      "type": "string"
+                    },
+                    "push_id": {
+                      "description": "A unique identifier for a push operation.",
+                      "format": "uuid",
+                      "title": "Push ID",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "push_id"
+                  ],
+                  "type": "object"
+                }
+              },
+              "required": [
+                "source",
+                "name",
+                "properties"
+              ],
+              "type": "object"
+            },
+            "device": {
+              "description": "Device properties for Custom Events with the `delivery_report` interaction type always specify an SMS device.",
+              "properties": {
+                "channel": {
+                  "description": "The unique, platform-agnostic channel identifier for a device.",
+                  "type": "string"
+                },
+                "delivery_address": {
+                  "description": "The phone number associated with the channel.",
+                  "type": "string"
+                },
+                "device_type": {
+                  "enum": [
+                    "SMS"
+                  ],
+                  "type": "string"
+                }
+              },
+              "required": [
+                "channel",
+                "delivery_address",
+                "device_type"
+              ],
+              "type": "object"
+            },
+            "id": {
+              "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
+              "type": "string"
+            },
+            "occurred": {
+              "description": "When the event occurred.",
+              "type": "string"
+            },
+            "offset": {
+              "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
+              "type": "string"
+            },
+            "processed": {
+              "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
+              "type": "string"
+            },
+            "type": {
+              "enum": [
+                "CUSTOM"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "id",
+            "occurred",
+            "offset",
+            "processed",
+            "type",
+            "device",
+            "body"
+          ],
+          "title": "RCS read report",
+          "type": "object",
+          "x-schema-tag": "Custom SMS events"
+        },
+        {
           "properties": {
             "body": {
               "properties": {
@@ -1332,7 +1497,7 @@
                   "type": "string"
                 },
                 "interaction_type": {
-                  "description": "The type of interaction as set by the Airship SDK. Values determine whether the interaction triggered an event from the Message Center (`ua_mcrap`), a landing page (`ua_landing_page`), an interactive notification (`ua_interactive_notification`), or a button tap (`ua_button_tap`).\n\n  Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](../../guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.",
+                  "description": "The type of interaction as set by the Airship SDK. Values determine whether the interaction triggered an event from the Message Center (`ua_mcrap`), a landing page (`ua_landing_page`), an interactive notification (`ua_interactive_notification`), or a button tap (`ua_button_tap`).\n\n  Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](https://docs.airship.com/guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.",
                   "enum": [
                     "ua_mcrap",
                     "ua_landing_page",
@@ -1414,7 +1579,7 @@
                   "type": "string"
                 },
                 "source": {
-                  "description": "The event source. `SDK` indicates an event sent from the Airship SDK. `API` indicates an event created by request against the [Custom Events API](../../api/ua/#tag-custom-events).",
+                  "description": "The event source. `SDK` indicates an event sent from the Airship SDK. `API` indicates an event created by request against the [Custom Events API](https://docs.airship.com/developer/rest-api/ua/#tag-custom-events).",
                   "enum": [
                     "SDK",
                     "API"

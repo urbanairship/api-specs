@@ -1071,6 +1071,42 @@ components:
                     }
                   }
                 }
+    flightSemantics:
+      - description: Example flight semantics object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "airlineCode": "AP",
+                  "flightNumber": 2214,
+                  "originalBoardingDate": "2025-03-19T20:30:00-08:00",
+                  "currentBoardingDate": "2025-03-19T20:59:00-08:00",
+                  "originalDepartureDate": "2025-03-19T09:00:00-08:00",
+                  "currentDepartureDate": "2025-03-20T09:30:00-08:00",
+                  "originalArrivalDate": "2025-03-20T02:00:00-05:00",
+                  "currentArrivalDate": "2025-03-20T02:00:00-05:00",
+                  "departureAirportCode": "SFO",
+                  "departureCityName": "San Francisco",
+                  "departureLocationTimeZone": "America/Los_Angeles",
+                  "departureAirportLocation": {
+                      "latitude": 37.6191,
+                      "longitude": 122.3816
+                  },
+                  "departureLocationSecurityPrograms": [
+                      "tsaPreCheck"
+                  ],
+                  "departureGate": "17B",
+                  "departureTerminal": "2",
+                  "destinationAirportCode": "JFK",
+                  "destinationCityName": "New York",
+                  "destinationLocationTimeZone": "America/New_York",
+                  "destinationAirportLocation": {
+                      "latitude": 40.6446,
+                      "longitude": 73.7797
+                  },
+                  "destinationGate": "6",
+                  "destinationTerminal": "1"
+              }
     googleHeaderItemShared:
       - description: Example Google header object with optional keys
         examples:
@@ -1514,6 +1550,41 @@ components:
                   "direction": "DESC",
                   "pageSize": 10
                 }
+              }
+    passengerSemantics:
+      - description: Example passenger semantics object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "passengerName": {
+                      "givenName": "Foo",
+                      "familyName": "Bar"
+                  },
+                  "boardingGroup": "3",
+                  "passengerCapabilities": [
+                      "priorityBoarding",
+                      "carryOn",
+                      "personalItem"
+                  ],
+                  "passengerEligibleSecurityPrograms": [
+                      "tsaPreCheck",
+                      "tsaPrecheckTouchlessId"
+                  ],
+                  "seats": [
+                      {
+                          "seatType": "Comfort+",
+                          "seatRow": "23",
+                          "seatNumber": "A"
+                      }
+                  ],
+                  "passengerServiceSSRs": [
+                      "wheelChair"
+                  ],
+                  "membershipProgramName": "Fleet Rewards",
+                  "membershipProgramNumber": "12345",
+                  "membershipProgramStatus": "Gold",
+                  "priorityStatus": "Fleet Priority"
               }
     passengers:
       - description: Example array of passengers
@@ -2626,7 +2697,7 @@ paths:
               Content-Type: application/json
 
               {
-                "passGroups": ["sfo-pdx-20180730"],
+                "passGroups": ["sfo-pdx-20250319"],
                 "fields": {
                   "flightNumber": { "value": "815" },
                   "airlineCode": { "value": "WN" },
@@ -2639,14 +2710,42 @@ paths:
                     "label": "Gate #",
                     "value": "25"
                   },
-                  "boardingTime": { "value": "2018-07-30T08:35:00" },
-                  "departureTime": { "value": "2018-07-30T09:00:00" },
+                  "boardingTime": { "value": "2025-03-19T20:30:00" },
+                  "departureTime": { "value": "2025-03-19T20:59" },
                   "arrivalAirport": {
                     "label": "Portland",
                     "value": "PDX"
                   },
-                  "arrivalTime": { "value": "2018-07-30T11:00:00" },
+                  "arrivalTime": { "value": "2025-03-20T09:30:00" },
                   "flightStatus": { "value": "scheduled" },
+                  "semantics" :{
+                        "airlineCode": "WN",
+                        "flightNumber": 2214,
+                        "originalBoardingDate": "2025-03-19T20:30:00-08:00",
+                        "originalDepartureDate": "2025-03-20T02:00:00-05:00",
+                        "originalArrivalDate": "2025-03-20T02:00:00-05:00",
+                        "currentBoardingDate": "2025-03-19T20:59:00-08:00",
+                        "currentDepartureDate": "2025-03-19T20:59:00-08:00",
+                        "currentArrivalDate": "2025-03-20T09:30:00-08:00",
+                        "departureAirportCode": "SFO",
+                        "departureCityName": "San Francisco",
+                        "departureLocationTimeZone": "America/Los_Angeles",
+                        "departureAirportLocation": {
+                             "latitude": 37.6191,
+                             "longitude": 122.3816
+                        },
+                       "departureGate": "25",
+                       "departureTerminal": "2",
+                       "destinationAirportCode": "PDX",
+                       "destinationCityName": "Portland",
+                       "destinationLocationTimeZone": "America/Los_Angeles",
+                       "destinationAirportLocation": {
+                            "latitude": 40.6446,
+                            "longitude": 73.7797
+                       },
+                       "destinationGate": "6",
+                       "destinationTerminal": "1"
+                 }
                 }
               }
       - description: Response
@@ -2659,8 +2758,8 @@ paths:
               {
                 "flightId": 1234,
                 "projectId": 12345,
-                "createdAt": "2018-07-05T09:12:32Z",
-                "updatedAt": "2018-07-05T09:12:32Z",
+                "createdAt": "2025-03-05T09:12:32Z",
+                "updatedAt": "2025-03-05T09:12:32Z",
                 "passGroups": ["sfo-pdx-20180730"],
                 "fields": {
                   "flightNumber": {
@@ -2685,11 +2784,11 @@ paths:
                   },
                   "boardingTime": {
                     "label": "Boarding Time",
-                    "value": "2018-07-30T08:35:00"
+                    "value": "2025-03-19T20:30:00"
                   },
                   "departureTime": {
                     "label": "Departure Time",
-                    "value": "2018-07-30T09:00:00"
+                    "value": "2025-03-19T20:59:00"
                   },
                   "arrivalAirport": {
                     "label": "Portland",
@@ -2701,12 +2800,40 @@ paths:
                   },
                   "arrivalTime": {
                     "label": "Arrival Time",
-                    "value": "2018-07-30T11:00:00"
+                    "value": "2025-03-20T09:30:00"
                   },
                   "flightStatus": {
                     "label": "Flight Status",
                     "value": "scheduled"
-                  }
+                  },
+                  "semantics" :{
+                        "airlineCode": "WN",
+                        "flightNumber": 2214,
+                        "originalBoardingDate": "2025-03-19T20:30:00-08:00",
+                        "originalDepartureDate": "2025-03-20T02:00:00-05:00",
+                        "originalArrivalDate": "2025-03-20T02:00:00-05:00",
+                        "currentBoardingDate": "2025-03-19T20:59:00-08:00",
+                        "currentDepartureDate": "2025-03-19T20:59:00-08:00",
+                        "currentArrivalDate": "2025-03-20T09:30:00-08:00",
+                        "departureAirportCode": "SFO",
+                        "departureCityName": "San Francisco",
+                        "departureLocationTimeZone": "America/Los_Angeles",
+                        "departureAirportLocation": {
+                             "latitude": 37.6191,
+                             "longitude": 122.3816
+                        },
+                       "departureGate": "25",
+                       "departureTerminal": "2",
+                       "destinationAirportCode": "PDX",
+                       "destinationCityName": "Portland",
+                       "destinationLocationTimeZone": "America/Los_Angeles",
+                       "destinationAirportLocation": {
+                            "latitude": 40.6446,
+                            "longitude": 73.7797
+                       },
+                       "destinationGate": "6",
+                       "destinationTerminal": "1"
+                 }
                 }
               }
   '/flights/project/{projectId}/passGroups/{passGroup}':
@@ -2811,11 +2938,11 @@ paths:
                   },
                   "boardingTime": {
                     "label": "Boarding Time",
-                    "value": "2018-07-30T09:20:00"
+                    "value": "2025-03-19T20:30:00"
                   },
                   "departureTime": {
                     "label": "Departure Time",
-                    "value": "2018-07-30T09:45:00"
+                    "value": "2025-03-20T02:00:00"
                   },
                   "arrivalAirport": {
                     "label": "Portland",
@@ -2827,12 +2954,40 @@ paths:
                   },
                   "arrivalTime": {
                     "label": "Arrival Time",
-                    "value": "2018-07-30T11:45:00"
+                    "value": "2025-03-20T02:00:00"
                   },
                   "flightStatus": {
                     "label": "Flight Status",
                     "value": "scheduled"
-                  }
+                  },
+                  "semantics" :{
+                        "airlineCode": "WN",
+                        "flightNumber": 2214,
+                        "originalBoardingDate": "2025-03-19T20:30:00-08:00",
+                        "originalDepartureDate": "2025-03-20T02:00:00-05:00",
+                        "originalArrivalDate": "2025-03-20T02:00:00-05:00",
+                        "currentBoardingDate": "2025-03-19T20:59:00-08:00",
+                        "currentDepartureDate": "2025-03-19T20:59:00-08:00",
+                        "currentArrivalDate": "2025-03-20T09:30:00-08:00",
+                        "departureAirportCode": "SFO",
+                        "departureCityName": "San Francisco",
+                        "departureLocationTimeZone": "America/Los_Angeles",
+                        "departureAirportLocation": {
+                             "latitude": 37.6191,
+                             "longitude": 122.3816
+                        },
+                       "departureGate": "25",
+                       "departureTerminal": "2",
+                       "destinationAirportCode": "PDX",
+                       "destinationCityName": "Portland",
+                       "destinationLocationTimeZone": "America/Los_Angeles",
+                       "destinationAirportLocation": {
+                            "latitude": 40.6446,
+                            "longitude": 73.7797
+                       },
+                       "destinationGate": "6",
+                       "destinationTerminal": "1"
+                 }
                 }
               }
       - description: Example request with external ID
@@ -10038,6 +10193,450 @@ paths:
                   "total": 7,
                   "installed": 0,
                   "uninstalled": 0
+              }
+  '/templates/{id}':
+    get:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              GET /templates/179229 HTTP/1.1
+              Authorization: Basic <Base64 key>
+      - description: Example request with external ID
+        examples:
+          - lang: HTTP
+            source: |
+              GET /templates/id/myTemplate HTTP/1.1
+              Authorization: Basic <Base64 key>
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json; charset=utf-8
+
+              {
+                "type": "loyalty",
+                "name": "Member Card Android",
+                "vendorId": 2,
+                "vendor": "Google",
+                "projectId": 7311,
+                "description": "Member Card Android",
+                "projectType": "loyalty",
+                "createdAt": "2025-09-26T20:44:15.000Z",
+                "updatedAt": "2025-09-26T20:44:16.000Z",
+                "id": 179229,
+                "deleted": false,
+                "disabled": false,
+                "expiryInfo": {
+                  "expiryDuration": 730,
+                  "expiryNever": null
+                },
+                "headers": {
+                  "barcode_value": {
+                    "fieldType": "barcode",
+                    "value": "123456789",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "barcode_encoding": {
+                    "fieldType": "barcode",
+                    "value": "iso-8859-1",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "barcodeAltText": {
+                    "fieldType": "barcode",
+                    "value": "",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "barcode_type": {
+                    "fieldType": "barcode",
+                    "value": "PDF_417",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  }
+                },
+                "fields": {
+                  "image": {
+                    "fieldType": "titleModule",
+                    "value": "",
+                    "formatType": "String",
+                    "label": "http://storage.googleapis.com/wallet-stag-storage-bucket/1000002/images/ff9367b7cff7cad7fa67ae2c871485e3befae602_6fc517eff2d76511c062913946b9149876a17623_Metro-Logo-1200x1200.png",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "Program Points": {
+                    "fieldType": "loyaltyPoints",
+                    "value": "3600",
+                    "formatType": "Number",
+                    "label": "Member Points",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  },
+                  "Program Details": {
+                    "fieldType": "textModulesData",
+                    "value": "Pre-Membership for Metro Members",
+                    "formatType": "String",
+                    "label": "Pre-Member Program",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  },
+                  "Tier": {
+                    "fieldType": "acctModule",
+                    "value": "Pre-Member",
+                    "formatType": "String",
+                    "label": "Member Level",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 2,
+                    "row": 0,
+                    "col": 1
+                  },
+                  "Merchant Website": {
+                    "fieldType": "linksModuleData",
+                    "value": "Merchant Website",
+                    "formatType": "URL",
+                    "label": "www.metro.com.sg",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 0
+                  },
+                  "Member Name": {
+                    "fieldType": "acctModule",
+                    "value": "Henry Christian",
+                    "formatType": "String",
+                    "label": "Member Name",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  },
+                  "Loyalty Program Name": {
+                    "fieldType": "titleModule",
+                    "value": "Metro",
+                    "formatType": "String",
+                    "label": "Pre-Member",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  }
+                },
+                "locations": [
+                ]
+              }
+    patch:
+      - description: Example patch template
+        examples:
+          - lang: HTTP
+            source: |
+              PATCH /templates/179229 HTTP/1.1
+              Authorization: Basic <authorization string>
+              Content-Type: application/json
+
+              {
+                "fields" : {
+                  "Loyalty Program Name": {
+                          "fieldType": "titleModule",
+                          "value": "MVP",
+                          "formatType": "String",
+                          "label": "program",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 1,
+                          "row": 0,
+                          "col": 0
+                      }
+                }
+              }
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json; charset=utf-8
+
+              {
+                "type": "loyalty",
+                "name": "Member Card Android",
+                "vendorId": 2,
+                "vendor": "Google",
+                "projectId": 7311,
+                "description": "Member Card Android",
+                "projectType": "loyalty",
+                "createdAt": "2025-09-26T20:44:15.000Z",
+                "updatedAt": "2025-09-26T20:44:16.000Z",
+                "id": 179229,
+                "deleted": false,
+                "disabled": false,
+                "expiryInfo": {
+                  "expiryDuration": 730,
+                  "expiryNever": null
+                },
+                "headers": {
+                  "barcodeAltText": {
+                    "fieldType": "barcode",
+                    "value": "",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "barcode_type": {
+                    "fieldType": "barcode",
+                    "value": "PDF_417",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "barcode_value": {
+                    "fieldType": "barcode",
+                    "value": "123456789",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "barcode_encoding": {
+                    "fieldType": "barcode",
+                    "value": "iso-8859-1",
+                    "formatType": "String",
+                    "label": "",
+                    "hideEmpty": false,
+                    "required": false
+                  }
+                },
+                "fields": {
+                  "image": {
+                    "fieldType": "titleModule",
+                    "value": "",
+                    "formatType": "String",
+                    "label": "http://storage.googleapis.com/wallet-stag-storage-bucket/1000002/images/ff9367b7cff7cad7fa67ae2c871485e3befae602_6fc517eff2d76511c062913946b9149876a17623_Metro-Logo-1200x1200.png",
+                    "hideEmpty": false,
+                    "required": false
+                  },
+                  "Program Points": {
+                    "fieldType": "loyaltyPoints",
+                    "value": "3600",
+                    "formatType": "Number",
+                    "label": "Member Points",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  },
+                  "Program Details": {
+                    "fieldType": "textModulesData",
+                    "value": "Pre-Membership for Metro Members",
+                    "formatType": "String",
+                    "label": "Pre-Member Program",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  },
+                  "Tier": {
+                    "fieldType": "acctModule",
+                    "value": "Pre-Member",
+                    "formatType": "String",
+                    "label": "Member Level",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 2,
+                    "row": 0,
+                    "col": 1
+                  },
+                  "Merchant Website": {
+                    "fieldType": "linksModuleData",
+                    "value": "Merchant Website",
+                    "formatType": "URL",
+                    "label": "www.metro.com.sg",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 0
+                  },
+                  "Member Name": {
+                    "fieldType": "acctModule",
+                    "value": "Henry Christian",
+                    "formatType": "String",
+                    "label": "Member Name",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  },
+                  "Loyalty Program Name": {
+                    "fieldType": "titleModule",
+                    "value": "MVP",
+                    "formatType": "String",
+                    "label": "program",
+                    "hideEmpty": false,
+                    "required": false,
+                    "order": 1,
+                    "row": 0,
+                    "col": 0
+                  }
+                }
+              }
+    put:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              PUT /templates/12345 HTTP/1.1
+              Content-Type: application/json
+              Authorization: Basic <Base64 key>
+
+              {
+                  "type": "loyalty",
+                  "name": "Member Card Android",
+                  "vendorId": 2,
+                  "vendor": "Google",
+                  "projectId": 7311,
+                  "description": "Member Card Android",
+                  "projectType": "loyalty",
+                  "deleted": false,
+                  "disabled": false,
+                  "headers": {
+                      "barcode_value": {
+                          "fieldType": "barcode",
+                          "value": "123456789",
+                          "formatType": "String",
+                          "label": "",
+                          "hideEmpty": false,
+                          "required": false
+                      },
+                      "barcode_encoding": {
+                          "fieldType": "barcode",
+                          "value": "iso-8859-1",
+                          "formatType": "String",
+                          "label": "",
+                          "hideEmpty": false,
+                          "required": false
+                      },
+                      "barcodeAltText": {
+                          "fieldType": "barcode",
+                          "value": "",
+                          "formatType": "String",
+                          "label": "",
+                          "hideEmpty": false,
+                          "required": false
+                      },
+                      "barcode_type": {
+                          "fieldType": "barcode",
+                          "value": "PDF_417",
+                          "formatType": "String",
+                          "label": "",
+                          "hideEmpty": false,
+                          "required": false
+                      }
+                  },
+                  "fields": {
+                      "image": {
+                          "fieldType": "titleModule",
+                          "value": "Image description for title image"
+                          "formatType": "String",
+                          "label": "http://storage.googleapis.com/wallet-stag-storage-bucket/1000002/images/ff9367b7cff7cad7fa67ae2c871485e3befae602_6fc517eff2d76511c062913946b9149876a17623_Metro-Logo-1200x1200.png",
+                          "hideEmpty": false,
+                          "required": false
+                      },
+                      "Program Points": {
+                          "fieldType": "loyaltyPoints",
+                          "value": "3600",
+                          "formatType": "Number",
+                          "label": "Member Points",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 1,
+                          "row": 0,
+                          "col": 0
+                      },
+                      "Program Details": {
+                          "fieldType": "textModulesData",
+                          "value": "Pre-Membership for Metro Members",
+                          "formatType": "String",
+                          "label": "Pre-Member Program",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 1,
+                          "row": 0,
+                          "col": 0
+                      },
+                      "Tier": {
+                          "fieldType": "acctModule",
+                          "value": "Pre-Member",
+                          "formatType": "String",
+                          "label": "Member Level",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 2,
+                          "row": 0,
+                          "col": 1
+                      },
+                      "Merchant Website": {
+                          "fieldType": "linksModuleData",
+                          "value": "Merchant Website",
+                          "formatType": "URL",
+                          "label": "www.metro.com.sg",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 0
+                      },
+                      "Member Name": {
+                          "fieldType": "acctModule",
+                          "value": "Henry Christian",
+                          "formatType": "String",
+                          "label": "Member Name",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 1,
+                          "row": 0,
+                          "col": 0
+                      },
+                      "Loyalty Program Name": {
+                          "fieldType": "titleModule",
+                          "value": "Metro",
+                          "formatType": "String",
+                          "label": "Pre-Member",
+                          "hideEmpty": false,
+                          "required": false,
+                          "order": 1,
+                          "row": 0,
+                          "col": 0
+                      }
+                  }
+              }
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json; charset=utf-8
+
+              {
+                "templateId": 179229
               }
   '/ticket/{ticketId}':
     get:

@@ -1,0 +1,81 @@
+{
+  "description": "Occurs when you update a Scene screen name.\n",
+  "properties": {
+    "body": {
+      "properties": {
+        "group_id": {
+          "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+          "format": "uuid",
+          "title": "Group ID",
+          "type": "string"
+        },
+        "labels": {
+          "description": "Page list",
+          "items": {
+            "properties": {
+              "id": {
+                "description": "Page ID",
+                "format": "uuid",
+                "type": "string"
+              },
+              "label": {
+                "description": "Page label",
+                "type": "string"
+              }
+            },
+            "required": [
+              "id",
+              "label"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "push_id": {
+          "description": "A unique identifier for a push operation.",
+          "format": "uuid",
+          "title": "Push ID",
+          "type": "string"
+        }
+      },
+      "required": [
+        "push_id",
+        "labels"
+      ],
+      "type": "object"
+    },
+    "id": {
+      "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, and `body` values but different `offset` and `processed` values. Use the `id` to deduplicate.",
+      "type": "string"
+    },
+    "occurred": {
+      "description": "When the event occurred.",
+      "type": "string"
+    },
+    "offset": {
+      "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
+      "type": "string"
+    },
+    "processed": {
+      "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
+      "type": "string"
+    },
+    "type": {
+      "enum": [
+        "LABEL_EVENT"
+      ],
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "type",
+    "occurred",
+    "processed",
+    "offset",
+    "body"
+  ],
+  "title": "Label event",
+  "type": "object",
+  "x-schema-tag": "Events"
+}

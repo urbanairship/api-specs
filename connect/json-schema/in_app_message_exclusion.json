@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](../../guides/messaging/project/config/ban-lists/).\n",
+  "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](https://docs.airship.com/guides/messaging/project/config/ban-lists/).\n",
   "properties": {
     "body": {
       "properties": {
@@ -74,7 +74,7 @@
           "type": "object"
         },
         "type": {
-          "description": "Indicates that the in-app message was not displayed on a device because the channel or Named User was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or Named User is on a project's [Ban List](../../guides/messaging/project/config/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a Ban List occurs.",
+          "description": "Indicates that the in-app message was not displayed on a device because the channel or Named User was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or Named User is on a project's [Ban List](https://docs.airship.com/guides/messaging/project/config/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a Ban List occurs.",
           "enum": [
             "AUDIENCE_CHECK_EXCLUDED"
           ],
@@ -119,11 +119,13 @@
               "type": "string"
             },
             "carrier": {
-              "description": "The wireless carrier used by the device.",
+              "deprecated": true,
+              "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
               "type": "string"
             },
             "connection_type": {
-              "description": "The internet connection type used by the device.",
+              "deprecated": true,
+              "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
               "enum": [
                 "WIFI",
                 "CELL",

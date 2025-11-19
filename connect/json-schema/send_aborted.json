@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [External Data Feeds](../../guides/messaging/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](../../guides/messaging/project/config/message-limits/) is met\n  * When a [Ban List](../../guides/messaging/project/config/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
+  "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [External Data Feeds](https://docs.airship.com/guides/messaging/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) is met\n  * When a [Ban List](https://docs.airship.com/guides/messaging/project/config/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
   "properties": {
     "body": {
       "properties": {
@@ -29,7 +29,7 @@
           "type": "string"
         },
         "reason": {
-          "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](../../guides/messaging/project/config/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](../../guides/messaging/project/config/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](../../guides/messaging/project/config/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
+          "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](https://docs.airship.com/guides/messaging/project/config/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
           "enum": [
             "FEED_BANNED_RESPONSE",
             "FEED_REQUEST_REJECTED",
@@ -78,11 +78,13 @@
               "type": "string"
             },
             "carrier": {
-              "description": "The wireless carrier used by the device.",
+              "deprecated": true,
+              "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
               "type": "string"
             },
             "connection_type": {
-              "description": "The internet connection type used by the device.",
+              "deprecated": true,
+              "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
               "enum": [
                 "WIFI",
                 "CELL",

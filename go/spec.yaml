@@ -22,7 +22,7 @@ components:
             $ref: '#/components/schemas/error'
       description: >-
         There was a parsing or validation error in the request. Bad Request
-        errors typically include `path` and `location` in the response, to help
+        errors typically include `path` and `location` in the response to help
         you find the cause of the error.
     '401':
       content:
@@ -110,8 +110,25 @@ components:
       description: >-
         Describes Actions to be performed by the SDK when a user interacts with
         the notification. You can personalize message actions using
-        [Handlebars](../../guides/messaging/personalization/handlebars/).
+        [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
       properties:
+        add_custom_event:
+          description: >-
+            Emit a custom event when a user interacts with the push
+            notification.
+          properties:
+            name:
+              description: The name of the custom event.
+              type: string
+            properties:
+              description: A JSON object with the properties associated with the event.
+              type: object
+            value:
+              description: An integer or decimal value of the event.
+              type: number
+          required:
+            - name
+          type: object
         add_tag:
           description: An array of tags.
           example:
@@ -134,7 +151,8 @@ components:
             the Actions object, but be aware that their registered names in the
             SDK may be different. For a summary of the actions registered by the
             SDK, including usage information, see the
-            [Mobile](https://docs.airship.com/platform/mobile/actions/) docs.
+            [Mobile](https://docs.airship.com/developer/sdk-integration/mobile/actions/)
+            docs.
           type: object
         open:
           description: >-
@@ -282,7 +300,7 @@ components:
             Default event values are enumerated below. If you create a custom or
             predefined event that you wish to segment users on, you must
             register the event in the Airship dashboard. See [Manage
-            events](../../guides/messaging/project/config/events/).
+            events](https://docs.airship.com/guides/messaging/project/config/events/).
           enum:
             - app_open
             - message_received
@@ -717,7 +735,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               type: object
@@ -805,6 +823,18 @@ components:
             not be sent until the device becomes active. The default value is
             false.
           type: boolean
+        deliver_to:
+          default: all
+          description: >-
+            Filters out Android channels that are not able to receive
+            notifications. If the value is `opted_in`, the payload is only sent
+            to opted-in devices. If the value is `all`, the payload is sent to
+            opted-in and background enabled devices. Defaults to `all` if not
+            provided.
+          enum:
+            - all
+            - opted_in
+          type: string
         delivery_priority:
           default: normal
           description: >-
@@ -838,7 +868,7 @@ components:
           description: >-
             JSON object that represents the content sent to a Live Update
             notification. Live Updates are an [AXP
-            feature](../../reference/feature-packages/). 
+            feature](https://docs.airship.com/reference/feature-packages/). 
 
 
             **Note**: Using this object transforms the Android notification to a
@@ -1103,6 +1133,18 @@ components:
             not be sent until the device becomes active. The default value is
             false.
           type: boolean
+        deliver_to:
+          default: all
+          description: >-
+            Filters out Android channels that are not able to receive
+            notifications. If the value is `opted_in`, the payload is only sent
+            to opted-in devices. If the value is `all`, the payload is sent to
+            opted-in and background enabled devices. Defaults to `all` if not
+            provided.
+          enum:
+            - all
+            - opted_in
+          type: string
         delivery_priority:
           default: normal
           description: >-
@@ -1229,7 +1271,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               type: object
@@ -1734,7 +1776,7 @@ components:
 
         This object enumerates predefined attributes, but you can [create your
         own in the Airship
-        dashboard](/guides/messaging/audience/segmentation/attributes/adding/).
+        dashboard](https://docs.airship.com/guides/messaging/audience/segmentation/attributes/adding/).
       properties:
         account_creation:
           description: >-
@@ -1857,8 +1899,8 @@ components:
       description: >-
         Defines limits to be applied to Push Notifications and standard in-app
         messages (not In-App Automations or Scenes) only. See [Audience
-        Limit](../../guides/messaging/messages/delivery/#audience-limit) in the
-        *Message delivery* user guide for additional information and
+        Limit](https://docs.airship.com/guides/messaging/messages/delivery/#audience-limit)
+        in the *Message delivery* user guide for additional information and
         limitations.
       properties:
         max_recipients:
@@ -1894,24 +1936,26 @@ components:
       description: >
         A list of parameters, where the key and value are both strings, that
         will be used to override the default values set for variables in a [Ban
-        List](../../guides/messaging/project/config/ban-lists/) request URL.
+        List](https://docs.airship.com/guides/messaging/project/config/ban-lists/)
+        request URL.
       title: Ban List parameters
       type: object
     bulkSendObject:
       description: >-
-        A bulk send object describes everything about a Create and Send a
-        message with bulk ID notification. The acceptable fields are identical
-        to a standard push with two exceptions. The audience field can only be a
-        single `bulk_id` and there can only be one `device_type`.
+        A bulk send object describes everything about a [Send message with bulk
+        ID](#operation-api-bulk-send-post) or [Schedule message with bulk
+        ID](#operation-api-schedules-bulk-send-post) notification. The
+        acceptable fields are identical to a standard push with two exceptions.
+        The audience field can only be a single `bulk_id` and there can only be
+        one `device_type`.
       properties:
         audience:
           properties:
             bulk_id:
               description: >
-                A unique string that can be used to target an audience
-                originally defined in a [Create bulk send audience
-                operation](#operation-api-bulk-platform_name-post) for an
-                immediate or scheduled push.
+                A unique string obtained from the [Create bulk send audience
+                operation](#operation-api-bulk-platform_name-post) to target an
+                audience for bulk sending.
               format: uuid
               type: string
           required:
@@ -2032,6 +2076,138 @@ components:
         - categories
       title: Campaigns object
       type: object
+    channelContactOperationDeviceInfoObject:
+      description: Additional device information that is not included in the headers.
+      properties:
+        device_type:
+          description: The device type of the channel.
+          enum:
+            - ios
+            - android
+            - amazon
+            - web
+            - email
+            - sms
+            - open
+          type: string
+      required:
+        - device_type
+      title: Channel Contact operation device info object
+      type: object
+    channelContactOperationIdentifyActionObject:
+      description: >-
+        A Channel Contact operation using this object associates a channel to a
+        Named User and attempts to identify the Named User with a specific
+        Contact ID. If the Named User does not yet exist, it will be created
+        with the [Anonymous
+        Contact](https://docs.airship.com/developer/sdk-integration/mobile/audience/#contacts)
+        ID that the channel is already associated to. If the channel is not
+        associated to an Anonymous Contact, the Named User will be created using
+        the optionally provided Contact ID or a randomly generated Contact ID if
+        there is no Contact ID provided or the provided Contact ID is already
+        bound to a Named User.
+      properties:
+        contact_id:
+          description: >-
+            Contact ID to associate to the Named User if it is not already
+            associated to a Contact. Otherwise it will be ignored.
+          format: uuid
+          type: string
+        named_user_id:
+          description: 'Identifies the Named User, with no leading or trailing whitespace.'
+          example: john_doe
+          maxLength: 128
+          minLength: 1
+          pattern: '^[^\s].{1,125}\S$'
+          type: string
+        type:
+          description: The action to be carried out.
+          enum:
+            - identify
+          type: string
+      required:
+        - type
+        - named_user_id
+      title: Identify action object
+      type: object
+    channelContactOperationObject:
+      description: Contains `device_info` and `action`.
+      properties:
+        action:
+          oneOf:
+            - $ref: '#/components/schemas/channelContactOperationResolveActionObject'
+            - $ref: '#/components/schemas/channelContactOperationIdentifyActionObject'
+            - $ref: '#/components/schemas/channelContactOperationResetActionObject'
+        device_info:
+          $ref: '#/components/schemas/channelContactOperationDeviceInfoObject'
+      required:
+        - device_info
+        - action
+      title: Channel Contact operation object
+      type: object
+    channelContactOperationResetActionObject:
+      description: >-
+        A Channel Contact operation using this object is mostly equivalent to
+        [Named Users
+        disassociation](#operation-api-named_users-disassociate-post), but
+        instead of leaving the channel disassociated, it associates the channel
+        to a new [Anonymous
+        Contact](https://docs.airship.com/developer/sdk-integration/mobile/audience/#contacts)
+        after disassociation from the current Contact.
+      properties:
+        type:
+          description: The action to be carried out.
+          enum:
+            - reset
+          type: string
+      required:
+        - type
+      title: Reset action object
+      type: object
+    channelContactOperationResolveActionObject:
+      description: >-
+        A Channel Contact operation using this object results in either
+        resolving the current associated Contact (named or anonymous) for that
+        channel or it will associate that channel to an [Anonymous
+        Contact](https://docs.airship.com/developer/sdk-integration/mobile/audience/#contacts),
+        always returning a Contact ID for the SDK to store. A Contact ID can
+        optionally be provided, which the channel will be associated to in the
+        event the channel is not already associated to a Contact and the
+        provided Contact ID is not already bound to a Named User.
+      properties:
+        contact_id:
+          description: >-
+            Contact ID to associate to the channel if it is not already
+            associated to a Contact.
+          format: uuid
+          type: string
+        type:
+          description: The action to be carried out.
+          enum:
+            - resolve
+          type: string
+      required:
+        - type
+      title: Resolve action object
+      type: object
+    channelContactOperationResponseContactObject:
+      description: Information about the Contact.
+      properties:
+        channel_association_timestamp:
+          description: >-
+            The [date-time](#date-time-format) when the channel association
+            occurred.
+          format: date-time
+          type: string
+        contact_id:
+          description: Internal Contact ID.
+          format: uuid
+          type: string
+        is_anonymous:
+          description: Specifies whether the Contact is anonymous or not.
+          type: boolean
+      title: Identify Contact response object
+      type: object
     channelListingObject:
       description: Describes a channel listing object.
       properties:
@@ -2057,8 +2233,8 @@ components:
           description: >
             A dictionary of attributes that you've associated with the channel.
             See the [Attributes
-            guide](../../guides/messaging/audience/segmentation/attributes/) for
-            more information about creating and assigning attributes.
+            guide](https://docs.airship.com/guides/messaging/audience/segmentation/attributes/)
+            for more information about creating and assigning attributes.
 
 
             The attributes listed here are "predefined" by Airship, but you can
@@ -2200,8 +2376,8 @@ components:
           $ref: '#/components/schemas/tagGroupObject'
           description: >-
             One or more tag group objects (including [Device Property
-            Tags](../../reference/device-property-tags/)) associated with this
-            channel.
+            Tags](https://docs.airship.com/reference/device-property-tags/))
+            associated with this channel.
         tags:
           description: An array of tags associated with this channel.
           example:
@@ -2790,7 +2966,7 @@ components:
       description: >
         Native attribute properties that Airship gathers automatically assigns
         to a channel. Varies by channel type. See: [Default
-        Attributes](../../guides/messaging/audience/segmentation/attributes/reference/#default-attributes).
+        Attributes](https://docs.airship.com/reference/data-collection/attributes/#default-attributes).
 
 
         For segmentation, when using `ua_app_version`, `ua_sdk_version`, or
@@ -2862,115 +3038,128 @@ components:
     email:
       description: >-
         The payload for a Create and Send operation to email channels. When
-        registering and sending to email channels, `device_types` must be set to
-        `email`.
+        sending to email channels, `device_types` must be set to `email`.
       properties:
         audience:
-          description: >-
-            The email addresses and opt in agreements for the channels you want
-            to register and send to.
-          properties:
-            create_and_send:
-              description: >-
-                Each object in the array represents a channel you want push to
-                and/or register. Channel registration fields are prefixed with
-                `ua_` and have the same requirements as the [email registration
-                endpoint](#operation-api-channels-email-post).
+          oneOf:
+            - description: >-
+                The email addresses and opt-in agreements for the audience you
+                want to send to. Unknown addresses are registered as new
+                channels.
+              properties:
+                create_and_send:
+                  description: >-
+                    Each object in the array represents an email address you
+                    want to send to. Unknown addresses are registered as new
+                    channels. Channel registration fields are prefixed with
+                    `ua_` and have the same requirements as the [email
+                    registration endpoint](#operation-api-channels-email-post).
 
 
 
-                You cannot provide optional channel registration fields using
-                this endpoint (like `locale_language` for email channels). All
-                other fields represent variables if `notification` specifies a
-                `template`.
-              items:
-                additionalProperties:
+                    You cannot provide optional channel registration fields
+                    using this endpoint (like `locale_language` for email
+                    channels). All other fields represent variables if
+                    `notification` specifies a `template`.
+                  items:
+                    additionalProperties:
+                      description: >
+                        Like substitutions in the [template merge data
+                        object](#schemas-pushtemplatepayload), you can provide
+                        additional keys and values representing variables in
+                        your notification `template`. Variable keys can be any
+                        type of value, including arrays, objects, etc. Your
+                        variable keys **must not** be prefixed with `ua_`. See
+                        [Email Notification Object with Inline
+                        Template](#schemas-emailoverridewithtemplate) for more
+                        information about template substitutions.
+                      title: substitutions
+                    description: >-
+                      Create and Send email channel registration and template
+                      `substitutions`. Each object in the array represents a
+                      channel.
+
+
+                      **Note:** The opted in/opted out dates are mutually
+                      exclusive. Providing a date for both
+                      `ua_commercial_opted_in` and `ua_commercial_opted_out`,
+                      both `ua_transactional_opted_in` and
+                      `ua_transactional_opted_out`, both
+                      `ua_open_tracking_opted_in` and
+                      `ua_open_tracking_opted_out`, or both
+                      `ua_click_tracking_opted_in` and
+                      `ua_click_tracking_opted_out` in the same row is
+                      considered invalid.
+                    properties:
+                      ua_address:
+                        description: The email address you want to send to.
+                        type: string
+                      ua_commercial_opted_in:
+                        description: >-
+                          The [date-time](#date-time-format) when the email
+                          address gave permission to receive commercial emails.
+                          If this date-time is newer than a
+                          `commercial_opted_out` value on the channel, the
+                          channel will receive your message but Airship will not
+                          update the channel's opt-in status or value.
+                        format: date-time
+                        type: string
+                      ua_commercial_opted_out:
+                        description: >-
+                          The [date-time](#date-time-format) when the email
+                          address opted out of receiving commercial emails.
+                        format: date-time
+                        type: string
+                      ua_email_suppression_state:
+                        description: >-
+                          The reason for suppression.`IMPORTED` is for reasons
+                          other than `BOUNCE`, `SPAM_COMPLAINT`, or
+                          `COMMERCIAL_SPAM_COMPLAINT`.
+                        enum:
+                          - BOUNCE
+                          - SPAM_COMPLAINT
+                          - COMMERCIAL_SPAM_COMPLAINT
+                          - IMPORTED
+                        type: string
+                      ua_transactional_opted_in:
+                        description: >-
+                          The [date-time](#date-time-format) when the email
+                          address gave permission to receive transactional
+                          emails. Transactional emails do not require this
+                          value, but you can set it if you want it to appear in
+                          email channel listings.
+                        format: date-time
+                        type: string
+                      ua_transactional_opted_out:
+                        description: >-
+                          The [date-time](#date-time-format) when the email
+                          address opted out of receiving transactional emails.
+                        format: date-time
+                        type: string
+                    required:
+                      - ua_address
+                    type: object
+                  maxItems: 1000
+                  type: array
+              required:
+                - create_and_send
+              title: Email audience for Create and Send payloads
+              type: object
+            - properties:
+                bulk_id:
                   description: >
-                    Like substitutions in the [template merge data
-                    object](#schemas-pushtemplatepayload), you can provide
-                    additional keys and values representing variables in your
-                    notification `template`. Variable keys can be any type of
-                    value, including arrays, objects, etc. Your variable keys
-                    **must not** be prefixed with `ua_`. See [Email Notification
-                    Object with Inline
-                    Template](#schemas-emailoverridewithtemplate) for more
-                    information about template substitutions.
-                  title: substitutions
-                description: >-
-                  Create and Send email channel registration and template
-                  `substitutions`. Each object in the array represents a
-                  channel.
-
-
-                  **Note:** The opted in/opted out dates are mutually exclusive.
-                  Providing a date for both `ua_commercial_opted_in` and
-                  `ua_commercial_opted_out`, both `ua_transactional_opted_in`
-                  and `ua_transactional_opted_out`, both
-                  `ua_open_tracking_opted_in` and `ua_open_tracking_opted_out`,
-                  or both `ua_click_tracking_opted_in` and
-                  `ua_click_tracking_opted_out` in the same row is considered
-                  invalid.
-                properties:
-                  ua_address:
-                    description: The email address you want to register.
-                    type: string
-                  ua_commercial_opted_in:
-                    description: >-
-                      The [date-time](#date-time-format) when the email address
-                      gave permission to receive commercial emails. If this
-                      date-time is newer than a `commercial_opted_out` value on
-                      the channel, the channel will receive your message but
-                      Airship will not update the channel's opt-in status or
-                      value.
-                    format: date-time
-                    type: string
-                  ua_commercial_opted_out:
-                    description: >-
-                      The [date-time](#date-time-format) when the email address
-                      opted out of receiving commercial emails.
-                    format: date-time
-                    type: string
-                  ua_email_suppression_state:
-                    description: >-
-                      The reason for suppression.`IMPORTED` is for reasons other
-                      than `BOUNCE`, `SPAM_COMPLAINT`, or
-                      `COMMERCIAL_SPAM_COMPLAINT`.
-                    enum:
-                      - BOUNCE
-                      - SPAM_COMPLAINT
-                      - COMMERCIAL_SPAM_COMPLAINT
-                      - IMPORTED
-                    type: string
-                  ua_transactional_opted_in:
-                    description: >-
-                      The [date-time](#date-time-format) when the email address
-                      gave permission to receive transactional emails.
-                      Transactional emails do not require this value, but you
-                      can set it if you want it to appear in email channel
-                      listings.
-                    format: date-time
-                    type: string
-                  ua_transactional_opted_out:
-                    description: >-
-                      The [date-time](#date-time-format) when the email address
-                      opted out of receiving transactional emails.
-                    format: date-time
-                    type: string
-                required:
-                  - ua_address
-                type: object
-              maxItems: 1000
-              type: array
-          required:
-            - create_and_send
-          title: Email audience for Create and Send payloads
-          type: object
+                    A unique string obtained from the [Create bulk send audience
+                    operation](#operation-api-bulk-platform_name-post) to target
+                    an audience for bulk sending.
+                  format: uuid
+                  type: string
+              required:
+                - bulk_id
+              type: object
         campaigns:
           $ref: '#/components/schemas/campaignsObject'
         device_types:
-          description: >-
-            The platform you want to register channels for and send
-            notifications to.
+          description: The platform you want to send notifications to.
           items:
             enum:
               - email
@@ -3002,6 +3191,31 @@ components:
       title: Create and Send to email channels
       type: object
       x-schema-tag: Create and Send
+    emailChannelAssociatedByContactObject:
+      description: An email channel associated with a contact.
+      properties:
+        channel_id:
+          description: The unique identifier.
+          format: uuid
+          type: string
+        commercial_opted_in:
+          description: >
+            The [date-time](#date-time-format) when a user gave explicit
+            permission to receive commercial
+
+            emails.
+          format: date-time
+          type: string
+        email_address:
+          description: The email address corresponding to the channel.
+          type: string
+        type:
+          description: The channel type.
+          enum:
+            - email
+          type: string
+      title: Email channel associated by contact
+      type: object
     emailOverrideObject:
       description: >-
         Notification fields specific to email messages. This object is required
@@ -3083,7 +3297,7 @@ components:
             customer-supplied landing page.
 
             * See: [Email image
-            recommendations](../../guides/messaging/messages/content/media-guidelines/#email).
+            recommendations](https://docs.airship.com/guides/messaging/messages/content/media-guidelines/#email).
           example:
             - >-
               <h1>Greetings</h1><p>Hello!</p><p><a data-ua-unsubscribe="1"
@@ -3136,7 +3350,7 @@ components:
           description: >
             The reply-to address. The username portion of the reply-to address
             can be set dynamically using
-            [Handlebars](../../guides/messaging/personalization/handlebars/).
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
             The domain portion of the reply-to address can be any correctly
             formatted domain.
           example: no-reply@example.com
@@ -3147,7 +3361,7 @@ components:
             enabled in the email provider at the delivery tier (ie: SparkPost).
             The username portion of the sender address can be set dynamically
             using
-            [Handlebars](../../guides/messaging/personalization/handlebars/).
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
             The domain portion of the sender address must match one of your
             project's configured email sending domains.
           example: no-reply@example.com
@@ -3156,7 +3370,7 @@ components:
           description: >-
             The common name for the sender, visible to email recipients. The
             sender name can be set dynamically using
-            [Handlebars](../../guides/messaging/personalization/handlebars/).
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
           example: My Company
           type: string
         subject:
@@ -3175,9 +3389,9 @@ components:
             If a query parameter defined in this object already exists in a
             link, it will not be overwritten in the link. Dynamic values are
             supported using
-            [Handlebars](../../guides/messaging/personalization/handlebars/),
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/),
             with limitations. See [URL
-            parameters](../../guides/messaging/messages/content/email/#url-parameters)
+            parameters](https://docs.airship.com/guides/messaging/messages/content/email/#url-parameters)
             in the *Email content* guide for more information.
           type: object
       required:
@@ -3199,7 +3413,7 @@ components:
         those variables, determining message text that to send to each member of
         your audience. Conditionals begin with `{{#operator}}` and end with
         `{{/operator}}`. For more information, see
-        [Handlebars](../../guides/messaging/personalization/handlebars/).
+        [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
       properties:
         bcc:
           description: >-
@@ -3234,7 +3448,7 @@ components:
           description: >
             The reply-to address. The username portion of the reply-to address
             can be set dynamically using
-            [Handlebars](../../guides/messaging/personalization/handlebars/).
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
             The domain portion of the reply-to address can be any correctly
             formatted domain.
           example: no-reply@example.com
@@ -3245,7 +3459,7 @@ components:
             enabled in the email provider at the delivery tier (ie: SparkPost).
             The username portion of the sender address can be set dynamically
             using
-            [Handlebars](../../guides/messaging/personalization/handlebars/).
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
             The domain portion of the sender address must match one of your
             project's configured email sending domains.
           example: no-reply@example.com
@@ -3254,7 +3468,7 @@ components:
           description: >-
             The common name for the sender, visible to email recipients. The
             sender name can be set dynamically using
-            [Handlebars](../../guides/messaging/personalization/handlebars/).
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
           example: My Company
           type: string
         template:
@@ -3268,7 +3482,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               required:
@@ -3319,7 +3533,7 @@ components:
                         to a customer-supplied landing page.
 
                         * See [Email image
-                        recommendations](../../guides/messaging/messages/content/media-guidelines/#email).
+                        recommendations](https://docs.airship.com/guides/messaging/messages/content/media-guidelines/#email).
                       type: string
                     plaintext_body:
                       description: >-
@@ -3369,9 +3583,9 @@ components:
             If a query parameter defined in this object already exists in a
             link, it will not be overwritten in the link. Dynamic values are
             supported using
-            [Handlebars](../../guides/messaging/personalization/handlebars/),
+            [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/),
             with limitations. See [URL
-            parameters](../../guides/messaging/messages/content/email/#url-parameters)
+            parameters](https://docs.airship.com/guides/messaging/messages/content/email/#url-parameters)
             in the *Email content* guide for more information.
           type: object
       required:
@@ -3435,9 +3649,9 @@ components:
       title: Error response
       type: object
       x-note: >-
-        it's a good idea to log whenever you receive a non-2XX response. For
-        best results, log the entire request and response, including headers.
-        This information will help you or Support fix the issue.
+        We recommend logging all non-2XX responses. Include the entire request
+        and response, including headers, to help you or
+        [Support](https://support.airship.com) troubleshoot issues.
       x-schema-tag: Response format
     eventIdentifier:
       description: >-
@@ -3780,7 +3994,7 @@ components:
             push. The remaining audience will be split between the variants. It
             may help to think of this value as a percentage. See [Audience
             groups in the
-            API](../../guides/messaging/experimentation/a-b-tests/messages/#audience-groups-in-the-api)
+            API](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages/#audience-groups-in-the-api)
             in *Message A/B tests*.
           format: float
           type: number
@@ -4678,7 +4892,7 @@ components:
             JSON object that represents the content sent to a [Live Activity
             Notification](https://developer.apple.com/documentation/activitykit/update-and-end-your-live-activity-with-remote-push-notifications).
             Live Activities are an [AXP
-            feature](../../reference/feature-packages/).
+            feature](https://docs.airship.com/reference/feature-packages/).
 
 
             **Note**: Using this object transforms the iOS notification to a
@@ -4826,7 +5040,7 @@ components:
                     in the thumbnail. Each field is a decimal, normalized from 0
                     to 1. Before displaying the thumbnail, iOS additionally
                     crops the thumbnail down to a square. See: [Media
-                    guidelines](../../guides/messaging/messages/content/media-guidelines/).
+                    guidelines](https://docs.airship.com/guides/messaging/messages/content/media-guidelines/).
                   properties:
                     height:
                       description: The height of the final crop.
@@ -4873,18 +5087,17 @@ components:
                 MPEG2, MP4, AVI. Although these are the theoretical file size
                 maximums, for performance the actual resources should be much
                 smaller. See [Media
-                Guidelines](/guides/messaging/messages/content/media-guidelines/).
+                Guidelines](https://docs.airship.com/guides/messaging/messages/content/media-guidelines/).
               type: string
           required:
             - url
           type: object
           x-note: >
-            It is recommended that you restrict image media attachments to 1 MB
-            or less. While larger file sizes are technically supported (as shown
-            in the table below), the ability to receive media may be limited by
-            the download speed of the receiving device. If media is too large
-            and takes too long to download, a notification may render without
-            it.
+            It is recommended that you restrict image media attachments to one
+            MB or less. While larger file sizes are technically supported, the
+            ability to receive media may be limited by the download speed of the
+            receiving device. If media is too large and takes too long to
+            download, a notification may render without it.
         mutable_content:
           description: >-
             When set to true, content may be modified by an extension. This flag
@@ -5047,7 +5260,7 @@ components:
                     in the thumbnail. Each field is a decimal, normalized from 0
                     to 1. Before displaying the thumbnail, iOS additionally
                     crops the thumbnail down to a square. See: [Media
-                    guidelines](../../guides/messaging/messages/content/media-guidelines/).
+                    guidelines](https://docs.airship.com/guides/messaging/messages/content/media-guidelines/).
                   properties:
                     height:
                       description: The height of the final crop.
@@ -5094,18 +5307,18 @@ components:
                 MPEG2, MP4, AVI. Although these are the theoretical file size
                 maximums, for performance the actual resources should be much
                 smaller. See [Media
-                Guidelines](/guides/messaging/messages/content/media-guidelines/).
+                Guidelines](https://docs.airship.com/guides/messaging/messages/content/media-guidelines/).
               type: string
           required:
             - url
           type: object
           x-note: >
-            It is recommended that you restrict image media attachments to 1 MB
-            or less. While larger file sizes are technically supported (as shown
-            in the table below), the ability to receive media may be limited by
-            the download speed of the receiving device. If media is too large
-            and takes too long to download, a notification may render without
-            it.
+            It is recommended that you restrict image media attachments to one
+            MB or less. While larger file sizes are technically supported, as
+            shown in the table below, the ability to receive media may be
+            limited by the download speed of the receiving device. If media is
+            too large and takes too long to download, a notification may render
+            without it.
         mutable_content:
           description: >-
             When set to true, content may be modified by an extension. This flag
@@ -5141,7 +5354,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               type: object
@@ -5595,7 +5808,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               type: object
@@ -5626,73 +5839,86 @@ components:
       title: Message type
       type: string
     mms:
-      description: >
-        The payload for a Create and Send operation that registers SMS channels
-        and sends a multimedia payload (MMS). When sending an MMS payload,
+      description: >-
+        The payload for a Create and Send operation that sends a multimedia
+        payload (MMS) to SMS channels. When sending an MMS payload,
         `device_types` must be set to `mms`.
       properties:
         audience:
-          description: >-
-            The SMS information and opt in parameters for the channels you want
-            to register and send to.
-          properties:
-            create_and_send:
-              description: >-
-                Each object in the array represents channel you want to register
-                and push to. Channel registration fields are prefixed with `ua_`
-                and have the same requirements as the [SMS channel registration
-                endpoint](#operation-api-channels-sms-post).
+          oneOf:
+            - description: >-
+                The SMS information and opt-in parameters for the audience you
+                want to send to. Unknown MSISDNs are registered as new channels.
+              properties:
+                create_and_send:
+                  description: >-
+                    Each object in the array represents an MSISDN you want to
+                    send to. Unknown MSISDNs are registered as new channels.
+                    Channel registration fields are prefixed with `ua_` and have
+                    the same requirements as the [SMS channel registration
+                    endpoint](#operation-api-channels-sms-post).
 
 
 
-                All other fields represent variables if `notification` specifies
-                a `template`.
-              items:
-                additionalProperties:
+                    All other fields represent variables if `notification`
+                    specifies a `template`.
+                  items:
+                    additionalProperties:
+                      description: >
+                        Like substitutions in the [template merge data
+                        object](#schemas-pushtemplatepayload), you can provide
+                        additional keys and values representing variables in
+                        your notification `template`. Variable keys can be any
+                        type of value, including arrays, objects, etc. Your
+                        variable keys **must not** be prefixed with `ua_`. See
+                        the [Push template
+                        payload](#schemas-pushtemplatepayload) for more
+                        information about template substitutions.
+                      title: substitutions
+                    properties:
+                      ua_msisdn:
+                        description: >-
+                          The phone number of a mobile device. Entries with
+                          `ua_msisdn` values that are not reachable by
+                          `ua_sender` values will be **silently dropped.**
+                        type: string
+                      ua_opted_in:
+                        description: >
+                          The [date-time](#date-time-format) when the user
+                          (msisdn) opted in to messages from the sender. If this
+                          date-time is newer than an `opted_out` value on the
+                          channel, the channel will receive your message, but
+                          Airship will not update the channel's opt-in status or
+                          value.
+                        format: date-time
+                        type: string
+                      ua_sender:
+                        description: "The long or short code your SMS messages are sent from. —\_`12345`."
+                        type: string
+                    required:
+                      - ua_msisdn
+                      - ua_sender
+                      - ua_opted_in
+                    type: object
+                  maxItems: 1000
+                  type: array
+              required:
+                - create_and_send
+              title: SMS audience for Create and Send payloads
+              type: object
+            - properties:
+                bulk_id:
                   description: >
-                    Like substitutions in the [template merge data
-                    object](#schemas-pushtemplatepayload), you can provide
-                    additional keys and values representing variables in your
-                    notification `template`. Variable keys can be any type of
-                    value, including arrays, objects, etc. Your variable keys
-                    **must not** be prefixed with `ua_`. See the [Push template
-                    payload](#schemas-pushtemplatepayload) for more information
-                    about template substitutions.
-                  title: substitutions
-                properties:
-                  ua_msisdn:
-                    description: >-
-                      The phone number of a mobile device. Entries with
-                      `ua_msisdn` values that are not reachable by `ua_sender`
-                      values will be **silently dropped.**
-                    type: string
-                  ua_opted_in:
-                    description: >
-                      The [date-time](#date-time-format) when the user (msisdn)
-                      opted in to messages from the sender. If this date-time is
-                      newer than an `opted_out` value on the channel, the
-                      channel will receive your message, but Airship will not
-                      update the channel's opt-in status or value.
-                    format: date-time
-                    type: string
-                  ua_sender:
-                    description: "The long or short code your SMS messages are sent from. —\_`12345`."
-                    type: string
-                required:
-                  - ua_msisdn
-                  - ua_sender
-                  - ua_opted_in
-                type: object
-              maxItems: 1000
-              type: array
-          required:
-            - create_and_send
-          title: SMS audience for Create and Send payloads
-          type: object
+                    A unique string obtained from the [Create bulk send audience
+                    operation](#operation-api-bulk-platform_name-post) to target
+                    an audience for bulk sending.
+                  format: uuid
+                  type: string
+              required:
+                - bulk_id
+              type: object
         device_types:
-          description: >-
-            The platform you want to register channels for and send
-            notifications to.
+          description: The platform you want to send notifications to.
           items:
             enum:
               - email
@@ -5850,7 +6076,7 @@ components:
         populate variables and conditional statements based on those variables.
         Conditionals begin with `{{#operator}}` and end with `{{/operator}}`.
         For more information, see
-        [Handlebars](../../guides/messaging/personalization/handlebars/).
+        [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
       properties:
         slides:
           description: >
@@ -5922,7 +6148,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               required:
@@ -6387,53 +6613,68 @@ components:
       x-schema-tag: Response format
     open:
       description: >-
-        When registering and sending to open channels, the `device_type` must be
-        set to `open::<open_channel_name>`.
+        The payload for a Create and Send operation to open channels. When
+        sending to open channels, the `device_type` must be set to
+        `open::<open_channel_name>`.
       properties:
         audience:
-          description: >-
-            The open channels and opt-in information for the channels you want
-            to register and send to.
-          properties:
-            create_and_send:
-              description: >-
-                Each object in the array represents channel you want to register
-                and push to. Channel registration fields are prefixed with `ua_`
-                and have the same requirements as open channel registration.
-              items:
-                additionalProperties:
+          oneOf:
+            - description: >-
+                The Open channel addresses and opt-in information for the
+                audience you want to send to. Unknown addresses are registered
+                as new channels.
+              properties:
+                create_and_send:
+                  description: >-
+                    Each object in the array represents an Open channel address
+                    you want to send to. Unknown addresses are registered as new
+                    channels. Channel registration fields are prefixed with
+                    `ua_` and have the same requirements as open channel
+                    registration.
+                  items:
+                    additionalProperties:
+                      description: >
+                        Like substitutions in the [template merge data
+                        object](#schemas-pushtemplatepayload), you can provide
+                        additional keys and values representing variables in
+                        your notification `template`. Variable keys can be any
+                        type of value, including arrays, objects, etc. Your
+                        variable keys **must not** be prefixed with `ua_`. See
+                        the [Push template
+                        payload](#schemas-pushtemplatepayload) for more
+                        information about template substitutions.
+                      title: substitutions
+                    properties:
+                      ua_address:
+                        description: >-
+                          The address that you want to populate the channel's
+                          `address` field.  See the channel object for more
+                          information.
+                        type: string
+                    required:
+                      - ua_address
+                    type: object
+                  maxItems: 1000
+                  type: array
+              required:
+                - create_and_send
+              title: Open audience for Create and Send payloads
+              type: object
+            - properties:
+                bulk_id:
                   description: >
-                    Like substitutions in the [template merge data
-                    object](#schemas-pushtemplatepayload), you can provide
-                    additional keys and values representing variables in your
-                    notification `template`. Variable keys can be any type of
-                    value, including arrays, objects, etc. Your variable keys
-                    **must not** be prefixed with `ua_`. See the [Push template
-                    payload](#schemas-pushtemplatepayload) for more information
-                    about template substitutions.
-                  title: substitutions
-                properties:
-                  ua_address:
-                    description: >-
-                      The address that you want to populate the channel's
-                      `address` field.  See the channel object for more
-                      information.
-                    type: string
-                required:
-                  - ua_address
-                type: object
-              maxItems: 1000
-              type: array
-          required:
-            - create_and_send
-          title: Open audience for Create and Send payloads
-          type: object
+                    A unique string obtained from the [Create bulk send audience
+                    operation](#operation-api-bulk-platform_name-post) to target
+                    an audience for bulk sending.
+                  format: uuid
+                  type: string
+              required:
+                - bulk_id
+              type: object
         campaigns:
           $ref: '#/components/schemas/campaignsObject'
         device_types:
-          description: >-
-            The platform you want to register channels for and send
-            notifications to.
+          description: The platform you want to send notifications to.
           items:
             enum:
               - email
@@ -6552,7 +6793,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               type: object
@@ -7399,22 +7640,22 @@ components:
           default: false
           description: >
             If true, a user's status on a [Ban
-            List](../../guides/messaging/project/config/ban-lists/) will not be
-            verified before sending the push.
+            List](https://docs.airship.com/guides/messaging/project/config/ban-lists/)
+            will not be verified before sending the push.
           type: boolean
         bypass_frequency_limits:
           default: false
           description: >
             If true, the push ignores any [Message
-            Limits](../../guides/messaging/project/config/message-limits/) that
-            would otherwise apply to your message.
+            Limits](https://docs.airship.com/guides/messaging/project/config/message-limits/)
+            that would otherwise apply to your message.
           type: boolean
         bypass_holdout_groups:
           default: false
           description: >
             If true, the push ignores withholding any messages for users in a
             holdout group for a [Holdout
-            Experiment](../../guides/messaging/experimentation/holdout-experiments/)
+            Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/)
             that is active at send time.
           type: boolean
         expiry:
@@ -7445,7 +7686,7 @@ components:
           default: false
           description: >
             If true, the push is omitted from the [Activity
-            Log](../../guides/messaging/data/reports/activity-log/).
+            Log](https://docs.airship.com/guides/messaging/data/reports/activity-log/).
           type: boolean
         personalization:
           default: false
@@ -7675,7 +7916,7 @@ components:
             The attribute ID for the attribute you want to set. JSON attribute
             key values must be in format `<attribute_ID>#<instance_ID>`. See
             [JSON
-            Attributes](../../guides/messaging/audience/segmentation/attributes/about/#json-attributes)
+            Attributes](https://docs.airship.com/guides/messaging/audience/segmentation/attributes/about/#json-attributes)
             in *About Attributes*.
           maxLength: 64
           type: string
@@ -7904,18 +8145,21 @@ components:
           x-note: >
             To use Local Time Delivery for App audiences, you must have Analytic
             Events turned on and integrated into your application. See
-            [Analytics and Reporting](../../platform/mobile/analytics/) for more
-            information.
+            [Analytics and
+            Reporting](https://docs.airship.com/developer/sdk-integration/mobile/analytics/)
+            for more information.
 
             A message delivered to local time includes a Delivery by Time Zone
-            section in its message report. See: [Message Reports: Delivery by
-            Time
-            Zone.](../../guides/engage-message-reports/#delivery-by-time-zone)
+            section in its message report. See the information in [View Message
+            Detail](https://docs.airship.com/guides/messaging/data/reports/message/#message-detail)
+            in *Message Reports*.
         - description: >
             Alternative to `scheduled_time`. Uses predictive analytics to send
-            the notification at the optimal send time for each member of your
-            audience. `best_time` is represented as "Optimize" in the dashboard
-            and is an add-on feature in Airship's Predictive suite.
+            the notification at the [optimal send
+            time](https://docs.airship.com/guides/messaging/data/predictive/optimal-send-time/)
+            for each member of your audience.
+
+              When your audience includes users without an optimal send time tag, those users will be dropped from delivery and will not receive the message. Since optimal send time is determined from user behavior over time, new users might not have an optimal send time determined for the first week or two after channel registration.
           properties:
             best_time:
               description: |
@@ -8012,7 +8256,7 @@ components:
             The attribute ID for the attribute you want to set. JSON attribute
             key values must be in format `<attribute_ID>#<instance_ID>`. See
             [JSON
-            Attributes](../../guides/messaging/audience/segmentation/attributes/about/#json-attributes)
+            Attributes](https://docs.airship.com/guides/messaging/audience/segmentation/attributes/about/#json-attributes)
             in *About Attributes*.
           maxLength: 64
           type: string
@@ -8061,73 +8305,85 @@ components:
     sms:
       description: >-
         The payload for a Create and Send operation to SMS channels. When
-        registering and sending to SMS channels, `device_types` must be set to
-        `sms`.
+        sending to SMS channels, `device_types` must be set to `sms`.
       properties:
         audience:
-          description: >-
-            The SMS information and opt in parameters for the channels you want
-            to register and send to.
-          properties:
-            create_and_send:
-              description: >-
-                Each object in the array represents channel you want to register
-                and push to. Channel registration fields are prefixed with `ua_`
-                and have the same requirements as the [SMS channel registration
-                endpoint](#operation-api-channels-sms-post).
+          oneOf:
+            - description: >-
+                The SMS information and opt-in parameters for the audience you
+                want to send to. Unknown MSISDNs are registered as new channels.
+              properties:
+                create_and_send:
+                  description: >-
+                    Each object in the array represents an MSISDN you want to
+                    send to. Unknown MSISDNs are registered as new channels.
+                    Channel registration fields are prefixed with `ua_` and have
+                    the same requirements as the [SMS channel registration
+                    endpoint](#operation-api-channels-sms-post).
 
 
 
-                All other fields represent variables if `notification` specifies
-                a `template`.
-              items:
-                additionalProperties:
+                    All other fields represent variables if `notification`
+                    specifies a `template`.
+                  items:
+                    additionalProperties:
+                      description: >
+                        Like substitutions in the [template merge data
+                        object](#schemas-pushtemplatepayload), you can provide
+                        additional keys and values representing variables in
+                        your notification `template`. Variable keys can be any
+                        type of value, including arrays, objects, etc. Your
+                        variable keys **must not** be prefixed with `ua_`. See
+                        the [Push template
+                        payload](#schemas-pushtemplatepayload) for more
+                        information about template substitutions.
+                      title: substitutions
+                    properties:
+                      ua_msisdn:
+                        description: >-
+                          The phone number of a mobile device. Entries with
+                          `ua_msisdn` values that are not reachable by
+                          `ua_sender` values will be **silently dropped.**
+                        type: string
+                      ua_opted_in:
+                        description: >
+                          The [date-time](#date-time-format) when the user
+                          (msisdn) opted in to messages from the sender. If this
+                          date-time is newer than an `opted_out` value on the
+                          channel, the channel will receive your message, but
+                          Airship will not update the channel's opt-in status or
+                          value.
+                        format: date-time
+                        type: string
+                      ua_sender:
+                        description: "The long or short code your SMS messages are sent from. —\_`12345`."
+                        type: string
+                    required:
+                      - ua_msisdn
+                      - ua_sender
+                      - ua_opted_in
+                    type: object
+                  maxItems: 1000
+                  type: array
+              required:
+                - create_and_send
+              title: SMS audience for Create and Send payloads
+              type: object
+            - properties:
+                bulk_id:
                   description: >
-                    Like substitutions in the [template merge data
-                    object](#schemas-pushtemplatepayload), you can provide
-                    additional keys and values representing variables in your
-                    notification `template`. Variable keys can be any type of
-                    value, including arrays, objects, etc. Your variable keys
-                    **must not** be prefixed with `ua_`. See the [Push template
-                    payload](#schemas-pushtemplatepayload) for more information
-                    about template substitutions.
-                  title: substitutions
-                properties:
-                  ua_msisdn:
-                    description: >-
-                      The phone number of a mobile device. Entries with
-                      `ua_msisdn` values that are not reachable by `ua_sender`
-                      values will be **silently dropped.**
-                    type: string
-                  ua_opted_in:
-                    description: >
-                      The [date-time](#date-time-format) when the user (msisdn)
-                      opted in to messages from the sender. If this date-time is
-                      newer than an `opted_out` value on the channel, the
-                      channel will receive your message, but Airship will not
-                      update the channel's opt-in status or value.
-                    format: date-time
-                    type: string
-                  ua_sender:
-                    description: "The long or short code your SMS messages are sent from. —\_`12345`."
-                    type: string
-                required:
-                  - ua_msisdn
-                  - ua_sender
-                  - ua_opted_in
-                type: object
-              maxItems: 1000
-              type: array
-          required:
-            - create_and_send
-          title: SMS audience for Create and Send payloads
-          type: object
+                    A unique string obtained from the [Create bulk send audience
+                    operation](#operation-api-bulk-platform_name-post) to target
+                    an audience for bulk sending.
+                  format: uuid
+                  type: string
+              required:
+                - bulk_id
+              type: object
         campaigns:
           $ref: '#/components/schemas/campaignsObject'
         device_types:
-          description: >-
-            The platform you want to register channels for and send
-            notifications to.
+          description: The platform you want to send notifications to.
           items:
             enum:
               - email
@@ -8154,6 +8410,31 @@ components:
       title: Create and Send to SMS channels
       type: object
       x-schema-tag: Create and Send
+    smsChannelAssociatedByContactObject:
+      description: An SMS channel associated with a contact.
+      properties:
+        channel_id:
+          description: The unique identifier.
+          format: uuid
+          type: string
+        msisdn:
+          description: The phone number corresponding to the channel.
+          type: string
+        opt_in:
+          description: >-
+            If true, the channel is opted in to push notifications. If false, it
+            is not.
+          type: boolean
+        sender:
+          description: The sender corresponding to the channel.
+          type: string
+        type:
+          description: The channel type.
+          enum:
+            - sms
+          type: string
+      title: SMS channel associated by contact
+      type: object
     smsOverrideObject:
       description: >-
         Provides override options when `sms` is one of the `device_types`
@@ -8223,7 +8504,7 @@ components:
         variables, determining message text that to send to each member of your
         audience. Conditionals begin with `{{#operator}}` and end with
         `{{/operator}}`. For more information, see
-        [Handlebars](../../guides/messaging/personalization/handlebars/).
+        [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
       properties:
         expiry:
           description: >-
@@ -8253,7 +8534,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               required:
@@ -8288,7 +8569,8 @@ components:
         notification or rich message.
 
 
-        See [Snippets](../../guides/messaging/personalization/content/snippets/)
+        See
+        [Snippets](https://docs.airship.com/guides/messaging/personalization/content/snippets/)
         to see how to create a snippet in the Airship dashboard.
       properties:
         snippets:
@@ -8492,7 +8774,8 @@ components:
       description: >-
         Tags belong to Tag Groups. Tag Groups appear within the `tags` object
         for a Named User or the `tag_groups` object for a channel. See also
-        [Device Properties](../../reference/integration/device-properties/)
+        [Device
+        Properties](https://docs.airship.com/reference/integration/device-properties/)
 
         ``ua_`` is a reserved prefix for Airship-specific tag groups.
 
@@ -8816,7 +9099,7 @@ components:
         Merge fields are allowed to use nested property names in CSV upload
 
         headers by using a subset of legal
-        [Handlebars](../../guides/messaging/personalization/handlebars/)
+        [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/)
         template expression syntax.
       properties:
         template:
@@ -9045,7 +9328,7 @@ components:
                     The `ID` of a template that you created in the Airship
                     dashboard. [To get your template IDs, go to **Content** and
                     select
-                    **Templates**.](../../guides/messaging/personalization/content/templates/#using-a-content-template)
+                    **Templates**.](https://docs.airship.com/guides/messaging/personalization/content/templates/#using-a-content-template)
                   format: uuid
                   type: string
               type: object
@@ -9135,7 +9418,7 @@ components:
           description: >
             The Custom Event property on which to filter for inclusion in the
             audience.  See [Event Segmentation
-            Properties](../../guides/messaging/data/events/#events-reference)
+            Properties](https://docs.airship.com/guides/messaging/data/events/#events-reference)
             for properties reference.
           type: string
         relative_to:
@@ -9203,6 +9486,13 @@ components:
       scheme: bearer
       type: http
       x-display-name: Bearer Token
+    contactJWTToken:
+      description: >-
+        A JWT token provided by our server. The token should be prefixed with
+        `Bearer `. The `X-UA-Appkey` request header is also required.
+      scheme: bearer
+      type: http
+      x-display-name: Contact JWT Token
     oauth2Token:
       description: >-
         Authorization header containing the word `Bearer` followed by a space
@@ -9224,6 +9514,15 @@ components:
           tokenUrl: 'http://oauth2.{domain}.com/token'
       type: oauth2
       x-display-name: OAuth 2.0
+    sdkChannelLevelBearerAuth:
+      description: >-
+        A bearer token generated by the SDK that is specific to a channel. It is
+        generated using HMACSHA256 with the app secret as the key and the
+        message: `app_key:channel_id:nonce:timestamp`. This should be prefixed
+        with `Bearer `.
+      scheme: bearer
+      type: http
+      x-display-name: App Secret Bearer Auth (Channel-level)
 info:
   description: >
 
@@ -9999,10 +10298,10 @@ paths:
       tags:
         - Attribute Lists
       x-note: >-
-        The maximum number of rows that may be uploaded to a list is 10 million,
-        and the maximum number of columns is 101 (one identifier column and 100
-        Attribute or internal header columns). `Content-Encoding: gzip` is
-        supported (and recommended) on this endpoint to reduce network traffic.
+        A list can contain a maximum of 10 million rows and 101 columns: one
+        identifier column and 100 Attribute or internal header columns.
+        `Content-Encoding: gzip` is supported and recommended on this endpoint
+        to reduce network traffic.
       x-warning: >-
         If your upload times out due to a poor connection, you must re-upload
         the list from scratch. Because we want to ensure that the entirety of a
@@ -10047,19 +10346,17 @@ paths:
   /api/bulk-send:
     post:
       description: >
-        Send an immediate [Create and Send](#tag-create-and-send) push 
-        notification to the `bulk_id`, ignoring inactive channels. Before
-        calling this endpoint, a
-
-        `bulk_id` must be obtained from a [Create bulk send
-        audience](#operation-api-bulk-platform_name-post) operation.
+        Send an immediate message to existing channels using a `bulk_id`.
+        Inactive channels are dropped. Before calling this endpoint, obtain a
+        `bulk_id` from the [Create bulk send
+        audience](#operation-api-bulk-platform_name-post) endpoint.
       operationId: bulkSendPush
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/bulkSendObject'
-        description: A Create and Send a message with bulk ID payload.
+        description: A Send a message with bulk ID payload.
       responses:
         '202':
           content:
@@ -10141,16 +10438,16 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Create and Send a message with bulk ID
+      summary: Send message with bulk ID
       tags:
-        - Create and Send
+        - Bulk Sending
   /api/bulk-send/validate:
     post:
       description: >-
         Accept the same range of payloads as POSTing to
         [`/api/bulk-send`](#operation-api-bulk-send-post), but parse and
-        validate only, without sending any pushes. Before calling this endpoint,
-        a `bulk_id` must be obtained from a [Create bulk send
+        validate only, without sending any messages. Before calling this
+        endpoint, obtain a `bulk_id` using the [Create bulk send
         audience](#operation-api-bulk-platform_name-post) operation.
       operationId: validateBulkSendPush
       requestBody:
@@ -10182,9 +10479,9 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Validate Create and Send a message with bulk ID
+      summary: Validate message with bulk ID
       tags:
-        - Create and Send
+        - Bulk Sending
   '/api/bulk/{platform_name}':
     parameters:
       - description: >
@@ -10205,21 +10502,32 @@ paths:
           type: string
     post:
       description: >
-        Get a `bulk_id` for provided Channel IDs or SMS, email, or open channel
-        addresses. You can then then send a message to the ID using the [Create
-        and Send a message with bulk ID](#operation-api-bulk-send-post) and
-        [Schedule Create and Send a message with bulk
-        ID](#operation-api-schedules-bulk-send-post) endpoints.
+        Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can
+        contain:
+
+        - Channel IDs for Upload and Send endpoints: [Send message with bulk
+        ID](#operation-api-bulk-send-post) or [Schedule message with bulk
+        ID](#operation-api-schedules-bulk-send-post)
+
+        - Email addresses, phone numbers, or Open channel addresses for Create
+        and Send endpoints: [Create and Send a
+        message](#operation-api-create-and-send-post) or [Schedule a Create and
+        Send message](#operation-api-schedules-create-and-send-post)
+
+
+        See [Bulk
+        sending](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/)
+        for CSV formatting requirements.
       operationId: bulkUploadCreateAndSendPlatform
       requestBody:
         content:
           text/csv:
             schema:
               description: >
-                List as CSV of Channel IDs, email addresses, MSISDNs, or Open
-                channel addresses. See [Create and
-                Send](../../guides/messaging/audience/segmentation/create-and-send/)
-                for formatting information.
+                A CSV of Channel IDs, email addresses, MSISDNs, or Open channel
+                addresses. See [Bulk
+                sending](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/)
+                for CSV formatting requirements.
               type: string
         required: true
       responses:
@@ -10231,12 +10539,8 @@ paths:
                 properties:
                   bulk_id:
                     description: >-
-                      A unique string that can be used to target the users
-                      provided in the request operation as an audience for an
-                      immediate or scheduled push. See [Create and Send a
-                      message with bulk ID](#operation-api-bulk-send-post) and
-                      [Schedule Create and Send a message with bulk
-                      ID](#operation-api-schedules-bulk-send-post).
+                      A unique string that identifies the audience provided in
+                      the CSV for bulk sending.
                     example: ef625038-70a3-41f1-826f-57bc11dd625a
                     format: uuid
                     type: string
@@ -10264,7 +10568,7 @@ paths:
         - bearerAuth: []
       summary: Create bulk send audience
       tags:
-        - Create and Send
+        - Bulk Sending
   /api/channels:
     get:
       description: >-
@@ -10342,9 +10646,9 @@ paths:
     post:
       description: >
         Set or remove attributes on a channel. Aside from Airship's [default
-        attributes](/guides/messaging/audience/segmentation/attributes/reference/#default-attributes),
+        attributes](https://docs.airship.com/reference/data-collection/attributes/#default-attributes),
         you must [define attributes in the Airship
-        dashboard](/guides/messaging/audience/segmentation/attributes/adding/)
+        dashboard](https://docs.airship.com/guides/messaging/audience/segmentation/attributes/adding/)
         before you can set them on channels.
       operationId: modifyChannelAttributes
       requestBody:
@@ -10746,7 +11050,7 @@ paths:
                   example:
                     interests: newsletter
                   type: object
-                tags:
+                tag_operations:
                   $ref: '#/components/schemas/tagGroupObject'
                   description: >-
                     Optionally one or more tag group objects associated with the
@@ -10834,8 +11138,9 @@ paths:
     get:
       description: >-
         Opts-out an email address using a custom unsubscribe token. Requires
-        [Custom Unsubscribe](../../platform/email/custom-unsubscribe-pages/) be
-        enabled for your project.
+        [Custom
+        Unsubscribe](https://docs.airship.com/developer/api-integrations/email/custom-unsubscribe-pages/)
+        be enabled for your project.
 
 
         This endpoint is public and does not require authentication.
@@ -11083,7 +11388,7 @@ paths:
                   example:
                     interests: newsletter
                   type: object
-                tags:
+                tag_operations:
                   $ref: '#/components/schemas/tagGroupObject'
                   description: >-
                     Optionally one or more tag group objects associated with the
@@ -11190,7 +11495,7 @@ paths:
         - Email
       x-note: >-
         Suppression state types that only apply to commercial messages, such as
-        `commercial_spam_complaint`,  cannot overwrite suppression state types
+        `commercial_spam_complaint`, cannot overwrite suppression state types
         that also apply to transactional messages.
   /api/channels/email/tags:
     post:
@@ -11451,8 +11756,8 @@ paths:
         emails.
 
 
-        The `opt_in` property is always set to true for an email channel, thus
-        it should be ignored.
+        The `opt_in` property is always set to true for an email channel, so it
+        should be ignored.
     put:
       description: >
         Update an email channel. You can use this endpoint to update the
@@ -11516,8 +11821,8 @@ paths:
                     address:
                       description: >-
                         The email address associated with the email channel. If
-                        provided,  it must match the existing email address or
-                        the request will be  rejected with a 400 status code.
+                        provided, it must match the existing email address or
+                        the request will be rejected with a 400 status code.
                       example: tommy@example.com
                       type: string
                     commercial_opted_in:
@@ -11807,8 +12112,8 @@ paths:
         Unauthorized response is returned.
       x-note: >
         A 200 status will be returned if an existing channel was found for the
-        specified `open_platform_name` and address. Otherwise a new channel will
-        be created, also returning a 200 status.
+        specified `open_platform_name` and address. Otherwise, a new channel
+        will be created and a 200 status will be returned.
   /api/channels/open/tags:
     post:
       description: >-
@@ -12071,7 +12376,7 @@ paths:
                     - sms_sender
                   title: SMS sender selector
                   type: string
-                tags:
+                tag_operations:
                   $ref: '#/components/schemas/tagGroupObject'
                   description: >-
                     Optionally one or more tag group objects associated with the
@@ -12331,8 +12636,8 @@ paths:
         - SMS
       x-note: >-
         Avoid repeated registration attempts. Repeated registrations of the same
-        msisdn and sender without an `opted_in` value will result in multiple
-        opt-in instruction messages being sent to the msisdn.
+        MSISDN and sender without an `opted_in` value will result in multiple
+        opt-in instruction messages being sent to the MSISDN.
   /api/channels/sms/opt-out:
     post:
       description: >
@@ -12915,7 +13220,7 @@ paths:
         - Channels
       x-important: >-
         You must first [create a subscription list in the
-        dashboard](/guides/messaging/audience/segmentation/audience-lists/subscription/#creating-a-list),
+        dashboard](https://docs.airship.com/guides/messaging/audience/segmentation/audience-lists/subscription/#creating-a-list),
         then you can refer to its ID when subscribing users. When subscribing
         users, if the list has not already been created in the dashboard, then
         the list will be created at the same time but will not be accessible
@@ -12923,7 +13228,7 @@ paths:
       x-note: >
         If you are using a single-channel Preference Center created before
         October 10, 2022, that has not been [migrated to
-        user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center),
+        user-level](https://docs.airship.com/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center),
         use the [`/api/channels/subscription_lists`
         endpoint](#operation-api-channels-subscription_lists-post) to add or
         remove individual channels to/from your subscription list. Otherwise,
@@ -13105,8 +13410,8 @@ paths:
 
 
         See [Individual Data Privacy Rights Under Data Privacy
-        Laws](../../guides/messaging/privacy/individual-data-privacy/) for more
-        information about data privacy law compliance.
+        Laws](https://docs.airship.com/guides/messaging/privacy/individual-data-privacy/)
+        for more information about data privacy law compliance.
       operationId: uninstallChannels
       requestBody:
         content:
@@ -13165,7 +13470,7 @@ paths:
         - Data Privacy Laws Compliance
       x-note: >-
         Channel uninstallation, like channel creation, is an asynchronous
-        operation, and may take some time to complete.
+        operation and may take some time to complete.
   '/api/channels/{channel_id}':
     get:
       description: >-
@@ -13282,7 +13587,7 @@ paths:
                             description: >-
                               One or more tag group objects (including [Device
                               Property
-                              Tags](../../reference/device-property-tags/))
+                              Tags](https://docs.airship.com/reference/device-property-tags/))
                               associated with this channel.
                           tags:
                             description: An array of tags associated with this channel.
@@ -13343,20 +13648,333 @@ paths:
         required: true
         schema:
           type: string
+  '/api/contacts/disassociate/{contact_id}':
+    post:
+      description: >-
+        Disassociates an SMS or email channel from a Contact with the option of
+        also opting out. You can identify the channel by MSISDN, email address,
+        or Channel ID.
+      operationId: disassociateContact
+      parameters:
+        - description: The Contact ID to disassociate from a channel.
+          in: path
+          name: contact_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                channel_id:
+                  description: The Channel ID to disassociate from the Contact.
+                  example: '{{channel_id}}'
+                  format: uuid
+                  type: string
+                channel_type:
+                  description: The type of channel.
+                  enum:
+                    - sms
+                    - email
+                  type: string
+                email_address:
+                  description: The email address to disassociate from the Contact.
+                  type: string
+                msisdn:
+                  description: >-
+                    The mobile phone number to disassociate from the Contact.
+                    Must be numeric characters only, without leading zeros. 15
+                    digits maximum.
+                  maxLength: 15
+                  pattern: '^[0-9]*$'
+                  type: string
+                opt_out:
+                  description: >-
+                    Optional. True if the channel is to be opted out; otherwise
+                    false.
+                  type: boolean
+                sender:
+                  description: >-
+                    A long or short code the app is configured to send from. For
+                    example, `12345`.
+                  properties:
+                    sms_sender:
+                      oneOf:
+                        - maxLength: 16
+                          minLength: 1
+                          type: string
+                        - items:
+                            maxLength: 16
+                            minLength: 1
+                            type: string
+                          maxItems: 100
+                          minItems: 1
+                          type: array
+                  required:
+                    - sms_sender
+                  title: SMS sender selector
+                  type: string
+              required:
+                - channel_type
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  channel_id:
+                    description: Identifies the existing unique Channel ID.
+                    example: ef625038-70a3-41f1-826f-57bc11dd625a
+                    format: uuid
+                    type: string
+                  contact:
+                    description: Identifies the existing unique Contact ID.
+                    example: ef625038-70a3-41f1-826f-57bc11dd625a
+                    format: uuid
+                    type: string
+                  ok:
+                    description: Success.
+                    type: boolean
+                type: object
+          description: The request was accepted.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+      security:
+        - contactJWTToken: []
+      summary: Contact disassociation
+      tags:
+        - Contacts
+  /api/contacts/identify/v2:
+    post:
+      description: >-
+        Executes Contact operations on the specified channel, returning the
+        resulting Contact ID and authentication token. Possible operations are
+        `resolve`, `identify`, or `reset`. See definitions in [Channel Contact
+        operation object](#schemas-channelcontactoperationobject).
+      operationId: identifyContactV2
+      parameters:
+        - in: header
+          name: X-UA-Appkey
+          required: true
+          schema:
+            description: The application key for your project.
+            title: Airship App Key header
+            type: string
+        - in: header
+          name: X-UA-Channel-ID
+          required: true
+          schema:
+            description: The Channel ID corresponding to the request.
+            title: Channel ID header
+            type: string
+        - in: header
+          name: X-UA-Timestamp
+          required: true
+          schema:
+            description: >-
+              The [date-time](#date-time-format) used for authentication
+              purposes. This should have second precision.
+            format: date-time
+            title: Auth Timestamp header
+            type: string
+        - in: header
+          name: X-UA-Nonce
+          required: true
+          schema:
+            description: >-
+              A nonce used for authentication purposes. This is suggested to be
+              a UUID that changes with every request.
+            format: uuid
+            title: Auth Nonce header
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/channelContactOperationObject'
+        required: true
+      responses:
+        '200':
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  contact:
+                    $ref: >-
+                      #/components/schemas/channelContactOperationResponseContactObject
+                  ok:
+                    description: Success.
+                    type: boolean
+                  token:
+                    description: A JWT specific to a channel and Contact.
+                    type: string
+                  token_expires_in:
+                    description: >-
+                      The number of milliseconds from the time the token is
+                      generated until it expires.
+                    type: integer
+          description: >-
+            Returned on success, with the JSON representation of Contact data
+            and a JWT auth token.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+      security:
+        - sdkChannelLevelBearerAuth: []
+      summary: Channel Contact operations
+      tags:
+        - Contacts
+  '/api/contacts/lookup/channel/{channel_id}':
+    get:
+      description: |
+        Looks up a Contact ID for the given Channel ID.
+      operationId: getContactIdFromChannelId
+      parameters:
+        - description: The Channel ID for which to retrieve the associated Contact ID.
+          in: path
+          name: channel_id
+          required: true
+          schema:
+            format: uuid
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                properties:
+                  contact_id:
+                    description: |
+                      The resolved Contact ID.
+                    format: uuid
+                    type: string
+                  is_anonymous:
+                    description: |
+                      Specifies whether the Contact is anonymous or not.
+                    type: boolean
+                  ok:
+                    description: |
+                      Set to `true` when status code is `200`.
+                    type: boolean
+                required:
+                  - ok
+                  - contact_id
+                  - is_anonymous
+                title: Resolve Anonymous Contact response
+                type: object
+          description: The request was accepted.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '406':
+          $ref: '#/components/responses/406'
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Look up Contact ID by Channel ID
+      tags:
+        - Contacts
+  '/api/contacts/lookup/named_user/{named_user_id}':
+    get:
+      description: |
+        Looks up a Contact ID for the given Named User ID.
+      operationId: getContactIdFromNamedUserId
+      parameters:
+        - description: >-
+            The URL-encoded Named User ID for which to retrieve the associated
+            Contact ID.
+          in: path
+          name: named_user_id
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                description: >
+                  The Contact ID in the response will be based on these
+                  precedence rules:
+
+                  * From the Named User if it exists
+
+                  * From the channel if it is associated to an [Anonymous
+                  Contact](https://docs.airship.com/developer/sdk-integration/mobile/audience/#contacts)
+
+                  * From the payload if provided
+
+                  * Randomly generated
+                properties:
+                  contact_id:
+                    description: |
+                      The resolved Contact ID.
+                    format: uuid
+                    type: string
+                  ok:
+                    description: |
+                      Set to `true` when status code is `200`.
+                    type: boolean
+                required:
+                  - ok
+                  - contact_id
+                title: Identify Anonymous Contact response
+                type: object
+          description: The request was accepted.
+        '400':
+          $ref: '#/components/responses/400'
+        '401':
+          $ref: '#/components/responses/401'
+        '403':
+          $ref: '#/components/responses/403'
+        '404':
+          $ref: '#/components/responses/404'
+        '406':
+          $ref: '#/components/responses/406'
+      security:
+        - basicAuth: []
+        - bearerAuth: []
+      summary: Look up Contact ID by Named User ID
+      tags:
+        - Contacts
   /api/create-and-send:
     post:
-      description: >
-        Send a notification to an audience of SMS, email, or open channel
-        addresses and simultaneously register new addresses in the `audience` as
-        new channels. Addresses that are not yet associated with channels are
-        registered as new channels. Addresses in the payload that are already
-        registered to a `channel_id` and are either `opted_in` or have an
-        `opted_in` value in the payload that is newer than the `opted_out` value
-        associated with a channel will receive the notification, but are not
-        re-registered as new channels.
+      description: >+
+        Send messages to email addresses, MSISDNs, or Open channel addresses.
+        Unknown identifiers are registered as new channels. This endpoint
+        supports two audience methods:
 
-        You cannot update `opted_in` values for existing channels through this
-        endpoint.
+        - `create_and_send` array: For smaller audiences, provide email
+        addresses, MSISDNs, or Open channel addresses directly in the request.
+
+
+        - `bulk_id`: For larger audiences, upload a CSV using the [Create bulk
+        send audience](#operation-api-bulk-platform_name-post) endpoint to
+        obtain a `bulk_id`, then reference it in this request.
+
+
+        Existing channels that are `opted_in` or have a newer `opted_in` value
+        in the payload receive the message but are not re-registered. You cannot
+        update `opted_in` values for existing channels through this endpoint.
+
+
+        Note: This endpoint also accepts Channel IDs for app or web via
+        `bulk_id`, but this works identically to [Send message with bulk
+        ID](#operation-api-bulk-send-post).
+
       operationId: createAndSend
       requestBody:
         content:
@@ -13458,9 +14076,9 @@ paths:
           $ref: '#/components/responses/400'
           description: >-
             You can only Create and Send to a single platform per request.
-            Attempting to register channels and send notifications for multiple
-            `device_types` in the same request will cause a 400 response. An
-            invalid or missing header row will also cause a 400 response.
+            Attempting to send notifications for multiple `device_types` in the
+            same request will cause a 400 response. An invalid or missing header
+            row will also cause a 400 response.
         '401':
           $ref: '#/components/responses/401'
         '413':
@@ -13475,7 +14093,7 @@ paths:
             - psh
       summary: Create and Send a message
       tags:
-        - Create and Send
+        - Bulk Sending
       x-warning: >-
         Duplicate addresses in the `create_and_send` array might receive
         redundant notifications or fewer notifications than expected. You should
@@ -13485,8 +14103,8 @@ paths:
     post:
       description: >-
         Validate a [Create and Send](#operation-api-create-and-send-post)
-        payload. This endpoint will not create channels or send notifications.
-        It only parses and validates your payload.
+        payload without creating channels or sending messages. It only parses
+        and validates your payload.
       operationId: validateCreateAndSendPayload
       requestBody:
         content:
@@ -13546,14 +14164,14 @@ paths:
             - psh
       summary: Validate Create and Send payload
       tags:
-        - Create and Send
+        - Bulk Sending
   /api/custom-events:
     parameters:
       - in: header
         name: X-UA-Appkey
         required: true
         schema:
-          description: The application key.
+          description: The application key for your project.
           title: Airship App Key header
           type: string
     post:
@@ -13635,8 +14253,8 @@ paths:
       x-note: >
         * Requests complete validation before returning a response.
 
-        * Requests are authenticated with a bearer token which can provide
-        access to this resource alone, or to this resource and others.
+        * Requests are authenticated with a bearer token, which can provide
+        access to this resource alone or to this resource and others.
 
         * The `name` value inside `body` must not contain any uppercase
         characters, or the event will be rejected with a 400 status code.
@@ -13791,6 +14409,12 @@ paths:
       summary: Create experiment (A/B Test)
       tags:
         - A/B Tests
+      x-important: >-
+        The A/B Tests API is unrelated to the [current version of A/B
+        testing](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages/).
+        For more information about this API, including its dashboard equivalent,
+        see [Legacy message A/B
+        tests](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages-legacy/).
   /api/experiments/scheduled:
     get:
       description: >-
@@ -14148,7 +14772,7 @@ paths:
       tags:
         - Static Lists
       x-note: >-
-        `Content-Encoding: gzip` is supported (and recommended) on this endpoint
+        `Content-Encoding: gzip` is supported and recommended on this endpoint
         to reduce network traffic.
   '/api/lists/{list_name}':
     delete:
@@ -14357,7 +14981,7 @@ paths:
       tags:
         - Static Lists
       x-note: >-
-        If you are trying to update the list contents, please see the [list
+        To update the list contents, use the [list
         upload](#operation-api-lists-list_name-csv-put) endpoint. The update
         endpoint is used to update a list's metadata rather than the actual list
         of device identifiers.
@@ -14487,7 +15111,7 @@ paths:
       x-note: >-
         The maximum number of `identifier_type,identifier` pairs that may be
         uploaded to a list is 10 million. `Content-Encoding: gzip` is supported
-        (and recommended) on this endpoint to reduce network traffic.
+        and recommended on this endpoint to reduce network traffic.
       x-warning: >-
         If an attempt to upload a list times out due to a poor connection, you
         must re-upload the list from scratch. Because we want to ensure that the
@@ -14496,7 +15120,7 @@ paths:
   /api/named_users:
     get:
       description: >-
-        Return a list of Named Users or lookup a single Named User by
+        Return a list of Named Users or look up a single Named User by
         `named_user_id`.
       operationId: getNamedUser
       responses:
@@ -14841,7 +15465,7 @@ paths:
       x-note: >
         If you are using a single-channel Preference Center created before
         October 10, 2022, that has not been [migrated to
-        user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center),
+        user-level](https://docs.airship.com/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center),
         use the [`/api/channels/subscription_lists`
         endpoint](#operation-api-channels-subscription_lists-post) to add or
         remove individual channels to/from your subscription list.
@@ -14999,8 +15623,8 @@ paths:
 
 
         See [Individual Data Privacy Rights Under Data Privacy
-        Laws](../../guides/messaging/privacy/individual-data-privacy/) for more
-        information about data privacy law compliance.
+        Laws](https://docs.airship.com/guides/messaging/privacy/individual-data-privacy/)
+        for more information about data privacy law compliance.
       operationId: uninstallNamedUser
       requestBody:
         content:
@@ -15060,7 +15684,7 @@ paths:
         - Data Privacy Laws Compliance
       x-note: >-
         Channel uninstallation, like channel creation, is an asynchronous
-        operation, and may take some time to complete.
+        operation and may take some time to complete.
   '/api/named_users/{named_user_id}':
     post:
       description: |
@@ -18558,9 +19182,9 @@ paths:
   /api/reports/responses/list:
     get:
       description: >-
-        Get a listing of all pushes, plus basic response information, in a given
-        timeframe. Start and end date times are required parameters. The time
-        defaults to 00:00 UTC if not specified.
+        Get a listing of all pushes, plus basic response information, for a
+        given time period. Start and end date times are required parameters. The
+        time defaults to 00:00 UTC if not specified.
       operationId: getResponses
       parameters:
         - description: 'A [date-time](#date-time-format) for start of report.'
@@ -18702,14 +19326,18 @@ paths:
       summary: Response listing
       tags:
         - Reports
-      x-note: |
-        If you don't specify a `start` and `end` time, our system
-        assumes 00:00 UTC, which will give you results just through
-        the prior day.
+      x-note: >
+        If you don't specify a `start` and `end` time, the system
+
+        assumes 00:00 UTC, which will provide results through
+
+        the previous day.
 
 
-        Use timestamps to get results for a specific timeframe, or
-        if you are only using date, set it in the future to ensure you
+
+        Use timestamps to get results for a specific time period. If only using
+        the date, set it in the future to ensure you
+
         will see the most recent listing.
   '/api/reports/responses/{push_id}':
     get:
@@ -19114,8 +19742,8 @@ paths:
       tags:
         - Reports
       x-note: >
-        If you don’t specify an `end` time, our system assumes 00:00 UTC, which
-        will give you results just through the prior day.
+        If you don't specify an `end` time, the system assumes 00:00 UTC, which
+        will provide results through the previous day.
   /api/schedules:
     get:
       description: >-
@@ -19314,18 +19942,17 @@ paths:
   /api/schedules/bulk-send:
     post:
       description: >
-        Schedule a [Create and Send](#tag-create-and-send) push to the
-        `bulk_id`, ignoring inactive channels. Before calling this endpoint, a
-
-        `bulk_id` must be obtained from a [Create bulk send
-        audience](#operation-api-bulk-platform_name-post) operation.
+        Schedule a message to existing channels using a `bulk_id`. Inactive
+        channels are dropped. Before calling this endpoint, obtain a `bulk_id`
+        from the [Create bulk send
+        audience](#operation-api-bulk-platform_name-post) endpoint.
       operationId: ScheduleBulkSendPush
       requestBody:
         content:
           application/json:
             schema:
               $ref: '#/components/schemas/scheduledBulkSendObject'
-        description: A Create and Send a message with bulk ID payload.
+        description: A Send a message with bulk ID payload.
       responses:
         '202':
           content:
@@ -19407,18 +20034,37 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Schedule Create and Send a message with bulk ID
+      summary: Schedule message with bulk ID
       tags:
-        - Create and Send
+        - Bulk Sending
   /api/schedules/create-and-send:
     post:
       description: >
         Schedule a [Create and Send
-        message](#operation-api-create-and-send-post).
+        message](#operation-api-create-and-send-post). Unknown identifiers are
+        registered as new channels. This endpoint supports two audience methods:
 
 
-        You cannot update `opted_in` values for existing channels through this
-        endpoint.
+        - `create_and_send` array: For smaller audiences, provide email
+        addresses, MSISDNs, or Open channel addresses directly in the request.
+
+
+
+        - `bulk_id`: For larger audiences, upload a CSV using the [Create bulk
+        send audience](#operation-api-bulk-platform_name-post) endpoint to
+        obtain a `bulk_id`, then reference it in this request.
+
+
+
+        Existing channels that are `opted_in` or have a newer `opted_in` value
+        in the payload receive the message but are not re-registered. You cannot
+        update `opted_in` values for existing channels through this endpoint.
+
+
+
+        Note: This endpoint also accepts Channel IDs for app or web via
+        `bulk_id`, but this works identically to [Schedule message with bulk
+        ID](#operation-api-schedules-bulk-send-post).
       operationId: scheduleCreateAndSendOperations
       requestBody:
         content:
@@ -19556,9 +20202,9 @@ paths:
           $ref: '#/components/responses/400'
           description: >-
             You can only Create and Send to a single platform per request.
-            Attempting to register channels and send notifications for multiple
-            `device_types` in the same request will cause a 400 response. An
-            invalid or missing header row will also cause a 400 response.
+            Attempting to send notifications for multiple `device_types` in the
+            same request will cause a 400 response. An invalid or missing header
+            row will also cause a 400 response.
         '401':
           $ref: '#/components/responses/401'
         '413':
@@ -19573,12 +20219,12 @@ paths:
             - psh
       summary: Schedule a Create and Send message
       tags:
-        - Create and Send
+        - Bulk Sending
       x-warning: >-
         Duplicate addresses in the `create_and_send` array might receive
         redundant notifications or fewer notifications than expected. You should
-        remove duplicate addresses from your request before scheduling a Create
-        and Send message.
+        remove duplicate addresses from your request before sending a Create and
+        Send message.
   '/api/schedules/{schedule_id}':
     delete:
       description: >-
@@ -20197,15 +20843,16 @@ paths:
       description: >
         Respond to a mobile-originated message based on a keyword consumed by
         your custom-response webhook, using a mobile-originated ID. See [SMS
-        Keyword Webhooks](../../platform/sms/inbound-message-handling/) for
-        information about setting up a custom response webhook server.
+        Keyword
+        Webhooks](https://docs.airship.com/developer/api-integrations/sms/inbound-message-handling/)
+        for information about setting up a custom response webhook server.
       operationId: createCustomSmsResponse
       parameters:
         - in: header
           name: X-UA-Appkey
           required: true
           schema:
-            description: The application key.
+            description: The application key for your project.
             title: Airship App Key header
             type: string
       requestBody:
@@ -20351,7 +20998,7 @@ paths:
           name: X-UA-Appkey
           required: true
           schema:
-            description: The application key.
+            description: The application key for your project.
             title: Airship App Key header
             type: string
         - description: >-
@@ -20537,9 +21184,9 @@ paths:
       tags:
         - Tag Lists
       x-note: >-
-        The tag list content will return the data that is provided in the [tag
-        list creation](#operation-api-tag-lists-post). Although `add`, `remove`,
-        and `set` are optional, one or more must be present.
+        The tag list content will return the data provided in the [tag list
+        creation](#operation-api-tag-lists-post) operation. Although `add`,
+        `remove`, and `set` are optional, one or more must be present.
     post:
       description: >-
         Add tags to your contacts by creating a list and uploading CSV file with
@@ -20770,7 +21417,7 @@ paths:
         - Tag Lists
       x-note: >-
         The maximum number of rows that may be uploaded to a list is 10 million.
-        `Content-Encoding: gzip` is supported (and recommended) on this endpoint
+        `Content-Encoding: gzip` is supported and recommended on this endpoint
         to reduce network traffic.
       x-warning: >-
         If your upload times out due to a poor connection, you must re-upload
@@ -21541,17 +22188,16 @@ paths:
       tags:
         - Push
       x-note: >-
-        For time-sensitive messages you should consider including an `expiry`
-        time, as detailed in the [In-App Message Object](#schemas-inappobject).
-        Setting an `expiry` value will prevent you from having to manually
-        remove messages.
+        For time-sensitive messages, consider including an `expiry` time as
+        detailed in the [In-App Message Object](#schemas-inappobject). Setting
+        an `expiry` value eliminates the need to manually remove messages.
   /token:
     post:
       description: >-
         Request an OAuth access token with Basic Auth or an assertion. When
         making a request with an assertion, do not provide the Basic Auth
         header. See also [OAuth
-        2.0](../../guides/messaging/getting-started/developers/api-security/#oauth-20)
+        2.0](https://docs.airship.com/guides/messaging/getting-started/developers/api-security/#oauth-20)
         in the *API Security* documentation.
 
 
@@ -21751,8 +22397,8 @@ paths:
         requests are using the appropriate [domain](#servers).
 
 
-        Here's an example using the OAuth token to list channels on Airship's
-        North American cloud site: {{< highlight "bash" >}} curl --location
+        This example uses the OAuth token to list channels on Airship's North
+        American cloud site: {{< highlight "bash" >}} curl --location
         'https://api.asnapius.com/api/channels/' \
          --header 'Accept: application/vnd.urbanairship+json; version=3;' \
          --header 'Authorization: Bearer {OAUTH_ACCESS_TOKEN}'
@@ -21838,6 +22484,12 @@ tags:
       of an audience. You can create up to 26 notification variants and send
       each variant to an audience subset.
     name: A/B Tests
+    x-important: >-
+      The A/B Tests API is unrelated to the [current version of A/B
+      testing](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages/).
+      For more information about this API, including its dashboard equivalent,
+      see [Legacy message A/B
+      tests](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages-legacy/).
   - description: >-
       Use the `/templates` API to create templates and push templatized
       notifications.
@@ -21845,9 +22497,10 @@ tags:
     x-note: >
       Consider the `/templates` API deprecated. You should instead [create
       templates in the Airship
-      dashboard](../../guides/messaging/personalization/content/templates/) and
-      send using the [`/create-and-send`](#operation-api-create-and-send-post)
-      or [`/pipelines`](#tag-automation) APIs.
+      dashboard](https://docs.airship.com/guides/messaging/personalization/content/templates/)
+      and send using the
+      [`/create-and-send`](#operation-api-create-and-send-post) or
+      [`/pipelines`](#tag-automation) APIs.
   - description: >-
       The Region API endpoints provide a listing and detail for all of your
       defined entry/exit regions, including custom shapes (polygons) and circles
@@ -21882,7 +22535,8 @@ tags:
     name: Email
   - description: >-
       Register and manage SMS channels. See [SMS Platform
-      Information](../../platform/sms/) to get started with SMS notifications.
+      Information](https://docs.airship.com/developer/api-integrations/sms/) to
+      get started with SMS notifications.
     name: SMS
   - description: >-
       A Named User is a proprietary identifier that maps customer-chosen IDs,
@@ -21924,7 +22578,7 @@ tags:
       members is elsewhere is a good candidate for Static Lists, e.g., members
       of a customer loyalty program. In the dashboard, they are referred to as
       [Uploaded
-      Lists](../../guides/messaging/audience/segmentation/audience-lists/uploaded/).
+      Lists](https://docs.airship.com/guides/messaging/audience/segmentation/audience-lists/uploaded/).
 
 
       Airship automatically deletes a Static list and all its versions after 90
@@ -21941,50 +22595,48 @@ tags:
       segmentation.
     name: Static Lists
   - description: >+
-      Target recipients of a single channel type by providing a list of user
-      identifiers when creating a message. You can send to Channel IDs, email
-      addresses, phone numbers, or Open channel addresses. Unknown identifiers
-      are registered as new email, SMS, and Open channels. This can help you
-      immediately notify new email, SMS, and Open contacts without having to
-      wait for channel registration. Addresses for `open::`, `email`, or `sms`
-      in the payload that are already registered as opted in, or have an
-      `opted_in` value that is newer than an `opted_out` value for their
-      `channel_id`, will still receive notifications but are not registered as
-      new channels.
-
-      * Use the [Create and Send a message](#operation-api-create-and-send-post)
-      or [Schedule a Create and Send
-      message](#operation-api-schedules-create-and-send-post) endpoints to
-      provide email, SMS, and Open channel identifiers in an array in the
-      `audience` object and simultaneously send a message.
+      Target recipients of a single channel type by providing audience
+      identifiers at send time. Bulk sending supports two methods:
 
 
-      * Use the bulk method to target Channel IDs, email addresses, phone
-      numbers, or Open channel addresses. First, use the [Create bulk send
-      audience](#operation-api-bulk-platform_name-post) endpoint to provide
-      identifiers in CSV format and obtain a `bulk_id`, and then send your
-      message to the ID using the [Create and Send a message with bulk
-      ID](#operation-api-bulk-send-post) or [Schedule Create and Send a message
-      with bulk ID](#operation-api-schedules-bulk-send-post) endpoint. New
-      channels are created at send time, not when requesting the ID.
+      * **Upload and Send** targets existing channels by Channel ID across app,
+      web, email, SMS, and Open channels. Upload a CSV of Channel IDs to the
+      [Create bulk send audience](#operation-api-bulk-platform_name-post)
+      endpoint to obtain a `bulk_id`, and then send your message using the [Send
+      message with bulk ID](#operation-api-bulk-send-post) or [Schedule message
+      with bulk ID](#operation-api-schedules-bulk-send-post) endpoint.
 
 
-      See also the [Create and
-      Send](../../guides/messaging/audience/segmentation/create-and-send/)
-      guide.
+      * **Create and Send** sends to email addresses, MSISDNs, or Open channel
+      addresses. Unknown identifiers are registered as new channels.
 
-    name: Create and Send
+        * For smaller audiences, use the [Create and Send a message](#operation-api-create-and-send-post) or [Schedule a Create and Send message](#operation-api-schedules-create-and-send-post) endpoints to provide email addresses, MSISDNs, or Open channel addresses in an array.
+
+        * For larger audiences, upload identifiers in CSV format to the [Create bulk send audience](#operation-api-bulk-platform_name-post) endpoint to obtain a `bulk_id`, and then send your message using the [Create and Send a message](#operation-api-create-and-send-post) or [Schedule a Create and Send message](#operation-api-schedules-create-and-send-post) endpoint.
+
+
+      See the [Bulk
+      sending](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/)
+      guide for more information.
+
+    name: Bulk Sending
     x-note: >-
       You cannot update channel information or opt-in status from these
-      endpoints. If you want to update channels, refer to the appropriate email,
-      SMS, or open channel endpoints.
-  - description: >+
+      endpoints. To update channels, use the appropriate channel registration
+      endpoints.
+  - description: >
       The Airship Reports APIs are available in only certain account plans.
       Please [contact Support](https://support.airship.com/) or your Account
       Manager if you are unable to use them for an app key that you believe is
       on an appropriate plan.
-
     name: Reports
+  - description: >+
+      A Contact is any user in your project. Contacts are identified as either
+      an Anonymous Contact or a Named User. Airship can set targeting data on
+      these identifiers, which are also used to map devices and channels to a
+      specific user.
+
+    name: Contacts
 x-schema-tags:
   - description: >
       Event Segmentation lets you target audiences based on lifecycle actions or
@@ -22014,12 +22666,12 @@ x-schema-tags:
       Override push settings and provide content for specific platforms
       (selected by `device_type`) using a `template`. Templated platform
       overrides automatically allow personalization using
-      [Handlebars](../../guides/messaging/personalization/handlebars/).
+      [Handlebars](https://docs.airship.com/guides/messaging/personalization/handlebars/).
     name: Platform overrides with templates
     x-note: >-
-      The `fields` key under `template` is deprecated. This old method is still
-      supported, but has been superseded by just using `{{handlebars}}` directly
-      in the payload.
+      The `fields` key under `template` is deprecated. This method is still
+      supported, but has been superseded by using `{{handlebars}}` directly in
+      the payload.
   - description: >-
       The following schemas represent ways to target by location, region, or
       geofence.
@@ -22058,16 +22710,16 @@ x-schema-tags:
       or open channel endpoints.
   - description: >
       A push request property specifying which [External Data
-      Feeds](../../guides/messaging/personalization/sources/external-data-feeds/)
+      Feeds](https://docs.airship.com/guides/messaging/personalization/sources/external-data-feeds/)
       should be invoked and with what parameters in order to support
       personalization from feed content.
     name: External Data Feeds references
     x-important: >-
       You must first [create an external data feed in the
-      dashboard](/guides/messaging/personalization/sources/external-data-feeds/),
+      dashboard](https://docs.airship.com/guides/messaging/personalization/sources/external-data-feeds/),
       then you can refer to its ID as the `name` in the feed references object.
       The Coupons service is a type of external data feed. See
-      [Coupons](../../guides/messaging/personalization/sources/coupons/) for
-      formatting and usage information.
+      [Coupons](https://docs.airship.com/guides/messaging/personalization/sources/coupons/)
+      for formatting and usage information.
   - name: Permissions
   - null

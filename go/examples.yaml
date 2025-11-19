@@ -16,6 +16,22 @@ components:
                  }
               }
     actionsObject:
+      - description: Example add custom event action
+        examples:
+          - lang: json
+            source: |
+              {
+                 "actions": {
+                     "add_custom_event": {
+                        "name": "myCustomEvent",
+                        "value": 12.5,
+                        "properties": {
+                           "property_key1": "value_property1",
+                           "property_key2": 6789
+                        }
+                     }
+                 }
+              }
       - description: Example tag actions
         examples:
           - lang: json
@@ -3142,7 +3158,7 @@ components:
                  "default_value" : "<fallback value>"
               }
     templatedMessageContent:
-      - description: Example templated Create and Send a message with bulk ID
+      - description: Example templated Send a message with bulk ID
         examples:
           - lang: json
             source: |
@@ -3940,7 +3956,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/bulk-send:
     post:
-      - description: Example Create and Send a message with bulk ID
+      - description: Example send message with bulk ID
         examples:
           - lang: HTTP
             source: |
@@ -3978,7 +3994,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/bulk-send/validate:
     post:
-      - description: Example Validate Create and Send a message with bulk ID
+      - description: Example validate message with bulk ID
         examples:
           - lang: HTTP
             source: |
@@ -4010,7 +4026,7 @@ paths:
         showMissingLanguagePlaceholders: true
   '/api/bulk/{platform_name}':
     post:
-      - description: Example Create bulk send audience request for email
+      - description: Example create bulk send audience request for email
         examples:
           - lang: HTTP
             source: |
@@ -4023,7 +4039,7 @@ paths:
               someone@example.com,2024-04-01T18:45:30
               else@example.com,2024-04-21T16:13:01
         showMissingLanguagePlaceholders: true
-      - description: Example Create bulk send audience request for SMS
+      - description: Example create bulk send audience request for SMS
         examples:
           - lang: HTTP
             source: |
@@ -4037,7 +4053,7 @@ paths:
               15031215555,55555,2024-04-21T16:13:01
         showMissingLanguagePlaceholders: true
       - description: >-
-          Example Create bulk send audience request for email with merge data
+          Example create bulk send audience request for email with merge data
           fields
         examples:
           - lang: HTTP
@@ -4061,7 +4077,7 @@ paths:
                 "field_names": ["ua_address", "ua_commercial_opted_in", "name", "city"]
               }
         showMissingLanguagePlaceholders: true
-      - description: Example Create bulk send audience request for email
+      - description: Example create bulk send audience request for email
         examples:
           - lang: HTTP
             source: |
@@ -4075,7 +4091,7 @@ paths:
               89099449-6032-4821-8f1c-fd0892fdc609
         showMissingLanguagePlaceholders: true
       - description: >-
-          Example Create bulk send audience request for email with merge data
+          Example create bulk send audience request for email with merge data
           fields
         examples:
           - lang: HTTP
@@ -4107,7 +4123,7 @@ paths:
                   "field_names": ["ua_channel_id", "name", "city"]
               }
         showMissingLanguagePlaceholders: true
-      - description: Example Create bulk send audience request for open platform
+      - description: Example create bulk send audience request for open platform
         examples:
           - lang: HTTP
             source: |
@@ -4134,7 +4150,7 @@ paths:
                 "field_names": ["ua_address"]
               }
         showMissingLanguagePlaceholders: true
-      - description: Example Create bulk send audience request for open channels
+      - description: Example create bulk send audience request for open channels
         examples:
           - lang: HTTP
             source: |
@@ -4712,10 +4728,12 @@ paths:
                   "properties" : {
                       "interests" : "newsletter"
                   },
-                  "tags": {
+                  "tag_operations": {
+                    "add": {
                       "my_fav_tag_group1": ["tag1", "tag2", "tag3"],
                       "my_fav_tag_group2": ["tag1", "tag2", "tag3"],
                       "my_fav_tag_group3": ["tag1", "tag2", "tag3"]
+                    }
                   },
                   "attributes": {
                       "my_fav_attribute1": "attribute1",
@@ -5829,10 +5847,12 @@ paths:
                 "timezone": "America/Los_Angeles",
                 "locale_country": "US",
                 "locale_language": "en",
-                "tags": {
+                "tag_operations": {
+                  "add": {
                     "my_fav_tag_group1": ["tag1", "tag2", "tag3"],
                     "my_fav_tag_group2": ["tag1", "tag2", "tag3"],
                     "my_fav_tag_group3": ["tag1", "tag2", "tag3"]
+                  }
                 },
                 "attributes": {
                     "my_fav_attribute1": "attribute1",
@@ -6888,7 +6908,7 @@ paths:
         showMissingLanguagePlaceholders: true
   '/api/contacts/associated_types/{contact_id}':
     get:
-      - description: Example
+      - description: Example list channels associated by Contact
         examples:
           - lang: HTTP
             source: >
@@ -6925,7 +6945,7 @@ paths:
         showMissingLanguagePlaceholders: true
   '/api/contacts/disassociate/{contact_id}':
     post:
-      - description: SMS with Channel ID
+      - description: Example dissociate SMS channel from Contact by Channel ID
         examples:
           - lang: HTTP
             source: >
@@ -6945,7 +6965,7 @@ paths:
                 "channel_id": "c8d58c64-7eb5-40ad-ad51-d39e05335c48"
               }
         showMissingLanguagePlaceholders: true
-      - description: SMS with sender and msisdn
+      - description: Example dissociate SMS channel from Contact by sender ID and MSISDN
         examples:
           - lang: HTTP
             source: >
@@ -6966,7 +6986,7 @@ paths:
                 "msisdn": "15035551234"
               }
         showMissingLanguagePlaceholders: true
-      - description: Email with email address
+      - description: Example dissociate email channel from Contact by email address
         examples:
           - lang: HTTP
             source: >
@@ -6986,7 +7006,9 @@ paths:
                 "email_address": "abc@example.com"
               }
         showMissingLanguagePlaceholders: true
-      - description: Email with email address and opt_out
+      - description: >-
+          Example dissociate email channel from Contact by email address with
+          opt_out
         examples:
           - lang: HTTP
             source: >
@@ -7021,7 +7043,7 @@ paths:
               }
   /api/contacts/identify/v2:
     post:
-      - description: Example identify contacts V2
+      - description: Example identify Contact by Named User ID
         examples:
           - lang: HTTP
             source: |
@@ -7062,7 +7084,7 @@ paths:
   '/api/contacts/lookup/channel/{channel_id}':
     get:
       - description: |
-          Example get contact ID from a Channel ID
+          Example get Contact ID from a Channel ID
         examples:
           - lang: HTTP
             source: >
@@ -7087,7 +7109,7 @@ paths:
   '/api/contacts/lookup/named_user/{named_user_id}':
     get:
       - description: |
-          Example get contact ID from a Named User ID
+          Example get Contact ID from a Named User ID
         examples:
           - lang: HTTP
             source: >
@@ -7501,6 +7523,52 @@ paths:
               send_it.notification = inline_template
 
               send_it.create_and_send
+          - lang: HTTP
+            source: |
+              HTTP/1.1 202 Accepted
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok": true,
+                  "operation_id": "67c65146-c27f-431f-b54a-83aca694fdd3",
+                  "push_ids": [
+                      "c0eead17-333b-4f86-8a42-9fb7be1ed627"
+                  ],
+                  "message_ids": [],
+                  "content_urls": []
+              }
+        showMissingLanguagePlaceholders: true
+      - description: Example Create and Send with bulk ID for email
+        examples:
+          - lang: HTTP
+            source: |
+              POST /api/create-and-send HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                "audience": {
+                  "bulk_id": "26425d51-fbab-4ad8-bd5f-9560ee84b087"
+                },
+                "device_types": [
+                    "email"
+                ],
+                "notification": {
+                    "email": {
+                      "subject": "Welcome to the Winter Sale!",
+                      "html_body": "<h1>Seasons Greetings {{name}}</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\"1\" title=\"unsubscribe\" href=\"http://unsubscribe.urbanairship.com/email/success.html\">Unsubscribe</a></p>",
+                      "plaintext_body": "Greetings {{name}}! Check out our latest winter deals! [[ua-unsubscribe href=\"http://unsubscribe.urbanairship.com/email/success.html\"]]",
+                      "message_type": "commercial",
+                      "sender_name": "Airship",
+                      "sender_address": "team@airship.com",
+                      "reply_to": "no-reply@airship.com"
+                    }
+                },
+                "campaigns": {
+                    "categories": ["winter sale", "west coast"]
+                }
+              }
           - lang: HTTP
             source: |
               HTTP/1.1 202 Accepted
@@ -14518,7 +14586,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/schedules/bulk-send:
     post:
-      - description: Example Schedule Create and Send a message with bulk ID
+      - description: Example schedule message with bulk ID
         examples:
           - lang: HTTP
             source: |
@@ -14807,6 +14875,56 @@ paths:
                       },
                       "url": "http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109"
                     }
+                ]
+              }
+        showMissingLanguagePlaceholders: true
+      - description: Example scheduled Create and Send with bulk ID
+        examples:
+          - lang: HTTP
+            source: |
+              POST /api/schedules/create-and-send HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                "schedule": {
+                  "scheduled_time": "2020-11-11T12:00:00"
+                },
+                "name": "scheduled winter sale email",
+                "push": {
+                  "audience": {
+                    "bulk_id": "26425d51-fbab-4ad8-bd5f-9560ee84b087"
+                  },
+                  "device_types": [
+                      "email"
+                  ],
+                  "notification": {
+                      "email": {
+                        "subject": "Welcome to the Winter Sale!",
+                        "html_body": "<h1>Seasons Greetings {{name}}</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\"1\" title=\"unsubscribe\" href=\"http://unsubscribe.urbanairship.com/email/success.html\">Unsubscribe</a></p>",
+                        "plaintext_body": "Greetings {{name}}! Check out our latest winter deals! [[ua-unsubscribe href=\"http://unsubscribe.urbanairship.com/email/success.html\"]]",
+                        "message_type": "commercial",
+                        "sender_name": "Airship",
+                        "sender_address": "team@airship.com",
+                        "reply_to": "no-reply@airship.com"
+                      }
+                  },
+                  "campaigns": {
+                      "categories": ["winter sale", "west coast"]
+                  }
+                }
+              }
+          - lang: HTTP
+            source: |
+              HTTP/1.1 202 Accepted
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                "ok": true,
+                "operation_id": "67c65146-c27f-431f-b54a-83aca694fdd3",
+                "schedule_urls": [
+                    "http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109"
                 ]
               }
         showMissingLanguagePlaceholders: true

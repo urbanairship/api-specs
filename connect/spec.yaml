@@ -3,11 +3,12 @@ components:
     api_initiate_opt_in:
       description: >
         Occurs when an SMS user is registered via the [SMS Channel Registration
-        API](../ua/#operation-api-channels-sms-post) without an `opted_in` value
-        — indicating that the user has initiated, but not completed, the
-        registration process. While this event contains a `channel_id`, you
-        cannot send messages to this channel until the associated user completes
-        the opt-in process (indicated by a `mobile_opt_in` event).
+        API](https://docs.airship.com/developer/rest-api/ua/#operation-api-channels-sms-post)
+        without an `opted_in` value — indicating that the user has initiated,
+        but not completed, the registration process. While this event contains a
+        `channel_id`, you cannot send messages to this channel until the
+        associated user completes the opt-in process (indicated by a
+        `mobile_opt_in` event).
       properties:
         body:
           description: >-
@@ -115,10 +116,18 @@ components:
                 - 'false'
               type: string
             carrier:
-              description: The wireless carrier used by the device.
+              deprecated: true
+              description: >-
+                The wireless carrier used by the device. **Deprecation notice:**
+                This property will not be collected as of SDK 20 for both iOS
+                and Android and will be removed on October 8, 2025.
               type: string
             connection_type:
-              description: The internet connection type used by the device.
+              deprecated: true
+              description: >-
+                The internet connection type used by the device. **Deprecation
+                notice:** This property will not be collected as of SDK 20 for
+                both iOS and Android and will be removed on October 8, 2025.
               enum:
                 - WIFI
                 - CELL
@@ -423,7 +432,7 @@ components:
             properties:
               properties:
                 bounce_class:
-                  description: The bounce classification as specified in Sparkpost.
+                  description: The bounce classification as specified in SparkPost.
                   maximum: 100
                   minimum: 1
                   type: integer
@@ -725,11 +734,11 @@ components:
       description: >
         Occurs when a device is excluded from a push because it was arbitrarily
         selected as a member of a control group for a [Message A/B
-        test](../../guides/messaging/experimentation/a-b-tests/messages/),
+        test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages/),
         [Sequence A/B
-        test](../../guides/messaging/experimentation/a-b-tests/sequences/), or
-        [Holdout
-        Experiment](../../guides/messaging/experimentation/holdout-experiments/).
+        test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/sequences/),
+        or [Holdout
+        Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).
       properties:
         body:
           properties:
@@ -746,6 +755,13 @@ components:
                   type: array
               title: Campaigns Object
               type: object
+            experiment_id:
+              description: >-
+                The unique identifier for the Message A/B test or Holdout
+                Experiment.
+              format: uuid
+              title: Experiment ID
+              type: string
             group_id:
               description: >
                 Identifies a push specification delivered over an interval of
@@ -764,6 +780,13 @@ components:
           oneOf:
             - $ref: '#/components/schemas/appdevices'
             - $ref: '#/components/schemas/webdevices'
+        experiment_id:
+          description: >-
+            The unique identifier for the Message A/B test or Holdout
+            Experiment.
+          format: uuid
+          title: Experiment ID
+          type: string
         id:
           description: >-
             Uniquely identifies an event. The data stream will occasionally send
@@ -853,6 +876,7 @@ components:
             - $ref: '#/components/schemas/emailClickEvent'
             - $ref: '#/components/schemas/emailUnsubscribeLinkEvent'
             - $ref: '#/components/schemas/delivery_report'
+            - $ref: '#/components/schemas/rcs_read_report'
             - properties:
                 body:
                   properties:
@@ -875,7 +899,7 @@ components:
                         (`ua_interactive_notification`), or a button tap
                         (`ua_button_tap`).
 
-                          Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](../../guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.
+                          Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](https://docs.airship.com/guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.
                       enum:
                         - ua_mcrap
                         - ua_landing_page
@@ -964,7 +988,7 @@ components:
                         The event source. `SDK` indicates an event sent from the
                         Airship SDK. `API` indicates an event created by request
                         against the [Custom Events
-                        API](../../api/ua/#tag-custom-events).
+                        API](https://docs.airship.com/developer/rest-api/ua/#tag-custom-events).
                       enum:
                         - SDK
                         - API
@@ -1512,7 +1536,7 @@ components:
                     link_name:
                       description: >-
                         The [name of the
-                        link](../../guides/messaging/messages/content/email/#link-names),
+                        link](https://docs.airship.com/guides/messaging/messages/content/email/#link-names),
                         if set.
                       type: string
                     link_url:
@@ -1611,8 +1635,8 @@ components:
       x-schema-tag: Custom email events
     emailCreateAndSend:
       description: >-
-        An event that occurs for email addresses used as a part of Create and
-        Send and a Bulk Send.
+        An event that occurs for email addresses used as a part of a [Create and
+        Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/).
       properties:
         body:
           description: >-
@@ -1634,7 +1658,10 @@ components:
                 - address
               type: object
             properties:
-              description: Properties for an email Create and Send event.
+              description: >-
+                Properties for an email [Create and
+                Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/)
+                event.
               properties:
                 channel_registered:
                   description: >-
@@ -2375,6 +2402,7 @@ components:
                 - IN_APP_PAGE_VIEW
                 - IN_APP_PAGER_COMPLETED
                 - IN_APP_PAGER_SUMMARY
+                - LABEL_EVENT
                 - LOCATION
                 - MOBILE_ORIGINATED
                 - OPEN
@@ -2423,7 +2451,7 @@ components:
       description: >
         Occurs when a user interacts with a tracked flagged feature. See
         [Feature
-        Flags](/guides/messaging/experimentation/feature-flags/#interaction-events).
+        Flags](https://docs.airship.com/guides/messaging/experimentation/feature-flags/#interaction-events).
         The events have a flag ID and flag name, which identify which flagged
         feature a user interacted with. They also have a boolean `eligible`
         field, which indicates whether or not the user was in the Feature Flag
@@ -3140,7 +3168,7 @@ components:
         Occurs when an In-App Automation or Scene is not delivered because the
         targeted user's contact or Channel ID was part of a control group for a
         [Holdout
-        Experiment](../../guides/messaging/experimentation/holdout-experiments/).
+        Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).
       properties:
         body:
           properties:
@@ -3349,7 +3377,7 @@ components:
       description: >
         Occurs when an In-App Automation or Scene is not displayed on a device
         because the user was banned. See [Ban
-        Lists](../../guides/messaging/project/config/ban-lists/).
+        Lists](https://docs.airship.com/guides/messaging/project/config/ban-lists/).
       properties:
         body:
           properties:
@@ -3400,9 +3428,9 @@ components:
                 `AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was
                 not displayed because the channel or Named User is on a
                 project's [Ban
-                List](../../guides/messaging/project/config/ban-lists/). This is
-                also reported when a 400- or 500-level error resolving the
-                user's status on a Ban List occurs.
+                List](https://docs.airship.com/guides/messaging/project/config/ban-lists/).
+                This is also reported when a 400- or 500-level error resolving
+                the user's status on a Ban List occurs.
               enum:
                 - AUDIENCE_CHECK_EXCLUDED
               type: string
@@ -3596,10 +3624,10 @@ components:
             button_group:
               description: >-
                 A category associated with the in-app message button. It may be
-                [predefined](../../reference/integration/built-in-interactive-notifications/)
+                [predefined](https://docs.airship.com/reference/integration/built-in-interactive-notifications/)
                 or [custom
-                defined](../../platform/mobile/push/getting-started/), or blank
-                if there is no association with a category.
+                defined](https://docs.airship.com/developer/sdk-integration/mobile/push/getting-started/),
+                or blank if there is no association with a category.
               type: string
             button_id:
               description: >-
@@ -4287,6 +4315,82 @@ components:
       title: JSON Predicate
       x-schema-tag: JSON Predicates
       x-weight: 100
+    label_event:
+      description: |
+        Occurs when you update a Scene screen name.
+      properties:
+        body:
+          properties:
+            group_id:
+              description: >
+                Identifies a push specification delivered over an interval of
+                time, e.g., multiple push_ids as part of the fulfillment of an
+                automation pipeline or a push-to-local-time specification.
+              format: uuid
+              title: Group ID
+              type: string
+            labels:
+              description: Page list
+              items:
+                properties:
+                  id:
+                    description: Page ID
+                    format: uuid
+                    type: string
+                  label:
+                    description: Page label
+                    type: string
+                required:
+                  - id
+                  - label
+                type: object
+              type: array
+            push_id:
+              description: A unique identifier for a push operation.
+              format: uuid
+              title: Push ID
+              type: string
+          required:
+            - push_id
+            - labels
+          type: object
+        id:
+          description: >-
+            Uniquely identifies an event. The data stream will occasionally send
+            duplicate events. Duplicate events will have the same `id`, `type`,
+            `occurred`, and `body` values but different `offset` and `processed`
+            values. Use the `id` to deduplicate.
+          type: string
+        occurred:
+          description: When the event occurred.
+          type: string
+        offset:
+          description: >-
+            An identifier of a location in the stream; used to resume the stream
+            after severing a connection. If you open a stream using the offset
+            value, the stream will resume with the next element in the stream.
+            You should store this value as a string so that you can easily
+            resume the stream if it ends for any reason.
+          type: string
+        processed:
+          description: >-
+            When the event was ingested by Airship. There may be some latency
+            between when the event occurred, and when it was processed.
+          type: string
+        type:
+          enum:
+            - LABEL_EVENT
+          type: string
+      required:
+        - id
+        - type
+        - occurred
+        - processed
+        - offset
+        - body
+      title: Label event
+      type: object
+      x-schema-tag: Events
     location:
       deprecated: true
       description: >-
@@ -5423,6 +5527,154 @@ components:
       title: Push body
       type: object
       x-schema-tag: Events
+    rcs_read_report:
+      description: >
+        Read reports are Custom Events sent when an RCS message is marked as
+        read. These events use the `delivery_report` interaction type with a
+        `name` of `read`. See [RCS branded
+        senders](https://docs.airship.com/developer/api-integrations/sms/rcs/).
+      properties:
+        body:
+          properties:
+            interaction_type:
+              enum:
+                - delivery_report
+              type: string
+            name:
+              description: Indicates the event is an RCS read.
+              enum:
+                - read
+              type: string
+            properties:
+              properties:
+                is_rcs:
+                  description: >-
+                    A boolean describing whether the message was delivered as
+                    RCS.
+                  type: boolean
+                number_of_message_parts:
+                  description: The number of message parts delivered.
+                  type: number
+                recipient_country_code:
+                  description: The country code of the message recipient.
+                  type: string
+                sender:
+                  description: The number or short code that the message originated from.
+                  type: string
+                vendor:
+                  description: The delivery service for the message.
+                  enum:
+                    - CLX
+                    - TWILIO
+                  type: string
+                vendorDeliveryId:
+                  description: A unique identifier for the message from the SMS vendor.
+                  type: string
+              required:
+                - sender
+                - vendor
+                - vendorDeliveryId
+              type: object
+            source:
+              enum:
+                - API
+              type: string
+            triggering_push:
+              description: Identifies the push notification that caused the event.
+              properties:
+                campaigns:
+                  description: >-
+                    An object listing the campaigns a push specification is
+                    associated with. The campaigns object includes an array of
+                    categories that must have between 1 and 10 elements, each of
+                    which is a string with a 64-byte and -character limit.
+                  properties:
+                    categories:
+                      items:
+                        type: string
+                      type: array
+                  title: Campaigns Object
+                  type: object
+                group_id:
+                  description: >
+                    Identifies a push specification delivered over an interval
+                    of time, e.g., multiple push_ids as part of the fulfillment
+                    of an automation pipeline or a push-to-local-time
+                    specification.
+                  format: uuid
+                  title: Group ID
+                  type: string
+                push_id:
+                  description: A unique identifier for a push operation.
+                  format: uuid
+                  title: Push ID
+                  type: string
+              required:
+                - push_id
+              type: object
+          required:
+            - source
+            - name
+            - properties
+          type: object
+        device:
+          description: >-
+            Device properties for Custom Events with the `delivery_report`
+            interaction type always specify an SMS device.
+          properties:
+            channel:
+              description: 'The unique, platform-agnostic channel identifier for a device.'
+              type: string
+            delivery_address:
+              description: The phone number associated with the channel.
+              type: string
+            device_type:
+              enum:
+                - SMS
+              type: string
+          required:
+            - channel
+            - delivery_address
+            - device_type
+          type: object
+        id:
+          description: >-
+            Uniquely identifies an event. The data stream will occasionally send
+            duplicate events. Duplicate events will have the same `id`, `type`,
+            `occurred`, `device`, and `body` values but different `offset` and
+            `processed` values. You should use the `id` to deduplicate.
+          type: string
+        occurred:
+          description: When the event occurred.
+          type: string
+        offset:
+          description: >-
+            An identifier of a location in the stream; used to resume the stream
+            after severing a connection. If you open a stream using the offset
+            value, the stream will resume with the next element in the stream.
+            You should store this value as a string so that you can easily
+            resume the stream if it ends for any reason.
+          type: string
+        processed:
+          description: >-
+            When the event was ingested by Airship. There may be some latency
+            between when the event occurred, and when it was processed.
+          type: string
+        type:
+          enum:
+            - CUSTOM
+          type: string
+      required:
+        - id
+        - occurred
+        - offset
+        - processed
+        - type
+        - device
+        - body
+      title: RCS read report
+      type: object
+      x-schema-tag: Custom SMS events
     region:
       description: >
         Region events are emitted when a device enters or exits a geofence or
@@ -5594,9 +5846,9 @@ components:
       description: >-
         Occurs when a Message Center message is not delivered to a user because
         they are in a control group for a [Sequence A/B
-        test](../../guides/messaging/experimentation/a-b-tests/sequences/) or
-        [Holdout
-        Experiment](../../guides/messaging/experimentation/holdout-experiments/).
+        test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/sequences/)
+        or [Holdout
+        Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).
       properties:
         body:
           properties:
@@ -5975,6 +6227,13 @@ components:
                 - event_uuid
               title: Context Object
               type: object
+            experiment_id:
+              description: >-
+                The unique identifier for the Message A/B test or Holdout
+                Experiment.
+              format: uuid
+              title: Experiment ID
+              type: string
             group_id:
               description: >
                 Identifies a push specification delivered over an interval of
@@ -6006,6 +6265,33 @@ components:
             - $ref: '#/components/schemas/webdevices'
             - $ref: '#/components/schemas/sms_email_devices'
             - $ref: '#/components/schemas/opendevices'
+        experiments:
+          description: >-
+            An object listing the details of the [Message A/B
+            test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages)
+            or [Holdout
+            Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments),
+            if the send includes either.
+          properties:
+            experiment_id:
+              description: >-
+                The unique identifier for the Message A/B test or Holdout
+                Experiment.
+              format: uuid
+              title: Experiment ID
+              type: string
+            type:
+              description: >-
+                The type of experiment. `GLOBAL` is for A/B tests, `EXP_GROUP`
+                is for Holdout Experiments.
+              enum:
+                - EXP_GROUP
+                - GLOBAL
+              type: string
+            variant_id:
+              description: 'For A/B tests, the string ID of the message variant.'
+              type: string
+          type: object
         id:
           description: >-
             Uniquely identifies an event. The data stream will occasionally send
@@ -6050,9 +6336,9 @@ components:
         Occurs when a push is dropped from our system before delivery is
         attempted. This can happen:
 
-          * When using [External Data Feeds](../../guides/messaging/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response
-          * When a [Message Limit](../../guides/messaging/project/config/message-limits/) is met
-          * When a [Ban List](../../guides/messaging/project/config/ban-lists/) webhook issues a `drop` response for a user
+          * When using [External Data Feeds](https://docs.airship.com/guides/messaging/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response
+          * When a [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) is met
+          * When a [Ban List](https://docs.airship.com/guides/messaging/project/config/ban-lists/) webhook issues a `drop` response for a user
 
         Device information for the device that did not receive the push is
         included with `SEND_ABORTED` events.
@@ -6092,7 +6378,7 @@ components:
 
                 * `FEED_BANNED_RESPONSE`: The response from the endpoint
                 indicated a channel was banned. See [Ban
-                Lists](../../guides/messaging/project/config/ban-lists/).
+                Lists](https://docs.airship.com/guides/messaging/project/config/ban-lists/).
 
                 * `FEED_REQUEST_REJECTED`: The request to the specified server
                 was rejected. Occurs when a 4xx HTTP response code is returned
@@ -6102,11 +6388,11 @@ components:
                 resolved.
 
                 * `FREQUENCY_LIMIT_FAILURE`: A [Message
-                Limit](../../guides/messaging/project/config/message-limits/)
+                Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/)
                 retrieval failed.
 
                 * `FREQUENCY_LIMIT_REACHED`: A [Message
-                Limit](../../guides/messaging/project/config/message-limits/)
+                Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/)
                 was exceeded.
 
                 * `UNKNOWN`: The error occurred due to another problem.
@@ -6380,8 +6666,8 @@ components:
       x-schema-tag: Events
     smsCreateAndSend:
       description: >-
-        An event that occurs for SMS channels used as a part of a Create and
-        Send and CSV Create and Send.
+        An event that occurs for SMS channels used as a part of a [Create and
+        Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/).
       properties:
         body:
           description: >-
@@ -6411,7 +6697,10 @@ components:
               title: SMS Identifiers
               type: object
             properties:
-              description: Properties for an SMS Create and Send event.
+              description: >-
+                Properties for an SMS [Create and
+                Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/)
+                event.
               properties:
                 channel_registered:
                   description: >-
@@ -6473,7 +6762,8 @@ components:
     smsRegistered:
       description: >-
         Occurs when a user opts in to receive SMS messages from you, via a call
-        to the [SMS registration API](../ua/#operation-api-channels-sms-post).
+        to the [SMS registration
+        API](https://docs.airship.com/developer/rest-api/ua/#operation-api-channels-sms-post).
       properties:
         body:
           description: >-
@@ -6684,7 +6974,8 @@ components:
     sms_uninstalled:
       description: >-
         Occurs when the [SMS uninstall
-        API](../ua/#operation-api-channels-sms-uninstall-post) is called.
+        API](https://docs.airship.com/developer/rest-api/ua/#operation-api-channels-sms-uninstall-post)
+        is called.
       properties:
         body:
           description: >-
@@ -6777,7 +7068,9 @@ components:
                 `click_tracking_opted_in`, or `open_tracking_opted_in` dates.
 
                 * `create_and_send`: A user's opted_in status changed as a
-                result of a Create and Send event.
+                result of a [Create and
+                Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/)
+                event.
 
                 * `bounce`: Subscription status changed as a result of a bounce
                 event.
@@ -7627,7 +7920,8 @@ components:
       description: >-
         Authorization header containing the word `Bearer` followed by a space
         and a bearer token, which can be obtained from Airship [when configuring
-        a direct integration](../../guides/messaging/real-time-data-streaming/).
+        a direct
+        integration](https://docs.airship.com/guides/messaging/real-time-data-streaming/).
         Tokens can be revoked at will.
       scheme: bearer
       type: http
@@ -7669,7 +7963,7 @@ paths:
         Streaming will never end the response without some external reason.
       operationId: openEventStream
       parameters:
-        - description: The App Key for the app you want to return events from.
+        - description: The App Key for the project you want to return events for.
           in: header
           name: X-UA-Appkey
           required: true
@@ -7773,6 +8067,7 @@ paths:
                   - $ref: '#/components/schemas/in_app_page_view'
                   - $ref: '#/components/schemas/in_app_pager_completed'
                   - $ref: '#/components/schemas/in_app_pager_summary'
+                  - $ref: '#/components/schemas/label_event'
                   - $ref: '#/components/schemas/location'
                   - $ref: '#/components/schemas/mobile_originated'
                   - $ref: '#/components/schemas/open'
@@ -7880,7 +8175,9 @@ paths:
         authorization, like API calls to `https://go.urbanairship.com/api`.
       operationId: openComplianceEventStream
       parameters:
-        - description: The App Key for the app you want to return compliance events for.
+        - description: >-
+            The App Key for the project you want to return compliance events
+            for.
           in: header
           name: X-UA-Appkey
           required: true

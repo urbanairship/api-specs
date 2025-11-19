@@ -77,8 +77,9 @@
                       "type": "integer"
                     },
                     "smartTapIssuerId": {
-                      "description": "Google only, represents your platform and may contain more than one `collectorId`.",
-                      "type": "string"
+                      "description": "Represents your platform and may contain more than one `collectorId`.",
+                      "type": "string",
+                      "x-google": true
                     },
                     "updatedAt": {
                       "description": "The date and time when your NFC merchant information was last updated.",
@@ -982,7 +983,7 @@
           "major",
           "minor"
         ],
-        "title": "Beacon object (iOS only)",
+        "title": "Beacon object",
         "type": "object",
         "x-schema-tag": "Passes"
       },
@@ -1165,6 +1166,20 @@
         "title": "Boarding pass Adaptive Link response",
         "x-schema-tag": "Flights and boarding passes"
       },
+      "boardingPassSemantics": {
+        "anyOf": [
+          {
+            "$ref": "#/components/schemas/passengerSemantics"
+          },
+          {
+            "$ref": "#/components/schemas/flightSemantics"
+          }
+        ],
+        "description": "For Apple boarding passes only, a JSON object that uses key-value pairs to add rich, machine-readable data that enhances passes. You can nest this object within `fields`.\n",
+        "title": "Boarding pass semantics",
+        "type": "object",
+        "x-schema-tag": "Flights and boarding passes"
+      },
       "callbackObject": {
         "properties": {
           "createdAt": {
@@ -1285,7 +1300,7 @@
             "type": "string"
           },
           "vendor": {
-            "description": "The vendor of the certificate. This endpoint presently supports Apple certificates only.",
+            "description": "The vendor of the certificate.",
             "enum": [
               "Apple"
             ],
@@ -1745,6 +1760,11 @@
             "title": "Public URL",
             "type": "object"
           },
+          "semantics": {
+            "$ref": "#/components/schemas/boardingPassSemantics",
+            "description": "Apple boarding pass only, top-level semantics.",
+            "type": "object"
+          },
           "tags": {
             "description": "An array of tags associated with the pass.",
             "items": {
@@ -2201,6 +2221,11 @@
             "description": "The field label, usually represented as a title on the pass. Only provide the label if you want to use a different label than is provided by the template.",
             "type": "string"
           },
+          "semantics": {
+            "$ref": "#/components/schemas/boardingPassSemantics",
+            "description": "Field-level semantics.",
+            "x-apple": true
+          },
           "value": {
             "description": "The default value for the field.",
             "type": "string"
@@ -2225,6 +2250,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "format": "date-time",
                     "type": "string"
@@ -2239,6 +2269,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "format": "date-time",
@@ -2270,6 +2305,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "type": "string"
                   }
@@ -2299,6 +2339,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "type": "string"
                   }
@@ -2312,6 +2357,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "type": "string"
@@ -2327,6 +2377,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "type": "string"
                   }
@@ -2340,6 +2395,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "type": "string"
@@ -2355,6 +2415,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "format": "date-time",
                     "type": "string"
@@ -2369,6 +2434,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "enum": [
@@ -2389,6 +2459,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "format": "date-time",
                     "type": "string"
@@ -2404,6 +2479,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "type": "string"
                   }
@@ -2417,6 +2497,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "type": "string"
@@ -2432,6 +2517,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "type": "string"
                   }
@@ -2445,6 +2535,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "format": "date-time",
@@ -2461,6 +2556,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "type": "string"
                   }
@@ -2474,6 +2574,11 @@
                     "description": "A label representing the field on the pass.",
                     "readOnly": true,
                     "type": "string"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
                   },
                   "value": {
                     "enum": [
@@ -2496,6 +2601,11 @@
                     "readOnly": true,
                     "type": "string"
                   },
+                  "semantics": {
+                    "$ref": "#/components/schemas/flightSemantics",
+                    "description": "Field-level flight semantics.",
+                    "x-apple": true
+                  },
                   "value": {
                     "enum": [
                       "cabinBased",
@@ -2507,6 +2617,15 @@
                   }
                 },
                 "type": "object"
+              },
+              "semantics": {
+                "$ref": "#/components/schemas/flightSemantics",
+                "description": "Top-level flight semantics.",
+                "x-apple": true
+              },
+              "universalLinks": {
+                "$ref": "#/components/schemas/universalLinksObject",
+                "description": "Special web links containing JSON key-value pairs used by Wallet to render buttons in the relevant sections of the pass."
               }
             },
             "required": [
@@ -2570,6 +2689,133 @@
         ],
         "description": "A complete flight response, including identifiers to reference the flight\nand the fields defined within the flight.\n",
         "title": "Flight response",
+        "x-schema-tag": "Flights and boarding passes"
+      },
+      "flightSemantics": {
+        "description": "For Apple boarding passes only, a JSON object that uses key-value pairs to add rich, machine-readable data, such as `flightNumber` and `originalDepartureTime`, that enhances passes. You can nest this object within `fields`.\n",
+        "properties": {
+          "airlineCode": {
+            "description": "The two-character IATA airline code.",
+            "type": "string"
+          },
+          "currentArrivalDate": {
+            "description": "The ISO 8601 date-time the flight is currently scheduled to arrive.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "currentBoardingDate": {
+            "description": "The ISO 8601 date-time the flight is currently scheduled to begin boarding.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "currentDepartureDate": {
+            "description": "The ISO 8601 date-time the flight is currently scheduled to depart.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "departureAirportCode": {
+            "description": "The three-letter IATA airport code the flight is departing from.",
+            "type": "string"
+          },
+          "departureCityName": {
+            "description": "The name of the departure city.",
+            "type": "string"
+          },
+          "departureGate": {
+            "description": "The gate number or letters of the departure gate.",
+            "type": "string"
+          },
+          "departureLocation": {
+            "description": "The geographic coordinates of the transit departure location.",
+            "type": "object"
+          },
+          "departureLocationSecurityPrograms": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/securityPrograms"
+              }
+            ],
+            "description": "A list of security programs that exist in the departure airport."
+          },
+          "departureLocationTimeZone": {
+            "description": "The time zone for the departure location, such as America/Los_Angeles.",
+            "type": "string"
+          },
+          "departureTerminal": {
+            "description": "The name or letter of the departure terminal.",
+            "type": "string"
+          },
+          "destinationAirportCode": {
+            "description": "The three-letter IATA airport code the flight is going to.",
+            "type": "string"
+          },
+          "destinationCityName": {
+            "description": "The name of the destination city.",
+            "type": "string"
+          },
+          "destinationGate": {
+            "description": "The gate number or letters of the arrival gate.",
+            "type": "string"
+          },
+          "destinationLocation": {
+            "description": "The geographic coordinates of the transit destination location.",
+            "type": "object"
+          },
+          "destinationLocationSecurityPrograms": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/securityPrograms"
+              }
+            ],
+            "description": "A list of security programs that exist in the destination airport."
+          },
+          "destinationLocationTimeZone": {
+            "description": "The time zone for the destination location, such as America/Los_Angeles.",
+            "type": "string"
+          },
+          "destinationTerminal": {
+            "description": "The name or letter of the arrival terminal.",
+            "type": "string"
+          },
+          "flightNumber": {
+            "description": "The one- to four-digit IATA flight number.",
+            "type": "number"
+          },
+          "loungePlaceIDs": {
+            "description": "A list of place IDs that reference the lounge locations.",
+            "items": {
+              "description": "The place ID of the lounge locations.",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "originalArrivalDate": {
+            "description": "The ISO 8601 date-time the flight is originally scheduled to arrive.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "originalBoardingDate": {
+            "description": "The ISO 8601 date-time the flight is originally scheduled to begin boarding.",
+            "format": "date-time",
+            "type": "string"
+          },
+          "originalDepartureDate": {
+            "description": "The ISO 8601 date-time the flight is originally scheduled to depart.",
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "required": [
+          "originalArrivalDate",
+          "departureAirportCode",
+          "departureCityName",
+          "departureLocationTimeZone",
+          "destinationAirportCode",
+          "destinationCityName",
+          "destinationLocationTimeZone"
+        ],
+        "title": "Flight semantics object",
+        "type": "object",
         "x-schema-tag": "Flights and boarding passes"
       },
       "googleHeaderItemShared": {
@@ -4355,6 +4601,192 @@
         "title": "Pagination object",
         "type": "object"
       },
+      "passengerCapabilities": {
+        "description": "List of passenger capabilities.",
+        "items": {
+          "anyOf": [
+            {
+              "description": "The passenger is eligible for pre-boarding.",
+              "enum": [
+                "preBoarding"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "The passenger is eligible for priority boarding.",
+              "enum": [
+                "priorityBoarding"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "The passenger's fare allows them to bring a carry-on item.",
+              "enum": [
+                "carryOn"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "The passenger's fare allows them to bring a personal item.",
+              "enum": [
+                "personalItem"
+              ],
+              "type": "string"
+            }
+          ],
+          "type": "string"
+        },
+        "title": "Passenger capabilities",
+        "type": "array"
+      },
+      "passengerInformationSSRs": {
+        "description": "A list of Special Service Requests (SSRs) information for passengers; supports any valid four-letter IATA SSR code in addition to those listed.",
+        "items": {
+          "enum": [
+            "infantLap"
+          ],
+          "type": "string"
+        },
+        "title": "Passenger information SSRs",
+        "type": "array"
+      },
+      "passengerNameSemanticsObject": {
+        "properties": {
+          "familyName": {
+            "description": "The person's family name or last name.",
+            "type": "string"
+          },
+          "givenName": {
+            "description": "The person's given name; also called the forename or first name in some countries.",
+            "type": "string"
+          },
+          "middleName": {
+            "description": "The person's middle name.",
+            "type": "string"
+          },
+          "namePrefix": {
+            "description": "The prefix for the person's name, such as \"Dr\".",
+            "type": "string"
+          },
+          "nameSuffix": {
+            "description": "The suffix for the person's name, such as \"Junior\".",
+            "type": "string"
+          },
+          "nickname": {
+            "description": "The person's nickname.",
+            "type": "string"
+          },
+          "phoneticRepresentation": {
+            "description": "The phonetic representation of the person's name.",
+            "type": "string"
+          }
+        },
+        "title": "Passenger name object",
+        "type": "object"
+      },
+      "passengerSemantics": {
+        "description": "For Apple boarding passes only, a JSON object that uses key-value pairs to add rich, machine-readable data, such as `passengerName` and `seats`, that enhances passes. You can nest this object within `fields`.\n",
+        "properties": {
+          "boardingGroup": {
+            "description": "A group number for boarding.",
+            "type": "string"
+          },
+          "boardingSequenceNumber": {
+            "description": "A sequence number for boarding.",
+            "type": "string"
+          },
+          "boardingZone": {
+            "description": "A zone number for boarding.",
+            "type": "string"
+          },
+          "internationalDocumentsAreVerified": {
+            "description": "Denotes whether the ticket/passenger has met all the requirements for international travel.",
+            "type": "boolean"
+          },
+          "internationalDocumentsVerifiedDeclarationName": {
+            "description": "The affirmation string that is displayed if the passenger meets the requirements for international travel.",
+            "type": "string"
+          },
+          "membershipProgramName": {
+            "description": "The name of a frequent flyer or loyalty program.",
+            "type": "string"
+          },
+          "membershipProgramNumber": {
+            "description": "The ticketed passenger's frequent flyer or loyalty number.",
+            "type": "string"
+          },
+          "membershipProgramStatus": {
+            "description": "The ticketed passenger's frequent flyer or loyalty program status.",
+            "type": "string"
+          },
+          "passengerAirlineSSRs": {
+            "description": "A list of airline-specific special service requests.",
+            "items": {
+              "anyOf": [
+                {
+                  "description": "The airline-specific service request.",
+                  "title": "airline service request"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "passengerCapabilities": {
+            "$ref": "#/components/schemas/passengerCapabilities"
+          },
+          "passengerEligibleSecurityPrograms": {
+            "$ref": "#/components/schemas/securityPrograms",
+            "description": "A list of security programs that the passenger is eligible for."
+          },
+          "passengerInformationSSRs": {
+            "$ref": "#/components/schemas/passengerInformationSSRs"
+          },
+          "passengerName": {
+            "$ref": "#/components/schemas/passengerNameSemanticsObject"
+          },
+          "passengerServiceSSRs": {
+            "$ref": "#/components/schemas/passengerServiceSSRs"
+          },
+          "priorityStatus": {
+            "description": "Additional priority status the ticketed passenger holds.",
+            "type": "string"
+          },
+          "seats": {
+            "items": {
+              "anyOf": [
+                {
+                  "$ref": "#/components/schemas/seatSemanticsObject"
+                }
+              ]
+            },
+            "type": "array"
+          },
+          "ticketFareClass": {
+            "description": "A localizable string that denotes the ticket fare class. This value displays as a badge on the boarding pass.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "passengerName"
+        ],
+        "title": "Passenger semantics object",
+        "type": "object",
+        "x-schema-tag": "Flights and boarding passes"
+      },
+      "passengerServiceSSRs": {
+        "description": "A list of Special Service Requests (SSRs) for passengers; supports any valid four-letter IATA SSR code in addition to those listed.",
+        "items": {
+          "enum": [
+            "wheelChair",
+            "serviceAnimal",
+            "carryOnPet",
+            "unAccompaniedMinor"
+          ],
+          "type": "string"
+        },
+        "title": "Passenger service SSRs",
+        "type": "array"
+      },
       "passengers": {
         "description": "An array of objects, each object representing a passenger/seat on a flight.\nPassengers are a part of the payload for boarding pass adaptive links.\n",
         "items": {
@@ -4376,6 +4808,11 @@
                 "boardingDoor": {
                   "description": "The door the passenger uses to board the plane.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "enum": [
                         "front",
@@ -4389,6 +4826,11 @@
                 "boardingGroup": {
                   "description": "The boarding group for the passenger.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4398,6 +4840,11 @@
                 "boardingPosition": {
                   "description": "The value of the boarding position.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4421,6 +4868,11 @@
                 "eticketNumber": {
                   "description": "The eTicket Number for the passenger's boarding pass.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4430,6 +4882,11 @@
                 "frequentFlyerNumber": {
                   "description": "The passenger's frequent flyer number.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4439,6 +4896,11 @@
                 "frequentFlyerProgramName": {
                   "description": "The name of the frequent flyer program the passenger belongs to.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4457,6 +4919,11 @@
                 "seatClass": {
                   "description": "The passenger's seat class.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4466,6 +4933,12 @@
                 "seatNumber": {
                   "description": "The seat number the passenger will sit in.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "type": "object",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4473,13 +4946,22 @@
                   "type": "object"
                 },
                 "securityProgramLogo": {
-                  "description": "The URL of the logo for the security program. Recommended size is 80 px tall and 80–780 px wide.\n",
+                  "description": "The URL of the logo for the security program. Recommended size is 80 px tall and 80-780 px wide.\n",
                   "format": "url",
                   "type": "string"
+                },
+                "semantics": {
+                  "$ref": "#/components/schemas/boardingPassSemantics",
+                  "description": "Top-level semantics for a passenger, which can include passenger and/or flight semantics.\n"
                 },
                 "sequenceNumber": {
                   "description": "The sequence number on the boarding pass. This usually matches the sequence in which the passengers checked in.",
                   "properties": {
+                    "semantics": {
+                      "$ref": "#/components/schemas/passengerSemantics",
+                      "description": "Field-level passenger semantics.",
+                      "x-apple": true
+                    },
                     "value": {
                       "type": "string"
                     }
@@ -4765,6 +5247,108 @@
         "title": "Schedule update object",
         "type": "object"
       },
+      "seatSemanticsObject": {
+        "description": "Seating information, including cabin class.",
+        "properties": {
+          "seatAisle": {
+            "description": "The aisle that contains the seat.",
+            "type": "string"
+          },
+          "seatDescription": {
+            "description": "A description of the seat, such as a flat bed seat.",
+            "type": "string"
+          },
+          "seatIdentifier": {
+            "description": "The identifier code for the seat.",
+            "type": "string"
+          },
+          "seatLevel": {
+            "description": "The level that contains the seat.",
+            "type": "string"
+          },
+          "seatNumber": {
+            "description": "The number of the seat.",
+            "type": "string"
+          },
+          "seatRow": {
+            "description": "The row that contains the seat.",
+            "type": "string"
+          },
+          "seatSection": {
+            "description": "The section that contains the seat.",
+            "type": "string"
+          },
+          "seatSectionColor": {
+            "description": "A color associated with identifying the seat, specified as a CSS-style RGB triple, such as `rgb(23, 187, 82)`.",
+            "type": "string"
+          },
+          "seatType": {
+            "description": "The type of seat, such as reserved seating.",
+            "type": "string"
+          }
+        },
+        "title": "Passenger seat object",
+        "type": "object"
+      },
+      "securityPrograms": {
+        "description": "Security program names.",
+        "items": {
+          "anyOf": [
+            {
+              "description": "Wallet will display a TSA PreCheck icon on the boarding pass.",
+              "enum": [
+                "tsaPreCheck"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "If present, Wallet will display a TSA PreCheck Touchless ID icon on the boarding pass.",
+              "enum": [
+                "tsaPrecheckTouchlessId"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "One Stop Security.",
+              "enum": [
+                "oss"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "International to International.",
+              "enum": [
+                "iti"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "International to Domestic.",
+              "enum": [
+                "itd"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "Global Entry.",
+              "enum": [
+                "globalEntry"
+              ],
+              "type": "string"
+            },
+            {
+              "description": "CLEAR",
+              "enum": [
+                "clear"
+              ],
+              "type": "string"
+            }
+          ],
+          "type": "string"
+        },
+        "title": "Transit security programs",
+        "type": "array"
+      },
       "segmentSelector": {
         "anyOf": [
           {
@@ -4954,11 +5538,98 @@
         ],
         "title": "General template headers",
         "type": "object"
+      },
+      "universalLinksObject": {
+        "description": "A list of key-value pairs that represents partner URLs.",
+        "properties": {
+          "accessibilityURL": {
+            "description": "The URL for special assistance.",
+            "format": "url",
+            "type": "string"
+          },
+          "bagPolicyURL": {
+            "description": "The URL for the bag policy information.",
+            "format": "url",
+            "type": "string"
+          },
+          "changeSeatURL": {
+            "description": "The URL for seat change.",
+            "format": "url",
+            "type": "string"
+          },
+          "entertainmentURL": {
+            "description": "The URL for inflight entertainment.",
+            "format": "url",
+            "type": "string"
+          },
+          "managementURL": {
+            "description": "The URL for managing the reservation.",
+            "format": "url",
+            "type": "string"
+          },
+          "orderFoodURL": {
+            "description": "The URL for ordering a meal.",
+            "format": "url",
+            "type": "string"
+          },
+          "purchaseAdditionalBaggageURL": {
+            "description": "The URL for adding/purchasing additional bags.",
+            "format": "url",
+            "type": "string"
+          },
+          "purchaseLoungeAccessURL": {
+            "description": "The URL for purchasing lounge access.",
+            "format": "url",
+            "type": "string"
+          },
+          "purchaseWifiURL": {
+            "description": "The URL for purchasing inflight Wi-Fi.",
+            "format": "url",
+            "type": "string"
+          },
+          "registerServiceAnimalURL": {
+            "description": "The URL for registering a service animal.",
+            "format": "url",
+            "type": "string"
+          },
+          "reportLostBagURL": {
+            "description": "The URL for reporting a lost bag.",
+            "format": "url",
+            "type": "string"
+          },
+          "requestWheelchairURL": {
+            "description": "The URL for requesting a wheelchair.",
+            "format": "url",
+            "type": "string"
+          },
+          "transitProviderEmail": {
+            "description": "The URL for the airline email address.",
+            "format": "email",
+            "type": "string"
+          },
+          "transitProviderPhoneNumber": {
+            "description": "The URL for the airline phone number.",
+            "format": "url",
+            "type": "string"
+          },
+          "transitProviderWebsiteURL": {
+            "description": "The URL for the airline website.",
+            "format": "url",
+            "type": "string"
+          },
+          "upgradeURL": {
+            "description": "The URL for upgrading a seat or fare.",
+            "format": "url",
+            "type": "string"
+          }
+        },
+        "title": "Universal links",
+        "type": "object"
       }
     },
     "securitySchemes": {
       "httpBasic": {
-        "description": "All Wallet operations use [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy you Project Key and Secret from your Wallet project. Go to **Settings**, then **API**.\n\n  Only TLS 1.2 and TLS 1.3 are supported for Wallet API endpoint access. See also [Mobile Wallet Reference: Security](../../guides/wallet/user-guide/reference/#security).\n",
+        "description": "All Wallet operations use [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy you Project Key and Secret from your Wallet project. Go to **Settings**, then **API**.\n\n  Only TLS 1.2 and TLS 1.3 are supported for Wallet API endpoint access. See also [Mobile Wallet Reference: Security](https://docs.airship.com/guides/wallet/user-guide/reference/#security).\n",
         "scheme": "basic",
         "type": "http",
         "x-display-name": "Basic Auth"
@@ -4966,7 +5637,7 @@
     }
   },
   "info": {
-    "description": "\nThe Wallet API provides programmatic access to Airship Wallet service,\nwhere you can create passes for Apple Wallet and Google Wallet. Passes are:\n\n* Created from templates within a project. The project determines the types of templates and passes you create; your templates determine the style and default data for your passes.\n* Distributed as links—When creating a pass or an adaptive link, you are creating a link. Users tap this link (or scan a QR code representing the link, etc.) to install the pass on their device.\n* Customizable—Add relevant data to your users when they install your pass.\n* Updatable with relevant field and value changes. After users install your passes, you can update passes with relevant field and values so your users' passes are always up to date.\n\n\nFor a better understanding of Airship Wallet projects and passes, see [How mobile wallet works](../../guides/wallet/getting-started/how-mobile-wallet-works/).\n\nSee the [Getting Started Guide](../../guides/wallet/getting-started/wallet/) for help setting up an Airship Wallet project.\n\n### API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in [JSON](https://www.json.org/json-en.html)\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Date/Time Format\n\nAll date/time values are represented according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) in UTC.\nA `T` separator is preferred but not required. It will be included in all date/time values generated by the API.\n\nExample: `2023-01-28T15:00-05:00`\n\n### Security {#intro-security}\n\n* Our APIs only work under 2048-bit HTTPS encrypted connections to ensure your data is private from client to server connections.\n* Access is authenticated through a unique secret API key which we provide to you in your Wallet dashboard. It is your responsibility to keep this key well-guarded, as it represents your identity.\n* You will use your own Apple Pass Type Certificate or Google Pay certificate to sign production passes.    \n\n## Specifying a version\n\n  The current version of the Wallet API is 1.2. The versioning for the Wallet API is currently distinct from the versioning for the Airship Engage API.\n\n\n  Always specify the version of the API you want to use by adding an HTTP header called\n   `Api-Revision`. The value of that header should be in the format x.y where x is the API version and y the sub-revision. For instance, 1.2 is for the /v1 API, revision 2.\n\n\n## External IDs\n\nMost endpoints support an `externalId` parameter in the path. While all assets\nwithin this API typically have an internal `id`, you can use the `externalId` parameter to grant custom identifiers to your assets — projects, templates, passes, etc. These identifiers can make your assets more recognizable and help you integrate with an external application or system.\n\n\nIf you want to use external IDs, you should use them for all assets — projects, templates, passes, etc.\n\n\nIn general you can support external IDs by appending `/id/{externalId}` to an endpoint path that would either take or generate a standard `id`.",
+    "description": "\nThe Wallet API provides programmatic access to Airship Wallet service,\nwhere you can create passes for Apple Wallet and Google Wallet. Passes are:\n\n* Created from templates within a project. The project determines the types of templates and passes you create; your templates determine the style and default data for your passes.\n* Distributed as links—When creating a pass or an adaptive link, you are creating a link. Users tap this link (or scan a QR code representing the link, etc.) to install the pass on their device.\n* Customizable—Add relevant data to your users when they install your pass.\n* Updatable with relevant field and value changes. After users install your passes, you can update passes with relevant field and values so your users' passes are always up to date.\n\n\nFor a better understanding of Airship Wallet projects and passes, see [How mobile wallet works](https://docs.airship.com/guides/wallet/getting-started/how-mobile-wallet-works/).\n\nSee the [Getting Started Guide](https://docs.airship.com/guides/wallet/getting-started/wallet/) for help setting up an Airship Wallet project.\n\n### API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in [JSON](https://www.json.org/json-en.html)\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Date/Time Format\n\nAll date/time values are represented according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) in UTC.\nA `T` separator is preferred but not required. It will be included in all date/time values generated by the API.\n\nExample: `2023-01-28T15:00-05:00`\n\n### Security {#intro-security}\n\n* Our APIs only work under 2048-bit HTTPS encrypted connections to ensure your data is private from client to server connections.\n* Access is authenticated through a unique secret API key which we provide to you in your Wallet dashboard. It is your responsibility to keep this key well-guarded, as it represents your identity.\n* You will use your own Apple Pass Type Certificate or Google Pay certificate to sign production passes.    \n\n## Specifying a version\n\n  The current version of the Wallet API is 1.2. The versioning for the Wallet API is currently distinct from the versioning for the Airship Engage API.\n\n\n  Always specify the version of the API you want to use by adding an HTTP header called\n   `Api-Revision`. The value of that header should be in the format x.y where x is the API version and y the sub-revision. For instance, 1.2 is for the /v1 API, revision 2.\n\n\n## External IDs\n\nMost endpoints support an `externalId` parameter in the path. While all assets\nwithin this API typically have an internal `id`, you can use the `externalId` parameter to grant custom identifiers to your assets — projects, templates, passes, etc. These identifiers can make your assets more recognizable and help you integrate with an external application or system.\n\n\nIf you want to use external IDs, you should use them for all assets — projects, templates, passes, etc.\n\n\nIn general you can support external IDs by appending `/id/{externalId}` to an endpoint path that would either take or generate a standard `id`.",
     "title": "Airship Wallet API",
     "version": "1.2"
   },
@@ -5003,7 +5674,7 @@
             }
           },
           {
-            "description": "The vendor of certificate you want to return. Supports Apple only.",
+            "description": "The vendor of certificate you want to return.",
             "in": "query",
             "name": "vendor",
             "schema": {
@@ -7475,18 +8146,19 @@
               "schema": {
                 "properties": {
                   "beacons": {
-                    "description": "You can only include beacons for Apple Wallet passes.",
+                    "description": "An array of beacon objects you want to update for this pass.",
                     "items": {
                       "$ref": "#/components/schemas/beacon"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "x-apple": true
                   },
                   "fields": {
                     "additionalProperties": {
                       "$ref": "#/components/schemas/fields",
                       "title": "Field Name (String)"
                     },
-                    "description": "The fields you want update on the pass."
+                    "description": "The fields you want to update on the pass."
                   },
                   "headers": {
                     "additionalProperties": {
@@ -7501,9 +8173,19 @@
                       "$ref": "#/components/schemas/locationObject"
                     },
                     "type": "array"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/boardingPassSemantics",
+                    "description": "An object that defines structured metadata for an Apple Wallet pass using key-value pairs. These semantic tags provide contextual information to the system to enhance the user experience.",
+                    "type": "object"
+                  },
+                  "universalLinks": {
+                    "$ref": "#/components/schemas/universalLinksObject",
+                    "description": "An object containing key-value pairs of universal links where each key-value pair defines a universal link.",
+                    "type": "object"
                   }
                 },
-                "title": "Update Apple Wallet Pass",
+                "title": "Update Wallet Pass",
                 "type": "object"
               }
             }
@@ -8475,18 +9157,19 @@
               "schema": {
                 "properties": {
                   "beacons": {
-                    "description": "You can only include beacons for Apple Wallet passes.",
+                    "description": "An array of beacon objects you want to update for this pass.",
                     "items": {
                       "$ref": "#/components/schemas/beacon"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "x-apple": true
                   },
                   "fields": {
                     "additionalProperties": {
                       "$ref": "#/components/schemas/fields",
                       "title": "Field Name (String)"
                     },
-                    "description": "The fields you want update on the pass."
+                    "description": "The fields you want to update on the pass."
                   },
                   "headers": {
                     "additionalProperties": {
@@ -8501,9 +9184,19 @@
                       "$ref": "#/components/schemas/locationObject"
                     },
                     "type": "array"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/boardingPassSemantics",
+                    "description": "An object that defines structured metadata for an Apple Wallet pass using key-value pairs. These semantic tags provide contextual information to the system to enhance the user experience.",
+                    "type": "object"
+                  },
+                  "universalLinks": {
+                    "$ref": "#/components/schemas/universalLinksObject",
+                    "description": "An object containing key-value pairs of universal links where each key-value pair defines a universal link.",
+                    "type": "object"
                   }
                 },
-                "title": "Update Apple Wallet Pass",
+                "title": "Update Wallet Pass",
                 "type": "object"
               }
             }
@@ -9031,18 +9724,19 @@
                   {
                     "properties": {
                       "beacons": {
-                        "description": "You can only include beacons for Apple Wallet passes.",
+                        "description": "An array of beacon objects you want to update for this pass.",
                         "items": {
                           "$ref": "#/components/schemas/beacon"
                         },
-                        "type": "array"
+                        "type": "array",
+                        "x-apple": true
                       },
                       "fields": {
                         "additionalProperties": {
                           "$ref": "#/components/schemas/fields",
                           "title": "Field Name (String)"
                         },
-                        "description": "The fields you want update on the pass."
+                        "description": "The fields you want to update on the pass."
                       },
                       "headers": {
                         "additionalProperties": {
@@ -9057,9 +9751,19 @@
                           "$ref": "#/components/schemas/locationObject"
                         },
                         "type": "array"
+                      },
+                      "semantics": {
+                        "$ref": "#/components/schemas/boardingPassSemantics",
+                        "description": "An object that defines structured metadata for an Apple Wallet pass using key-value pairs. These semantic tags provide contextual information to the system to enhance the user experience.",
+                        "type": "object"
+                      },
+                      "universalLinks": {
+                        "$ref": "#/components/schemas/universalLinksObject",
+                        "description": "An object containing key-value pairs of universal links where each key-value pair defines a universal link.",
+                        "type": "object"
                       }
                     },
-                    "title": "Update Apple Wallet Pass",
+                    "title": "Update Wallet Pass",
                     "type": "object"
                   }
                 ]
@@ -9518,7 +10222,7 @@
         "tags": [
           "Passes with external IDs"
         ],
-        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/../../guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
+        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](https://docs.airship.com/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
       },
       "get": {
         "description": "Get a pass with an external ID.",
@@ -9672,7 +10376,7 @@
         ]
       },
       "put": {
-        "description": "Update a pass with an external ID",
+        "description": "Update a pass with an external ID.",
         "operationId": "updatePassFromTemplateExternalId",
         "parameters": [
           {
@@ -10774,7 +11478,7 @@
         "tags": [
           "Passes"
         ],
-        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/../../guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
+        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](https://docs.airship.com/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
       },
       "get": {
         "description": "Get the specified pass. This endpoint will return the external ID of a pass, but only if there is one associated with it.",
@@ -10955,18 +11659,19 @@
               "schema": {
                 "properties": {
                   "beacons": {
-                    "description": "You can only include beacons for Apple Wallet passes.",
+                    "description": "An array of beacon objects you want to update for this pass.",
                     "items": {
                       "$ref": "#/components/schemas/beacon"
                     },
-                    "type": "array"
+                    "type": "array",
+                    "x-apple": true
                   },
                   "fields": {
                     "additionalProperties": {
                       "$ref": "#/components/schemas/fields",
                       "title": "Field Name (String)"
                     },
-                    "description": "The fields you want update on the pass."
+                    "description": "The fields you want to update on the pass."
                   },
                   "headers": {
                     "additionalProperties": {
@@ -10981,9 +11686,19 @@
                       "$ref": "#/components/schemas/locationObject"
                     },
                     "type": "array"
+                  },
+                  "semantics": {
+                    "$ref": "#/components/schemas/boardingPassSemantics",
+                    "description": "An object that defines structured metadata for an Apple Wallet pass using key-value pairs. These semantic tags provide contextual information to the system to enhance the user experience.",
+                    "type": "object"
+                  },
+                  "universalLinks": {
+                    "$ref": "#/components/schemas/universalLinksObject",
+                    "description": "An object containing key-value pairs of universal links where each key-value pair defines a universal link.",
+                    "type": "object"
                   }
                 },
-                "title": "Update Apple Wallet Pass",
+                "title": "Update Wallet Pass",
                 "type": "object"
               }
             }
@@ -12502,8 +13217,9 @@
                                 "type": "integer"
                               },
                               "smartTapIssuerId": {
-                                "description": "Google only, represents your platform and may contain more than one `collectorId`.",
-                                "type": "string"
+                                "description": "Represents your platform and may contain more than one `collectorId`.",
+                                "type": "string",
+                                "x-google": true
                               },
                               "updatedAt": {
                                 "description": "The date and time when your NFC merchant information was last updated.",
@@ -12917,7 +13633,7 @@
             }
           }
         },
-        "description": "Register a callback specification, which includes the remote URL and any HTTP headers required by the remote URL.\n\nYour callback server should expect to receive callbacks at up to three endpoints:\n* `{baseUrl}/v1/pass/install` — Receives a [callback](#schemas-callbackobject) when your audience installs passes.\n* `{baseUrl}/v1/pass/uninstall` — Receives a [callback](#schemas-callbackobject) when your audience uninstalls passes.\n* `{baseUrl}/v1/pass/{passId}/personalize` — Receives a [callback with a personalization object](#schemas-callbackpersonalizationobject) when your audience personalizes a Loyalty pass. You must [add personalization requirements](#tag-apple-wallet-pass-personalization) to Apple templates before users can personalize passes created from them.\n\nSee [Wallet callbacks](../../guides/wallet/user-guide/reporting/wallet-callbacks/) for more information.",
+        "description": "Register a callback specification, which includes the remote URL and any HTTP headers required by the remote URL.\n\nYour callback server should expect to receive callbacks at up to three endpoints:\n* `{baseUrl}/v1/pass/install` — Receives a [callback](#schemas-callbackobject) when your audience installs passes.\n* `{baseUrl}/v1/pass/uninstall` — Receives a [callback](#schemas-callbackobject) when your audience uninstalls passes.\n* `{baseUrl}/v1/pass/{passId}/personalize` — Receives a [callback with a personalization object](#schemas-callbackpersonalizationobject) when your audience personalizes a Loyalty pass. You must [add personalization requirements](#tag-apple-wallet-pass-personalization) to Apple templates before users can personalize passes created from them.\n\nSee [Wallet callbacks](https://docs.airship.com/guides/wallet/user-guide/reporting/wallet-callbacks/) for more information.",
         "operationId": "createCallbackSpecification",
         "requestBody": {
           "content": {
@@ -15027,7 +15743,7 @@
         ]
       },
       "get": {
-        "description": "Get the template specified by the `templateId`.",
+        "description": "Get the template specified by the `templateId`. To get the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](#operation-templates-id-get) endpoint instead.",
         "operationId": "getTemplate",
         "parameters": [
           {
@@ -15163,7 +15879,7 @@
               }
             }
           },
-          "description": "The request body is shaped by platform `vendor` your template and subsequent passes are intended for."
+          "description": "The request body is structured by the platform `vendor` your template and subsequent passes are intended for."
         },
         "responses": {
           "200": {
@@ -15196,7 +15912,7 @@
         ]
       },
       "put": {
-        "description": "Update the specified template. This endpoint takes any of the parameters used for Creating a Template. You can also add or remove fields from the template with this call by adding or omitting those fields from the request.",
+        "description": "Update the specified template. This endpoint takes any of the parameters used for Creating a Template. You can also add or remove fields from the template with this call by adding or omitting those fields from the request.\n\nTo update the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](#operation-templates-id-put) endpoint instead.",
         "operationId": "updateTemplate",
         "parameters": [
           {
@@ -15243,7 +15959,7 @@
               }
             }
           },
-          "description": "The shape of your template is determined by the device/wallet vendor you create passes for.",
+          "description": "The structure of your template is determined by the device/wallet vendor you create passes for.",
           "required": true
         },
         "responses": {
@@ -15338,7 +16054,7 @@
               }
             }
           },
-          "description": "The request body is shaped by platform `vendor` your template and subsequent passes are intended for."
+          "description": "The request body is structured by the platform `vendor` your template and subsequent passes are intended for."
         },
         "responses": {
           "200": {
@@ -16126,6 +16842,218 @@
         }
       ]
     },
+    "/templates/{id}": {
+      "get": {
+        "description": "Get the template specified by the `templateId`. The template payload returned will be in the same format you would use in a `POST` or `PUT` operation unlike the [/template](#operation-template-id-get) endpoint.",
+        "operationId": "getTemplatesV2",
+        "parameters": [
+          {
+            "description": "The `templateId` of the template you want to look up. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "explode": false,
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "properties": {
+                        "createdAt": {
+                          "description": "The date and time when the item was created.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        },
+                        "id": {
+                          "description": "The identifier for the template. You can recall the template by ID in other operations.",
+                          "readOnly": true,
+                          "type": "integer"
+                        },
+                        "updatedAt": {
+                          "description": "The date and time when the item was last updated.",
+                          "format": "date-time",
+                          "readOnly": true,
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    },
+                    {
+                      "discriminator": {
+                        "propertyName": "vendor"
+                      },
+                      "oneOf": [
+                        {
+                          "$ref": "#/components/schemas/iosTemplate"
+                        },
+                        {
+                          "$ref": "#/components/schemas/googleTemplate"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            },
+            "description": "A successful response returns returns the identifier of the template and dates when the template was created and last updated."
+          }
+        },
+        "security": [
+          {
+            "httpBasic": [
+            ]
+          }
+        ],
+        "summary": "Get template v2",
+        "tags": [
+          "Templates"
+        ]
+      },
+      "patch": {
+        "description": "Update the template with the `overrides` object, performing a partial update. In the payload, you only need to provide the fields in your template that you want to override.",
+        "operationId": "patchTemplates",
+        "parameters": [
+          {
+            "description": "The `templateId` of the template you want to update. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "explode": false,
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "discriminator": {
+                  "propertyName": "vendor"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/iosTemplate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/googleTemplate"
+                  }
+                ]
+              }
+            }
+          },
+          "description": "The structure of your template is determined by the device/wallet vendor you create passes for.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "properties": {
+                    "templateId": {
+                      "description": "The identifier for the template. You can recall the template by ID in other operations.",
+                      "readOnly": true,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A response returns the template's unique identifier. Use this `templateId` to reference the template in subsequent operations.\n"
+          }
+        },
+        "security": [
+          {
+            "httpBasic": [
+            ]
+          }
+        ],
+        "summary": "Patch template",
+        "tags": [
+          "Templates"
+        ]
+      },
+      "put": {
+        "description": "Update the template with the whole resource specified in the request, performing a complete replacement. You can also add or remove fields from the template with this call by adding or omitting those fields from the request. The template payload will be in the same format as in a `POST` or `PUT` operation, unlike the [/template](#operation-template-id-put) endpoint.",
+        "operationId": "updateTemplatesV2",
+        "parameters": [
+          {
+            "description": "The `templateId` of the template you want to update. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "explode": false,
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "style": "simple"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "discriminator": {
+                  "propertyName": "vendor"
+                },
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/iosTemplate"
+                  },
+                  {
+                    "$ref": "#/components/schemas/googleTemplate"
+                  }
+                ]
+              }
+            }
+          },
+          "description": "The structure of your template is determined by the device/wallet vendor you create passes for.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json; charset=utf-8": {
+                "schema": {
+                  "properties": {
+                    "templateId": {
+                      "description": "The identifier for the template. You can recall the template by ID in other operations.",
+                      "readOnly": true,
+                      "type": "integer"
+                    }
+                  },
+                  "type": "object"
+                }
+              }
+            },
+            "description": "A response returns the template's unique identifier. Use this `templateId` to reference the template in subsequent operations.\n"
+          }
+        },
+        "security": [
+          {
+            "httpBasic": [
+            ]
+          }
+        ],
+        "summary": "Update template v2",
+        "tags": [
+          "Templates"
+        ],
+        "x-note": "Provide a complete template object when updating a template. This call replaces the existing template object in its entirety. You must include all keys and fields that should remain in the template, otherwise they will be removed."
+      }
+    },
     "/ticket/{ticketId}": {
       "get": {
         "description": "Get the status of a ticket. Some operations can't complete immediately and return a `ticketId`. Use this item to determine the true status of the operation.",
@@ -16260,7 +17188,7 @@
       "name": "Events"
     },
     {
-      "description": "[Wallet callbacks](../../guides/wallet/user-guide/reporting/wallet-callbacks/) provide a pass event notification, e.g., pass install or uninstall, using webhooks.",
+      "description": "[Wallet callbacks](https://docs.airship.com/guides/wallet/user-guide/reporting/wallet-callbacks/) provide a pass event notification, e.g., pass install or uninstall, using webhooks.",
       "name": "Callbacks"
     },
     {
@@ -16274,6 +17202,10 @@
     {
       "description": "Send a push notification to end users who have iOS or Android passes installed, letting them know information has changed. By notifying users, they will receive an alert as well as an update to the back of the pass showing the most recent notification.\n",
       "name": "Push Notifications"
+    },
+    {
+      "description": "These endpoints supports Apple certificates only. Google certificates can be managed via the UI.\n",
+      "name": "Certificates"
     }
   ],
   "x-schema-tags": [

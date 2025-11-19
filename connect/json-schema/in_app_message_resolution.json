@@ -12,7 +12,7 @@
           "type": "string"
         },
         "button_group": {
-          "description": "A category associated with the in-app message button. It may be [predefined](../../reference/integration/built-in-interactive-notifications/) or [custom defined](../../platform/mobile/push/getting-started/), or blank if there is no association with a category.",
+          "description": "A category associated with the in-app message button. It may be [predefined](https://docs.airship.com/reference/integration/built-in-interactive-notifications/) or [custom defined](https://docs.airship.com/developer/sdk-integration/mobile/push/getting-started/), or blank if there is no association with a category.",
           "type": "string"
         },
         "button_id": {
@@ -248,11 +248,13 @@
               "type": "string"
             },
             "carrier": {
-              "description": "The wireless carrier used by the device.",
+              "deprecated": true,
+              "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
               "type": "string"
             },
             "connection_type": {
-              "description": "The internet connection type used by the device.",
+              "deprecated": true,
+              "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
               "enum": [
                 "WIFI",
                 "CELL",

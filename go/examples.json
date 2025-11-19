@@ -14,6 +14,15 @@
       ],
       "actionsObject": [
         {
+          "description": "Example add custom event action",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"actions\": {\n       \"add_custom_event\": {\n          \"name\": \"myCustomEvent\",\n          \"value\": 12.5,\n          \"properties\": {\n             \"property_key1\": \"value_property1\",\n             \"property_key2\": 6789\n          }\n       }\n   }\n}\n"
+            }
+          ]
+        },
+        {
           "description": "Example tag actions",
           "examples": [
             {
@@ -1486,7 +1495,7 @@
       ],
       "templatedMessageContent": [
         {
-          "description": "Example templated Create and Send a message with bulk ID",
+          "description": "Example templated Send a message with bulk ID",
           "examples": [
             {
               "lang": "json",
@@ -1792,7 +1801,7 @@
     "/api/bulk-send": {
       "post": [
         {
-          "description": "Example Create and Send a message with bulk ID",
+          "description": "Example send message with bulk ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -1810,7 +1819,7 @@
     "/api/bulk-send/validate": {
       "post": [
         {
-          "description": "Example Validate Create and Send a message with bulk ID",
+          "description": "Example validate message with bulk ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -1828,7 +1837,7 @@
     "/api/bulk/{platform_name}": {
       "post": [
         {
-          "description": "Example Create bulk send audience request for email",
+          "description": "Example create bulk send audience request for email",
           "examples": [
             {
               "lang": "HTTP",
@@ -1838,7 +1847,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Create bulk send audience request for SMS",
+          "description": "Example create bulk send audience request for SMS",
           "examples": [
             {
               "lang": "HTTP",
@@ -1848,7 +1857,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Create bulk send audience request for email with merge data fields",
+          "description": "Example create bulk send audience request for email with merge data fields",
           "examples": [
             {
               "lang": "HTTP",
@@ -1862,7 +1871,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Create bulk send audience request for email",
+          "description": "Example create bulk send audience request for email",
           "examples": [
             {
               "lang": "HTTP",
@@ -1872,7 +1881,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Create bulk send audience request for email with merge data fields",
+          "description": "Example create bulk send audience request for email with merge data fields",
           "examples": [
             {
               "lang": "HTTP",
@@ -1886,7 +1895,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Create bulk send audience request for open platform",
+          "description": "Example create bulk send audience request for open platform",
           "examples": [
             {
               "lang": "HTTP",
@@ -1900,7 +1909,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Create bulk send audience request for open channels",
+          "description": "Example create bulk send audience request for open channels",
           "examples": [
             {
               "lang": "HTTP",
@@ -2061,7 +2070,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/channels/email HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n {\n    \"channel\" : {\n        \"type\": \"email\",\n        \"commercial_opted_in\": \"2020-10-28T10:34:22\",\n        \"open_tracking_opted_in\": \"2022-12-11T00:00:00\",\n        \"click_tracking_opted_in\": \"2022-12-11T00:00:00\",\n        \"address\": \"name@example.com\",\n        \"timezone\" : \"America/Los_Angeles\",\n        \"locale_country\" : \"US\",\n        \"locale_language\" : \"en\"\n    },\n    \"opt_in_mode\" : \"classic\",\n    \"properties\" : {\n        \"interests\" : \"newsletter\"\n    },\n    \"tags\": {\n        \"my_fav_tag_group1\": [\"tag1\", \"tag2\", \"tag3\"],\n        \"my_fav_tag_group2\": [\"tag1\", \"tag2\", \"tag3\"],\n        \"my_fav_tag_group3\": [\"tag1\", \"tag2\", \"tag3\"]\n    },\n    \"attributes\": {\n        \"my_fav_attribute1\": \"attribute1\",\n        \"my_fav_attribute2\": \"attribute2\"\n    }\n }\n"
+              "source": "POST /api/channels/email HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n {\n    \"channel\" : {\n        \"type\": \"email\",\n        \"commercial_opted_in\": \"2020-10-28T10:34:22\",\n        \"open_tracking_opted_in\": \"2022-12-11T00:00:00\",\n        \"click_tracking_opted_in\": \"2022-12-11T00:00:00\",\n        \"address\": \"name@example.com\",\n        \"timezone\" : \"America/Los_Angeles\",\n        \"locale_country\" : \"US\",\n        \"locale_language\" : \"en\"\n    },\n    \"opt_in_mode\" : \"classic\",\n    \"properties\" : {\n        \"interests\" : \"newsletter\"\n    },\n    \"tag_operations\": {\n      \"add\": {\n        \"my_fav_tag_group1\": [\"tag1\", \"tag2\", \"tag3\"],\n        \"my_fav_tag_group2\": [\"tag1\", \"tag2\", \"tag3\"],\n        \"my_fav_tag_group3\": [\"tag1\", \"tag2\", \"tag3\"]\n      }\n    },\n    \"attributes\": {\n        \"my_fav_attribute1\": \"attribute1\",\n        \"my_fav_attribute2\": \"attribute2\"\n    }\n }\n"
             },
             {
               "lang": "java",
@@ -2535,7 +2544,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/channels/sms HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"msisdn\" : \"15035556789\",\n  \"sender\": \"12345\",\n  \"opted_in\": \"2020-02-13T11:58:59\",\n  \"timezone\": \"America/Los_Angeles\",\n  \"locale_country\": \"US\",\n  \"locale_language\": \"en\",\n  \"tags\": {\n      \"my_fav_tag_group1\": [\"tag1\", \"tag2\", \"tag3\"],\n      \"my_fav_tag_group2\": [\"tag1\", \"tag2\", \"tag3\"],\n      \"my_fav_tag_group3\": [\"tag1\", \"tag2\", \"tag3\"]\n  },\n  \"attributes\": {\n      \"my_fav_attribute1\": \"attribute1\",\n      \"my_fav_attribute2\": \"attribute2\"\n  }\n}\n"
+              "source": "POST /api/channels/sms HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"msisdn\" : \"15035556789\",\n  \"sender\": \"12345\",\n  \"opted_in\": \"2020-02-13T11:58:59\",\n  \"timezone\": \"America/Los_Angeles\",\n  \"locale_country\": \"US\",\n  \"locale_language\": \"en\",\n  \"tag_operations\": {\n    \"add\": {\n      \"my_fav_tag_group1\": [\"tag1\", \"tag2\", \"tag3\"],\n      \"my_fav_tag_group2\": [\"tag1\", \"tag2\", \"tag3\"],\n      \"my_fav_tag_group3\": [\"tag1\", \"tag2\", \"tag3\"]\n    }\n  },\n  \"attributes\": {\n      \"my_fav_attribute1\": \"attribute1\",\n      \"my_fav_attribute2\": \"attribute2\"\n  }\n}\n"
             },
             {
               "lang": "java",
@@ -2934,7 +2943,7 @@
     "/api/contacts/associated_types/{contact_id}": {
       "get": [
         {
-          "description": "Example",
+          "description": "Example list channels associated by Contact",
           "examples": [
             {
               "lang": "HTTP",
@@ -2952,7 +2961,7 @@
     "/api/contacts/disassociate/{contact_id}": {
       "post": [
         {
-          "description": "SMS with Channel ID",
+          "description": "Example dissociate SMS channel from Contact by Channel ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -2962,7 +2971,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "SMS with sender and msisdn",
+          "description": "Example dissociate SMS channel from Contact by sender ID and MSISDN",
           "examples": [
             {
               "lang": "HTTP",
@@ -2972,7 +2981,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Email with email address",
+          "description": "Example dissociate email channel from Contact by email address",
           "examples": [
             {
               "lang": "HTTP",
@@ -2982,7 +2991,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Email with email address and opt_out",
+          "description": "Example dissociate email channel from Contact by email address with opt_out",
           "examples": [
             {
               "lang": "HTTP",
@@ -3005,7 +3014,7 @@
     "/api/contacts/identify/v2": {
       "post": [
         {
-          "description": "Example identify contacts V2",
+          "description": "Example identify Contact by Named User ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -3023,7 +3032,7 @@
     "/api/contacts/lookup/channel/{channel_id}": {
       "get": [
         {
-          "description": "Example get contact ID from a Channel ID\n",
+          "description": "Example get Contact ID from a Channel ID\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -3041,7 +3050,7 @@
     "/api/contacts/lookup/named_user/{named_user_id}": {
       "get": [
         {
-          "description": "Example get contact ID from a Named User ID\n",
+          "description": "Example get Contact ID from a Named User ID\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -3112,6 +3121,20 @@
             {
               "lang": "ruby",
               "source": "require 'urbanairship'\n\nUA = Urbanairship\nairship = UA::Client.new(key: '<app key>', secret: '<master secret>')\n\nemail_notification = UA::EmailNotification.new(client: airship)\nemail_notification.message_type = 'transactional'\nemail_notification.reply_to = 'no-reply@airship.com'\nemail_notification.sender_address = 'team@airship.com'\nemail_notification.sender_name = 'Airship'\nemail_notification.template_id = \"9335bb2a-2a45-456c-8b53-42af7898236a\"\ninline_template = email_notification.email_with_inline_template\nsend_it = UA::CreateAndSend.new(client: airship)\nsend_it.addresses = [\n  {\n    \"ua_address\": \"new@example.com\",\n    \"ua_commercial_opted_in\": \"2020-11-29T10:34:22\"\n  },\n  {\n    \"ua_address\": \"ben@example.com\",\n    \"ua_commercial_opted_in\": \"2020-11-29T12:45:10\"\n  }\n]\nsend_it.device_types = [ \"email\" ]\nsend_it.notification = inline_template\nsend_it.create_and_send\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true,\n    \"operation_id\": \"67c65146-c27f-431f-b54a-83aca694fdd3\",\n    \"push_ids\": [\n        \"c0eead17-333b-4f86-8a42-9fb7be1ed627\"\n    ],\n    \"message_ids\": [],\n    \"content_urls\": []\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        },
+        {
+          "description": "Example Create and Send with bulk ID for email",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/create-and-send HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"audience\": {\n    \"bulk_id\": \"26425d51-fbab-4ad8-bd5f-9560ee84b087\"\n  },\n  \"device_types\": [\n      \"email\"\n  ],\n  \"notification\": {\n      \"email\": {\n        \"subject\": \"Welcome to the Winter Sale!\",\n        \"html_body\": \"<h1>Seasons Greetings {{name}}</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\\\"1\\\" title=\\\"unsubscribe\\\" href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\">Unsubscribe</a></p>\",\n        \"plaintext_body\": \"Greetings {{name}}! Check out our latest winter deals! [[ua-unsubscribe href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\"]]\",\n        \"message_type\": \"commercial\",\n        \"sender_name\": \"Airship\",\n        \"sender_address\": \"team@airship.com\",\n        \"reply_to\": \"no-reply@airship.com\"\n      }\n  },\n  \"campaigns\": {\n      \"categories\": [\"winter sale\", \"west coast\"]\n  }\n}\n"
             },
             {
               "lang": "HTTP",
@@ -5223,7 +5246,7 @@
     "/api/schedules/bulk-send": {
       "post": [
         {
-          "description": "Example Schedule Create and Send a message with bulk ID",
+          "description": "Example schedule message with bulk ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -5258,6 +5281,20 @@
             {
               "lang": "HTTP",
               "source": "HTTP/1.1 202 Accepted\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"operation_id\": \"67c65146-c27f-431f-b54a-83aca694fdd3\",\n  \"push_ids\": [\n      \"8cf8b2a5-7655-40c2-a500-ff498e60453e\"\n  ],\n  \"schedule_urls\": [\n      \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\"\n  ],\n  \"schedules\": [\n      {\n        \"push\": {\n            \"audience\": {\n              \"create_and_send\": [\n                  {\n                    \"ua_address\": \"new@example.com\",\n                    \"ua_commercial_opted_in\": \"2020-11-29T10:34:22\"\n                  },\n                  {\n                    \"ua_address\": \"ben@example.com\",\n                    \"ua_commercial_opted_in\": \"2020-11-29T12:45:10\"\n                  }\n              ]\n            },\n            \"device_types\": [\n              \"email\"\n            ],\n            \"notification\": {\n              \"campaigns\": {\n                  \"categories\": [\n                    \"winter sale\",\n                    \"west coast\"\n                  ]\n              },\n              \"email\": {\n                  \"html_body\": \"<h1>Seasons Greetings</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\\\"1\\\" title=\\\"unsubscribe\\\" href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\">Unsubscribe</a></p>\",\n                  \"message_type\": \"commercial\",\n                  \"plaintext_body\": \"Greetings! Check out our latest winter deals! [[ua-unsubscribe href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\"]]\",\n                  \"reply_to\": \"no-reply@airship.com\",\n                  \"sender_address\": \"team@airship.com\",\n                  \"sender_name\": \"Airship\",\n                  \"subject\": \"Welcome to the Winter Sale! \"\n              }\n            }\n        },\n        \"schedule\": {\n            \"scheduled_time\": \"2020-11-11T12:00:00\"\n        },\n        \"url\": \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\"\n      }\n  ]\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        },
+        {
+          "description": "Example scheduled Create and Send with bulk ID",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/schedules/create-and-send HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"schedule\": {\n    \"scheduled_time\": \"2020-11-11T12:00:00\"\n  },\n  \"name\": \"scheduled winter sale email\",\n  \"push\": {\n    \"audience\": {\n      \"bulk_id\": \"26425d51-fbab-4ad8-bd5f-9560ee84b087\"\n    },\n    \"device_types\": [\n        \"email\"\n    ],\n    \"notification\": {\n        \"email\": {\n          \"subject\": \"Welcome to the Winter Sale!\",\n          \"html_body\": \"<h1>Seasons Greetings {{name}}</h1><p>Check out our winter deals!</p><p><a data-ua-unsubscribe=\\\"1\\\" title=\\\"unsubscribe\\\" href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\">Unsubscribe</a></p>\",\n          \"plaintext_body\": \"Greetings {{name}}! Check out our latest winter deals! [[ua-unsubscribe href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\"]]\",\n          \"message_type\": \"commercial\",\n          \"sender_name\": \"Airship\",\n          \"sender_address\": \"team@airship.com\",\n          \"reply_to\": \"no-reply@airship.com\"\n        }\n    },\n    \"campaigns\": {\n        \"categories\": [\"winter sale\", \"west coast\"]\n    }\n  }\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"operation_id\": \"67c65146-c27f-431f-b54a-83aca694fdd3\",\n  \"schedule_urls\": [\n      \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\"\n  ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true

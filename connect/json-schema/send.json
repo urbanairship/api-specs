@@ -55,6 +55,12 @@
           "title": "Context Object",
           "type": "object"
         },
+        "experiment_id": {
+          "description": "The unique identifier for the Message A/B test or Holdout Experiment.",
+          "format": "uuid",
+          "title": "Experiment ID",
+          "type": "string"
+        },
         "group_id": {
           "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
@@ -115,11 +121,13 @@
                   "type": "string"
                 },
                 "carrier": {
-                  "description": "The wireless carrier used by the device.",
+                  "deprecated": true,
+                  "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
                   "type": "string"
                 },
                 "connection_type": {
-                  "description": "The internet connection type used by the device.",
+                  "deprecated": true,
+                  "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
                   "enum": [
                     "WIFI",
                     "CELL",
@@ -394,6 +402,30 @@
           "x-schema-tag": "Device information"
         }
       ]
+    },
+    "experiments": {
+      "description": "An object listing the details of the [Message A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages) or [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments), if the send includes either.",
+      "properties": {
+        "experiment_id": {
+          "description": "The unique identifier for the Message A/B test or Holdout Experiment.",
+          "format": "uuid",
+          "title": "Experiment ID",
+          "type": "string"
+        },
+        "type": {
+          "description": "The type of experiment. `GLOBAL` is for A/B tests, `EXP_GROUP` is for Holdout Experiments.",
+          "enum": [
+            "EXP_GROUP",
+            "GLOBAL"
+          ],
+          "type": "string"
+        },
+        "variant_id": {
+          "description": "For A/B tests, the string ID of the message variant.",
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
