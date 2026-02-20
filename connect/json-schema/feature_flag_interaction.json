@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](https://docs.airship.com/guides/messaging/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the Feature Flag audience and had access to the feature.\n",
+  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the Feature Flag audience and had access to the feature.\n",
   "properties": {
     "body": {
       "properties": {
@@ -57,22 +57,6 @@
                   "enum": [
                     "true",
                     "false"
-                  ],
-                  "type": "string"
-                },
-                "carrier": {
-                  "deprecated": true,
-                  "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "type": "string"
-                },
-                "connection_type": {
-                  "deprecated": true,
-                  "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "enum": [
-                    "WIFI",
-                    "CELL",
-                    "WIMAX",
-                    "NONE"
                   ],
                   "type": "string"
                 },
@@ -313,7 +297,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "Feature Flag interaction event",
   "type": "object",

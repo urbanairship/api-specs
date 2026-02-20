@@ -2,7 +2,7 @@
   "components": {
     "schemas": {
       "api_initiate_opt_in": {
-        "description": "Occurs when an SMS user is registered via the [SMS Channel Registration API](https://docs.airship.com/developer/rest-api/ua/#operation-api-channels-sms-post) without an `opted_in` value — indicating that the user has initiated, but not completed, the registration process. While this event contains a `channel_id`, you cannot send messages to this channel until the associated user completes the opt-in process (indicated by a `mobile_opt_in` event).\n",
+        "description": "Occurs when an SMS user is registered via the [SMS Channel Registration API](/developer/rest-api/ua/#operation-api-channels-sms-post) without an `opted_in` value — indicating that the user has initiated, but not completed, the registration process. While this event contains a `channel_id`, you cannot send messages to this channel until the associated user completes the opt-in process (indicated by a `mobile_opt_in` event).\n",
         "properties": {
           "body": {
             "description": "Contains the event subtype, identifiers, and additional properties about the event.",
@@ -115,22 +115,6 @@
                 "enum": [
                   "true",
                   "false"
-                ],
-                "type": "string"
-              },
-              "carrier": {
-                "deprecated": true,
-                "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                "type": "string"
-              },
-              "connection_type": {
-                "deprecated": true,
-                "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                "enum": [
-                  "WIFI",
-                  "CELL",
-                  "WIMAX",
-                  "NONE"
                 ],
                 "type": "string"
               },
@@ -434,7 +418,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Attribute operation event",
         "type": "object",
@@ -634,7 +619,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Close",
         "type": "object",
@@ -765,12 +751,15 @@
             "$ref": "#/components/schemas/user"
           }
         },
+        "required": [
+          "offset"
+        ],
         "title": "Contact change",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "control": {
-        "description": "Occurs when a device is excluded from a push because it was arbitrarily selected as a member of a control group for a [Message A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages/), [Sequence A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/sequences/), or [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).\n",
+        "description": "Occurs when a device is excluded from a push because it was arbitrarily selected as a member of a control group for a [Message A/B test](/guides/experimentation/a-b-tests/messages/), [Sequence A/B test](/guides/experimentation/a-b-tests/sequences/), or [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
         "properties": {
           "body": {
             "properties": {
@@ -856,7 +845,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Control",
         "type": "object",
@@ -943,7 +933,7 @@
                         "type": "string"
                       },
                       "interaction_type": {
-                        "description": "The type of interaction as set by the Airship SDK. Values determine whether the interaction triggered an event from the Message Center (`ua_mcrap`), a landing page (`ua_landing_page`), an interactive notification (`ua_interactive_notification`), or a button tap (`ua_button_tap`).\n\n  Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](https://docs.airship.com/guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.",
+                        "description": "The type of interaction as set by the Airship SDK. Values determine whether the interaction triggered an event from the Message Center (`ua_mcrap`), a landing page (`ua_landing_page`), an interactive notification (`ua_interactive_notification`), or a button tap (`ua_button_tap`).\n\n  Button tap events with custom names are in the format `ua_button_tap-<custom name>`. For example, for a button action with custom name `Cat socks55`, the event name is `ua_button_tap-Cat socks55`. See [Buttons and images: App](/guides/messaging/features/wysiwyg-editor/actions/#buttons-and-images-app) in *Actions in the WYSIWYG editor*.",
                         "enum": [
                           "ua_mcrap",
                           "ua_landing_page",
@@ -1025,7 +1015,7 @@
                         "type": "string"
                       },
                       "source": {
-                        "description": "The event source. `SDK` indicates an event sent from the Airship SDK. `API` indicates an event created by request against the [Custom Events API](https://docs.airship.com/developer/rest-api/ua/#tag-custom-events).",
+                        "description": "The event source. `SDK` indicates an event sent from the Airship SDK. `API` indicates an event created by request against the [Custom Events API](/developer/rest-api/ua/operations/custom-events).",
                         "enum": [
                           "SDK",
                           "API"
@@ -1599,7 +1589,7 @@
                   {
                     "properties": {
                       "link_name": {
-                        "description": "The [name of the link](https://docs.airship.com/guides/messaging/messages/content/email/#link-names), if set.",
+                        "description": "The [name of the link](/guides/messaging/messages/content/email/email/#link-names), if set.",
                         "type": "string"
                       },
                       "link_url": {
@@ -1708,7 +1698,7 @@
         "x-schema-tag": "Custom email events"
       },
       "emailCreateAndSend": {
-        "description": "An event that occurs for email addresses used as a part of a [Create and Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/).",
+        "description": "An event that occurs for email addresses used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/).",
         "properties": {
           "body": {
             "description": "Contains the event subtype and additional properties about the event.",
@@ -1732,7 +1722,7 @@
                 "type": "object"
               },
               "properties": {
-                "description": "Properties for an email [Create and Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/) event.",
+                "description": "Properties for an email [Create and Send](/guides/audience/segmentation/bulk-sending/) event.",
                 "properties": {
                   "channel_registered": {
                     "description": "If true, a new channel was created to represent the identifiers in the event. If false, the address was already registered to Airship.",
@@ -2568,7 +2558,7 @@
               "type": "array"
             },
             "types": {
-              "description": "Specifies the [event](#schema-tag-events) types you want to return in the event stream.",
+              "description": "Specifies the [event](/developer/rest-api/connect/schemas/events/) types you want to return in the event stream.",
               "items": {
                 "enum": [
                   "ATTRIBUTE_OPERATION",
@@ -2652,7 +2642,7 @@
         "type": "array"
       },
       "feature_flag_interaction": {
-        "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](https://docs.airship.com/guides/messaging/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the Feature Flag audience and had access to the feature.\n",
+        "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the Feature Flag audience and had access to the feature.\n",
         "properties": {
           "body": {
             "properties": {
@@ -2720,14 +2710,15 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Feature Flag interaction event",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "first_open": {
-        "description": "This event occurs when a user opens an Airship-integrated app for the first time.",
+        "description": "This event occurs when a user first registers a channel in your app. This event fires only once per user, when a channel is first registered. Channel registration most commonly occurs immediately after the first app open but can happen at other times as well, for example, if channel registration was delayed. The [open](#open) event fires on every app open, including the first.",
         "properties": {
           "device": {
             "oneOf": [
@@ -2767,7 +2758,8 @@
           "device",
           "type",
           "occurred",
-          "processed"
+          "processed",
+          "offset"
         ],
         "title": "First open",
         "type": "object",
@@ -2814,7 +2806,8 @@
           "device",
           "type",
           "occurred",
-          "processed"
+          "processed",
+          "offset"
         ],
         "title": "First opt-in",
         "type": "object",
@@ -2904,7 +2897,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app button tap",
         "type": "object",
@@ -3117,7 +3111,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app experiences",
         "type": "object",
@@ -3216,7 +3211,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app form display",
         "type": "object",
@@ -3387,14 +3383,15 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app form result",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "in_app_message_control": {
-        "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).\n",
+        "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
         "properties": {
           "body": {
             "properties": {
@@ -3478,7 +3475,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app message control",
         "type": "object",
@@ -3574,14 +3572,15 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app message display",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "in_app_message_exclusion": {
-        "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](https://docs.airship.com/guides/messaging/project/config/ban-lists/).\n",
+        "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).\n",
         "properties": {
           "body": {
             "properties": {
@@ -3616,7 +3615,7 @@
                 "description": "Appears if the user began the current session by opening a push notification."
               },
               "type": {
-                "description": "Indicates that the in-app message was not displayed on a device because the channel or Named User was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or Named User is on a project's [Ban List](https://docs.airship.com/guides/messaging/project/config/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a Ban List occurs.",
+                "description": "Indicates that the in-app message was not displayed on a device because the channel or Named User was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or Named User is on a project's [Ban List](/guides/audience/segmentation/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a Ban List occurs.",
                 "enum": [
                   "AUDIENCE_CHECK_EXCLUDED"
                 ],
@@ -3665,7 +3664,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app message exclusion",
         "type": "object",
@@ -3760,7 +3760,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app message expiration",
         "type": "object",
@@ -3780,7 +3781,7 @@
                 "type": "string"
               },
               "button_group": {
-                "description": "A category associated with the in-app message button. It may be [predefined](https://docs.airship.com/reference/integration/built-in-interactive-notifications/) or [custom defined](https://docs.airship.com/developer/sdk-integration/mobile/push/getting-started/), or blank if there is no association with a category.",
+                "description": "A category associated with the in-app message button. It may be [predefined](/reference/integration/built-in-interactive-notifications/) or [custom defined](developer/sdk-integration/mobile/push/getting-started/), or blank if there is no association with a category.",
                 "type": "string"
               },
               "button_id": {
@@ -3887,7 +3888,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app message resolution",
         "type": "object",
@@ -3996,7 +3998,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app page swipe",
         "type": "object",
@@ -4108,7 +4111,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app page view",
         "type": "object",
@@ -4212,7 +4216,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app pager completed",
         "type": "object",
@@ -4335,14 +4340,15 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "In-app pager summary",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "json_predicate": {
-        "description": "[Standard request filters](#schemas-eventsrequestfilters) check specific, predefined fields in your events and remove any events that don't match the criteria for that field. For example, the `device_types` filter always checks the `device_type` sub-field of the device object. In contrast, you can use JSON Predicates to examine any part of an event, providing more flexibility than the standard filters. You can also combine multiple JSON Predicate objects to create complex filtering logic for your event stream.\n\nThe simplest JSON Predicate examines a single key and provides a `matcher` object that can be applied to the value at that key. To filter a stream for only [Open events](#schemas-open), you could use the standard filter [`types`](#schemas-eventsrequestfilters-items-types): `filters:{\"types\": [\"OPEN\"]}`. However, to achieve this with a JSON Predicate, you would use `filters:{\"predicates\":{\"key\":\"type\", \"value\": {\"equals\": \"OPEN\"}}}`. This checks the value of the top-level key `type` to see if it's exactly \"OPEN\". It also serves as a foundational step for constructing more intricate filters.\n\nTo filter for only Android events, you could use the `device_type` filter, but a JSON Predicate allows for more complex combinations later. Since the device type key doesn't appear at the top level of the event, you'll need to provide a scope, like this `filters:{\"predicates\":{\"scope\":[\"device\"], \"key\":\"device_type\", \"value\": {\"equals\": \"ANDROID\"}}}`. This configuration targets the `device_type` key within the `device` object, checking if its value is \"ANDROID\".\n\nYou can combine the two filters to see only Opens from Android devices: `filters:{\"predicates\":{\"and\":[\n    {\"scope\":[\"device\"], \"key\":\"device_type\", \"value\": {\"equals\": \"ANDROID\"}},\n    {\"key\":\"type\", \"value\": {\"equals\": \"OPEN\"}}\n]}}`\n\nWe also have matchers other than `equals`. Numeric `at_least` and `at_most` can be combined to create ranges. `version_matches` uses [Ivy syntax](https://ant.apache.org/ivy/history/2.1.0/settings/version-matchers.html) to match version numbers. `is_present` determines if there's any value at a given key. `array_contains` can be combined with another predicate to determine if an array contains an object that matches another criteria.\n\n",
+        "description": "[Standard request filters](/developer/rest-api/connect/schemas/others/#eventsrequestfilters) check specific, predefined fields in your events and remove any events that don't match the criteria for that field. For example, the `device_types` filter always checks the `device_type` sub-field of the device object. In contrast, you can use JSON Predicates to examine any part of an event, providing more flexibility than the standard filters. You can also combine multiple JSON Predicate objects to create complex filtering logic for your event stream.\n\nThe simplest JSON Predicate examines a single key and provides a `matcher` object that can be applied to the value at that key. To filter a stream for only [Open events](/developer/rest-api/connect/schemas/events/#open), you could use the standard filter `types`: `filters:{\"types\": [\"OPEN\"]}`. However, to achieve this with a JSON Predicate, you would use `filters:{\"predicates\":{\"key\":\"type\", \"value\": {\"equals\": \"OPEN\"}}}`. This checks the value of the top-level key `type` to see if it's exactly \"OPEN\". It also serves as a foundational step for constructing more intricate filters.\n\nTo filter for only Android events, you could use the `device_type` filter, but a JSON Predicate allows for more complex combinations later. Since the device type key doesn't appear at the top level of the event, you'll need to provide a scope, like this `filters:{\"predicates\":{\"scope\":[\"device\"], \"key\":\"device_type\", \"value\": {\"equals\": \"ANDROID\"}}}`. This configuration targets the `device_type` key within the `device` object, checking if its value is \"ANDROID\".\n\nYou can combine the two filters to see only Opens from Android devices: `filters:{\"predicates\":{\"and\":[\n    {\"scope\":[\"device\"], \"key\":\"device_type\", \"value\": {\"equals\": \"ANDROID\"}},\n    {\"key\":\"type\", \"value\": {\"equals\": \"OPEN\"}}\n]}}`\n\nWe also have matchers other than `equals`. Numeric `at_least` and `at_most` can be combined to create ranges. `version_matches` uses [Ivy syntax](https://ant.apache.org/ivy/history/2.1.0/settings/version-matchers.html) to match version numbers. `is_present` determines if there's any value at a given key. `array_contains` can be combined with another predicate to determine if an array contains an object that matches another criteria.\n\n",
         "oneOf": [
           {
             "properties": {
@@ -4581,7 +4587,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Location",
         "type": "object",
@@ -5195,7 +5202,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Mobile originated event",
         "type": "object",
@@ -5399,7 +5407,7 @@
         "x-weight": 520
       },
       "open": {
-        "description": "Occurs when a user opens your app.",
+        "description": "Occurs when a user opens your app. This event fires every time a user opens your app, including the first time. See also the [first open](#first-open) event.",
         "properties": {
           "body": {
             "properties": {
@@ -5488,6 +5496,9 @@
             "$ref": "#/components/schemas/user"
           }
         },
+        "required": [
+          "offset"
+        ],
         "title": "Open",
         "type": "object",
         "x-schema-tag": "Events"
@@ -5586,6 +5597,9 @@
                 "type": "string"
               }
             },
+            "required": [
+              "offset"
+            ],
             "type": "object"
           },
           {
@@ -5730,12 +5744,15 @@
             "type": "string"
           }
         },
+        "required": [
+          "offset"
+        ],
         "title": "Push body",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "rcs_read_report": {
-        "description": "Read reports are Custom Events sent when an RCS message is marked as read. These events use the `delivery_report` interaction type with a `name` of `read`. See [RCS branded senders](https://docs.airship.com/developer/api-integrations/sms/rcs/).\n",
+        "description": "Read reports are Custom Events sent when an RCS message is marked as read. These events use the `delivery_report` interaction type with a `name` of `read`. See [RCS branded senders](developer/api-integrations/sms/rcs/).\n",
         "properties": {
           "body": {
             "properties": {
@@ -5985,7 +6002,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Region event",
         "type": "object",
@@ -6080,7 +6098,7 @@
         "x-schema-tag": "Email compliance events"
       },
       "rich_control": {
-        "description": "Occurs when a Message Center message is not delivered to a user because they are in a control group for a [Sequence A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/sequences/) or [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).",
+        "description": "Occurs when a Message Center message is not delivered to a user because they are in a control group for a [Sequence A/B test](/guides/experimentation/a-b-tests/sequences/) or [Holdout Experiment](/guides/experimentation/holdout-experiments/).",
         "properties": {
           "body": {
             "properties": {
@@ -6139,7 +6157,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Rich control",
         "type": "object",
@@ -6200,7 +6219,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Rich delete",
         "type": "object",
@@ -6261,7 +6281,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Rich delivery",
         "type": "object",
@@ -6322,7 +6343,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Rich read",
         "type": "object",
@@ -6390,7 +6412,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Screen viewed",
         "type": "object",
@@ -6503,7 +6526,7 @@
             ]
           },
           "experiments": {
-            "description": "An object listing the details of the [Message A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages) or [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments), if the send includes either.",
+            "description": "An object listing the details of the [Message A/B test](/guides/experimentation/a-b-tests/messages) or [Holdout Experiment](/guides/experimentation/holdout-experiments), if the send includes either.",
             "properties": {
               "experiment_id": {
                 "description": "The unique identifier for the Message A/B test or Holdout Experiment.",
@@ -6558,14 +6581,15 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Send",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "send_aborted": {
-        "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [External Data Feeds](https://docs.airship.com/guides/messaging/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) is met\n  * When a [Ban List](https://docs.airship.com/guides/messaging/project/config/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
+        "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [External Data Feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [Ban List](/guides/audience/segmentation/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
         "properties": {
           "body": {
             "properties": {
@@ -6595,7 +6619,7 @@
                 "type": "string"
               },
               "reason": {
-                "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](https://docs.airship.com/guides/messaging/project/config/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](https://docs.airship.com/guides/messaging/project/config/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
+                "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/project/config/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/project/config/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
                 "enum": [
                   "FEED_BANNED_RESPONSE",
                   "FEED_REQUEST_REJECTED",
@@ -6645,7 +6669,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Send aborted",
         "type": "object",
@@ -6740,7 +6765,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Send rejected",
         "type": "object",
@@ -6868,14 +6894,15 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Short link click event",
         "type": "object",
         "x-schema-tag": "Events"
       },
       "smsCreateAndSend": {
-        "description": "An event that occurs for SMS channels used as a part of a [Create and Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/).",
+        "description": "An event that occurs for SMS channels used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/).",
         "properties": {
           "body": {
             "description": "Contains the event subtype and additional properties about the event.",
@@ -6906,7 +6933,7 @@
                 "type": "object"
               },
               "properties": {
-                "description": "Properties for an SMS [Create and Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/) event.",
+                "description": "Properties for an SMS [Create and Send](/guides/audience/segmentation/bulk-sending/) event.",
                 "properties": {
                   "channel_registered": {
                     "description": "If true, a new channel was created to represent the identifiers in the event. If false, the address was already registered to Airship.",
@@ -6979,7 +7006,7 @@
         "x-schema-tag": "SMS compliance events"
       },
       "smsRegistered": {
-        "description": "Occurs when a user opts in to receive SMS messages from you, via a call to the [SMS registration API](https://docs.airship.com/developer/rest-api/ua/#operation-api-channels-sms-post).",
+        "description": "Occurs when a user opts in to receive SMS messages from you, via a call to the [SMS registration API](/developer/rest-api/ua/#operation-api-channels-sms-post).",
         "properties": {
           "body": {
             "description": "Contains the event subtype, identifiers, and additional properties about the event.",
@@ -7230,7 +7257,7 @@
         "x-schema-tag": "Device information"
       },
       "sms_uninstalled": {
-        "description": "Occurs when the [SMS uninstall API](https://docs.airship.com/developer/rest-api/ua/#operation-api-channels-sms-uninstall-post) is called.",
+        "description": "Occurs when the [SMS uninstall API](/developer/rest-api/ua/#operation-api-channels-sms-uninstall-post) is called.",
         "properties": {
           "body": {
             "description": "Contains the event subtype, identifiers, and additional properties about the event.",
@@ -7322,7 +7349,7 @@
           "body": {
             "properties": {
               "event_type": {
-                "description": "Determines the source of the subscription event. `registration` and `create_and_send` events result in changes to `opted_in` dates; all other event types contain `opted_out` dates.\n\n* `registration`: Represents a change to a user's `commercial_opted_in`, `transactional_opted_in`, `click_tracking_opted_in`, or `open_tracking_opted_in` dates.\n* `create_and_send`: A user's opted_in status changed as a result of a [Create and Send](https://docs.airship.com/guides/messaging/audience/segmentation/bulk-sending/) event.\n* `bounce`: Subscription status changed as a result of a bounce event.\n* `list_unsubscribe`: The user clicked the `unsubscribe` button in their email client.\n* `link_unsubscribe`: The user clicked an `unsubscribe` hyperlink in an email.\n* `spam_complaint`: The user classified an email as spam.\n* `out_of_band`: A bounce occurred after the recipient MTA accepted an email.\n",
+                "description": "Determines the source of the subscription event. `registration` and `create_and_send` events result in changes to `opted_in` dates; all other event types contain `opted_out` dates.\n\n* `registration`: Represents a change to a user's `commercial_opted_in`, `transactional_opted_in`, `click_tracking_opted_in`, or `open_tracking_opted_in` dates.\n* `create_and_send`: A user's opted_in status changed as a result of a [Create and Send](/guides/audience/segmentation/bulk-sending/) event.\n* `bounce`: Subscription status changed as a result of a bounce event.\n* `list_unsubscribe`: The user clicked the `unsubscribe` button in their email client.\n* `link_unsubscribe`: The user clicked an `unsubscribe` hyperlink in an email.\n* `spam_complaint`: The user classified an email as spam.\n* `out_of_band`: A bounce occurred after the recipient MTA accepted an email.\n",
                 "enum": [
                   "registration",
                   "create_and_send",
@@ -7482,7 +7509,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Subscription event",
         "type": "object",
@@ -7597,7 +7625,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Subscription list event",
         "type": "object",
@@ -7724,7 +7753,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Tag change",
         "type": "object",
@@ -7787,7 +7817,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Uninstall",
         "type": "object",
@@ -8019,7 +8050,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Web click event",
         "type": "object",
@@ -8120,7 +8152,8 @@
           "type",
           "occurred",
           "processed",
-          "body"
+          "body",
+          "offset"
         ],
         "title": "Web session event",
         "type": "object",
@@ -8219,7 +8252,7 @@
         "x-display-name": "Basic Auth (Master)"
       },
       "bearerAuth": {
-        "description": "Authorization header containing the word `Bearer` followed by a space and a bearer token, which can be obtained from Airship [when configuring a direct integration](https://docs.airship.com/guides/messaging/real-time-data-streaming/). Tokens can be revoked at will.",
+        "description": "Authorization header containing the word `Bearer` followed by a space and a bearer token, which can be obtained from Airship [when configuring a direct integration](/guides/reports/real-time-data-streaming/). Tokens can be revoked at will.",
         "scheme": "bearer",
         "type": "http",
         "x-display-name": "Bearer Token"
@@ -8305,7 +8338,8 @@
                             "id",
                             "type",
                             "occurred",
-                            "processed"
+                            "processed",
+                            "offset"
                           ],
                           "type": "object"
                         },
@@ -8492,8 +8526,7 @@
         },
         "security": [
           {
-            "bearerAuth": [
-            ]
+            "bearerAuth": []
           }
         ],
         "summary": "Open an event stream",
@@ -8565,7 +8598,8 @@
                         "id",
                         "type",
                         "occurred",
-                        "processed"
+                        "processed",
+                        "offset"
                       ],
                       "type": "object"
                     },
@@ -8642,8 +8676,7 @@
         },
         "security": [
           {
-            "basicAuth": [
-            ]
+            "basicAuth": []
           }
         ],
         "summary": "Open a compliance event stream",
@@ -8666,45 +8699,55 @@
   "tags": [
     {
       "description": "Opens an event stream to your filter specifications.",
-      "name": "Event Stream"
+      "name": "Event Stream",
+      "x-card-description": "Consume real-time event streams"
     },
     {
       "description": "The compliance event stream provides real-time access to `COMPLIANCE` type events. This endpoint is open to all Airship users.",
-      "name": "Compliance Event Stream"
+      "name": "Compliance Event Stream",
+      "x-card-description": "Access compliance event data"
     }
   ],
   "x-schema-tags": [
     {
       "description": "Contains information about events organized by `type`. Some events contain additional subtypes or device information.\n",
-      "name": "Events"
+      "name": "Events",
+      "x-card-description": "Event type definitions"
     },
     {
       "description": "Contains event body information specific to email compliance events.\n",
-      "name": "Email compliance events"
+      "name": "Email compliance events",
+      "x-card-description": "Email compliance event schemas"
     },
     {
       "description": "Contains event body information specific to SMS compliance events.\n",
-      "name": "SMS compliance events"
+      "name": "SMS compliance events",
+      "x-card-description": "SMS compliance event schemas"
     },
     {
       "description": "Airship delivers email messages through a provider (SparkPost). Custom email events represent events that occur at the provider level — outside Airship, between the provider and recipient.\n",
-      "name": "Custom email events"
+      "name": "Custom email events",
+      "x-card-description": "Provider email event schemas"
     },
     {
       "description": "Events are ascribed to devices. App, web, SMS, email, and open channel `devices` return different information.\n",
-      "name": "Device information"
+      "name": "Device information",
+      "x-card-description": "Device information schemas"
     },
     {
       "description": "Airship delivers SMS messages through service providers Sinch (formerly known as CLX) and Twilio. Custom SMS events represent events that occur between the service provider and recipient. They do not represent Airship service events.\n",
-      "name": "Custom SMS events"
+      "name": "Custom SMS events",
+      "x-card-description": "Provider SMS event schemas"
     },
     {
       "description": "Contains information about the user that is associated with a given event.\n",
-      "name": "User information"
+      "name": "User information",
+      "x-card-description": "User information schemas"
     },
     {
       "description": "Provides a flexible language for expressing custom filtering of your event stream.\n",
-      "name": "JSON Predicates"
+      "name": "JSON Predicates",
+      "x-card-description": "Filter expression schemas"
     }
   ]
 }

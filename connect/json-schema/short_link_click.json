@@ -120,7 +120,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "Short link click event",
   "type": "object",

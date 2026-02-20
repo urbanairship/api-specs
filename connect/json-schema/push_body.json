@@ -78,6 +78,9 @@
       "type": "string"
     }
   },
+  "required": [
+    "offset"
+  ],
   "title": "Push body",
   "type": "object",
   "x-schema-tag": "Events"

@@ -1,7 +1,6 @@
 {
   "components": {
-    "parameters": {
-    },
+    "parameters": {},
     "responses": {
       "nfcMerchant": {
         "content": {
@@ -487,7 +486,7 @@
                 "writeOnly": true
               },
               "locations": {
-                "description": "An array of up to 10,000 locations associated with the adaptive link. Apple Wallet supports up to 10 locations per pass. If you exceed this limit, Apple Wallet passes will use the 10 locations nearest to a user (located by IP address) when they install the pass.\n\n\nYou can also include a location radius and the maximum number of locations to be matched upon pass creation. Wallet sorts locations to be matched in order from closest to/furthest from the location provided by the device.\n",
+                "description": "An array of up to 10,000 locations associated with the adaptive link. Each pass supports up to 10 locations. If you exceed this limit, the passes will use the 10 locations nearest to a user (located by IP address) when they install the pass.\n\n\nYou can also include a location radius and the maximum number of locations to be matched upon pass creation. Wallet sorts locations to be matched in order from closest to/furthest from the location provided by the device.\n",
                 "items": {
                   "$ref": "#/components/schemas/locationObject"
                 },
@@ -545,7 +544,7 @@
             "type": "object"
           }
         ],
-        "description": "An adaptive link request contains identifiers for the templates you used to generate passes from the link and any fields you want to set when users create passes from the link.\nIf you need to create a boarding pass adaptive link, go to the [boarding pass object](#schema-tag-flights-and-boarding-passes).",
+        "description": "An adaptive link request contains identifiers for the templates you used to generate passes from the link and any fields you want to set when users create passes from the link.\nIf you need to create a boarding pass adaptive link, go to the [boarding pass object](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/).",
         "title": "Adaptive Link request",
         "x-schema-tag": "Adaptive Links"
       },
@@ -1237,7 +1236,7 @@
             "type": "object"
           }
         ],
-        "description": "You must [add personalization requirements](#tag-apple-wallet-pass-personalization) to Apple templates before users can personalize passes created from them.",
+        "description": "You must [add personalization requirements](/developer/rest-api/wallet/operations/apple-wallet-pass-personalization/) to Apple templates before users can personalize passes created from them.",
         "title": "Callback personalization object",
         "type": "object"
       },
@@ -1665,7 +1664,7 @@
               "$ref": "#/components/schemas/fields",
               "title": "Header object with string name."
             },
-            "description": "Headers on an Apple Wallet pass. Provide only the header objects and values you want to differentiate or personalize from the template. See [Apple Template Headers](#schemas-iostemplateheaderobject) for information about available header objects for Apple Wallet templates and passes.",
+            "description": "Headers on an Apple Wallet pass. Provide only the header objects and values you want to differentiate or personalize from the template. See [Apple Template Headers](/developer/rest-api/wallet/schemas/others/#iostemplateheaderobject) for information about available header objects for Apple Wallet templates and passes.",
             "properties": {
               "expirationDate": {
                 "description": "May contain `value` and `label` fields. `value` indicates the expiration date of the pass.\n`label` can be set to either `valid` or `voided`, where `valid` indicates a non-expired pass and `voided` indicates that the pass is no longer accepted.\n",
@@ -4521,7 +4520,7 @@
         "type": "object"
       },
       "locationObject": {
-        "description": "Represents a location on a pass or an adaptive link.\n\n\nPlace objects in the locations array to add location information to passes and templates. Updating locations on a pass or template will replace all locations on that pass; if you want to add to the locations on a pass, you must provide all locations already included on the pass and any additional locations you want to add.\n\nApple Wallet supports up to 10 locations per pass. If you exceed this limit for an iOS pass, we will use the 10 locations nearest to a user (located by IP address) when they install the pass.\n",
+        "description": "Represents a location on a pass or an adaptive link.\n\n\nPlace objects in the locations array to add location information to passes and templates. Updating locations on a pass or template will replace all locations on that pass; if you want to add to the locations on a pass, you must provide all locations already included on the pass and any additional locations you want to add.\n\nApple Wallet Each pass supports up to 10 locations. If you exceed this limit for an iOS pass, we will use the 10 locations nearest to a user (located by IP address) when they install the pass.\n",
         "properties": {
           "city": {
             "description": "The location city.",
@@ -4567,8 +4566,7 @@
           "latitude"
         ],
         "title": "Location object",
-        "type": "object",
-        "x-important": "As of August 2020, Location triggers are unavailable for all mobile devices upgraded to Google Play Services, which affects most Google Wallet passes. Google has not announced when they will make Location triggers available again.\n"
+        "type": "object"
       },
       "paginationObject": {
         "description": "Contains information about pagination, according to your query parameters.",
@@ -5629,7 +5627,7 @@
     },
     "securitySchemes": {
       "httpBasic": {
-        "description": "All Wallet operations use [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy you Project Key and Secret from your Wallet project. Go to **Settings**, then **API**.\n\n  Only TLS 1.2 and TLS 1.3 are supported for Wallet API endpoint access. See also [Mobile Wallet Reference: Security](https://docs.airship.com/guides/wallet/user-guide/reference/#security).\n",
+        "description": "All Wallet operations use [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy you Project Key and Secret from your Wallet project. Go to **Settings**, then **API**.\n\n  Only TLS 1.2 and TLS 1.3 are supported for Wallet API endpoint access. See also [Mobile Wallet Reference: Security](/guides/wallet/user-guide/reference/#security).\n",
         "scheme": "basic",
         "type": "http",
         "x-display-name": "Basic Auth"
@@ -5637,7 +5635,7 @@
     }
   },
   "info": {
-    "description": "\nThe Wallet API provides programmatic access to Airship Wallet service,\nwhere you can create passes for Apple Wallet and Google Wallet. Passes are:\n\n* Created from templates within a project. The project determines the types of templates and passes you create; your templates determine the style and default data for your passes.\n* Distributed as links—When creating a pass or an adaptive link, you are creating a link. Users tap this link (or scan a QR code representing the link, etc.) to install the pass on their device.\n* Customizable—Add relevant data to your users when they install your pass.\n* Updatable with relevant field and value changes. After users install your passes, you can update passes with relevant field and values so your users' passes are always up to date.\n\n\nFor a better understanding of Airship Wallet projects and passes, see [How mobile wallet works](https://docs.airship.com/guides/wallet/getting-started/how-mobile-wallet-works/).\n\nSee the [Getting Started Guide](https://docs.airship.com/guides/wallet/getting-started/wallet/) for help setting up an Airship Wallet project.\n\n### API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in [JSON](https://www.json.org/json-en.html)\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Date/Time Format\n\nAll date/time values are represented according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) in UTC.\nA `T` separator is preferred but not required. It will be included in all date/time values generated by the API.\n\nExample: `2023-01-28T15:00-05:00`\n\n### Security {#intro-security}\n\n* Our APIs only work under 2048-bit HTTPS encrypted connections to ensure your data is private from client to server connections.\n* Access is authenticated through a unique secret API key which we provide to you in your Wallet dashboard. It is your responsibility to keep this key well-guarded, as it represents your identity.\n* You will use your own Apple Pass Type Certificate or Google Pay certificate to sign production passes.    \n\n## Specifying a version\n\n  The current version of the Wallet API is 1.2. The versioning for the Wallet API is currently distinct from the versioning for the Airship Engage API.\n\n\n  Always specify the version of the API you want to use by adding an HTTP header called\n   `Api-Revision`. The value of that header should be in the format x.y where x is the API version and y the sub-revision. For instance, 1.2 is for the /v1 API, revision 2.\n\n\n## External IDs\n\nMost endpoints support an `externalId` parameter in the path. While all assets\nwithin this API typically have an internal `id`, you can use the `externalId` parameter to grant custom identifiers to your assets — projects, templates, passes, etc. These identifiers can make your assets more recognizable and help you integrate with an external application or system.\n\n\nIf you want to use external IDs, you should use them for all assets — projects, templates, passes, etc.\n\n\nIn general you can support external IDs by appending `/id/{externalId}` to an endpoint path that would either take or generate a standard `id`.",
+    "description": "\nThe Wallet API provides programmatic access to Airship Wallet service,\nwhere you can create passes for Apple Wallet and Google Wallet. Passes are:\n\n* Created from templates within a project. The project determines the types of templates and passes you create; your templates determine the style and default data for your passes.\n* Distributed as links—When creating a pass or an adaptive link, you are creating a link. Users tap this link (or scan a QR code representing the link, etc.) to install the pass on their device.\n* Customizable—Add relevant data to your users when they install your pass.\n* Updatable with relevant field and value changes. After users install your passes, you can update passes with relevant field and values so your users' passes are always up to date.\n\n\nFor a better understanding of Airship Wallet projects and passes, see [How mobile wallet works](/guides/wallet/getting-started/how-mobile-wallet-works/).\n\nSee the [Getting Started Guide](/guides/wallet/getting-started/wallet/) for help setting up an Airship Wallet project.\n\n### API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in [JSON](https://www.json.org/json-en.html)\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Date/Time Format\n\nAll date/time values are represented according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) in UTC.\nA `T` separator is preferred but not required. It will be included in all date/time values generated by the API.\n\nExample: `2023-01-28T15:00-05:00`\n\n### Security {#intro-security}\n\n* Our APIs only work under 2048-bit HTTPS encrypted connections to ensure your data is private from client to server connections.\n* Access is authenticated through a unique secret API key which we provide to you in your Wallet dashboard. It is your responsibility to keep this key well-guarded, as it represents your identity.\n* You will use your own Apple Pass Type Certificate or Google Pay certificate to sign production passes.    \n\n## Specifying a version\n\n  The current version of the Wallet API is 1.2. The versioning for the Wallet API is currently distinct from the versioning for the Airship Engage API.\n\n\n  Always specify the version of the API you want to use by adding an HTTP header called\n   `Api-Revision`. The value of that header should be in the format x.y where x is the API version and y the sub-revision. For instance, 1.2 is for the /v1 API, revision 2.\n\n\n## External IDs\n\nMost endpoints support an `externalId` parameter in the path. While all assets\nwithin this API typically have an internal `id`, you can use the `externalId` parameter to grant custom identifiers to your assets — projects, templates, passes, etc. These identifiers can make your assets more recognizable and help you integrate with an external application or system.\n\n\nIf you want to use external IDs, you should use them for all assets — projects, templates, passes, etc.\n\n\nIn general you can support external IDs by appending `/id/{externalId}` to an endpoint path that would either take or generate a standard `id`.",
     "title": "Airship Wallet API",
     "version": "1.2"
   },
@@ -6045,7 +6043,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the event belongs to. For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
+          "description": "The project that the event belongs to. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -6077,7 +6075,7 @@
                 "properties": {
                   "fields": {
                     "additionalProperties": true,
-                    "description": "Provide only the keys that you want to update from `fields` object of an [Event Request](#schemas-eventrequest); any fields that you omit from the payload remain unchanged.",
+                    "description": "Provide only the keys that you want to update from `fields` object of an [Event Request](/developer/rest-api/wallet/schemas/event-tickets/#eventrequest); any fields that you omit from the payload remain unchanged.",
                     "type": "object"
                   }
                 },
@@ -6154,8 +6152,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete event",
@@ -6199,7 +6196,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the event belongs to. For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
+          "description": "The project that the event belongs to. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -6210,7 +6207,7 @@
           "style": "simple"
         },
         {
-          "description": "The event you want to get, update, or delete. For [External IDs](#external-ids), format the `{eventId}` as `id/{eventExternalId}`.",
+          "description": "The event you want to get, update, or delete. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{eventId}` as `id/{eventExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "eventId",
@@ -6222,7 +6219,7 @@
         }
       ],
       "put": {
-        "description": "Update any of the keys provided in the `fields` object of an [Event Request](#schemas-eventrequest). Provide only the fields you want to update; any fields that you omit from the payload remain unchanged.\n",
+        "description": "Update any of the keys provided in the `fields` object of an [Event Request](/developer/rest-api/wallet/schemas/event-tickets/#eventrequest). Provide only the fields you want to update; any fields that you omit from the payload remain unchanged.\n",
         "operationId": "updateEvent",
         "requestBody": {
           "content": {
@@ -6313,7 +6310,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the event belongs to. Use the Airship-generated project ID or project's external ID.\nFor [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
+          "description": "The project that the event belongs to. Use the Airship-generated project ID or project's external ID.\nFor [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -6324,7 +6321,7 @@
           "style": "simple"
         },
         {
-          "description": "The event you want modify groups for.  For [External IDs](#external-ids), format the `{eventId}` as `id/{eventExternalId}`.\n",
+          "description": "The event you want modify groups for.  For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{eventId}` as `id/{eventExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "eventId",
@@ -6426,7 +6423,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the event belongs to. Use either the Airship-generated project ID or the external ID.\nFor [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
+          "description": "The project that the event belongs to. Use either the Airship-generated project ID or the external ID.\nFor [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -6437,7 +6434,7 @@
           "style": "simple"
         },
         {
-          "description": "The event you want modify groups for. Use either the Airship-generated event ID or the external ID for the event.\nFor [External IDs](#external-ids), format the `{eventId}` as `id/{eventExternalId}`.\n",
+          "description": "The event you want modify groups for. Use either the Airship-generated event ID or the external ID for the event.\nFor [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{eventId}` as `id/{eventExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "eventId",
@@ -6557,8 +6554,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List event passes",
@@ -6704,7 +6700,7 @@
         }
       ],
       "put": {
-        "description": "Update fields common to a group of flights. Provide only the keys that you want to update from `fields` object of an [flight Request](#schemas-flightrequest); any fields that you omit from the payload remain unchanged.\nSee also [Update flights in a pass group](#operation-flights-project-projectid-passgroups-passgroup-put).\n",
+        "description": "Update fields common to a group of flights. Provide only the keys that you want to update from `fields` object of an [flight Request](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/#flightrequest); any fields that you omit from the payload remain unchanged.\nSee also [Update flights in a pass group](#operation-flights-project-projectid-passgroups-passgroup-put).\n",
         "operationId": "updateFlightsInPassGroupExternalId",
         "requestBody": {
           "content": {
@@ -6713,7 +6709,7 @@
                 "properties": {
                   "fields": {
                     "additionalProperties": true,
-                    "description": "Provide only the keys that you want to update from `fields` object of an [flight Request](#schemas-flightrequest); any fields that you omit from the payload remain unchanged.",
+                    "description": "Provide only the keys that you want to update from `fields` object of an [flight Request](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/#flightrequest); any fields that you omit from the payload remain unchanged.",
                     "type": "object"
                   }
                 },
@@ -6942,7 +6938,7 @@
                 "properties": {
                   "fields": {
                     "additionalProperties": true,
-                    "description": "Provide only the keys that you want to update from `fields` object of an [flight Request](#schemas-flightrequest); any fields that you omit from the payload remain unchanged.",
+                    "description": "Provide only the keys that you want to update from `fields` object of an [flight Request](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/#flightrequest); any fields that you omit from the payload remain unchanged.",
                     "type": "object"
                   }
                 },
@@ -7019,8 +7015,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete flight",
@@ -7064,7 +7059,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the flight belongs to. For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
+          "description": "The project that the flight belongs to. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -7075,7 +7070,7 @@
           "style": "simple"
         },
         {
-          "description": "The flight you want to get, update, or delete. For [External IDs](#external-ids), format the `{flightId}` as `id/{flightExternalId}`.",
+          "description": "The flight you want to get, update, or delete. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{flightId}` as `id/{flightExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "flightId",
@@ -7087,7 +7082,7 @@
         }
       ],
       "put": {
-        "description": "Update any of the keys provided in the `fields` object of a [Flight Request](#schemas-flightrequest). Provide only the fields you want to update; any fields that you omit from the payload remain unchanged.\n",
+        "description": "Update any of the keys provided in the `fields` object of a [Flight Request](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/#flightrequest). Provide only the fields you want to update; any fields that you omit from the payload remain unchanged.\n",
         "operationId": "updateFlight",
         "requestBody": {
           "content": {
@@ -7172,7 +7167,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the flight belongs to. For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
+          "description": "The project that the flight belongs to. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -7183,7 +7178,7 @@
           "style": "simple"
         },
         {
-          "description": "The flight you want modify groups for. For [External IDs](#external-ids), format the `{flightId}` as `id/{flightExternalId}`.\n",
+          "description": "The flight you want modify groups for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{flightId}` as `id/{flightExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "flightId",
@@ -7285,7 +7280,7 @@
           "style": "simple"
         },
         {
-          "description": "The project that the flight belongs to. Use either the Airship-generated project ID or the external ID. For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
+          "description": "The project that the flight belongs to. Use either the Airship-generated project ID or the external ID. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -7296,7 +7291,7 @@
           "style": "simple"
         },
         {
-          "description": "The flight you want modify groups for. Use either the Airship-generated flight ID or the external ID for the flight. For [External IDs](#external-ids), format the `{flightId}` as `id/{flightExternalId}`.\n",
+          "description": "The flight you want modify groups for. Use either the Airship-generated flight ID or the external ID for the flight. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{flightId}` as `id/{flightExternalId}`.\n",
           "explode": false,
           "in": "path",
           "name": "flightId",
@@ -7416,8 +7411,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List flight passes",
@@ -7549,8 +7543,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List Adaptive Links",
@@ -7603,8 +7596,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create Adaptive Link",
@@ -7691,8 +7683,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create boarding pass or event ticket Adaptive Links",
@@ -7722,8 +7713,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get Adaptive Link from project",
@@ -7798,8 +7788,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create Adaptive Link in project",
@@ -7907,8 +7896,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List passes for an Adaptive Link for an external project",
@@ -8077,8 +8065,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get pass from Adaptive Link",
@@ -8225,11 +8212,10 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
-        "summary": "Update passes from Adaptive Link",
+        "summary": "Update passes from Adaptive Link for an external project",
         "tags": [
           "Adaptive Links with external IDs"
         ]
@@ -8256,8 +8242,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get Adaptive Link",
@@ -8332,8 +8317,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create Adaptive Link",
@@ -8441,8 +8425,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List passes for an Adaptive Link for a project",
@@ -8531,8 +8514,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List Adaptive Links for a project",
@@ -8612,8 +8594,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List Adaptive Links for a template",
@@ -8691,8 +8672,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete Adaptive Link",
@@ -8720,8 +8700,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get Adaptive Link",
@@ -8786,8 +8765,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update Adaptive Link",
@@ -8895,8 +8873,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List passes for an Adaptive Link",
@@ -9099,8 +9076,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get passes from Adaptive Link",
@@ -9236,8 +9212,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update passes from Adaptive Link",
@@ -9426,8 +9401,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List passes",
@@ -9803,13 +9777,12 @@
                 }
               }
             },
-            "description": "A response returns one or more [`ticketId`](#tag-tickets) values, each referencing the pass update operation. If your request does not include the `templates` array, the response includes a single `ticketId`. If your request includes the `templates` array, the response is an array of of ticket objects, corresponding to the order of templates in the array.\n"
+            "description": "A response returns one or more [`ticketId`](/developer/rest-api/wallet/operations/tickets/) values, each referencing the pass update operation. If your request does not include the `templates` array, the response includes a single `ticketId`. If your request includes the `templates` array, the response is an array of of ticket objects, corresponding to the order of templates in the array.\n"
           }
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update pass",
@@ -9818,35 +9791,6 @@
         ],
         "x-note": "You can also update a pass to include an expiration date using the `expirationDate` key."
       }
-    },
-    "/pass/id/{externalId}/locations": {
-      "parameters": [
-        {
-          "description": "The particular API revision you want to use. In general, this is `1.2`.",
-          "explode": false,
-          "in": "header",
-          "name": "Api-Revision",
-          "required": true,
-          "schema": {
-            "enum": [
-              1.2
-            ],
-            "type": "string"
-          },
-          "style": "simple"
-        },
-        {
-          "description": "The external ID of the pass you want to add locations to.",
-          "explode": false,
-          "in": "path",
-          "name": "externalId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "style": "simple"
-        }
-      ]
     },
     "/pass/id/{externalId}/stats": {
       "get": {
@@ -9901,8 +9845,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Pass statistics with external ID",
@@ -9935,37 +9878,6 @@
           }
         }
       ]
-    },
-    "/pass/id/{passExternalId}/download": {
-      "parameters": [
-        {
-          "description": "The particular API revision you want to use. In general, this is `1.2`.",
-          "explode": false,
-          "in": "header",
-          "name": "Api-Revision",
-          "required": true,
-          "schema": {
-            "enum": [
-              1.2
-            ],
-            "type": "string"
-          },
-          "style": "simple"
-        },
-        {
-          "description": "The custom identifier of the pass you want to download.",
-          "explode": false,
-          "in": "path",
-          "name": "passExternalId",
-          "required": true,
-          "schema": {
-            "type": "string"
-          },
-          "style": "simple"
-        }
-      ]
-    },
-    "/pass/id/{passExternalId}/tags": {
     },
     "/pass/id/{passExternalId}/viewJSONPass": {
       "get": {
@@ -10102,8 +10014,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create pass from a template",
@@ -10114,7 +10025,7 @@
     },
     "/pass/template/{templateId}/download": {
       "get": {
-        "description": "Download Apple Wallet passes with external IDs in a single .pkpass file. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. See also [Download multiple Apple Wallet Passes in a single .pkpass file](#operation-pass-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.\n",
+        "description": "Download Apple Wallet passes with external IDs in a single .pkpass file. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. See also [Download multiple Apple Wallet Passes in a single .pkpass file](/developer/rest-api/wallet/operations/apple-passes-only/#getapplewalletpasses).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.\n",
         "operationId": "getAppleWalletMultiPassForTemplateExternalId",
         "responses": {
           "200": {
@@ -10145,7 +10056,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the template the pass will be or was created from. For [External IDs](#external-ids), format the `{templateId}` as `id/{templateExternalId}`.",
+          "description": "The ID of the template the pass will be or was created from. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{templateId}` as `id/{templateExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "templateId",
@@ -10214,15 +10125,14 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete pass",
         "tags": [
           "Passes with external IDs"
         ],
-        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](https://docs.airship.com/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
+        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
       },
       "get": {
         "description": "Get a pass with an external ID.",
@@ -10267,8 +10177,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get pass",
@@ -10366,8 +10275,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create pass",
@@ -10426,7 +10334,7 @@
                 }
               }
             },
-            "description": "The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "400": {
             "description": "The request was malformed."
@@ -10437,8 +10345,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update pass for a template",
@@ -10501,8 +10408,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List beacons on Apple Wallet pass",
@@ -10596,8 +10502,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add or update beacons for Apple Wallet pass",
@@ -10691,8 +10596,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete locations from pass",
@@ -10838,15 +10742,13 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add locations to pass",
         "tags": [
           "Passes with external IDs"
-        ],
-        "x-important": "As of August 2020, Location triggers are unavailable for all mobile devices upgraded to Google Play Services, which affects most Google Wallet passes. Google has not announced when they will make Location triggers available again.\n"
+        ]
       }
     },
     "/pass/template/{templateId}/id/{passExternalId}/message": {
@@ -10935,8 +10837,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get messages for Google Pass with external ID",
@@ -11084,8 +10985,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add message to Google Pass with external ID",
@@ -11113,7 +11013,7 @@
                 }
               }
             },
-            "description": "Notification is being deleted. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being deleted. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The pass does not exist."
@@ -11121,8 +11021,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete notification by pass with external ID",
@@ -11197,7 +11096,7 @@
                 }
               }
             },
-            "description": "Notification is being sent. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being sent. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The pass does not exist."
@@ -11205,8 +11104,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Send notification by pass with external ID",
@@ -11284,8 +11182,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List tags for pass with external ID",
@@ -11401,8 +11298,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update tags for pass with external ID",
@@ -11470,15 +11366,14 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete pass",
         "tags": [
           "Passes"
         ],
-        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](https://docs.airship.com/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
+        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
       },
       "get": {
         "description": "Get the specified pass. This endpoint will return the external ID of a pass, but only if there is one associated with it.",
@@ -11531,8 +11426,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get pass",
@@ -11614,8 +11508,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create pass",
@@ -11729,8 +11622,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update pass",
@@ -11824,8 +11716,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Generates a pass",
@@ -11902,8 +11793,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete locations from pass",
@@ -12024,15 +11914,13 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add locations to pass",
         "tags": [
           "Passes"
-        ],
-        "x-important": "As of August 2020, Location triggers are unavailable for all mobile devices upgraded to Google Play Services, which affects most Google Wallet passes. Google has not announced when they will make Location triggers available again.\n"
+        ]
       }
     },
     "/pass/{passId}/message": {
@@ -12110,8 +11998,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get messages for Google Pass",
@@ -12248,8 +12135,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add message to Google Pass",
@@ -12277,7 +12163,7 @@
                 }
               }
             },
-            "description": "Notification is being deleted. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being deleted. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The pass does not exist."
@@ -12285,8 +12171,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete notification by pass",
@@ -12350,7 +12235,7 @@
                 }
               }
             },
-            "description": "Notification is being sent. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being sent. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The pass does not exist."
@@ -12358,8 +12243,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Send notification by pass",
@@ -12440,8 +12324,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List tags for pass",
@@ -12468,7 +12351,7 @@
             "style": "simple"
           },
           {
-            "description": "The ID of the pass you want to add tags to. For [External IDs](#external-ids), format the `{passId}` as `id/{externalId}`.",
+            "description": "The ID of the pass you want to add tags to. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{passId}` as `id/{externalId}`.",
             "explode": false,
             "in": "path",
             "name": "passId",
@@ -12541,8 +12424,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add tags to pass",
@@ -12816,8 +12698,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List projects",
@@ -12868,8 +12749,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create project",
@@ -12895,7 +12775,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the project you want to duplicate. For [External IDs](#external-ids), format the `{projectId}` as `id/{externalId}`.",
+          "description": "The ID of the project you want to duplicate. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{externalId}`.",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -12923,8 +12803,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Duplicate project",
@@ -12960,7 +12839,7 @@
         }
       ],
       "post": {
-        "description": "Create a project with a custom identifier. Your project is based around the type of passes you want to create and the type of barcode you will include on your passes. It is a container for your templates and passes.\n\nThe response includes an `id` and `contextId`. Use these values to access your project via the API and dashboard, respectively.\nSee also [Create project](#operation-project-post).",
+        "description": "Create a project with a custom identifier. Your project is based around the type of passes you want to create and the type of barcode you will include on your passes. It is a container for your templates and passes.\n\nThe response includes an `id` and `contextId`. Use these values to access your project via the API and dashboard, respectively.\nSee also [Create project](/developer/rest-api/wallet/operations/projects/#createproject).",
         "operationId": "createProjectExternalId",
         "requestBody": {
           "content": {
@@ -12986,8 +12865,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create project with external ID",
@@ -12998,7 +12876,7 @@
     },
     "/project/{projectId}": {
       "get": {
-        "description": "Get the project with the specified `id`. The response includes information about the project (set when [Creating a Project](#operation-project-post)) and an array of templates associated with the project. The templates array contains all the information found in the `templateHeader` object.",
+        "description": "Get the project with the specified `id`. The response includes information about the project (set when [Creating a Project](/developer/rest-api/wallet/operations/projects/#createproject)) and an array of templates associated with the project. The templates array contains all the information found in the `templateHeader` object.",
         "operationId": "getProject",
         "responses": {
           "200": {
@@ -13014,8 +12892,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get project",
@@ -13039,7 +12916,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the project. For [External IDs](#external-ids), format the `{projectId}` as `id/{externalId}`.",
+          "description": "The ID of the project. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{externalId}`.",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -13078,8 +12955,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update project",
@@ -13100,8 +12976,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Project activity",
@@ -13125,7 +13000,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the project you want to return activity for. For [External IDs](#external-ids), format the `{projectId}` as `id/{externalId}`.",
+          "description": "The ID of the project you want to return activity for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{externalId}`.",
           "in": "path",
           "name": "projectId",
           "required": true,
@@ -13244,8 +13119,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List NFC merchants",
@@ -13269,7 +13143,7 @@
           "style": "simple"
         },
         {
-          "description": "The project you want to add or lookup NFC merchant information for.  For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
+          "description": "The project you want to add or lookup NFC merchant information for.  For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -13341,8 +13215,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add NFC merchant",
@@ -13381,8 +13254,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete NFC merchant",
@@ -13401,8 +13273,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get NFC merchant",
@@ -13426,7 +13297,7 @@
           "style": "simple"
         },
         {
-          "description": "The project you want to add or lookup NFC merchant information for.  For [External IDs](#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
+          "description": "The project you want to add or lookup NFC merchant information for.  For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{projectExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "projectId",
@@ -13477,8 +13348,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update NFC merchant information",
@@ -13633,7 +13503,7 @@
             }
           }
         },
-        "description": "Register a callback specification, which includes the remote URL and any HTTP headers required by the remote URL.\n\nYour callback server should expect to receive callbacks at up to three endpoints:\n* `{baseUrl}/v1/pass/install` — Receives a [callback](#schemas-callbackobject) when your audience installs passes.\n* `{baseUrl}/v1/pass/uninstall` — Receives a [callback](#schemas-callbackobject) when your audience uninstalls passes.\n* `{baseUrl}/v1/pass/{passId}/personalize` — Receives a [callback with a personalization object](#schemas-callbackpersonalizationobject) when your audience personalizes a Loyalty pass. You must [add personalization requirements](#tag-apple-wallet-pass-personalization) to Apple templates before users can personalize passes created from them.\n\nSee [Wallet callbacks](https://docs.airship.com/guides/wallet/user-guide/reporting/wallet-callbacks/) for more information.",
+        "description": "Register a callback specification, which includes the remote URL and any HTTP headers required by the remote URL.\n\nYour callback server should expect to receive callbacks at up to three endpoints:\n* `{baseUrl}/v1/pass/install` — Receives a [callback](/developer/rest-api/wallet/schemas/others/#callbackobject) when your audience installs passes.\n* `{baseUrl}/v1/pass/uninstall` — Receives a [callback](/developer/rest-api/wallet/schemas/others/#callbackobject) when your audience uninstalls passes.\n* `{baseUrl}/v1/pass/{passId}/personalize` — Receives a [callback with a personalization object](/developer/rest-api/wallet/schemas/others/#callbackpersonalizationobject) when your audience personalizes a Loyalty pass. You must [add personalization requirements](/developer/rest-api/wallet/operations/apple-wallet-pass-personalization/) to Apple templates before users can personalize passes created from them.\n\nSee [Wallet callbacks](/guides/wallet/user-guide/reporting/wallet-callbacks/) for more information.",
         "operationId": "createCallbackSpecification",
         "requestBody": {
           "content": {
@@ -13753,7 +13623,7 @@
     },
     "/project/{projectId}/stats": {
       "get": {
-        "description": "Returns statistics for a given project ID. This endpoint does not count repeated actions by the same user. For [External IDs](#external-ids), the response payload lists the internal Wallet ID for the template rather than the external ID.",
+        "description": "Returns statistics for a given project ID. This endpoint does not count repeated actions by the same user. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), the response payload lists the internal Wallet ID for the template rather than the external ID.",
         "operationId": "getProjectStatistics",
         "responses": {
           "200": {
@@ -13762,8 +13632,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Project statistics",
@@ -13787,7 +13656,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the project you want to return statistics for. For [External IDs](#external-ids), format the `{projectId}` as `id/{externalId}`.",
+          "description": "The ID of the project you want to return statistics for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{projectId}` as `id/{externalId}`.",
           "in": "path",
           "name": "projectId",
           "required": true,
@@ -14457,7 +14326,7 @@
                 }
               }
             },
-            "description": "Notification is being deleted. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being deleted. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The segment does not exist."
@@ -14465,8 +14334,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete notification by segment",
@@ -14550,7 +14418,7 @@
                 }
               }
             },
-            "description": "Notification is being sent. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being sent. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The segment does not exist."
@@ -14558,8 +14426,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Send notification by segment",
@@ -14658,7 +14525,7 @@
                 }
               }
             },
-            "description": "A response returns one or more [`ticketId`](#tag-tickets) values, each referencing the pass update operation."
+            "description": "A response returns one or more [`ticketId`](/developer/rest-api/wallet/operations/tickets/) values, each referencing the pass update operation."
           }
         },
         "summary": "Update passes by segment",
@@ -14808,8 +14675,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List all tags",
@@ -14880,8 +14746,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete tag",
@@ -14909,7 +14774,7 @@
                 }
               }
             },
-            "description": "Notification is being deleted. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being deleted. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The tag does not exist."
@@ -14917,8 +14782,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete notification by tag",
@@ -14991,7 +14855,7 @@
                 }
               }
             },
-            "description": "Notification is being sent. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being sent. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The tag does not exist."
@@ -14999,8 +14863,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Send notification by tag",
@@ -15041,7 +14904,7 @@
             "style": "simple"
           },
           {
-            "description": "The pass you want to remove the tag from. For [External IDs](#external-ids), format the `{pass}` as `id/{externalId}`.",
+            "description": "The pass you want to remove the tag from. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{pass}` as `id/{externalId}`.",
             "explode": false,
             "in": "path",
             "name": "pass",
@@ -15083,8 +14946,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Remove tag from a pass",
@@ -15155,8 +15017,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Remove tag from all passes",
@@ -15341,8 +15202,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List passes for a tag",
@@ -15420,13 +15280,12 @@
                 }
               }
             },
-            "description": "A successful request returns a [`ticketId`](#tag-tickets)."
+            "description": "A successful request returns a [`ticketId`](/developer/rest-api/wallet/operations/tickets/)."
           }
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update passes by tag",
@@ -15446,8 +15305,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Tag statistics",
@@ -15501,7 +15359,7 @@
             "style": "simple"
           },
           {
-            "description": "The templateId of the template you want to duplicate. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "description": "The templateId of the template you want to duplicate. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
             "explode": false,
             "in": "path",
             "name": "templateId",
@@ -15533,8 +15391,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Duplicate template",
@@ -15665,8 +15522,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "List templates",
@@ -15695,7 +15551,7 @@
             "style": "simple"
           },
           {
-            "description": "The `templateId` of the template you want to delete. For [External IDs](#external-ids), format the `{id}` as `id/{externalId}`.",
+            "description": "The `templateId` of the template you want to delete. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{externalId}`.",
             "explode": false,
             "in": "path",
             "name": "id",
@@ -15733,8 +15589,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete template",
@@ -15743,7 +15598,7 @@
         ]
       },
       "get": {
-        "description": "Get the template specified by the `templateId`. To get the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](#operation-templates-id-get) endpoint instead.",
+        "description": "Get the template specified by the `templateId`. To get the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](/developer/rest-api/wallet/operations/templates/#gettemplatesv2) endpoint instead.",
         "operationId": "getTemplate",
         "parameters": [
           {
@@ -15761,7 +15616,7 @@
             "style": "simple"
           },
           {
-            "description": "The `templateId` of the template you want to look up. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "description": "The `templateId` of the template you want to look up. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
             "explode": false,
             "in": "path",
             "name": "id",
@@ -15822,8 +15677,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get template",
@@ -15902,8 +15756,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create template",
@@ -15912,7 +15765,7 @@
         ]
       },
       "put": {
-        "description": "Update the specified template. This endpoint takes any of the parameters used for Creating a Template. You can also add or remove fields from the template with this call by adding or omitting those fields from the request.\n\nTo update the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](#operation-templates-id-put) endpoint instead.",
+        "description": "Update the specified template. This endpoint takes any of the parameters used for Creating a Template. You can also add or remove fields from the template with this call by adding or omitting those fields from the request.\n\nTo update the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](/developer/rest-api/wallet/operations/templates/#updatetemplatesv2) endpoint instead.",
         "operationId": "updateTemplate",
         "parameters": [
           {
@@ -15930,7 +15783,7 @@
             "style": "simple"
           },
           {
-            "description": "The `templateId` of the template you want to update. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "description": "The `templateId` of the template you want to update. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
             "explode": false,
             "in": "path",
             "name": "id",
@@ -15983,8 +15836,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update template",
@@ -16034,7 +15886,7 @@
         }
       ],
       "post": {
-        "description": "Create a template with an external ID within the specified project. A template is specific to a vendor platform, Apple or Google.\nSee also [Create template](#operation-template-id-post).",
+        "description": "Create a template with an external ID within the specified project. A template is specific to a vendor platform, Apple or Google.\nSee also [Create template](/developer/rest-api/wallet/operations/templates/#createtemplate).",
         "operationId": "createExternalTemplate",
         "requestBody": {
           "content": {
@@ -16077,8 +15929,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Create template with external ID",
@@ -16098,8 +15949,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Template activity",
@@ -16123,7 +15973,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the template you want to return activity for. For [External IDs](#external-ids), format the `{templateId}` as `id/{externalId}`.",
+          "description": "The ID of the template you want to return activity for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{templateId}` as `id/{externalId}`.",
           "in": "path",
           "name": "templateId",
           "required": true,
@@ -16151,8 +16001,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete location from template",
@@ -16176,7 +16025,7 @@
           "style": "simple"
         },
         {
-          "description": "The template you want to remove a location from. For [External IDs](#external-ids), format the `{templateId}` as `id/{externalId}`.",
+          "description": "The template you want to remove a location from. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{templateId}` as `id/{externalId}`.",
           "explode": false,
           "in": "path",
           "name": "templateId",
@@ -16216,7 +16065,7 @@
           "style": "simple"
         },
         {
-          "description": "The template you want to add locations to. For [External IDs](#external-ids), format the `{templateId}` as `id/{externalId}`.",
+          "description": "The template you want to add locations to. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{templateId}` as `id/{externalId}`.",
           "explode": false,
           "in": "path",
           "name": "templateId",
@@ -16293,15 +16142,13 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Add locations to template",
         "tags": [
           "Templates"
-        ],
-        "x-important": "As of August 2020, Location triggers are unavailable for all mobile devices upgraded to Google Play Services, which affects most Google Wallet passes. Google has not announced when they will make Location triggers available again.\n"
+        ]
       }
     },
     "/template/{templateId}/notify": {
@@ -16323,7 +16170,7 @@
                 }
               }
             },
-            "description": "Notification is being deleted. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being deleted. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The template does not exist."
@@ -16331,8 +16178,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Delete notification by template",
@@ -16342,7 +16188,7 @@
       },
       "parameters": [
         {
-          "description": "The `id` of the template you want to send or delete notification for. For [External IDs](#external-ids), format the `{templateId}` as `id/{templateExternalId}`.",
+          "description": "The `id` of the template you want to send or delete notification for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{templateId}` as `id/{templateExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "templateId",
@@ -16396,7 +16242,7 @@
                 }
               }
             },
-            "description": "Notification is being sent. The response contains a [`ticketId`](#tag-tickets) that you can use to look up the operation."
+            "description": "Notification is being sent. The response contains a [`ticketId`](/developer/rest-api/wallet/operations/tickets/) that you can use to look up the operation."
           },
           "404": {
             "description": "The pass does not exist."
@@ -16404,8 +16250,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Send notification by template",
@@ -16510,8 +16355,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get template passes",
@@ -16535,7 +16379,7 @@
           "style": "simple"
         },
         {
-          "description": "The `templateId` of the template you want to get passes for. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+          "description": "The `templateId` of the template you want to get passes for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
           "explode": false,
           "in": "path",
           "name": "templateId",
@@ -16656,8 +16500,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Publish a bulk update to passes",
@@ -16798,7 +16641,7 @@
     },
     "/template/{templateId}/stats": {
       "get": {
-        "description": "Returns statistics for a given template by ID, including the total number of passes installed and uninstalled. For [External IDs](#external-ids), the response payload lists the internal Wallet ID for the template rather than the external ID.\n\n\nThis endpoint does not count repeated actions by the same user.\n",
+        "description": "Returns statistics for a given template by ID, including the total number of passes installed and uninstalled. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), the response payload lists the internal Wallet ID for the template rather than the external ID.\n\n\nThis endpoint does not count repeated actions by the same user.\n",
         "operationId": "getTemplateStatistics",
         "responses": {
           "200": {
@@ -16807,8 +16650,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Template statistics",
@@ -16832,7 +16674,7 @@
           "style": "simple"
         },
         {
-          "description": "The ID of the template you want to return statistics for. For [External IDs](#external-ids), format the `{templateId}` as `id/{externalId}`.",
+          "description": "The ID of the template you want to return statistics for. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{templateId}` as `id/{externalId}`.",
           "in": "path",
           "name": "templateId",
           "required": true,
@@ -16844,11 +16686,11 @@
     },
     "/templates/{id}": {
       "get": {
-        "description": "Get the template specified by the `templateId`. The template payload returned will be in the same format you would use in a `POST` or `PUT` operation unlike the [/template](#operation-template-id-get) endpoint.",
+        "description": "Get the template specified by the `templateId`. The template payload returned will be in the same format you would use in a `POST` or `PUT` operation unlike the [/template](/developer/rest-api/wallet/operations/templates/#gettemplate) endpoint.",
         "operationId": "getTemplatesV2",
         "parameters": [
           {
-            "description": "The `templateId` of the template you want to look up. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "description": "The `templateId` of the template you want to look up. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
             "explode": false,
             "in": "path",
             "name": "id",
@@ -16909,8 +16751,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get template v2",
@@ -16923,7 +16764,7 @@
         "operationId": "patchTemplates",
         "parameters": [
           {
-            "description": "The `templateId` of the template you want to update. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "description": "The `templateId` of the template you want to update. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
             "explode": false,
             "in": "path",
             "name": "id",
@@ -16976,8 +16817,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Patch template",
@@ -16986,11 +16826,11 @@
         ]
       },
       "put": {
-        "description": "Update the template with the whole resource specified in the request, performing a complete replacement. You can also add or remove fields from the template with this call by adding or omitting those fields from the request. The template payload will be in the same format as in a `POST` or `PUT` operation, unlike the [/template](#operation-template-id-put) endpoint.",
+        "description": "Update the template with the whole resource specified in the request, performing a complete replacement. You can also add or remove fields from the template with this call by adding or omitting those fields from the request. The template payload will be in the same format as in a `POST` or `PUT` operation, unlike the [/template](/developer/rest-api/wallet/operations/templates/#updatetemplate) endpoint.",
         "operationId": "updateTemplatesV2",
         "parameters": [
           {
-            "description": "The `templateId` of the template you want to update. For [External IDs](#external-ids), format the `{id}` as `id/{templateExternalId}`.",
+            "description": "The `templateId` of the template you want to update. For [External IDs](/developer/rest-api/wallet/introduction/#external-ids), format the `{id}` as `id/{templateExternalId}`.",
             "explode": false,
             "in": "path",
             "name": "id",
@@ -17043,8 +16883,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Update template v2",
@@ -17091,8 +16930,7 @@
         },
         "security": [
           {
-            "httpBasic": [
-            ]
+            "httpBasic": []
           }
         ],
         "summary": "Get ticket status",
@@ -17123,8 +16961,7 @@
   },
   "security": [
     {
-      "httpBasic": [
-      ]
+      "httpBasic": []
     }
   ],
   "servers": [
@@ -17144,98 +16981,146 @@
   "tags": [
     {
       "description": "A project contains your templates and a collection of passes and determines the types of templates and passes you can create. You must specify a project for all operations in Wallet.",
-      "name": "Projects"
+      "name": "Projects",
+      "x-card-description": "Manage Wallet projects"
     },
     {
       "description": "A template determines the format, style, field placement, and default values for passes. You must specify a template when creating passes or adaptive links.",
       "name": "Templates",
+      "x-card-description": "Create and manage pass templates",
       "x-note": "The `Create Template` and `Update Template` calls expect a different data structure than the response from a `Get Template` call."
     },
     {
       "description": "Adding personalization to an Apple Wallet `loyalty` template creates a pass that prompts the user for relevant personal information when signing up for a rewards program. These endpoints help you manage the personalizable information that you require users to provide when signing up for your loyalty/rewards program.",
-      "name": "Apple Wallet Pass Personalization"
+      "name": "Apple Wallet Pass Personalization",
+      "x-card-description": "Manage loyalty pass personalization"
     },
     {
       "description": "A link that detects the platform of a recipient and installs the correct pass.\nYou can send adaptive links to both Apple and Google platform users; When a\nuser on either platform taps the link, Airship detects the user's device\nplatform and returns the correct pass.\n\n\nTo send an adaptive link to both Google and Apple platforms, you must have configured templates for both platforms. You can send an adaptive link to an individual platform, and define the behavior for the unsupported platform.",
-      "name": "Adaptive Links"
+      "name": "Adaptive Links",
+      "x-card-description": "Create platform-detecting pass links"
     },
     {
       "description": "Adaptive Link endpoints with external IDs — either for the link itself or for passes generated from adaptive links. An adaptive link is a link that detects the platform of a recipient and installs the correct pass. You can send adaptive links to both Apple and Google platform users; When a user on either platform taps the link, Airship detects the user's device platform and returns the correct pass.\n\n\nTo send an adaptive link to both Google and Apple platforms, you must have configured templates for both platforms. You can send an adaptive link to an individual platform, and define the behavior for the unsupported platform.\n",
-      "name": "Adaptive Links with external IDs"
+      "name": "Adaptive Links with external IDs",
+      "x-card-description": "Adaptive links with custom IDs"
     },
     {
-      "description": "A pass is essentially a populated, personalized template intended for a single platform — Apple Wallet or Google Wallet. Passes manifest as links; you distribute the pass link to users, and they tap or click the link to install the pass.\n\nIf you want to distribute passes to both Apple and Google users, you may want to use Adaptive links instead. While a pass is intended for a single platform, so you have to distribute separate pass links to independent Apple and Google audiences, an adaptive link is a single pass link that detects the user's platform and installs the correct pass. Adaptive links can save you the trouble of maintaining separate passes and distribution lists for your customers.",
-      "name": "Passes"
+      "description": "A pass is essentially a populated, personalized template intended for a single platform — Apple Wallet or Google Wallet. Passes manifest as links; you distribute the pass link to users, and they tap or click the link to install the pass.\n\nIf you want to distribute passes to both Apple and Google users, you may want to use Adaptive links instead. While a pass is intended for a single platform, so you have to distribute separate pass links to independent Apple and Google audiences, an adaptive link is a single pass link that detects the user's platform and installs the correct pass. Adaptive links can save you the trouble of maintaining separate passes and distribution lists for your customers.",
+      "name": "Passes",
+      "x-card-description": "Create and manage passes"
     },
     {
-      "description": "These endpoints support passes incorporating external IDs for the template, the pass, or both. A pass is essentially a populated, personalized template intended for a single platform — Apple Wallet or Google Wallet. Passes manifest as links; you distribute the pass link to users, and they tap or click the link to install the pass.\n\nIf you want to distribute passes to both Apple and Google users, you may want to use adaptive links instead. While a pass is intended for a single platform, so you have to distribute separate pass links to independent Apple and Google audiences, an adaptive link is a single pass link that detects the user's platform and installs the correct pass. Adaptive links can save you the trouble of maintaining separate passes and distribution lists for your customers.\n",
-      "name": "Passes with external IDs"
+      "description": "These endpoints support passes incorporating external IDs for the template, the pass, or both. A pass is essentially a populated, personalized template intended for a single platform — Apple Wallet or Google Wallet. Passes manifest as links; you distribute the pass link to users, and they tap or click the link to install the pass.\n\nIf you want to distribute passes to both Apple and Google users, you may want to use adaptive links instead. While a pass is intended for a single platform, so you have to distribute separate pass links to independent Apple and Google audiences, an adaptive link is a single pass link that detects the user's platform and installs the correct pass. Adaptive links can save you the trouble of maintaining separate passes and distribution lists for your customers.\n",
+      "name": "Passes with external IDs",
+      "x-card-description": "Passes with custom IDs"
     },
     {
       "description": "Tags are plain-text identifiers for passes. Use tags to identify passes for segmentation purposes, or to target an audience of passes for updates.\n\n\nTags are limited to 15 per pass.",
-      "name": "Tags"
+      "name": "Tags",
+      "x-card-description": "Tag passes for targeting"
     },
     {
       "description": "A Segment identifies a group/set of Wallet passes that contains a tag or combination of tags, using boolean `and`, `or`, and `not` operators. Use segments to group and target passes for subsequent updates.",
-      "name": "Segments"
+      "name": "Segments",
+      "x-card-description": "Create pass segments"
     },
     {
       "description": "Create and store flight information for use with boarding passes. When creating boarding passes, you can reference a flight, automatically populating flight information on the pass. By storing and referencing flight information independently of your passes, you can update a single flight, automatically pushing an update to all passes referencing that flight.",
-      "name": "Flights"
+      "name": "Flights",
+      "x-card-description": "Manage flight information"
     },
     {
       "description": "Create and store event information for use with event tickets. When creating event tickets, you can reference an event, automatically populating event information on the pass. By storing and referencing event information independently of your passes, you can update a single event, automatically pushing an update to all passes referencing it.",
-      "name": "Events"
+      "name": "Events",
+      "x-card-description": "Manage event information"
     },
     {
-      "description": "[Wallet callbacks](https://docs.airship.com/guides/wallet/user-guide/reporting/wallet-callbacks/) provide a pass event notification, e.g., pass install or uninstall, using webhooks.",
-      "name": "Callbacks"
+      "description": "[Wallet callbacks](/guides/wallet/user-guide/reporting/wallet-callbacks/) provide a pass event notification, e.g., pass install or uninstall, using webhooks.",
+      "name": "Callbacks",
+      "x-card-description": "Configure pass event webhooks"
     },
     {
       "description": "Return status information about tickets or the server itself. For operations\nthat cannot complete immediately, the system returns a `ticketId`. You can look\nup this `ticketId` to determine the true status of the operation.\n",
-      "name": "Tickets"
+      "name": "Tickets",
+      "x-card-description": "Check operation status"
     },
     {
       "description": "Get pass creation, installation, and uninstallation counts for projects and templates.\n\n\nEndpoints for `/activity` report net total activities, including repeated actions by the same user. For example, if the same user installs, removes, and then adds the same pass again, a response will show two passes installed and one pass removed. Endpoints for `/stats` will not count repeated actions from the same user.\n",
-      "name": "Statistics"
+      "name": "Statistics",
+      "x-card-description": "View pass statistics"
     },
     {
       "description": "Send a push notification to end users who have iOS or Android passes installed, letting them know information has changed. By notifying users, they will receive an alert as well as an update to the back of the pass showing the most recent notification.\n",
-      "name": "Push Notifications"
+      "name": "Push Notifications",
+      "x-card-description": "Send push notifications to passes"
     },
     {
       "description": "These endpoints supports Apple certificates only. Google certificates can be managed via the UI.\n",
-      "name": "Certificates"
+      "name": "Certificates",
+      "x-card-description": "Manage Apple certificates"
+    },
+    {
+      "description": "Operations specific to event ticket passes.",
+      "name": "Event Passes",
+      "x-card-description": "Manage event passes"
+    },
+    {
+      "description": "Operations specific to boarding passes.",
+      "name": "Flight Passes",
+      "x-card-description": "Manage boarding passes"
+    },
+    {
+      "description": "Operations that apply only to Apple Wallet passes.",
+      "name": "Apple Passes Only",
+      "x-card-description": "Apple-specific operations"
+    },
+    {
+      "description": "Operations that apply only to Google Wallet passes.",
+      "name": "Google Passes Only",
+      "x-card-description": "Google-specific operations"
+    },
+    {
+      "description": "Schedule pass updates for future delivery.",
+      "name": "Schedules",
+      "x-card-description": "Schedule pass updates"
     }
   ],
   "x-schema-tags": [
     {
       "description": "Adaptive links detect the user's platform and install the correct\npass for their device vendor. An adaptive link can specify an Apple and Google\ntemplate.\n",
-      "name": "Adaptive Links"
+      "name": "Adaptive Links",
+      "x-card-description": "Adaptive link schemas"
     },
     {
       "description": "Select an audience of passes for scheduled updates or other operations.",
-      "name": "Audience selection"
+      "name": "Audience selection",
+      "x-card-description": "Pass targeting and selection"
     },
     {
       "description": "Schemas for creating events and event ticket adaptive links. An event ticket includes both event information and an array of attendees.\n",
-      "name": "Event tickets"
+      "name": "Event tickets",
+      "x-card-description": "Event ticket schemas"
     },
     {
       "description": "Schemas for creating flights and boarding pass adaptive links. A Boarding pass includes both flight information and an array of passengers.\n",
-      "name": "Flights and boarding passes"
+      "name": "Flights and boarding passes",
+      "x-card-description": "Boarding pass schemas"
     },
     {
       "description": "Schemas used when creating passes (as opposed to adaptive links).",
-      "name": "Passes"
+      "name": "Passes",
+      "x-card-description": "Pass object schemas"
     },
     {
       "description": "Request and Response schemas for `/project` endpoints.",
-      "name": "Project objects"
+      "name": "Project objects",
+      "x-card-description": "Project schemas"
     },
     {
       "description": "Template objects vary based on the vendor they're intended for and the types of passes you want to create.\n",
-      "name": "Template objects"
+      "name": "Template objects",
+      "x-card-description": "Template schemas"
     }
   ]
 }

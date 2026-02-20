@@ -129,7 +129,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "Mobile originated event",
   "type": "object",

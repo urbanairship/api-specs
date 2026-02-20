@@ -158,7 +158,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "Web click event",
   "type": "object",

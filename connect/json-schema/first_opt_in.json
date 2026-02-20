@@ -92,7 +92,8 @@
     "device",
     "type",
     "occurred",
-    "processed"
+    "processed",
+    "offset"
   ],
   "title": "First opt-in",
   "type": "object",

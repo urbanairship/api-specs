@@ -167,7 +167,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "In-app message expiration",
   "type": "object",

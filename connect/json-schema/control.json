@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when a device is excluded from a push because it was arbitrarily selected as a member of a control group for a [Message A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages/), [Sequence A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/sequences/), or [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).\n",
+  "description": "Occurs when a device is excluded from a push because it was arbitrarily selected as a member of a control group for a [Message A/B test](/guides/experimentation/a-b-tests/messages/), [Sequence A/B test](/guides/experimentation/a-b-tests/sequences/), or [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
   "properties": {
     "body": {
       "properties": {
@@ -66,22 +66,6 @@
                   "enum": [
                     "true",
                     "false"
-                  ],
-                  "type": "string"
-                },
-                "carrier": {
-                  "deprecated": true,
-                  "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "type": "string"
-                },
-                "connection_type": {
-                  "deprecated": true,
-                  "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "enum": [
-                    "WIFI",
-                    "CELL",
-                    "WIMAX",
-                    "NONE"
                   ],
                   "type": "string"
                 },
@@ -344,7 +328,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "Control",
   "type": "object",

@@ -57,22 +57,6 @@
               ],
               "type": "string"
             },
-            "carrier": {
-              "deprecated": true,
-              "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-              "type": "string"
-            },
-            "connection_type": {
-              "deprecated": true,
-              "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-              "enum": [
-                "WIFI",
-                "CELL",
-                "WIMAX",
-                "NONE"
-              ],
-              "type": "string"
-            },
             "device_model": {
               "description": "The device model.",
               "type": "string"
@@ -234,6 +218,9 @@
       "x-schema-tag": "User information"
     }
   },
+  "required": [
+    "offset"
+  ],
   "title": "Contact change",
   "type": "object",
   "x-schema-tag": "Events"

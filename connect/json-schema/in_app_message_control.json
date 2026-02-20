@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments/).\n",
+  "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
   "properties": {
     "body": {
       "properties": {
@@ -115,22 +115,6 @@
               "enum": [
                 "true",
                 "false"
-              ],
-              "type": "string"
-            },
-            "carrier": {
-              "deprecated": true,
-              "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-              "type": "string"
-            },
-            "connection_type": {
-              "deprecated": true,
-              "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-              "enum": [
-                "WIFI",
-                "CELL",
-                "WIMAX",
-                "NONE"
               ],
               "type": "string"
             },
@@ -301,7 +285,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "In-app message control",
   "type": "object",

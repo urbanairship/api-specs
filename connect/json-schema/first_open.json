@@ -1,5 +1,5 @@
 {
-  "description": "This event occurs when a user opens an Airship-integrated app for the first time.",
+  "description": "This event occurs when a user first registers a channel in your app. This event fires only once per user, when a channel is first registered. Channel registration most commonly occurs immediately after the first app open but can happen at other times as well, for example, if channel registration was delayed. The [open](#open) event fires on every app open, including the first.",
   "properties": {
     "device": {
       "oneOf": [
@@ -30,22 +30,6 @@
                   "enum": [
                     "true",
                     "false"
-                  ],
-                  "type": "string"
-                },
-                "carrier": {
-                  "deprecated": true,
-                  "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "type": "string"
-                },
-                "connection_type": {
-                  "deprecated": true,
-                  "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "enum": [
-                    "WIFI",
-                    "CELL",
-                    "WIMAX",
-                    "NONE"
                   ],
                   "type": "string"
                 },
@@ -285,7 +269,8 @@
     "device",
     "type",
     "occurred",
-    "processed"
+    "processed",
+    "offset"
   ],
   "title": "First open",
   "type": "object",

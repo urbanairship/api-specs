@@ -34,18 +34,18 @@ components:
                     {
                        "latitude": 45.525492,
                        "longitude": -122.686092,
-                       "city": "Portland",
+                       "city": "San Francisco",
                        "country": "US",
-                       "region": "OR",
-                       "regionCode": "97209",
+                       "region": "CA",
+                       "regionCode": "94104",
                        "relevantText": "Welcome to the Ship!",
-                       "streetAddress1": "1417 NW Everett St #300",
+                       "streetAddress1": "548 Market St. Suite 698370",
                        "streetAddress2": ""
                     },
                     {
                        "latitude": 45.5205,
                        "longitude": -122.6788,
-                       "relevantText": "See you at dinner tonight… or did you already hit voodoo donuts?"
+                       "relevantText": "See you at dinner tonight...or did you already fill up on donuts?"
                     }
                   ]
                 }
@@ -160,9 +160,7 @@ components:
                 ]
               }
     audienceSelector:
-      - description: >-
-          Example pass objects tagged for baseball or basketball and in time
-          zone PST
+      - description: Example pass objects tagged for baseball or basketball and in time zone PST
         examples:
           - lang: json
             source: |
@@ -532,7 +530,7 @@ components:
                         "label": "",
                         "hideEmpty": false,
                         "formatType": "String",
-                        "value": "https://s3.amazonaws.com/passtools_prod/1169167/images/587ac4e3d188b0fcd4f05038d8814fefd82ac834_iOS_Logo_320x100_WHITE.png",
+                        "value": "https://example.com/passtools_prod/1169167/images/587ac4e3d188b0fcd4f05038d8814fefd82ac834_iOS_Logo_320x100_WHITE.png",
                         "fieldType": "image",
                         "required": false
                     },
@@ -554,7 +552,7 @@ components:
                 "fields": {
                     "image": {
                         "ignoresTimeZone": null,
-                        "title.string": "https://s3.amazonaws.com/passtools_prod/1169167/images/9af688aea35f473e29ca187438c12083202f1eeb_Android_Logo_660x660.png",
+                        "title.string": "https://example.com/passtools_prod/1169167/images/9af688aea35f473e29ca187438c12083202f1eeb_Android_Logo_660x660.png",
                         "hideEmpty": false,
                         "formatType": "String",
                         "fieldType": "titleModule",
@@ -596,7 +594,7 @@ components:
                         "order": 1
                     },
                     "imageModulesData": {
-                        "image": "https://s3.amazonaws.com/passtools_prod/1169167/images/834420d3cbf287f56c8be46806e58e23e8296e94_Android_Hero_1032x336_Opt1.png",
+                        "image": "https://example.com/passtools_prod/1169167/images/834420d3cbf287f56c8be46806e58e23e8296e94_Android_Hero_1032x336_Opt1.png",
                         "ignoresTimeZone": null,
                         "imageDescription": "Logo Image",
                         "hideEmpty": false,
@@ -657,7 +655,7 @@ components:
                        "label": "nearestStore"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons":[
@@ -727,7 +725,7 @@ components:
                           "formatType": "String",
                           "changeMessage": null,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools...0bb4_favicon.png",
+                          "value": "https:\/\/example.com\/passtools...0bb4_favicon.png",
                           "label": "",
                           "required": false,
                           "hideEmpty": false
@@ -1257,7 +1255,7 @@ components:
                 "notAssigned": {
                 },
                 "titleModule": {
-                   "image": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                   "image": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                    "imageDescription": "Logo Image",
                    "Program Name": {
                       "label": "Program Name",
@@ -1348,7 +1346,7 @@ components:
                 "notAssigned": {
                 },
                 "titleModule": {
-                   "image": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                   "image": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                    "imageDescription": "Logo Image",
                    "Program Name": {
                       "label": "Program Name",
@@ -1394,7 +1392,7 @@ components:
                   "icon_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png"
                   },
                   "logo_text": {
                     "formatType": 1,
@@ -1414,7 +1412,7 @@ components:
                   "logo_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-logo.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-logo.png"
                   },
                   "foreground_color": {
                     "formatType": 1,
@@ -1443,7 +1441,7 @@ components:
                   "icon_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png"
                   },
                   "logo_text": {
                     "formatType": 1,
@@ -1463,7 +1461,7 @@ components:
                   "logo_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-logo.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-logo.png"
                   },
                   "foreground_color": {
                     "formatType": 1,
@@ -1882,17 +1880,14 @@ paths:
                   "createdAt": "2016-05-26T23:23:21Z",
                   "updatedAt": "2016-05-26T22:23:21Z",
               }
-  '/certificates/{id}':
+  /certificates/{id}:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/certificates/9d9d28f2-4f63-44fc-82d2-ba101d2c4fd9
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/certificates/9d9d28f2-4f63-44fc-82d2-ba101d2c4fd9 HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -1961,21 +1956,16 @@ paths:
                 "validityEnd": "2024-01-01T22:39:49.000Z",
                 "expired": true
               }
-  '/events/project/id/{projectExternalId}/id/{eventExternalId}':
+  /events/project/id/{projectExternalId}/id/{eventExternalId}:
     post:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              POST /v1/events/project/id/project123ExtId/id/event123ExtId
-              HTTP/1.1
-
+            source: |
+              POST /v1/events/project/id/project123ExtId/id/event123ExtId HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                 "passGroups": ["giants_2019-09-25"],
@@ -2006,7 +1996,7 @@ paths:
                   }
                 }
               }
-  '/events/project/{projectId}':
+  /events/project/{projectId}:
     post:
       - description: Example request
         examples:
@@ -2077,21 +2067,16 @@ paths:
                   }
                 }
               }
-  '/events/project/{projectId}/passGroups/{passGroup}':
+  /events/project/{projectId}/passGroups/{passGroup}:
     put:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT /v1/events/project/myFavProject/passGroups/giants_2019-09-25
-              HTTP/1.1
-
+            source: |
+              PUT /v1/events/project/myFavProject/passGroups/giants_2019-09-25 HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                 "fields": {
@@ -2103,17 +2088,11 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              PUT
-              /v1/events/project/id/myFavProject/passGroups/giants_2019-09-25
-              HTTP/1.1
-
+            source: |
+              PUT /v1/events/project/id/myFavProject/passGroups/giants_2019-09-25 HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                 "fields": {
@@ -2140,7 +2119,7 @@ paths:
                   }
                 ]
               }
-  '/events/project/{projectId}/{eventId}':
+  /events/project/{projectId}/{eventId}:
     delete:
       - description: Example request
         examples:
@@ -2215,12 +2194,9 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/events/project/id/project123ExtId/id/event123ExtId
-              HTTP/1.1
-
+            source: |
+              GET /v1/events/project/id/project123ExtId/id/event123ExtId HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response with external ID
         examples:
@@ -2321,16 +2297,11 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              PUT /v1/events/project/id/project123ExtId/id/event123ExtId
-              HTTP/1.1
-
+            source: |
+              PUT /v1/events/project/id/project123ExtId/id/event123ExtId HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                 "fields": {
@@ -2378,7 +2349,7 @@ paths:
                   }
                 }
               }
-  '/events/project/{projectId}/{eventId}/passGroups':
+  /events/project/{projectId}/{eventId}/passGroups:
     get:
       - description: Example request
         examples:
@@ -2390,13 +2361,9 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/events/project/id/project123ExtId/id/event123ExtId/passGroups
-              HTTP/1.1
-
+            source: |
+              GET /v1/events/project/id/project123ExtId/id/event123ExtId/passGroups HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -2468,28 +2435,21 @@ paths:
                 "eventExternalId" : "4567",
                 "passGroups" :["EVENT_100_LUNCH","EVENT_100_DINNER"]
               }
-  '/events/project/{projectId}/{eventId}/passGroups/{passGroup}':
+  /events/project/{projectId}/{eventId}/passGroups/{passGroup}:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/events/project/12345/1234/passGroups/EVENT_100_LUNCH
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/events/project/12345/1234/passGroups/EVENT_100_LUNCH HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              DELETE
-              /v1/events/project/id/project123ExtId/id/event123ExtId/passGroups/EVENT_100_LUNCH
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/events/project/id/project123ExtId/id/event123ExtId/passGroups/EVENT_100_LUNCH HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -2499,7 +2459,7 @@ paths:
               Content-Type: application/json; charset=utf-8
 
               {}
-  '/events/project/{projectId}/{eventId}/passes':
+  /events/project/{projectId}/{eventId}/passes:
     get:
       - description: Example request
         examples:
@@ -2546,20 +2506,15 @@ paths:
                           "pageSize": 2
                         }
               }
-  '/flights/project/id/{projectExternalId}/id/passGroups/{passGroup}':
+  /flights/project/id/{projectExternalId}/id/passGroups/{passGroup}:
     put:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT
-              /v1/flights/project/id/project123ExtId/id/passGroups/sfo-pdx-20180730
-              HTTP/1.1
-
+            source: |
+              PUT /v1/flights/project/id/project123ExtId/id/passGroups/sfo-pdx-20180730 HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                 "fields": {
@@ -2586,19 +2541,15 @@ paths:
                   }
                 ]
               }
-  '/flights/project/id/{projectExternalId}/id/{flightExternalId}':
+  /flights/project/id/{projectExternalId}/id/{flightExternalId}:
     post:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              POST /v1/flights/project/id/project123ExtId/id/flight123ExtId
-              HTTP/1.1
-
+            source: |
+              POST /v1/flights/project/id/project123ExtId/id/flight123ExtId HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                 "passGroups": ["sfo-pdx-20180730"],
@@ -2686,7 +2637,7 @@ paths:
                   }
                 }
               }
-  '/flights/project/{projectId}':
+  /flights/project/{projectId}:
     post:
       - description: Example request
         examples:
@@ -2836,7 +2787,7 @@ paths:
                  }
                 }
               }
-  '/flights/project/{projectId}/passGroups/{passGroup}':
+  /flights/project/{projectId}/passGroups/{passGroup}:
     put:
       - description: Example request
         examples:
@@ -2871,7 +2822,7 @@ paths:
                   }
                 ]
               }
-  '/flights/project/{projectId}/{flightId}':
+  /flights/project/{projectId}/{flightId}:
     delete:
       - description: Example request
         examples:
@@ -2883,12 +2834,9 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/flights/project/id/project123ExtId/id/flight123ExtId
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/flights/project/id/project123ExtId/id/flight123ExtId HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -2993,10 +2941,8 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/flights/project/id/project123ExtId/id/flight123ExtId
-              HTTP/1.1
-
+            source: |
+              GET /v1/flights/project/id/project123ExtId/id/flight123ExtId HTTP/1.1
               Authorization: Basic <authorization string>
       - description: Response with external ID
         examples:
@@ -3141,14 +3087,10 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              PUT /v1/flights/project/id/project123ExtId/id/flight123ExtId
-              HTTP/1.1
-
+            source: |
+              PUT /v1/flights/project/id/project123ExtId/id/flight123ExtId HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                 "passGroups": ["sfo-pdx-20180730"],
@@ -3221,7 +3163,7 @@ paths:
                   }
                 }
               }
-  '/flights/project/{projectId}/{flightId}/passGroups':
+  /flights/project/{projectId}/{flightId}/passGroups:
     get:
       - description: Example request
         examples:
@@ -3302,26 +3244,21 @@ paths:
                 "flightExternalId" : "4567",
                 "passGroups" :["sfo-pdx-20180730", "pdx-yvr-20180730"]
               }
-  '/flights/project/{projectId}/{flightId}/passGroups/{passGroup}':
+  /flights/project/{projectId}/{flightId}/passGroups/{passGroup}:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/flights/project/12345/1234/passGroups/sfo-pdx-20180730
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/flights/project/12345/1234/passGroups/sfo-pdx-20180730 HTTP/1.1
               Authorization: Basic <authorization string>
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              DELETE
-              /v1/flights/project/id/67890/id/4567/passGroups/sfo-pdx-20180730
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/flights/project/id/67890/id/4567/passGroups/sfo-pdx-20180730 HTTP/1.1
               Authorization: Basic <authorization string>
-  '/flights/project/{projectId}/{flightId}/passes':
+  /flights/project/{projectId}/{flightId}/passes:
     get:
       - description: Example request
         examples:
@@ -3513,18 +3450,18 @@ paths:
                     {
                        "latitude": 45.525492,
                        "longitude": -122.686092,
-                       "city": "Portland",
+                       "city": "San Francisco",
                        "country": "US",
-                       "region": "OR",
-                       "regionCode": "97209",
+                       "region": "CA",
+                       "regionCode": "94140",
                        "relevantText": "Welcome to the Ship!",
-                       "streetAddress1": "1417 NW Everett St #300",
+                       "streetAddress1": "548 Market St. Suite 698370",
                        "streetAddress2": ""
                     },
                     {
                        "latitude": 45.5205,
                        "longitude": -122.6788,
-                       "relevantText": "See you at dinner tonight… or did you already hit voodoo donuts?"
+                       "relevantText": "See you at dinner tonight...or did you already fill up on donuts?"
                     }
               ]
               }
@@ -3546,7 +3483,7 @@ paths:
                 "availablePasses": 100000,
                 "ttlInDays": 30
               }
-  '/links/adaptive/multiple/project/{projectId}':
+  /links/adaptive/multiple/project/{projectId}:
     post:
       - description: Example boarding pass request
         examples:
@@ -3699,16 +3636,13 @@ paths:
                   },
                 ]
               }
-  '/links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}':
+  /links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}:
     get:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink
-              HTTP/1.1
-
+            source: |
+              GET /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink HTTP/1.1
               Authorization: Basic <authorization string>
       - description: Response
         examples:
@@ -3744,15 +3678,10 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              POST
-              /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink
-              HTTP/1.1
-
+            source: |
+              POST /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                   "iosTemplateExternalId": "ios123ExtId",
@@ -3794,18 +3723,14 @@ paths:
                 "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "status": 200
               }
-  '/links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}/passes':
+  /links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}/passes:
     get:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/links/adaptive/project/id/exid_7294/id/my_ext_flight_111924_2/passes
-              HTTP/1.1
-
+            source: |
+              GET /v1/links/adaptive/project/id/exid_7294/id/my_ext_flight_111924_2/passes HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -3840,16 +3765,13 @@ paths:
                   "pageSize": 10
                 }
               }
-  '/links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}/passes/id/{passExternalId}':
+  /links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}/passes/id/{passExternalId}:
     get:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink/passes/id/mypass
-              HTTP/1.1
-
+            source: |
+              GET /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink/passes/id/mypass HTTP/1.1
               Authorization: Basic <authorization string>
       - description: Response
         examples:
@@ -3882,15 +3804,10 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT
-              /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink/passes/id/mypass
-              HTTP/1.1
-
+            source: |
+              PUT /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink/passes/id/mypass HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                   "fields": {
@@ -3900,7 +3817,7 @@ paths:
                         "label": "Coupon"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons": [
@@ -3942,15 +3859,13 @@ paths:
                       }
                   ]
               }
-  '/links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}':
+  /links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}:
     get:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/links/adaptive/project/12345/id/coolNewAdaptiveLink
-              HTTP/1.1
-
+            source: |
+              GET /v1/links/adaptive/project/12345/id/coolNewAdaptiveLink HTTP/1.1
               Authorization: Basic <authorization string>
       - description: Response
         examples:
@@ -3983,14 +3898,10 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              POST /v1/links/adaptive/project/12345/id/coolNewAdaptiveLink
-              HTTP/1.1
-
+            source: |
+              POST /v1/links/adaptive/project/12345/id/coolNewAdaptiveLink HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                   "iosTemplateId": 54321,
@@ -4029,17 +3940,14 @@ paths:
                 "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "status": 200
               }
-  '/links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}/passes':
+  /links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}/passes:
     get:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/links/adaptive/project/6884/id/my_ext_121924_2/passes
-              HTTP/1.1
-
+            source: |
+              GET /v1/links/adaptive/project/6884/id/my_ext_121924_2/passes HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -4074,7 +3982,7 @@ paths:
                   "pageSize": 10
                 }
               }
-  '/links/adaptive/projects/{projectId}':
+  /links/adaptive/projects/{projectId}:
     get:
       - description: Example request
         examples:
@@ -4124,7 +4032,7 @@ paths:
                 ],
                 "nextPageToken": "XGMuDpx2RDs.1684443368127"
               }
-  '/links/adaptive/projects/{projectId}/templates/{templateId}':
+  /links/adaptive/projects/{projectId}/templates/{templateId}:
     get:
       - description: Example request
         examples:
@@ -4159,7 +4067,7 @@ paths:
                 ],
                 "nextPageToken": "Y0E6EXuTx5i.1684873239808"
               }
-  '/links/adaptive/{adaptiveLinkId}':
+  /links/adaptive/{adaptiveLinkId}:
     delete:
       - description: Example request
         examples:
@@ -4234,7 +4142,7 @@ paths:
                  "availablePasses": 100000,
                  "ttlInDays": 30
               }
-  '/links/adaptive/{adaptiveLinkId}/passes':
+  /links/adaptive/{adaptiveLinkId}/passes:
     get:
       - description: Example request
         examples:
@@ -4282,17 +4190,14 @@ paths:
                     "pageSize": 2
                   }
               }
-  '/links/adaptive/{adaptiveLinkId}/passes/id/{passExternalId}':
+  /links/adaptive/{adaptiveLinkId}/passes/id/{passExternalId}:
     get:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/links/adaptive/coolNewAdaptiveLink/passes/id/mypass
-              HTTP/1.1
-
+            source: |
+              GET /v1/links/adaptive/coolNewAdaptiveLink/passes/id/mypass HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
       - description: Response
         examples:
@@ -4325,14 +4230,10 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT /v1/links/adaptive/coolNewAdaptiveLink/passes/id/mypass
-              HTTP/1.1
-
+            source: |
+              PUT /v1/links/adaptive/coolNewAdaptiveLink/passes/id/mypass HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
 
               {
                   "fields": {
@@ -4342,7 +4243,7 @@ paths:
                         "label": "Coupon"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons": [
@@ -4437,9 +4338,8 @@ paths:
       - description: Example iOS request
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/pass/adaptive?ids=rthBWAWDaAA,Y0E6EXuTx5i&deviceType=ios
-              HTTP/1.1
+            source: |
+              GET /v1/pass/adaptive?ids=rthBWAWDaAA,Y0E6EXuTx5i&deviceType=ios HTTP/1.1
       - description: iOS response
         examples:
           - lang: HTTP
@@ -4451,16 +4351,14 @@ paths:
       - description: Example Android request
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/pass/adaptive?ids=rthBWAWDaAA,Y0E6EXuTx5i&deviceType=android
-              HTTP/1.1
+            source: |
+              GET /v1/pass/adaptive?ids=rthBWAWDaAA,Y0E6EXuTx5i&deviceType=android HTTP/1.1
       - description: Android response
         examples:
           - lang: HTTP
             source: |
               HTTP/1.1 301 Redirect
-  '/pass/adaptive/{adaptiveLinkId}/{deviceType}':
+  /pass/adaptive/{adaptiveLinkId}/{deviceType}:
     get:
       - description: Example iOS request
         examples:
@@ -4498,335 +4396,7 @@ paths:
               GET /v1/pass/download?passIds=123 HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2
-  '/pass/id/{externalId}':
-    get:
-      - description: Example request
-        examples:
-          - lang: HTTP
-            source: |
-              GET /v1/pass/1234 HTTP/1.1
-              Authorization: Basic <Base64 key>
-              Api-Revision: 1.2
-      - description: Response
-        examples:
-          - lang: HTTP
-            source: |
-              HTTP/1.1 200 OK
-              Content-Type: application/json
-
-              {
-                 "tags":[
-
-                 ],
-                 "headers": {
-                    "barcodeAltText": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "barcode",
-                       "value": "123456789",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "logo_color": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "topLevel",
-                       "value": "rgb(24,86,148)",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "icon_image": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "topLevel",
-                       "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "barcode_value": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "barcode",
-                       "value": "123456789",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "logo_text": {
-                       "formatType": "String",
-                       "changeMessage": "%@",
-                       "fieldType": "topLevel",
-                       "value": "Logo",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "barcode_encoding": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "barcode",
-                       "value": "iso-8859-1",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "suppress_strip_shine": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "topLevel",
-                       "value": "true",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "barcode_label": {
-                       "formatType": "String",
-                       "changeMessage": "%@",
-                       "fieldType": "barcode",
-                       "value": "Member ID",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "barcode_type": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "barcode",
-                       "value": "PKBarcodeFormatPDF417",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "foreground_color": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "topLevel",
-                       "value": "rgb(255,255,255)",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "background_color": {
-                       "formatType": "String",
-                       "changeMessage": null,
-                       "fieldType": "topLevel",
-                       "value": "rgb(0,147,201)",
-                       "label": "",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "relevantDate": {
-                       "changeMessage": "The new date is %@",
-                       "label": "relevantDate",
-                       "hideEmpty": false,
-                       "formatType": "String",
-                       "value": "2015-12-31T23:00:00-08:00",
-                       "fieldType": "topLevel",
-                       "required": false
-                    }
-                 },
-                 "id": "1234",
-                 "templateId": "12345",
-                 "updatedAt": "2013-06-19T01:06:23.000Z",
-                 "createdAt": "2013-06-19T01:06:17.000Z",
-                 "serialNumber": "14f94898-2f5e-46f5-925c-7e29fa9a0508",
-                 "url": "https:\/\/wallet-api.urbanairship.com\/v1\/pass\/1249\/download",
-                 "fields": {
-                    "Merchant Website": {
-                       "formatType": "URL",
-                       "changeMessage": "Get event details at %@",
-                       "order": 2,
-                       "fieldType": "back",
-                       "value": "http:\/\/www.example.com",
-                       "label": "Merchant Website",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "More Details": {
-                       "formatType": "String",
-                       "changeMessage": "%@",
-                       "order": 1,
-                       "fieldType": "back",
-                       "value": "More details about how to use this event ticket. Additional terms and support information.",
-                       "label": "More Details",
-                       "required": false,
-                       "hideEmpty": false
-                    },
-                    "Seat": {
-                       "textAlignment": "textAlignmentNatural",
-                       "changeMessage": "You are now seated at %@",
-                       "numberStyle": "PKNumberStyleDecimal",
-                       "label": "Seat",
-                       "hideEmpty": false,
-                       "formatType": "Number",
-                       "value": 1.0,
-                       "fieldType": "auxiliary",
-                       "required": false,
-                       "order": 3
-                    },
-                    "Row": {
-                       "textAlignment": "textAlignmentNatural",
-                       "changeMessage": "You are now seated in row %@",
-                       "numberStyle": "PKNumberStyleDecimal",
-                       "label": "Row",
-                       "hideEmpty": false,
-                       "formatType": "Number",
-                       "value": 1.0,
-                       "fieldType": "auxiliary",
-                       "required": false,
-                       "order": 2
-                    },
-                    "Section": {
-                       "textAlignment": "textAlignmentLeft",
-                       "changeMessage": "You are now seated in section %@",
-                       "label": "Section",
-                       "hideEmpty": false,
-                       "formatType": "String",
-                       "value": "1",
-                       "fieldType": "auxiliary",
-                       "required": true,
-                       "order": 1
-                    }
-                 }
-              }
-    post:
-      - description: Example request
-        examples:
-          - lang: HTTP
-            source: |
-              POST /v1/pass/id/myExternalTemplate HTTP/1.1
-              Content-Type: application/json
-              Authorization: Basic <Base64 key>
-              Api-Revision: 1.2
-
-              {
-                  "headers": {
-                      "expirationDate": {
-                         "value": "2014-08-20T09:41-08:00"
-                       },
-                       "barcodeAltText": {
-                          "changeMessage": null,
-                          "value": "abc1234567890",
-                          "label": ""
-                       },
-                       "barcode_value": {
-                          "changeMessage": null,
-                          "value": "abc1234567890",
-                          "label": ""
-                       }
-                  },
-                  "fields": {
-                    "Coupon": {
-                       "changeMessage": "Enjoy %@ off your next order!",
-                       "value": "20%",
-                       "label": "Coupon"
-                    },
-                    "SiteAddress": {
-                       "changeMessage": "Check out things we think you would like at %@",
-                       "value": "https://www.example.com/new?custnumb=123456",
-                       "label": "personal deals"
-                    },
-                    "InStore": {
-                       "changeMessage": "Or visit your nearest store at %@",
-                       "value": "1234 Fake St.",
-                       "label": "nearestStore"
-                    },
-                    "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
-                    }
-                  },
-                  "beacons":[
-                      {
-                         "uuid": "55502220-A123-A88A-F321-555A444B333C",
-                         "relevantText": "You are near the Ship",
-                         "major": 2,
-                         "minor": 346
-                      }
-                  ],
-                  "locations":[
-                      {
-                         "longitude": -122.374,
-                         "latitude": 37.618,
-                         "relevantText": "Hello loc0",
-                         "streetAddress1": "address line #1",
-                         "streetAddress2": "address line #2",
-                         "city": "San Francisco",
-                         "region": "CA",
-                         "regionCode": "94404",
-                         "country": "US"
-                      }
-                  ],
-                  "publicUrl": {
-                      "type": "single"
-                  }
-              }
-      - description: Example request with payload
-        examples:
-          - lang: JSON
-            source: |
-              {
-                  "id": 12345,
-                  "templateId": 123,
-                  "createdAt": "2012-11-01 12:37:07.0",
-                  "url": "https:\/\/wallet-api.urbanairship.com\/v1\/pass\/888\/download",
-                  "publicUrl": {
-                        "path": "https:\/\/wallet-api.urbanairship.com\/v1\/download\/pass\/9c9c9c7d-c6b6-9c9c-9d2b-9c9c9c54c89c",
-                        "used": false,
-                        "type": "Single",
-                        "installs": 0
-                  },
-                  "passFields": {
-                      "gate": {
-                          "changeMessage": "Your gate has changed to %@",
-                          "fieldType": "HEADER",
-                          "value": "A56",
-                          "label": "my value",
-                          "required": false
-                      },
-                      "logo_text": {
-                          "changeMessage": null,
-                          "fieldType": "TOP_LEVEL",
-                          "value": "Test Value",
-                          "label": "",
-                          "required": false
-                      },
-                      "boarding_time": {
-                          "changeMessage": "Be at your new gate by %@",
-                          "fieldType": "PRIMARY",
-                          "value": "08:45",
-                          "label": "",
-                          "required": false
-                      },
-                      "thumbnail_image": {
-                          "formatType": "String",
-                          "changeMessage": null,
-                          "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools...0bb4_favicon.png",
-                          "label": "",
-                          "required": false,
-                          "hideEmpty": false
-                      }
-                  },
-                  "beacons":[
-                      {
-                          "uuid": "55502220-A123-A88A-F321-555A444B333C",
-                          "relevantText": "You are near the Ship",
-                          "major": 2,
-                          "minor": 346
-                      }
-                  ],
-                  "locations":[
-                      {
-                          "relevantText":"Hello loc0",
-                          "latitude":37.618,
-                          "id":30473906,
-                          "longitude":-122.374
-                      }
-                  ]
-              }
+  /pass/id/{externalId}:
     put:
       - description: Example request
         examples:
@@ -4856,7 +4426,7 @@ paths:
                         "label": "nearestStore"
                      },
                      "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                      }
                   },
                   "beacons": [
@@ -4895,78 +4465,7 @@ paths:
               {
                   "ticketId": 1234
               }
-  '/pass/id/{externalId}/location/{locationId}':
-    delete:
-      - description: Example request
-        examples:
-          - lang: HTTP
-            source: |
-              DELETE /v1/pass/id/myNewPass/location/456 HTTP/1.1
-              Authorization: Basic <Base64 key>
-              Api-Revision: 1.2
-  '/pass/id/{externalId}/locations':
-    post:
-      - description: Example request
-        examples:
-          - lang: HTTP
-            source: |
-              POST /v1/pass/123/locations HTTP/1.1
-              Content-Type: application/json
-              Authorization: Basic <Base64 key>
-              Api-Revision: 1.2
-
-              {
-                "locations": [
-                  {
-                    "longitude": "-122.374",
-                    "latitude": "37.618",
-                    "relevantText": "Hello loc0",
-                    "streetAddress1": "address line #1",
-                    "streetAddress2": "address line #2",
-                    "city": "San Francisco",
-                    "region": "CA",
-                    "regionCode": "94404",
-                    "country": "US"
-                  },
-                  { "...": "..." }
-                ]
-              }
-      - description: Response
-        examples:
-          - lang: HTTP
-            source: |
-              HTTP/1.1 200 OK
-              Content-Type: application/json
-
-              [
-                 {
-                    "passLocationId": 65,
-                    "value": {
-                       "region": "CA",
-                       "regionCode": "94404",
-                       "relevantText": "Hello loc0!",
-                       "streetAddress1": "add11",
-                       "streetAddress2": "add22",
-                       "longitude": "-122.3742",
-                       "latitude": "37.618",
-                       "city": "FC"
-                    }
-                 },
-                 {
-                    "passLocationId": 66,
-                    "value": {
-                       "region": "CA",
-                       "regionCode": "94404",
-                       "relevantText": "Hello loc1!",
-                       "streetAddress1": "add12",
-                       "streetAddress2": "add23",
-                       "longitude": "-123.374",
-                       "latitude": "38.618",
-                       "city": "FC"
-                    }
-                 }
-              ]
-  '/pass/id/{externalId}/stats':
+  /pass/id/{externalId}/stats:
     get:
       - description: Example request
         examples:
@@ -4994,66 +4493,7 @@ paths:
                   }
                 ]
               }
-  '/pass/id/{passExternalId}/download':
-    get:
-      - description: Example request
-        examples:
-          - lang: HTTP
-            source: |
-              GET /v1/pass/123/download HTTP/1.1
-              Authorization: Basic <Base64 key>
-              Api-Revision: 1.2
-  '/pass/id/{passExternalId}/tags':
-    get:
-      - description: Example request
-        examples:
-          - lang: HTTP
-            source: |
-              GET /v1/pass/id/mypass/tags HTTP/1.1
-              Authorization: Basic <Base64 key>
-              Api-Revision: 1.2
-      - description: Response
-        examples:
-          - lang: HTTP
-            source: |
-              HTTP/1.1 200 OK
-              Content-Type: application/json
-
-              {
-                "tags": [
-                  {
-                    "id": 72,
-                    "createdAt": "2022-07-10 11:38:06.0",
-                    "name": "tag-2971-4280-479"
-                  },
-                  {
-                    "id": 73,
-                    "createdAt": "2022-07-10 11:52:20.0",
-                    "name": "tag-1049-2951-9529"
-                  },
-                  {
-                    "id": 74,
-                    "createdAt": "2022-07-10 11:59:32.0",
-                    "name": "tag-385-9612-723"
-                  },
-                  {
-                    "id": 75,
-                    "createdAt": "2022-07-10 12:00:18.0",
-                    "name": "tag-5784-6282-8767"
-                  },
-                  {
-                    "id": 76,
-                    "createdAt": "2022-07-10 12:00:55.0",
-                    "name": "tag-1050-1982-8211"
-                  },
-                  {
-                    "id": 77,
-                    "createdAt": "2022-07-10 12:02:09.0",
-                    "name": "tag-5040-8715-7744"
-                  }
-                ]
-              }
-  '/pass/id/{passExternalId}/viewJSONPass':
+  /pass/id/{passExternalId}/viewJSONPass:
     get:
       - description: Example request
         examples:
@@ -5085,8 +4525,8 @@ paths:
                        },
                        {
                           "key": "back0",
-                          "label": "Built with Airship Reach",
-                          "value": "Find out more and create your own passes at https://wallet.urbanairship.com\n\nAirship, Inc.,1417 NW Everett St., Portland, OR 97209 800.720.2098 support@urbanairship.com"
+                          "label": "Built with Airship Mobile Wallet",
+                          "value": "Find out more and create your own passes at https://www.airship.com/channels/mobile-wallet/"
                        }
                     ],
                     "primaryFields":[
@@ -5145,7 +4585,7 @@ paths:
                  "description": "Template 1",
                  "foregroundColor": "rgb(255,255,255)"
               }
-  '/pass/id/{templateExternalId}/id/{passExternalId}':
+  /pass/id/{templateExternalId}/id/{passExternalId}:
     post:
       - description: Example request
         examples:
@@ -5189,7 +4629,7 @@ paths:
                        "label": "nearestStore"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons":[
@@ -5262,7 +4702,7 @@ paths:
                           "formatType": "String",
                           "changeMessage": null,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools...0bb4_favicon.png",
+                          "value": "https:\/\/example.com\/passtools...0bb4_favicon.png",
                           "label": "",
                           "required": false,
                           "hideEmpty": false
@@ -5285,7 +4725,7 @@ paths:
                       }
                   ]
               }
-  '/pass/template/{templateId}/download':
+  /pass/template/{templateId}/download:
     get:
       - description: Example request
         examples:
@@ -5301,7 +4741,7 @@ paths:
               GET /v1/pass/template/id/1234/download?exids=mypass HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2 
-  '/pass/template/{templateId}/id/{passExternalId}':
+  /pass/template/{templateId}/id/{passExternalId}:
     delete:
       - description: Example request
         examples:
@@ -5363,7 +4803,7 @@ paths:
                        "formatType": "String",
                        "changeMessage": null,
                        "fieldType": "topLevel",
-                       "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                       "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                        "label": "",
                        "required": false,
                        "hideEmpty": false
@@ -5560,7 +5000,7 @@ paths:
                        "label": "nearestStore"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons":[
@@ -5632,7 +5072,7 @@ paths:
                           "formatType": "String",
                           "changeMessage": null,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools...0bb4_favicon.png",
+                          "value": "https:\/\/example.com\/passtools...0bb4_favicon.png",
                           "label": "",
                           "required": false,
                           "hideEmpty": false
@@ -5683,7 +5123,7 @@ paths:
                         "label": "nearestStore"
                      },
                      "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                      }
                   },
                   "beacons": [
@@ -5722,7 +5162,7 @@ paths:
               {
                     "ticketId": 1234
               }
-  '/pass/template/{templateId}/id/{passExternalId}/beacons':
+  /pass/template/{templateId}/id/{passExternalId}/beacons:
     get:
       - description: Example request
         examples:
@@ -5778,7 +5218,7 @@ paths:
               {
                  "ticketId": 7
               }
-  '/pass/template/{templateId}/id/{passExternalId}/download':
+  /pass/template/{templateId}/id/{passExternalId}/download:
     get:
       - description: Example request
         examples:
@@ -5787,7 +5227,7 @@ paths:
               GET /v1/pass/template/123/id/mypass/download HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2 
-  '/pass/template/{templateId}/id/{passExternalId}/location/{locationId}':
+  /pass/template/{templateId}/id/{passExternalId}/location/{locationId}:
     delete:
       - description: Example request
         examples:
@@ -5796,7 +5236,7 @@ paths:
               DELETE /v1/pass/template/123/id/mypass/location/456 HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2
-  '/pass/template/{templateId}/id/{passExternalId}/locations':
+  /pass/template/{templateId}/id/{passExternalId}/locations:
     post:
       - description: Example request
         examples:
@@ -5858,7 +5298,7 @@ paths:
                     }
                  }
               ]
-  '/pass/template/{templateId}/id/{passExternalId}/message':
+  /pass/template/{templateId}/id/{passExternalId}/message:
     get:
       - description: Example request
         examples:
@@ -5917,15 +5357,13 @@ paths:
                  "updatedAt": "2021-08-18T23:25:05.075Z",
                  "messageType": "expirationNotification"
               }
-  '/pass/template/{templateId}/id/{passExternalId}/notify':
+  /pass/template/{templateId}/id/{passExternalId}/notify:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/pass/template/12345/id/my_custom_pass_id/notify
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/pass/template/12345/id/my_custom_pass_id/notify HTTP/1.1
               Authorization: Basic <Base64 key>
       - description: Response
         examples:
@@ -5960,7 +5398,7 @@ paths:
               {
                  "ticketId": 1234
               }
-  '/pass/template/{templateId}/id/{passExternalId}/tags':
+  /pass/template/{templateId}/id/{passExternalId}/tags:
     get:
       - description: Example request
         examples:
@@ -6034,7 +5472,7 @@ paths:
                 "newTags": ["tag-name"],
                 "mappings": 1
               }
-  '/pass/{id}':
+  /pass/{id}:
     delete:
       - description: Example request
         examples:
@@ -6096,7 +5534,7 @@ paths:
                        "formatType": "String",
                        "changeMessage": null,
                        "fieldType": "topLevel",
-                       "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                       "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                        "label": "",
                        "required": false,
                        "hideEmpty": false
@@ -6292,7 +5730,7 @@ paths:
                        "label": "nearestStore"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons":[
@@ -6364,7 +5802,7 @@ paths:
                           "formatType": "String",
                           "changeMessage": null,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools...0bb4_favicon.png",
+                          "value": "https:\/\/example.com\/passtools...0bb4_favicon.png",
                           "label": "",
                           "required": false,
                           "hideEmpty": false
@@ -6452,7 +5890,7 @@ paths:
                         "label": "nearestStore"
                      },
                      "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                      }
                   },
                   "beacons": [
@@ -6491,7 +5929,7 @@ paths:
               {
                   "ticketId": 1234
               }
-  '/pass/{id}/dynamic':
+  /pass/{id}/dynamic:
     post:
       - description: Example request
         examples:
@@ -6535,7 +5973,7 @@ paths:
                           "label": "nearestStore"
                        },
                        "thumbnail_image": {
-                          "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                          "value": "https:\/\/example.com\/assets\/favicon.png"
                        }
                  },
                     "beacons":[
@@ -6561,7 +5999,7 @@ paths:
               {
                  "url": "https://wallet-api.urbanairship.com/v1/pass/dynamic/44e128a5-ac7a-4c9a-be4c-224b6bf81b20"
               }
-  '/pass/{passId}/download':
+  /pass/{passId}/download:
     get:
       - description: Example request
         examples:
@@ -6570,7 +6008,7 @@ paths:
               GET /v1/pass/123/download HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2
-  '/pass/{passId}/location/{passLocationId}':
+  /pass/{passId}/location/{passLocationId}:
     delete:
       - description: Example request
         examples:
@@ -6579,7 +6017,7 @@ paths:
               DELETE /v1/pass/123/location/456 HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2
-  '/pass/{passId}/locations':
+  /pass/{passId}/locations:
     post:
       - description: Example request
         examples:
@@ -6641,7 +6079,7 @@ paths:
                     }
                  }
               ]
-  '/pass/{passId}/message':
+  /pass/{passId}/message:
     get:
       - description: Example request
         examples:
@@ -6700,7 +6138,7 @@ paths:
                  "updatedAt": "2021-08-18T23:25:05.075Z",
                  "messageType": "expirationNotification"
               }
-  '/pass/{passId}/notify':
+  /pass/{passId}/notify:
     delete:
       - description: Example request
         examples:
@@ -6741,7 +6179,7 @@ paths:
               {
                  "ticketId": 1234
               }
-  '/pass/{passId}/tags':
+  /pass/{passId}/tags:
     get:
       - description: Example request
         examples:
@@ -6827,7 +6265,7 @@ paths:
                 "newTags": ["tag-name"],
                 "mappings": 1
               }
-  '/pass/{passId}/viewJSONPass':
+  /pass/{passId}/viewJSONPass:
     get:
       - description: Example request
         examples:
@@ -6859,8 +6297,8 @@ paths:
                        },
                        {
                           "key": "back0",
-                          "label": "Built with Airship Reach",
-                          "value": "Find out more and create your own passes at https://wallet.urbanairship.com\n\nAirship, Inc.,1417 NW Everett St., Portland, OR 97209 800.720.2098 support@urbanairship.com"
+                          "label": "Built with Airship Mobile Wallet",
+                          "value": "Find out more and create your own passes at https://www.airship.com/channels/mobile-wallet/"
                        }
                     ],
                     "primaryFields":[
@@ -6919,7 +6357,7 @@ paths:
                  "description": "Template 1",
                  "foregroundColor": "rgb(255,255,255)"
               }
-  '/pass/{templateId}/id/{passExternalId}':
+  /pass/{templateId}/id/{passExternalId}:
     post:
       - description: Example request
         examples:
@@ -6963,7 +6401,7 @@ paths:
                        "label": "nearestStore"
                     },
                     "thumbnail_image": {
-                        "value": "https:\/\/wallet.urbanairship.com\/assets\/favicon.png"
+                        "value": "https:\/\/example.com\/assets\/favicon.png"
                     }
                   },
                   "beacons":[
@@ -7033,7 +6471,7 @@ paths:
                           "formatType": "String",
                           "changeMessage": null,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools...0bb4_favicon.png",
+                          "value": "https:\/\/example.com\/passtools...0bb4_favicon.png",
                           "label": "",
                           "required": false,
                           "hideEmpty": false
@@ -7056,7 +6494,7 @@ paths:
                       }
                   ]
               }
-  '/pass/{templateId}/saveToWallet':
+  /pass/{templateId}/saveToWallet:
     post:
       - description: Example request
         examples:
@@ -7081,28 +6519,21 @@ paths:
       - description: Response
         examples:
           - lang: html
-            source: >
-              <script src="https://apis.google.com/js/plusone.js"
-              type="text/javascript"></script>
-
+            source: |
+              <script src="https://apis.google.com/js/plusone.js" type="text/javascript"></script>
               <script type="text/javascript">
-
               function urban_airship_callback(path) {
                  var script = document.createElement('script');
                  script.src = path
                  document.getElementsByTagName('head')[0].appendChild(script);
               }
-
               var successHandler = function (params) {
                  urban_airship_callback('https://wallet-api.urbanairship.com/v1/card/register/2931580989855247863.31885_34ab7304-0148-407f-9e4a-69ae30c1efd1')
               }
-
               var failureHandler = function (params) {
                  urban_airship_callback('https://wallet-api.urbanairship.com/v1/card/register/2931580989855247863.31885_34ab7304-0148-407f-9e4a-69ae30c1efd1')
               }
-
               </script>
-
               <g:savetowallet
                  jwt="eyJhbGciOiJSUzI1NiJ9..."
                  onsuccess="mySuccessFunc()"
@@ -7220,7 +6651,7 @@ paths:
                 "name": "Aztec Barcode",
                 "projectType": "loyalty"
               }
-  '/project/duplicate/{projectId}':
+  /project/duplicate/{projectId}:
     post:
       - description: Example request
         examples:
@@ -7298,7 +6729,7 @@ paths:
                   "id": 7425,
                   "updatedAt": "2024-01-25T03:23:19Z"
               }
-  '/project/id/{externalId}':
+  /project/id/{externalId}:
     post:
       - description: Example request
         examples:
@@ -7347,7 +6778,7 @@ paths:
                 "name": "Aztec Barcode",
                 "projectType": "loyalty"
               }
-  '/project/{projectId}':
+  /project/{projectId}:
     get:
       - description: Example request
         examples:
@@ -7510,7 +6941,7 @@ paths:
                 "name": "New And Improved Name",
                 "projectType": "loyalty"
               }
-  '/project/{projectId}/activity':
+  /project/{projectId}/activity:
     get:
       - description: Example request
         examples:
@@ -7522,13 +6953,9 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/project/id/myExternalProject/activity/2015-08-19/2015-08-20
-              HTTP/1.1
-
+            source: |
+              GET /v1/project/id/myExternalProject/activity/2015-08-19/2015-08-20 HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -7565,7 +6992,7 @@ paths:
                       }
                   ]
               }
-  '/project/{projectId}/nfcMerchants':
+  /project/{projectId}/nfcMerchants:
     get:
       - description: Example request
         examples:
@@ -7675,29 +7102,21 @@ paths:
                 "keySource": "IMPORTED",
                 "updatedAt": "2020-09-16T18:17:49.349Z"
               }
-  '/project/{projectId}/nfcMerchants/{merchantId}':
+  /project/{projectId}/nfcMerchants/{merchantId}:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE
-              /v1/project/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/project/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              DELETE
-              /v1/project/id/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/project/id/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Example request
         examples:
@@ -7714,24 +7133,16 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/project/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c
-              HTTP/1.1
-
+            source: |
+              GET /v1/project/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              GET
-              /v1/project/id/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c
-              HTTP/1.1
-
+            source: |
+              GET /v1/project/id/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c HTTP/1.1
               Authorization: Basic <authorization string>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -7756,17 +7167,11 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT
-              /v1/project/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c
-              HTTP/1.1
-
+            source: |
+              PUT /v1/project/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                 "merchantName": "Example Merchant",
@@ -7775,17 +7180,11 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              PUT
-              /v1/project/id/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c
-              HTTP/1.1
-
+            source: |
+              PUT /v1/project/id/13137/nfcMerchants/23c0da58-3b79-4d44-9191-b69faef7b24c HTTP/1.1
               Authorization: Basic <authorization string>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                 "merchantName": "Example Merchant",
@@ -7810,7 +7209,7 @@ paths:
                 "keySource": "GENERATED",
                 "updatedAt": "2020-09-16T19:16:28.877Z"
               }
-  '/project/{projectId}/settings/callback':
+  /project/{projectId}/settings/callback:
     delete:
       - description: Example request
         examples:
@@ -7904,7 +7303,7 @@ paths:
                     "Content-Type": "application/json"
                  }
               }
-  '/project/{projectId}/stats':
+  /project/{projectId}/stats:
     get:
       - description: Example request
         examples:
@@ -7944,7 +7343,7 @@ paths:
                   "installed": 2,
                   "uninstalled": 7
               }
-  '/schedules/{projectId}':
+  /schedules/{projectId}:
     get:
       - description: Example request
         examples:
@@ -8125,17 +7524,14 @@ paths:
                    }
                 ]
               }
-  '/schedules/{projectId}/{scheduleId}':
+  /schedules/{projectId}/{scheduleId}:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/schedules/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/schedules/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -8146,12 +7542,9 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/schedules/12345/2d69320c-3c91-5241-fac4-248269eed109
-              HTTP/1.1
-
+            source: |
+              GET /v1/schedules/12345/2d69320c-3c91-5241-fac4-248269eed109 HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -8185,16 +7578,11 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT /v1/schedules/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a
-              HTTP/1.1
-
+            source: |
+              PUT /v1/schedules/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                  "name": "New Offer Update",
@@ -8255,7 +7643,7 @@ paths:
                    }
                 ]
               }
-  '/segments/{projectId}':
+  /segments/{projectId}:
     get:
       - description: Example request
         examples:
@@ -8324,17 +7712,14 @@ paths:
                  "segmentId": "b13666df-e5b3-4e42-8919-f8d63bd7ce2a",
                  "operationId": "dd2f1d32-aca9-4463-91c2-a3420bbcd489"
               }
-  '/segments/{projectId}/{segmentId}':
+  /segments/{projectId}/{segmentId}:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -8345,12 +7730,9 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a
-              HTTP/1.1
-
+            source: |
+              GET /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2             
       - description: Response
         examples:
@@ -8378,16 +7760,11 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a
-              HTTP/1.1
-
+            source: |
+              PUT /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                  "criteria": {
@@ -8416,16 +7793,13 @@ paths:
                "segmentId": "3b13666df-e5b3-4e42-8919-f8d63bd7ce2a",
                "operationId": "f573b3c5-b0ee-4461-a179-2e78aab20400"
               }
-  '/segments/{projectId}/{segmentId}/notify':
+  /segments/{projectId}/{segmentId}/notify:
     delete:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              DELETE
-              /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a/notify?templateId=6789
-              HTTP/1.1
-
+            source: |
+              DELETE /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a/notify?templateId=6789 HTTP/1.1
               Authorization: Basic <Base64 key>
       - description: Response
         examples:
@@ -8441,15 +7815,10 @@ paths:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              POST
-              /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a/notify?templateId=6789
-              HTTP/1.1
-
+            source: |
+              POST /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a/notify?templateId=6789 HTTP/1.1
               Content-Type: application/json
-
               Authorization: Basic <Base64 key>
-
 
               {
                 "label": "Last Notification",
@@ -8465,22 +7834,16 @@ paths:
               {
                  "ticketId": 1234
               }
-  '/segments/{projectId}/{segmentId}/passes':
+  /segments/{projectId}/{segmentId}/passes:
     put:
       - description: Example request
         examples:
           - lang: HTTP
-            source: >
-              PUT
-              /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a/passes?templateId=6789
-              HTTP/1.1
-
+            source: |
+              PUT /v1/segments/12345/3b13666df-e5b3-4e42-8919-f8d63bd7ce2a/passes?templateId=6789 HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Content-Type: application/json
-
               Api-Revision: 1.2
-
 
               {
                   "fields":{
@@ -8567,7 +7930,7 @@ paths:
                 },
                 "count": 4
               }
-  '/tag/{tag}':
+  /tag/{tag}:
     delete:
       - description: Example request
         examples:
@@ -8588,7 +7951,7 @@ paths:
                   "tagId": 5,
                   "count": 93
               }
-  '/tag/{tag}/notify':
+  /tag/{tag}/notify:
     delete:
       - description: Example request
         examples:
@@ -8629,7 +7992,7 @@ paths:
               {
                  "ticketId": 1234
               }
-  '/tag/{tag}/pass/{pass}':
+  /tag/{tag}/pass/{pass}:
     delete:
       - description: Example request
         examples:
@@ -8657,7 +8020,7 @@ paths:
                  "status": "success",
                  "tagId": 70
               }
-  '/tag/{tag}/passes':
+  /tag/{tag}/passes:
     delete:
       - description: Example request
         examples:
@@ -8755,7 +8118,7 @@ paths:
               {
                  "ticketId": 123
               }
-  '/tag/{tag}/stats':
+  /tag/{tag}/stats:
     get:
       - description: Example request
         examples:
@@ -8778,7 +8141,7 @@ paths:
                 "not_been_installed": 0,
                 "lastUpdated": "2023-06-14T12:45:37.000Z"
               }              
-  '/template/duplicate/{templateId}':
+  /template/duplicate/{templateId}:
     post:
       - description: Example request
         examples:
@@ -8876,7 +8239,7 @@ paths:
                     "pageSize": 10
                  }
               }
-  '/template/{id}':
+  /template/{id}:
     delete:
       - description: Example request
         examples:
@@ -8936,7 +8299,7 @@ paths:
                        "icon_image": {
                           "formatType": 1,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png"
+                          "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png"
                        },
                        "logo_text": {
                           "formatType": 1,
@@ -8956,7 +8319,7 @@ paths:
                        "logo_image": {
                           "formatType": 1,
                           "fieldType": "image",
-                          "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-logo.png"
+                          "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-logo.png"
                        },
                        "foreground_color": {
                           "formatType": 1,
@@ -9040,7 +8403,7 @@ paths:
                   "icon_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png"
                   },
                   "logo_text": {
                     "formatType": 1,
@@ -9060,7 +8423,7 @@ paths:
                   "logo_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-logo.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-logo.png"
                   },
                   "foreground_color": {
                     "formatType": 1,
@@ -9224,7 +8587,7 @@ paths:
                 "notAssigned": {
                 },
                 "titleModule": {
-                   "image": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                   "image": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                    "imageDescription": "Logo Image",
                    "Program Name": {
                       "label": "Program Name",
@@ -9273,7 +8636,7 @@ paths:
                     "icon_image": {
                        "formatType": "1",
                        "fieldType": "image",
-                       "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png"
+                       "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png"
                     },
                     "logo_text": {
                        "formatType": "1",
@@ -9293,7 +8656,7 @@ paths:
                     "logo_image": {
                        "formatType": "1",
                        "fieldType": "image",
-                       "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-logo.png"
+                       "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-logo.png"
                     },
                     "foreground_color": {
                        "formatType": "1",
@@ -9461,7 +8824,7 @@ paths:
                 "notAssigned": {
                 },
                 "titleModule": {
-                   "image": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                   "image": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                    "imageDescription": "Logo Image",
                    "Program Name": {
                       "label": "Program Name",
@@ -9489,7 +8852,7 @@ paths:
               {
                  "templateId": "12345"
               }
-  '/template/{projectId}/id/{templateExternalId}':
+  /template/{projectId}/id/{templateExternalId}:
     post:
       - description: Example Apple template
         examples:
@@ -9510,7 +8873,7 @@ paths:
                   "icon_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png"
                   },
                   "logo_text": {
                     "formatType": 1,
@@ -9530,7 +8893,7 @@ paths:
                   "logo_image": {
                     "formatType": 1,
                     "fieldType": "image",
-                    "value": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-logo.png"
+                    "value": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-logo.png"
                   },
                   "foreground_color": {
                     "formatType": 1,
@@ -9594,16 +8957,11 @@ paths:
       - description: Example Google template
         examples:
           - lang: HTTP
-            source: >
-              POST /v1/template/project/id/someProjectExtId/id/someTemplateExtId
-              HTTP/1.1
-
+            source: |
+              POST /v1/template/project/id/someProjectExtId/id/someTemplateExtId HTTP/1.1
               Content-Type: application/json
-
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
-
 
               {
                 "infoModuleData": {
@@ -9699,7 +9057,7 @@ paths:
                 "notAssigned": {
                 },
                 "titleModule": {
-                   "image": "https:\/\/s3.amazonaws.com\/passtools_prod\/1\/images\/default-pass-icon.png",
+                   "image": "https:\/\/example.com\/passtools_prod\/1\/images\/default-pass-icon.png",
                    "imageDescription": "Logo Image",
                    "Program Name": {
                       "label": "Program Name",
@@ -9730,7 +9088,7 @@ paths:
               {
                  "templateId": 12345
               }
-  '/template/{templateId}/activity':
+  /template/{templateId}/activity:
     get:
       - description: Example request
         examples:
@@ -9742,12 +9100,9 @@ paths:
       - description: Example request with external ID
         examples:
           - lang: HTTP
-            source: >
-              GET /v1/template/id/myExternalId/activity/2015-08-19/2015-08-20
-              HTTP/1.1
-
+            source: |
+              GET /v1/template/id/myExternalId/activity/2015-08-19/2015-08-20 HTTP/1.1
               Authorization: Basic <Base64 key>
-
               Api-Revision: 1.2
       - description: Response
         examples:
@@ -9785,7 +9140,7 @@ paths:
                       }
                   ]
               }
-  '/template/{templateId}/location/{locationId}':
+  /template/{templateId}/location/{locationId}:
     delete:
       - description: Example request
         examples:
@@ -9801,7 +9156,7 @@ paths:
               DELETE /v1/template/id/myTemplate/location/456 HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2
-  '/template/{templateId}/locations':
+  /template/{templateId}/locations:
     post:
       - description: Example request
         examples:
@@ -9874,7 +9229,7 @@ paths:
                     "fieldId": 1842
                  }
               ]
-  '/template/{templateId}/notify':
+  /template/{templateId}/notify:
     delete:
       - description: Example request
         examples:
@@ -9933,7 +9288,7 @@ paths:
               {
                  "ticketId": 1234
               }
-  '/template/{templateId}/passes':
+  /template/{templateId}/passes:
     get:
       - description: Example request
         examples:
@@ -10062,7 +9417,7 @@ paths:
               {
                  "ticketId": 56789
               }
-  '/template/{templateId}/personalization':
+  /template/{templateId}/personalization:
     delete:
       - description: Example request
         examples:
@@ -10163,7 +9518,7 @@ paths:
                 "description": "Enter your information to sign up and earn points.",
                 "termsAndConditions": "Terms and conditions go here"
               }
-  '/template/{templateId}/stats':
+  /template/{templateId}/stats:
     get:
       - description: Example request
         examples:
@@ -10194,7 +9549,7 @@ paths:
                   "installed": 0,
                   "uninstalled": 0
               }
-  '/templates/{id}':
+  /templates/{id}:
     get:
       - description: Example request
         examples:
@@ -10312,7 +9667,7 @@ paths:
                     "fieldType": "linksModuleData",
                     "value": "Merchant Website",
                     "formatType": "URL",
-                    "label": "www.metro.com.sg",
+                    "label": "www.example.com.sg",
                     "hideEmpty": false,
                     "required": false,
                     "order": 0
@@ -10471,7 +9826,7 @@ paths:
                     "fieldType": "linksModuleData",
                     "value": "Merchant Website",
                     "formatType": "URL",
-                    "label": "www.metro.com.sg",
+                    "label": "www.example.com.sg",
                     "hideEmpty": false,
                     "required": false,
                     "order": 0
@@ -10599,7 +9954,7 @@ paths:
                           "fieldType": "linksModuleData",
                           "value": "Merchant Website",
                           "formatType": "URL",
-                          "label": "www.metro.com.sg",
+                          "label": "www.example.com.sg",
                           "hideEmpty": false,
                           "required": false,
                           "order": 0
@@ -10638,7 +9993,7 @@ paths:
               {
                 "templateId": 179229
               }
-  '/ticket/{ticketId}':
+  /ticket/{ticketId}:
     get:
       - description: Example request
         examples:

@@ -120,22 +120,6 @@
                   ],
                   "type": "string"
                 },
-                "carrier": {
-                  "deprecated": true,
-                  "description": "The wireless carrier used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "type": "string"
-                },
-                "connection_type": {
-                  "deprecated": true,
-                  "description": "The internet connection type used by the device. **Deprecation notice:** This property will not be collected as of SDK 20 for both iOS and Android and will be removed on October 8, 2025.",
-                  "enum": [
-                    "WIFI",
-                    "CELL",
-                    "WIMAX",
-                    "NONE"
-                  ],
-                  "type": "string"
-                },
                 "device_model": {
                   "description": "The device model.",
                   "type": "string"
@@ -404,7 +388,7 @@
       ]
     },
     "experiments": {
-      "description": "An object listing the details of the [Message A/B test](https://docs.airship.com/guides/messaging/experimentation/a-b-tests/messages) or [Holdout Experiment](https://docs.airship.com/guides/messaging/experimentation/holdout-experiments), if the send includes either.",
+      "description": "An object listing the details of the [Message A/B test](/guides/experimentation/a-b-tests/messages) or [Holdout Experiment](/guides/experimentation/holdout-experiments), if the send includes either.",
       "properties": {
         "experiment_id": {
           "description": "The unique identifier for the Message A/B test or Holdout Experiment.",
@@ -472,7 +456,8 @@
     "type",
     "occurred",
     "processed",
-    "body"
+    "body",
+    "offset"
   ],
   "title": "Send",
   "type": "object",

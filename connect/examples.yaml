@@ -44,9 +44,7 @@ components:
                   }
                 }
     array_matcher:
-      - description: >-
-          Example find only push body objects with the campaign category
-          "spring_sale"
+      - description: Example find only push body objects with the campaign category "spring_sale"
         examples:
           - lang: json
             source: |
@@ -1956,9 +1954,7 @@ components:
                 "type": "IN_APP_PAGER_SUMMARY"
               }
     json_predicate:
-      - description: >-
-          Example JSON Predicate to filter the stream to only Android Open
-          events
+      - description: Example JSON Predicate to filter the stream to only Android Open events
         examples:
           - lang: json
             source: |
@@ -2263,9 +2259,7 @@ components:
                 "type": "COMPLIANCE"
               }
     numeric_matcher:
-      - description: >-
-          Example find custom events with name "purchase" and a "value" of at
-          least 100
+      - description: Example find custom events with name "purchase" and a "value" of at least 100
         examples:
           - lang: json
             source: |
@@ -2484,9 +2478,7 @@ components:
                   "type": "COMPLIANCE"
                 }
     rich_control:
-      - description: >-
-          Example event body - message not delivered due to user being in a
-          control group
+      - description: Example event body - message not delivered due to user being in a control group
         examples:
           - lang: json
             source: |
@@ -2825,7 +2817,7 @@ components:
                       "push_id": "f4b4201a-70e2-4a8d-bc8f-f35ddfa7d0e7",
                       "group_id": "47f01bbf-2efa-4743-acd8-fd1023a36744",
                       "properties": {
-                        "original_url": "https://docs.airship.com/api/connect#schemas-short_link_click"
+                        "original_url": "api/connect#schemas-short_link_click"
                       }
                   },
                   "type": "SHORT_LINK_CLICK"
@@ -3111,9 +3103,7 @@ components:
                 "type": "COMPLIANCE"
               }
     version_matcher:
-      - description: >-
-          Example find custom events of type "purchase" performed by Android
-          users on app versions between 18.4.1 and 19.2.3
+      - description: Example find custom events of type "purchase" performed by Android users on app versions between 18.4.1 and 19.2.3
         examples:
           - lang: json
             source: |
@@ -3259,39 +3249,14 @@ paths:
       - description: Response
         examples:
           - lang: HTTP
-            source: >
+            source: |
               HTTP/1.1 200 OK
-
               Content-encoding: gzip
-
               Content-Type: application/vnd.urbanairship+json; version=3;
 
-
-              {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type":
-              "UNINSTALL", "offset": "MTIzNQ", "occurred":
-              "2015-05-03T02:32:12.088Z", "processed":
-              "2015-05-03T12:12:43.180Z", "device":
-              {"channel":"a61448e1-be63-43ee-84eb-19446ba743f0",
-              "device_type":"ANDROID", "android_channel":
-              "a61448e1-be63-43ee-84eb-19446ba743f0"}}
-
-              {"id" : "8e50350e-dd9f-41af-b98e-b0e5d4b27dea","type":
-              "SEND","offset": "NTIxMDM1","occurred":
-              "2015-05-02T02:31:22.088Z","processed":
-              "2015-05-02T02:32:43.181Z","device":
-              {"channel":"5117f2a7-ba58-4981-9456-169959511d1a",
-              "device_type":"IOS", "ios_channel":
-              "5117f2a7-ba58-4981-9456-169959511d1a" },"body": {"push_id":
-              "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e", "alerting": true}}
-
-              {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type":
-              "UNINSTALL", "offset": "MTIzNQ", "occurred":
-              "2015-05-03T02:32:12.088Z", "processed":
-              "2015-05-03T12:12:43.180Z", "device":
-              {"channel":"a61448e1-be63-43ee-84eb-19446ba743f0",
-              "device_type":"ANDROID", "android_channel":
-              "a61448e1-be63-43ee-84eb-19446ba743f0"}}
-
+              {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type": "UNINSTALL", "offset": "MTIzNQ", "occurred": "2015-05-03T02:32:12.088Z", "processed": "2015-05-03T12:12:43.180Z", "device": {"channel":"a61448e1-be63-43ee-84eb-19446ba743f0", "device_type":"ANDROID", "android_channel": "a61448e1-be63-43ee-84eb-19446ba743f0"}}
+              {"id" : "8e50350e-dd9f-41af-b98e-b0e5d4b27dea","type": "SEND","offset": "NTIxMDM1","occurred": "2015-05-02T02:31:22.088Z","processed": "2015-05-02T02:32:43.181Z","device": {"channel":"5117f2a7-ba58-4981-9456-169959511d1a", "device_type":"IOS", "ios_channel": "5117f2a7-ba58-4981-9456-169959511d1a" },"body": {"push_id": "0c173744-dd35-4b5e-9f7f-2b7e0ce0e36e", "alerting": true}}
+              {"id" : "ff76bb85-74bc-4511-a3bf-11b6117784db", "type": "UNINSTALL", "offset": "MTIzNQ", "occurred": "2015-05-03T02:32:12.088Z", "processed": "2015-05-03T12:12:43.180Z", "device": {"channel":"a61448e1-be63-43ee-84eb-19446ba743f0", "device_type":"ANDROID", "android_channel": "a61448e1-be63-43ee-84eb-19446ba743f0"}}
               {"device":{"channel":"820e4493-e4c9-4577-99bc-a98180599f73","delivery_address":"new.user@urbanairship.com","device_type":"EMAIL"},"id":"00000169-4a14-67b2-1ddd-d9e733622c3a","occurred":"2019-03-04T19:00:45.106Z","offset":"1000001260057","processed":"2019-03-04T19:00:47.094Z","type":"FIRST_OPT_IN"}
       - description: Response object
         examples:
