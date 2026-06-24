@@ -7,7 +7,8 @@
           "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
-          "type": "string"
+          "type": "string",
+          "x-inline-component": true
         },
         "labels": {
           "description": "Page list",
@@ -35,7 +36,8 @@
           "description": "A unique identifier for a push operation.",
           "format": "uuid",
           "title": "Push ID",
-          "type": "string"
+          "type": "string",
+          "x-inline-component": true
         }
       },
       "required": [
@@ -50,15 +52,18 @@
     },
     "occurred": {
       "description": "When the event occurred.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "offset": {
       "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "processed": {
       "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "type": {
       "enum": [

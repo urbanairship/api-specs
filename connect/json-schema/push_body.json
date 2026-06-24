@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when you initiate a push, automation, or sequence.\n\nAirship fulfills delivery over a time interval with a number of child pushes, each with a unique Push ID and a common Group ID. There is no guarantee that push body events (defined in Push Body Event) for the child pushes fulfilling a group will appear in the stream.\n\n**Note:** When you start, pause, or publish a sequence, Airship emits a `push_body` event for the sequence itself, and each message contained within the sequence (i.e., messages +1). After you start a sequence, Airship does not issue subsequent `push_body` events for the sequence unless you pause or publish changes to the sequence.\n",
+  "description": "Occurs when you initiate a push, automation, or sequence.\n\nAirship fulfills delivery over a time interval with a number of child pushes, each with a unique `push_id` and a common `group_id`. There is no guarantee that push body events (defined in Push Body Event) for the child pushes fulfilling a group will appear in the stream.\n\nWhen you start, pause, or publish a sequence, Airship emits a `push_body` event for the sequence itself, and each message contained within the sequence (i.e., messages +1). After you start a sequence, Airship does not issue subsequent `push_body` events for the sequence unless you pause or publish changes to the sequence.\n\nAirship does not store the API payload for unicast messages. See the [Data Retention Schedule](/reference/general/#data-retention-schedule).\n",
   "properties": {
     "body": {
       "properties": {
@@ -14,13 +14,15 @@
             }
           },
           "title": "Campaigns Object",
-          "type": "object"
+          "type": "object",
+          "x-inline-component": true
         },
         "group_id": {
           "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
           "format": "uuid",
           "title": "Group ID",
-          "type": "string"
+          "type": "string",
+          "x-inline-component": true
         },
         "payload": {
           "description": "The specification of the push as sent via the API, a Base64 encoded JSON value.",
@@ -30,7 +32,8 @@
           "description": "A unique identifier for a push operation.",
           "format": "uuid",
           "title": "Push ID",
-          "type": "string"
+          "type": "string",
+          "x-inline-component": true
         },
         "resource": {
           "description": "Describes the type of push, helping you interpret the JSON response. Values pertain to the push `type`.",
@@ -57,19 +60,23 @@
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "occurred": {
       "description": "When the event occurred.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "offset": {
       "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "processed": {
       "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "type": {
       "enum": [

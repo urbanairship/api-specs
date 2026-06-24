@@ -1,10 +1,10 @@
 {
-  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the Feature Flag audience and had access to the feature.\n",
+  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
   "properties": {
     "body": {
       "properties": {
         "eligible": {
-          "description": "Indicates whether or not the user was in the Feature Flag audience and had access to the feature. `true` means the user was in the Feature Flag audience and had access to the feature.",
+          "description": "Indicates whether or not the user was in the feature flag audience and had access to the feature. `true` means the user was in the feature flag audience and had access to the feature.",
           "type": "boolean"
         },
         "flag_id": {
@@ -70,23 +70,28 @@
                 },
                 "iana_timezone": {
                   "description": "The time zone of the device.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_country_code": {
                   "description": "The ISO 3166-1 country code as defined in device settings.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_language_code": {
                   "description": "The ISO 639-1 two-letter language code reflecting the language that the device is set to.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_timezone": {
                   "description": "The device's time zone offset in seconds from UTC.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_variant": {
                   "description": "The language variant.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "location_enabled": {
                   "description": "Indicates whether or not the device has location services enabled.",
@@ -105,22 +110,26 @@
                     "FOREGROUND_ALLOWED",
                     "UNPROMPTED"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "push_opt_in": {
                   "description": "Indicates whether or not the device is opted into push notifications.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "ua_sdk_version": {
                   "description": "The version of the Airship SDK used in the app.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 }
               },
               "type": "object"
             },
             "channel": {
               "description": "The unique, platform-agnostic channel identifier for a device.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "device_type": {
               "description": "The platform that the channel is on.",
@@ -170,8 +179,9 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The Named User identifier for the device.",
-              "type": "string"
+              "description": "The named user identifier for the device.",
+              "type": "string",
+              "x-inline-component": true
             }
           },
           "required": [
@@ -189,31 +199,38 @@
               "properties": {
                 "iana_timezone": {
                   "description": "The time zone of the device.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_country_code": {
                   "description": "The ISO 3166-1 country code as defined in device settings.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_language_code": {
                   "description": "The ISO 639-1 two-letter language code reflecting the language that the device is set to.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_timezone": {
                   "description": "The device's time zone offset in seconds from UTC.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_variant": {
                   "description": "The language variant.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "push_opt_in": {
                   "description": "Indicates whether or not the device is opted into push notifications.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "ua_sdk_version": {
                   "description": "The version of the Airship SDK used in the app.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "web_browser_name": {
                   "description": "The name of the browser running the SDK.",
@@ -244,7 +261,8 @@
             },
             "channel": {
               "description": "The unique, platform-agnostic channel identifier for a device.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "device_type": {
               "description": "The platform that the channel is on.",
@@ -254,8 +272,9 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The Named User identifier for the device.",
-              "type": "string"
+              "description": "The named user identifier for the device.",
+              "type": "string",
+              "x-inline-component": true
             }
           },
           "required": [
@@ -270,19 +289,23 @@
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "occurred": {
       "description": "When the event occurred.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "offset": {
       "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "processed": {
       "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "type": {
       "enum": [
@@ -300,7 +323,7 @@
     "body",
     "offset"
   ],
-  "title": "Feature Flag interaction event",
+  "title": "Feature flag interaction event",
   "type": "object",
   "x-schema-tag": "Events"
 }

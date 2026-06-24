@@ -1,20 +1,5 @@
 components:
   schemas:
-    absoluteWindow:
-      - description: Example absolute time window
-        examples:
-          - lang: json
-            source: |
-              { "audience":
-                 {
-                    "date": {
-                       "days": {
-                          "start": "2020-01-01",
-                          "end": "2020-01-15"
-                       }
-                    }
-                 }
-              }
     actionsObject:
       - description: Example add custom event action
         examples:
@@ -289,6 +274,17 @@ components:
                     "notification_channel": "promos"
                  }
               }
+    appAndWebTemplatesObject:
+      - description: Example app and web template object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "title": "Shoe sale on {{level}} floor!",
+                  "alert": "All the shoes are on sale {{name}}!",
+                  "summary": "Don't miss out!",
+                  "icon": "shoes"
+              }
     atomicSelector:
       - description: Example audience selection by tag
         examples:
@@ -321,7 +317,7 @@ components:
                       "segment" : "<segment-id>"
                   }
               }
-      - description: Example audience of Named Users
+      - description: Example audience of named users
         examples:
           - lang: json
             source: |
@@ -340,7 +336,7 @@ components:
                  }
               }
     attributes:
-      - description: Example Attributes object
+      - description: Example attributes object
         examples:
           - lang: json
             source: |
@@ -393,7 +389,7 @@ components:
                 }
               }
     banListParametersObject:
-      - description: Ban List parameters
+      - description: Ban list parameters
         examples:
           - lang: json
             source: |
@@ -552,7 +548,6 @@ components:
                  "created": "2020-08-08T20:41:06",
                  "last_registration": "2020-05-01T18:00:27",
                  "named_user_id": "some_id_that_maps_to_your_systems",
-                 "alias": null,
                  "tags": [
                     "tag1",
                     "tag2"
@@ -590,8 +585,7 @@ components:
                              "quiettime": { "start": "22:00", "end": "06:00" },
                              "tz": "America/Los_Angeles" } },
                  "identity_hints": {
-                    "user_id": "eDAXv7aQTQaAaUHOXuePLQ",
-                    "apid": "df6a6b50-9843-0304-d5a5-743f246a4946" } }
+                    "user_id": "eDAXv7aQTQaAaUHOXuePLQ" } }
     channelSubscriptionItem:
       - description: Example preference form channel subscription item
         examples:
@@ -932,8 +926,46 @@ components:
                     "unsubscribe": ["subscription_3"]
                  }
               }
+    contentTemplateObject:
+      - description: Example content template object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "id": "ef34a8d9-0ad7-491c-86b0-aea74da15161",
+                  "external_id": "customer-defined-id",
+                  "name": "Welcome Message",
+                  "description": "Our welcome message",
+                  "type": "email",
+                  "content": {
+                      "subject": "Welcome!",
+                      "html_body": "<html><body>Hi, {{first_name}}!</body></html> {{>copyright}}",
+                      "plaintext_body": "Hi, {{first_name}}!"
+                  },
+                  "created_at": "2020-08-17T11:10:02Z",
+                  "modified_at": "2020-08-17T11:10:02Z",
+                  "feed_references": {
+                      "feeds": [
+                        {
+                          "name": "featured_product"
+                        }
+                      ],
+                      "defaults": {
+                        "featured_product": {
+                          "category": "featured"
+                        }
+                      }
+                  },
+                  "snippet_references": {
+                      "snippets": [
+                        {
+                          "name": "copyright"
+                        }
+                      ]
+                  }
+              }
     customEventObject:
-      - description: Example Custom Event
+      - description: Example custom event
         examples:
           - lang: json
             source: |
@@ -953,8 +985,8 @@ components:
                         "description": "sky high",
                         "brand": "victory",
                         "colors": [
-                        "red",
-                        "blue"
+                           "red",
+                           "blue"
                         ],
                         "items": [
                         {
@@ -972,15 +1004,22 @@ components:
                         ],
                         "name": "Cool Person",
                         "userLocation": {
-                        "state": "CO",
-                        "zip": "80202"
+                           "state": "CO",
+                           "zip": "80202"
                         }
+                     },
+                     "external_campaigns": {
+                        "categories": [
+                           "shoes",
+                           "running",
+                           "summer_2017"
+                       ]
                      },
                     "session_id": "22404b07-3f8f-4e42-a4ff-a996c18fa9f1"
                  }
               }
     dateAttribute:
-      - description: Date Attribute example
+      - description: Date attribute example
         examples:
           - lang: json
             source: |
@@ -1309,6 +1348,16 @@ components:
                   }
                 }
               }
+    emailTemplatesObject:
+      - description: Example email template object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "subject": "Welcome!",
+                  "html_body": "<html><body>Hi, {{first_name}}!</body></html>",
+                  "plaintext_body": "Hi, {{first_name}}!"
+              }
     error:
       - description: 400 response
         examples:
@@ -1326,6 +1375,7 @@ components:
                         "column" : 18
                     }
                 }
+              }
       - description: 400 response without location
         examples:
           - lang: json
@@ -1362,7 +1412,7 @@ components:
               {
                 "tag_added": "cool_user"
               }
-      - description: Custom Event example
+      - description: Custom event example
         examples:
           - lang: json
             source: |
@@ -1700,7 +1750,7 @@ components:
                  }
               }
     jsonAttribute:
-      - description: JSON Attribute examples
+      - description: JSON attribute examples
         examples:
           - lang: json
             source: |
@@ -1814,6 +1864,15 @@ components:
                        }
                     }
                  ]
+              }
+    messageCenterTemplatesObject:
+      - description: Example Message Center template object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "html_body": "<h2>Richtext body goes here</h2><p><a data-ua-unsubscribe=\"1\" title=\"unsubscribe\" href=\"http://unsubscribe.urbanairship.com/email/success.html\">Unsubscribe</a></p>",
+                  "title": "Message Center Notification"
               }
     messageObject:
       - description: Message object example
@@ -2095,7 +2154,7 @@ components:
                 ]
               }
     namedUserResponseBody:
-      - description: Example Named User
+      - description: Example named user
         examples:
           - lang: json
             source: |
@@ -2223,7 +2282,7 @@ components:
                  }
               }
     numberAttribute:
-      - description: Number Attribute example
+      - description: Number attribute example
         examples:
           - lang: json
             source: |
@@ -2293,7 +2352,7 @@ components:
                  "audience" : {
                     "OR" : [
                           { "tag" : ["sports", "entertainment"]},
-                          { "device_token" : "871922F4F7C6DF9D51AC7ABAE9AA5FCD7188D7BFA19A2FA99E1D2EC5F2D76506" },
+                          { "device_token" : "YOUR_DEVICE_TOKEN" },
                           { "open_channel" : "6bcf3e63-a38a-44d8-8b0d-2fb5941e74ab" } ]
                  },
                  "notification" : {
@@ -2341,6 +2400,17 @@ components:
                  "open::email": {
                     "alert": "A longer alert for users of email, who have more space." }
               }            
+    openChannelTemplatesObject:
+      - description: Example open channel template object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "title": "SMS Alert!",
+                  "alert": "A shorter alert for SMS users",
+                  "summary": "A longer summary of text alongside the notification",
+                  "media_attachment": "https://example.com/cat_standing_up.jpeg"
+              }
     pipelineObject:
       - description: Example
         examples:
@@ -2559,7 +2629,7 @@ components:
                  },
                  "notification": {
                     "sms": {
-                       "alert": "Hi {{name}}, {{#feed \"weather_updates\" kw="today" as |weather|}}It's going to be {{weather.temp}} in {{weather.loc}} today!{{/feed}}",
+                       "alert": "Hi {{name}}, {{#feed \"weather_updates\" kw=\"today\" as |weather|}}It's going to be {{weather.temp}} in {{weather.loc}} today!{{/feed}}",
                     }
                  },
                  "audience": {
@@ -2684,18 +2754,6 @@ components:
                       "vendor_href": "http://api.gimbal.com/2/places/4BPSFLKJSDFLKJSDFLKJ"
                   }
               }
-    relativeWindow:
-      - description: Example relative time window
-        examples:
-          - lang: json
-            source: |
-              {
-                "date": {
-                   "days": {
-                      "recent": 1
-                   }
-                }
-              }
     removeAttributeObject:
       - description: Remove Attribute
         examples:
@@ -2807,7 +2865,7 @@ components:
                 ]
               }
     setAttributeObject:
-      - description: Set Attribute with string value
+      - description: Set attribute with string value
         examples:
           - lang: json
             source: |
@@ -2816,7 +2874,7 @@ components:
                 "key": "position",
                 "value": "LF"
               }
-      - description: Set JSON Attribute with its required object value
+      - description: Set JSON attribute with its required object value
         examples:
           - lang: json
             source: |
@@ -2827,7 +2885,7 @@ components:
                   "exp": 1731531110,
                   "name": "LeftField",
                   "rank": 2,
-                  "active" true,
+                  "active": true,
                   "extras": [
                     "rookie",
                     "mvp"
@@ -2974,6 +3032,14 @@ components:
                   }
                 }
               }
+    smsTemplatesObject:
+      - description: Example SMS template object
+        examples:
+          - lang: json
+            source: |
+              {
+                  "alert": "My SMS message"
+              }
     snippetReferences:
       - description: Example push snippets request
         examples:
@@ -3116,7 +3182,7 @@ components:
                     "ua_locale_country": ["US"]
                 }
               }
-      - description: An array of Tag Groups for a channel. Channels can have Airship-specific tag groups; Named Users do not have Airship-specific Tag Groups.
+      - description: An array of tag groups for a channel. Channels can have Airship-specific tag groups; named users do not have Airship-specific tag groups.
         examples:
           - lang: json
             source: |
@@ -3146,7 +3212,7 @@ components:
                     }
                 ]
               }
-      - description: An array of Tag Groups for a Named User. Named Users do not have Airship-specific tag groups.
+      - description: An array of tag groups for a named user. Named users do not have Airship-specific tag groups.
         examples:
           - lang: json
             source: |
@@ -3222,8 +3288,7 @@ components:
                   "audience" : {
                       "OR" : [
                           { "tag" : ["sports", "entertainment"]},
-                          { "device_token" : "871922F4F7C6DF9D51AC7ABAE9AA5FCD7188D7BFA19A2FA99E1D2EC5F2D76506" },
-                          { "apid" : "5673fb25-0e18-f665-6ed3-f32de4f9ddc6" }
+                          { "device_token" : "YOUR_DEVICE_TOKEN" }
                       ]
                   },
                   "device_types" : [ "ios" ],
@@ -3390,7 +3455,7 @@ components:
                 }
               }
     textAttribute:
-      - description: Text Attribute example
+      - description: Text attribute example
         examples:
           - lang: json
             source: |
@@ -3735,7 +3800,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/attribute-lists/{list_name}/csv:
     put:
-      - description: Upload Attribute list example
+      - description: Upload attribute list example
         examples:
           - lang: HTTP
             source: |
@@ -3750,7 +3815,7 @@ paths:
               15410d17-687c-46fa-bbd9-f255741a1523,2,Football
               c2c64ef7-8f5c-470e-915f-f5e3da04e1df,22.1,Rugby
         showMissingLanguagePlaceholders: true
-      - description: Upload Attribute Snapshot list example
+      - description: Upload attribute snapshot list example
         examples:
           - lang: HTTP
             source: |
@@ -3796,7 +3861,7 @@ paths:
                 description="example snapshot list",
               )
               snapshot_list.upload(file_path="path/to/snapshot_file.csv")
-      - description: Upload Attribute list for SMS example
+      - description: Upload attribute list for SMS example
         examples:
           - lang: HTTP
             source: |
@@ -4330,7 +4395,6 @@ paths:
                        "created": "2020-03-06T18:52:59",
                        "last_registration": "2020-10-07T21:28:35",
                        "named_user_id": "some_id_that_maps_to_your_systems",
-                       "alias": "null",
                        "tags": [
                           "tag1",
                           "tag2"
@@ -4366,7 +4430,6 @@ paths:
                        "created": "2020-03-06T18:52:59",
                        "last_registration": "2020-10-07T21:28:35",
                        "named_user_id": "some_id_that_maps_to_your_systems",
-                       "alias": "null",
                        "tags": [
                           "tag1",
                           "tag2"
@@ -4403,7 +4466,6 @@ paths:
                     "opt_in": true,
                     "background": true,
                     "push_address": "FFFF",
-                    "alias": "xxxx",
                     "set_tags": true,
                     "tags": ["asdf"],
                     "ios": {
@@ -4416,8 +4478,7 @@ paths:
                     }
                  },
                  "identity_hints": {
-                    "user_id": "eDAXv7aQTQaAaUHOXuePLQ",
-                    "apid": "df6a6b50-9843-0304-d5a5-743f246a4946"
+                    "user_id": "eDAXv7aQTQaAaUHOXuePLQ"
                  },
                  "properties": {
                     "promotion_id": "64a03385-52ae-4217-873d-db791ff64225",
@@ -4821,7 +4882,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/channels/email/opt-in?app_key=ShwzPCCPS6CMlAZTMmMReQ&channel_id=c4D5tjvkNTzivY5ZCUhaBLQ&message_type=commercial&redirect=https%3A%2F%2Fdomain.example HTTP/1.1
+              GET /api/channels/email/opt-in?app_key=YOUR_APP_KEY&channel_id=c4D5tjvkNTzivY5ZCUhaBLQ&message_type=commercial&redirect=https%3A%2F%2Fdomain.example HTTP/1.1
           - lang: HTTP
             source: |
               HTTP/1.1 302 Found
@@ -5064,7 +5125,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/channels/email/unsubscribe/?app_key=Vl0wyG8kSyCyOUW98Wj4xg&channel_id=cXAdAfloQzeDdvMPnM3KKA&push_id=8a90b60f-f836-4ec6-82a4-05c3915b1c40&message_type=commercial&redirect=http%3A%2F%2Funsubscribe.urbanairship.com%2Femail%2Fsuccess.html&campaigns=shoes&campaigns=fall&group_id=79a122fc-48e2-4369-843f-a0973fd52d78 HTTP/1.1
+              GET /api/channels/email/unsubscribe/?app_key=YOUR_APP_KEY&channel_id=cXAdAfloQzeDdvMPnM3KKA&push_id=8a90b60f-f836-4ec6-82a4-05c3915b1c40&message_type=commercial&redirect=http%3A%2F%2Funsubscribe.urbanairship.com%2Femail%2Fsuccess.html&campaigns=shoes&campaigns=fall&group_id=79a122fc-48e2-4369-843f-a0973fd52d78 HTTP/1.1
               Accept: */*
           - lang: HTTP
             source: |
@@ -5274,8 +5335,6 @@ paths:
                        },
                        "tz": "America/Los_Angeles"
                     },
-
-                    "alias": "xxxx",
 
                     "set_tags": true,
                     "tags": ["asdf"]
@@ -6146,7 +6205,6 @@ paths:
                     "installed": true,
                     "push_address": null,
                     "named_user_id": null,
-                    "alias": null,
                     "tags": [],
                     "tag_groups": {
                        "ua_channel_type": [
@@ -6183,7 +6241,6 @@ paths:
                     "installed": true,
                     "push_address": null,
                     "named_user_id": null,
-                    "alias": null,
                     "tags": [],
                     "tag_groups": {
                        "ua_channel_type": [
@@ -6492,7 +6549,6 @@ paths:
                     "created": "2020-08-08T20:41:06",
                     "last_registration": "2020-05-01T18:00:27",
                     "named_user_id": "some_id_that_maps_to_your_systems",
-                    "alias": null,
                     "tags": [
                        "tag1",
                        "tag2"
@@ -6546,7 +6602,7 @@ paths:
                        "tag_group_2" : ["tag1", "tag2"]
                     },
 
-                    "open" {
+                    "open": {
                        "open_platform_name": "email",
                        "identifiers": {
                           "com.example.external_id": "df6a6b50-9843-7894-1235-12aed4489489"
@@ -6575,7 +6631,7 @@ paths:
                     "last_modified": "2014-05-01T18:00:27",
 
                     "tags": [],
-                    "tag_groups" {},
+                    "tag_groups": {},
 
                     "open": {
                        "open_platform_name": "email"
@@ -6598,7 +6654,6 @@ paths:
                     "opt_in": true,
                     "background": true,
                     "push_address": "FFFF",
-                    "alias": "xxxx",
                     "set_tags": true,
                     "tags": ["qwerty"],
                     "tag_changes": {
@@ -6663,7 +6718,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/contacts/associated_types/{contact_id}:
     get:
-      - description: Example list channels associated by Contact
+      - description: Example list channels associated by contact
         examples:
           - lang: HTTP
             source: |
@@ -6696,7 +6751,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/contacts/disassociate/{contact_id}:
     post:
-      - description: Example dissociate SMS channel from Contact by Channel ID
+      - description: Example dissociate SMS channel from contact by Channel ID
         examples:
           - lang: HTTP
             source: |
@@ -6710,7 +6765,7 @@ paths:
                 "channel_id": "c8d58c64-7eb5-40ad-ad51-d39e05335c48"
               }
         showMissingLanguagePlaceholders: true
-      - description: Example dissociate SMS channel from Contact by sender ID and MSISDN
+      - description: Example dissociate SMS channel from contact by sender ID and MSISDN
         examples:
           - lang: HTTP
             source: |
@@ -6725,7 +6780,7 @@ paths:
                 "msisdn": "15035551234"
               }
         showMissingLanguagePlaceholders: true
-      - description: Example dissociate email channel from Contact by email address
+      - description: Example dissociate email channel from contact by email address
         examples:
           - lang: HTTP
             source: |
@@ -6739,7 +6794,7 @@ paths:
                 "email_address": "abc@example.com"
               }
         showMissingLanguagePlaceholders: true
-      - description: Example dissociate email channel from Contact by email address with opt_out
+      - description: Example dissociate email channel from contact by email address with opt_out
         examples:
           - lang: HTTP
             source: |
@@ -6768,7 +6823,7 @@ paths:
               }
   /api/contacts/identify/v2:
     post:
-      - description: Example identify Contact by Named User ID
+      - description: Example identify contact by named user ID
         examples:
           - lang: HTTP
             source: |
@@ -6801,15 +6856,15 @@ paths:
                   "contact_id": "1a32e8c7-5a73-47c0-9716-99fd3d41924b",
                   "is_anonymous": true,
                   "channel_association_timestamp": "2022-12-29T10:15:30.00Z"
-                }
-                "token": "eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJLSHVNTE15RmVmYjdoeXR3WkV5VTF4IiwiaWF0IjoxNjAyMDY4NDIxLCJleHAiOjE2MDIwNjg0MjEsInN1YiI6InVMa2hSaktBYzVXQW1SdTFPTFZSVncifQ.kJPu3enbLJMX10xEtzlxxeum66R2ZWLs02OSVPhjomQ",
+                },
+                "token": "YOUR_TOKEN",
                 "token_expires_in": 3600000
               }
         showMissingLanguagePlaceholders: true
   /api/contacts/lookup/channel/{channel_id}:
     get:
       - description: |
-          Example get Contact ID from a Channel ID
+          Example get contact ID from a Channel ID
         examples:
           - lang: HTTP
             source: |
@@ -6830,7 +6885,7 @@ paths:
   /api/contacts/lookup/named_user/{named_user_id}:
     get:
       - description: |
-          Example get Contact ID from a Named User ID
+          Example get contact ID from a named user ID
         examples:
           - lang: HTTP
             source: |
@@ -6875,6 +6930,259 @@ paths:
 
               {
                  "ok": true
+              }
+        showMissingLanguagePlaceholders: true
+  /api/content/templates:
+    get:
+      - description: Example list content templates
+        examples:
+          - lang: HTTP
+            source: |
+              GET /api/content/templates HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok" : true,
+                  "count": 1,
+                  "total_count": 1,
+                  "content_templates": [
+                      {
+                        "id": "ef34a8d9-0ad7-491c-86b0-aea74da15161",
+                        "external_id": "welcome_message",
+                        "name": "Welcome Message",
+                        "description": "Our welcome message",
+                        "type": "email",
+                        "content": {
+                            "subject": "Welcome!",
+                            "html_body": "<html><body>Hi, {{first_name}}!</body></html>",
+                            "plaintext_body": "Hi, {{first_name}}!"
+                        },
+                        "created_at": "2020-08-17T11:10:02Z",
+                        "modified_at": "2020-08-17T11:10:02Z"
+                    }
+                  ],
+                  "next_page": null,
+                  "prev_page": null
+              }
+        showMissingLanguagePlaceholders: true
+    post:
+      - description: Example create email content template with snippet and feed references
+        examples:
+          - lang: HTTP
+            source: |
+              POST /api/content/templates HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                  "external_id": "welcome_message",
+                  "name": "Welcome Message",
+                  "description": "Our welcome message",
+                  "type": "email",
+                  "content": {
+                      "subject": "Welcome!",
+                      "html_body": "<html><body>Hi, {{first_name}}! {{>footer}}</body></html>",
+                      "plaintext_body": "Hi, {{first_name}}!"
+                  },
+                  "snippet_references": {
+                      "snippets": [
+                        {
+                          "name": "footer"
+                        }
+                      ]
+                  },
+                  "feed_references": {
+                      "feeds": [
+                        {
+                          "name": "featured_product"
+                        }
+                      ]
+                  }
+              }
+          - lang: HTTP
+            source: |
+              HTTP/1.1 201 Created
+              Location: https://go.urbanairship.com/api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok" : true,
+                  "operation_id" : "9ce808c8-7176-45dc-b79e-44aa74249a5a",
+                  "template_id": "ef34a8d9-0ad7-491c-86b0-aea74da15161"
+              }
+        showMissingLanguagePlaceholders: true
+  /api/content/templates/external/{type}/{external_id}:
+    delete:
+      - description: Example delete content template by external ID
+        examples:
+          - lang: HTTP
+            source: |
+              DELETE /api/content/templates/external/email/customer-defined-id HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok" : true,
+                  "operation_id" : "9ce808c8-7176-45dc-b79e-44aa74249a5a"
+              }
+        showMissingLanguagePlaceholders: true
+    get:
+      - description: Example look up content template by external ID
+        examples:
+          - lang: HTTP
+            source: |
+              GET /api/content/templates/external/email/customer-defined-id HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                "ok" : true,
+                "content_template":  {
+                  "id": "ef34a8d9-0ad7-491c-86b0-aea74da15161",
+                  "external_id": "customer-defined-id",
+                  "name": "Welcome Message",
+                  "description": "Our welcome message",
+                  "type": "email",
+                  "content": {
+                      "subject": "Welcome!",
+                      "html_body": "<html><body>Hi, {{first_name}}! {{>footer}}</body></html>",
+                      "plaintext_body": "Hi, {{first_name}}!"
+                  },
+                  "created_at": "2020-08-17T11:10:02Z",
+                  "modified_at": "2020-08-17T11:10:02Z",
+                  "snippets": [
+                    {
+                      "name": "footer"
+                    }
+                  ]
+                }
+              }
+        showMissingLanguagePlaceholders: true
+    put:
+      - description: Example update content template by external ID
+        examples:
+          - lang: HTTP
+            source: |
+              PUT /api/content/templates/external/email/customer-defined-id HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                  "name": "Welcome Message",
+                  "description": "Our welcome message",
+                  "content": {
+                      "subject": "Welcome!",
+                      "html_body": "<html><body>Hi, {{first_name}}!</body></html>",
+                      "plaintext_body": "Hi, {{first_name}}!"
+                  }
+              }
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok" : true,
+                  "operation_id" : "9ce808c8-7176-45dc-b79e-44aa74249a5a"
+              }
+        showMissingLanguagePlaceholders: true
+  /api/content/templates/{template_id}:
+    delete:
+      - description: Example delete content template
+        examples:
+          - lang: HTTP
+            source: |
+              DELETE /api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161 HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok" : true,
+                  "operation_id" : "9ce808c8-7176-45dc-b79e-44aa74249a5a"
+              }
+        showMissingLanguagePlaceholders: true
+    get:
+      - description: Example look up content template
+        examples:
+          - lang: HTTP
+            source: |
+              GET /api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161 HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                "ok" : true,
+                "content_template":  {
+                  "id": "ef34a8d9-0ad7-491c-86b0-aea74da15161",
+                  "external_id": "welcome_message",
+                  "name": "Welcome Message",
+                  "description": "Our welcome message",
+                  "type": "email",
+                  "content": {
+                      "subject": "Welcome!",
+                      "html_body": "<html><body>Hi, {{first_name}}! {{>footer}}</body></html>",
+                      "plaintext_body": "Hi, {{first_name}}!"
+                  },
+                  "created_at": "2020-08-17T11:10:02Z",
+                  "modified_at": "2020-08-17T11:10:02Z",
+                  "snippets": [
+                    {
+                      "name": "footer"
+                    }
+                  ]
+                }
+              }
+        showMissingLanguagePlaceholders: true
+    put:
+      - description: Example update content template
+        examples:
+          - lang: HTTP
+            source: |
+              PUT /api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161 HTTP/1.1
+              Authorization: Basic <master authorization string>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                  "name": "Welcome Message",
+                  "description": "Our welcome message",
+                  "content": {
+                      "subject": "Welcome!",
+                      "html_body": "<html><body>Hi, {{first_name}}!</body></html>",
+                      "plaintext_body": "Hi, {{first_name}}!"
+                  }
+              }
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok" : true,
+                  "operation_id" : "9ce808c8-7176-45dc-b79e-44aa74249a5a"
               }
         showMissingLanguagePlaceholders: true
   /api/create-and-send:
@@ -7535,7 +7843,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              POST /api/delivery-report/clx/IAbc_TTJRaabcs9-o_Gabc?sender=28444&channel_id=09a4bd41-a853-48d1-8061-d72f9336891d&send_id=1b50e0d6-1365-4290-b4c2-0d4be2cfd7a2&push_id=2eae9868-1fb3-47bc-991f-992fbfe5fdd1 HTTP/1.1
+              POST /api/delivery-report/clx/YOUR_APP_KEY?sender=28444&channel_id=09a4bd41-a853-48d1-8061-d72f9336891d&send_id=1b50e0d6-1365-4290-b4c2-0d4be2cfd7a2&push_id=2eae9868-1fb3-47bc-991f-992fbfe5fdd1 HTTP/1.1
               Content-type: application/json
 
               {
@@ -8205,7 +8513,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/in-app/app/IAbc_TTJRaabcs9-o_Gabc HTTP/1.1
+              GET /api/in-app/app/YOUR_APP_KEY HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
           - lang: HTTP
             source: |
@@ -8245,7 +8553,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              POST /api/in-app/IAbc_TTJRaabcs9-o_Gabc HTTP/1.1
+              POST /api/in-app/YOUR_APP_KEY HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
               Content-type: application/json
 
@@ -8299,7 +8607,7 @@ paths:
             source: |
               HTTP/1.1 201 Created
               Content-Type: application/vnd.urbanairship+json; version=3
-              Location: /api/in-app/IAbc_TTJRaabcs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924
+              Location: /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924
 
               {
                 "ok": true,
@@ -8313,7 +8621,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              PUT /api/in-app/app/af_ctTpJRuarzs9-o_Gkh3/eligibility HTTP/1.1
+              PUT /api/in-app/app/YOUR_APP_KEY/eligibility HTTP/1.1
               Authorization: Bearer <jwt bearer token string>
               Accept: application/vnd.urbanairship+json; version=3
               Content-Type: application/json
@@ -8341,7 +8649,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              POST /api/in-app/IAbc_TTJRaabcs9-o_Gabc/validate HTTP/1.1
+              POST /api/in-app/YOUR_APP_KEY/validate HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
               Content-type: application/json
 
@@ -8406,7 +8714,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              DELETE /api/in-app/IAbc_TTJRuarzs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1
+              DELETE /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
           - lang: HTTP
             source: |
@@ -8423,7 +8731,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/in-app/app/IAbc_TTJRaabcs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1
+              GET /api/in-app/app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
           - lang: HTTP
             source: |
@@ -8468,7 +8776,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              PUT /api/in-app/IAbc_TTJRaabcs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1
+              PUT /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
               Content-type: application/json
 
@@ -8504,12 +8812,68 @@ paths:
             source: |
               HTTP/1.1 200 Ok
               Content-Type: application/vnd.urbanairship+json; version=3
-              Location: /api/in-app/ISex_TTJRuarzs9-o_Gkhg/031de218-9fff-44d4-b348-de4b724bb924
+              Location: /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924
 
               {
                 "ok": true,
                 "message_id": "031de218-9fff-44d4-b348-de4b724bb924",
                 "operation_id": "03ca94a3-2b27-42f6-be7e-41efc2612cd4"
+              }
+        showMissingLanguagePlaceholders: true
+  /api/journeys/exit:
+    post:
+      - description: Example exit in-flight users from a Sequence
+        examples:
+          - lang: HTTP
+            source: |
+              POST /api/journeys/exit HTTP/1.1
+              Authorization: Bearer <authorization token>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                  "triggering_id" : "1fd202ca-9deb-4372-b052-dff0516f9518",
+                  "entrance_id" : "product_123"
+              }
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Length: 11
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok": true
+              }
+        showMissingLanguagePlaceholders: true
+  /api/journeys/trigger:
+    post:
+      - description: Example enter an audience into a Sequence
+        examples:
+          - lang: HTTP
+            source: |
+              POST /api/journeys/trigger HTTP/1.1
+              Authorization: Bearer <authorization token>
+              Accept: application/vnd.urbanairship+json; version=3
+              Content-Type: application/json
+
+              {
+                  "audience" : {
+                      "segment": "<segment-id>"
+                  },
+                  "triggering_id" : "1fd202ca-9deb-4372-b052-dff0516f9518",
+                  "entrance_id" : "product_123",
+                  "global_attributes" : {
+                      "product_name": "widget"
+                  }
+              }
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Length: 11
+              Content-Type: application/vnd.urbanairship+json; version=3
+
+              {
+                  "ok": true
               }
         showMissingLanguagePlaceholders: true
   /api/lists:
@@ -9057,7 +9421,7 @@ paths:
               }
   /api/named_users:
     get:
-      - description: Example Named User lookup
+      - description: Example named user lookup
         examples:
           - lang: HTTP
             source: |
@@ -9075,13 +9439,13 @@ paths:
               Response<NamedUserListingResponse> response = client.execute(request);
               NamedUserView namedUser = response.getBody().get().getNamedUserView().get();
 
-              // The Named User ID
+              // The named user ID
               String namedUserId = namedUser.getNamedUserId();
 
               // Map of tag groups and the associated sets of tags
               ImmutableMap<String, ImmutableSet<String>> namedUserTags = namedUser.getNamedUserTags();
 
-              // All channel objects associated with the Named User
+              // All channel objects associated with the named user
               ImmutableSet<ChannelView> channelViews = namedUser.getChannelViews();
           - lang: python
             source: |
@@ -9172,7 +9536,7 @@ paths:
                 }
               }
         showMissingLanguagePlaceholders: true
-      - description: Example Named User listing
+      - description: Example named user listing
         examples:
           - lang: HTTP
             source: |
@@ -9268,7 +9632,6 @@ paths:
                              "push_address": "FFFF",
                              "created": "2020-04-08T20:41:06",
                              "last_registration": "2020-05-01T18:00:27",
-                             "alias": "xxxx",
                              "tags": ["asdf"],
                              "ios": {
                                 "badge": 0,
@@ -9286,7 +9649,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /api/named_users/associate:
     post:
-      - description: Example associate an iOS channel with a Named User
+      - description: Example associate an iOS channel with a named user
         examples:
           - lang: HTTP
             source: |
@@ -9335,7 +9698,7 @@ paths:
               named_user.named_user_id = 'user-id-1234'
               named_user.associate(channel_id: 'df6a6b50-9843-0304-d5a5-743f246a4946', device_type: 'ios')
         showMissingLanguagePlaceholders: true
-      - description: Example associate a web channel with Named User (do not declare device type)
+      - description: Example associate a web channel with a named user (do not declare device type)
         examples:
           - lang: HTTP
             source: |
@@ -9383,7 +9746,7 @@ paths:
               named_user.named_user_id = 'user-id-1234'
               named_user.associate(channel_id: 'wf6a6b50-9843-0304-d5a5-743f246a4946')
         showMissingLanguagePlaceholders: true
-      - description: Example associate an email channel with Named User
+      - description: Example associate an email channel with a named user
         examples:
           - lang: HTTP
             source: |
@@ -9488,7 +9851,7 @@ paths:
               named_user = NamedUser(airship=client, named_user_id='user-id-1234')
               response = named_user.disassociate(channel_id='df6a6b50-9843-0304-d5a5-743f246a4946', device_type='ios')
         showMissingLanguagePlaceholders: true
-      - description: Example disassociate an email channel from Named User
+      - description: Example disassociate an email channel from a named user
         examples:
           - lang: HTTP
             source: |
@@ -9546,7 +9909,7 @@ paths:
   /api/named_users/scoped/{named_user_id}:
     post:
       - description: |
-          Example scoped Named User batch operations
+          Example scoped named user batch operations
         examples:
           - lang: HTTP
             source: |
@@ -9774,7 +10137,7 @@ paths:
   /api/named_users/{named_user_id}:
     post:
       - description: |
-          Create a Named User by associating an email and SMS channel and setting tags and attributes.
+          Create a named user by associating an email and SMS channel and setting tags and attributes.
         examples:
           - lang: HTTP
             source: |
@@ -10003,14 +10366,14 @@ paths:
                 "ok": true,
                 "payloads": [
                   {
-                    "app_key": "IAex_TTJRuarzs9-o_Gkhg",
+                    "app_key": "YOUR_APP_KEY",
                     "push_id": "8dc01402-a80c-4369-9bbf-1ca5ace9560e",
                     "payload": "(some Base64)",
                     "api_version": "IN_APP_V2",
                     "created_at": 1516303729093121980
                   },
                   {
-                    "app_key": "IAex_TTJRuarzs9-o_Gkhg",
+                    "app_key": "YOUR_APP_KEY",
                     "push_id": "fc5cee97-171d-4de1-b51e-44dfcdf02925",
                     "payload": "(some Base64)",
                     "api_version": "IN_APP_V2",
@@ -10030,7 +10393,7 @@ paths:
               Accept: application/vnd.urbanairship+json; version=3
 
               {
-                "app_key": "IAex_TTJRuarzs9-o_Gkhg",
+                "app_key": "YOUR_APP_KEY",
                 "push_id": "fada2a68-d941-41bc-b351-e63e04a7b8e2",
                 "payload": "(some Base64)",
                 "api_version": "IN_APP_V2",
@@ -10698,7 +11061,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/preference_forms/af_ctTpJRuarzs9-o_Gkh3 HTTP/1.1
+              GET /api/preference_forms/YOUR_APP_KEY HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
           - lang: HTTP
             source: |
@@ -10753,7 +11116,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              POST /api/preference-forms/af_ctTpJRuarzs9-o_Gkh3: HTTP/1.1
+              POST /api/preference-forms/YOUR_APP_KEY: HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
               Content-Type: application/json
 
@@ -11225,12 +11588,12 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              POST /api/remote-audience-check/app/af_ctTpJRuarzs9-o_Gkh3: HTTP/1.1
+              POST /api/remote-audience-check/app/YOUR_APP_KEY: HTTP/1.1
               Authorization: <Contact JWT Token>
               Accept: application/vnd.urbanairship+json; version=3
               Content-Type: application/json
               X-UA-Contact-ID: 7c24ebdd-ec06-47d4-9a56-ced8611f5b52
-              X-UA-Appkey: af_ctTpJRuarzs9-o_Gkh3
+              X-UA-Appkey: YOUR_APP_KEY
 
               {
                 "channel_id": "164c3a13-9c75-4ea9-be2c-1bed2c97f9c3",
@@ -11256,7 +11619,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/remote-config/app/IAex_TTJRuarzs9-o_Gkhg/common HTTP/1.1
+              GET /api/remote-config/app/YOUR_APP_KEY/common HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
           - lang: HTTP
             source: |
@@ -11295,7 +11658,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              POST /api/remote-config/app/IAex_TTJRuarzs9-o_Gkhg/common HTTP/1.1
+              POST /api/remote-config/app/YOUR_APP_KEY/common HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
               Content-type: application/json
 
@@ -11403,7 +11766,7 @@ paths:
               Authorization: <Json Web Token>
               Accept: application/vnd.urbanairship+json; version=3
               Content-Type: application/json
-              X-UA-Appkey: af_ctTpJRuarzs9-o_Gkh3
+              X-UA-Appkey: YOUR_APP_KEY
           - lang: HTTP
             source: |
               HTTP/1.1 200 OK
@@ -11488,7 +11851,7 @@ paths:
                                 }
                               },
                               "media": {
-                                "url": "https://hangar-dl.urbanairship.com/binary/public/af_ctTpJRuarzs9-o_Gkh3/8da2a9db-309e-4f11-85e2-b24429e9bcc0",
+                                "url": "https://hangar-dl.urbanairship.com/binary/public/YOUR_APP_KEY/8da2a9db-309e-4f11-85e2-b24429e9bcc0",
                                 "type": "image",
                                 "description": "Image"
                               },
@@ -11519,7 +11882,7 @@ paths:
                           ],
                           "edit_grace_period": 14,
                           "requires_eligibility": true,
-                          "reporting_metadata": "{"pipeline_id":"7f6c8656-adfe-480f-98c3-d9fa45434e39"}"
+                          "reporting_metadata": "{\"pipeline_id\":\"7f6c8656-adfe-480f-98c3-d9fa45434e39\"}"
                         }
                       ]
                     }
@@ -11534,7 +11897,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/remote-data/app/af_ctTpJRuarzs9-o_Gkh3/android HTTP/1.1
+              GET /api/remote-data/app/YOUR_APP_KEY/android HTTP/1.1
               Accept: application/vnd.urbanairship+json; version=3
               Content-Type: application/json
           - lang: HTTP
@@ -11553,7 +11916,7 @@ paths:
                         "wallet_url": "https://wallet-api.urbanairship.com",
                         "metered_usage_url": "https://metered-usage-api.urbanairship.com"
                       },
-                      "additional_audience_check": {"url": "https://device-api.urbanairship.com/api/remote-audience-check/app/af_ctTpJRuarzs9-o_Gkh3"},
+                      "additional_audience_check": {"url": "https://device-api.urbanairship.com/api/remote-audience-check/app/YOUR_APP_KEY"},
                       "testkey": "prod",
                       "fetch_contact_remote_data": false
                     }
@@ -11611,7 +11974,7 @@ paths:
                                 "actions": {"open_external_url_action": "https://google.fr"}
                               },
                               "media": {
-                                "url": "https://hangar-dl.urbanairship.com/binary/public/af_ctTpJRuarzs9-o_Gkh3/8da2a9db-309e-4f11-85e2-b24429e9bcc0",
+                                "url": "https://hangar-dl.urbanairship.com/binary/public/YOUR_APP_KEY/8da2a9db-309e-4f11-85e2-b24429e9bcc0",
                                 "type": "image",
                                 "description": "Image"
                               },
@@ -11708,7 +12071,7 @@ paths:
               Content-Type: application/json
 
               {
-                  "app_key": "Wz9d8TlSWk0lZTAwzHA2qc",
+                  "app_key": "YOUR_APP_KEY",
                   "start": "2020-06-02T20:47:20",
                   "end": "2023-01-31T20:47:20",
                   "limit": 10,
@@ -11939,7 +12302,7 @@ paths:
               Authorization: Basic <authorization string>
               Accept: application/vnd.urbanairship+json; version=3
         showMissingLanguagePlaceholders: true
-      - description: Response with Group ID parameter
+      - description: Response with group ID parameter
         examples:
           - lang: HTTP
             source: |
@@ -11974,7 +12337,7 @@ paths:
               Authorization: Basic <authorization string>
               Accept: application/vnd.urbanairship+json; version=3
         showMissingLanguagePlaceholders: true
-      - description: Response with Push ID parameter
+      - description: Response with push ID parameter
         examples:
           - lang: HTTP
             source: |
@@ -13045,7 +13408,7 @@ paths:
         examples:
           - lang: HTTP
             source: |
-              GET /api/reports/web/interaction?app_key=ZGIwZTY3YjEtZTRiMi00ZG&start=2020-05-01T10:00&end=2020-05-03T20:00&precision=HOURLY HTTP/1.1
+              GET /api/reports/web/interaction?app_key=YOUR_APP_KEY&start=2020-05-01T10:00&end=2020-05-03T20:00&precision=HOURLY HTTP/1.1
               Authorization: Basic <authorization string>
               Accept: application/vnd.urbanairship+json; version=3
           - lang: java
@@ -13078,7 +13441,7 @@ paths:
               Content-Type: application/vnd.urbanairship+json; version=3
 
               {
-                 "app_key": "ZGIwZTY3YjEtZTRiMi00ZG",
+                 "app_key": "YOUR_APP_KEY",
                  "end": "2020-05-03 00:00:00",
                  "precision": "HOURLY",
                  "start": "2020-05-01 00:00:00",
@@ -13446,7 +13809,7 @@ paths:
                           "device_types": [ "ios", "android" ]
                        },
                        "push_ids": [ "83046227-9b06-4114-9f23-0df349792bbd" ]
-                    }
+                    },
                     {
                         "url": "https://go.urbanairship.com/api/schedules/6c7c9bf5-cb2b-47cb-b27f-f85981391c4e",
                         "schedule": {
@@ -13507,10 +13870,10 @@ paths:
                   ],
                   "schedules": [
                     {
-                          "url": "http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109"
+                          "url": "http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109",
                           "schedule": {
                               "scheduled_time" : "2024-11-07T12:00:00"
-                          }
+                          },
                           "push": {
                               "audience": {
                                 "bulk_id" : "36d5a261-0454-40f5-b952-942c4b2b0f22"
@@ -16108,7 +16471,6 @@ paths:
               Content-Type: application/json
 
               {
-                "alias": "user1",
                 "tags": ["tag1", "tag2"],
                 "android_channels": ["6368d6f8-5c69-4f91-bec4-870239ab28bf"],
                 "ua_device_id": "<UUID identifier>"
@@ -16123,10 +16485,8 @@ paths:
                 "user_url": "https://go.urbanairship.com/api/user/example_user_id/",
                 "user_id": "example_user_id",
                 "password": "example_password",
-                "apids": ["6368d6f8-5c69-4f91-bec4-870239ab28bf"],
                 "ios_channels": ["6368d6f8-5c69-4f91-bec4-870239ab28bf"],
-                "device_tokens": [],
-                "device_pins": []
+                "device_tokens": []
               }
         showMissingLanguagePlaceholders: true
   /api/user/messages/batch-delete:
@@ -16248,9 +16608,7 @@ paths:
                 "user_url": "https://go.urbanairship.com/api/user/example_user_id/",
                 "user_id": "example_user_id",
                 "ios_channels": ["6368d6f8-5c69-4f91-bec4-870239ab28bf"],
-                "device_tokens": [],
-                "device_pins": [],
-                "apids": []
+                "device_tokens": []
               }
         showMissingLanguagePlaceholders: true
     post:
@@ -16792,7 +17150,7 @@ paths:
               Accept: application/json
               Authorization: Basic <base64 encoded string of "client_id:client_secret">
 
-              grant_type=client_credentials&sub=app:JQIMcndxIHWy2QISpt1SpZ&scope=chn&scope=nu&ipaddr=24.20.40.0/24&ipaddr=2001:4860:4860::8888/32
+              grant_type=client_credentials&sub=app:YOUR_APP_KEY&scope=chn&scope=nu&ipaddr=24.20.40.0/24&ipaddr=2001:4860:4860::8888/32
           - lang: java
             source: |
               OAuthCredentials oAuthCredentials = OAuthCredentials.newBuilder("<client_id>")
@@ -16888,7 +17246,7 @@ paths:
         showMissingLanguagePlaceholders: true
   /verify/public_key/{kid}:
     get:
-      - description: Example key verification
+      - description: Example verify public key
         examples:
           - lang: HTTP
             source: |

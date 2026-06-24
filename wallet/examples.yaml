@@ -227,8 +227,8 @@ components:
                       "flightExternalId": "flight123ExtId",
                       "fields": {
                         "flightNumber": { "value": "815" },
-                        "airlineCode": { "value": "WN" },
-                        "airlineName": { "value": "Southwest Airlines" },
+                        "airlineCode": { "value": "OA" },
+                        "airlineName": { "value": "Sabine Airlines" },
                         "departureAirport": {
                           "label": "San Francisco",
                           "value": "SFO"
@@ -989,8 +989,8 @@ components:
                 "passGroups": ["sfo-pdx-20180730"],
                 "fields": {
                   "flightNumber": { "value": "815" },
-                  "airlineCode": { "value": "WN" },
-                  "airlineName": { "value": "Southwest Airlines" },
+                  "airlineCode": { "value": "OA" },
+                  "airlineName": { "value": "Sabine Airlines" },
                   "departureAirport": {
                     "label": "San Francisco",
                     "value": "SFO"
@@ -1029,11 +1029,11 @@ components:
                     },
                     "airlineCode": {
                       "label": "Airline Code",
-                      "value": "WN"
+                      "value": "OA"
                     },
                     "airlineName": {
                       "label": "Airline Name",
-                      "value": "Southwest Airlines"
+                      "value": "Sabine Airlines"
                     },
                     "departureAirport": {
                       "label": "San Francisco",
@@ -1075,7 +1075,7 @@ components:
           - lang: json
             source: |
               {
-                  "airlineCode": "AP",
+                  "airlineCode": "OA",
                   "flightNumber": 2214,
                   "originalBoardingDate": "2025-03-19T20:30:00-08:00",
                   "currentBoardingDate": "2025-03-19T20:59:00-08:00",
@@ -1519,6 +1519,14 @@ components:
                 "name": "Loyalty Card",
                 "disabled": "False"
               }
+    linkedPasses:
+      - description: Example linked passes object
+        examples:
+          - lang: json
+            source: |
+              {
+                 "passURIs" : ["v1/pass/adaptive/fqsl9UyW3O7", "v1/pass/12345"]
+              }
     locationObject:
       - description: Example location object
         examples:
@@ -1823,7 +1831,7 @@ paths:
                       {
                           "id": "12adce15-5c52-479d-8620-54c21cd851aa",
                           "vendor": "Apple",
-                          "baseName", "pass.wallet.myName.anotherTest",
+                          "baseName": "pass.wallet.myName.anotherTest",
                           "name": "editable name1",
                           "comment": "a plain text description of this cert",
                           "teamIdentifier": "OGKV57GD95",
@@ -2555,8 +2563,8 @@ paths:
                 "passGroups": ["sfo-pdx-20180730"],
                 "fields": {
                   "flightNumber": { "value": "815" },
-                  "airlineCode": { "value": "WN" },
-                  "airlineName": { "value": "Southwest Airlines" },
+                  "airlineCode": { "value": "OA" },
+                  "airlineName": { "value": "Sabine Airlines" },
                   "departureAirport": {
                     "label": "San Francisco",
                     "value": "SFO"
@@ -2597,11 +2605,11 @@ paths:
                   },
                   "airlineCode": {
                     "label": "Airline Code",
-                    "value": "WN"
+                    "value": "OA"
                   },
                   "airlineName": {
                     "label": "Airline Name",
-                    "value": "Southwest Airlines"
+                    "value": "Sabine Airlines"
                   },
                   "departureAirport": {
                     "label": "San Francisco",
@@ -2651,8 +2659,8 @@ paths:
                 "passGroups": ["sfo-pdx-20250319"],
                 "fields": {
                   "flightNumber": { "value": "815" },
-                  "airlineCode": { "value": "WN" },
-                  "airlineName": { "value": "Southwest Airlines" },
+                  "airlineCode": { "value": "OA" },
+                  "airlineName": { "value": "Sabine Airlines" },
                   "departureAirport": {
                     "label": "San Francisco",
                     "value": "SFO"
@@ -2670,7 +2678,7 @@ paths:
                   "arrivalTime": { "value": "2025-03-20T09:30:00" },
                   "flightStatus": { "value": "scheduled" },
                   "semantics" :{
-                        "airlineCode": "WN",
+                        "airlineCode": "OA",
                         "flightNumber": 2214,
                         "originalBoardingDate": "2025-03-19T20:30:00-08:00",
                         "originalDepartureDate": "2025-03-20T02:00:00-05:00",
@@ -2719,11 +2727,11 @@ paths:
                   },
                   "airlineCode": {
                     "label": "Airline Code",
-                    "value": "WN"
+                    "value": "OA"
                   },
                   "airlineName": {
                     "label": "Airline Name",
-                    "value": "Southwest Airlines"
+                    "value": "Sabine Airlines"
                   },
                   "departureAirport": {
                     "label": "San Francisco",
@@ -2758,7 +2766,7 @@ paths:
                     "value": "scheduled"
                   },
                   "semantics" :{
-                        "airlineCode": "WN",
+                        "airlineCode": "OA",
                         "flightNumber": 2214,
                         "originalBoardingDate": "2025-03-19T20:30:00-08:00",
                         "originalDepartureDate": "2025-03-20T02:00:00-05:00",
@@ -2870,11 +2878,11 @@ paths:
                   },
                   "airlineCode": {
                     "label": "Airline Code",
-                    "value": "WN"
+                    "value": "OA"
                   },
                   "airlineName": {
                     "label": "Airline Name",
-                    "value": "Southwest Airlines"
+                    "value": "Sabine Airlines"
                   },
                   "departureAirport": {
                     "label": "San Francisco",
@@ -2909,7 +2917,7 @@ paths:
                     "value": "scheduled"
                   },
                   "semantics" :{
-                        "airlineCode": "WN",
+                        "airlineCode": "OA",
                         "flightNumber": 2214,
                         "originalBoardingDate": "2025-03-19T20:30:00-08:00",
                         "originalDepartureDate": "2025-03-20T02:00:00-05:00",
@@ -2966,11 +2974,11 @@ paths:
                   },
                   "airlineCode": {
                     "label": "Airline Code",
-                    "value": "WN"
+                    "value": "OA"
                   },
                   "airlineName": {
                     "label": "Airline Name",
-                    "value": "Southwest Airlines"
+                    "value": "Sabine Airlines"
                   },
                   "departureAirport": {
                     "label": "San Francisco",
@@ -3044,11 +3052,11 @@ paths:
                   },
                   "airlineCode": {
                     "label": "Airline Code",
-                    "value": "WN"
+                    "value": "OA"
                   },
                   "airlineName": {
                     "label": "Airline Name",
-                    "value": "Southwest Airlines"
+                    "value": "Sabine Airlines"
                   },
                   "departureAirport": {
                     "label": "San Francisco",
@@ -3123,11 +3131,11 @@ paths:
                   },
                   "airlineCode": {
                     "label": "Airline Code",
-                    "value": "WN"
+                    "value": "OA"
                   },
                   "airlineName": {
                     "label": "Airline Name",
-                    "value": "Southwest Airlines"
+                    "value": "Sabine Airlines"
                   },
                   "departureAirport": {
                     "label": "San Francisco",
@@ -3502,8 +3510,8 @@ paths:
                       "flightExternalId": "flight123ExtId",
                       "fields": {
                         "flightNumber": { "value": "815" },
-                        "airlineCode": { "value": "WN" },
-                        "airlineName": { "value": "Southwest Airlines" },
+                        "airlineCode": { "value": "OA" },
+                        "airlineName": { "value": "Sabine Airlines" },
                         "departureAirport": {
                           "label": "San Francisco",
                           "value": "SFO"
@@ -4525,7 +4533,7 @@ paths:
                        },
                        {
                           "key": "back0",
-                          "label": "Built with Airship Mobile Wallet",
+                          "label": "Built with Airship",
                           "value": "Find out more and create your own passes at https://www.airship.com/channels/mobile-wallet/"
                        }
                     ],
@@ -4724,6 +4732,29 @@ paths:
                           "longitude":-122.374
                       }
                   ]
+              }
+  /pass/template/id/{templateExternalId}/id/{passExternalId}/linkedPasses:
+    post:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              POST /v1/pass/template/id/custom_test_template_id/id/custom_test_pass_id/linkedPasses HTTP/1.1
+              Authorization: Basic <authorization string>
+              Content-Type: application/json
+
+              {
+                 "passURIs" : ["v1/pass/adaptive/gqsl9UyW3O8", "v1/pass/adaptive/Zzq5O7lf263"]
+              }
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json
+
+              {
+                  "ticketId": 12347
               }
   /pass/template/{templateId}/download:
     get:
@@ -5227,6 +5258,29 @@ paths:
               GET /v1/pass/template/123/id/mypass/download HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2 
+  /pass/template/{templateId}/id/{passExternalId}/linkedPasses:
+    post:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              POST /v1/pass/template/12345/id/test_custom_pass_id/linkedPasses HTTP/1.1
+              Authorization: Basic <authorization string>
+              Content-Type: application/json
+
+              {
+                 "passURIs" : ["v1/pass/adaptive/gqsl9UyW3O8", "v1/pass/adaptive/Yzq5O7lf263"]
+              }
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json
+
+              {
+                  "ticketId": 12346
+              }
   /pass/template/{templateId}/id/{passExternalId}/location/{locationId}:
     delete:
       - description: Example request
@@ -5386,7 +5440,9 @@ paths:
 
               {
                 "label": "Last Notification",
-                "value": "20% off any one regular priced item"
+                "value": "20% off any one regular priced item",
+                "startTime": "2026-03-26T12:00:00Z",
+                "endTime": "2026-03-26T13:00:00Z"
               }
       - description: Response
         examples:
@@ -6008,6 +6064,29 @@ paths:
               GET /v1/pass/123/download HTTP/1.1
               Authorization: Basic <Base64 key>
               Api-Revision: 1.2
+  /pass/{passId}/linkedPasses:
+    post:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              POST /v1/pass/12345/linkedPasses HTTP/1.1
+              Authorization: Basic <authorization string>
+              Content-Type: application/json
+
+              {
+                 "passURIs" : ["v1/pass/adaptive/fqsl9UyW3O7", "v1/pass/adaptive/Xzq5O7lf262"]
+              }
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json
+
+              {
+                  "ticketId": 12345
+              }
   /pass/{passId}/location/{passLocationId}:
     delete:
       - description: Example request
@@ -6167,7 +6246,9 @@ paths:
 
               {
                 "label": "Last Notification",
-                "value": "20% off any one regular priced item"
+                "value": "20% off any one regular priced item",
+                "startTime": "2026-03-26T12:00:00Z",
+                "endTime": "2026-03-26T13:00:00Z"  
               }
       - description: Response
         examples:
@@ -6297,7 +6378,7 @@ paths:
                        },
                        {
                           "key": "back0",
-                          "label": "Built with Airship Mobile Wallet",
+                          "label": "Built with Airship",
                           "value": "Find out more and create your own passes at https://www.airship.com/channels/mobile-wallet/"
                        }
                     ],
@@ -7822,7 +7903,9 @@ paths:
 
               {
                 "label": "Last Notification",
-                "value": "20% off any one regular priced item"
+                "value": "20% off any one regular priced item",
+                "startTime": "2026-03-26T12:00:00Z",
+                "endTime": "2026-03-26T13:00:00Z"
               }
       - description: Response
         examples:
@@ -7980,7 +8063,9 @@ paths:
 
               {
                 "label": "Last Notification",
-                "value": "20% off any one regular priced item"
+                "value": "20% off any one regular priced item",
+                "startTime": "2026-03-26T12:00:00Z",
+                "endTime": "2026-03-26T13:00:00Z"
               }
       - description: Response
         examples:
@@ -9911,7 +9996,7 @@ paths:
                   "fields": {
                       "image": {
                           "fieldType": "titleModule",
-                          "value": "Image description for title image"
+                          "value": "Image description for title image",
                           "formatType": "String",
                           "label": "http://storage.googleapis.com/wallet-stag-storage-bucket/1000002/images/ff9367b7cff7cad7fa67ae2c871485e3befae602_6fc517eff2d76511c062913946b9149876a17623_Metro-Logo-1200x1200.png",
                           "hideEmpty": false,
@@ -10015,4 +10100,39 @@ paths:
                  "children": {
                     "...": "..."
                  }
+              }
+  /token:
+    post:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              POST /token HTTP/1.1
+              Host: oauth2.asnapius.com
+              Authorization: Basic <Base64 client_id:client_secret>
+              Accept: application/json
+              Content-Type: application/x-www-form-urlencoded
+
+              grant_type=client_credentials&scope=wtmp%20wprj&sub=app:<project_id>
+          - lang: HTTP
+            source: |
+              POST /token HTTP/1.1
+              Host: oauth2.asnapius.com
+              Authorization: Basic <Base64 client_id:client_secret>
+              Accept: application/json
+              Content-Type: application/x-www-form-urlencoded
+
+              grant_type=assertion&assertion=<ES384 encoded JWT>
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json
+
+              {
+                "access_token": "...",
+                "expires_in": 3600,
+                "scope": "wtmp wprj",
+                "token_type": "Bearer"
               }

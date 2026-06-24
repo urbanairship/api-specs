@@ -1,10 +1,10 @@
 {
-  "description": "Occurs when a contact is uninstalled, associated with a channel or Named User, or dissociated from a \nchannel or Named User.\n",
+  "description": "Occurs when a contact is uninstalled, associated with a channel or named user, or dissociated from a \nchannel or named user.\n",
   "properties": {
     "body": {
       "properties": {
         "change_type": {
-          "description": "Describes the reason the contact change event was emitted.\n\n* `ASSOCIATION`: The contact was associated to a channel or Named User.\n* `DISSOCIATION`: The contact was dissociated from a channel or Named User.\n* `UNINSTALL`: The contact was uninstalled.",
+          "description": "Describes the reason the contact change event was emitted.\n\n* `ASSOCIATION`: The contact was associated to a channel or named user.\n* `DISSOCIATION`: The contact was dissociated from a channel or named user.\n* `UNINSTALL`: The contact was uninstalled.",
           "enum": [
             "ASSOCIATION",
             "DISSOCIATION",
@@ -21,7 +21,7 @@
           "type": "string"
         },
         "named_user_id": {
-          "description": "An optional string that represents the Named User ID related to the change event.",
+          "description": "An optional string that represents the named user ID related to the change event.",
           "type": "string"
         }
       },
@@ -67,23 +67,28 @@
             },
             "iana_timezone": {
               "description": "The time zone of the device.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "locale_country_code": {
               "description": "The ISO 3166-1 country code as defined in device settings.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "locale_language_code": {
               "description": "The ISO 639-1 two-letter language code reflecting the language that the device is set to.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "locale_timezone": {
               "description": "The device's time zone offset in seconds from UTC.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "locale_variant": {
               "description": "The language variant.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "location_enabled": {
               "description": "Indicates whether or not the device has location services enabled.",
@@ -102,22 +107,26 @@
                 "FOREGROUND_ALLOWED",
                 "UNPROMPTED"
               ],
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "push_opt_in": {
               "description": "Indicates whether or not the device is opted into push notifications.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "ua_sdk_version": {
               "description": "The version of the Airship SDK used in the app.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             }
           },
           "type": "object"
         },
         "channel": {
           "description": "The unique, platform-agnostic channel identifier for a device.",
-          "type": "string"
+          "type": "string",
+          "x-inline-component": true
         },
         "device_type": {
           "description": "The platform that the channel is on.",
@@ -167,8 +176,9 @@
           "type": "string"
         },
         "named_user_id": {
-          "description": "The Named User identifier for the device.",
-          "type": "string"
+          "description": "The named user identifier for the device.",
+          "type": "string",
+          "x-inline-component": true
         }
       },
       "required": [
@@ -181,19 +191,23 @@
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "occurred": {
       "description": "When the event occurred.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "offset": {
       "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "processed": {
       "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "type": {
       "enum": [
@@ -205,12 +219,14 @@
       "description": "The current state of the user when the event is emitted, including the contact ID and an optional named user ID.",
       "properties": {
         "contact_id": {
-          "description": "The Contact identifier for the device.",
-          "type": "string"
+          "description": "The contact identifier for the device.",
+          "type": "string",
+          "x-inline-component": true
         },
         "named_user_id": {
-          "description": "The Named User identifier for the device.",
-          "type": "string"
+          "description": "The named user identifier for the device.",
+          "type": "string",
+          "x-inline-component": true
         }
       },
       "title": "User",

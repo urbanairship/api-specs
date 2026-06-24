@@ -11,6 +11,13 @@
           },
           "type": "array"
         },
+        "current": {
+          "description": "An array of subscription list IDs the user is enrolled in after\nthe change.\n",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "enrolled": {
           "description": "An array of subscription list IDs which were enrolled. Present\nonly when an enrollment occurred.\n",
           "items": {
@@ -19,7 +26,7 @@
           "type": "array"
         },
         "scope": {
-          "description": "The scope at which the operation was performed; only present on events\nwhich target a Named User.\n",
+          "description": "The scope at which the operation was performed; only present on events\nwhich target a named user.\n",
           "enum": [
             "app",
             "web",
@@ -27,10 +34,12 @@
             "sms"
           ],
           "title": "Scope",
-          "type": "string"
+          "type": "string",
+          "x-inline-component": true
         }
       },
-      "type": "object"
+      "type": "object",
+      "x-inline-component": true
     },
     "device": {
       "oneOf": [
@@ -74,23 +83,28 @@
                 },
                 "iana_timezone": {
                   "description": "The time zone of the device.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_country_code": {
                   "description": "The ISO 3166-1 country code as defined in device settings.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_language_code": {
                   "description": "The ISO 639-1 two-letter language code reflecting the language that the device is set to.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_timezone": {
                   "description": "The device's time zone offset in seconds from UTC.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "locale_variant": {
                   "description": "The language variant.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "location_enabled": {
                   "description": "Indicates whether or not the device has location services enabled.",
@@ -109,22 +123,26 @@
                     "FOREGROUND_ALLOWED",
                     "UNPROMPTED"
                   ],
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "push_opt_in": {
                   "description": "Indicates whether or not the device is opted into push notifications.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 },
                 "ua_sdk_version": {
                   "description": "The version of the Airship SDK used in the app.",
-                  "type": "string"
+                  "type": "string",
+                  "x-inline-component": true
                 }
               },
               "type": "object"
             },
             "channel": {
               "description": "The unique, platform-agnostic channel identifier for a device.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "device_type": {
               "description": "The platform that the channel is on.",
@@ -174,8 +192,9 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The Named User identifier for the device.",
-              "type": "string"
+              "description": "The named user identifier for the device.",
+              "type": "string",
+              "x-inline-component": true
             }
           },
           "required": [
@@ -191,7 +210,8 @@
           "properties": {
             "channel": {
               "description": "The unique, platform-agnostic channel identifier for a device.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "device_type": {
               "description": "The platform that the channel is on.",
@@ -201,8 +221,9 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The Named User identifier for the device.",
-              "type": "string"
+              "description": "The named user identifier for the device.",
+              "type": "string",
+              "x-inline-component": true
             }
           },
           "required": [
@@ -210,7 +231,8 @@
             "device_type"
           ],
           "title": "Web device information without `attributes`",
-          "type": "object"
+          "type": "object",
+          "x-inline-component": true
         },
         {
           "description": "Information about the SMS or email device related to an event.",
@@ -232,7 +254,7 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The Named User the channel is associated with.",
+              "description": "The named user the channel is associated with.",
               "type": "string"
             }
           },
@@ -249,7 +271,8 @@
           "properties": {
             "channel": {
               "description": "The unique, platform-agnostic channel identifier for a device.",
-              "type": "string"
+              "type": "string",
+              "x-inline-component": true
             },
             "device_type": {
               "description": "The platform that the channel is on.",
@@ -259,8 +282,9 @@
               "type": "string"
             },
             "named_user_id": {
-              "description": "The Named User identifier for the device.",
-              "type": "string"
+              "description": "The named user identifier for the device.",
+              "type": "string",
+              "x-inline-component": true
             },
             "open_platform_name": {
               "description": "If `device_type` is set to `OPEN`, this field shows the full name of the platform.",
@@ -275,14 +299,15 @@
           "description": "User information for events which occur at the user level.",
           "properties": {
             "named_user_id": {
-              "description": "The Named User identifier for the device.",
-              "type": "string"
+              "description": "The named user identifier for the device.",
+              "type": "string",
+              "x-inline-component": true
             }
           },
           "required": [
             "named_user_id"
           ],
-          "title": "Named User",
+          "title": "Named user",
           "type": "object",
           "x-schema-tag": "Device information"
         }
@@ -290,19 +315,23 @@
     },
     "id": {
       "description": "Uniquely identifies an event. The data stream will occasionally send duplicate events. Duplicate events will have the same `id`, `type`, `occurred`, `device`, and `body` values but different `offset` and `processed` values. You should use the `id` to deduplicate.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "occurred": {
       "description": "When the event occurred.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "offset": {
       "description": "An identifier of a location in the stream; used to resume the stream after severing a connection. If you open a stream using the offset value, the stream will resume with the next element in the stream. You should store this value as a string so that you can easily resume the stream if it ends for any reason.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "processed": {
       "description": "When the event was ingested by Airship. There may be some latency between when the event occurred, and when it was processed.",
-      "type": "string"
+      "type": "string",
+      "x-inline-component": true
     },
     "type": {
       "enum": [
@@ -314,12 +343,14 @@
       "description": "The current state of the user when the event is emitted, including the contact ID and an optional named user ID.",
       "properties": {
         "contact_id": {
-          "description": "The Contact identifier for the device.",
-          "type": "string"
+          "description": "The contact identifier for the device.",
+          "type": "string",
+          "x-inline-component": true
         },
         "named_user_id": {
-          "description": "The Named User identifier for the device.",
-          "type": "string"
+          "description": "The named user identifier for the device.",
+          "type": "string",
+          "x-inline-component": true
         }
       },
       "title": "User",

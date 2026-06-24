@@ -1,17 +1,6 @@
 {
   "components": {
     "schemas": {
-      "absoluteWindow": [
-        {
-          "description": "Example absolute time window",
-          "examples": [
-            {
-              "lang": "json",
-              "source": "{ \"audience\":\n   {\n      \"date\": {\n         \"days\": {\n            \"start\": \"2020-01-01\",\n            \"end\": \"2020-01-15\"\n         }\n      }\n   }\n}\n"
-            }
-          ]
-        }
-      ],
       "actionsObject": [
         {
           "description": "Example add custom event action",
@@ -159,6 +148,17 @@
           ]
         }
       ],
+      "appAndWebTemplatesObject": [
+        {
+          "description": "Example app and web template object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"title\": \"Shoe sale on {{level}} floor!\",\n    \"alert\": \"All the shoes are on sale {{name}}!\",\n    \"summary\": \"Don't miss out!\",\n    \"icon\": \"shoes\"\n}\n"
+            }
+          ]
+        }
+      ],
       "atomicSelector": [
         {
           "description": "Example audience selection by tag",
@@ -188,7 +188,7 @@
           ]
         },
         {
-          "description": "Example audience of Named Users",
+          "description": "Example audience of named users",
           "examples": [
             {
               "lang": "json",
@@ -208,7 +208,7 @@
       ],
       "attributes": [
         {
-          "description": "Example Attributes object",
+          "description": "Example attributes object",
           "examples": [
             {
               "lang": "json",
@@ -241,7 +241,7 @@
       ],
       "banListParametersObject": [
         {
-          "description": "Ban List parameters",
+          "description": "Ban list parameters",
           "examples": [
             {
               "lang": "json",
@@ -344,7 +344,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"channel_id\": \"b8f9b663-0a3b-cf45-587a-be880946e881\",\n   \"device_type\": \"ios\",\n   \"installed\": true,\n   \"background\": true,\n   \"opt_in\": false,\n   \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n   \"created\": \"2020-08-08T20:41:06\",\n   \"last_registration\": \"2020-05-01T18:00:27\",\n   \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n   \"alias\": null,\n   \"tags\": [\n      \"tag1\",\n      \"tag2\"\n   ],\n\n   \"tag_groups\": {\n      \"sports fan\": [\"Federer fan\", \"Messi fan\"],\n      \"music fan\": [ \"Beyonce\", \"Muse\" ],\n      \"ua_locale_country\": [ \"US\" ],\n      \"ua_locale_language\": [ \"en\" ]\n   },\n\n   \"ios\": {\n      \"badge\": 0,\n      \"quiettime\": {\n         \"start\": null,\n         \"end\": null\n      },\n      \"tz\": \"America/Los_Angeles\"\n   }\n}\n"
+              "source": "{\n   \"channel_id\": \"b8f9b663-0a3b-cf45-587a-be880946e881\",\n   \"device_type\": \"ios\",\n   \"installed\": true,\n   \"background\": true,\n   \"opt_in\": false,\n   \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n   \"created\": \"2020-08-08T20:41:06\",\n   \"last_registration\": \"2020-05-01T18:00:27\",\n   \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n   \"tags\": [\n      \"tag1\",\n      \"tag2\"\n   ],\n\n   \"tag_groups\": {\n      \"sports fan\": [\"Federer fan\", \"Messi fan\"],\n      \"music fan\": [ \"Beyonce\", \"Muse\" ],\n      \"ua_locale_country\": [ \"US\" ],\n      \"ua_locale_language\": [ \"en\" ]\n   },\n\n   \"ios\": {\n      \"badge\": 0,\n      \"quiettime\": {\n         \"start\": null,\n         \"end\": null\n      },\n      \"tz\": \"America/Los_Angeles\"\n   }\n}\n"
             }
           ]
         }
@@ -355,7 +355,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{  \"channel\" : {\n      \"device_type\": \"ios\",\n      \"opt_in\": true,\n      \"background\": true,\n      \"push_address\": \"FFFF\",\n      \"set_tags\": true,\n      \"tags\": [\"asdf\"],\n      \"ios\": { \"badge\": 0,\n               \"quiettime\": { \"start\": \"22:00\", \"end\": \"06:00\" },\n               \"tz\": \"America/Los_Angeles\" } },\n   \"identity_hints\": {\n      \"user_id\": \"eDAXv7aQTQaAaUHOXuePLQ\",\n      \"apid\": \"df6a6b50-9843-0304-d5a5-743f246a4946\" } }\n"
+              "source": "{  \"channel\" : {\n      \"device_type\": \"ios\",\n      \"opt_in\": true,\n      \"background\": true,\n      \"push_address\": \"FFFF\",\n      \"set_tags\": true,\n      \"tags\": [\"asdf\"],\n      \"ios\": { \"badge\": 0,\n               \"quiettime\": { \"start\": \"22:00\", \"end\": \"06:00\" },\n               \"tz\": \"America/Los_Angeles\" } },\n   \"identity_hints\": {\n      \"user_id\": \"eDAXv7aQTQaAaUHOXuePLQ\" } }\n"
             }
           ]
         }
@@ -475,20 +475,31 @@
           ]
         }
       ],
-      "customEventObject": [
+      "contentTemplateObject": [
         {
-          "description": "Example Custom Event",
+          "description": "Example content template object",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"occurred\": \"2020-05-02T02:31:22\",\n   \"user\": {\n       \"named_user_id\": \"cool.person\"\n   },\n   \"body\": {\n       \"name\": \"purchased\",\n       \"value\": 239.85,\n       \"transaction\": \"686f53d4-7e0s-36d7-234e-c9792dac6e7b\",\n       \"interaction_id\": \"your.store/us/en_us/pd/shoe/pid-123456/pgid-123456\",\n       \"interaction_type\": \"email\",\n       \"unique_id\": \"4c2c380a-0400-4d34-ab04-aaf31f0967c7\",\n       \"properties\": {\n          \"description\": \"sky high\",\n          \"brand\": \"victory\",\n          \"colors\": [\n          \"red\",\n          \"blue\"\n          ],\n          \"items\": [\n          {\n             \"text\": \"New Line Sneakers\",\n             \"price\": \"$ 79.95\"\n          },\n          {\n             \"text\": \"Old Line Sneakers\",\n             \"price\": \"$ 79.95\"\n          },\n          {\n             \"text\": \"Blue Line Sneakers\",\n             \"price\": \"$ 79.95\"\n          }\n          ],\n          \"name\": \"Cool Person\",\n          \"userLocation\": {\n          \"state\": \"CO\",\n          \"zip\": \"80202\"\n          }\n       },\n      \"session_id\": \"22404b07-3f8f-4e42-a4ff-a996c18fa9f1\"\n   }\n}\n"
+              "source": "{\n    \"id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\",\n    \"external_id\": \"customer-defined-id\",\n    \"name\": \"Welcome Message\",\n    \"description\": \"Our welcome message\",\n    \"type\": \"email\",\n    \"content\": {\n        \"subject\": \"Welcome!\",\n        \"html_body\": \"<html><body>Hi, {{first_name}}!</body></html> {{>copyright}}\",\n        \"plaintext_body\": \"Hi, {{first_name}}!\"\n    },\n    \"created_at\": \"2020-08-17T11:10:02Z\",\n    \"modified_at\": \"2020-08-17T11:10:02Z\",\n    \"feed_references\": {\n        \"feeds\": [\n          {\n            \"name\": \"featured_product\"\n          }\n        ],\n        \"defaults\": {\n          \"featured_product\": {\n            \"category\": \"featured\"\n          }\n        }\n    },\n    \"snippet_references\": {\n        \"snippets\": [\n          {\n            \"name\": \"copyright\"\n          }\n        ]\n    }\n}\n"
+            }
+          ]
+        }
+      ],
+      "customEventObject": [
+        {
+          "description": "Example custom event",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"occurred\": \"2020-05-02T02:31:22\",\n   \"user\": {\n       \"named_user_id\": \"cool.person\"\n   },\n   \"body\": {\n       \"name\": \"purchased\",\n       \"value\": 239.85,\n       \"transaction\": \"686f53d4-7e0s-36d7-234e-c9792dac6e7b\",\n       \"interaction_id\": \"your.store/us/en_us/pd/shoe/pid-123456/pgid-123456\",\n       \"interaction_type\": \"email\",\n       \"unique_id\": \"4c2c380a-0400-4d34-ab04-aaf31f0967c7\",\n       \"properties\": {\n          \"description\": \"sky high\",\n          \"brand\": \"victory\",\n          \"colors\": [\n             \"red\",\n             \"blue\"\n          ],\n          \"items\": [\n          {\n             \"text\": \"New Line Sneakers\",\n             \"price\": \"$ 79.95\"\n          },\n          {\n             \"text\": \"Old Line Sneakers\",\n             \"price\": \"$ 79.95\"\n          },\n          {\n             \"text\": \"Blue Line Sneakers\",\n             \"price\": \"$ 79.95\"\n          }\n          ],\n          \"name\": \"Cool Person\",\n          \"userLocation\": {\n             \"state\": \"CO\",\n             \"zip\": \"80202\"\n          }\n       },\n       \"external_campaigns\": {\n          \"categories\": [\n             \"shoes\",\n             \"running\",\n             \"summer_2017\"\n         ]\n       },\n      \"session_id\": \"22404b07-3f8f-4e42-a4ff-a996c18fa9f1\"\n   }\n}\n"
             }
           ]
         }
       ],
       "dateAttribute": [
         {
-          "description": "Date Attribute example",
+          "description": "Date attribute example",
           "examples": [
             {
               "lang": "json",
@@ -613,13 +624,24 @@
           ]
         }
       ],
+      "emailTemplatesObject": [
+        {
+          "description": "Example email template object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"subject\": \"Welcome!\",\n    \"html_body\": \"<html><body>Hi, {{first_name}}!</body></html>\",\n    \"plaintext_body\": \"Hi, {{first_name}}!\"\n}\n"
+            }
+          ]
+        }
+      ],
       "error": [
         {
           "description": "400 response",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"ok\" : false,\n  \"error\" : \"Could not parse request body.\",\n  \"error_code\" : 40000,\n  \"details\" : {\n      \"error\" : \"The key 'alert1' is not allowed in this context\",\n      \"path\" : \"notification.alert1\",\n      \"location\" : {\n          \"line\" : 5,\n          \"column\" : 18\n      }\n  }\n"
+              "source": "{\n  \"ok\" : false,\n  \"error\" : \"Could not parse request body.\",\n  \"error_code\" : 40000,\n  \"details\" : {\n      \"error\" : \"The key 'alert1' is not allowed in this context\",\n      \"path\" : \"notification.alert1\",\n      \"location\" : {\n          \"line\" : 5,\n          \"column\" : 18\n      }\n  }\n}\n"
             }
           ]
         },
@@ -662,7 +684,7 @@
           ]
         },
         {
-          "description": "Custom Event example",
+          "description": "Custom event example",
           "examples": [
             {
               "lang": "json",
@@ -831,7 +853,7 @@
       ],
       "jsonAttribute": [
         {
-          "description": "JSON Attribute examples",
+          "description": "JSON attribute examples",
           "examples": [
             {
               "lang": "json",
@@ -858,6 +880,17 @@
             {
               "lang": "json",
               "source": "{\n  \"localizations\": [\n      {\n         \"language\": \"de\",\n         \"country\": \"AT\",\n         \"notification\": {\n            \"alert\": \"Grüss Gott\"\n         }\n      },\n      {\n         \"language\": \"de\",\n         \"country\": \"DE\",\n         \"notification\": {\n            \"alert\": \"Guten Tag\"\n         }\n      }\n   ]\n}\n"
+            }
+          ]
+        }
+      ],
+      "messageCenterTemplatesObject": [
+        {
+          "description": "Example Message Center template object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"html_body\": \"<h2>Richtext body goes here</h2><p><a data-ua-unsubscribe=\\\"1\\\" title=\\\"unsubscribe\\\" href=\\\"http://unsubscribe.urbanairship.com/email/success.html\\\">Unsubscribe</a></p>\",\n    \"title\": \"Message Center Notification\"\n}\n"
             }
           ]
         }
@@ -957,7 +990,7 @@
       ],
       "namedUserResponseBody": [
         {
-          "description": "Example Named User",
+          "description": "Example named user",
           "examples": [
             {
               "lang": "json",
@@ -1001,7 +1034,7 @@
       ],
       "numberAttribute": [
         {
-          "description": "Number Attribute example",
+          "description": "Number attribute example",
           "examples": [
             {
               "lang": "json",
@@ -1047,7 +1080,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"audience\" : {\n      \"OR\" : [\n            { \"tag\" : [\"sports\", \"entertainment\"]},\n            { \"device_token\" : \"871922F4F7C6DF9D51AC7ABAE9AA5FCD7188D7BFA19A2FA99E1D2EC5F2D76506\" },\n            { \"open_channel\" : \"6bcf3e63-a38a-44d8-8b0d-2fb5941e74ab\" } ]\n   },\n   \"notification\" : {\n      \"alert\" : \"Someone did sports!\",\n      \"ios\" : {\n         \"extra\" : {\n            \"url\" : \"http://www.example.com\" } },\n      \"open::sms\" : {\n         \"alert\" : \"SMS override alert value! I will replace the top-level alert.\",\n         \"extra\" : {\n            \"sms_key\" : \"Some SMS specific payload data for all SMS devices.\" } },\n      \"open::email\" : {\n         \"alert\" : \"Email override alert value! I will replace the top-level alert.\",\n         \"title\" : \"A title for email payloads - neat!\" }\n   },\n   \"options\" : { \"expiry\" : 60 },\n   \"device_types\" : [ \"ios\", \"open::sms\", \"open::email\" ]\n}\n"
+              "source": "{\n   \"audience\" : {\n      \"OR\" : [\n            { \"tag\" : [\"sports\", \"entertainment\"]},\n            { \"device_token\" : \"YOUR_DEVICE_TOKEN\" },\n            { \"open_channel\" : \"6bcf3e63-a38a-44d8-8b0d-2fb5941e74ab\" } ]\n   },\n   \"notification\" : {\n      \"alert\" : \"Someone did sports!\",\n      \"ios\" : {\n         \"extra\" : {\n            \"url\" : \"http://www.example.com\" } },\n      \"open::sms\" : {\n         \"alert\" : \"SMS override alert value! I will replace the top-level alert.\",\n         \"extra\" : {\n            \"sms_key\" : \"Some SMS specific payload data for all SMS devices.\" } },\n      \"open::email\" : {\n         \"alert\" : \"Email override alert value! I will replace the top-level alert.\",\n         \"title\" : \"A title for email payloads - neat!\" }\n   },\n   \"options\" : { \"expiry\" : 60 },\n   \"device_types\" : [ \"ios\", \"open::sms\", \"open::email\" ]\n}\n"
             }
           ]
         },
@@ -1057,6 +1090,17 @@
             {
               "lang": "json",
               "source": "{\n   \"alert\": \"A generic alert sent to all open platforms\",\n   \"device_types\" : [\"open::sms\", \"open::email\"],\n   \"open::sms\": {\n      \"title\": \"SMS Alert!\",\n      \"alert\": \"A shorter alert for SMS users\",\n      \"summary\": \"A longer summary of some content or whatever\",\n      \"media_attachment\": \"https://example.com/cat_standing_up.jpeg\",\n      \"extra\": {\n         \"some_info\": \"For SMS only\",\n         \"some_id\": \"671ecd12-ad56-4b2f-98f1-107ce33d33e6\" },\n      \"interactive\": {\n         \"type\": \"ua_yes_no_foreground\",\n         \"button_actions\": {\n            \"yes\": {\n               \"open\": {\n                  \"type\": \"url\",\n                  \"content\": \"http://www.example.com\" } },\n            \"no\": {\n               \"app_defined\": {\n                  \"foo\": \"bar\" } } } }\n   },\n   \"open::email\": {\n      \"alert\": \"A longer alert for users of email, who have more space.\" }\n}            \n"
+            }
+          ]
+        }
+      ],
+      "openChannelTemplatesObject": [
+        {
+          "description": "Example open channel template object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"title\": \"SMS Alert!\",\n    \"alert\": \"A shorter alert for SMS users\",\n    \"summary\": \"A longer summary of text alongside the notification\",\n    \"media_attachment\": \"https://example.com/cat_standing_up.jpeg\"\n}\n"
             }
           ]
         }
@@ -1138,7 +1182,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n   \"device_types\": [\n      \"sms\"\n   ],\n   \"options\": {\n      \"personalization\": true\n   },\n   \"notification\": {\n      \"sms\": {\n         \"alert\": \"Hi {{name}}, {{#feed \\\"weather_updates\\\" kw=\"today\" as |weather|}}It's going to be {{weather.temp}} in {{weather.loc}} today!{{/feed}}\",\n      }\n   },\n   \"audience\": {\n      \"tag\": \"local_updates\",\n      \"group\": \"weather\"\n   },\n   \"feeds\": [\n      {\n         \"name\": \"weather_updates\",\n         \"params\": {\n            \"kw\": \"today\"\n         }\n      }\n   ]\n}\n"
+              "source": "{\n   \"device_types\": [\n      \"sms\"\n   ],\n   \"options\": {\n      \"personalization\": true\n   },\n   \"notification\": {\n      \"sms\": {\n         \"alert\": \"Hi {{name}}, {{#feed \\\"weather_updates\\\" kw=\\\"today\\\" as |weather|}}It's going to be {{weather.temp}} in {{weather.loc}} today!{{/feed}}\",\n      }\n   },\n   \"audience\": {\n      \"tag\": \"local_updates\",\n      \"group\": \"weather\"\n   },\n   \"feeds\": [\n      {\n         \"name\": \"weather_updates\",\n         \"params\": {\n            \"kw\": \"today\"\n         }\n      }\n   ]\n}\n"
             }
           ]
         },
@@ -1170,17 +1214,6 @@
             {
               "lang": "json",
               "source": "{\n    \"region_id\": \"abe5deb3-00d0-446e-8c5d-94b6421a01e0\",\n    \"name\": \"My Favorite Place\",\n    \"created_at\": \"2020-06-09T12:34:56\",\n    \"updated_at\": \"2020-06-09T12:34:56\",\n    \"geofence\": {\n        \"type\": \"POLYGON\",\n        \"points\": [\n            {\n                \"latitude\": 90.0,\n                \"longitude\": 180.0\n            },\n            {\n                \"latitude\": 90.0,\n                \"longitude\": 180.0\n            },\n            {\n                \"latitude\": 0.0,\n                \"longitude\": 0.0\n            }\n        ]\n    },\n    \"beacons\": [\n        {\n            \"name\": \"entryway\",\n            \"id\": \"VLSHLAOEXOFCMLDVTKFQ\"\n        },\n        {\n            \"name\": \"Exhibit A\",\n            \"id\": \"ZAQQMNOZKRFCRPYEUCZI\"\n        }\n    ],\n    \"attributes\": {\n        \"store_name\": \"REI\"\n    },\n    \"source_info\": {\n        \"source\": \"GIMBAL\",\n        \"region_id\": \"4BPSFLKJSDFLKJSDFLKJ\",\n        \"vendor_href\": \"http://api.gimbal.com/2/places/4BPSFLKJSDFLKJSDFLKJ\"\n    }\n}\n"
-            }
-          ]
-        }
-      ],
-      "relativeWindow": [
-        {
-          "description": "Example relative time window",
-          "examples": [
-            {
-              "lang": "json",
-              "source": "{\n  \"date\": {\n     \"days\": {\n        \"recent\": 1\n     }\n  }\n}\n"
             }
           ]
         }
@@ -1271,7 +1304,7 @@
       ],
       "setAttributeObject": [
         {
-          "description": "Set Attribute with string value",
+          "description": "Set attribute with string value",
           "examples": [
             {
               "lang": "json",
@@ -1280,11 +1313,11 @@
           ]
         },
         {
-          "description": "Set JSON Attribute with its required object value",
+          "description": "Set JSON attribute with its required object value",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"action\": \"set\",\n  \"key\": \"position#instance_42\",\n  \"value\": {\n    \"exp\": 1731531110,\n    \"name\": \"LeftField\",\n    \"rank\": 2,\n    \"active\" true,\n    \"extras\": [\n      \"rookie\",\n      \"mvp\"\n    ]\n  }\n}\n"
+              "source": "{\n  \"action\": \"set\",\n  \"key\": \"position#instance_42\",\n  \"value\": {\n    \"exp\": 1731531110,\n    \"name\": \"LeftField\",\n    \"rank\": 2,\n    \"active\": true,\n    \"extras\": [\n      \"rookie\",\n      \"mvp\"\n    ]\n  }\n}\n"
             }
           ]
         }
@@ -1338,6 +1371,17 @@
             {
               "lang": "json",
               "source": "{\n  \"audience\": {\n    \"create_and_send\" : [\n      {\n        \"ua_sender\" : \"12345\",\n        \"ua_msisdn\" : \"15558675309\",\n        \"ua_opted_in\" : \"2020-08-30T22:35:00\",\n        \"customer\": {\n            \"first_name\": \"Jenny\",\n            \"last_name\": \"Smith\",\n            \"location\": \"Vancouver\"\n        },\n        \"cart\" : [\n          {\n            \"name\" : \"Rubber Gloves\",\n            \"code\" : \"abaccgdsagsde\",\n            \"qty\": 1\n          },\n          {\n            \"name\" : \"Bleach Alternative\",\n            \"code\" : \"cacadgdesgaga\",\n            \"qty\": 1\n          }\n        ]\n      }\n    ]\n  },\n  \"device_types\" : [ \"sms\" ],\n  \"notification\" : {\n    \"sms\" : {\n      \"template\" : {\n        \"template_id\": \"9335bb2a-2a45-456c-8b53-42af7898236a\"\n      }\n    }\n  }\n}\n"
+            }
+          ]
+        }
+      ],
+      "smsTemplatesObject": [
+        {
+          "description": "Example SMS template object",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n    \"alert\": \"My SMS message\"\n}\n"
             }
           ]
         }
@@ -1431,7 +1475,7 @@
           ]
         },
         {
-          "description": "An array of Tag Groups for a channel. Channels can have Airship-specific tag groups; Named Users do not have Airship-specific Tag Groups.",
+          "description": "An array of tag groups for a channel. Channels can have Airship-specific tag groups; named users do not have Airship-specific tag groups.",
           "examples": [
             {
               "lang": "json",
@@ -1440,7 +1484,7 @@
           ]
         },
         {
-          "description": "An array of Tag Groups for a Named User. Named Users do not have Airship-specific tag groups.",
+          "description": "An array of tag groups for a named user. Named users do not have Airship-specific tag groups.",
           "examples": [
             {
               "lang": "json",
@@ -1477,7 +1521,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n    \"audience\" : {\n        \"OR\" : [\n            { \"tag\" : [\"sports\", \"entertainment\"]},\n            { \"device_token\" : \"871922F4F7C6DF9D51AC7ABAE9AA5FCD7188D7BFA19A2FA99E1D2EC5F2D76506\" },\n            { \"apid\" : \"5673fb25-0e18-f665-6ed3-f32de4f9ddc6\" }\n        ]\n    },\n    \"device_types\" : [ \"ios\" ],\n    \"merge_data\": {\n        \"template_id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\",\n        \"substitutions\": {\n            \"FIRST_NAME\": \"Bob\"\n        }\n    }\n}\n"
+              "source": "{\n    \"audience\" : {\n        \"OR\" : [\n            { \"tag\" : [\"sports\", \"entertainment\"]},\n            { \"device_token\" : \"YOUR_DEVICE_TOKEN\" }\n        ]\n    },\n    \"device_types\" : [ \"ios\" ],\n    \"merge_data\": {\n        \"template_id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\",\n        \"substitutions\": {\n            \"FIRST_NAME\": \"Bob\"\n        }\n    }\n}\n"
             }
           ]
         }
@@ -1533,7 +1577,7 @@
       ],
       "textAttribute": [
         {
-          "description": "Text Attribute example",
+          "description": "Text attribute example",
           "examples": [
             {
               "lang": "json",
@@ -1677,7 +1721,7 @@
     "/api/attribute-lists/{list_name}/csv": {
       "put": [
         {
-          "description": "Upload Attribute list example",
+          "description": "Upload attribute list example",
           "examples": [
             {
               "lang": "HTTP",
@@ -1687,7 +1731,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Upload Attribute Snapshot list example",
+          "description": "Upload attribute snapshot list example",
           "examples": [
             {
               "lang": "HTTP",
@@ -1700,7 +1744,7 @@
           ]
         },
         {
-          "description": "Upload Attribute list for SMS example",
+          "description": "Upload attribute list for SMS example",
           "examples": [
             {
               "lang": "HTTP",
@@ -1969,7 +2013,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channels\nLink: <https://go.urbanairship.com/api/channels/?start=1234&limit=100>; rel=next\n\n{\n   \"ok\": true,\n   \"next_page\": \"https://go.urbanairship.com/api/channels?start=07AAFE44CD82C2F4E3FBAB8962A95B95F90A54857FB8532A155DE3510B481C13&limit=2\",\n   \"channels\": [\n      {\n         \"channel_id\": \"9c36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n         \"device_type\": \"android\",\n         \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n         \"opt_in\": true,\n         \"installed\": true,\n         \"background\": true,\n         \"created\": \"2020-03-06T18:52:59\",\n         \"last_registration\": \"2020-10-07T21:28:35\",\n         \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n         \"alias\": \"null\",\n         \"tags\": [\n            \"tag1\",\n            \"tag2\"\n         ],\n         \"tag_groups\": {\n            \"tag_group_1\": [\"tag1\", \"tag2\"],\n            \"tag_group_2\": [\"tag1\", \"tag2\"]\n         },\n         \"device_attributes\": {\n             \"ua_device_os\": \"10\",\n             \"ua_country\": \"US\",\n             \"ua_device_model\": \"SM-G973U\",\n             \"ua_local_tz\": \"America/Los_Angeles\",\n             \"ua_app_version\": \"2020-02-01T002322-goat\",\n             \"ua_location_settings\": \"true\",\n             \"ua_language\": \"en\",\n             \"ua_sdk_version\": \"12.2.0\",\n             \"ua_carrier\": \"Verizon \"\n          },\n          \"attributes\": {\n             \"first_name\": \"Cool\",\n             \"last_name\": \"Person\",\n             \"birthdate\": \"1983-03-15T00:00:00\",\n          }\n      },\n      {\n         \"channel_id\": \"bd36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n         \"device_type\": \"ios\",\n         \"push_address\": null,\n         \"opt_in\": false,\n         \"installed\": true,\n         \"background\": true,\n         \"created\": \"2020-03-06T18:52:59\",\n         \"last_registration\": \"2020-10-07T21:28:35\",\n         \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n         \"alias\": \"null\",\n         \"tags\": [\n            \"tag1\",\n            \"tag2\"\n         ],\n         \"tag_groups\": {\n            \"tag_group_1\": [\"tag1\", \"tag2\"],\n            \"tag_group_2\": [\"tag1\", \"tag2\"]\n         },\n         \"ios\": {\n            \"badge\": 0,\n            \"quiettime\": {\n               \"start\": null,\n               \"end\": null\n            },\n            \"tz\": null\n         }\n      }\n   ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channels\nLink: <https://go.urbanairship.com/api/channels/?start=1234&limit=100>; rel=next\n\n{\n   \"ok\": true,\n   \"next_page\": \"https://go.urbanairship.com/api/channels?start=07AAFE44CD82C2F4E3FBAB8962A95B95F90A54857FB8532A155DE3510B481C13&limit=2\",\n   \"channels\": [\n      {\n         \"channel_id\": \"9c36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n         \"device_type\": \"android\",\n         \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n         \"opt_in\": true,\n         \"installed\": true,\n         \"background\": true,\n         \"created\": \"2020-03-06T18:52:59\",\n         \"last_registration\": \"2020-10-07T21:28:35\",\n         \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n         \"tags\": [\n            \"tag1\",\n            \"tag2\"\n         ],\n         \"tag_groups\": {\n            \"tag_group_1\": [\"tag1\", \"tag2\"],\n            \"tag_group_2\": [\"tag1\", \"tag2\"]\n         },\n         \"device_attributes\": {\n             \"ua_device_os\": \"10\",\n             \"ua_country\": \"US\",\n             \"ua_device_model\": \"SM-G973U\",\n             \"ua_local_tz\": \"America/Los_Angeles\",\n             \"ua_app_version\": \"2020-02-01T002322-goat\",\n             \"ua_location_settings\": \"true\",\n             \"ua_language\": \"en\",\n             \"ua_sdk_version\": \"12.2.0\",\n             \"ua_carrier\": \"Verizon \"\n          },\n          \"attributes\": {\n             \"first_name\": \"Cool\",\n             \"last_name\": \"Person\",\n             \"birthdate\": \"1983-03-15T00:00:00\",\n          }\n      },\n      {\n         \"channel_id\": \"bd36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n         \"device_type\": \"ios\",\n         \"push_address\": null,\n         \"opt_in\": false,\n         \"installed\": true,\n         \"background\": true,\n         \"created\": \"2020-03-06T18:52:59\",\n         \"last_registration\": \"2020-10-07T21:28:35\",\n         \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n         \"tags\": [\n            \"tag1\",\n            \"tag2\"\n         ],\n         \"tag_groups\": {\n            \"tag_group_1\": [\"tag1\", \"tag2\"],\n            \"tag_group_2\": [\"tag1\", \"tag2\"]\n         },\n         \"ios\": {\n            \"badge\": 0,\n            \"quiettime\": {\n               \"start\": null,\n               \"end\": null\n            },\n            \"tz\": null\n         }\n      }\n   ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -1981,7 +2025,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/channels HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"channel\" : {\n      \"device_type\": \"ios\",\n      \"opt_in\": true,\n      \"background\": true,\n      \"push_address\": \"FFFF\",\n      \"alias\": \"xxxx\",\n      \"set_tags\": true,\n      \"tags\": [\"asdf\"],\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": \"22:00\",\n            \"end\": \"06:00\"\n         },\n         \"tz\": \"America/Los_Angeles\"\n      }\n   },\n   \"identity_hints\": {\n      \"user_id\": \"eDAXv7aQTQaAaUHOXuePLQ\",\n      \"apid\": \"df6a6b50-9843-0304-d5a5-743f246a4946\"\n   },\n   \"properties\": {\n      \"promotion_id\": \"64a03385-52ae-4217-873d-db791ff64225\",\n      \"loyalty_code\": \"eDAXv7aQTQaAaUHOXuePLQ\"\n   }\n}\n"
+              "source": "POST /api/channels HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"channel\" : {\n      \"device_type\": \"ios\",\n      \"opt_in\": true,\n      \"background\": true,\n      \"push_address\": \"FFFF\",\n      \"set_tags\": true,\n      \"tags\": [\"asdf\"],\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": \"22:00\",\n            \"end\": \"06:00\"\n         },\n         \"tz\": \"America/Los_Angeles\"\n      }\n   },\n   \"identity_hints\": {\n      \"user_id\": \"eDAXv7aQTQaAaUHOXuePLQ\"\n   },\n   \"properties\": {\n      \"promotion_id\": \"64a03385-52ae-4217-873d-db791ff64225\",\n      \"loyalty_code\": \"eDAXv7aQTQaAaUHOXuePLQ\"\n   }\n}\n"
             },
             {
               "lang": "HTTP",
@@ -2118,7 +2162,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/channels/email/opt-in?app_key=ShwzPCCPS6CMlAZTMmMReQ&channel_id=c4D5tjvkNTzivY5ZCUhaBLQ&message_type=commercial&redirect=https%3A%2F%2Fdomain.example HTTP/1.1\n"
+              "source": "GET /api/channels/email/opt-in?app_key=YOUR_APP_KEY&channel_id=c4D5tjvkNTzivY5ZCUhaBLQ&message_type=commercial&redirect=https%3A%2F%2Fdomain.example HTTP/1.1\n"
             },
             {
               "lang": "HTTP",
@@ -2240,7 +2284,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/channels/email/unsubscribe/?app_key=Vl0wyG8kSyCyOUW98Wj4xg&channel_id=cXAdAfloQzeDdvMPnM3KKA&push_id=8a90b60f-f836-4ec6-82a4-05c3915b1c40&message_type=commercial&redirect=http%3A%2F%2Funsubscribe.urbanairship.com%2Femail%2Fsuccess.html&campaigns=shoes&campaigns=fall&group_id=79a122fc-48e2-4369-843f-a0973fd52d78 HTTP/1.1\nAccept: */*\n"
+              "source": "GET /api/channels/email/unsubscribe/?app_key=YOUR_APP_KEY&channel_id=cXAdAfloQzeDdvMPnM3KKA&push_id=8a90b60f-f836-4ec6-82a4-05c3915b1c40&message_type=commercial&redirect=http%3A%2F%2Funsubscribe.urbanairship.com%2Femail%2Fsuccess.html&campaigns=shoes&campaigns=fall&group_id=79a122fc-48e2-4369-843f-a0973fd52d78 HTTP/1.1\nAccept: */*\n"
             },
             {
               "lang": "HTTP",
@@ -2338,7 +2382,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/channels/import/ HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n[\n   {\n      \"device_type\": \"ios\",\n\n      \"opt_in\": true,\n      \"push_address\": \"FFFF\",\n\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": \"22:00\",\n            \"end\": \"06:00\"\n         },\n         \"tz\": \"America/Los_Angeles\"\n      },\n\n      \"alias\": \"xxxx\",\n\n      \"set_tags\": true,\n      \"tags\": [\"asdf\"]\n   }\n]\n"
+              "source": "POST /api/channels/import/ HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n[\n   {\n      \"device_type\": \"ios\",\n\n      \"opt_in\": true,\n      \"push_address\": \"FFFF\",\n\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": \"22:00\",\n            \"end\": \"06:00\"\n         },\n         \"tz\": \"America/Los_Angeles\"\n      },\n\n      \"set_tags\": true,\n      \"tags\": [\"asdf\"]\n   }\n]\n"
             },
             {
               "lang": "HTTP",
@@ -2764,7 +2808,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nData-Attribute: channel\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"84e36d69-873b-4ffe-81cd-e74c9f002057\",\n      \"device_type\": \"sms\",\n      \"installed\": true,\n      \"push_address\": null,\n      \"named_user_id\": null,\n      \"alias\": null,\n      \"tags\": [],\n      \"tag_groups\": {\n         \"ua_channel_type\": [\n            \"sms\"\n         ],\n         \"ua_sender_id\": [\n            \"12345\"\n         ],\n         \"ua_opt_in\": [\n            \"true\"\n         ]\n      },\n      \"created\": \"2020-04-27T22:06:21\",\n      \"opt_in\": true,\n      \"opt_in_date\": \"2022-07-07T03:23:13\",\n      \"msisdn\": \"150355551234\",\n      \"last_registration\": \"2020-05-14T19:51:38\"\n   }\n}\n"
+              "source": "HTTP/1.1 200 OK\nData-Attribute: channel\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"84e36d69-873b-4ffe-81cd-e74c9f002057\",\n      \"device_type\": \"sms\",\n      \"installed\": true,\n      \"push_address\": null,\n      \"named_user_id\": null,\n      \"tags\": [],\n      \"tag_groups\": {\n         \"ua_channel_type\": [\n            \"sms\"\n         ],\n         \"ua_sender_id\": [\n            \"12345\"\n         ],\n         \"ua_opt_in\": [\n            \"true\"\n         ]\n      },\n      \"created\": \"2020-04-27T22:06:21\",\n      \"opt_in\": true,\n      \"opt_in_date\": \"2022-07-07T03:23:13\",\n      \"msisdn\": \"150355551234\",\n      \"last_registration\": \"2020-05-14T19:51:38\"\n   }\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -2774,7 +2818,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nData-Attribute: channel\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"84e36d69-873b-4ffe-81cd-e74c9f002057\",\n      \"device_type\": \"sms\",\n      \"installed\": true,\n      \"push_address\": null,\n      \"named_user_id\": null,\n      \"alias\": null,\n      \"tags\": [],\n      \"tag_groups\": {\n         \"ua_channel_type\": [\n            \"sms\"\n         ],\n         \"ua_sender_id\": [\n            \"12345\"\n         ],\n         \"ua_opt_in\": [\n            \"true\"\n         ]\n      },\n      \"created\": \"2020-04-27T22:06:21\",\n      \"opt_in\": false,\n      \"opt_in_date\": \"2022-07-07T03:23:13\",\n      \"opt_out_date\": \"2022-07-08T03:23:13\",\n      \"msisdn\": \"150355551234\",\n      \"last_registration\": \"2020-05-14T19:51:38\"\n   }\n}\n"
+              "source": "HTTP/1.1 200 OK\nData-Attribute: channel\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"84e36d69-873b-4ffe-81cd-e74c9f002057\",\n      \"device_type\": \"sms\",\n      \"installed\": true,\n      \"push_address\": null,\n      \"named_user_id\": null,\n      \"tags\": [],\n      \"tag_groups\": {\n         \"ua_channel_type\": [\n            \"sms\"\n         ],\n         \"ua_sender_id\": [\n            \"12345\"\n         ],\n         \"ua_opt_in\": [\n            \"true\"\n         ]\n      },\n      \"created\": \"2020-04-27T22:06:21\",\n      \"opt_in\": false,\n      \"opt_in_date\": \"2022-07-07T03:23:13\",\n      \"opt_out_date\": \"2022-07-08T03:23:13\",\n      \"msisdn\": \"150355551234\",\n      \"last_registration\": \"2020-05-14T19:51:38\"\n   }\n}\n"
             }
           ]
         }
@@ -2885,7 +2929,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channel\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"9c36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n      \"device_type\": \"ios\",\n      \"installed\": true,\n      \"opt_in\": false,\n      \"background\": true,\n      \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n      \"created\": \"2020-08-08T20:41:06\",\n      \"last_registration\": \"2020-05-01T18:00:27\",\n      \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n      \"alias\": null,\n      \"tags\": [\n         \"tag1\",\n         \"tag2\"\n      ],\n      \"tag_groups\": {\n         \"tag_group_1\": [\"tag1\", \"tag2\"],\n         \"tag_group_2\": [\"tag1\", \"tag2\"]\n      },\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": null,\n            \"end\": null\n         },\n         \"tz\": \"America/Los_Angeles\"\n      },\n      \"open_tracking_opted_in\": \"2022-11-26T00:00:00\",\n      \"open_tracking_opted_out\": \"2022-12-11T00:00:00\",\n      \"click_tracking_opted_in\": \"2022-11-26T00:00:00\",\n      \"click_tracking_opted_out\": \"2022-12-11T00:00:00\"\n   }\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channel\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"9c36e8c7-5a73-47c0-9716-99fd3d4197d5\",\n      \"device_type\": \"ios\",\n      \"installed\": true,\n      \"opt_in\": false,\n      \"background\": true,\n      \"push_address\": \"FE66489F304DC75B8D6E8200DFF8A456E8DAEACEC428B427E9518741C92C6660\",\n      \"created\": \"2020-08-08T20:41:06\",\n      \"last_registration\": \"2020-05-01T18:00:27\",\n      \"named_user_id\": \"some_id_that_maps_to_your_systems\",\n      \"tags\": [\n         \"tag1\",\n         \"tag2\"\n      ],\n      \"tag_groups\": {\n         \"tag_group_1\": [\"tag1\", \"tag2\"],\n         \"tag_group_2\": [\"tag1\", \"tag2\"]\n      },\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": null,\n            \"end\": null\n         },\n         \"tz\": \"America/Los_Angeles\"\n      },\n      \"open_tracking_opted_in\": \"2022-11-26T00:00:00\",\n      \"open_tracking_opted_out\": \"2022-12-11T00:00:00\",\n      \"click_tracking_opted_in\": \"2022-11-26T00:00:00\",\n      \"click_tracking_opted_out\": \"2022-12-11T00:00:00\"\n   }\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -2895,7 +2939,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channel\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"b8f9b663-0a3b-cf45-587a-be880946e881\",\n      \"type\": \"open\",\n      \"opt_in\": true,\n      \"address\": \"example@example.com\",\n\n      \"created\": \"2013-08-08T20:41:06\",\n      \"last_registration\": \"2014-05-01T18:00:27\",\n\n      \"named_user_id\": \"john_doe_123\",\n      \"tags\": [\"asdf\"],\n\n      \"tag_groups\": {\n         \"timezone\" : [\"America/Los_Angeles\"],\n         \"locale_country\" : [\"US\"],\n         \"locale_language\" : [\"en\"],\n         \"tag_group_1\" : [\"tag1\", \"tag2\"],\n         \"tag_group_2\" : [\"tag1\", \"tag2\"]\n      },\n\n      \"open\" {\n         \"open_platform_name\": \"email\",\n         \"identifiers\": {\n            \"com.example.external_id\": \"df6a6b50-9843-7894-1235-12aed4489489\"\n         }\n      }\n   }\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channel\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"b8f9b663-0a3b-cf45-587a-be880946e881\",\n      \"type\": \"open\",\n      \"opt_in\": true,\n      \"address\": \"example@example.com\",\n\n      \"created\": \"2013-08-08T20:41:06\",\n      \"last_registration\": \"2014-05-01T18:00:27\",\n\n      \"named_user_id\": \"john_doe_123\",\n      \"tags\": [\"asdf\"],\n\n      \"tag_groups\": {\n         \"timezone\" : [\"America/Los_Angeles\"],\n         \"locale_country\" : [\"US\"],\n         \"locale_language\" : [\"en\"],\n         \"tag_group_1\" : [\"tag1\", \"tag2\"],\n         \"tag_group_2\" : [\"tag1\", \"tag2\"]\n      },\n\n      \"open\": {\n         \"open_platform_name\": \"email\",\n         \"identifiers\": {\n            \"com.example.external_id\": \"df6a6b50-9843-7894-1235-12aed4489489\"\n         }\n      }\n   }\n}\n"
             }
           ]
         },
@@ -2904,7 +2948,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channel\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"b8f9b663-0a3b-cf45-587a-be880946e881\",\n\n      \"type\": \"open\",\n      \"opt_in\": false,\n      \"address\": \"example@example.com\",\n\n      \"created\": \"2013-08-08T20:41:06\",\n      \"last_modified\": \"2014-05-01T18:00:27\",\n\n      \"tags\": [],\n      \"tag_groups\" {},\n\n      \"open\": {\n         \"open_platform_name\": \"email\"\n      }\n   }\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-Attribute: channel\n\n{\n   \"ok\": true,\n   \"channel\": {\n      \"channel_id\": \"b8f9b663-0a3b-cf45-587a-be880946e881\",\n\n      \"type\": \"open\",\n      \"opt_in\": false,\n      \"address\": \"example@example.com\",\n\n      \"created\": \"2013-08-08T20:41:06\",\n      \"last_modified\": \"2014-05-01T18:00:27\",\n\n      \"tags\": [],\n      \"tag_groups\": {},\n\n      \"open\": {\n         \"open_platform_name\": \"email\"\n      }\n   }\n}\n"
             }
           ]
         }
@@ -2915,7 +2959,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "PUT /api/channels/df6a6b50-9843-0304-d5a5-743f246a4946 HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"channel\" : {\n      \"device_type\": \"ios\",\n      \"opt_in\": true,\n      \"background\": true,\n      \"push_address\": \"FFFF\",\n      \"alias\": \"xxxx\",\n      \"set_tags\": true,\n      \"tags\": [\"qwerty\"],\n      \"tag_changes\": {\n         \"add\": [ \"qwerty\" ],\n         \"remove\": [ \"asdf\" ]\n      },\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": \"22:00\",\n            \"end\": \"06:00\"\n         },\n         \"tz\": \"America/Los_Angeles\"\n      }\n   },\n   \"identity_hints\": {\n      \"ua_id\": \"64a03385-52ae-4217-873d-db791ff64225\",\n      \"user_id\": \"eDAXv7aQTQaAaUHOXuePLQ\"\n   }\n}\n"
+              "source": "PUT /api/channels/df6a6b50-9843-0304-d5a5-743f246a4946 HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n   \"channel\" : {\n      \"device_type\": \"ios\",\n      \"opt_in\": true,\n      \"background\": true,\n      \"push_address\": \"FFFF\",\n      \"set_tags\": true,\n      \"tags\": [\"qwerty\"],\n      \"tag_changes\": {\n         \"add\": [ \"qwerty\" ],\n         \"remove\": [ \"asdf\" ]\n      },\n      \"ios\": {\n         \"badge\": 0,\n         \"quiettime\": {\n            \"start\": \"22:00\",\n            \"end\": \"06:00\"\n         },\n         \"tz\": \"America/Los_Angeles\"\n      }\n   },\n   \"identity_hints\": {\n      \"ua_id\": \"64a03385-52ae-4217-873d-db791ff64225\",\n      \"user_id\": \"eDAXv7aQTQaAaUHOXuePLQ\"\n   }\n}\n"
             },
             {
               "lang": "HTTP",
@@ -2943,7 +2987,7 @@
     "/api/contacts/associated_types/{contact_id}": {
       "get": [
         {
-          "description": "Example list channels associated by Contact",
+          "description": "Example list channels associated by contact",
           "examples": [
             {
               "lang": "HTTP",
@@ -2961,7 +3005,7 @@
     "/api/contacts/disassociate/{contact_id}": {
       "post": [
         {
-          "description": "Example dissociate SMS channel from Contact by Channel ID",
+          "description": "Example dissociate SMS channel from contact by Channel ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -2971,7 +3015,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example dissociate SMS channel from Contact by sender ID and MSISDN",
+          "description": "Example dissociate SMS channel from contact by sender ID and MSISDN",
           "examples": [
             {
               "lang": "HTTP",
@@ -2981,7 +3025,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example dissociate email channel from Contact by email address",
+          "description": "Example dissociate email channel from contact by email address",
           "examples": [
             {
               "lang": "HTTP",
@@ -2991,7 +3035,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example dissociate email channel from Contact by email address with opt_out",
+          "description": "Example dissociate email channel from contact by email address with opt_out",
           "examples": [
             {
               "lang": "HTTP",
@@ -3014,7 +3058,7 @@
     "/api/contacts/identify/v2": {
       "post": [
         {
-          "description": "Example identify Contact by Named User ID",
+          "description": "Example identify contact by named user ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -3022,7 +3066,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"contact\": {\n    \"contact_id\": \"1a32e8c7-5a73-47c0-9716-99fd3d41924b\",\n    \"is_anonymous\": true,\n    \"channel_association_timestamp\": \"2022-12-29T10:15:30.00Z\"\n  }\n  \"token\": \"eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiJLSHVNTE15RmVmYjdoeXR3WkV5VTF4IiwiaWF0IjoxNjAyMDY4NDIxLCJleHAiOjE2MDIwNjg0MjEsInN1YiI6InVMa2hSaktBYzVXQW1SdTFPTFZSVncifQ.kJPu3enbLJMX10xEtzlxxeum66R2ZWLs02OSVPhjomQ\",\n  \"token_expires_in\": 3600000\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"contact\": {\n    \"contact_id\": \"1a32e8c7-5a73-47c0-9716-99fd3d41924b\",\n    \"is_anonymous\": true,\n    \"channel_association_timestamp\": \"2022-12-29T10:15:30.00Z\"\n  },\n  \"token\": \"YOUR_TOKEN\",\n  \"token_expires_in\": 3600000\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -3032,7 +3076,7 @@
     "/api/contacts/lookup/channel/{channel_id}": {
       "get": [
         {
-          "description": "Example get Contact ID from a Channel ID\n",
+          "description": "Example get contact ID from a Channel ID\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -3050,7 +3094,7 @@
     "/api/contacts/lookup/named_user/{named_user_id}": {
       "get": [
         {
-          "description": "Example get Contact ID from a Named User ID\n",
+          "description": "Example get contact ID from a named user ID\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -3077,6 +3121,140 @@
             {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/content/templates": {
+      "get": [
+        {
+          "description": "Example list content templates",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/content/templates HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\" : true,\n    \"count\": 1,\n    \"total_count\": 1,\n    \"content_templates\": [\n        {\n          \"id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\",\n          \"external_id\": \"welcome_message\",\n          \"name\": \"Welcome Message\",\n          \"description\": \"Our welcome message\",\n          \"type\": \"email\",\n          \"content\": {\n              \"subject\": \"Welcome!\",\n              \"html_body\": \"<html><body>Hi, {{first_name}}!</body></html>\",\n              \"plaintext_body\": \"Hi, {{first_name}}!\"\n          },\n          \"created_at\": \"2020-08-17T11:10:02Z\",\n          \"modified_at\": \"2020-08-17T11:10:02Z\"\n      }\n    ],\n    \"next_page\": null,\n    \"prev_page\": null\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ],
+      "post": [
+        {
+          "description": "Example create email content template with snippet and feed references",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/content/templates HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"external_id\": \"welcome_message\",\n    \"name\": \"Welcome Message\",\n    \"description\": \"Our welcome message\",\n    \"type\": \"email\",\n    \"content\": {\n        \"subject\": \"Welcome!\",\n        \"html_body\": \"<html><body>Hi, {{first_name}}! {{>footer}}</body></html>\",\n        \"plaintext_body\": \"Hi, {{first_name}}!\"\n    },\n    \"snippet_references\": {\n        \"snippets\": [\n          {\n            \"name\": \"footer\"\n          }\n        ]\n    },\n    \"feed_references\": {\n        \"feeds\": [\n          {\n            \"name\": \"featured_product\"\n          }\n        ]\n    }\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 201 Created\nLocation: https://go.urbanairship.com/api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\" : true,\n    \"operation_id\" : \"9ce808c8-7176-45dc-b79e-44aa74249a5a\",\n    \"template_id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\"\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/content/templates/external/{type}/{external_id}": {
+      "delete": [
+        {
+          "description": "Example delete content template by external ID",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "DELETE /api/content/templates/external/email/customer-defined-id HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\" : true,\n    \"operation_id\" : \"9ce808c8-7176-45dc-b79e-44aa74249a5a\"\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ],
+      "get": [
+        {
+          "description": "Example look up content template by external ID",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/content/templates/external/email/customer-defined-id HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\" : true,\n  \"content_template\":  {\n    \"id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\",\n    \"external_id\": \"customer-defined-id\",\n    \"name\": \"Welcome Message\",\n    \"description\": \"Our welcome message\",\n    \"type\": \"email\",\n    \"content\": {\n        \"subject\": \"Welcome!\",\n        \"html_body\": \"<html><body>Hi, {{first_name}}! {{>footer}}</body></html>\",\n        \"plaintext_body\": \"Hi, {{first_name}}!\"\n    },\n    \"created_at\": \"2020-08-17T11:10:02Z\",\n    \"modified_at\": \"2020-08-17T11:10:02Z\",\n    \"snippets\": [\n      {\n        \"name\": \"footer\"\n      }\n    ]\n  }\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ],
+      "put": [
+        {
+          "description": "Example update content template by external ID",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "PUT /api/content/templates/external/email/customer-defined-id HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"name\": \"Welcome Message\",\n    \"description\": \"Our welcome message\",\n    \"content\": {\n        \"subject\": \"Welcome!\",\n        \"html_body\": \"<html><body>Hi, {{first_name}}!</body></html>\",\n        \"plaintext_body\": \"Hi, {{first_name}}!\"\n    }\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\" : true,\n    \"operation_id\" : \"9ce808c8-7176-45dc-b79e-44aa74249a5a\"\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/content/templates/{template_id}": {
+      "delete": [
+        {
+          "description": "Example delete content template",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "DELETE /api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161 HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\" : true,\n    \"operation_id\" : \"9ce808c8-7176-45dc-b79e-44aa74249a5a\"\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ],
+      "get": [
+        {
+          "description": "Example look up content template",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "GET /api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161 HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\" : true,\n  \"content_template\":  {\n    \"id\": \"ef34a8d9-0ad7-491c-86b0-aea74da15161\",\n    \"external_id\": \"welcome_message\",\n    \"name\": \"Welcome Message\",\n    \"description\": \"Our welcome message\",\n    \"type\": \"email\",\n    \"content\": {\n        \"subject\": \"Welcome!\",\n        \"html_body\": \"<html><body>Hi, {{first_name}}! {{>footer}}</body></html>\",\n        \"plaintext_body\": \"Hi, {{first_name}}!\"\n    },\n    \"created_at\": \"2020-08-17T11:10:02Z\",\n    \"modified_at\": \"2020-08-17T11:10:02Z\",\n    \"snippets\": [\n      {\n        \"name\": \"footer\"\n      }\n    ]\n  }\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ],
+      "put": [
+        {
+          "description": "Example update content template",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "PUT /api/content/templates/ef34a8d9-0ad7-491c-86b0-aea74da15161 HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"name\": \"Welcome Message\",\n    \"description\": \"Our welcome message\",\n    \"content\": {\n        \"subject\": \"Welcome!\",\n        \"html_body\": \"<html><body>Hi, {{first_name}}!</body></html>\",\n        \"plaintext_body\": \"Hi, {{first_name}}!\"\n    }\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\" : true,\n    \"operation_id\" : \"9ce808c8-7176-45dc-b79e-44aa74249a5a\"\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -3208,7 +3386,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/delivery-report/clx/IAbc_TTJRaabcs9-o_Gabc?sender=28444&channel_id=09a4bd41-a853-48d1-8061-d72f9336891d&send_id=1b50e0d6-1365-4290-b4c2-0d4be2cfd7a2&push_id=2eae9868-1fb3-47bc-991f-992fbfe5fdd1 HTTP/1.1\nContent-type: application/json\n\n{\n   \"type\": \"recipient_delivery_report_sms\",\n   \"batch_id\": \"eRmpk8IQIPg6_IWa\",\n   \"recipient\": \"15035551212\",\n   \"code\": \"0\",\n   \"status\": \"Delivered\",\n   \"at\": \"2023-10-02T09:34:18.542Z\",\n   \"operator_status_at\": \"2023-10-02T09:34:18.101Z\"\n}\n"
+              "source": "POST /api/delivery-report/clx/YOUR_APP_KEY?sender=28444&channel_id=09a4bd41-a853-48d1-8061-d72f9336891d&send_id=1b50e0d6-1365-4290-b4c2-0d4be2cfd7a2&push_id=2eae9868-1fb3-47bc-991f-992fbfe5fdd1 HTTP/1.1\nContent-type: application/json\n\n{\n   \"type\": \"recipient_delivery_report_sms\",\n   \"batch_id\": \"eRmpk8IQIPg6_IWa\",\n   \"recipient\": \"15035551212\",\n   \"code\": \"0\",\n   \"status\": \"Delivered\",\n   \"at\": \"2023-10-02T09:34:18.542Z\",\n   \"operator_status_at\": \"2023-10-02T09:34:18.101Z\"\n}\n"
             },
             {
               "lang": "HTTP",
@@ -3410,7 +3588,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/in-app/app/IAbc_TTJRaabcs9-o_Gabc HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
+              "source": "GET /api/in-app/app/YOUR_APP_KEY HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
               "lang": "HTTP",
@@ -3426,11 +3604,11 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/in-app/IAbc_TTJRaabcs9-o_Gabc HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"in_app_message\": {\n    \"message\": {\n      \"display_type\": \"banner\",\n      \"display\": {\n        \"body\": {\n          \"text\": \"We're having a fire ... sale. Oh the burning! It burns me!\"\n        },\n        \"buttons\": [\n          {\n            \"label\": {\"text\": \"Shop The Fire Sale\"},\n            \"id\": \"shop\",\n            \"actions\": {\"url\": \"http://example.com/fire-sale\"}\n          }\n        ]\n      },\n      \"audience\": {\n        \"tags\": { \"not\": {\"tag\": \"nude\"} }\n      }\n    },\n    \"triggers\": [ {\"type\": \"foreground\", \"goal\": 1} ],\n    \"localizations\": [\n      {\n        \"locale\": {\"country\": \"FR\"},\n        \"message\": {\n          \"display\": {\n            \"body\": {\n              \"text\": \"We're having le fire ... sale. Oh le burning! It burns moi!\"\n            },\n            \"buttons\": [\n              {\n                \"label\": {\"text\": \"Shop Le Fire Sale\"},\n                \"id\": \"shop\",\n                \"actions\": {\n                  \"url\": \"http://france.example.com/fire-sale\"\n                }\n              }\n            ]\n          }\n        }\n      }\n    ],\n    \"requires_eligibility\": true\n  },\n  \"notify\": true\n}\n"
+              "source": "POST /api/in-app/YOUR_APP_KEY HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"in_app_message\": {\n    \"message\": {\n      \"display_type\": \"banner\",\n      \"display\": {\n        \"body\": {\n          \"text\": \"We're having a fire ... sale. Oh the burning! It burns me!\"\n        },\n        \"buttons\": [\n          {\n            \"label\": {\"text\": \"Shop The Fire Sale\"},\n            \"id\": \"shop\",\n            \"actions\": {\"url\": \"http://example.com/fire-sale\"}\n          }\n        ]\n      },\n      \"audience\": {\n        \"tags\": { \"not\": {\"tag\": \"nude\"} }\n      }\n    },\n    \"triggers\": [ {\"type\": \"foreground\", \"goal\": 1} ],\n    \"localizations\": [\n      {\n        \"locale\": {\"country\": \"FR\"},\n        \"message\": {\n          \"display\": {\n            \"body\": {\n              \"text\": \"We're having le fire ... sale. Oh le burning! It burns moi!\"\n            },\n            \"buttons\": [\n              {\n                \"label\": {\"text\": \"Shop Le Fire Sale\"},\n                \"id\": \"shop\",\n                \"actions\": {\n                  \"url\": \"http://france.example.com/fire-sale\"\n                }\n              }\n            ]\n          }\n        }\n      }\n    ],\n    \"requires_eligibility\": true\n  },\n  \"notify\": true\n}\n"
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 201 Created\nContent-Type: application/vnd.urbanairship+json; version=3\nLocation: /api/in-app/IAbc_TTJRaabcs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924\n\n{\n  \"ok\": true,\n  \"message_id\": \"031de218-9fff-44d4-b348-de4b724bb924\",\n  \"operation_id\": \"03ca94a3-2b27-42f6-be7e-41efc2612cd4\"\n}\n"
+              "source": "HTTP/1.1 201 Created\nContent-Type: application/vnd.urbanairship+json; version=3\nLocation: /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924\n\n{\n  \"ok\": true,\n  \"message_id\": \"031de218-9fff-44d4-b348-de4b724bb924\",\n  \"operation_id\": \"03ca94a3-2b27-42f6-be7e-41efc2612cd4\"\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -3444,7 +3622,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "PUT /api/in-app/app/af_ctTpJRuarzs9-o_Gkh3/eligibility HTTP/1.1\nAuthorization: Bearer <jwt bearer token string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"automation_ids\": [\n        \"b601827f-1169-4dbd-bd39-533b8de51992\",\n        \"46b77aae-06a1-44e8-a903-b0d84ab20093\",\n    ],\n    \"requires_eligibility\": true\n}\n"
+              "source": "PUT /api/in-app/app/YOUR_APP_KEY/eligibility HTTP/1.1\nAuthorization: Bearer <jwt bearer token string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"automation_ids\": [\n        \"b601827f-1169-4dbd-bd39-533b8de51992\",\n        \"46b77aae-06a1-44e8-a903-b0d84ab20093\",\n    ],\n    \"requires_eligibility\": true\n}\n"
             },
             {
               "lang": "HTTP",
@@ -3462,7 +3640,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/in-app/IAbc_TTJRaabcs9-o_Gabc/validate HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"in_app_message\": {\n    \"message\": {\n      \"display_type\": \"banner\",\n      \"display\": {\n        \"body\": {\n          \"text\": \"We're having a fire ... sale. Oh the burning! It burns me!\"\n        },\n        \"buttons\": [\n          {\n            \"label\": {\"text\": \"Shop The Fire Sale\"},\n            \"id\": \"shop\",\n            \"actions\": {\"url\": \"http://example.com/fire-sale\"}\n          }\n        ]\n      },\n      \"audience\": {\n        \"tags\": { \"not\": {\"tag\": \"nude\"} }\n      }\n    },\n    \"triggers\": [ {\"type\": \"foreground\", \"goal\": 1} ],\n    \"localizations\": [\n      {\n        \"locale\": {\"country\": \"FR\"},\n        \"message\": {\n          \"display\": {\n            \"body\": {\n              \"text\": \"We're having le fire ... sale. Oh le burning! It burns moi!\"\n            },\n            \"buttons\": [\n              {\n                \"label\": {\"text\": \"Shop Le Fire Sale\"},\n                \"id\": \"shop\",\n                \"actions\": {\n                  \"url\": \"http://france.example.com/fire-sale\"\n                }\n              }\n            ]\n          }\n        }\n      }\n    ],\n    \"requires_eligibility\": true\n  },\n  \"notify\": true\n}\n"
+              "source": "POST /api/in-app/YOUR_APP_KEY/validate HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"in_app_message\": {\n    \"message\": {\n      \"display_type\": \"banner\",\n      \"display\": {\n        \"body\": {\n          \"text\": \"We're having a fire ... sale. Oh the burning! It burns me!\"\n        },\n        \"buttons\": [\n          {\n            \"label\": {\"text\": \"Shop The Fire Sale\"},\n            \"id\": \"shop\",\n            \"actions\": {\"url\": \"http://example.com/fire-sale\"}\n          }\n        ]\n      },\n      \"audience\": {\n        \"tags\": { \"not\": {\"tag\": \"nude\"} }\n      }\n    },\n    \"triggers\": [ {\"type\": \"foreground\", \"goal\": 1} ],\n    \"localizations\": [\n      {\n        \"locale\": {\"country\": \"FR\"},\n        \"message\": {\n          \"display\": {\n            \"body\": {\n              \"text\": \"We're having le fire ... sale. Oh le burning! It burns moi!\"\n            },\n            \"buttons\": [\n              {\n                \"label\": {\"text\": \"Shop Le Fire Sale\"},\n                \"id\": \"shop\",\n                \"actions\": {\n                  \"url\": \"http://france.example.com/fire-sale\"\n                }\n              }\n            ]\n          }\n        }\n      }\n    ],\n    \"requires_eligibility\": true\n  },\n  \"notify\": true\n}\n"
             },
             {
               "lang": "HTTP",
@@ -3480,7 +3658,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "DELETE /api/in-app/IAbc_TTJRuarzs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
+              "source": "DELETE /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
               "lang": "HTTP",
@@ -3496,7 +3674,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/in-app/app/IAbc_TTJRaabcs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
+              "source": "GET /api/in-app/app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
               "lang": "HTTP",
@@ -3512,11 +3690,47 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "PUT /api/in-app/IAbc_TTJRaabcs9-o_Gabc/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"in_app_message\": {\n    \"message\": {\n      \"display_type\": \"banner\",\n      \"display\": {\n        \"body\": {\n          \"text\": \"Gobias some coffee\"\n        },\n        \"buttons\": [\n          {\n            \"label\": \"Coffee\",\n            \"id\": \"shop\",\n            \"actions\": {\n              \"url\": \"http://example.com/coffee\"\n            }\n          }\n        ]\n      }\n    },\n    \"priority\": 11,\n    \"triggers\": [\n      {\n        \"type\": \"foreground\",\n        \"goal\": 1\n      }\n    ]\n  }\n}\n"
+              "source": "PUT /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"in_app_message\": {\n    \"message\": {\n      \"display_type\": \"banner\",\n      \"display\": {\n        \"body\": {\n          \"text\": \"Gobias some coffee\"\n        },\n        \"buttons\": [\n          {\n            \"label\": \"Coffee\",\n            \"id\": \"shop\",\n            \"actions\": {\n              \"url\": \"http://example.com/coffee\"\n            }\n          }\n        ]\n      }\n    },\n    \"priority\": 11,\n    \"triggers\": [\n      {\n        \"type\": \"foreground\",\n        \"goal\": 1\n      }\n    ]\n  }\n}\n"
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 Ok\nContent-Type: application/vnd.urbanairship+json; version=3\nLocation: /api/in-app/ISex_TTJRuarzs9-o_Gkhg/031de218-9fff-44d4-b348-de4b724bb924\n\n{\n  \"ok\": true,\n  \"message_id\": \"031de218-9fff-44d4-b348-de4b724bb924\",\n  \"operation_id\": \"03ca94a3-2b27-42f6-be7e-41efc2612cd4\"\n}\n"
+              "source": "HTTP/1.1 200 Ok\nContent-Type: application/vnd.urbanairship+json; version=3\nLocation: /api/in-app/YOUR_APP_KEY/031de218-9fff-44d4-b348-de4b724bb924\n\n{\n  \"ok\": true,\n  \"message_id\": \"031de218-9fff-44d4-b348-de4b724bb924\",\n  \"operation_id\": \"03ca94a3-2b27-42f6-be7e-41efc2612cd4\"\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/journeys/exit": {
+      "post": [
+        {
+          "description": "Example exit in-flight users from a Sequence",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/journeys/exit HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"triggering_id\" : \"1fd202ca-9deb-4372-b052-dff0516f9518\",\n    \"entrance_id\" : \"product_123\"\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Length: 11\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        }
+      ]
+    },
+    "/api/journeys/trigger": {
+      "post": [
+        {
+          "description": "Example enter an audience into a Sequence",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/journeys/trigger HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"audience\" : {\n        \"segment\": \"<segment-id>\"\n    },\n    \"triggering_id\" : \"1fd202ca-9deb-4372-b052-dff0516f9518\",\n    \"entrance_id\" : \"product_123\",\n    \"global_attributes\" : {\n        \"product_name\": \"widget\"\n    }\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 200 OK\nContent-Length: 11\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -3774,7 +3988,7 @@
     "/api/named_users": {
       "get": [
         {
-          "description": "Example Named User lookup",
+          "description": "Example named user lookup",
           "examples": [
             {
               "lang": "HTTP",
@@ -3782,7 +3996,7 @@
             },
             {
               "lang": "java",
-              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nNamedUserListingRequest request = NamedUserListingRequest.newRequest(\"user-456\");\nResponse<NamedUserListingResponse> response = client.execute(request);\nNamedUserView namedUser = response.getBody().get().getNamedUserView().get();\n\n// The Named User ID\nString namedUserId = namedUser.getNamedUserId();\n\n// Map of tag groups and the associated sets of tags\nImmutableMap<String, ImmutableSet<String>> namedUserTags = namedUser.getNamedUserTags();\n\n// All channel objects associated with the Named User\nImmutableSet<ChannelView> channelViews = namedUser.getChannelViews();\n"
+              "source": "UrbanAirshipClient client = UrbanAirshipClient.newBuilder()\n        .setKey(\"<app key>\")\n        .setSecret(\"<master secret>\")\n        .build();\n\nNamedUserListingRequest request = NamedUserListingRequest.newRequest(\"user-456\");\nResponse<NamedUserListingResponse> response = client.execute(request);\nNamedUserView namedUser = response.getBody().get().getNamedUserView().get();\n\n// The named user ID\nString namedUserId = namedUser.getNamedUserId();\n\n// Map of tag groups and the associated sets of tags\nImmutableMap<String, ImmutableSet<String>> namedUserTags = namedUser.getNamedUserTags();\n\n// All channel objects associated with the named user\nImmutableSet<ChannelView> channelViews = namedUser.getChannelViews();\n"
             },
             {
               "lang": "python",
@@ -3800,7 +4014,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example Named User listing",
+          "description": "Example named user listing",
           "examples": [
             {
               "lang": "HTTP",
@@ -3820,7 +4034,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nData-Attribute: named_users\nLink: <https://go.urbanairship.com/api/named_users?start=user-1234>; rel=next\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"next_page\": \"https://go.urbanairship.com/api/named_users?start=user-1234\",\n   \"named_users\": [\n      {\n         \"named_user_id\": \"user-id-1234\",\n         \"created\" : \"2020-04-08T20:41:06\",\n         \"last_modified\" : \"2020-05-01T18:00:27\",\n         \"tags\": {\n            \"my_fav_tag_group\": [\"tag1\", \"tag2\"]\n         },\n         \"subscription_lists\": [\n         {\n            \"list_ids\": [\"example_listId-1\", \"example_listId-5\"],\n            \"scope\": \"web\"\n         },\n         {\n            \"list_ids\": [\"example_listId-2\", \"example_listId-3\"],\n            \"scope\": \"app\"\n         },\n         {\n            \"list_ids\": [\"example_listId-2\"],\n            \"scope\": \"web\"\n         },\n         {\n            \"list_ids\": [\"example_listId-3\"],\n            \"scope\": \"email\"\n         }\n         ],\n         \"attributes\":{\n            \"item_purchased\":\"Fur removal tool\",\n            \"cats_name\":\"fluffy butt\",\n            \"pets_age\":2\n         },\n         \"user_attributes\": {\n            \"ua_country\": \"US\",\n            \"ua_language\": \"en\",\n            \"ua_tz\": \"America/Los_Angeles\"\n         },\n         \"channels\": [\n            {\n               \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd5\",\n               \"device_type\": \"ios\",\n               \"installed\": true,\n               \"opt_in\": true,\n               \"push_address\": \"FFFF\",\n               \"created\": \"2020-04-08T20:41:06\",\n               \"last_registration\": \"2020-05-01T18:00:27\",\n               \"alias\": \"xxxx\",\n               \"tags\": [\"asdf\"],\n               \"ios\": {\n                  \"badge\": 0,\n                  \"quiettime\": {\n                     \"start\": \"22:00\",\n                     \"end\": \"06:00\"\n                  },\n                  \"tz\": \"America/Los_Angeles\"\n               }\n            }\n         ]\n      }\n   ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nData-Attribute: named_users\nLink: <https://go.urbanairship.com/api/named_users?start=user-1234>; rel=next\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"next_page\": \"https://go.urbanairship.com/api/named_users?start=user-1234\",\n   \"named_users\": [\n      {\n         \"named_user_id\": \"user-id-1234\",\n         \"created\" : \"2020-04-08T20:41:06\",\n         \"last_modified\" : \"2020-05-01T18:00:27\",\n         \"tags\": {\n            \"my_fav_tag_group\": [\"tag1\", \"tag2\"]\n         },\n         \"subscription_lists\": [\n         {\n            \"list_ids\": [\"example_listId-1\", \"example_listId-5\"],\n            \"scope\": \"web\"\n         },\n         {\n            \"list_ids\": [\"example_listId-2\", \"example_listId-3\"],\n            \"scope\": \"app\"\n         },\n         {\n            \"list_ids\": [\"example_listId-2\"],\n            \"scope\": \"web\"\n         },\n         {\n            \"list_ids\": [\"example_listId-3\"],\n            \"scope\": \"email\"\n         }\n         ],\n         \"attributes\":{\n            \"item_purchased\":\"Fur removal tool\",\n            \"cats_name\":\"fluffy butt\",\n            \"pets_age\":2\n         },\n         \"user_attributes\": {\n            \"ua_country\": \"US\",\n            \"ua_language\": \"en\",\n            \"ua_tz\": \"America/Los_Angeles\"\n         },\n         \"channels\": [\n            {\n               \"channel_id\": \"dceafd02-b852-4305-83df-98b65fa40dd5\",\n               \"device_type\": \"ios\",\n               \"installed\": true,\n               \"opt_in\": true,\n               \"push_address\": \"FFFF\",\n               \"created\": \"2020-04-08T20:41:06\",\n               \"last_registration\": \"2020-05-01T18:00:27\",\n               \"tags\": [\"asdf\"],\n               \"ios\": {\n                  \"badge\": 0,\n                  \"quiettime\": {\n                     \"start\": \"22:00\",\n                     \"end\": \"06:00\"\n                  },\n                  \"tz\": \"America/Los_Angeles\"\n               }\n            }\n         ]\n      }\n   ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -3830,7 +4044,7 @@
     "/api/named_users/associate": {
       "post": [
         {
-          "description": "Example associate an iOS channel with a Named User",
+          "description": "Example associate an iOS channel with a named user",
           "examples": [
             {
               "lang": "HTTP",
@@ -3852,7 +4066,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example associate a web channel with Named User (do not declare device type)",
+          "description": "Example associate a web channel with a named user (do not declare device type)",
           "examples": [
             {
               "lang": "HTTP",
@@ -3874,7 +4088,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example associate an email channel with Named User",
+          "description": "Example associate an email channel with a named user",
           "examples": [
             {
               "lang": "HTTP",
@@ -3926,7 +4140,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Example disassociate an email channel from Named User",
+          "description": "Example disassociate an email channel from a named user",
           "examples": [
             {
               "lang": "HTTP",
@@ -3956,7 +4170,7 @@
     "/api/named_users/scoped/{named_user_id}": {
       "post": [
         {
-          "description": "Example scoped Named User batch operations\n",
+          "description": "Example scoped named user batch operations\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -4038,7 +4252,7 @@
     "/api/named_users/{named_user_id}": {
       "post": [
         {
-          "description": "Create a Named User by associating an email and SMS channel and setting tags and attributes.\n",
+          "description": "Create a named user by associating an email and SMS channel and setting tags and attributes.\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -4094,7 +4308,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-attribute: payloads\n\n{\n  \"ok\": true,\n  \"payloads\": [\n    {\n      \"app_key\": \"IAex_TTJRuarzs9-o_Gkhg\",\n      \"push_id\": \"8dc01402-a80c-4369-9bbf-1ca5ace9560e\",\n      \"payload\": \"(some Base64)\",\n      \"api_version\": \"IN_APP_V2\",\n      \"created_at\": 1516303729093121980\n    },\n    {\n      \"app_key\": \"IAex_TTJRuarzs9-o_Gkhg\",\n      \"push_id\": \"fc5cee97-171d-4de1-b51e-44dfcdf02925\",\n      \"payload\": \"(some Base64)\",\n      \"api_version\": \"IN_APP_V2\",\n      \"created_at\": 1516304647009588861\n    }\n  ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\nData-attribute: payloads\n\n{\n  \"ok\": true,\n  \"payloads\": [\n    {\n      \"app_key\": \"YOUR_APP_KEY\",\n      \"push_id\": \"8dc01402-a80c-4369-9bbf-1ca5ace9560e\",\n      \"payload\": \"(some Base64)\",\n      \"api_version\": \"IN_APP_V2\",\n      \"created_at\": 1516303729093121980\n    },\n    {\n      \"app_key\": \"YOUR_APP_KEY\",\n      \"push_id\": \"fc5cee97-171d-4de1-b51e-44dfcdf02925\",\n      \"payload\": \"(some Base64)\",\n      \"api_version\": \"IN_APP_V2\",\n      \"created_at\": 1516304647009588861\n    }\n  ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -4106,7 +4320,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/payloads HTTP/1.1\nContent-type: application/json\nAccept: application/vnd.urbanairship+json; version=3\n\n{\n  \"app_key\": \"IAex_TTJRuarzs9-o_Gkhg\",\n  \"push_id\": \"fada2a68-d941-41bc-b351-e63e04a7b8e2\",\n  \"payload\": \"(some Base64)\",\n  \"api_version\": \"IN_APP_V2\",\n  \"created_at\": 1516303729093121980\n}\n"
+              "source": "POST /api/payloads HTTP/1.1\nContent-type: application/json\nAccept: application/vnd.urbanairship+json; version=3\n\n{\n  \"app_key\": \"YOUR_APP_KEY\",\n  \"push_id\": \"fada2a68-d941-41bc-b351-e63e04a7b8e2\",\n  \"payload\": \"(some Base64)\",\n  \"api_version\": \"IN_APP_V2\",\n  \"created_at\": 1516303729093121980\n}\n"
             },
             {
               "lang": "HTTP",
@@ -4352,7 +4566,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/preference_forms/af_ctTpJRuarzs9-o_Gkh3 HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
+              "source": "GET /api/preference_forms/YOUR_APP_KEY HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
               "lang": "HTTP",
@@ -4368,7 +4582,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/preference-forms/af_ctTpJRuarzs9-o_Gkh3: HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"preference_form\": {\n    \"form\": {\n      \"display\": {\n        \"description\": \"Choose your own adventure\",\n        \"name\": \"Preferences\"\n      },\n      \"id\": \"seanbird_mobile_app\",\n      \"sections\": [\n        {\n          \"display\": {\n            \"name\": \"Select the wonderful things you would like to receive notifications for:\"\n          },\n          \"id\": \"161bb08b-5e09-424b-8265-b0458920aa74\",\n          \"items\": [\n            {\n              \"display\": {\n                \"description\": \"Be the first to know about what's on sale each week.\",\n                \"name\": \"Weekly Special\"\n              },\n              \"id\": \"efe3e322-33c7-4157-b765-046b9cd2647a\",\n              \"subscription_id\": \"weekly_special\",\n              \"type\": \"channel_subscription\"\n            },\n          ],\n          \"type\": \"section\"\n        }\n      ]\n    },\n    \"platforms\": [\n      \"amazon\",\n      \"android\",\n      \"ios\"\n    ]\n  }\n}\n"
+              "source": "POST /api/preference-forms/YOUR_APP_KEY: HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"preference_form\": {\n    \"form\": {\n      \"display\": {\n        \"description\": \"Choose your own adventure\",\n        \"name\": \"Preferences\"\n      },\n      \"id\": \"seanbird_mobile_app\",\n      \"sections\": [\n        {\n          \"display\": {\n            \"name\": \"Select the wonderful things you would like to receive notifications for:\"\n          },\n          \"id\": \"161bb08b-5e09-424b-8265-b0458920aa74\",\n          \"items\": [\n            {\n              \"display\": {\n                \"description\": \"Be the first to know about what's on sale each week.\",\n                \"name\": \"Weekly Special\"\n              },\n              \"id\": \"efe3e322-33c7-4157-b765-046b9cd2647a\",\n              \"subscription_id\": \"weekly_special\",\n              \"type\": \"channel_subscription\"\n            },\n          ],\n          \"type\": \"section\"\n        }\n      ]\n    },\n    \"platforms\": [\n      \"amazon\",\n      \"android\",\n      \"ios\"\n    ]\n  }\n}\n"
             },
             {
               "lang": "HTTP",
@@ -4518,7 +4732,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/remote-audience-check/app/af_ctTpJRuarzs9-o_Gkh3: HTTP/1.1\nAuthorization: <Contact JWT Token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\nX-UA-Contact-ID: 7c24ebdd-ec06-47d4-9a56-ced8611f5b52\nX-UA-Appkey: af_ctTpJRuarzs9-o_Gkh3\n\n{\n  \"channel_id\": \"164c3a13-9c75-4ea9-be2c-1bed2c97f9c3\",\n  \"contact_id\": \"7c24ebdd-ec06-47d4-9a56-ced8611f5b52\",\n  \"context\": {\n    \"campaign\": \"cool_campaign_1\"\n  }\n}\n"
+              "source": "POST /api/remote-audience-check/app/YOUR_APP_KEY: HTTP/1.1\nAuthorization: <Contact JWT Token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\nX-UA-Contact-ID: 7c24ebdd-ec06-47d4-9a56-ced8611f5b52\nX-UA-Appkey: YOUR_APP_KEY\n\n{\n  \"channel_id\": \"164c3a13-9c75-4ea9-be2c-1bed2c97f9c3\",\n  \"contact_id\": \"7c24ebdd-ec06-47d4-9a56-ced8611f5b52\",\n  \"context\": {\n    \"campaign\": \"cool_campaign_1\"\n  }\n}\n"
             },
             {
               "lang": "HTTP",
@@ -4536,7 +4750,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/remote-config/app/IAex_TTJRuarzs9-o_Gkhg/common HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
+              "source": "GET /api/remote-config/app/YOUR_APP_KEY/common HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
               "lang": "HTTP",
@@ -4552,7 +4766,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/remote-config/app/IAex_TTJRuarzs9-o_Gkhg/common HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"notify\": true,\n  \"set_values\": [\n    {\n      \"scope\": [\"message_center\", \"font\"],\n      \"value\": \"Times New Roman\"\n    }\n  ],\n  \"deletes\" : [\n    {\n      \"scope\": [\"message_center\", \"background_color\"]\n    }\n  ]\n}\n"
+              "source": "POST /api/remote-config/app/YOUR_APP_KEY/common HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-type: application/json\n\n{\n  \"notify\": true,\n  \"set_values\": [\n    {\n      \"scope\": [\"message_center\", \"font\"],\n      \"value\": \"Times New Roman\"\n    }\n  ],\n  \"deletes\" : [\n    {\n      \"scope\": [\"message_center\", \"background_color\"]\n    }\n  ]\n}\n"
             },
             {
               "lang": "HTTP",
@@ -4597,11 +4811,11 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/remote-data-contact/android/3c2be0e5-8a1a-5d3d-b64c-925c339c504a: HTTP/1.1\nAuthorization: <Json Web Token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\nX-UA-Appkey: af_ctTpJRuarzs9-o_Gkh3\n"
+              "source": "GET /api/remote-data-contact/android/3c2be0e5-8a1a-5d3d-b64c-925c339c504a: HTTP/1.1\nAuthorization: <Json Web Token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\nX-UA-Appkey: YOUR_APP_KEY\n"
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"payloads\": [\n    {\n      \"type\": \"in_app_messages\",\n      \"timestamp\": \"2023-02-03T22:33:13.781\",\n      \"data\": {\n        \"in_app_messages\": [\n          {\n            \"message\": {\n              \"name\": \"my message\",\n              \"message_id\": \"01bbe0e5-8a1a-483d-ac4c-925c333150ae\",\n              \"display_type\": \"fullscreen\",\n              \"display\": {\n                \"heading\": {\n                  \"text\": \"header\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\n                    \"sans-serif\"\n                  ],\n                  \"alignment\": \"left\"\n                },\n                \"body\": {\n                  \"text\": \"body\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\n                    \"sans-serif\"\n                  ],\n                  \"alignment\": \"left\"\n                },\n                \"background_color\": \"#ffffff\",\n                \"button_layout\": \"stacked\",\n                \"buttons\": [\n                  {\n                    \"label\": {\n                      \"text\": \"bouton\",\n                      \"color\": \"#ffffff\",\n                      \"size\": 12,\n                      \"font_family\": [\n                        \"sans-serif\"\n                      ],\n                      \"style\": [\n                        \"bold\"\n                      ]\n                    },\n                    \"id\": \"bouton\",\n                    \"background_color\": \"#000000\",\n                    \"border_color\": \"#000000\",\n                    \"border_radius\": 2,\n                    \"actions\": {\n\n                    }\n                  }\n                ],\n                \"footer\": {\n                  \"label\": {\n                    \"text\": \"footer\",\n                    \"color\": \"#ffa600\",\n                    \"size\": 18,\n                    \"font_family\": [\n                      \"Gothem SSm\",\n                      \"gothem_family\",\n                      \"sans-serif\"\n                    ],\n                    \"alignment\": \"left\",\n                    \"style\": [\n                      \"bold\",\n                      \"italic\",\n                      \"underline\"\n                    ]\n                  },\n                  \"id\": \"footer\",\n                  \"actions\": {\n                    \"open_external_url_action\": \"https://google.fr\"\n                  }\n                },\n                \"media\": {\n                  \"url\": \"https://hangar-dl.urbanairship.com/binary/public/af_ctTpJRuarzs9-o_Gkh3/8da2a9db-309e-4f11-85e2-b24429e9bcc0\",\n                  \"type\": \"image\",\n                  \"description\": \"Image\"\n                },\n                \"dismiss_button_color\": \"#000000\",\n                \"template\": \"header_media_body\"\n              },\n              \"audience\": {\n                \"tags\": {\n                  \"and\": [\n                    {\n                      \"tag\": \"paris\"\n                    }\n                  ]\n                },\n                \"miss_behavior\": \"skip\"\n              }\n            },\n            \"created\": \"2021-07-19T12:44:21.152\",\n            \"last_updated\": \"2021-07-19T12:44:21.152\",\n            \"additional_audience_check_overrides\": {\n              \"bypass\": true\n            },\n            \"triggers\": [\n              {\n                \"type\": \"active_session\",\n                \"goal\": 1\n              }\n            ],\n            \"edit_grace_period\": 14,\n            \"requires_eligibility\": true,\n            \"reporting_metadata\": \"{\"pipeline_id\":\"7f6c8656-adfe-480f-98c3-d9fa45434e39\"}\"\n          }\n        ]\n      }\n    }\n  ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n  \"ok\": true,\n  \"payloads\": [\n    {\n      \"type\": \"in_app_messages\",\n      \"timestamp\": \"2023-02-03T22:33:13.781\",\n      \"data\": {\n        \"in_app_messages\": [\n          {\n            \"message\": {\n              \"name\": \"my message\",\n              \"message_id\": \"01bbe0e5-8a1a-483d-ac4c-925c333150ae\",\n              \"display_type\": \"fullscreen\",\n              \"display\": {\n                \"heading\": {\n                  \"text\": \"header\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\n                    \"sans-serif\"\n                  ],\n                  \"alignment\": \"left\"\n                },\n                \"body\": {\n                  \"text\": \"body\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\n                    \"sans-serif\"\n                  ],\n                  \"alignment\": \"left\"\n                },\n                \"background_color\": \"#ffffff\",\n                \"button_layout\": \"stacked\",\n                \"buttons\": [\n                  {\n                    \"label\": {\n                      \"text\": \"bouton\",\n                      \"color\": \"#ffffff\",\n                      \"size\": 12,\n                      \"font_family\": [\n                        \"sans-serif\"\n                      ],\n                      \"style\": [\n                        \"bold\"\n                      ]\n                    },\n                    \"id\": \"bouton\",\n                    \"background_color\": \"#000000\",\n                    \"border_color\": \"#000000\",\n                    \"border_radius\": 2,\n                    \"actions\": {\n\n                    }\n                  }\n                ],\n                \"footer\": {\n                  \"label\": {\n                    \"text\": \"footer\",\n                    \"color\": \"#ffa600\",\n                    \"size\": 18,\n                    \"font_family\": [\n                      \"Gothem SSm\",\n                      \"gothem_family\",\n                      \"sans-serif\"\n                    ],\n                    \"alignment\": \"left\",\n                    \"style\": [\n                      \"bold\",\n                      \"italic\",\n                      \"underline\"\n                    ]\n                  },\n                  \"id\": \"footer\",\n                  \"actions\": {\n                    \"open_external_url_action\": \"https://google.fr\"\n                  }\n                },\n                \"media\": {\n                  \"url\": \"https://hangar-dl.urbanairship.com/binary/public/YOUR_APP_KEY/8da2a9db-309e-4f11-85e2-b24429e9bcc0\",\n                  \"type\": \"image\",\n                  \"description\": \"Image\"\n                },\n                \"dismiss_button_color\": \"#000000\",\n                \"template\": \"header_media_body\"\n              },\n              \"audience\": {\n                \"tags\": {\n                  \"and\": [\n                    {\n                      \"tag\": \"paris\"\n                    }\n                  ]\n                },\n                \"miss_behavior\": \"skip\"\n              }\n            },\n            \"created\": \"2021-07-19T12:44:21.152\",\n            \"last_updated\": \"2021-07-19T12:44:21.152\",\n            \"additional_audience_check_overrides\": {\n              \"bypass\": true\n            },\n            \"triggers\": [\n              {\n                \"type\": \"active_session\",\n                \"goal\": 1\n              }\n            ],\n            \"edit_grace_period\": 14,\n            \"requires_eligibility\": true,\n            \"reporting_metadata\": \"{\\\"pipeline_id\\\":\\\"7f6c8656-adfe-480f-98c3-d9fa45434e39\\\"}\"\n          }\n        ]\n      }\n    }\n  ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -4615,11 +4829,11 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/remote-data/app/af_ctTpJRuarzs9-o_Gkh3/android HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n"
+              "source": "GET /api/remote-data/app/YOUR_APP_KEY/android HTTP/1.1\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n"
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{ \"ok\": true,\n  \"payloads\": [\n    { \"type\": \"app_config\",\n      \"timestamp\": \"2023-01-31T16:27:28.13\",\n      \"data\": {\n        \"airship_config\": {\n          \"analytics_url\": \"https://combine.urbanairship.com\",\n          \"device_api_url\": \"https://device-api.urbanairship.com\",\n          \"wallet_url\": \"https://wallet-api.urbanairship.com\",\n          \"metered_usage_url\": \"https://metered-usage-api.urbanairship.com\"\n        },\n        \"additional_audience_check\": {\"url\": \"https://device-api.urbanairship.com/api/remote-audience-check/app/af_ctTpJRuarzs9-o_Gkh3\"},\n        \"testkey\": \"prod\",\n        \"fetch_contact_remote_data\": false\n      }\n    },\n    { \"type\": \"in_app_messages\",\n      \"timestamp\": \"2023-02-03T22:33:13.781\",\n      \"data\": {\n        \"in_app_messages\": [\n          { \"message\": {\n              \"name\": \"my message\",\n              \"message_id\": \"01bbe0e5-8a1a-483d-ac4c-925c333150ae\",\n              \"display_type\": \"fullscreen\",\n              \"display\": {\n                \"heading\": {\n                  \"text\": \"header\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\"sans-serif\"],\n                  \"alignment\": \"left\"\n                },\n                \"body\": {\n                  \"text\": \"body\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\"sans-serif\"],\n                  \"alignment\": \"left\"\n                },\n                \"background_color\": \"#ffffff\",\n                \"button_layout\": \"stacked\",\n                \"buttons\": [\n                  { \"label\": {\n                      \"text\": \"bouton\",\n                      \"color\": \"#ffffff\",\n                      \"size\": 12,\n                      \"font_family\": [\"sans-serif\"],\n                      \"style\": [\"bold\"]\n                    },\n                    \"id\": \"bouton\",\n                    \"background_color\": \"#000000\",\n                    \"border_color\": \"#000000\",\n                    \"border_radius\": 2,\n                    \"actions\": {}\n                  }\n                ],\n                \"footer\": {\n                  \"label\": {\n                    \"text\": \"footer\",\n                    \"color\": \"#ffa600\",\n                    \"size\": 18,\n                    \"font_family\": [\"Gothem SSm\", \"gothem_family\", \"sans-serif\"],\n                    \"alignment\": \"left\",\n                    \"style\": [\"bold\", \"italic\", \"underline\"]\n                  },\n                  \"id\": \"footer\",\n                  \"actions\": {\"open_external_url_action\": \"https://google.fr\"}\n                },\n                \"media\": {\n                  \"url\": \"https://hangar-dl.urbanairship.com/binary/public/af_ctTpJRuarzs9-o_Gkh3/8da2a9db-309e-4f11-85e2-b24429e9bcc0\",\n                  \"type\": \"image\",\n                  \"description\": \"Image\"\n                },\n                \"dismiss_button_color\": \"#000000\",\n                \"template\": \"header_media_body\"\n              },\n              \"audience\": {\n                \"tags\": { \"and\": [ {\"tag\": \"paris\"} ] },\n                \"miss_behavior\": \"skip\"\n              }\n            },\n            \"created\": \"2021-07-19T12:44:21.152\",\n            \"last_updated\": \"2021-07-19T12:44:21.152\",\n            \"additional_audience_check_overrides\": {\"context\": {\"campaign\": \"cool_campaign_1\"}},\n            \"triggers\": [ {\"type\": \"active_session\", \"goal\": 1} ],\n            \"edit_grace_period\": 14\n          }\n        ]\n      }\n    },\n    {\n      \"type\": \"preference_forms\",\n      \"timestamp\": \"2022-12-14T18:52:31.938\",\n      \"data\": {\n        \"preference_forms\": [\n          { \"form\": {\n              \"display\": {\n                \"description\": \"Choose your own adventure\",\n                \"name\": \"Preferences\"\n              },\n              \"id\": \"seanbird_mobile_app\",\n              \"sections\": [\n                { \"display\": {\"name\": \"Select the wonderful things you would like to receive notifications for:\"},\n                  \"id\": \"161bb08b-5e09-424b-8265-b0458920aa74\",\n                  \"items\": [\n                    { \"display\": {\"description\": \"Be the first to know about what's on sale each week.\", \"name\": \"Weekly Special\"},\n                      \"id\": \"efe3e322-33c7-4157-b765-046b9cd2647a\",\n                      \"subscription_id\": \"weekly_special\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Celebrity goat gossip\"},\n                      \"id\": \"ceb607e4-6924-46d3-b4c0-c17d1d6cb86f\",\n                      \"subscription_id\": \"celebrity_goat_gossip\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Goat traffic\"},\n                      \"id\": \"07b324e9-1b05-4cab-90b6-cae5b6843037\",\n                      \"subscription_id\": \"goat_traffic\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Goat crime\"},\n                      \"id\": \"498f7bde-537a-4739-a130-18773304ff1c\",\n                      \"subscription_id\": \"goat_crime\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Goat business\"},\n                      \"id\": \"c6887ac3-fead-4fac-a2ac-03f8fcebabfb\",\n                      \"subscription_id\": \"goat_business\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"It's just like normal yoga, but with goats.\", \"name\": \"Goat yoga\"},\n                      \"id\": \"112d528d-8096-435c-b68a-e9225a53ad7b\",\n                      \"subscription_id\": \"goat_yoga\",\n                      \"type\": \"channel_subscription\"\n                    }\n                  ],\n                  \"type\": \"section\"\n                }\n              ]\n            },\n            \"form_id\": \"06d0e72f-0a2a-4533-8ea2-7ef83abe22d4\",\n            \"created\": \"2021-09-22T15:54:27.1\",\n            \"last_updated\": \"2021-10-08T22:55:05.926\",\n            \"platforms\": [\"amazon\", \"android\", \"ios\"]\n          }\n        ]\n      }\n    }\n  ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{ \"ok\": true,\n  \"payloads\": [\n    { \"type\": \"app_config\",\n      \"timestamp\": \"2023-01-31T16:27:28.13\",\n      \"data\": {\n        \"airship_config\": {\n          \"analytics_url\": \"https://combine.urbanairship.com\",\n          \"device_api_url\": \"https://device-api.urbanairship.com\",\n          \"wallet_url\": \"https://wallet-api.urbanairship.com\",\n          \"metered_usage_url\": \"https://metered-usage-api.urbanairship.com\"\n        },\n        \"additional_audience_check\": {\"url\": \"https://device-api.urbanairship.com/api/remote-audience-check/app/YOUR_APP_KEY\"},\n        \"testkey\": \"prod\",\n        \"fetch_contact_remote_data\": false\n      }\n    },\n    { \"type\": \"in_app_messages\",\n      \"timestamp\": \"2023-02-03T22:33:13.781\",\n      \"data\": {\n        \"in_app_messages\": [\n          { \"message\": {\n              \"name\": \"my message\",\n              \"message_id\": \"01bbe0e5-8a1a-483d-ac4c-925c333150ae\",\n              \"display_type\": \"fullscreen\",\n              \"display\": {\n                \"heading\": {\n                  \"text\": \"header\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\"sans-serif\"],\n                  \"alignment\": \"left\"\n                },\n                \"body\": {\n                  \"text\": \"body\",\n                  \"color\": \"#000000\",\n                  \"size\": 14,\n                  \"font_family\": [\"sans-serif\"],\n                  \"alignment\": \"left\"\n                },\n                \"background_color\": \"#ffffff\",\n                \"button_layout\": \"stacked\",\n                \"buttons\": [\n                  { \"label\": {\n                      \"text\": \"bouton\",\n                      \"color\": \"#ffffff\",\n                      \"size\": 12,\n                      \"font_family\": [\"sans-serif\"],\n                      \"style\": [\"bold\"]\n                    },\n                    \"id\": \"bouton\",\n                    \"background_color\": \"#000000\",\n                    \"border_color\": \"#000000\",\n                    \"border_radius\": 2,\n                    \"actions\": {}\n                  }\n                ],\n                \"footer\": {\n                  \"label\": {\n                    \"text\": \"footer\",\n                    \"color\": \"#ffa600\",\n                    \"size\": 18,\n                    \"font_family\": [\"Gothem SSm\", \"gothem_family\", \"sans-serif\"],\n                    \"alignment\": \"left\",\n                    \"style\": [\"bold\", \"italic\", \"underline\"]\n                  },\n                  \"id\": \"footer\",\n                  \"actions\": {\"open_external_url_action\": \"https://google.fr\"}\n                },\n                \"media\": {\n                  \"url\": \"https://hangar-dl.urbanairship.com/binary/public/YOUR_APP_KEY/8da2a9db-309e-4f11-85e2-b24429e9bcc0\",\n                  \"type\": \"image\",\n                  \"description\": \"Image\"\n                },\n                \"dismiss_button_color\": \"#000000\",\n                \"template\": \"header_media_body\"\n              },\n              \"audience\": {\n                \"tags\": { \"and\": [ {\"tag\": \"paris\"} ] },\n                \"miss_behavior\": \"skip\"\n              }\n            },\n            \"created\": \"2021-07-19T12:44:21.152\",\n            \"last_updated\": \"2021-07-19T12:44:21.152\",\n            \"additional_audience_check_overrides\": {\"context\": {\"campaign\": \"cool_campaign_1\"}},\n            \"triggers\": [ {\"type\": \"active_session\", \"goal\": 1} ],\n            \"edit_grace_period\": 14\n          }\n        ]\n      }\n    },\n    {\n      \"type\": \"preference_forms\",\n      \"timestamp\": \"2022-12-14T18:52:31.938\",\n      \"data\": {\n        \"preference_forms\": [\n          { \"form\": {\n              \"display\": {\n                \"description\": \"Choose your own adventure\",\n                \"name\": \"Preferences\"\n              },\n              \"id\": \"seanbird_mobile_app\",\n              \"sections\": [\n                { \"display\": {\"name\": \"Select the wonderful things you would like to receive notifications for:\"},\n                  \"id\": \"161bb08b-5e09-424b-8265-b0458920aa74\",\n                  \"items\": [\n                    { \"display\": {\"description\": \"Be the first to know about what's on sale each week.\", \"name\": \"Weekly Special\"},\n                      \"id\": \"efe3e322-33c7-4157-b765-046b9cd2647a\",\n                      \"subscription_id\": \"weekly_special\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Celebrity goat gossip\"},\n                      \"id\": \"ceb607e4-6924-46d3-b4c0-c17d1d6cb86f\",\n                      \"subscription_id\": \"celebrity_goat_gossip\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Goat traffic\"},\n                      \"id\": \"07b324e9-1b05-4cab-90b6-cae5b6843037\",\n                      \"subscription_id\": \"goat_traffic\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Goat crime\"},\n                      \"id\": \"498f7bde-537a-4739-a130-18773304ff1c\",\n                      \"subscription_id\": \"goat_crime\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"\", \"name\": \"Goat business\"},\n                      \"id\": \"c6887ac3-fead-4fac-a2ac-03f8fcebabfb\",\n                      \"subscription_id\": \"goat_business\",\n                      \"type\": \"channel_subscription\"\n                    },\n                    { \"display\": {\"description\": \"It's just like normal yoga, but with goats.\", \"name\": \"Goat yoga\"},\n                      \"id\": \"112d528d-8096-435c-b68a-e9225a53ad7b\",\n                      \"subscription_id\": \"goat_yoga\",\n                      \"type\": \"channel_subscription\"\n                    }\n                  ],\n                  \"type\": \"section\"\n                }\n              ]\n            },\n            \"form_id\": \"06d0e72f-0a2a-4533-8ea2-7ef83abe22d4\",\n            \"created\": \"2021-09-22T15:54:27.1\",\n            \"last_updated\": \"2021-10-08T22:55:05.926\",\n            \"platforms\": [\"amazon\", \"android\", \"ios\"]\n          }\n        ]\n      }\n    }\n  ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -4637,7 +4851,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n    \"app_key\": \"Wz9d8TlSWk0lZTAwzHA2qc\",\n    \"start\": \"2020-06-02T20:47:20\",\n    \"end\": \"2023-01-31T20:47:20\",\n    \"limit\": 10,\n    \"next_page\": \"https://go.urbanairship.com/api/reports/activity/details...\",\n    \"activities\": [\n        {\n            \"push_id\": \"ecb8eaf0-0430-4dfa-93d8-c3149f479d96\",\n            \"timestamp\": \"2023-01-31 20:47:20\",\n            \"type\": \"GROUP\",\n            \"experiment\": true,\n            \"details\": {\n                \"interaction\": {\n                    \"web\": {\n                        \"clicks\": 20,\n                        \"sessions\": 13\n                    },\n                    \"app\": {\n                        \"influenced\": 13,\n                        \"direct\": 12,\n                        \"indirect\": 10,\n                        \"rich_read\": 5\n                    }\n                },\n                \"delivery\": {\n                    \"web\": {\n                        \"total\": 13\n                    },\n                    \"app\": {\n                        \"silent\": 125,\n                        \"alerting\": 13,\n                        \"rich\": 5,\n                        \"in_app\": {\n                            \"impressions\": 10,\n                            \"impressions_opted_in\": 5,\n                            \"impressions_opted_out\": 5\n                        }\n                    }\n                }\n            }\n        }\n    ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n    \"app_key\": \"YOUR_APP_KEY\",\n    \"start\": \"2020-06-02T20:47:20\",\n    \"end\": \"2023-01-31T20:47:20\",\n    \"limit\": 10,\n    \"next_page\": \"https://go.urbanairship.com/api/reports/activity/details...\",\n    \"activities\": [\n        {\n            \"push_id\": \"ecb8eaf0-0430-4dfa-93d8-c3149f479d96\",\n            \"timestamp\": \"2023-01-31 20:47:20\",\n            \"type\": \"GROUP\",\n            \"experiment\": true,\n            \"details\": {\n                \"interaction\": {\n                    \"web\": {\n                        \"clicks\": 20,\n                        \"sessions\": 13\n                    },\n                    \"app\": {\n                        \"influenced\": 13,\n                        \"direct\": 12,\n                        \"indirect\": 10,\n                        \"rich_read\": 5\n                    }\n                },\n                \"delivery\": {\n                    \"web\": {\n                        \"total\": 13\n                    },\n                    \"app\": {\n                        \"silent\": 125,\n                        \"alerting\": 13,\n                        \"rich\": 5,\n                        \"in_app\": {\n                            \"impressions\": 10,\n                            \"impressions_opted_in\": 5,\n                            \"impressions_opted_out\": 5\n                        }\n                    }\n                }\n            }\n        }\n    ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -4713,7 +4927,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Response with Group ID parameter",
+          "description": "Response with group ID parameter",
           "examples": [
             {
               "lang": "HTTP",
@@ -4736,7 +4950,7 @@
           "showMissingLanguagePlaceholders": true
         },
         {
-          "description": "Response with Push ID parameter",
+          "description": "Response with push ID parameter",
           "examples": [
             {
               "lang": "HTTP",
@@ -5144,7 +5358,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "GET /api/reports/web/interaction?app_key=ZGIwZTY3YjEtZTRiMi00ZG&start=2020-05-01T10:00&end=2020-05-03T20:00&precision=HOURLY HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
+              "source": "GET /api/reports/web/interaction?app_key=YOUR_APP_KEY&start=2020-05-01T10:00&end=2020-05-03T20:00&precision=HOURLY HTTP/1.1\nAuthorization: Basic <authorization string>\nAccept: application/vnd.urbanairship+json; version=3\n"
             },
             {
               "lang": "java",
@@ -5156,7 +5370,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"app_key\": \"ZGIwZTY3YjEtZTRiMi00ZG\",\n   \"end\": \"2020-05-03 00:00:00\",\n   \"precision\": \"HOURLY\",\n   \"start\": \"2020-05-01 00:00:00\",\n   \"total_counts\": [\n      {\"counts\": {\"clicks\": 36, \"sessions\": 55 }, \"date\": \"2020-05-01 10:00:00\"},\n      {\"counts\": {\"clicks\": 50, \"sessions\": 79 }, \"date\": \"2020-05-01 11:00:00\"},\n      {\"...\"},\n      {\"...\"},\n      {\"counts\": {\"clicks\": 67, \"sessions\": 75 }, \"date\": \"2020-05-03 20:00:00\"}\n  ]\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"app_key\": \"YOUR_APP_KEY\",\n   \"end\": \"2020-05-03 00:00:00\",\n   \"precision\": \"HOURLY\",\n   \"start\": \"2020-05-01 00:00:00\",\n   \"total_counts\": [\n      {\"counts\": {\"clicks\": 36, \"sessions\": 55 }, \"date\": \"2020-05-01 10:00:00\"},\n      {\"counts\": {\"clicks\": 50, \"sessions\": 79 }, \"date\": \"2020-05-01 11:00:00\"},\n      {\"...\"},\n      {\"...\"},\n      {\"counts\": {\"clicks\": 67, \"sessions\": 75 }, \"date\": \"2020-05-03 20:00:00\"}\n  ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -5236,7 +5450,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 201 Created\nData-Attribute: schedule_urls\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"operation_id\": \"efb18e92-9a60-6689-45c2-82fedab36399\",\n   \"schedule_urls\": [\n        \"https://go.urbanairship.com/api/schedules/eac2ace6-349a-41a2-b874-5496d7bf0100\",\n        \"https://go.urbanairship.com/api/schedules/6c7c9bf5-cb2b-47cb-b27f-f85981391c4e\"\n    ],\n    \"schedule_ids\": [\n        \"eac2ace6-349a-41a2-b874-5496d7bf0100\",\n        \"6c7c9bf5-cb2b-47cb-b27f-f85981391c4e\"\n    ],\n   \"schedules\": [\n      {\n         \"url\": \"https://go.urbanairship.com/api/schedules/eac2ace6-349a-41a2-b874-5496d7bf0100\",\n         \"schedule\": {\n            \"scheduled_time\": \"2020-06-03T09:15:00\"\n         },\n         \"name\": \"Morning People\",\n         \"push\": {\n            \"audience\": { \"tag\": \"earlyBirds\" },\n            \"notification\": { \"alert\": \"Good Day Sunshine\" },\n            \"device_types\": [ \"ios\", \"android\" ]\n         },\n         \"push_ids\": [ \"83046227-9b06-4114-9f23-0df349792bbd\" ]\n      }\n      {\n          \"url\": \"https://go.urbanairship.com/api/schedules/6c7c9bf5-cb2b-47cb-b27f-f85981391c4e\",\n          \"schedule\": {\n            \"best_time\": {\n              \"send_date\": \"2020-06-03\"\n            }\n          },\n          \"name\": \"Everybody Else\",\n          \"push\": {\n            \"audience\": { \"tag\": \"normalPeople\" },\n            \"notification\": { \"alert\": \"Stay Up Late\" },\n            \"device_types\": [ \"ios\", \"android\" ]\n         },\n         \"push_ids\": [ \"8438e81-bb31-82a9-5feb-e7fd5b21ca7e\" ]\n      }\n   ]\n}\n"
+              "source": "HTTP/1.1 201 Created\nData-Attribute: schedule_urls\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"ok\": true,\n   \"operation_id\": \"efb18e92-9a60-6689-45c2-82fedab36399\",\n   \"schedule_urls\": [\n        \"https://go.urbanairship.com/api/schedules/eac2ace6-349a-41a2-b874-5496d7bf0100\",\n        \"https://go.urbanairship.com/api/schedules/6c7c9bf5-cb2b-47cb-b27f-f85981391c4e\"\n    ],\n    \"schedule_ids\": [\n        \"eac2ace6-349a-41a2-b874-5496d7bf0100\",\n        \"6c7c9bf5-cb2b-47cb-b27f-f85981391c4e\"\n    ],\n   \"schedules\": [\n      {\n         \"url\": \"https://go.urbanairship.com/api/schedules/eac2ace6-349a-41a2-b874-5496d7bf0100\",\n         \"schedule\": {\n            \"scheduled_time\": \"2020-06-03T09:15:00\"\n         },\n         \"name\": \"Morning People\",\n         \"push\": {\n            \"audience\": { \"tag\": \"earlyBirds\" },\n            \"notification\": { \"alert\": \"Good Day Sunshine\" },\n            \"device_types\": [ \"ios\", \"android\" ]\n         },\n         \"push_ids\": [ \"83046227-9b06-4114-9f23-0df349792bbd\" ]\n      },\n      {\n          \"url\": \"https://go.urbanairship.com/api/schedules/6c7c9bf5-cb2b-47cb-b27f-f85981391c4e\",\n          \"schedule\": {\n            \"best_time\": {\n              \"send_date\": \"2020-06-03\"\n            }\n          },\n          \"name\": \"Everybody Else\",\n          \"push\": {\n            \"audience\": { \"tag\": \"normalPeople\" },\n            \"notification\": { \"alert\": \"Stay Up Late\" },\n            \"device_types\": [ \"ios\", \"android\" ]\n         },\n         \"push_ids\": [ \"8438e81-bb31-82a9-5feb-e7fd5b21ca7e\" ]\n      }\n   ]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -5254,7 +5468,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true,\n    \"operation_id\": \"67c65146-c27f-431f-b54a-83aca694fdd3\",\n    \"schedule_urls\": [\n      \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\"\n    ],\n    \"schedules\": [\n      {\n            \"url\": \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\"\n            \"schedule\": {\n                \"scheduled_time\" : \"2024-11-07T12:00:00\"\n            }\n            \"push\": {\n                \"audience\": {\n                  \"bulk_id\" : \"36d5a261-0454-40f5-b952-942c4b2b0f22\"\n                },\n                \"device_types\" : [ \"open::rcs\" ],\n                \"notification\" : {\n                  \"alert\" : \"Welcome to the winter sale!!\"\n                },\n                \"campaigns\": {\n                  \"categories\": [\"winter sale\", \"west coast\"]\n                }\n            }\n      }\n    ],\n    \"push_ids\": [\"8cf8b2a5-7655-40c2-a500-ff498e60453e\"]\n}\n"
+              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true,\n    \"operation_id\": \"67c65146-c27f-431f-b54a-83aca694fdd3\",\n    \"schedule_urls\": [\n      \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\"\n    ],\n    \"schedules\": [\n      {\n            \"url\": \"http://go.urbanairship/api/schedules/2d69320c-3c91-5241-fac4-248269eed109\",\n            \"schedule\": {\n                \"scheduled_time\" : \"2024-11-07T12:00:00\"\n            },\n            \"push\": {\n                \"audience\": {\n                  \"bulk_id\" : \"36d5a261-0454-40f5-b952-942c4b2b0f22\"\n                },\n                \"device_types\" : [ \"open::rcs\" ],\n                \"notification\" : {\n                  \"alert\" : \"Welcome to the winter sale!!\"\n                },\n                \"campaigns\": {\n                  \"categories\": [\"winter sale\", \"west coast\"]\n                }\n            }\n      }\n    ],\n    \"push_ids\": [\"8cf8b2a5-7655-40c2-a500-ff498e60453e\"]\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -6220,11 +6434,11 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /api/user/ HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"alias\": \"user1\",\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"android_channels\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"ua_device_id\": \"<UUID identifier>\"\n}\n"
+              "source": "POST /api/user/ HTTP/1.1\nAuthorization: Basic <application authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n  \"tags\": [\"tag1\", \"tag2\"],\n  \"android_channels\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"ua_device_id\": \"<UUID identifier>\"\n}\n"
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 201 Created\nAuthorization: Basic <application authorization string>\nContent-Type: application/json; charset=utf-8\n\n{\n  \"user_url\": \"https://go.urbanairship.com/api/user/example_user_id/\",\n  \"user_id\": \"example_user_id\",\n  \"password\": \"example_password\",\n  \"apids\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"ios_channels\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"device_tokens\": [],\n  \"device_pins\": []\n}\n"
+              "source": "HTTP/1.1 201 Created\nAuthorization: Basic <application authorization string>\nContent-Type: application/json; charset=utf-8\n\n{\n  \"user_url\": \"https://go.urbanairship.com/api/user/example_user_id/\",\n  \"user_id\": \"example_user_id\",\n  \"password\": \"example_password\",\n  \"ios_channels\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"device_tokens\": []\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -6294,7 +6508,7 @@
             },
             {
               "lang": "HTTP",
-              "source": "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n\n{\n  \"user_url\": \"https://go.urbanairship.com/api/user/example_user_id/\",\n  \"user_id\": \"example_user_id\",\n  \"ios_channels\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"device_tokens\": [],\n  \"device_pins\": [],\n  \"apids\": []\n}\n"
+              "source": "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n\n{\n  \"user_url\": \"https://go.urbanairship.com/api/user/example_user_id/\",\n  \"user_id\": \"example_user_id\",\n  \"ios_channels\": [\"6368d6f8-5c69-4f91-bec4-870239ab28bf\"],\n  \"device_tokens\": []\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true
@@ -6628,7 +6842,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "POST /token HTTP/1.1\nHost: oauth2.asnapius.com\nContent-Type: application/x-www-form-urlencoded\nAccept: application/json\nAuthorization: Basic <base64 encoded string of \"client_id:client_secret\">\n\ngrant_type=client_credentials&sub=app:JQIMcndxIHWy2QISpt1SpZ&scope=chn&scope=nu&ipaddr=24.20.40.0/24&ipaddr=2001:4860:4860::8888/32\n"
+              "source": "POST /token HTTP/1.1\nHost: oauth2.asnapius.com\nContent-Type: application/x-www-form-urlencoded\nAccept: application/json\nAuthorization: Basic <base64 encoded string of \"client_id:client_secret\">\n\ngrant_type=client_credentials&sub=app:YOUR_APP_KEY&scope=chn&scope=nu&ipaddr=24.20.40.0/24&ipaddr=2001:4860:4860::8888/32\n"
             },
             {
               "lang": "java",
@@ -6672,7 +6886,7 @@
     "/verify/public_key/{kid}": {
       "get": [
         {
-          "description": "Example key verification",
+          "description": "Example verify public key",
           "examples": [
             {
               "lang": "HTTP",

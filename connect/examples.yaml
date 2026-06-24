@@ -269,13 +269,13 @@ components:
                     "contact_id": "6b5ca2a2-c1f1-4119-9617-2d5bff0db09d",
                     "named_user_id": "mini_me"
                   },
-                "body:" {
+                "body": {
                   "push_id": "c91d9e1b-605f-4bad-a45d-cdf3e6e0773f",
                   "group_id": "3eec7de4-4b19-436e-ad15-88278f9ddb82"
                   }
                 }
     custom:
-      - description: Example Custom Event (entire payload on Android channel)
+      - description: Example custom event (entire payload on Android channel)
         examples:
           - lang: json
             source: |
@@ -342,7 +342,7 @@ components:
                 "source": "SDK",
                 "type": "CUSTOM"
               }
-      - description: Example Custom Event from API (shoe sale)
+      - description: Example custom event from API (shoe sale)
         examples:
           - lang: json
             source: |
@@ -377,7 +377,7 @@ components:
                   }
                 }
               }
-      - description: Example Custom Event from SDK (shoe sale)
+      - description: Example custom event from SDK (shoe sale)
         examples:
           - lang: json
             source: |
@@ -439,7 +439,7 @@ components:
                   "type": "COMPLIANCE"
               }
     delivery_report:
-      - description: Example SMS delivery report Custom Event
+      - description: Example SMS delivery report custom event
         examples:
           - lang: json
             source: |
@@ -474,7 +474,7 @@ components:
                 "type": "CUSTOM"
               }
     emailBounceEvent:
-      - description: Example email bounce Custom Event
+      - description: Example email bounce custom event
         examples:
           - lang: json
             source: |
@@ -512,7 +512,7 @@ components:
                 "type": "CUSTOM"
               }
     emailClickEvent:
-      - description: Example email click Custom Event
+      - description: Example email click custom event
         examples:
           - lang: json
             source: |
@@ -584,7 +584,7 @@ components:
                   "type": "COMPLIANCE"
                 }
     emailDelayEvent:
-      - description: Example email delay Custom Event
+      - description: Example email delay custom event
         examples:
           - lang: json
             source: |
@@ -620,7 +620,7 @@ components:
                 "type": "CUSTOM"
               }
     emailDeliveryEvent:
-      - description: Example email delivery Custom Event
+      - description: Example email delivery custom event
         examples:
           - lang: json
             source: |
@@ -656,7 +656,7 @@ components:
                 "type": "CUSTOM"
               }
     emailInitialOpenEvent:
-      - description: Example email initial_open Custom Event
+      - description: Example email initial_open custom event
         examples:
           - lang: json
             source: |
@@ -694,7 +694,7 @@ components:
                 "type": "CUSTOM"
               }
     emailInjectionEvent:
-      - description: Example email injection Custom Event
+      - description: Example email injection custom event
         examples:
           - lang: json
             source: |
@@ -730,7 +730,7 @@ components:
                 "type": "CUSTOM"
               }
     emailOpenEvent:
-      - description: Example email open Custom Event
+      - description: Example email open custom event
         examples:
           - lang: json
             source: |
@@ -773,7 +773,7 @@ components:
                 "type": "CUSTOM"
               }
     emailUnsubscribeLinkEvent:
-      - description: Example email unsubscribe link Custom Event
+      - description: Example email unsubscribe event from an email body link click
         examples:
           - lang: json
             source: |
@@ -802,6 +802,30 @@ components:
                     "source": "API",
                     "properties": {
                       "unsubscribe_event_type": "link_unsubscribe"
+                    }
+                },
+                "type": "CUSTOM"
+              }
+      - description: Example email unsubscribe event from the email client unsubscribe button
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "3df90a4b-3569-4d3e-9fde-22f604c2c96f",
+                "offset": "1000001778146",
+                "occurred": "2019-02-27T23:21:01.000Z",
+                "processed": "2019-02-27T23:21:35.211Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "new.subscriber@example.com"
+                },
+                "body": {
+                    "name": "unsubscribe",
+                    "session_id": "29f1abf9-b697-5009-051a-2b5195a3a3fa",
+                    "source": "API",
+                    "properties": {
+                      "unsubscribe_event_type": "list_unsubscribe"
                     }
                 },
                 "type": "CUSTOM"
@@ -893,7 +917,7 @@ components:
                 ]
               }
     feature_flag_interaction:
-      - description: Example Feature Flag interaction event
+      - description: Example feature flag interaction event
         examples:
           - lang: json
             source: |
@@ -1050,6 +1074,7 @@ components:
                     "page_count": 2,
                     "completed": false
                   }
+                }
               }
     in_app_experiences:
       - description: Example in-app experiences event
@@ -2477,6 +2502,34 @@ components:
                   },
                   "type": "COMPLIANCE"
                 }
+      - description: Example email suppression removal event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "d7ece0e7-b160-49ff-974d-2fd4dd5b34fd",
+                "offset": "1000000287040",
+                "occurred": "2026-03-12T19:45:00.620Z",
+                "processed": "2026-03-12T19:45:02.065Z",
+                "device": {
+                  "channel": "e839cdb5-4b79-4652-ab94-b1ac84294f3f",
+                  "device_type": "EMAIL",
+                  "delivery_address": "some.user@example.com"
+                },
+                "body": {
+                  "event_type": "registration",
+                  "identifiers": {
+                    "address": "some.user@example.com"
+                  },
+                  "properties": {
+                    "suppression_state": "none",
+                    "source": "ui",
+                    "user": "some_user",
+                    "registration_type": "unbounce"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
     rich_control:
       - description: Example event body - message not delivered due to user being in a control group
         examples:
@@ -2498,7 +2551,12 @@ components:
                 },
                 "body" : {
                   "push_id" : "62fd4bac-a85a-0e18-00b4-9e59339bece5",
-                  "group_id" : "da16d1c2-7d8f-9ade-ff14-05ce696ba042"
+                  "group_id" : "da16d1c2-7d8f-9ade-ff14-05ce696ba042",
+                  "campaigns" : {
+                    "categories" : [
+                      "campaign-test"
+                    ]
+                  }
                 },
                 "type" : "RICH_CONTROL"
               }
@@ -2546,7 +2604,18 @@ components:
                     "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
                   },
                 "body": {
-                  "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801"
+                  "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801",
+                  "campaigns": {
+                    "categories": [
+                      "campaign-test"
+                    ]
+                  },
+                  "context": {
+                    "extra": {
+                      "whoa": "wow",
+                      "who": "what"
+                    }
+                  }
                 },
                 "type": "RICH_DELETE"
               }
@@ -2569,7 +2638,18 @@ components:
                   "contact_id": "982B35f2-0375-6384-893e-a19b5cd5R771"
                 },
                 "body": {
-                  "push_id": "1a7d774c-1659-4104-b594-2f7ec739c92d"
+                  "push_id": "1a7d774c-1659-4104-b594-2f7ec739c92d",
+                  "campaigns": {
+                    "categories": [
+                      "campaign-test"
+                    ]
+                  },
+                  "context": {
+                    "extra": {
+                      "whoa": "wow",
+                      "who": "what"
+                    }
+                  }
                 },
                 "type": "RICH_DELIVERY"
               }
@@ -2618,7 +2698,18 @@ components:
                 },
                 "body": {
                   "push_id": "1bf2A1a1-4069-11e9-abf1-024297609801",
-                  "time": "2019-03-04T15:12:54.657Z"
+                  "time": "2019-03-04T15:12:54.657Z",
+                  "campaigns": {
+                    "categories": [
+                      "campaign-test"
+                    ]
+                  },
+                  "context": {
+                    "extra": {
+                      "whoa": "wow",
+                      "who": "what"
+                    }
+                  }
                 },
                 "type": "RICH_READ"
               }
@@ -2746,7 +2837,7 @@ components:
                   "reason": "FEED_RESOLVE_FAILURE"
                 }
               }
-      - description: Example send aborted event due to Ban List
+      - description: Example send aborted event due to ban list
         examples:
           - lang: json
             source: |
@@ -2935,7 +3026,7 @@ components:
                 "type": "COMPLIANCE"
               }
     subscription:
-      - description: Example subscription event
+      - description: Example subscription event for an email opt-in
         examples:
           - lang: json
             source: |
@@ -2960,6 +3051,31 @@ components:
                     "click_tracking_opted_out":"2019-01-04T20:56:00.000Z",
                     "open_tracking_opted_out":"2019-01-04T20:56:00.000Z"
                     }
+                },
+                "type": "SUBSCRIPTION"
+              }
+      - description: Example subscription event for a Subscription List unsubscribe from an email body link
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "73a4c8bd-5159-5033-b1c6-33d12fa283ba",
+                "offset": "1000022265028",
+                "occurred": "2019-04-01T13:01:14.522Z",
+                "processed": "2019-04-01T13:01:14.713Z",
+                "device": {
+                  "channel": "6b46c724-494b-4491-9fe7-1b903d266110",
+                  "device_type": "EMAIL",
+                  "delivery_address": "user+43679@urbanairship.com.sink.sparkpostmail.com"
+                },
+                "body": {
+                  "event_type":"link_unsubscribe",
+                  "identifiers": {
+                    "address":"user@example.com"
+                  },
+                  "subscription_lists": {
+                    "canceled": ["cool_deals"]
+                  }
                 },
                 "type": "SUBSCRIPTION"
               }
@@ -3079,7 +3195,7 @@ components:
                 "type": "UNINSTALL"
               }
     unsubscribe:
-      - description: Example email unsubscribe event
+      - description: Example email unsubscribe event for a commercial opt-out
         examples:
           - lang: json
             source: |
@@ -3098,6 +3214,32 @@ components:
                     "properties": {
                         "message_type": "commercial",
                         "registration_type": "unsubscribe"
+                    }
+                },
+                "type": "COMPLIANCE"
+              }
+      - description: Example email unsubscribe event for a Subscription List unsubscribe
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "ce9da1e7-6815-5549-9186-8641e1175dcb",
+                "offset": "1000001778793",
+                "occurred": "2018-11-27T23:48:11.220Z",
+                "processed": "2018-11-27T23:48:12.085Z",
+                "device": {
+                    "channel": "b8519372-54ff-456d-9819-7faa92fe8b9d",
+                    "device_type": "EMAIL",
+                    "delivery_address": "user@example.com"
+                },
+                "body": {
+                    "event_type": "registration",
+                    "properties": {
+                        "message_type": "commercial",
+                        "registration_type": "unsubscribe"
+                    },
+                    "subscription_lists": {
+                        "canceled": ["cool_deals"]
                     }
                 },
                 "type": "COMPLIANCE"

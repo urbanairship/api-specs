@@ -1,5 +1,25 @@
 # Airship API Specs Changelog
 
+## Version 7 (June 23, 2026)
+
+### Changes
+
+- Added Content API with Templates endpoints
+- Added custom event external campaign categories
+- Added Journeys endpoints
+- Added attributes action to actionsObject (set or remove channel/contact attributes on notification interaction)
+- Added tags actions to the actionsObject (add or remove channel/contact tags on notification interaction)
+- Added OAuth scopes: tpl (content templates), jny (Journeys), rpt (Reports)
+- Added the ability to specify start and end times for Wallet notifications
+- Added Wallet NFC query param for AdaptiveLink Passes
+- Added Google Wallet Auto-linked Passes endpoints
+- Added OAuth 2.0 support in Wallet
+- Added documentation to RTDS compliance stream for email suppression removal
+- Updated Subscription event, Subscription List event, and Email unsubscribe events in RTDS
+- Added Campaigns and custom keys ("extra") to certain rich push body in RTDS
+- Listed emailInitialOpenEvent as one of the custom event in RTDS
+- Added optional campaigns fields in the body of several In-app events in RTDS
+
 ## Version 6 (February 19, 2026)
 
 ### Changes
