@@ -10,8 +10,6 @@ components:
                 "iosTemplateId": 12345,
                 "androidTemplateId": 154321,
                 "isPersonalized": "true",
-                "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                "androidPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
                 "landingPageUrl": "https://example.com/landing.html",
                 "expirationDate": "2022-10-01",
                 "availablePasses": 100000,
@@ -311,9 +309,7 @@ components:
                     "availablePasses": 1000000,
                     "ttlInDays": 30,
                     "flightId": 465,
-                    "flightExternalId": "flight123ExtId",
-                    "iosPassLinkId": "eb94e8e0-4353-4e0b-bfe9-cfd21c52a540",
-                    "androidPassLinkId": "41c1ea48-f469-4968-b610-a98629ea19bc"
+                    "flightExternalId": "flight123ExtId"
                   },
                   {
                     "status": 201,
@@ -332,9 +328,7 @@ components:
                     "availablePasses": 1000000,
                     "ttlInDays": 30,
                     "flightId": 465,
-                    "flightExternalId": "flight123ExtId",
-                    "iosPassLinkId": "5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b",
-                    "androidPassLinkId": "c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab"
+                    "flightExternalId": "flight123ExtId"
                   },
                   {
                     "status": 201,
@@ -353,9 +347,7 @@ components:
                     "availablePasses": 1000000,
                     "ttlInDays": 30,
                     "flightId": 465,
-                    "flightExternalId": "flight123ExtId",
-                    "iosPassLinkId": "5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b",
-                    "androidPassLinkId": "c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab"
+                    "flightExternalId": "flight123ExtId"
                   }
                 ]
               }
@@ -961,8 +953,6 @@ components:
                   "updatedAt": "2018-09-24T09:15:32Z",
                   "isPersonalized": "false",
                   "availablePasses": 1000000,
-                  "iosPassLinkId": "a5711a29-7b38-41f2-8202-8f792df89b0b",
-                  "androidPassLinkId": "c1f512e5-fda3-4ddf-82c6-066c5681161d",
                   "status": 200
                },
                {...},
@@ -3383,8 +3373,6 @@ paths:
                  "iosTemplateId": 12345,
                  "androidTemplateId": 154321,
                  "isPersonalized": "true",
-                 "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                 "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                  "landingPageUrl": "https://example.com/landing.html",
                  "availablePasses": 100000,
                  "payload": {}
@@ -3401,8 +3389,6 @@ paths:
                  "iosTemplateId": 12345,
                  "androidTemplateId": 154321,
                  "isPersonalized": "true",
-                 "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                 "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                  "landingPageUrl": "https://example.com/landing.html",
                  "expirationDate": "2022-10-01",
                  "availablePasses": 100000,
@@ -3435,8 +3421,6 @@ paths:
                 "iosTemplateId": 12345,
                 "androidTemplateId": 154321,
                 "isPersonalized": "true",
-                "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "landingPageUrl": "https://example.com/landing.html",
                 "availablePasses": 100000,
                 "ttlInDays": 30,
@@ -3594,9 +3578,7 @@ paths:
                     "availablePasses": 1000000,
                     "ttlInDays": 30,
                     "flightId": 465,
-                    "flightExternalId": "flight123ExtId",
-                    "iosPassLinkId": "eb94e8e0-4353-4e0b-bfe9-cfd21c52a540",
-                    "androidPassLinkId": "41c1ea48-f469-4968-b610-a98629ea19bc"
+                    "flightExternalId": "flight123ExtId"
                   },
                   {
                     "status": 200,
@@ -3616,9 +3598,7 @@ paths:
                     "availablePasses": 1000000,
                     "ttlInDays": 30,
                     "flightId": 465,
-                    "flightExternalId": "flight123ExtId",
-                    "iosPassLinkId": "5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b",
-                    "androidPassLinkId": "c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab"
+                    "flightExternalId": "flight123ExtId"
                   },
                   {
                     "status": 200,
@@ -3638,9 +3618,7 @@ paths:
                     "availablePasses": 1000000,
                     "ttlInDays": 30,
                     "flightId": 465,
-                    "flightExternalId": "flight123ExtId",
-                    "iosPassLinkId": "5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b",
-                    "androidPassLinkId": "c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab"
+                    "flightExternalId": "flight123ExtId"
                   },
                 ]
               }
@@ -3678,8 +3656,6 @@ paths:
                 "projectExternalId": "myExternalProject",
                 "createdAt": "2019-05-28T23:55:00.000Z",
                 "updatedAt": "2019-05-31T00:59:42.000Z",
-                "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "status": 200
               }
     post:
@@ -3695,8 +3671,6 @@ paths:
                   "iosTemplateExternalId": "ios123ExtId",
                   "androidTemplateExternalId": "android123ExtId",
                   "isPersonalized": "true",
-                  "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                  "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                   "landingPageUrl": "https://example.com/landing.html",
                   "availablePasses": 100000,
                   "payload": {}
@@ -3727,8 +3701,6 @@ paths:
                 "projectExternalId": "myExternalProject",
                 "createdAt": "2019-05-28T23:55:00.000Z",
                 "updatedAt": "2019-05-31T00:59:42.000Z",
-                "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "status": 200
               }
   /links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}/passes:
@@ -3898,8 +3870,6 @@ paths:
                 "projectId": 12345,
                 "createdAt": "2019-05-28T23:55:00.000Z",
                 "updatedAt": "2019-05-31T00:59:42.000Z",
-                "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "status": 200
               }
     post:
@@ -3915,8 +3885,6 @@ paths:
                   "iosTemplateId": 54321,
                   "androidTemplateId": 54322,
                   "isPersonalized": false,
-                  "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                  "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                   "landingPageUrl": "https://example.com/landing.html",
                   "availablePasses": 100000,
                   "payload": {}
@@ -3944,8 +3912,6 @@ paths:
                 "projectId": 12345,
                 "createdAt": "2019-05-28T23:55:00.000Z",
                 "updatedAt": "2019-05-31T00:59:42.000Z",
-                "iosPassLinkId": "44e128a5-ac7a-4c9a-be4c-224b6bf81b20",
-                "androidPassLinkId": "19d128a6-ac7a-3c6c-2a4d-214b6bf81b21",
                 "status": 200
               }
   /links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}/passes:
@@ -7320,7 +7286,7 @@ paths:
               {
                  "baseUrl": "https://www.remotehost.example.com/callbacks",
                  "headers": {
-                    "Authorization": "Basic dGVzdEB0ZXN0LmNvbTp0ZXN0",
+                    "Authorization": "Basic <Base64 key>",
                     "Content-Type": "application/json"
                  }
               }
@@ -7336,7 +7302,7 @@ paths:
               {
                  "baseUrl": "https://www.remotehost.example.com/callbacks",
                  "headers": {
-                    "Authorization": "Basic dGVzdEB0ZXN0LmNvbTp0ZXN0",
+                    "Authorization": "Basic <Base64 key>",
                     "Content-Type": "application/json"
                  }
               }
@@ -7350,7 +7316,7 @@ paths:
               {
                  "baseUrl": "https://www.remotehost.example.com/callbacks",
                  "headers": {
-                    "Authorization": "Basic dGVzdEB0ZXN0LmNvbTp0ZXN0",
+                    "Authorization": "Basic <Base64 key>",
                     "Content-Type": "application/json"
                  }
               }
@@ -7366,7 +7332,7 @@ paths:
               {
                  "baseUrl": "https://www.remotehost.example.com/callbacks",
                  "headers": {
-                    "Authorization": "Basic dGVzdEB0ZXN0LmNvbTp0ZXN0",
+                    "Authorization": "Basic <Base64 key>",
                     "Content-Type": "application/json"
                  }
               }
@@ -7380,7 +7346,7 @@ paths:
               {
                  "baseUrl": "https://www.remotehost.example.com/callbacks",
                  "headers": {
-                    "Authorization": "Basic dGVzdEB0ZXN0LmNvbTp0ZXN0",
+                    "Authorization": "Basic <Base64 key>",
                     "Content-Type": "application/json"
                  }
               }

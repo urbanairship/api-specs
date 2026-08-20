@@ -1173,7 +1173,7 @@
           "x-schema-tag": "Custom email events"
         },
         {
-          "description": "Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [Subscription List](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.\n",
+          "description": "Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [subscription list](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.\n",
           "properties": {
             "body": {
               "properties": {

@@ -257,7 +257,7 @@
         "SMS carrier deactivation event"
       ],
       "title": "SMS carrier deactivation event",
-      "description": "Occurs when an MSISDN is deactivated by a carrier. This event type does not contain additional `properties`.",
+      "description": "Occurs when an MSISDN is deactivated by a carrier. The `properties.action` value indicates the outcome: `uninstalled` for default carrier deactivation monitoring, or `suppressed` when carrier deactivation RND scanning is enabled and the channel is suppressed pending RND verification. For more information, see [SMS Number Life Cycle Management](/developer/api-integrations/sms/compliance/number-lifecycle).",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "SMS compliance events",
@@ -265,7 +265,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when an MSISDN is deactivated by a carrier. This event type does not contain additional `properties`."
+          "text": "Occurs when an MSISDN is deactivated by a carrier. The `properties.action` value indicates the outcome: `uninstalled` for default carrier deactivation monitoring, or `suppressed` when carrier deactivation RND scanning is enabled and the channel is suppressed pending RND verification. For more information, see [SMS Number Life Cycle Management](/developer/api-integrations/sms/compliance/number-lifecycle)."
         },
         {
           "type": "property",
@@ -289,7 +289,7 @@
         "SMS Create and Send event"
       ],
       "title": "SMS Create and Send event",
-      "description": "An event that occurs for SMS channels used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/).",
+      "description": "An event that occurs for SMS channels used as a part of a [Create and Send](/guides/messaging/bulk-sending/).",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "SMS compliance events",
@@ -297,7 +297,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "An event that occurs for SMS channels used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/)."
+          "text": "An event that occurs for SMS channels used as a part of a [Create and Send](/guides/messaging/bulk-sending/)."
         },
         {
           "type": "property",
@@ -649,6 +649,88 @@
         {
           "type": "description",
           "text": "Occurs when a user opts in to receive SMS messages from you, via a call to the [SMS registration API](/developer/rest-api/ua/#operation-api-channels-sms-post)."
+        },
+        {
+          "type": "property",
+          "name": "body",
+          "propertyType": "object",
+          "required": true,
+          "description": "Contains the event subtype, identifiers, and additional properties about the event.",
+          "deprecated": false,
+          "platformSpecific": null
+        },
+        {
+          "type": "property",
+          "name": "device",
+          "propertyType": "object",
+          "required": true,
+          "description": "Holds information about an SMS `device` (an individual SMS channel).",
+          "deprecated": false,
+          "platformSpecific": null
+        }
+      ]
+    },
+    {
+      "id": "schema-rnd-scan",
+      "type": "schema",
+      "path": "/developer/rest-api/connect/schemas/sms-compliance-events/",
+      "anchor": "rnd-scan",
+      "headings": [
+        "Data Formats",
+        "SMS compliance events",
+        "SMS RND scan event"
+      ],
+      "title": "SMS RND scan event",
+      "description": "Occurs when an MSISDN undergoes an RND scan, either as part of recurring carrier deactivation monitoring or as an ad hoc scan, indicated by `source`. RND scans may remove suppression, uninstall the channel, or take no action. For more information, see [SMS Number Life Cycle Management](/developer/api-integrations/sms/compliance/number-lifecycle).",
+      "isDeprecated": false,
+      "isInternal": false,
+      "schemaTag": "SMS compliance events",
+      "tags": [],
+      "contentBlocks": [
+        {
+          "type": "description",
+          "text": "Occurs when an MSISDN undergoes an RND scan, either as part of recurring carrier deactivation monitoring or as an ad hoc scan, indicated by `source`. RND scans may remove suppression, uninstall the channel, or take no action. For more information, see [SMS Number Life Cycle Management](/developer/api-integrations/sms/compliance/number-lifecycle)."
+        },
+        {
+          "type": "property",
+          "name": "body",
+          "propertyType": "object",
+          "required": true,
+          "description": "Contains the event subtype, identifiers, and additional properties about the event.",
+          "deprecated": false,
+          "platformSpecific": null
+        },
+        {
+          "type": "property",
+          "name": "device",
+          "propertyType": "object",
+          "required": true,
+          "description": "Holds information about an SMS `device` (an individual SMS channel).",
+          "deprecated": false,
+          "platformSpecific": null
+        }
+      ]
+    },
+    {
+      "id": "schema-suppression_removed",
+      "type": "schema",
+      "path": "/developer/rest-api/connect/schemas/sms-compliance-events/",
+      "anchor": "suppression-removed",
+      "headings": [
+        "Data Formats",
+        "SMS compliance events",
+        "SMS suppression removed event"
+      ],
+      "title": "SMS suppression removed event",
+      "description": "Occurs when suppression is removed from an SMS channel outside of an RND scan, for example from the dashboard. For more information, see [SMS Opt-In/Out Handling](/developer/api-integrations/sms/opt-in-out-handling#suppression).",
+      "isDeprecated": false,
+      "isInternal": false,
+      "schemaTag": "SMS compliance events",
+      "tags": [],
+      "contentBlocks": [
+        {
+          "type": "description",
+          "text": "Occurs when suppression is removed from an SMS channel outside of an RND scan, for example from the dashboard. For more information, see [SMS Opt-In/Out Handling](/developer/api-integrations/sms/opt-in-out-handling#suppression)."
         },
         {
           "type": "property",
@@ -2264,7 +2346,7 @@
         "In-app message control"
       ],
       "title": "In-app message control",
-      "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
+      "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -2272,7 +2354,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n"
+          "text": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n"
         },
         {
           "type": "property",
@@ -2454,7 +2536,7 @@
         "In-app message exclusion"
       ],
       "title": "In-app message exclusion",
-      "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).\n",
+      "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -2462,7 +2544,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).\n"
+          "text": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n"
         },
         {
           "type": "property",
@@ -4015,7 +4097,7 @@
         "Screen viewed"
       ],
       "title": "Screen viewed",
-      "description": "Occurs when a user has finished viewing a screen. It is up to you to instrument your application with names for each screen. Doing so will allow you to determine the user's path by filtering on the fields in the table below.\n",
+      "description": "Occurs when a user has finished viewing a screen. It is up to you to instrument your app or website with names for each screen. Doing so will allow you to determine the user's path by filtering on the fields in the table below.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -4023,7 +4105,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when a user has finished viewing a screen. It is up to you to instrument your application with names for each screen. Doing so will allow you to determine the user's path by filtering on the fields in the table below.\n"
+          "text": "Occurs when a user has finished viewing a screen. It is up to you to instrument your app or website with names for each screen. Doing so will allow you to determine the user's path by filtering on the fields in the table below.\n"
         },
         {
           "type": "property",
@@ -4037,7 +4119,7 @@
         {
           "type": "property",
           "name": "device",
-          "propertyType": "object",
+          "propertyType": "oneOf",
           "required": true,
           "description": "",
           "deprecated": false,
@@ -4214,7 +4296,7 @@
         "Send aborted"
       ],
       "title": "Send aborted",
-      "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/audience/segmentation/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
+      "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -4222,7 +4304,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/audience/segmentation/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n"
+          "text": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n"
         },
         {
           "type": "property",
@@ -4472,7 +4554,7 @@
         "Subscription event"
       ],
       "title": "Subscription event",
-      "description": "`SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to Subscription List memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n",
+      "description": "`SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to subscription list memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -4480,7 +4562,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "`SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to Subscription List memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n"
+          "text": "`SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to subscription list memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n"
         },
         {
           "type": "property",
@@ -5083,7 +5165,7 @@
         "Email Create and Send event"
       ],
       "title": "Email Create and Send event",
-      "description": "An event that occurs for email addresses used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/).",
+      "description": "An event that occurs for email addresses used as a part of a [Create and Send](/guides/messaging/bulk-sending/).",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Email compliance events",
@@ -5091,7 +5173,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "An event that occurs for email addresses used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/)."
+          "text": "An event that occurs for email addresses used as a part of a [Create and Send](/guides/messaging/bulk-sending/)."
         },
         {
           "type": "property",
@@ -5165,7 +5247,7 @@
         "Email unsubscribe event"
       ],
       "title": "Email unsubscribe event",
-      "description": "A compliance event representing a user who unsubscribed from your email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header, an unsubscribe link in the message body, or the Email Preference Center. When the unsubscribe applies to specific Subscription Lists rather than the email channel as a whole, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n",
+      "description": "A compliance event representing a user who unsubscribed from your email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header, an unsubscribe link in the message body, or the Email Preference Center. When the unsubscribe applies to specific subscription lists rather than the email channel as a whole, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Email compliance events",
@@ -5173,7 +5255,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "A compliance event representing a user who unsubscribed from your email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header, an unsubscribe link in the message body, or the Email Preference Center. When the unsubscribe applies to specific Subscription Lists rather than the email channel as a whole, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n"
+          "text": "A compliance event representing a user who unsubscribed from your email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header, an unsubscribe link in the message body, or the Email Preference Center. When the unsubscribe applies to specific subscription lists rather than the email channel as a whole, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n"
         },
         {
           "type": "property",
@@ -5738,7 +5820,7 @@
         "Email unsubscribe link event"
       ],
       "title": "Email unsubscribe link event",
-      "description": "Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [Subscription List](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.\n",
+      "description": "Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [subscription list](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Custom email events",
@@ -5746,7 +5828,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [Subscription List](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.\n"
+          "text": "Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [subscription list](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.\n"
         },
         {
           "type": "property",

@@ -48,7 +48,16 @@
           ]
         },
         {
-          "description": "Example Subscription List action",
+          "description": "Example Scene action",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n   \"actions\": {\n      \"open\": {\n         \"type\": \"scene\",\n         \"content\": {\n            \"template\": {\n               \"template_id\": \"b295e180-bdf1-4d57-b375-f3SAMPLE7fa7\"\n            }\n         }\n      }\n   }\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example subscription list action",
           "examples": [
             {
               "lang": "json",
@@ -411,6 +420,17 @@
           ]
         }
       ],
+      "conditionBranchesObject": [
+        {
+          "description": "Pipeline with condition branches",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"enabled\": true,\n  \"immediate_trigger\": [\n    {\n      \"pipeline_event\": {\n        \"pipeline_id\": \"entry-pipeline-id\",\n        \"type\": \"fulfilled\"\n      }\n    }\n  ],\n  \"condition_branches\": {\n    \"branching_type\": \"priority_order\",\n    \"branches\": [\n      {\n        \"branch_id\": \"branch-A-id\",\n        \"condition\": {\n          \"or\": [\n            {\n              \"segmentation\": {\n                \"audience\": {\n                  \"tag\": [\"beyonce\"]\n                }\n              }\n            }\n          ]\n        }\n      },\n      {\n        \"branch_id\": \"branch-B-id\",\n        \"condition\": {\n          \"and\": [\n            {\n              \"segmentation\": {\n                \"audience\": {\n                  \"tag\": [\"sports\", \"entertainment\"]\n                }\n              }\n            },\n            {\n              \"named_user\": {\n                \"state\": \"associated\"\n              }\n            }\n          ]\n        }\n      }\n    ],\n    \"fallback_branch\": {\n      \"branch_id\": \"default-branch-id\"\n    }\n  },\n  \"workflow\": \"condition-branching-workflow-id\"\n}\n"
+            }
+          ]
+        }
+      ],
       "contactManagementItem": [
         {
           "description": "Example preference form contact management item (SMS)",
@@ -455,7 +475,7 @@
       ],
       "contactSubscriptionListObject": [
         {
-          "description": "Example contact Subscription Lists object",
+          "description": "Example contact subscription lists object",
           "examples": [
             {
               "lang": "json",
@@ -1001,7 +1021,7 @@
       ],
       "namedUserSubscriptionListItem": [
         {
-          "description": "Example Subscription List item",
+          "description": "Example subscription list item",
           "examples": [
             {
               "lang": "json",
@@ -1012,7 +1032,7 @@
       ],
       "namedUserSubscriptionListsObject": [
         {
-          "description": "Example Subscription Lists object",
+          "description": "Example subscription lists object",
           "examples": [
             {
               "lang": "json",
@@ -1424,7 +1444,7 @@
       ],
       "subscriptionListObject": [
         {
-          "description": "Example Subscription List object",
+          "description": "Example subscription list object",
           "examples": [
             {
               "lang": "json",
@@ -1435,7 +1455,7 @@
       ],
       "subscriptionListResultObject": [
         {
-          "description": "Example Subscription List result object",
+          "description": "Example subscription list result object",
           "examples": [
             {
               "lang": "json",
@@ -2352,7 +2372,7 @@
           "examples": [
             {
               "lang": "HTTP",
-              "source": "PUT /api/channels/email/251d3318-b3cb-4e9f-876a-ea3bfa6e47bd HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n {\n     \"channel\" : {\n        \"device_type\": \"email\",\n        \"address\": \"tommy@example.com\",\n        \"commercial_opted_in\": \"2020-10-28T10:34:22\"\n     }\n  }\n"
+              "source": "PUT /api/channels/email/251d3318-b3cb-4e9f-876a-ea3bfa6e47bd HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n {\n     \"channel\" : {\n        \"device_type\": \"email\",\n        \"address\": \"tommy@example.com\",\n        \"commercial_opted_in\": \"2020-10-28T10:34:22\",\n        \"open_tracking_opted_out\": \"2022-12-13T00:00:00\",\n        \"click_tracking_opted_out\": \"2022-12-13T00:00:00\"\n     }\n  }\n"
             },
             {
               "lang": "java",
@@ -3005,7 +3025,7 @@
     "/api/contacts/disassociate/{contact_id}": {
       "post": [
         {
-          "description": "Example dissociate SMS channel from contact by Channel ID",
+          "description": "Example dissociate SMS channel from contact by channel ID",
           "examples": [
             {
               "lang": "HTTP",
@@ -3076,7 +3096,7 @@
     "/api/contacts/lookup/channel/{channel_id}": {
       "get": [
         {
-          "description": "Example get contact ID from a Channel ID\n",
+          "description": "Example get contact ID from a channel ID\n",
           "examples": [
             {
               "lang": "HTTP",
@@ -3711,6 +3731,10 @@
               "source": "POST /api/journeys/exit HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"triggering_id\" : \"1fd202ca-9deb-4372-b052-dff0516f9518\",\n    \"entrance_id\" : \"product_123\"\n}\n"
             },
             {
+              "lang": "python",
+              "source": "from urbanairship import OAuthClient, Journeys\n\nclient = OAuthClient(\n    key=\"<app key>\",\n    client_id=\"<client_id>\",\n    private_key=\"<private_key>\"\n)\n\njourneys = Journeys(client)\nresponse = journeys.exit(\n    triggering_id=\"1fd202ca-9deb-4372-b052-dff0516f9518\",\n    entrance_id=\"product_123\"\n)\n\nprint(response)\n"
+            },
+            {
               "lang": "HTTP",
               "source": "HTTP/1.1 200 OK\nContent-Length: 11\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"ok\": true\n}\n"
             }
@@ -3727,6 +3751,10 @@
             {
               "lang": "HTTP",
               "source": "POST /api/journeys/trigger HTTP/1.1\nAuthorization: Bearer <authorization token>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"audience\" : {\n        \"segment\": \"<segment-id>\"\n    },\n    \"triggering_id\" : \"1fd202ca-9deb-4372-b052-dff0516f9518\",\n    \"entrance_id\" : \"product_123\",\n    \"global_attributes\" : {\n        \"product_name\": \"widget\"\n    }\n}\n"
+            },
+            {
+              "lang": "python",
+              "source": "from urbanairship import OAuthClient, Journeys, segment\n\nclient = OAuthClient(\n    key=\"<app key>\",\n    client_id=\"<client_id>\",\n    private_key=\"<private_key>\"\n)\n\njourneys = Journeys(client)\nresponse = journeys.trigger(\n    audience=segment(\"<segment-id>\"),\n    triggering_id=\"1fd202ca-9deb-4372-b052-dff0516f9518\",\n    entrance_id=\"product_123\",\n    global_attributes={\"product_name\": \"widget\"}\n)\n\nprint(response)\n"
             },
             {
               "lang": "HTTP",
@@ -6465,6 +6493,20 @@
             {
               "lang": "HTTP",
               "source": "HTTP/1.1 404 Not Found\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n    \"deleted_message_ids\": [],\n    \"errors\": [\n        {\n            \"message_id\": \"drKa4OdxEeyhSwJC9Tkdt1\",\n            \"error_message\": \"Message not found.\",\n            \"error_code\": 40404\n        },\n        {\n            \"message_id\": \"W5ersOdxEeyvwAJCxz92i1\",\n            \"error_message\": \"Message not found.\",\n            \"error_code\": 40404\n        }\n    ]\n}\n"
+            }
+          ],
+          "showMissingLanguagePlaceholders": true
+        },
+        {
+          "description": "Example delete by group IDs",
+          "examples": [
+            {
+              "lang": "HTTP",
+              "source": "POST /api/user/messages/batch-delete HTTP/1.1\nAuthorization: Basic <master authorization string>\nAccept: application/vnd.urbanairship+json; version=3\nContent-Type: application/json\n\n{\n    \"group_ids\": [\n        \"79a122fc-48e2-4369-843f-a0973fd52d78\"\n    ]\n}\n"
+            },
+            {
+              "lang": "HTTP",
+              "source": "HTTP/1.1 202 Accepted\nContent-Type: application/vnd.urbanairship+json; version=3\n\n{\n   \"deleted_message_ids\": [],\n   \"errors\": []\n}\n"
             }
           ],
           "showMissingLanguagePlaceholders": true

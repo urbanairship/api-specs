@@ -134,11 +134,11 @@
       ],
       "title": "Basic Auth (OAuth)",
       "schemeType": "http",
-      "description": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/ua/operations/oauth/).",
+      "description": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/ua/operations/oauth/).",
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/ua/operations/oauth/)."
+          "text": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/ua/operations/oauth/)."
         }
       ],
       "tags": [],
@@ -662,7 +662,7 @@
       "title": "Upload attributes list",
       "method": "PUT",
       "endpoint": "/api/attribute-lists/{list_name}/csv",
-      "description": "Upload a CSV to set Text, Number, or Date attribute values on the specified channels or named users.\n\nCSV guidelines:\n- The first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `email_address`, or `named_user`.\n- Only one identifier type is allowed per file unless the identifier type name matches a custom attribute schema for the associated app key.\n- You must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n- Uploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\nRequired column headers per identifier type:\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Web              | `channel_id`                                                                           |\n| Email            | `email_address`                                                                        |\n| Open Channel     | `channel_id`                                                                           |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li>`sms_sender` (numeric, e.g., `1234`)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric, e.g., `1234`)</li></ul> |\n\nOptional Fields: Opt-in dates can optionally be set for new channels\nwhen the identifier is an `email_address` or `msisdn`.\n\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_transactional_opted_in` (UTC Timestamp) </li><li> `ua_commercial_opted_in` (UTC Timestamp)</li></ul> |\n",
+      "description": "Upload a CSV to set Text, Number, or Date attribute values on the specified channels or named users.\n\nCSV guidelines:\n- The first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `email_address`, or `named_user`.\n- Only one identifier type is allowed per file unless the identifier type name matches a custom attribute schema for the associated app key.\n- You must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n- Uploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\nRequired column headers per identifier type:\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Web              | `channel_id`                                                                           |\n| Email            | `email_address`                                                                        |\n| Open channel     | `channel_id`                                                                           |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li>`sms_sender` (numeric, e.g., `1234`)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric, e.g., `1234`)</li></ul> |\n\nOptional Fields: Opt-in and opt-out dates, tracking status, suppression state, and time zone can optionally be set for new or existing channels when the identifier is an `email_address` or `msisdn`.\n\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_commercial_opted_in` or `ua_commercial_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_transactional_opted_in` or `ua_transactional_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_open_tracking_opted_in` or `ua_open_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_click_tracking_opted_in` or `ua_click_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_email_suppression_state` (`BOUNCE`, `SPAM_COMPLAINT`, `COMMERCIAL_SPAM_COMPLAINT`, or `IMPORTED`)</li><li>`timezone` (IANA time zone database value, for example, `America/Los_Angeles`)</li></ul> |\n\n<sup>1</sup> Opt-in and opt-out dates are mutually exclusive. Providing both in the same row is invalid.<br>\n<sup>2</sup> By default, new channels are opted in to open and click tracking. Opt out by setting an opt-out date. Opt back in with an opt-in date that is newer than the opt-out date. Providing both dates in the same row is invalid.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -676,7 +676,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Upload a CSV to set Text, Number, or Date attribute values on the specified channels or named users.\n\nCSV guidelines:\n- The first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `email_address`, or `named_user`.\n- Only one identifier type is allowed per file unless the identifier type name matches a custom attribute schema for the associated app key.\n- You must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n- Uploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\nRequired column headers per identifier type:\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Web              | `channel_id`                                                                           |\n| Email            | `email_address`                                                                        |\n| Open Channel     | `channel_id`                                                                           |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li>`sms_sender` (numeric, e.g., `1234`)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric, e.g., `1234`)</li></ul> |\n\nOptional Fields: Opt-in dates can optionally be set for new channels\nwhen the identifier is an `email_address` or `msisdn`.\n\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_transactional_opted_in` (UTC Timestamp) </li><li> `ua_commercial_opted_in` (UTC Timestamp)</li></ul> |\n"
+          "text": "Upload a CSV to set Text, Number, or Date attribute values on the specified channels or named users.\n\nCSV guidelines:\n- The first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `email_address`, or `named_user`.\n- Only one identifier type is allowed per file unless the identifier type name matches a custom attribute schema for the associated app key.\n- You must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n- Uploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\nRequired column headers per identifier type:\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Web              | `channel_id`                                                                           |\n| Email            | `email_address`                                                                        |\n| Open channel     | `channel_id`                                                                           |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li>`sms_sender` (numeric, e.g., `1234`)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric, e.g., `1234`)</li></ul> |\n\nOptional Fields: Opt-in and opt-out dates, tracking status, suppression state, and time zone can optionally be set for new or existing channels when the identifier is an `email_address` or `msisdn`.\n\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_commercial_opted_in` or `ua_commercial_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_transactional_opted_in` or `ua_transactional_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_open_tracking_opted_in` or `ua_open_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_click_tracking_opted_in` or `ua_click_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_email_suppression_state` (`BOUNCE`, `SPAM_COMPLAINT`, `COMMERCIAL_SPAM_COMPLAINT`, or `IMPORTED`)</li><li>`timezone` (IANA time zone database value, for example, `America/Los_Angeles`)</li></ul> |\n\n<sup>1</sup> Opt-in and opt-out dates are mutually exclusive. Providing both in the same row is invalid.<br>\n<sup>2</sup> By default, new channels are opted in to open and click tracking. Opt out by setting an opt-out date. Opt back in with an opt-in date that is newer than the opt-out date. Providing both dates in the same row is invalid.\n"
         },
         {
           "type": "parameter",
@@ -1423,7 +1423,7 @@
       "title": "Create and Send a message",
       "method": "POST",
       "endpoint": "/api/create-and-send",
-      "description": "Send messages to email addresses, MSISDNs, or Open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or Open channel addresses directly in the request.\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\nNote: This endpoint also accepts Channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).\n\n",
+      "description": "Send messages to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).\n\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -1437,7 +1437,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Send messages to email addresses, MSISDNs, or Open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or Open channel addresses directly in the request.\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\nNote: This endpoint also accepts Channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).\n\n"
+          "text": "Send messages to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).\n\n"
         },
         {
           "type": "request_body",
@@ -1477,7 +1477,7 @@
       "title": "Create bulk send audience",
       "method": "POST",
       "endpoint": "/api/bulk/{platform_name}",
-      "description": "Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:\n- Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)\n- Email addresses, phone numbers, or Open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)\n\nSee [Bulk sending](/guides/audience/segmentation/bulk-sending/) for CSV formatting requirements.\n",
+      "description": "Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:\n- Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)\n- Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)\n\nSee [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -1490,7 +1490,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:\n- Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)\n- Email addresses, phone numbers, or Open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)\n\nSee [Bulk sending](/guides/audience/segmentation/bulk-sending/) for CSV formatting requirements.\n"
+          "text": "Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:\n- Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)\n- Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)\n\nSee [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.\n"
         },
         {
           "type": "parameter",
@@ -1533,7 +1533,7 @@
       "title": "Schedule a Create and Send message",
       "method": "POST",
       "endpoint": "/api/schedules/create-and-send",
-      "description": "Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or Open channel addresses directly in the request.\n\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\n\nNote: This endpoint also accepts Channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).\n",
+      "description": "Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -1547,7 +1547,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or Open channel addresses directly in the request.\n\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\n\nNote: This endpoint also accepts Channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).\n"
+          "text": "Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).\n"
         },
         {
           "type": "request_body",
@@ -2036,7 +2036,7 @@
       "title": "Subscribe or unsubscribe channels to/from subscription lists",
       "method": "POST",
       "endpoint": "/api/channels/subscription_lists",
-      "description": "Subscribe or unsubscribe channels to/from Subscription Lists.\n",
+      "description": "Subscribe or unsubscribe channels to/from subscription lists.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -2051,7 +2051,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Subscribe or unsubscribe channels to/from Subscription Lists.\n"
+          "text": "Subscribe or unsubscribe channels to/from subscription lists.\n"
         },
         {
           "type": "request_body",
@@ -2086,7 +2086,7 @@
       "title": "Uninstall channels",
       "method": "POST",
       "endpoint": "/api/channels/uninstall",
-      "description": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a Channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new Channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance.",
+      "description": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -2101,7 +2101,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a Channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new Channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance."
+          "text": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance."
         },
         {
           "type": "request_body",
@@ -2152,7 +2152,7 @@
         },
         {
           "type": "request_body",
-          "description": "Contact association requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 Channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a Channel ID and a device type are required to prevent \"channel does not exist\" errors."
+          "description": "Contact association requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors."
         },
         {
           "type": "response",
@@ -2193,7 +2193,7 @@
       "title": "Contact disassociation",
       "method": "POST",
       "endpoint": "/api/contacts/disassociate/{contact_id}",
-      "description": "Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or Channel ID.",
+      "description": "Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or channel ID.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -2205,7 +2205,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or Channel ID."
+          "text": "Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or channel ID."
         },
         {
           "type": "parameter",
@@ -2248,7 +2248,7 @@
       "title": "Contacts tags",
       "method": "POST",
       "endpoint": "/api/contacts/tags/",
-      "description": "Add, remove, or set tags on a Contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.",
+      "description": "Add, remove, or set tags on a contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -2261,7 +2261,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Add, remove, or set tags on a Contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request."
+          "text": "Add, remove, or set tags on a contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request."
         },
         {
           "type": "request_body",
@@ -2301,12 +2301,12 @@
       "anchor": "getcontactidfromchannelid",
       "headings": [
         "Contacts",
-        "Look up contact ID by Channel ID"
+        "Look up contact ID by channel ID"
       ],
-      "title": "Look up contact ID by Channel ID",
+      "title": "Look up contact ID by channel ID",
       "method": "GET",
       "endpoint": "/api/contacts/lookup/channel/{channel_id}",
-      "description": "Looks up a contact ID for the given Channel ID.\n",
+      "description": "Looks up a contact ID for the given channel ID.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -2320,14 +2320,14 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Looks up a contact ID for the given Channel ID.\n"
+          "text": "Looks up a contact ID for the given channel ID.\n"
         },
         {
           "type": "parameter",
           "name": "channel_id",
           "paramType": "string",
           "required": true,
-          "description": "The Channel ID for which to retrieve the associated contact ID.",
+          "description": "The channel ID for which to retrieve the associated contact ID.",
           "deprecated": false
         },
         {
@@ -3014,7 +3014,7 @@
       "title": "Add custom events",
       "method": "POST",
       "endpoint": "/api/custom-events",
-      "description": "Submit an externally-generated custom event, associated with a Channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Sequences and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).\n",
+      "description": "Submit an externally-generated custom event, associated with a channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Sequences and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -3027,7 +3027,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Submit an externally-generated custom event, associated with a Channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Sequences and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).\n"
+          "text": "Submit an externally-generated custom event, associated with a channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Sequences and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).\n"
         },
         {
           "type": "parameter",
@@ -3130,7 +3130,7 @@
       "title": "Uninstall channels",
       "method": "POST",
       "endpoint": "/api/channels/uninstall",
-      "description": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a Channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new Channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance.",
+      "description": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -3145,7 +3145,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a Channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new Channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance."
+          "text": "Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.\n\nUninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.\nThe value of a channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.\n\nSee [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance."
         },
         {
           "type": "request_body",
@@ -3662,7 +3662,7 @@
       "title": "Update an email channel",
       "method": "PUT",
       "endpoint": "/api/channels/email/{email}",
-      "description": "Update an email channel. You can use this endpoint to update the subscription/unsubscription values.\n",
+      "description": "Update an email channel's opt-in and opt-out values for commercial email, transactional email, and open and click tracking.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -3676,7 +3676,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Update an email channel. You can use this endpoint to update the subscription/unsubscription values.\n"
+          "text": "Update an email channel's opt-in and opt-out values for commercial email, transactional email, and open and click tracking.\n"
         },
         {
           "type": "parameter",
@@ -3958,7 +3958,7 @@
         },
         {
           "type": "request_body",
-          "description": "Named user association requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 Channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a Channel ID and a device type are required to prevent \"channel does not exist\" errors."
+          "description": "Named user association requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors."
         },
         {
           "type": "response",
@@ -4301,7 +4301,7 @@
       "title": "Request token",
       "method": "POST",
       "endpoint": "/token",
-      "description": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/getting-started/developers/api-security/#oauth-20) in the *Airship API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.",
+      "description": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/ua/api-security/#oauth-20) in the *Airship API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -4313,7 +4313,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/getting-started/developers/api-security/#oauth-20) in the *Airship API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token."
+          "text": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/ua/api-security/#oauth-20) in the *Airship API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token."
         },
         {
           "type": "parameter",
@@ -4514,7 +4514,7 @@
       "title": "Uninstall open channels",
       "method": "POST",
       "endpoint": "/api/channels/open/uninstall",
-      "description": "Uninstall a channel needing to know its Channel ID. You cannot send notifications to, or get channel information for, an uninstalled channel.\n",
+      "description": "Uninstall a channel needing to know its channel ID. You cannot send notifications to, or get channel information for, an uninstalled channel.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -4528,7 +4528,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Uninstall a channel needing to know its Channel ID. You cannot send notifications to, or get channel information for, an uninstalled channel.\n"
+          "text": "Uninstall a channel needing to know its channel ID. You cannot send notifications to, or get channel information for, an uninstalled channel.\n"
         },
         {
           "type": "request_body",
@@ -4996,7 +4996,7 @@
       "title": "Delete message from inbox",
       "method": "DELETE",
       "endpoint": "/api/user/messages/{push_id}",
-      "description": "Delete a Message Center message completely, removing it from every user’s inbox. This is an asynchronous call; a success response means that the deletion has been queued for processing.\n\nThis delete call will work with either the `message_id` or the `push_id` of the accompanying push notification.\n\nThis endpoint will not work with a `group_id` from an automated message or a push to local time delivery. To delete a rich message that was part of an automated or local time delivery, you must use the relevant `push_id` from the operation.\n",
+      "description": "Delete a Message Center message completely, removing it from every user's inbox. This is an asynchronous call. A success response means that the deletion has been queued for processing.\n\nThis delete call will work with either the `message_id` or the `push_id` of the accompanying push notification.\n\nThis endpoint will not work with a group ID from an automated message or a push to local time delivery. To delete a Message Center message that was part of an automated or local time delivery, you can provide a group ID to the  [batch-delete](/developer/rest-api/ua/operations/push/#batchdeletemessages) endpoint.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -5008,14 +5008,14 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Delete a Message Center message completely, removing it from every user’s inbox. This is an asynchronous call; a success response means that the deletion has been queued for processing.\n\nThis delete call will work with either the `message_id` or the `push_id` of the accompanying push notification.\n\nThis endpoint will not work with a `group_id` from an automated message or a push to local time delivery. To delete a rich message that was part of an automated or local time delivery, you must use the relevant `push_id` from the operation.\n"
+          "text": "Delete a Message Center message completely, removing it from every user's inbox. This is an asynchronous call. A success response means that the deletion has been queued for processing.\n\nThis delete call will work with either the `message_id` or the `push_id` of the accompanying push notification.\n\nThis endpoint will not work with a group ID from an automated message or a push to local time delivery. To delete a Message Center message that was part of an automated or local time delivery, you can provide a group ID to the  [batch-delete](/developer/rest-api/ua/operations/push/#batchdeletemessages) endpoint."
         },
         {
           "type": "parameter",
           "name": "push_id",
           "paramType": "string",
           "required": true,
-          "description": "The `push_id` or `message_id` of the Rich Message you want to delete from users` inboxes.",
+          "description": "The `push_id` or `message_id` of the Message Center message you want to delete from users' inboxes.",
           "deprecated": false
         },
         {
@@ -5042,7 +5042,7 @@
       "title": "Delete multiple messages from inbox",
       "method": "POST",
       "endpoint": "/api/user/messages/batch-delete",
-      "description": "Deletes multiple Message Center messages (up to 50 messages per request) completely, removing them from every user’s inbox. This is an asynchronous call; a success response means that the deletion has been queued for processing.\n\nIt is not possible to delete Message Center messages generated by an automation, a recurring message, or a Sequence.\n",
+      "description": "Deletes multiple Message Center messages completely, removing them from every user's inbox. You can provide up to 50 IDs in a request. This is an asynchronous call. A success response means that the deletion has been queued for processing.\n\nWhen providing a group ID, only messages delivered by the time this request is made will be deleted. Messages that are delivered after this request, such as by an ongoing automation, will continue to be available.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -5054,16 +5054,16 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Deletes multiple Message Center messages (up to 50 messages per request) completely, removing them from every user’s inbox. This is an asynchronous call; a success response means that the deletion has been queued for processing.\n\nIt is not possible to delete Message Center messages generated by an automation, a recurring message, or a Sequence.\n"
+          "text": "Deletes multiple Message Center messages completely, removing them from every user's inbox. You can provide up to 50 IDs in a request. This is an asynchronous call. A success response means that the deletion has been queued for processing.\n\nWhen providing a group ID, only messages delivered by the time this request is made will be deleted. Messages that are delivered after this request, such as by an ongoing automation, will continue to be available."
         },
         {
           "type": "request_body",
-          "description": "A request body containing an array of message IDs to be deleted."
+          "description": "An array of message IDs or group IDs to delete. Provide either `message_ids` or `group_ids`, but not both."
         },
         {
           "type": "response",
           "statusCode": "202",
-          "description": "The request has been accepted for processing."
+          "description": "The deletion request has been accepted for processing."
         },
         {
           "type": "response",
@@ -8559,7 +8559,7 @@
       "title": "Upload tag list",
       "method": "PUT",
       "endpoint": "/api/tag-lists/{list_name}/csv",
-      "description": "Upload a CSV that will set tag values on the specified channels or named users.\n\nThe first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `named_user`, `email_address`.\n\nOnly one identifier type is allowed per file.\n\nYou must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n\nUploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| Web              | `channel_id`                                                                           |\n| Open Channel     | `channel_id`                                                                           |\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Email            | `email_address`                                                                        |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n\nOptional Fields: Opt-in dates can optionally be set for new channels\nwhen the identifier is an `email_address` or `msisdn`.\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_transactional_opted_in` (UTC Timestamp) </li><li> `ua_commercial_opted_in` (UTC Timestamp)</li></ul> |\n",
+      "description": "Upload a CSV that will set tag values on the specified channels or named users.\n\nThe first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `named_user`, `email_address`.\n\nOnly one identifier type is allowed per file.\n\nYou must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n\nUploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| Web              | `channel_id`                                                                           |\n| Open channel     | `channel_id`                                                                           |\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Email            | `email_address`                                                                        |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n\nOptional Fields: Opt-in and opt-out dates, tracking status, suppression state, and time zone can optionally be set for new or existing channels when the identifier is an `email_address` or `msisdn`.\n\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_commercial_opted_in` or `ua_commercial_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_transactional_opted_in` or `ua_transactional_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_open_tracking_opted_in` or `ua_open_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_click_tracking_opted_in` or `ua_click_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_email_suppression_state` (`BOUNCE`, `SPAM_COMPLAINT`, `COMMERCIAL_SPAM_COMPLAINT`, or `IMPORTED`)</li><li>`timezone` (IANA time zone database value, for example, `America/Los_Angeles`)</li></ul> |\n\n<sup>1</sup> Opt-in and opt-out dates are mutually exclusive. Providing both in the same row is invalid.<br>\n<sup>2</sup> By default, new channels are opted in to open and click tracking. Opt out by setting an opt-out date. Opt back in with an opt-in date that is newer than the opt-out date. Providing both dates in the same row is invalid.\n",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -8573,7 +8573,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Upload a CSV that will set tag values on the specified channels or named users.\n\nThe first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `named_user`, `email_address`.\n\nOnly one identifier type is allowed per file.\n\nYou must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n\nUploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| Web              | `channel_id`                                                                           |\n| Open Channel     | `channel_id`                                                                           |\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Email            | `email_address`                                                                        |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n\nOptional Fields: Opt-in dates can optionally be set for new channels\nwhen the identifier is an `email_address` or `msisdn`.\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_transactional_opted_in` (UTC Timestamp) </li><li> `ua_commercial_opted_in` (UTC Timestamp)</li></ul> |\n"
+          "text": "Upload a CSV that will set tag values on the specified channels or named users.\n\nThe first entry in the uploaded CSV must be a header row. The first field must be one of the following identifier types: `channel_id`, `msisdn`, `named_user`, `email_address`.\n\nOnly one identifier type is allowed per file.\n\nYou must include both `msisdn` and `sms_sender` columns when targeting SMS or MMS channel types. See example to the right.\n\nUploads must be newline-delimited identifiers (text/CSV) as described in RFC 4180, with commas as the delimiter, optionally double-quoted values, UTF-8 encoded, and with CRLF or LF line separators.\n\n| Target type      | Required column headers                                                                  |\n|------------------|------------------------------------------------------------------------------------------|\n| Web              | `channel_id`                                                                           |\n| Open channel     | `channel_id`                                                                           |\n| iOS              | `channel_id`                                                                           |\n| Android          | `channel_id`                                                                           |\n| Named user       | `named_user`                                                                           |\n| Email            | `email_address`                                                                        |\n| SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n| MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |\n\nOptional Fields: Opt-in and opt-out dates, tracking status, suppression state, and time zone can optionally be set for new or existing channels when the identifier is an `email_address` or `msisdn`.\n\n| Target type     | Optional column headers                                                                  |\n|-----------------|------------------------------------------------------------------------------------------|\n| SMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| MMS             | `ua_opted_in` (UTC Timestamp)                                                          |\n| Email           | <ul><li>`ua_commercial_opted_in` or `ua_commercial_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_transactional_opted_in` or `ua_transactional_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_open_tracking_opted_in` or `ua_open_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_click_tracking_opted_in` or `ua_click_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_email_suppression_state` (`BOUNCE`, `SPAM_COMPLAINT`, `COMMERCIAL_SPAM_COMPLAINT`, or `IMPORTED`)</li><li>`timezone` (IANA time zone database value, for example, `America/Los_Angeles`)</li></ul> |\n\n<sup>1</sup> Opt-in and opt-out dates are mutually exclusive. Providing both in the same row is invalid.<br>\n<sup>2</sup> By default, new channels are opted in to open and click tracking. Opt out by setting an opt-out date. Opt back in with an opt-in date that is newer than the opt-out date. Providing both dates in the same row is invalid.\n"
         },
         {
           "type": "parameter",
@@ -8682,7 +8682,7 @@
       "title": "Contacts tags",
       "method": "POST",
       "endpoint": "/api/contacts/tags/",
-      "description": "Add, remove, or set tags on a Contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.",
+      "description": "Add, remove, or set tags on a contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -8695,7 +8695,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Add, remove, or set tags on a Contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request."
+          "text": "Add, remove, or set tags on a contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request."
         },
         {
           "type": "request_body",
@@ -9016,7 +9016,7 @@
           "name": "open",
           "propertyType": "object",
           "required": false,
-          "description": "Open action. When a user interacts with the notification, opens one of: URL, deep link, or landing page as described in the associated `content` property.",
+          "description": "Open action. When a user interacts with the notification, opens one of: URL, deep link, landing page, or Scene as described in the associated `content` property.",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -9795,7 +9795,7 @@
           "name": "bypass_ban_list_processing",
           "propertyType": "boolean",
           "required": false,
-          "description": "If true, a user's status on a [ban list](/guides/audience/segmentation/ban-lists/) will not be verified before sending the push.\n",
+          "description": "If true, a user's status on a [ban list](/guides/messaging/messages/delivery/ban-lists/) will not be verified before sending the push.\n",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -9918,6 +9918,38 @@
           "propertyType": "string",
           "required": true,
           "description": "Determines whether to target a channel or contact attribute.",
+          "deprecated": false,
+          "platformSpecific": null
+        }
+      ]
+    },
+    {
+      "id": "schema-sceneContent",
+      "type": "schema",
+      "path": "/developer/rest-api/ua/schemas/push/",
+      "anchor": "scenecontent",
+      "headings": [
+        "Data Formats",
+        "Push",
+        "Scene content"
+      ],
+      "title": "Scene content",
+      "description": "References an existing Scene template by its `template_id`. The Scene opens when a user interacts with the notification. Not supported for the web channel.",
+      "isDeprecated": false,
+      "isInternal": false,
+      "schemaTag": "Push",
+      "tags": [],
+      "contentBlocks": [
+        {
+          "type": "description",
+          "text": "References an existing Scene template by its `template_id`. The Scene opens when a user interacts with the notification. Not supported for the web channel."
+        },
+        {
+          "type": "property",
+          "name": "template",
+          "propertyType": "object",
+          "required": true,
+          "description": "",
           "deprecated": false,
           "platformSpecific": null
         }
@@ -10095,7 +10127,7 @@
           "name": "activity",
           "propertyType": "string",
           "required": true,
-          "description": "The target event activity, e.g., `app_open`.\n\nDefault event values are enumerated below. If you create a custom or predefined event that you wish to segment users on, you must register the event in the Airship dashboard. See [Manage events](/guides/audience/events/manage/).\n",
+          "description": "The target event activity, e.g., `app_open`.\n\nDefault event values are enumerated below. If you create a custom or predefined event that you wish to segment users on, you must register the event in the Airship dashboard. See [Adding events to your project](/guides/audience/events/adding/).\n",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -10235,7 +10267,7 @@
           "name": "property",
           "propertyType": "string",
           "required": true,
-          "description": "The custom event property on which to filter for inclusion in the audience.  See [Event Segmentation Properties](/guides/audience/events/about/#events-reference) for properties reference.\n",
+          "description": "The custom event property on which to filter for inclusion in the audience. See the [Events Reference](/reference/data-collection/events/).\n",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -12464,7 +12496,7 @@
         "OAuth Scope"
       ],
       "title": "OAuth Scope",
-      "description": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.\n  * `att`: Attachments\n  * `chn`: Channels\n  * `tpl`: Content\n  * `evt`: Events\n  * `jny`: Journeys\n  * `lst`: Lists\n  * `nu`: Named Users\n  * `pln`: Pipelines\n  * `psh`: Push\n  * `rpt`: Reports\n  * `sch`: Schedules",
+      "description": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.\n  * `att`: Attachments\n  * `chn`: Channels\n  * `cnt`: Contacts\n  * `tpl`: Content\n  * `evt`: Events\n  * `jny`: Journeys\n  * `lst`: Lists\n  * `nu`: Named Users\n  * `pln`: Pipelines\n  * `psh`: Push\n  * `rpt`: Reports\n  * `sch`: Schedules",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "OAuth",
@@ -12472,7 +12504,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.\n  * `att`: Attachments\n  * `chn`: Channels\n  * `tpl`: Content\n  * `evt`: Events\n  * `jny`: Journeys\n  * `lst`: Lists\n  * `nu`: Named Users\n  * `pln`: Pipelines\n  * `psh`: Push\n  * `rpt`: Reports\n  * `sch`: Schedules"
+          "text": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.\n  * `att`: Attachments\n  * `chn`: Channels\n  * `cnt`: Contacts\n  * `tpl`: Content\n  * `evt`: Events\n  * `jny`: Journeys\n  * `lst`: Lists\n  * `nu`: Named Users\n  * `pln`: Pipelines\n  * `psh`: Push\n  * `rpt`: Reports\n  * `sch`: Schedules"
         }
       ]
     },
@@ -12510,7 +12542,7 @@
         "Atomic selector"
       ],
       "title": "Atomic selector",
-      "description": "Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a Channel ID or metadata that maps to the device (or multiple devices) such as a tag.",
+      "description": "Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a channel ID or metadata that maps to the device (or multiple devices) such as a tag.",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Audience selection",
@@ -12518,7 +12550,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a Channel ID or metadata that maps to the device (or multiple devices) such as a tag."
+          "text": "Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a channel ID or metadata that maps to the device (or multiple devices) such as a tag."
         }
       ]
     },
@@ -13053,6 +13085,15 @@
         },
         {
           "type": "property",
+          "name": "ua_email_domain",
+          "propertyType": "string",
+          "required": false,
+          "description": "The portion of the email address after the `@` symbol for an email channel, such as `example.com`. Not set when a user is opted in by default, such as for transactional messages.",
+          "deprecated": false,
+          "platformSpecific": null
+        },
+        {
+          "type": "property",
           "name": "ua_language",
           "propertyType": "string",
           "required": false,
@@ -13165,9 +13206,9 @@
       "headings": [
         "Data Formats",
         "Attributes",
-        "NPS survey Attributes"
+        "NPS survey attributes"
       ],
-      "title": "NPS survey Attributes",
+      "title": "NPS survey attributes",
       "description": "Attributes automatically generated by Airship based on data from your NPS surveys.\n",
       "isDeprecated": false,
       "isInternal": false,
@@ -13306,9 +13347,9 @@
       "headings": [
         "Data Formats",
         "Attributes",
-        "Set Attribute"
+        "Set attribute"
       ],
-      "title": "Set Attribute",
+      "title": "Set attribute",
       "description": "Add a new attribute, or edit the value of an existing attribute, for the audience.\n",
       "isDeprecated": false,
       "isInternal": false,
@@ -13450,7 +13491,7 @@
         "Ban list parameters"
       ],
       "title": "Ban list parameters",
-      "description": "A list of parameters, where the key and value are both strings, that will be used to override the default values set for variables in a [ban list](/guides/audience/segmentation/ban-lists/) request URL.\n",
+      "description": "A list of parameters, where the key and value are both strings, that will be used to override the default values set for variables in a [ban list](/guides/messaging/messages/delivery/ban-lists/) request URL.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Audience limits",
@@ -13458,7 +13499,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "A list of parameters, where the key and value are both strings, that will be used to override the default values set for variables in a [ban list](/guides/audience/segmentation/ban-lists/) request URL.\n"
+          "text": "A list of parameters, where the key and value are both strings, that will be used to override the default values set for variables in a [ban list](/guides/messaging/messages/delivery/ban-lists/) request URL.\n"
         },
         {
           "type": "property",
@@ -13908,7 +13949,7 @@
           "name": "suppression_state",
           "propertyType": "string",
           "required": false,
-          "description": "If an email channel is suppressed, the reason for its suppression. Email\nchannels with any suppression state set will not have any delivery to\nthem fulfilled. If a more specific reason is not known, use `imported`.\n",
+          "description": "The reason an email or SMS channel is suppressed. Suppressed channels don't receive messages.\n\n- `spam_complaint`, `commercial_spam_complaint`, `bounce`, and `imported` are email only. See [Email Bounce Handling and Suppression](/developer/api-integrations/email/bounce-handling/).\n- `carrier_deactivation` is SMS only. It is set when Airship's nightly carrier deactivation scan suppresses the channel. See [Suppression](/developer/api-integrations/sms/opt-in-out-handling#suppression) in *SMS Opt-In/Out Handling*.\n",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -14389,9 +14430,9 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Contact Subscription List object"
+        "Contact subscription list object"
       ],
-      "title": "Contact Subscription List object",
+      "title": "Contact subscription list object",
       "description": "A list of subscription list items associated with the specified contact. Each item consists of a list of list IDs and an optional scope.",
       "isDeprecated": false,
       "isInternal": false,
@@ -14430,10 +14471,10 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Contact Subscription List object"
+        "Contact subscription list object"
       ],
-      "title": "Contact Subscription List object",
-      "description": "Defines the Subscription List changes.",
+      "title": "Contact subscription list object",
+      "description": "Defines the subscription list changes.",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Subscription Lists",
@@ -14441,14 +14482,14 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Defines the Subscription List changes."
+          "text": "Defines the subscription list changes."
         },
         {
           "type": "property",
           "name": "subscribe",
           "propertyType": "array[string]",
           "required": false,
-          "description": "Subscribe to the specified Subscription List identifier.",
+          "description": "Subscribe to the specified subscription list identifier.",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -14457,7 +14498,7 @@
           "name": "unsubscribe",
           "propertyType": "array[string]",
           "required": false,
-          "description": "Unsubscribe the specified Subscription List identifier.",
+          "description": "Unsubscribe the specified subscription list identifier.",
           "deprecated": false,
           "platformSpecific": null
         }
@@ -14535,10 +14576,10 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Named user Subscription List object"
+        "Named user subscription list object"
       ],
-      "title": "Named user Subscription List object",
-      "description": "Defines the Subscription List changes.",
+      "title": "Named user subscription list object",
+      "description": "Defines the subscription list changes.",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Subscription Lists",
@@ -14546,14 +14587,14 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Defines the Subscription List changes."
+          "text": "Defines the subscription list changes."
         },
         {
           "type": "property",
           "name": "subscribe",
           "propertyType": "array[string]",
           "required": false,
-          "description": "Subscribe to the specified Subscription List identifier.",
+          "description": "Subscribe to the specified subscription list identifier.",
           "deprecated": false,
           "platformSpecific": null
         },
@@ -14562,7 +14603,7 @@
           "name": "unsubscribe",
           "propertyType": "array[string]",
           "required": false,
-          "description": "Unsubscribe the specified Subscription List identifier.",
+          "description": "Unsubscribe the specified subscription list identifier.",
           "deprecated": false,
           "platformSpecific": null
         }
@@ -14599,9 +14640,9 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Subscription List action"
+        "Subscription list action"
       ],
-      "title": "Subscription List action",
+      "title": "Subscription list action",
       "description": "A string representing the membership mutation action to be taken for a given list.",
       "isDeprecated": false,
       "isInternal": false,
@@ -14622,9 +14663,9 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Subscription List item object"
+        "Subscription list item object"
       ],
-      "title": "Subscription List item object",
+      "title": "Subscription list item object",
       "description": "An item consisting of a list of list IDs and scope.",
       "isDeprecated": false,
       "isInternal": false,
@@ -14663,9 +14704,9 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Subscription List object"
+        "Subscription list object"
       ],
-      "title": "Subscription List object",
+      "title": "Subscription list object",
       "description": "",
       "isDeprecated": false,
       "isInternal": false,
@@ -14709,9 +14750,9 @@
       "headings": [
         "Data Formats",
         "Subscription Lists",
-        "Subscription List result object"
+        "Subscription list result object"
       ],
-      "title": "Subscription List result object",
+      "title": "Subscription list result object",
       "description": "Defines the subscription list result object.",
       "isDeprecated": false,
       "isInternal": false,
@@ -15901,7 +15942,7 @@
         "Tag group object"
       ],
       "title": "Tag group object",
-      "description": "Tags belong to tag groups. Tag groups appear within the `tags` object for a named user or the `tag_groups` object for a channel. See also [Device Properties](/reference/data-collection/device-properties/)\n``ua_`` is a reserved prefix for Airship-specific tag groups.\n\nA tag group has two parts: a \"name\" string of 1-128 characters, and an array of tags, containing 0-100 tags. Each tag in the array is also a string consisting of 1-128 characters.",
+      "description": "Tag groups appear within the `tags` object for a named user or the `tag_groups` object for a channel.\n\n`ua_` is a reserved prefix for Airship-specific tag groups. See [Device property tags](/reference/data-collection/device-property-tags/).",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Tags",
@@ -15909,7 +15950,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Tags belong to tag groups. Tag groups appear within the `tags` object for a named user or the `tag_groups` object for a channel. See also [Device Properties](/reference/data-collection/device-properties/)\n``ua_`` is a reserved prefix for Airship-specific tag groups.\n\nA tag group has two parts: a \"name\" string of 1-128 characters, and an array of tags, containing 0-100 tags. Each tag in the array is also a string consisting of 1-128 characters."
+          "text": "Tag groups appear within the `tags` object for a named user or the `tag_groups` object for a channel.\n\n`ua_` is a reserved prefix for Airship-specific tag groups. See [Device property tags](/reference/data-collection/device-property-tags/)."
         },
         {
           "type": "property",

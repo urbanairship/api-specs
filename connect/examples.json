@@ -69,11 +69,20 @@
       ],
       "carrier_deactivation": [
         {
-          "description": "Example SMS carrier_deactivation event",
+          "description": "Example SMS carrier deactivation event that uninstalls the channel",
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"action\": \"uninstalled\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example SMS carrier deactivation event that suppresses the channel",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"action\": \"suppressed\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -776,6 +785,44 @@
           ]
         }
       ],
+      "rnd-scan": [
+        {
+          "description": "Example SMS RND scan event for a monthly scan that uninstalls a reassigned channel",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example SMS RND scan event for a monthly scan that removes suppression when the channel was not reassigned",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"suppression_removed\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example SMS RND scan event for an app scan that uninstalls a reassigned channel",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        },
+        {
+          "description": "Example SMS RND scan event for an app scan with no action when the channel was not reassigned",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"none\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+            }
+          ]
+        }
+      ],
       "screen_viewed": [
         {
           "description": "Example screen viewed event",
@@ -895,7 +942,7 @@
           ]
         },
         {
-          "description": "Example subscription event for a Subscription List unsubscribe from an email body link",
+          "description": "Example subscription event for a subscription list unsubscribe from an email body link",
           "examples": [
             {
               "lang": "json",
@@ -906,7 +953,7 @@
       ],
       "subscription_list": [
         {
-          "description": "Example Subscription List event",
+          "description": "Example subscription list event",
           "examples": [
             {
               "lang": "json",
@@ -931,6 +978,17 @@
             {
               "lang": "json",
               "source": "{\n  \"type\": \"PARTITION\",\n  \"count\": 10,\n  \"selection\": 0\n}\n"
+            }
+          ]
+        }
+      ],
+      "suppression_removed": [
+        {
+          "description": "Example SMS suppression removal event",
+          "examples": [
+            {
+              "lang": "json",
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"suppression_removed\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"source\": \"ui\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -968,7 +1026,7 @@
           ]
         },
         {
-          "description": "Example email unsubscribe event for a Subscription List unsubscribe",
+          "description": "Example email unsubscribe event for a subscription list unsubscribe",
           "examples": [
             {
               "lang": "json",

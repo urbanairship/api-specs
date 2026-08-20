@@ -303,7 +303,7 @@ components:
       type: object
       x-inline-component: true
     carrier_deactivation:
-      description: Occurs when an MSISDN is deactivated by a carrier. This event type does not contain additional `properties`.
+      description: 'Occurs when an MSISDN is deactivated by a carrier. The `properties.action` value indicates the outcome: `uninstalled` for default carrier deactivation monitoring, or `suppressed` when carrier deactivation RND scanning is enabled and the channel is suppressed pending RND verification. For more information, see [SMS Number Life Cycle Management](/developer/api-integrations/sms/compliance/number-lifecycle).'
       properties:
         body:
           description: Contains the event subtype, identifiers, and additional properties about the event.
@@ -315,6 +315,18 @@ components:
               type: string
             identifiers:
               $ref: '#/components/schemas/smsIdentifiers'
+            properties:
+              description: Contains properties specific to the `event_type`.
+              properties:
+                action:
+                  description: The action performed on the channel. `uninstalled` indicates permanent removal. `suppressed` indicates the channel was suppressed pending RND verification.
+                  enum:
+                    - uninstalled
+                    - suppressed
+                  type: string
+              required:
+                - action
+              type: object
           required:
             - event_type
             - identifiers
@@ -391,12 +403,14 @@ components:
         - discriminator:
             propertyName: event_type
           oneOf:
+            - $ref: '#/components/schemas/rnd-scan'
             - $ref: '#/components/schemas/bounce'
             - $ref: '#/components/schemas/emailCreateAndSend'
             - $ref: '#/components/schemas/registration'
             - $ref: '#/components/schemas/unsubscribe'
             - $ref: '#/components/schemas/api_initiate_opt_in'
             - $ref: '#/components/schemas/carrier_deactivation'
+            - $ref: '#/components/schemas/suppression_removed'
             - $ref: '#/components/schemas/smsCreateAndSend'
             - $ref: '#/components/schemas/custom_keyword_response'
             - $ref: '#/components/schemas/mobile_create_channel'
@@ -1121,7 +1135,7 @@ components:
       type: object
       x-schema-tag: Custom email events
     emailCreateAndSend:
-      description: An event that occurs for email addresses used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/).
+      description: An event that occurs for email addresses used as a part of a [Create and Send](/guides/messaging/bulk-sending/).
       properties:
         body:
           description: Contains the event subtype and additional properties about the event.
@@ -1139,7 +1153,7 @@ components:
                 - address
               type: object
             properties:
-              description: Properties for an email [Create and Send](/guides/audience/segmentation/bulk-sending/) event.
+              description: Properties for an email [Create and Send](/guides/messaging/bulk-sending/) event.
               properties:
                 channel_registered:
                   description: If true, a new channel was created to represent the identifiers in the event. If false, the address was already registered to Airship.
@@ -1343,7 +1357,7 @@ components:
       x-schema-tag: Custom email events
     emailUnsubscribeLinkEvent:
       description: |
-        Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [Subscription List](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.
+        Occurs when a user unsubscribes from email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header), an unsubscribe link in the message body, or the **Unsubscribe from all** button in the Email Preference Center. Use the `unsubscribe_event_type` property to identify the source. This event is not emitted for [subscription list](/guides/messaging/messages/content/email/email-unsubscribe-links/) unsubscribes.
       properties:
         body:
           properties:
@@ -2065,7 +2079,7 @@ components:
       x-schema-tag: Events
     in_app_message_control:
       description: |
-        Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).
+        Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).
       properties:
         body:
           properties:
@@ -2178,7 +2192,7 @@ components:
       x-schema-tag: Events
     in_app_message_exclusion:
       description: |
-        Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).
+        Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).
       properties:
         body:
           properties:
@@ -2202,7 +2216,7 @@ components:
             type:
               description: |-
                 Indicates that the in-app message was not displayed on a device because the channel or named user was excluded from the push. The only possible value is 
-                `AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or named user is on a project's [ban list](/guides/audience/segmentation/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a ban list occurs.
+                `AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or named user is on a project's [ban list](/guides/messaging/messages/delivery/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a ban list occurs.
               enum:
                 - AUDIENCE_CHECK_EXCLUDED
               type: string
@@ -3596,7 +3610,7 @@ components:
                     - unsubscribe
                   type: string
                 source:
-                  description: Only appears when [suppression is removed from an email channel using the dashboard Contact Management tool](/guides/audience/contact-management/#removing-email-suppression).
+                  description: Only appears when [suppression is removed from an email channel using the dashboard Contact Management tool](/guides/audience/tools/contact-management/#removing-suppression).
                   enum:
                     - ui
                   type: string
@@ -3611,7 +3625,7 @@ components:
                     - none
                   type: string
                 user:
-                  description: The username of the Airship dashboard user that [removed suppression from an email channel using the dashboard Contact Management tool](/guides/audience/contact-management/#removing-email-suppression) and acknowledged the compliance implications.
+                  description: The username of the Airship dashboard user that [removed suppression from an email channel using the dashboard Contact Management tool](/guides/audience/tools/contact-management/#removing-suppression) and acknowledged the compliance implications.
                   type: string
               required:
                 - registration_type
@@ -3795,6 +3809,57 @@ components:
       title: Rich read
       type: object
       x-schema-tag: Events
+    rnd-scan:
+      description: Occurs when an MSISDN undergoes an RND scan, either as part of recurring carrier deactivation monitoring or as an ad hoc scan, indicated by `source`. RND scans may remove suppression, uninstall the channel, or take no action. For more information, see [SMS Number Life Cycle Management](/developer/api-integrations/sms/compliance/number-lifecycle).
+      properties:
+        body:
+          description: Contains the event subtype, identifiers, and additional properties about the event.
+          properties:
+            event_type:
+              description: Indicates an RND scan action for the channel.
+              enum:
+                - rnd_scan
+              type: string
+            identifiers:
+              $ref: '#/components/schemas/smsIdentifiers'
+            properties:
+              description: Contains properties specific to the `event_type`.
+              properties:
+                action:
+                  description: The action performed on the channel as a result of the scan. `suppression_removed` indicates the channel was restored from suppression. `uninstalled` indicates permanent removal. `none` indicates a scan with no action taken.
+                  enum:
+                    - suppression_removed
+                    - uninstalled
+                    - none
+                  type: string
+                reassigned:
+                  description: Indicates whether the action was due to a number reassignment.
+                  type: boolean
+                scan_id:
+                  description: Optional identifier shared by all events from the same scan.
+                  type: string
+                source:
+                  description: Optional identifier of the process that initiated the scan event. `monthly_scan` indicates a carrier deactivation RND scan aligned with the monthly FCC RND update. `app_scan` indicates a full audience RND scan.
+                  enum:
+                    - monthly_scan
+                    - app_scan
+                  type: string
+              required:
+                - action
+              type: object
+          required:
+            - event_type
+            - identifiers
+            - properties
+          type: object
+        device:
+          $ref: '#/components/schemas/complianceSmsDevice'
+      required:
+        - device
+        - body
+      title: SMS RND scan event
+      type: object
+      x-schema-tag: SMS compliance events
     scope:
       description: |
         The scope at which the operation was performed; only present on events
@@ -3809,7 +3874,7 @@ components:
       x-inline-component: true
     screen_viewed:
       description: |
-        Occurs when a user has finished viewing a screen. It is up to you to instrument your application with names for each screen. Doing so will allow you to determine the user's path by filtering on the fields in the table below.
+        Occurs when a user has finished viewing a screen. It is up to you to instrument your app or website with names for each screen. Doing so will allow you to determine the user's path by filtering on the fields in the table below.
       properties:
         body:
           properties:
@@ -3827,7 +3892,9 @@ components:
               type: string
           type: object
         device:
-          $ref: '#/components/schemas/appdevices'
+          oneOf:
+            - $ref: '#/components/schemas/appdevices'
+            - $ref: '#/components/schemas/webdevices'
         id:
           $ref: '#/components/schemas/id'
         occurred:
@@ -3935,7 +4002,7 @@ components:
 
           * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response
           * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met
-          * When a [ban list](/guides/audience/segmentation/ban-lists/) webhook issues a `drop` response for a user
+          * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user
 
         Device information for the device that did not receive the push is included with `SEND_ABORTED` events.
       properties:
@@ -3954,7 +4021,7 @@ components:
               description: |-
                 Describes the reason this push was aborted.
 
-                * `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).
+                * `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).
                 * `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.
                 * `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.
                 * `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/project/config/message-limits/) retrieval failed.
@@ -4142,7 +4209,7 @@ components:
       type: object
       x-schema-tag: Events
     smsCreateAndSend:
-      description: An event that occurs for SMS channels used as a part of a [Create and Send](/guides/audience/segmentation/bulk-sending/).
+      description: An event that occurs for SMS channels used as a part of a [Create and Send](/guides/messaging/bulk-sending/).
       properties:
         body:
           description: Contains the event subtype and additional properties about the event.
@@ -4154,7 +4221,7 @@ components:
             identifiers:
               $ref: '#/components/schemas/smsIdentifiers'
             properties:
-              description: Properties for an SMS [Create and Send](/guides/audience/segmentation/bulk-sending/) event.
+              description: Properties for an SMS [Create and Send](/guides/messaging/bulk-sending/) event.
               properties:
                 channel_registered:
                   description: If true, a new channel was created to represent the identifiers in the event. If false, the address was already registered to Airship.
@@ -4352,16 +4419,16 @@ components:
       x-schema-tag: SMS compliance events
     subscription:
       description: |
-        `SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to Subscription List memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.
+        `SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to subscription list memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.
       properties:
         body:
           properties:
             event_type:
               description: |
-                Determines the source of the subscription event. `registration` and `create_and_send` events result in changes to `opted_in` dates. `link_unsubscribe` and `list_unsubscribe` events represent changes to `opted_out` status unless the body includes a `subscription_lists` payload, in which case the change applies only to the listed Subscription Lists. All other event types contain `opted_out` dates.
+                Determines the source of the subscription event. `registration` and `create_and_send` events result in changes to `opted_in` dates. `link_unsubscribe` and `list_unsubscribe` events represent changes to `opted_out` status unless the body includes a `subscription_lists` payload, in which case the change applies only to the listed subscription lists. All other event types contain `opted_out` dates.
 
                 * `registration`: Represents a change to a user's `commercial_opted_in`, `transactional_opted_in`, `click_tracking_opted_in`, or `open_tracking_opted_in` dates.
-                * `create_and_send`: A user's opted_in status changed as a result of a [Create and Send](/guides/audience/segmentation/bulk-sending/) event.
+                * `create_and_send`: A user's opted_in status changed as a result of a [Create and Send](/guides/messaging/bulk-sending/) event.
                 * `bounce`: Subscription status changed as a result of a bounce event.
                 * `link_unsubscribe`: The user clicked an unsubscribe link in the message body of an email, or selected the **Unsubscribe from all** button in the Email Preference Center.
                 * `list_unsubscribe`: The user selected the unsubscribe button in their email client, sent through the `List-Unsubscribe` email header.
@@ -4412,15 +4479,15 @@ components:
               type: object
             subscription_lists:
               description: |
-                Present when the event represents a change to the user's Subscription List membership rather than a full opt-in or opt-out. When this property is absent, the event applies to the channel as a whole.
+                Present when the event represents a change to the user's subscription list membership rather than a full opt-in or opt-out. When this property is absent, the event applies to the channel as a whole.
               properties:
                 canceled:
-                  description: An array of Subscription List IDs the user was removed from.
+                  description: An array of subscription list IDs the user was removed from.
                   items:
                     type: string
                   type: array
                 enrolled:
-                  description: An array of Subscription List IDs the user was added to.
+                  description: An array of subscription list IDs the user was added to.
                   items:
                     type: string
                   type: array
@@ -4553,6 +4620,43 @@ components:
           type: string
       title: Request subset
       type: object
+    suppression_removed:
+      description: Occurs when suppression is removed from an SMS channel outside of an RND scan, for example from the dashboard. For more information, see [SMS Opt-In/Out Handling](/developer/api-integrations/sms/opt-in-out-handling#suppression).
+      properties:
+        body:
+          description: Contains the event subtype, identifiers, and additional properties about the event.
+          properties:
+            event_type:
+              description: Indicates that suppression was removed from the channel.
+              enum:
+                - suppression_removed
+              type: string
+            identifiers:
+              $ref: '#/components/schemas/smsIdentifiers'
+            properties:
+              description: Contains properties specific to the `event_type`.
+              properties:
+                source:
+                  description: Identifies where suppression was removed. `ui` indicates removal from the Airship dashboard.
+                  enum:
+                    - ui
+                  type: string
+              required:
+                - source
+              type: object
+          required:
+            - event_type
+            - identifiers
+            - properties
+          type: object
+        device:
+          $ref: '#/components/schemas/complianceSmsDevice'
+      required:
+        - device
+        - body
+      title: SMS suppression removed event
+      type: object
+      x-schema-tag: SMS compliance events
     tag_change:
       description: |
         Occurs when tags change for a device.
@@ -4646,7 +4750,7 @@ components:
       x-schema-tag: Events
     unsubscribe:
       description: |
-        A compliance event representing a user who unsubscribed from your email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header, an unsubscribe link in the message body, or the Email Preference Center. When the unsubscribe applies to specific Subscription Lists rather than the email channel as a whole, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.
+        A compliance event representing a user who unsubscribed from your email messaging. The unsubscribe can originate from the email client's unsubscribe button (sent through the `List-Unsubscribe` email header, an unsubscribe link in the message body, or the Email Preference Center. When the unsubscribe applies to specific subscription lists rather than the email channel as a whole, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.
       properties:
         body:
           description: Contains the event subtype and additional properties about the event.
@@ -4679,10 +4783,10 @@ components:
               type: object
             subscription_lists:
               description: |
-                Present when the unsubscribe applies to one or more Subscription Lists rather than the email channel as a whole. When this property is present, no opt-out timestamps are set on the channel.
+                Present when the unsubscribe applies to one or more subscription lists rather than the email channel as a whole. When this property is present, no opt-out timestamps are set on the channel.
               properties:
                 canceled:
-                  description: An array of Subscription List IDs the user was removed from.
+                  description: An array of subscription list IDs the user was removed from.
                   items:
                     type: string
                   type: array

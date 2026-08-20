@@ -125,7 +125,7 @@ components:
           type: object
         add_tag:
           $ref: '#/components/schemas/tagArray'
-          description: Add tag action. When a user interacts with the notification, these tags will be added to the user's Channel ID.
+          description: Add tag action. When a user interacts with the notification, these tags will be added to the user's channel ID.
         app_defined:
           additionalProperties:
             title: Application-Defined Action Payload
@@ -140,7 +140,7 @@ components:
               - $ref: '#/components/schemas/removeAttributesActionItem'
           type: array
         open:
-          description: 'Open action. When a user interacts with the notification, opens one of: URL, deep link, or landing page as described in the associated `content` property.'
+          description: 'Open action. When a user interacts with the notification, opens one of: URL, deep link, landing page, or Scene as described in the associated `content` property.'
           oneOf:
             - description: Opens a URL or passes a string for use as a custom action.
               properties:
@@ -190,10 +190,23 @@ components:
                 - content
               title: Open Landing Page
               type: object
+            - description: Opens a Scene. Reference an existing Scene template by its `template_id`. Not supported for the web channel.
+              properties:
+                content:
+                  $ref: '#/components/schemas/sceneContent'
+                type:
+                  enum:
+                    - scene
+                  type: string
+              required:
+                - type
+                - content
+              title: Open Scene
+              type: object
           type: object
         remove_tag:
           $ref: '#/components/schemas/tagArray'
-          description: Remove tag action. Upon interaction with the notification, the defined tag or tags will be removed from the user's Channel ID.
+          description: Remove tag action. Upon interaction with the notification, the defined tag or tags will be removed from the user's channel ID.
         share:
           description: String indicating the text that will populate the share action.
           example: Hey guys check this out!
@@ -335,7 +348,7 @@ components:
           description: |
             The target event activity, e.g., `app_open`.
 
-            Default event values are enumerated below. If you create a custom or predefined event that you wish to segment users on, you must register the event in the Airship dashboard. See [Manage events](/guides/audience/events/manage/).
+            Default event values are enumerated below. If you create a custom or predefined event that you wish to segment users on, you must register the event in the Airship dashboard. See [Adding events to your project](/guides/audience/events/adding/).
           enum:
             - app_open
             - message_received
@@ -1012,7 +1025,7 @@ components:
       type: object
       x-inline-component: true
     atomicSelector:
-      description: Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a Channel ID or metadata that maps to the device (or multiple devices) such as a tag.
+      description: Atomic selectors are the simplest way to identify a single device, i.e., app or browser installation, or a group of devices. These selectors are either a unique identifier for the device such as a channel ID or metadata that maps to the device (or multiple devices) such as a tag.
       oneOf:
         - $ref: '#/components/schemas/allSelector'
         - $ref: '#/components/schemas/tag'
@@ -1229,7 +1242,7 @@ components:
           key: value
         type: string
       description: |
-        A list of parameters, where the key and value are both strings, that will be used to override the default values set for variables in a [ban list](/guides/audience/segmentation/ban-lists/) request URL.
+        A list of parameters, where the key and value are both strings, that will be used to override the default values set for variables in a [ban list](/guides/messaging/messages/delivery/ban-lists/) request URL.
       title: Ban list parameters
       type: object
       x-schema-tag: Audience limits
@@ -1352,7 +1365,7 @@ components:
     channelIdContactIdAssociation:
       properties:
         channel_id:
-          description: The Channel ID you want to associate with a contact.
+          description: The channel ID you want to associate with a contact.
           example: 9c36e8c7-5a73-47c0-9716-99fd3d4197d5
           format: uuid
           type: string
@@ -1368,13 +1381,13 @@ components:
       required:
         - contact_id
         - channel_id
-      title: Contact association payload with Channel ID
+      title: Contact association payload with channel ID
       type: object
       x-inline-component: true
     channelIdNamedUserAssociation:
       properties:
         channel_id:
-          description: The Channel ID you want to associate with a named user.
+          description: The channel ID you want to associate with a named user.
           example: 9c36e8c7-5a73-47c0-9716-99fd3d4197d5
           format: uuid
           type: string
@@ -1390,13 +1403,13 @@ components:
       required:
         - named_user_id
         - channel_id
-      title: Named user association payload with Channel ID
+      title: Named user association payload with channel ID
       type: object
       x-inline-component: true
     channelIdNamedUserDisassociation:
       properties:
         channel_id:
-          description: The Channel ID you want to disassociate from a named user.
+          description: The channel ID you want to disassociate from a named user.
           example: 9c36e8c7-5a73-47c0-9716-99fd3d4197d5
           format: uuid
           type: string
@@ -1420,7 +1433,7 @@ components:
           type: string
       required:
         - channel_id
-      title: Named user disassociation payload with Channel ID
+      title: Named user disassociation payload with channel ID
       type: object
       x-inline-component: true
     channelListingObject:
@@ -1626,10 +1639,10 @@ components:
       type: object
       x-inline-component: true
     cnsOpenAudienceObject:
-      description: The Open channel addresses and opt-in information for the audience you want to send to. Unknown addresses are registered as new channels.
+      description: The open channel addresses for the audience you want to send to. Unknown addresses are registered as new channels.
       properties:
         create_and_send:
-          description: Each object in the array represents an Open channel address you want to send to. Unknown addresses are registered as new channels. Channel registration fields are prefixed with `ua_` and have the same requirements as open channel registration.
+          description: Each object in the array represents an open channel address you want to send to. Unknown addresses are registered as new channels. Channel registration fields are prefixed with `ua_` and have the same requirements as open channel registration.
           items:
             additionalProperties:
               description: |
@@ -1665,7 +1678,7 @@ components:
               title: substitutions
             properties:
               ua_msisdn:
-                description: The phone number of a mobile device. Entries with `ua_msisdn` values that are not reachable by `ua_sender` values will be **silently dropped.**
+                description: The phone number of a mobile device. Include the numeric country code, using digits only and no leading `+`. For example, a US number is `15558675309`. Entries with `ua_msisdn` values that are not reachable by `ua_sender` values will be silently dropped.
                 type: string
               ua_opted_in:
                 description: |
@@ -1885,23 +1898,23 @@ components:
           $ref: '#/components/schemas/scopes'
       required:
         - list_ids
-      title: Contact Subscription List object
+      title: Contact subscription list object
       type: object
       x-schema-tag: Subscription Lists
     contactSubscriptionListsObject:
-      description: Defines the Subscription List changes.
+      description: Defines the subscription list changes.
       properties:
         subscribe:
-          description: Subscribe to the specified Subscription List identifier.
+          description: Subscribe to the specified subscription list identifier.
           items:
             type: string
           type: array
         unsubscribe:
-          description: Unsubscribe the specified Subscription List identifier.
+          description: Unsubscribe the specified subscription list identifier.
           items:
             type: string
           type: array
-      title: Contact Subscription List object
+      title: Contact subscription list object
       type: object
       x-schema-tag: Subscription Lists
     contactTagsResponse:
@@ -2442,6 +2455,9 @@ components:
         ua_device_os:
           description: The operating system of the device associated with an app channel.
           type: string
+        ua_email_domain:
+          description: The portion of the email address after the `@` symbol for an email channel, such as `example.com`. Not set when a user is opted in by default, such as for transactional messages.
+          type: string
         ua_language:
           description: The 2-letter language code for an app or web channel.
           type: string
@@ -2680,6 +2696,8 @@ components:
         Each channel uses `opted_in` and `opted_out` keys for both commercial and transactional emails. The value of each key is the [date-time](/developer/rest-api/ua/introduction/#date-time-format) when the user subscribed to or unsubscribed from emails of either type — commercial or transactional. If a user has opted out of a particular email type (or the user never opted in to commercial emails), and the user is a part of your audience for a message of that type, the email designated for the opted-out user is dropped at delivery time. These values are all optional. However, an email channel with no `opted_in` or `opted_out` values can only receive transactional emails.
 
         If a channel has both opt_in and opt_out values for a particular email type, Airship respects the most recent [date-time](/developer/rest-api/ua/introduction/#date-time-format). So, if a user opted in to commercial emails after previously opting out, that user can receive commercial emails from you even though that user's channel possesses both `commercial_opted_in` and `commercial_opted_out` values; if the opt-in date is prior to the opt-out date, the user will not receive commercial emails from you.
+
+        Providing both opt-in and opt-out values for commercial email, transactional email, open tracking, or click tracking in a single request is considered invalid.
       properties:
         channel:
           properties:
@@ -2687,6 +2705,10 @@ components:
               description: The email address associated with the email channel. If provided, it must match the existing email address or the request will be rejected with a 400 status code.
               example: tommy@example.com
               type: string
+            click_tracking_opted_in:
+              $ref: '#/components/schemas/click_tracking_opted_in'
+            click_tracking_opted_out:
+              $ref: '#/components/schemas/click_tracking_opted_out'
             commercial_opted_in:
               $ref: '#/components/schemas/commercial_opted_in'
             commercial_opted_out:
@@ -2705,6 +2727,10 @@ components:
               description: The device property tag related to locale language setting.
               example: en
               type: string
+            open_tracking_opted_in:
+              $ref: '#/components/schemas/open_tracking_opted_in'
+            open_tracking_opted_out:
+              $ref: '#/components/schemas/open_tracking_opted_out'
             suppression_state:
               $ref: '#/components/schemas/suppression_state'
             timezone:
@@ -3189,7 +3215,7 @@ components:
       type: object
       x-inline-component: true
     external_id:
-      description: The user-provided identifier of a template created in the Airship dashboard or the API. See [Using content templates](/guides/personalization/content/templates/#using-content-templates) for more information.
+      description: The user-provided identifier of a template created in the Airship dashboard or the API. See [Using templates](/guides/personalization/content/templates/#using-templates) for more information.
       type: string
       x-inline-component: true
     extraObject:
@@ -4992,23 +5018,23 @@ components:
           type: string
       required:
         - list_ids
-      title: Subscription List item object
+      title: Subscription list item object
       type: object
       x-schema-tag: Subscription Lists
     namedUserSubscriptionListsObject:
-      description: Defines the Subscription List changes.
+      description: Defines the subscription list changes.
       properties:
         subscribe:
-          description: Subscribe to the specified Subscription List identifier.
+          description: Subscribe to the specified subscription list identifier.
           items:
             type: string
           type: array
         unsubscribe:
-          description: Unsubscribe the specified Subscription List identifier.
+          description: Unsubscribe the specified subscription list identifier.
           items:
             type: string
           type: array
-      title: Named user Subscription List object
+      title: Named user subscription list object
       type: object
       x-schema-tag: Subscription Lists
     namedUserTags:
@@ -5207,7 +5233,7 @@ components:
         ua_nps_score:
           description: The score (0-10) a user submits in an NPS (Net Promoter Score) survey.
           type: number
-      title: NPS survey Attributes
+      title: NPS survey attributes
       type: object
       x-inline-component: false
       x-schema-tag: Attributes
@@ -5245,6 +5271,7 @@ components:
         The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.
           * `att`: Attachments
           * `chn`: Channels
+          * `cnt`: Contacts
           * `tpl`: Content
           * `evt`: Events
           * `jny`: Journeys
@@ -5257,6 +5284,7 @@ components:
       enum:
         - att
         - chn
+        - cnt
         - tpl
         - evt
         - jny
@@ -6178,7 +6206,7 @@ components:
         bypass_ban_list_processing:
           default: false
           description: |
-            If true, a user's status on a [ban list](/guides/audience/segmentation/ban-lists/) will not be verified before sending the push.
+            If true, a user's status on a [ban list](/guides/messaging/messages/delivery/ban-lists/) will not be verified before sending the push.
           type: boolean
         bypass_frequency_limits:
           default: false
@@ -6461,6 +6489,23 @@ components:
       title: Resolve anonymous contact response
       type: object
       x-inline-component: true
+    sceneContent:
+      description: References an existing Scene template by its `template_id`. The Scene opens when a user interacts with the notification. Not supported for the web channel.
+      properties:
+        template:
+          properties:
+            template_id:
+              description: The UUID of the Scene template to open.
+              format: uuid
+              type: string
+          required:
+            - template_id
+          type: object
+      required:
+        - template
+      title: Scene content
+      type: object
+      x-schema-tag: Push
     scheduleObject:
       description: A schedule object consists of a schedule, i.e., a future delivery time, an optional name, and a push object.
       properties:
@@ -6760,7 +6805,7 @@ components:
         - action
         - key
         - value
-      title: Set Attribute
+      title: Set attribute
       type: object
       x-schema-tag: Attributes
       x-weight: 5
@@ -6951,7 +6996,7 @@ components:
               type: boolean
           type: object
         channel_id:
-          description: Unique Channel ID for the SMS channel.
+          description: Unique channel ID for the SMS channel.
           format: uuid
           type: string
         ok:
@@ -6978,7 +7023,7 @@ components:
               type: boolean
           type: object
         channel_id:
-          description: Unique Channel ID for the SMS channel. This channel is created with `opt_in` set to `false`, as the user has not yet opted in to your audience.
+          description: Unique channel ID for the SMS channel. This channel is created with `opt_in` set to `false`, as the user has not yet opted in to your audience.
           format: uuid
           type: string
         ok:
@@ -7035,7 +7080,7 @@ components:
         Make sure that the location where you are using a snippet supports the content defined in the snippet. For example, an image URL or HTML will not render in a push notification since push notifications only support plain text.
       x-schema-tag: Push
     static_list:
-      description: A `static_list` is a subset of your audience defined by a CSV file containing Channel IDs or named users.
+      description: A `static_list` is a subset of your audience defined by a CSV file containing channel IDs or named users.
       example:
         - preferred_customers
       properties:
@@ -7124,7 +7169,7 @@ components:
       x-schema-tag: Pipeline objects
     subscriptionListAction:
       oneOf:
-        - description: Alters Subscription List membership for a channel.
+        - description: Alters subscription list membership for a channel.
           properties:
             action:
               $ref: '#/components/schemas/subscriptionListMutation'
@@ -7138,7 +7183,7 @@ components:
             - list_id
             - type
             - action
-          title: Channel Subscription List action
+          title: Channel subscription list action
           type: object
         - description: Alters subscription list membership for a contact.
           properties:
@@ -7159,7 +7204,7 @@ components:
             - scope
           title: Contact subscription list action
           type: object
-      title: Subscription List action
+      title: Subscription list action
       type: object
       x-inline-component: true
     subscriptionListArray:
@@ -7183,7 +7228,7 @@ components:
       enum:
         - subscribe
         - unsubscribe
-      title: Subscription List action
+      title: Subscription list action
       type: string
       x-schema-tag: Subscription Lists
     subscriptionListObject:
@@ -7200,7 +7245,7 @@ components:
       required:
         - action
         - list_id
-      title: Subscription List object
+      title: Subscription list object
       x-schema-tag: Subscription Lists
     subscriptionListResultObject:
       description: Defines the subscription list result object.
@@ -7233,7 +7278,7 @@ components:
         - list_id
         - scopes
         - default_opted_in
-      title: Subscription List result object
+      title: Subscription list result object
       type: object
       x-schema-tag: Subscription Lists
     subscription_list:
@@ -7247,26 +7292,28 @@ components:
             - $ref: '#/components/schemas/subscriptionListArray'
       required:
         - subscription_list
-      title: Subscription List selector
+      title: Subscription list selector
       type: object
       x-inline-component: true
     subscription_lists:
-      description: An array of Subscription List objects.
+      description: An array of subscription list objects.
       items:
         $ref: '#/components/schemas/subscriptionListObject'
-      title: Subscription Lists
+      title: Subscription lists
       type: array
       x-inline-component: true
     suppression_state:
       description: |
-        If an email channel is suppressed, the reason for its suppression. Email
-        channels with any suppression state set will not have any delivery to
-        them fulfilled. If a more specific reason is not known, use `imported`.
+        The reason an email or SMS channel is suppressed. Suppressed channels don't receive messages.
+
+        - `spam_complaint`, `commercial_spam_complaint`, `bounce`, and `imported` are email only. See [Email Bounce Handling and Suppression](/developer/api-integrations/email/bounce-handling/).
+        - `carrier_deactivation` is SMS only. It is set when Airship's nightly carrier deactivation scan suppresses the channel. See [Suppression](/developer/api-integrations/sms/opt-in-out-handling#suppression) in *SMS Opt-In/Out Handling*.
       enum:
         - spam_complaint
         - commercial_spam_complaint
         - bounce
         - imported
+        - carrier_deactivation
       type: string
       x-inline-component: true
     tag:
@@ -7340,10 +7387,9 @@ components:
         $ref: '#/components/schemas/tagArray'
         title: Tag group name
       description: |-
-        Tags belong to tag groups. Tag groups appear within the `tags` object for a named user or the `tag_groups` object for a channel. See also [Device Properties](/reference/data-collection/device-properties/)
-        ``ua_`` is a reserved prefix for Airship-specific tag groups.
+        Tag groups appear within the `tags` object for a named user or the `tag_groups` object for a channel.
 
-        A tag group has two parts: a "name" string of 1-128 characters, and an array of tags, containing 0-100 tags. Each tag in the array is also a string consisting of 1-128 characters.
+        `ua_` is a reserved prefix for Airship-specific tag groups. See [Device property tags](/reference/data-collection/device-property-tags/).
       example:
         - sports fan:
             - Federer fan
@@ -7588,7 +7634,7 @@ components:
       type: object
       x-schema-tag: Personalization template objects
     template_id:
-      description: The ID of a template created in the Airship dashboard or the API. See [Using content templates](/guides/personalization/content/templates/#using-content-templates) for more information.
+      description: The ID of a template created in the Airship dashboard or the API. See [Using templates](/guides/personalization/content/templates/#using-templates) for more information.
       format: uuid
       type: string
       x-inline-component: true
@@ -7951,7 +7997,7 @@ components:
           type: string
         property:
           description: |
-            The custom event property on which to filter for inclusion in the audience.  See [Event Segmentation Properties](/guides/audience/events/about/#events-reference) for properties reference.
+            The custom event property on which to filter for inclusion in the audience. See the [Events Reference](/reference/data-collection/events/).
           type: string
         relative_to:
           description: Used only for date values.
@@ -7988,7 +8034,7 @@ components:
       type: http
       x-display-name: Basic Auth (Master)
     basicOauth:
-      description: Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/ua/operations/oauth/).
+      description: Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/ua/operations/oauth/).
       scheme: basic
       type: http
       x-display-name: Basic Auth (OAuth)
@@ -8408,18 +8454,20 @@ paths:
         | Named user       | `named_user`                                                                           |
         | Web              | `channel_id`                                                                           |
         | Email            | `email_address`                                                                        |
-        | Open Channel     | `channel_id`                                                                           |
+        | Open channel     | `channel_id`                                                                           |
         | SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li>`sms_sender` (numeric, e.g., `1234`)</li></ul> |
         | MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric, e.g., `1234`)</li></ul> |
 
-        Optional Fields: Opt-in dates can optionally be set for new channels
-        when the identifier is an `email_address` or `msisdn`.
+        Optional Fields: Opt-in and opt-out dates, tracking status, suppression state, and time zone can optionally be set for new or existing channels when the identifier is an `email_address` or `msisdn`.
 
         | Target type     | Optional column headers                                                                  |
         |-----------------|------------------------------------------------------------------------------------------|
         | SMS             | `ua_opted_in` (UTC Timestamp)                                                          |
         | MMS             | `ua_opted_in` (UTC Timestamp)                                                          |
-        | Email           | <ul><li>`ua_transactional_opted_in` (UTC Timestamp) </li><li> `ua_commercial_opted_in` (UTC Timestamp)</li></ul> |
+        | Email           | <ul><li>`ua_commercial_opted_in` or `ua_commercial_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_transactional_opted_in` or `ua_transactional_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_open_tracking_opted_in` or `ua_open_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_click_tracking_opted_in` or `ua_click_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_email_suppression_state` (`BOUNCE`, `SPAM_COMPLAINT`, `COMMERCIAL_SPAM_COMPLAINT`, or `IMPORTED`)</li><li>`timezone` (IANA time zone database value, for example, `America/Los_Angeles`)</li></ul> |
+
+        <sup>1</sup> Opt-in and opt-out dates are mutually exclusive. Providing both in the same row is invalid.<br>
+        <sup>2</sup> By default, new channels are opted in to open and click tracking. Opt out by setting an opt-out date. Opt back in with an opt-in date that is newer than the opt-out date. Providing both dates in the same row is invalid.
       operationId: uploadAttributeList
       requestBody:
         content:
@@ -8593,16 +8641,16 @@ paths:
       description: |
         Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:
         - Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)
-        - Email addresses, phone numbers, or Open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)
+        - Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)
 
-        See [Bulk sending](/guides/audience/segmentation/bulk-sending/) for CSV formatting requirements.
+        See [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.
       operationId: bulkUploadCreateAndSendPlatform
       requestBody:
         content:
           text/csv:
             schema:
               description: |
-                A CSV of Channel IDs, email addresses, MSISDNs, or Open channel addresses. See [Bulk sending](/guides/audience/segmentation/bulk-sending/) for CSV formatting requirements.
+                A CSV of channel IDs, email addresses, MSISDNs, or open channel addresses. See [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.
               type: string
         required: true
       responses:
@@ -8849,7 +8897,7 @@ paths:
       summary: Register email channel
       tags:
         - Email
-      x-note: Channel creation is asynchronous, so when associating a newly created channel, both a Channel ID and a device type are required to prevent "channel does not exist" errors.
+      x-note: Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
   /api/channels/email/custom-unsubscribe:
     get:
       description: |-
@@ -9212,7 +9260,7 @@ paths:
         The `opt_in` property is always set to true for an email channel, so it should be ignored.
     put:
       description: |
-        Update an email channel. You can use this endpoint to update the subscription/unsubscription values.
+        Update an email channel's opt-in and opt-out values for commercial email, transactional email, and open and click tracking.
       operationId: updateEmailChannel
       parameters:
         - description: The email `channel_id` you want to modify.
@@ -9474,7 +9522,7 @@ paths:
   /api/channels/open/uninstall:
     post:
       description: |
-        Uninstall a channel needing to know its Channel ID. You cannot send notifications to, or get channel information for, an uninstalled channel.
+        Uninstall a channel needing to know its channel ID. You cannot send notifications to, or get channel information for, an uninstalled channel.
       operationId: uninstallOpenChannels
       requestBody:
         content:
@@ -9966,7 +10014,7 @@ paths:
   /api/channels/subscription_lists:
     post:
       description: |
-        Subscribe or unsubscribe channels to/from Subscription Lists.
+        Subscribe or unsubscribe channels to/from subscription lists.
       operationId: modifyChannelSubscriptions
       requestBody:
         content:
@@ -10008,7 +10056,7 @@ paths:
       summary: Subscribe or unsubscribe channels to/from subscription lists
       tags:
         - Channels
-      x-important: You must first [create a subscription list in the dashboard](/guides/audience/segmentation/audience-lists/subscription/#creating-a-list), then you can refer to its ID when subscribing users. When subscribing users, if the list has not already been created in the dashboard, then the list will be created at the same time but will not be accessible from the dashboard; the list will available for API use only.
+      x-important: You must first [create a subscription list in the dashboard](/guides/audience/audience-lists/subscription/), then you can refer to its ID when subscribing users. When subscribing users, if the list has not already been created in the dashboard, then the list will be created at the same time but will not be accessible from the dashboard; the list will available for API use only.
       x-note: |
         If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list. Otherwise, use the [Scoped named user batch operations endpoint](/developer/rest-api/ua/operations/named-users/#performnameduserscopedbatchoperations) to do so.
   /api/channels/tags:
@@ -10109,7 +10157,7 @@ paths:
         Uninstalls a channel, removing it and all accompanying analytic data (including Performance Analytics) from Airship systems in accordance with data privacy law compliance.
 
         Uninstallation is handled automatically by the Airship SDK and push systems. If a user decides to opt in to communications again (either by using your app or other user preferences), they will create a new channel and a new set of analytic data.
-        The value of a Channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new Channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.
+        The value of a channel ID may be the same as before however none of the associated metadata will persist when a user opts in again. A new channel ID will be created if the user clears their browser’s cookies and data, deletes and reinstalls the app, etc.
 
         See [Individual Data Privacy Rights Under Data Privacy Laws](/guides/audience/privacy/individual-data-privacy/) for more information about data privacy law compliance.
       operationId: uninstallChannels
@@ -10123,10 +10171,10 @@ paths:
                 device_type: android
             schema:
               items:
-                description: Specifies the Channel ID and device type you want to uninstall.
+                description: Specifies the channel ID and device type you want to uninstall.
                 properties:
                   channel_id:
-                    description: The Channel ID.
+                    description: The channel ID.
                     example: bd36e8c7-5a73-47c0-9716-99fd3d4197d5
                     type: string
                   device_type:
@@ -10222,7 +10270,7 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/channelIdContactIdAssociation'
                 - $ref: '#/components/schemas/emailAddressContactIdAssociation'
-        description: Contact association requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 Channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a Channel ID and a device type are required to prevent "channel does not exist" errors.
+        description: Contact association requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
         required: true
       responses:
         '200':
@@ -10302,7 +10350,7 @@ paths:
         supports an `audience` object in the request body.
   /api/contacts/disassociate/{contact_id}:
     post:
-      description: Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or Channel ID.
+      description: Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or channel ID.
       operationId: disassociateContact
       parameters:
         - description: The contact ID to disassociate from a channel.
@@ -10318,7 +10366,7 @@ paths:
             schema:
               properties:
                 channel_id:
-                  description: The Channel ID to disassociate from the contact.
+                  description: The channel ID to disassociate from the contact.
                   example: '{{channel_id}}'
                   format: uuid
                   type: string
@@ -10356,7 +10404,7 @@ paths:
               schema:
                 properties:
                   channel_id:
-                    description: Identifies the existing unique Channel ID.
+                    description: Identifies the existing unique channel ID.
                     example: ef625038-70a3-41f1-826f-57bc11dd625a
                     format: uuid
                     type: string
@@ -10384,10 +10432,10 @@ paths:
   /api/contacts/lookup/channel/{channel_id}:
     get:
       description: |
-        Looks up a contact ID for the given Channel ID.
+        Looks up a contact ID for the given channel ID.
       operationId: getContactIdFromChannelId
       parameters:
-        - description: The Channel ID for which to retrieve the associated contact ID.
+        - description: The channel ID for which to retrieve the associated contact ID.
           in: path
           name: channel_id
           required: true
@@ -10416,7 +10464,7 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - cnt
-      summary: Look up contact ID by Channel ID
+      summary: Look up contact ID by channel ID
       tags:
         - Contacts
   /api/contacts/lookup/named_user/{named_user_id}:
@@ -10521,7 +10569,7 @@ paths:
         If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.
   /api/contacts/tags/:
     post:
-      description: Add, remove, or set tags on a Contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.
+      description: Add, remove, or set tags on a contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.
       operationId: modifyContactTags
       requestBody:
         content:
@@ -10970,14 +11018,14 @@ paths:
   /api/create-and-send:
     post:
       description: |+
-        Send messages to email addresses, MSISDNs, or Open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:
-        - `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or Open channel addresses directly in the request.
+        Send messages to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:
+        - `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.
 
         - `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.
 
         Existing channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.
 
-        Note: This endpoint also accepts Channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).
+        Note: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).
 
       operationId: createAndSend
       requestBody:
@@ -11093,7 +11141,7 @@ paths:
       - $ref: '#/components/parameters/appKeyHeader'
     post:
       description: |
-        Submit an externally-generated custom event, associated with a Channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Sequences and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).
+        Submit an externally-generated custom event, associated with a channel ID or named user, to Airship. You can use these events as custom event triggers for Automation or Sequences and can use handlebars to personalize messages using custom event properties (information in the `body.properties` object).
       operationId: addCustomEvents
       requestBody:
         content:
@@ -11953,7 +12001,7 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/channelIdNamedUserAssociation'
                 - $ref: '#/components/schemas/emailAddressNamedUserAssociation'
-        description: Named user association requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 Channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a Channel ID and a device type are required to prevent "channel does not exist" errors.
+        description: Named user association requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
         required: true
       responses:
         '200':
@@ -14626,7 +14674,7 @@ paths:
       description: |
         Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:
 
-        - `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or Open channel addresses directly in the request.
+        - `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.
 
 
         - `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.
@@ -14635,7 +14683,7 @@ paths:
         Existing channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.
 
 
-        Note: This endpoint also accepts Channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).
+        Note: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).
       operationId: scheduleCreateAndSendOperations
       requestBody:
         content:
@@ -15533,7 +15581,7 @@ paths:
         | Target type      | Required column headers                                                                  |
         |------------------|------------------------------------------------------------------------------------------|
         | Web              | `channel_id`                                                                           |
-        | Open Channel     | `channel_id`                                                                           |
+        | Open channel     | `channel_id`                                                                           |
         | iOS              | `channel_id`                                                                           |
         | Android          | `channel_id`                                                                           |
         | Named user       | `named_user`                                                                           |
@@ -15541,13 +15589,16 @@ paths:
         | SMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |
         | MMS              | <ul><li>`msisdn` (numeric and no leading 0) </li><li> `sms_sender` (numeric)</li></ul> |
 
-        Optional Fields: Opt-in dates can optionally be set for new channels
-        when the identifier is an `email_address` or `msisdn`.
+        Optional Fields: Opt-in and opt-out dates, tracking status, suppression state, and time zone can optionally be set for new or existing channels when the identifier is an `email_address` or `msisdn`.
+
         | Target type     | Optional column headers                                                                  |
         |-----------------|------------------------------------------------------------------------------------------|
         | SMS             | `ua_opted_in` (UTC Timestamp)                                                          |
         | MMS             | `ua_opted_in` (UTC Timestamp)                                                          |
-        | Email           | <ul><li>`ua_transactional_opted_in` (UTC Timestamp) </li><li> `ua_commercial_opted_in` (UTC Timestamp)</li></ul> |
+        | Email           | <ul><li>`ua_commercial_opted_in` or `ua_commercial_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_transactional_opted_in` or `ua_transactional_opted_out` (UTC Timestamp)<sup>1</sup></li><li>`ua_open_tracking_opted_in` or `ua_open_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_click_tracking_opted_in` or `ua_click_tracking_opted_out` (UTC Timestamp)<sup>2</sup></li><li>`ua_email_suppression_state` (`BOUNCE`, `SPAM_COMPLAINT`, `COMMERCIAL_SPAM_COMPLAINT`, or `IMPORTED`)</li><li>`timezone` (IANA time zone database value, for example, `America/Los_Angeles`)</li></ul> |
+
+        <sup>1</sup> Opt-in and opt-out dates are mutually exclusive. Providing both in the same row is invalid.<br>
+        <sup>2</sup> By default, new channels are opted in to open and click tracking. Opt out by setting an opt-out date. Opt back in with an opt-in date that is newer than the opt-out date. Providing both dates in the same row is invalid.
       operationId: uploadTagList
       requestBody:
         content:
@@ -16138,33 +16189,79 @@ paths:
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
   /api/user/messages/batch-delete:
     post:
-      description: |
-        Deletes multiple Message Center messages (up to 50 messages per request) completely, removing them from every user’s inbox. This is an asynchronous call; a success response means that the deletion has been queued for processing.
+      description: |-
+        Deletes multiple Message Center messages completely, removing them from every user's inbox. You can provide up to 50 IDs in a request. This is an asynchronous call. A success response means that the deletion has been queued for processing.
 
-        It is not possible to delete Message Center messages generated by an automation, a recurring message, or a Sequence.
+        When providing a group ID, only messages delivered by the time this request is made will be deleted. Messages that are delivered after this request, such as by an ongoing automation, will continue to be available.
       operationId: batchDeleteMessages
       requestBody:
         content:
           application/json:
             schema:
-              description: An array of message IDs, each uniquely identifying a Message Center message.
-              properties:
-                message_ids:
-                  description: Array of Message IDs.
-                  items:
-                    maxLength: 128
-                    minLength: 1
-                    type: string
-                  maxItems: 50
-                  minItems: 1
-                  type: array
-              required:
-                - message_ids
-              type: object
-        description: A request body containing an array of message IDs to be deleted.
+              oneOf:
+                - properties:
+                    message_ids:
+                      description: Array of `message_id` or `push_id` values.
+                      items:
+                        description: A `push_id` or `message_id`.
+                        type: string
+                      maxItems: 50
+                      minItems: 1
+                      type: array
+                  required:
+                    - message_ids
+                  title: Delete by message IDs
+                  type: object
+                - properties:
+                    group_ids:
+                      description: Array of `group_id` values.
+                      items:
+                        format: uuid
+                        type: string
+                      maxItems: 50
+                      minItems: 1
+                      type: array
+                  required:
+                    - group_ids
+                  title: Delete by group IDs
+                  type: object
+        description: An array of message IDs or group IDs to delete. Provide either `message_ids` or `group_ids`, but not both.
       responses:
         '202':
-          $ref: '#/components/responses/202'
+          content:
+            application/vnd.urbanairship+json; version=3:
+              schema:
+                properties:
+                  deleted_message_ids:
+                    description: Message IDs queued for deletion. Populated when the request uses `message_ids`. Always an empty array when the request uses `group_ids`.
+                    items:
+                      maxLength: 128
+                      minLength: 1
+                      type: string
+                    type: array
+                  errors:
+                    description: Errors for individual message IDs in the request. An empty array when all IDs were accepted. Always an empty array when the request uses `group_ids`.
+                    items:
+                      properties:
+                        error_code:
+                          type: integer
+                        error_message:
+                          type: string
+                        message_id:
+                          maxLength: 128
+                          minLength: 1
+                          type: string
+                      required:
+                        - message_id
+                        - error_message
+                        - error_code
+                      type: object
+                    type: array
+                required:
+                  - deleted_message_ids
+                  - errors
+                type: object
+          description: The deletion request has been accepted for processing.
         '404':
           $ref: '#/components/responses/404'
       security:
@@ -16174,20 +16271,19 @@ paths:
         - Push
   /api/user/messages/{push_id}:
     delete:
-      description: |
-        Delete a Message Center message completely, removing it from every user’s inbox. This is an asynchronous call; a success response means that the deletion has been queued for processing.
+      description: |-
+        Delete a Message Center message completely, removing it from every user's inbox. This is an asynchronous call. A success response means that the deletion has been queued for processing.
 
         This delete call will work with either the `message_id` or the `push_id` of the accompanying push notification.
 
-        This endpoint will not work with a `group_id` from an automated message or a push to local time delivery. To delete a rich message that was part of an automated or local time delivery, you must use the relevant `push_id` from the operation.
+        This endpoint will not work with a group ID from an automated message or a push to local time delivery. To delete a Message Center message that was part of an automated or local time delivery, you can provide a group ID to the  [batch-delete](/developer/rest-api/ua/operations/push/#batchdeletemessages) endpoint.
       operationId: deleteMessage
       parameters:
-        - description: The `push_id` or `message_id` of the Rich Message you want to delete from users` inboxes.
+        - description: The `push_id` or `message_id` of the Message Center message you want to delete from users' inboxes.
           in: path
           name: push_id
           required: true
           schema:
-            format: uuid
             type: string
       responses:
         '202':
@@ -16199,11 +16295,11 @@ paths:
       summary: Delete message from inbox
       tags:
         - Push
-      x-note: For time-sensitive messages, consider including an `expiry` time as detailed in the [In-app message object](/developer/rest-api/ua/schemas/others/#inappobject). Setting an `expiry` value eliminates the need to manually remove messages.
+      x-note: For time-sensitive messages, set an `expiry` on the [In-app message object](/developer/rest-api/ua/schemas/push/#inappobject) so you don't have to delete them manually.
   /token:
     post:
       description: |-
-        Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/getting-started/developers/api-security/#oauth-20) in the *Airship API Security* documentation.
+        Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/ua/api-security/#oauth-20) in the *Airship API Security* documentation.
 
         Use `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.
       operationId: requestOauthToken
@@ -16360,7 +16456,7 @@ tags:
     name: Channels
     x-card-description: Manage app and web channels
   - description: |-
-      Open Channels are custom communication channels that you can configure for messaging, using the same segmentation and scheduling tools available on natively-supported platforms (iOS, Android, etc.). With Open Channels, you define a new open platform, e.g., SMS, Slack, Acme™ Smart Toasters, and register the new platform with Airship.
+      Open channels are custom communication channels that you can configure for messaging, using the same segmentation and scheduling tools available on natively-supported platforms (iOS, Android, etc.). With open channels, you define a new open platform, e.g., SMS, Slack, Acme™ Smart Toasters, and register the new platform with Airship.
 
         If you are sending through the [Push API](/developer/rest-api/ua/operations/push/), platform overrides for open platforms are covered in [Open Channel Overrides](/developer/rest-api/ua/schemas/platform-overrides/#openchanneloverrideobject). For open channel lookup, use the [Channel Lookup endpoint](/developer/rest-api/ua/operations/channels/#getchannel).
     name: Open Channels
@@ -16371,11 +16467,11 @@ tags:
   - description: Register and manage SMS channels. See [SMS Platform Information](/developer/api-integrations/sms/) to get started with SMS notifications.
     name: SMS
     x-card-description: Register and manage SMS channels
-  - description: A named user is a proprietary identifier that maps customer-chosen IDs, e.g., CRM data, to Channels. It is useful to think of a named user as an individual consumer who might have more than one mobile device registered with your app. For example, named user "john_doe_123" might have a personal Android phone and an iPad, on both of which he has opted in for push notifications. If you want to reach John on both devices, associate the Channel (device) identifiers for each device to the named user "john_doe_123," and push to the named user. Notifications will then fan out to each associated device.
+  - description: A named user is a proprietary identifier that maps customer-chosen IDs, e.g., CRM data, to channels. It is useful to think of a named user as an individual consumer who might have more than one mobile device registered with your app. For example, named user "john_doe_123" might have a personal Android phone and an iPad, on both of which he has opted in for push notifications. If you want to reach John on both devices, associate the channel (device) identifiers for each device to the named user "john_doe_123," and push to the named user. Notifications will then fan out to each associated device.
     name: Named Users
     x-card-description: Map user IDs to channels
   - description: |
-      Operations to assign or unassign tags for Channels and named users. Tags belong to tag groups and can help you organize channels using identifiers relevant to your operations. See the linked for information about, and strategies for using, tag groups.
+      Operations to assign or unassign tags for channels and named users. Tags belong to tag groups and can help you organize channels using identifiers relevant to your operations. See the linked for information about, and strategies for using, tag groups.
     name: Tags
     x-card-description: Assign and manage tags
     x-note: If you previously used the `/api/tags` endpoint to set tags, it is strongly recommended that you transition to the endpoints and methods specified in this document.
@@ -16387,7 +16483,7 @@ tags:
     x-card-description: Set attributes in bulk by CSV upload
     x-note: To set JSON attributes, use the [Set or remove attributes on channels](/developer/rest-api/ua/operations/channels/#modifychannelattributes) or [Set or remove attributes on named users](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint, or the Airship SDKs. For more information, see [Setting and removing JSON attributes](/guides/audience/attributes/setting/#setting-and-removing-json-attributes).
   - description: |-
-      With the Static List API endpoint, you can target and manage lists of devices that are defined in systems outside of Airship. Any list or grouping of devices for which the canonical source of data about the members is elsewhere is a good candidate for Static Lists, e.g., members of a customer loyalty program. In the dashboard, they are referred to as [Uploaded Lists](/guides/audience/segmentation/audience-lists/uploaded/).
+      With the Static List API endpoint, you can target and manage lists of devices that are defined in systems outside of Airship. Any list or grouping of devices for which the canonical source of data about the members is elsewhere is a good candidate for Static Lists, e.g., members of a customer loyalty program. In the dashboard, they are referred to as [uploaded lists](/guides/audience/audience-lists/uploaded/).
 
       Airship automatically deletes a Static list and all its versions after 90 days of inactivity. Timestamps used to calculate the 90-day period are the creation date, when updating list contents or metadata, and when sending a message (pushing) to the list. The creation date is the initial day one of the 90-day period. Each instance of updating or sending to the list resets the timestamp to day one.
 
@@ -16397,16 +16493,16 @@ tags:
   - description: |
       Target recipients of a single channel type by providing audience identifiers at send time. Bulk sending supports two methods:
 
-      * **Upload and Send** targets existing channels by Channel ID across app, web, email, SMS, and Open channels. Upload a CSV of Channel IDs to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush) endpoint.
+      * **Upload and Send** targets existing channels by channel ID across app, web, email, SMS, and open channels. Upload a CSV of channel IDs to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush) endpoint.
 
-      * **Create and Send** sends to email addresses, MSISDNs, or Open channel addresses. Unknown identifiers are registered as new channels.
+      * **Create and Send** sends to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels.
 
-        * For smaller audiences, use the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoints to provide email addresses, MSISDNs, or Open channel addresses in an array.
+        * For smaller audiences, use the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoints to provide email addresses, MSISDNs, or open channel addresses in an array.
 
         * For larger audiences, upload identifiers in CSV format to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoint.
 
 
-      See the [Bulk sending](/guides/audience/segmentation/bulk-sending/) guide for more information.
+      See the [Bulk sending](/guides/messaging/bulk-sending/) guide for more information.
     name: Bulk Sending
     x-card-description: Send to audiences via CSV upload
   - description: Report API endpoints let you retrieve information about push notifications that you have sent.
@@ -16494,7 +16590,7 @@ x-schema-tags:
     x-card-description: OAuth scopes and authorization
   - null
   - description: |
-      A named user is a proprietary identifier that maps customer-chosen IDs, e.g., CRM data, to Channels. Schemas for managing named users, their associations, and updates.
+      A named user is a proprietary identifier that maps customer-chosen IDs, e.g., CRM data, to channels. Schemas for managing named users, their associations, and updates.
     name: Named User
     x-card-description: Named user data formats
   - description: |
@@ -16502,7 +16598,7 @@ x-schema-tags:
     name: Bulk sending
     x-card-description: Bulk sending data formats
   - description: |
-      Subscription Lists are lists of channels that can be used to target messages to specific groups of users.
+      Subscription lists are lists of channels that can be used to target messages to specific groups of users.
     name: Subscription Lists
     x-card-description: Manage subscription lists
   - description: |

@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/audience/segmentation/ban-lists/).\n",
+  "description": "Occurs when an In-App Automation or Scene is not displayed on a device because the user was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n",
   "properties": {
     "body": {
       "properties": {
@@ -95,7 +95,7 @@
           "type": "object"
         },
         "type": {
-          "description": "Indicates that the in-app message was not displayed on a device because the channel or named user was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or named user is on a project's [ban list](/guides/audience/segmentation/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a ban list occurs.",
+          "description": "Indicates that the in-app message was not displayed on a device because the channel or named user was excluded from the push. The only possible value is \n`AUDIENCE_CHECK_EXCLUDED`, which indicates that the message was not displayed because the channel or named user is on a project's [ban list](/guides/messaging/messages/delivery/ban-lists/). This is also reported when a 400- or 500-level error resolving the user's status on a ban list occurs.",
           "enum": [
             "AUDIENCE_CHECK_EXCLUDED"
           ],

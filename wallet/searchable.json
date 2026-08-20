@@ -99,11 +99,11 @@
       ],
       "title": "Basic Auth (OAuth)",
       "schemeType": "http",
-      "description": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/).",
+      "description": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/).",
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/)."
+          "text": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/)."
         }
       ],
       "tags": [],
@@ -121,11 +121,11 @@
       ],
       "title": "Basic Auth",
       "schemeType": "http",
-      "description": "All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy your Project Key and Secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.\n",
+      "description": "All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your project key and project secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy your project key and secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.\n",
       "contentBlocks": [
         {
           "type": "description",
-          "text": "All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy your Project Key and Secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.\n"
+          "text": "All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your project key and project secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy your project key and secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.\n"
         }
       ],
       "tags": [],
@@ -166,7 +166,7 @@
       "title": "Create Adaptive Link",
       "method": "POST",
       "endpoint": "/links/adaptive",
-      "description": "If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.\n\nTemplates can be provided either implicitly as part of Dynamic Link objects or explicitly with IDs. So either one or both of iosPassLinkId and androidPassLinkId must be present, or payload must be present along with one or both of iosTemplateId and androidTemplateId.",
+      "description": "If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.\n\nTemplate IDs must be provided in the request payload. Every request requires at least one template identifier: `iosTemplateId`, `androidTemplateId`, or both.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -179,7 +179,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.\n\nTemplates can be provided either implicitly as part of Dynamic Link objects or explicitly with IDs. So either one or both of iosPassLinkId and androidPassLinkId must be present, or payload must be present along with one or both of iosTemplateId and androidTemplateId."
+          "text": "If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.\n\nTemplate IDs must be provided in the request payload. Every request requires at least one template identifier: `iosTemplateId`, `androidTemplateId`, or both."
         },
         {
           "type": "parameter",
@@ -201,7 +201,7 @@
         {
           "type": "response",
           "statusCode": "404",
-          "description": "Could not find template(s), or could not find or create Dynamic Link object(s).               \n"
+          "description": "Could not find template(s).               \n"
         }
       ]
     },
@@ -1019,7 +1019,7 @@
         {
           "type": "response",
           "statusCode": "404",
-          "description": "Could not find templates or Dynamic Link object(s).      \n"
+          "description": "Could not find template, project, or adaptive link.      \n"
         }
       ]
     },
@@ -1086,7 +1086,7 @@
         {
           "type": "response",
           "statusCode": "404",
-          "description": "Could not find or create Dynamic Link object(s).      \n"
+          "description": "Could not find template or project.\n"
         }
       ]
     },
@@ -1153,7 +1153,7 @@
         {
           "type": "response",
           "statusCode": "404",
-          "description": "Could not find project, or could not find or create Dynamic Link object(s).      \n"
+          "description": "Could not find project.      \n"
         }
       ]
     },
@@ -4670,7 +4670,7 @@
       "title": "Request token",
       "method": "POST",
       "endpoint": "/token",
-      "description": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.",
+      "description": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -4682,7 +4682,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token."
+          "text": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token."
         },
         {
           "type": "parameter",
@@ -4985,12 +4985,12 @@
       "anchor": "createdynamiclink",
       "headings": [
         "Passes",
-        "Generates a pass"
+        "Generates a pass dynamic link"
       ],
-      "title": "Generates a pass",
+      "title": "Generates a pass dynamic link",
       "method": "POST",
       "endpoint": "/pass/{id}/dynamic",
-      "description": "Generates a pass with an optional expiration date and serial number. You can also assign an external ID to passes generated from this endpoint.",
+      "description": "Generates a pass link containing the pass serial number with an optional expiration date. You can also assign an external ID to passes generated from this endpoint.",
       "isDeprecated": false,
       "isInternal": false,
       "tags": [
@@ -5003,7 +5003,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Generates a pass with an optional expiration date and serial number. You can also assign an external ID to passes generated from this endpoint."
+          "text": "Generates a pass link containing the pass serial number with an optional expiration date. You can also assign an external ID to passes generated from this endpoint."
         },
         {
           "type": "parameter",

@@ -183,10 +183,6 @@ components:
       allOf:
         - $ref: '#/components/schemas/adaptiveLinkShared'
         - properties:
-            androidPassLinkId:
-              description: A dynamic link for Android passes.
-              format: uuid
-              type: string
             expirationDate:
               description: |
                 When set, indicates the date this adaptive link expires. An expired adaptive link will return a JSON object with an error message instead of a pass.
@@ -206,10 +202,6 @@ components:
 
                 This limit only affects the adaptive link itself, not actual Apple pass files. If you want to prevent users from installing shared passes on Apple devices, you should also set `sharingStatus` to prohibit sharing.
               type: integer
-            iosPassLinkId:
-              description: A dynamic link for iOS passes.
-              format: uuid
-              type: string
             locationRadius:
               description: |
                 Determines the range, in miles, that a pass holder can be from a location
@@ -267,10 +259,6 @@ components:
                 A unique identifier for the adaptive link. Use this value to reference the adaptive link in future operations.
               readOnly: true
               type: integer
-            androidPassLinkId:
-              description: A dynamic link for Android passes. This field cannot be provided for `links/adaptive/multiple` requests, nor is it provided in those responses (e.g., boarding passes, event tickets, etc.).
-              format: uuid
-              type: string
             androidUrl:
               description: A pass URL specific to Android users.
               format: url
@@ -282,10 +270,6 @@ components:
               description: |
                 The date this adaptive link expires. This property appears in the response only if it has been explicitly set with a previous API request. Cannot be set to a date more than 1,080 days in the future.
               format: date
-              type: string
-            iosPassLinkId:
-              description: A dynamic link for iOS passes. This field cannot be provided for `links/adaptive/multiple` requests, nor is it provided in those responses (e.g., boarding passes, event tickets, etc.).
-              format: uuid
               type: string
             iosUrl:
               description: A pass URL specific to iOS users.
@@ -3769,15 +3753,15 @@ components:
       x-inline-component: true
   securitySchemes:
     basicOauth:
-      description: Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/).
+      description: Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/).
       scheme: basic
       type: http
       x-display-name: Basic Auth (OAuth)
     httpBasic:
       description: |
-        All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.
+        All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your project key and project secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.
                 
-          You can copy your Project Key and Secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.
+          You can copy your project key and secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.
       scheme: basic
       type: http
       x-display-name: Basic Auth
@@ -5015,7 +4999,7 @@ paths:
       description: |-
         If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.
 
-        Templates can be provided either implicitly as part of Dynamic Link objects or explicitly with IDs. So either one or both of iosPassLinkId and androidPassLinkId must be present, or payload must be present along with one or both of iosTemplateId and androidTemplateId.
+        Template IDs must be provided in the request payload. Every request requires at least one template identifier: `iosTemplateId`, `androidTemplateId`, or both.
       operationId: createAdaptiveLink
       requestBody:
         content:
@@ -5031,7 +5015,7 @@ paths:
           description: A successful request results in an adaptive link.
         '404':
           description: |
-            Could not find template(s), or could not find or create Dynamic Link object(s).               
+            Could not find template(s).               
       security:
         - httpBasic: []
         - oauth2Token:
@@ -5149,7 +5133,7 @@ paths:
           description: A successful request results in an adaptive link.
         '404':
           description: |
-            Could not find project, or could not find or create Dynamic Link object(s).      
+            Could not find project.      
       security:
         - httpBasic: []
         - oauth2Token:
@@ -5390,7 +5374,7 @@ paths:
           description: A successful request results in an adaptive link.
         '404':
           description: |
-            Could not find or create Dynamic Link object(s).      
+            Could not find template or project.
       security:
         - httpBasic: []
         - oauth2Token:
@@ -5630,7 +5614,7 @@ paths:
           description: A successful request results in an adaptive link.
         '404':
           description: |
-            Could not find templates or Dynamic Link object(s).      
+            Could not find template, project, or adaptive link.      
       security:
         - httpBasic: []
         - oauth2Token:
@@ -7295,7 +7279,7 @@ paths:
           format: date
           type: string
     post:
-      description: Generates a pass with an optional expiration date and serial number. You can also assign an external ID to passes generated from this endpoint.
+      description: Generates a pass link containing the pass serial number with an optional expiration date. You can also assign an external ID to passes generated from this endpoint.
       operationId: createDynamicLink
       requestBody:
         content:
@@ -7322,7 +7306,7 @@ paths:
         - httpBasic: []
         - oauth2Token:
             - wpas
-      summary: Generates a pass
+      summary: Generates a pass dynamic link
       tags:
         - Passes
   /pass/{passId}/download:
@@ -10216,7 +10200,7 @@ paths:
   /token:
     post:
       description: |-
-        Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.
+        Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.
 
         Use `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.
       operationId: requestOauthToken

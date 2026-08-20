@@ -77,7 +77,7 @@
           "name": "Basic Auth (OAuth)",
           "type": "http",
           "scheme": "basic",
-          "description": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth Client ID and Client Secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/).",
+          "description": "Authorization header containing the word `Basic` followed by a space and a Base64-encoded string generated from your OAuth client ID and client secret in `client_id:client_secret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`. Used only for requesting OAuth tokens. See [OAuth](/developer/rest-api/wallet/operations/oauth/).",
           "anchor": "security-basicOauth",
           "isInternal": false,
           "scopes": null,
@@ -88,7 +88,7 @@
           "name": "Basic Auth",
           "type": "http",
           "scheme": "basic",
-          "description": "All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your Project Key and Project Secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy your Project Key and Secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.\n",
+          "description": "All Wallet API operations support [basic authorization](https://en.wikipedia.org/wiki/Basic_access_authentication). The authorization header contains the word `Basic` followed by a space and a Base64-encoded string generated from your project key and project secret in `projectKey:projectSecret` format. For example, `Basic YXBwX2tleTptYXN0ZXJfc2VjcmV0`.\n        \n  You can copy your project key and secret from your wallet project. Go to **Settings**, then **API**. For TLS and cipher requirements, see [TLS and supported ciphers](#tls-and-supported-ciphers) below.\n",
           "anchor": "security-httpBasic",
           "isInternal": false,
           "scopes": null,
@@ -151,7 +151,7 @@
           "method": "POST",
           "path": "/links/adaptive",
           "anchor": "createadaptivelink",
-          "description": "If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.\n\nTemplates can be provided either implicitly as part of Dynamic Link objects or explicitly with IDs. So either one or both of iosPassLinkId and androidPassLinkId must be present, or payload must be present along with one or both of iosTemplateId and androidTemplateId.",
+          "description": "If a template for a device type is not provided, the adaptive link will not be able to create passes for that device. Visiting the adaptive link URL associated with an unsupported device will redirect to the landingPageUrl, if present.\n\nTemplate IDs must be provided in the request payload. Every request requires at least one template identifier: `iosTemplateId`, `androidTemplateId`, or both.",
           "deprecated": false,
           "isInternal": false,
           "weight": null,
@@ -219,7 +219,7 @@
             },
             {
               "statusCode": "404",
-              "description": "Could not find template(s), or could not find or create Dynamic Link object(s).               \n",
+              "description": "Could not find template(s).               \n",
               "headers": [],
               "content": []
             }
@@ -229,7 +229,7 @@
               "description": "Example request",
               "code": {
                 "HTTP": [
-                  "POST /v1/links/adaptive HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n   \"iosTemplateId\": 12345,\n   \"androidTemplateId\": 154321,\n   \"isPersonalized\": \"true\",\n   \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n   \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n   \"landingPageUrl\": \"https://example.com/landing.html\",\n   \"availablePasses\": 100000,\n   \"payload\": {}\n}\n"
+                  "POST /v1/links/adaptive HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n   \"iosTemplateId\": 12345,\n   \"androidTemplateId\": 154321,\n   \"isPersonalized\": \"true\",\n   \"landingPageUrl\": \"https://example.com/landing.html\",\n   \"availablePasses\": 100000,\n   \"payload\": {}\n}\n"
                 ]
               }
             },
@@ -237,7 +237,7 @@
               "description": "Example request with expiration date",
               "code": {
                 "HTTP": [
-                  "POST /v1/links/adaptive HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n   \"iosTemplateId\": 12345,\n   \"androidTemplateId\": 154321,\n   \"isPersonalized\": \"true\",\n   \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n   \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n   \"landingPageUrl\": \"https://example.com/landing.html\",\n   \"expirationDate\": \"2022-10-01\",\n   \"availablePasses\": 100000,\n   \"ttlInDays\": 730,\n   \"payload\": {}\n}\n"
+                  "POST /v1/links/adaptive HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n   \"iosTemplateId\": 12345,\n   \"androidTemplateId\": 154321,\n   \"isPersonalized\": \"true\",\n   \"landingPageUrl\": \"https://example.com/landing.html\",\n   \"expirationDate\": \"2022-10-01\",\n   \"availablePasses\": 100000,\n   \"ttlInDays\": 730,\n   \"payload\": {}\n}\n"
                 ]
               }
             },
@@ -253,7 +253,7 @@
               "description": "Example request with locations",
               "code": {
                 "HTTP": [
-                  "POST /v1/links/adaptive HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n  \"iosTemplateId\": 12345,\n  \"androidTemplateId\": 154321,\n  \"isPersonalized\": \"true\",\n  \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 30,\n  \"parameterEncoding\": \"base64\",\n  \"locationRadius\": 10,\n  \"maxResultLocations\": 5,\n  \"payload\": {},\n  \"locations\": [\n      {\n         \"latitude\": 45.5898,\n         \"longitude\": -122.5951,\n         \"city\": \"Portland\",\n         \"country\": \"US\",\n         \"region\": \"OR\",\n         \"regionCode\": \"97218\",\n         \"relevantText\": \"Welcome to Portland... Voodoo Donuts is only 11 miles away\",\n         \"streetAddress1\": \"7000 NE Airport Way\"\n      },\n      {\n         \"latitude\": 45.525492,\n         \"longitude\": -122.686092,\n         \"city\": \"San Francisco\",\n         \"country\": \"US\",\n         \"region\": \"CA\",\n         \"regionCode\": \"94140\",\n         \"relevantText\": \"Welcome to the Ship!\",\n         \"streetAddress1\": \"548 Market St. Suite 698370\",\n         \"streetAddress2\": \"\"\n      },\n      {\n         \"latitude\": 45.5205,\n         \"longitude\": -122.6788,\n         \"relevantText\": \"See you at dinner tonight...or did you already fill up on donuts?\"\n      }\n]\n}\n"
+                  "POST /v1/links/adaptive HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n  \"iosTemplateId\": 12345,\n  \"androidTemplateId\": 154321,\n  \"isPersonalized\": \"true\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 30,\n  \"parameterEncoding\": \"base64\",\n  \"locationRadius\": 10,\n  \"maxResultLocations\": 5,\n  \"payload\": {},\n  \"locations\": [\n      {\n         \"latitude\": 45.5898,\n         \"longitude\": -122.5951,\n         \"city\": \"Portland\",\n         \"country\": \"US\",\n         \"region\": \"OR\",\n         \"regionCode\": \"97218\",\n         \"relevantText\": \"Welcome to Portland... Voodoo Donuts is only 11 miles away\",\n         \"streetAddress1\": \"7000 NE Airport Way\"\n      },\n      {\n         \"latitude\": 45.525492,\n         \"longitude\": -122.686092,\n         \"city\": \"San Francisco\",\n         \"country\": \"US\",\n         \"region\": \"CA\",\n         \"regionCode\": \"94140\",\n         \"relevantText\": \"Welcome to the Ship!\",\n         \"streetAddress1\": \"548 Market St. Suite 698370\",\n         \"streetAddress2\": \"\"\n      },\n      {\n         \"latitude\": 45.5205,\n         \"longitude\": -122.6788,\n         \"relevantText\": \"See you at dinner tonight...or did you already fill up on donuts?\"\n      }\n]\n}\n"
                 ]
               }
             },
@@ -441,7 +441,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n\n{\n  \"links\": [\n    {\n      \"status\": 200,\n      \"adaptiveLinkId\": \"abchd345678\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId1\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"isExpired\": false,\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\",\n      \"iosPassLinkId\": \"eb94e8e0-4353-4e0b-bfe9-cfd21c52a540\",\n      \"androidPassLinkId\": \"41c1ea48-f469-4968-b610-a98629ea19bc\"\n    },\n    {\n      \"status\": 200,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"isExpired\": false,\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\",\n      \"iosPassLinkId\": \"5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b\",\n      \"androidPassLinkId\": \"c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab\"\n    },\n    {\n      \"status\": 200,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"isExpired\": false,\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\",\n      \"iosPassLinkId\": \"5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b\",\n      \"androidPassLinkId\": \"c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab\"\n    },\n  ]\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n\n{\n  \"links\": [\n    {\n      \"status\": 200,\n      \"adaptiveLinkId\": \"abchd345678\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId1\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"isExpired\": false,\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\"\n    },\n    {\n      \"status\": 200,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"isExpired\": false,\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\"\n    },\n    {\n      \"status\": 200,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"isExpired\": false,\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\"\n    },\n  ]\n}\n"
                 ]
               }
             }
@@ -3345,7 +3345,7 @@
             },
             {
               "statusCode": "404",
-              "description": "Could not find templates or Dynamic Link object(s).      \n",
+              "description": "Could not find template, project, or adaptive link.      \n",
               "headers": [],
               "content": []
             }
@@ -3490,7 +3490,7 @@
             },
             {
               "statusCode": "404",
-              "description": "Could not find or create Dynamic Link object(s).      \n",
+              "description": "Could not find template or project.\n",
               "headers": [],
               "content": []
             }
@@ -3500,7 +3500,7 @@
               "description": "Example request",
               "code": {
                 "HTTP": [
-                  "POST /v1/links/adaptive/project/12345/id/coolNewAdaptiveLink HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n    \"iosTemplateId\": 54321,\n    \"androidTemplateId\": 54322,\n    \"isPersonalized\": false,\n    \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n    \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n    \"landingPageUrl\": \"https://example.com/landing.html\",\n    \"availablePasses\": 100000,\n    \"payload\": {}\n}\n"
+                  "POST /v1/links/adaptive/project/12345/id/coolNewAdaptiveLink HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n    \"iosTemplateId\": 54321,\n    \"androidTemplateId\": 54322,\n    \"isPersonalized\": false,\n    \"landingPageUrl\": \"https://example.com/landing.html\",\n    \"availablePasses\": 100000,\n    \"payload\": {}\n}\n"
                 ]
               }
             },
@@ -3508,7 +3508,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"androidTemplateId\": 54322,\n  \"projectId\": 12345,\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n  \"status\": 200\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"androidTemplateId\": 54322,\n  \"projectId\": 12345,\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"status\": 200\n}\n"
                 ]
               }
             }
@@ -3621,7 +3621,7 @@
             },
             {
               "statusCode": "404",
-              "description": "Could not find project, or could not find or create Dynamic Link object(s).      \n",
+              "description": "Could not find project.      \n",
               "headers": [],
               "content": []
             }
@@ -3631,7 +3631,7 @@
               "description": "Example request",
               "code": {
                 "HTTP": [
-                  "POST /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n    \"iosTemplateExternalId\": \"ios123ExtId\",\n    \"androidTemplateExternalId\": \"android123ExtId\",\n    \"isPersonalized\": \"true\",\n    \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n    \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n    \"landingPageUrl\": \"https://example.com/landing.html\",\n    \"availablePasses\": 100000,\n    \"payload\": {}\n}\n"
+                  "POST /v1/links/adaptive/project/id/myExternalProject/id/coolNewAdaptiveLink HTTP/1.1\nAuthorization: Basic <authorization string>\nContent-Type: application/json\n\n{\n    \"iosTemplateExternalId\": \"ios123ExtId\",\n    \"androidTemplateExternalId\": \"android123ExtId\",\n    \"isPersonalized\": \"true\",\n    \"landingPageUrl\": \"https://example.com/landing.html\",\n    \"availablePasses\": 100000,\n    \"payload\": {}\n}\n"
                 ]
               }
             },
@@ -3639,7 +3639,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"iosTemplateExternalId\": \"ios123ExtId\",\n  \"androidTemplateId\": 54322,\n  \"androidTemplateExternalId\": \"android123ExtId\",\n  \"projectId\": 12345,\n  \"projectExternalId\": \"myExternalProject\",\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n  \"status\": 200\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"iosTemplateExternalId\": \"ios123ExtId\",\n  \"androidTemplateId\": 54322,\n  \"androidTemplateExternalId\": \"android123ExtId\",\n  \"projectId\": 12345,\n  \"projectExternalId\": \"myExternalProject\",\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"status\": 200\n}\n"
                 ]
               }
             }
@@ -3756,7 +3756,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"androidTemplateId\": 54322,\n  \"projectId\": 12345,\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n  \"status\": 200\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"androidTemplateId\": 54322,\n  \"projectId\": 12345,\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"status\": 200\n}\n"
                 ]
               }
             }
@@ -3871,7 +3871,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"iosTemplateExternalId\": \"ios123ExtId\",\n  \"androidTemplateId\": 54322,\n  \"androidTemplateExternalId\": \"android123ExtId\",\n  \"projectId\": 12345,\n  \"projectExternalId\": \"myExternalProject\",\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"androidPassLinkId\": \"19d128a6-ac7a-3c6c-2a4d-214b6bf81b21\",\n  \"status\": 200\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n  \"adaptiveLinkId\": \"1KVMz6NlFb\",\n  \"adaptiveLinkExternalId\": \"coolNewAdaptiveLink\",\n  \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb\",\n  \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/ios\",\n  \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/1KVMz6NlFb/android\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"isPersonalized\": false,\n  \"isExpired\": false,\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 730,\n  \"iosTemplateId\": 54321,\n  \"iosTemplateExternalId\": \"ios123ExtId\",\n  \"androidTemplateId\": 54322,\n  \"androidTemplateExternalId\": \"android123ExtId\",\n  \"projectId\": 12345,\n  \"projectExternalId\": \"myExternalProject\",\n  \"createdAt\": \"2019-05-28T23:55:00.000Z\",\n  \"updatedAt\": \"2019-05-31T00:59:42.000Z\",\n  \"status\": 200\n}\n"
                 ]
               }
             }
@@ -7315,7 +7315,7 @@
               "description": "Example request",
               "code": {
                 "HTTP": [
-                  "POST /v1/project/12345/settings/callback HTTP/1.1\nAuthorization: Basic <Base64 key>\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic dGVzdEB0ZXN0LmNvbTp0ZXN0\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
+                  "POST /v1/project/12345/settings/callback HTTP/1.1\nAuthorization: Basic <Base64 key>\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic <Base64 key>\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
                 ]
               }
             },
@@ -7323,7 +7323,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic dGVzdEB0ZXN0LmNvbTp0ZXN0\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic <Base64 key>\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
                 ]
               }
             }
@@ -7559,7 +7559,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic dGVzdEB0ZXN0LmNvbTp0ZXN0\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic <Base64 key>\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
                 ]
               }
             }
@@ -7790,7 +7790,7 @@
               "description": "Example request",
               "code": {
                 "HTTP": [
-                  "PUT /v1/project/12345/settings/callback HTTP/1.1\nAuthorization: Basic <Base64 key>\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic dGVzdEB0ZXN0LmNvbTp0ZXN0\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
+                  "PUT /v1/project/12345/settings/callback HTTP/1.1\nAuthorization: Basic <Base64 key>\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic <Base64 key>\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
                 ]
               }
             },
@@ -7798,7 +7798,7 @@
               "description": "Response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic dGVzdEB0ZXN0LmNvbTp0ZXN0\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json\n\n{\n   \"baseUrl\": \"https://www.remotehost.example.com/callbacks\",\n   \"headers\": {\n      \"Authorization\": \"Basic <Base64 key>\",\n      \"Content-Type\": \"application/json\"\n   }\n}\n"
                 ]
               }
             }
@@ -15684,7 +15684,7 @@
           "method": "POST",
           "path": "/token",
           "anchor": "requestoauthtoken",
-          "description": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/guides/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.",
+          "description": "Request an OAuth access token with Basic Auth or an assertion. When making a request with an assertion, do not provide the Basic Auth header. See also [OAuth 2.0](/developer/rest-api/wallet/api-security/#oauth-20) in the *Wallet API Security* documentation.\n\nUse `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when requesting an OAuth token.",
           "deprecated": false,
           "isInternal": false,
           "weight": null,
@@ -17226,11 +17226,11 @@
         {
           "id": "createDynamicLink",
           "operationId": "createDynamicLink",
-          "summary": "Generates a pass",
+          "summary": "Generates a pass dynamic link",
           "method": "POST",
           "path": "/pass/{id}/dynamic",
           "anchor": "createdynamiclink",
-          "description": "Generates a pass with an optional expiration date and serial number. You can also assign an external ID to passes generated from this endpoint.",
+          "description": "Generates a pass link containing the pass serial number with an optional expiration date. You can also assign an external ID to passes generated from this endpoint.",
           "deprecated": false,
           "isInternal": false,
           "weight": null,
@@ -39133,39 +39133,6 @@
               "enum": null,
               "properties": [
                 {
-                  "name": "androidPassLinkId",
-                  "type": "string",
-                  "itemType": null,
-                  "items": null,
-                  "required": false,
-                  "description": "A dynamic link for Android passes.",
-                  "deprecated": false,
-                  "enum": null,
-                  "example": null,
-                  "default": null,
-                  "pattern": null,
-                  "minLength": null,
-                  "maxLength": null,
-                  "format": "uuid",
-                  "minimum": null,
-                  "maximum": null,
-                  "exclusiveMinimum": null,
-                  "exclusiveMaximum": null,
-                  "multipleOf": null,
-                  "minItems": null,
-                  "maxItems": null,
-                  "uniqueItems": null,
-                  "nullable": null,
-                  "readOnly": null,
-                  "writeOnly": null,
-                  "platformSpecific": null,
-                  "schemaRef": null,
-                  "schemaRefTitle": null,
-                  "schemaRefDescription": null,
-                  "isInternal": false,
-                  "anchor": "-androidPassLinkId"
-                },
-                {
                   "name": "expirationDate",
                   "type": "string",
                   "itemType": null,
@@ -39263,39 +39230,6 @@
                   "schemaRefDescription": null,
                   "isInternal": false,
                   "anchor": "-installLimitPerPassExternalId"
-                },
-                {
-                  "name": "iosPassLinkId",
-                  "type": "string",
-                  "itemType": null,
-                  "items": null,
-                  "required": false,
-                  "description": "A dynamic link for iOS passes.",
-                  "deprecated": false,
-                  "enum": null,
-                  "example": null,
-                  "default": null,
-                  "pattern": null,
-                  "minLength": null,
-                  "maxLength": null,
-                  "format": "uuid",
-                  "minimum": null,
-                  "maximum": null,
-                  "exclusiveMinimum": null,
-                  "exclusiveMaximum": null,
-                  "multipleOf": null,
-                  "minItems": null,
-                  "maxItems": null,
-                  "uniqueItems": null,
-                  "nullable": null,
-                  "readOnly": null,
-                  "writeOnly": null,
-                  "platformSpecific": null,
-                  "schemaRef": null,
-                  "schemaRefTitle": null,
-                  "schemaRefDescription": null,
-                  "isInternal": false,
-                  "anchor": "-iosPassLinkId"
                 },
                 {
                   "name": "locationRadius",
@@ -39551,7 +39485,7 @@
               "description": "Example Adaptive Link",
               "code": {
                 "json": [
-                  "\n{\n  \"iosTemplateId\": 12345,\n  \"androidTemplateId\": 154321,\n  \"isPersonalized\": \"true\",\n  \"iosPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"androidPassLinkId\": \"44e128a5-ac7a-4c9a-be4c-224b6bf81b20\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"expirationDate\": \"2022-10-01\",\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 30,\n  \"parameterEncoding\": \"base64\",\n  \"locationRadius\": 10,\n  \"maxResultLocations\": 5,\n  \"payload\": {},\n  \"locations\": [\n      {\n         \"latitude\": 45.5898,\n         \"longitude\": -122.5951,\n         \"city\": \"Portland\",\n         \"country\": \"US\",\n         \"region\": \"OR\",\n         \"regionCode\": \"97218\",\n         \"relevantText\": \"Welcome to Portland... Voodoo Donuts is only 11 miles away\",\n         \"streetAddress1\": \"7000 NE Airport Way\"\n      },\n      {\n         \"latitude\": 45.525492,\n         \"longitude\": -122.686092,\n         \"city\": \"San Francisco\",\n         \"country\": \"US\",\n         \"region\": \"CA\",\n         \"regionCode\": \"94104\",\n         \"relevantText\": \"Welcome to the Ship!\",\n         \"streetAddress1\": \"548 Market St. Suite 698370\",\n         \"streetAddress2\": \"\"\n      },\n      {\n         \"latitude\": 45.5205,\n         \"longitude\": -122.6788,\n         \"relevantText\": \"See you at dinner tonight...or did you already fill up on donuts?\"\n      }\n    ]\n  }\n"
+                  "\n{\n  \"iosTemplateId\": 12345,\n  \"androidTemplateId\": 154321,\n  \"isPersonalized\": \"true\",\n  \"landingPageUrl\": \"https://example.com/landing.html\",\n  \"expirationDate\": \"2022-10-01\",\n  \"availablePasses\": 100000,\n  \"ttlInDays\": 30,\n  \"parameterEncoding\": \"base64\",\n  \"locationRadius\": 10,\n  \"maxResultLocations\": 5,\n  \"payload\": {},\n  \"locations\": [\n      {\n         \"latitude\": 45.5898,\n         \"longitude\": -122.5951,\n         \"city\": \"Portland\",\n         \"country\": \"US\",\n         \"region\": \"OR\",\n         \"regionCode\": \"97218\",\n         \"relevantText\": \"Welcome to Portland... Voodoo Donuts is only 11 miles away\",\n         \"streetAddress1\": \"7000 NE Airport Way\"\n      },\n      {\n         \"latitude\": 45.525492,\n         \"longitude\": -122.686092,\n         \"city\": \"San Francisco\",\n         \"country\": \"US\",\n         \"region\": \"CA\",\n         \"regionCode\": \"94104\",\n         \"relevantText\": \"Welcome to the Ship!\",\n         \"streetAddress1\": \"548 Market St. Suite 698370\",\n         \"streetAddress2\": \"\"\n      },\n      {\n         \"latitude\": 45.5205,\n         \"longitude\": -122.6788,\n         \"relevantText\": \"See you at dinner tonight...or did you already fill up on donuts?\"\n      }\n    ]\n  }\n"
                 ]
               }
             }
@@ -39885,39 +39819,6 @@
                   "anchor": "-adaptiveLinkId"
                 },
                 {
-                  "name": "androidPassLinkId",
-                  "type": "string",
-                  "itemType": null,
-                  "items": null,
-                  "required": false,
-                  "description": "A dynamic link for Android passes. This field cannot be provided for `links/adaptive/multiple` requests, nor is it provided in those responses (e.g., boarding passes, event tickets, etc.).",
-                  "deprecated": false,
-                  "enum": null,
-                  "example": null,
-                  "default": null,
-                  "pattern": null,
-                  "minLength": null,
-                  "maxLength": null,
-                  "format": "uuid",
-                  "minimum": null,
-                  "maximum": null,
-                  "exclusiveMinimum": null,
-                  "exclusiveMaximum": null,
-                  "multipleOf": null,
-                  "minItems": null,
-                  "maxItems": null,
-                  "uniqueItems": null,
-                  "nullable": null,
-                  "readOnly": null,
-                  "writeOnly": null,
-                  "platformSpecific": null,
-                  "schemaRef": null,
-                  "schemaRefTitle": null,
-                  "schemaRefDescription": null,
-                  "isInternal": false,
-                  "anchor": "-androidPassLinkId"
-                },
-                {
                   "name": "androidUrl",
                   "type": "string",
                   "itemType": null,
@@ -40015,39 +39916,6 @@
                   "schemaRefDescription": null,
                   "isInternal": false,
                   "anchor": "-expirationDate"
-                },
-                {
-                  "name": "iosPassLinkId",
-                  "type": "string",
-                  "itemType": null,
-                  "items": null,
-                  "required": false,
-                  "description": "A dynamic link for iOS passes. This field cannot be provided for `links/adaptive/multiple` requests, nor is it provided in those responses (e.g., boarding passes, event tickets, etc.).",
-                  "deprecated": false,
-                  "enum": null,
-                  "example": null,
-                  "default": null,
-                  "pattern": null,
-                  "minLength": null,
-                  "maxLength": null,
-                  "format": "uuid",
-                  "minimum": null,
-                  "maximum": null,
-                  "exclusiveMinimum": null,
-                  "exclusiveMaximum": null,
-                  "multipleOf": null,
-                  "minItems": null,
-                  "maxItems": null,
-                  "uniqueItems": null,
-                  "nullable": null,
-                  "readOnly": null,
-                  "writeOnly": null,
-                  "platformSpecific": null,
-                  "schemaRef": null,
-                  "schemaRefTitle": null,
-                  "schemaRefDescription": null,
-                  "isInternal": false,
-                  "anchor": "-iosPassLinkId"
                 },
                 {
                   "name": "iosUrl",
@@ -43755,7 +43623,7 @@
               "description": "Example event ticket response array",
               "code": {
                 "json": [
-                  "[\n {\n    \"adaptiveLinkId\": \"abchd345678\",\n    \"adaptiveLinkExternalId\": \"abch3ExtId1\",\n    \"iosTemplateId\": 12345,\n    \"iosTemplateExternalId\": \"ios123ExtId\",\n    \"androidTemplateId\": 154321,\n    \"androidTemplateExternalId\": \"android123ExtId\",\n    \"eventId\": 476,\n    \"eventExternalId\": \"event123ExtId\",\n    \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678\",\n    \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/ios\",\n    \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/android\",\n    \"createdAt\": \"2018-09-24T09:12:32Z\",\n    \"updatedAt\": \"2018-09-24T09:15:32Z\",\n    \"isPersonalized\": \"false\",\n    \"availablePasses\": 1000000,\n    \"iosPassLinkId\": \"a5711a29-7b38-41f2-8202-8f792df89b0b\",\n    \"androidPassLinkId\": \"c1f512e5-fda3-4ddf-82c6-066c5681161d\",\n    \"status\": 200\n },\n {...},\n {...}\n]\n"
+                  "[\n {\n    \"adaptiveLinkId\": \"abchd345678\",\n    \"adaptiveLinkExternalId\": \"abch3ExtId1\",\n    \"iosTemplateId\": 12345,\n    \"iosTemplateExternalId\": \"ios123ExtId\",\n    \"androidTemplateId\": 154321,\n    \"androidTemplateExternalId\": \"android123ExtId\",\n    \"eventId\": 476,\n    \"eventExternalId\": \"event123ExtId\",\n    \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678\",\n    \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/ios\",\n    \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/android\",\n    \"createdAt\": \"2018-09-24T09:12:32Z\",\n    \"updatedAt\": \"2018-09-24T09:15:32Z\",\n    \"isPersonalized\": \"false\",\n    \"availablePasses\": 1000000,\n    \"status\": 200\n },\n {...},\n {...}\n]\n"
                 ]
               }
             }
@@ -44634,7 +44502,7 @@
               "description": "Example boarding pass response",
               "code": {
                 "HTTP": [
-                  "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n\n{\n  \"links\": [\n    {\n      \"status\": 201,\n      \"adaptiveLinkId\": \"abchd345678\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId1\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\",\n      \"iosPassLinkId\": \"eb94e8e0-4353-4e0b-bfe9-cfd21c52a540\",\n      \"androidPassLinkId\": \"41c1ea48-f469-4968-b610-a98629ea19bc\"\n    },\n    {\n      \"status\": 201,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\",\n      \"iosPassLinkId\": \"5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b\",\n      \"androidPassLinkId\": \"c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab\"\n    },\n    {\n      \"status\": 201,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\",\n      \"iosPassLinkId\": \"5d370e0d-0aa9-45c3-b7ab-eff0a3d4995b\",\n      \"androidPassLinkId\": \"c60bd6c0-8f1e-4419-abb0-9f6fcb8a6fab\"\n    }\n  ]\n}\n"
+                  "HTTP/1.1 200 OK\nContent-Type: application/json; charset=utf-8\n\n{\n  \"links\": [\n    {\n      \"status\": 201,\n      \"adaptiveLinkId\": \"abchd345678\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId1\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345678/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\"\n    },\n    {\n      \"status\": 201,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\"\n    },\n    {\n      \"status\": 201,\n      \"adaptiveLinkId\": \"abchd345Id2\",\n      \"adaptiveLinkExternalId\": \"abch3ExtId2\",\n      \"iosTemplateId\": 12345,\n      \"iosTemplateExternalId\": \"ios123ExtId\",\n      \"androidTemplateId\": 154321,\n      \"androidTemplateExternalId\": \"android123ExtId\",\n      \"url\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2\",\n      \"iosUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/ios\",\n      \"androidUrl\": \"https://wallet-api.urbanairship.com/v1/pass/adaptive/abchd345Id2/android\",\n      \"createdAt\": \"2018-07-05T09:12:32Z\",\n      \"updatedAt\": \"2018-07-05T09:12:32Z\",\n      \"isPersonalized\": \"false\",\n      \"availablePasses\": 1000000,\n      \"ttlInDays\": 30,\n      \"flightId\": 465,\n      \"flightExternalId\": \"flight123ExtId\"\n    }\n  ]\n}\n"
                 ]
               }
             }
@@ -64195,7 +64063,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -64293,7 +64161,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -64573,7 +64441,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       },
@@ -64689,7 +64557,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -64763,7 +64631,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -64837,7 +64705,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -64911,7 +64779,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -64985,7 +64853,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65059,7 +64927,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65133,7 +65001,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65245,7 +65113,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65295,7 +65163,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65327,7 +65195,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65371,7 +65239,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65415,7 +65283,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       }
@@ -65459,7 +65327,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       },
@@ -65545,7 +65413,7 @@
       },
       {
         "operationId": "createDynamicLink",
-        "summary": "Generates a pass",
+        "summary": "Generates a pass dynamic link",
         "anchor": "createdynamiclink",
         "path": "/developer/rest-api/wallet/operations/passes/"
       },

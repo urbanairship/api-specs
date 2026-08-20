@@ -1,10 +1,10 @@
 {
-  "description": "`SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to Subscription List memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n",
+  "description": "`SUBSCRIPTION` events reflect changes to a user's  subscription state. Most `SUBSCRIPTION` events represent changes to opt-in status. When the event represents a change to subscription list memberships rather than a full opt-in or opt-out, the body includes a `subscription_lists` payload and no opt-out timestamps are set on the channel.\n",
   "properties": {
     "body": {
       "properties": {
         "event_type": {
-          "description": "Determines the source of the subscription event. `registration` and `create_and_send` events result in changes to `opted_in` dates. `link_unsubscribe` and `list_unsubscribe` events represent changes to `opted_out` status unless the body includes a `subscription_lists` payload, in which case the change applies only to the listed Subscription Lists. All other event types contain `opted_out` dates.\n\n* `registration`: Represents a change to a user's `commercial_opted_in`, `transactional_opted_in`, `click_tracking_opted_in`, or `open_tracking_opted_in` dates.\n* `create_and_send`: A user's opted_in status changed as a result of a [Create and Send](/guides/audience/segmentation/bulk-sending/) event.\n* `bounce`: Subscription status changed as a result of a bounce event.\n* `link_unsubscribe`: The user clicked an unsubscribe link in the message body of an email, or selected the **Unsubscribe from all** button in the Email Preference Center.\n* `list_unsubscribe`: The user selected the unsubscribe button in their email client, sent through the `List-Unsubscribe` email header.\n* `spam_complaint`: The user classified an email as spam.\n* `out_of_band`: A bounce occurred after the recipient MTA accepted an email.\n",
+          "description": "Determines the source of the subscription event. `registration` and `create_and_send` events result in changes to `opted_in` dates. `link_unsubscribe` and `list_unsubscribe` events represent changes to `opted_out` status unless the body includes a `subscription_lists` payload, in which case the change applies only to the listed subscription lists. All other event types contain `opted_out` dates.\n\n* `registration`: Represents a change to a user's `commercial_opted_in`, `transactional_opted_in`, `click_tracking_opted_in`, or `open_tracking_opted_in` dates.\n* `create_and_send`: A user's opted_in status changed as a result of a [Create and Send](/guides/messaging/bulk-sending/) event.\n* `bounce`: Subscription status changed as a result of a bounce event.\n* `link_unsubscribe`: The user clicked an unsubscribe link in the message body of an email, or selected the **Unsubscribe from all** button in the Email Preference Center.\n* `list_unsubscribe`: The user selected the unsubscribe button in their email client, sent through the `List-Unsubscribe` email header.\n* `spam_complaint`: The user classified an email as spam.\n* `out_of_band`: A bounce occurred after the recipient MTA accepted an email.\n",
           "enum": [
             "registration",
             "create_and_send",
@@ -64,17 +64,17 @@
           "type": "object"
         },
         "subscription_lists": {
-          "description": "Present when the event represents a change to the user's Subscription List membership rather than a full opt-in or opt-out. When this property is absent, the event applies to the channel as a whole.\n",
+          "description": "Present when the event represents a change to the user's subscription list membership rather than a full opt-in or opt-out. When this property is absent, the event applies to the channel as a whole.\n",
           "properties": {
             "canceled": {
-              "description": "An array of Subscription List IDs the user was removed from.",
+              "description": "An array of subscription list IDs the user was removed from.",
               "items": {
                 "type": "string"
               },
               "type": "array"
             },
             "enrolled": {
-              "description": "An array of Subscription List IDs the user was added to.",
+              "description": "An array of subscription list IDs the user was added to.",
               "items": {
                 "type": "string"
               },

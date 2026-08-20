@@ -143,7 +143,32 @@ components:
                   "type": "COMPLIANCE"
               }
     carrier_deactivation:
-      - description: Example SMS carrier_deactivation event
+      - description: Example SMS carrier deactivation event that uninstalls the channel
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS"
+                },
+                "body": {
+                  "event_type": "carrier_deactivation",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "action": "uninstalled"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+      - description: Example SMS carrier deactivation event that suppresses the channel
         examples:
           - lang: json
             source: |
@@ -155,13 +180,19 @@ components:
                 "device": {
                   "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
                   "device_type": "SMS",
-                  "delivery_address": "15558968663"
+                  "delivery_address": "15558968663",
+                  "identifiers": {
+                    "sender": "15558675309"
+                  }
                 },
                 "body": {
                   "event_type": "carrier_deactivation",
                   "identifiers": {
                     "sender": "15558675309",
                     "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "action": "suppressed"
                   }
                 },
                 "type": "COMPLIANCE"
@@ -2713,6 +2744,127 @@ components:
                 },
                 "type": "RICH_READ"
               }
+    rnd-scan:
+      - description: Example SMS RND scan event for a monthly scan that uninstalls a reassigned channel
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS"
+                },
+                "body": {
+                  "event_type": "rnd_scan",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "reassigned": true,
+                    "action": "uninstalled",
+                    "source": "monthly_scan",
+                    "scan_id": "786e06ec-a58a-4117-bb24-b37089b84169"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+      - description: Example SMS RND scan event for a monthly scan that removes suppression when the channel was not reassigned
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663",
+                  "identifiers": {
+                    "sender": "15558675309"
+                  }
+                },
+                "body": {
+                  "event_type": "rnd_scan",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "reassigned": false,
+                    "action": "suppression_removed",
+                    "source": "monthly_scan",
+                    "scan_id": "786e06ec-a58a-4117-bb24-b37089b84169"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+      - description: Example SMS RND scan event for an app scan that uninstalls a reassigned channel
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS"
+                },
+                "body": {
+                  "event_type": "rnd_scan",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "reassigned": true,
+                    "action": "uninstalled",
+                    "source": "app_scan",
+                    "scan_id": "786e06ec-a58a-4117-bb24-b37089b84169"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
+      - description: Example SMS RND scan event for an app scan with no action when the channel was not reassigned
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663",
+                  "identifiers": {
+                    "sender": "15558675309"
+                  }
+                },
+                "body": {
+                  "event_type": "rnd_scan",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "reassigned": false,
+                    "action": "none",
+                    "source": "app_scan",
+                    "scan_id": "786e06ec-a58a-4117-bb24-b37089b84169"
+                  }
+                },
+                "type": "COMPLIANCE"
+              }
     screen_viewed:
       - description: Example screen viewed event
         examples:
@@ -3054,7 +3206,7 @@ components:
                 },
                 "type": "SUBSCRIPTION"
               }
-      - description: Example subscription event for a Subscription List unsubscribe from an email body link
+      - description: Example subscription event for a subscription list unsubscribe from an email body link
         examples:
           - lang: json
             source: |
@@ -3080,7 +3232,7 @@ components:
                 "type": "SUBSCRIPTION"
               }
     subscription_list:
-      - description: Example Subscription List event
+      - description: Example subscription list event
         examples:
           - lang: json
             source: |
@@ -3120,6 +3272,36 @@ components:
                 "type": "PARTITION",
                 "count": 10,
                 "selection": 0
+              }
+    suppression_removed:
+      - description: Example SMS suppression removal event
+        examples:
+          - lang: json
+            source: |
+              {
+                "id": "a7086338-0473-46fe-8d9b-cb61305c3c0d",
+                "offset": "1000000701505",
+                "occurred": "2018-12-03T19:31:10.000Z",
+                "processed": "2018-12-03T19:31:11.302Z",
+                "device": {
+                  "channel": "a828de17-b315-4e80-9d2d-35a906afeacf",
+                  "device_type": "SMS",
+                  "delivery_address": "15558968663",
+                  "identifiers": {
+                    "sender": "15558675309"
+                  }
+                },
+                "body": {
+                  "event_type": "suppression_removed",
+                  "identifiers": {
+                    "sender": "15558675309",
+                    "msisdn": "15558968663"
+                  },
+                  "properties": {
+                    "source": "ui"
+                  }
+                },
+                "type": "COMPLIANCE"
               }
     tag_change:
       - description: Example tag change event
@@ -3218,7 +3400,7 @@ components:
                 },
                 "type": "COMPLIANCE"
               }
-      - description: Example email unsubscribe event for a Subscription List unsubscribe
+      - description: Example email unsubscribe event for a subscription list unsubscribe
         examples:
           - lang: json
             source: |

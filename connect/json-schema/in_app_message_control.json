@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or Channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
+  "description": "Occurs when an In-App Automation or Scene is not delivered because the targeted user's contact or channel ID was part of a control group for a [Holdout Experiment](/guides/experimentation/holdout-experiments/).\n",
   "properties": {
     "body": {
       "properties": {
