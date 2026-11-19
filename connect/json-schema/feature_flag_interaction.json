@@ -1,5 +1,5 @@
 {
-  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
+  "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
   "properties": {
     "body": {
       "properties": {

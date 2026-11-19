@@ -313,7 +313,7 @@
           "name": "device",
           "propertyType": "object",
           "required": true,
-          "description": "Holds information about an SMS `device` (an individual SMS channel).",
+          "description": "Describes the device involved in the `create_and_send` SMS event.\n\nHolds information about an SMS `device` (an individual SMS channel).",
           "deprecated": false,
           "platformSpecific": null
         }
@@ -1726,7 +1726,7 @@
         "Feature flag interaction event"
       ],
       "title": "Feature flag interaction event",
-      "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
+      "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -1734,7 +1734,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n"
+          "text": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n"
         },
         {
           "type": "property",
@@ -4296,7 +4296,7 @@
         "Send aborted"
       ],
       "title": "Send aborted",
-      "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
+      "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [message limit](/guides/messaging/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
       "isDeprecated": false,
       "isInternal": false,
       "schemaTag": "Events",
@@ -4304,7 +4304,7 @@
       "contentBlocks": [
         {
           "type": "description",
-          "text": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n"
+          "text": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [message limit](/guides/messaging/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n"
         },
         {
           "type": "property",
@@ -5189,7 +5189,7 @@
           "name": "device",
           "propertyType": "object",
           "required": true,
-          "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
+          "description": "Describes the device involved in the `create_and_send` email event.\n\nHolds information about the email `device` (an individual email channel) the event occurred against.",
           "deprecated": false,
           "platformSpecific": null
         }

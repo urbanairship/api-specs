@@ -433,7 +433,7 @@
             "type": "object"
           },
           "experiment": {
-            "description": "A boolean value indicating whether or not the push is an experiment.",
+            "description": "A Boolean value indicating whether or not the push is an experiment.",
             "type": "boolean"
           },
           "push_id": {
@@ -1583,7 +1583,7 @@
             "type": "integer"
           },
           "zipcode": {
-            "description": "A user's zipcode. This is different from the SMS channel `ua_ndc` attribute, that records user's area code or phone number prefix.",
+            "description": "A user's zipcode. This is different from the SMS channel `ua_ndc` attribute, which records a user's National Destination Code (NDC) or phone number prefix.",
             "type": "integer"
           }
         },
@@ -1593,7 +1593,7 @@
         "x-weight": 2
       },
       "attributesArray": {
-        "description": "The array can hold string, number, boolean, objects, and array.  Accepts numbers and strings for integer/number type attributes, but your string must be convertible to a number or the request will fail. Objects must be valid JSON or the request will fail.\n",
+        "description": "The array can hold string, number, Boolean, objects, and array.  Accepts numbers and strings for integer/number type attributes, but your string must be convertible to a number or the request will fail. Objects must be valid JSON or the request will fail.\n",
         "items": {
           "oneOf": [
             {
@@ -1728,7 +1728,7 @@
           "audience": {
             "properties": {
               "bulk_id": {
-                "description": "A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
+                "description": "A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
                 "format": "uuid",
                 "type": "string"
               }
@@ -1910,7 +1910,7 @@
           "contact_id",
           "channel_id"
         ],
-        "title": "Contact association payload with channel ID",
+        "title": "Associate contact payload with channel ID",
         "type": "object",
         "x-inline-component": true
       },
@@ -1938,7 +1938,7 @@
           "named_user_id",
           "channel_id"
         ],
-        "title": "Named user association payload with channel ID",
+        "title": "Associate named user payload with channel ID",
         "type": "object",
         "x-inline-component": true
       },
@@ -1975,7 +1975,7 @@
         "required": [
           "channel_id"
         ],
-        "title": "Named user disassociation payload with channel ID",
+        "title": "Disassociate named user payload with channel ID",
         "type": "object",
         "x-inline-component": true
       },
@@ -2268,7 +2268,7 @@
               },
               "properties": {
                 "ua_msisdn": {
-                  "description": "The phone number of a mobile device. Include the numeric country code, using digits only and no leading `+`. For example, a US number is `15558675309`. Entries with `ua_msisdn` values that are not reachable by `ua_sender` values will be silently dropped.",
+                  "description": "The phone number of a mobile device. Include the numeric country code, using digits only and no leading `+`. For example, a US number is `14155550123`. A properly formatted `ua_msisdn` value that is not reachable by the `ua_sender` value is accepted, but the message is silently dropped.",
                   "type": "string"
                 },
                 "ua_opted_in": {
@@ -2399,7 +2399,7 @@
         "x-schema-tag": "Pipeline objects"
       },
       "compoundSelector": {
-        "description": "Compound selectors combine boolean operators (AND, OR, or NOT) with atomic or nested compound selectors.",
+        "description": "Compound selectors combine Boolean operators (AND, OR, or NOT) with atomic or nested compound selectors.",
         "oneOf": [
           {
             "description": "AND selector",
@@ -2481,7 +2481,7 @@
         "x-inline-component": true
       },
       "conditionSet": {
-        "description": "A single condition set or array of condition sets. It is a collection of one or more conditions and an operator for combining them, in the case\nthat there are multiple conditions. A condition set follows the same general syntax as a compound selector. It is a JSON dictionary with a single\nkey indicating the operator. The key's value is an array of one or more condition objects. Taken together, the operator and set of conditions form\na boolean expression which must evaluate to true for a pipeline to be activated and its outcomes executed. Valid operators for a condition set are\n`and` and `or`. This field is evaluated before the pipeline is `entered` and only evaluated against events for the triggers on which they are set,\nwhich is noticeable when using multiple triggers.\n",
+        "description": "A single condition set or array of condition sets. It is a collection of one or more conditions and an operator for combining them, in the case\nthat there are multiple conditions. A condition set follows the same general syntax as a compound selector. It is a JSON dictionary with a single\nkey indicating the operator. The key's value is an array of one or more condition objects. Taken together, the operator and set of conditions form\na Boolean expression which must evaluate to true for a pipeline to be activated and its outcomes executed. Valid operators for a condition set are\n`and` and `or`. This field is evaluated before the pipeline is `entered` and only evaluated against events for the triggers on which they are set,\nwhich is noticeable when using multiple triggers.\n",
         "items": {
           "oneOf": [
             {
@@ -3233,10 +3233,6 @@
             "description": "The browser version associated with a web channel.",
             "type": "string"
           },
-          "ua_carrier": {
-            "description": "The cellular carrier of the device associated with an app channel.",
-            "type": "string"
-          },
           "ua_country": {
             "description": "The 2-letter country code for an app or web channel.",
             "type": "string"
@@ -3274,7 +3270,7 @@
             "type": "string"
           },
           "ua_ndc": {
-            "description": "The National Destination Code aka area code derived from the MSISDN on an SMS channel.",
+            "description": "The National Destination Code (NDC) derived from the MSISDN on an SMS channel. In the US, an NDC is the area code.",
             "type": "string"
           },
           "ua_rcs_enabled": {
@@ -3339,7 +3335,7 @@
               {
                 "properties": {
                   "bulk_id": {
-                    "description": "A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
+                    "description": "A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
                     "format": "uuid",
                     "type": "string"
                   }
@@ -3405,7 +3401,7 @@
           "contact_id",
           "email_address"
         ],
-        "title": "Contact association payload with email address",
+        "title": "Associate contact payload with email address",
         "type": "object",
         "x-inline-component": true
       },
@@ -3430,7 +3426,7 @@
           "named_user_id",
           "email_address"
         ],
-        "title": "Named user association payload with email address",
+        "title": "Associate named user payload with email address",
         "type": "object",
         "x-inline-component": true
       },
@@ -3454,7 +3450,7 @@
         "required": [
           "email_address"
         ],
-        "title": "Named user disassociation payload with email address",
+        "title": "Disassociate named user payload with email address",
         "type": "object",
         "x-inline-component": true
       },
@@ -3947,7 +3943,7 @@
               },
               "custom_event": {
                 "$ref": "#/components/schemas/complexEventSelector",
-                "description": "A custom event selector is an event selector that describes the\nspecific criteria a custom event must fulfill in order to trigger an automation.\nSupported custom event fields in the default scope are `\"name\"` (string) and `[\"value\"]`.\ncustom events also have a map of properties that may also be selected under the `\"properties\"` scope. Values for the `\"properties\"` key may be string, boolean, number, or an array of strings."
+                "description": "A custom event selector is an event selector that describes the\nspecific criteria a custom event must fulfill in order to trigger an automation.\nSupported custom event fields in the default scope are `\"name\"` (string) and `[\"value\"]`.\ncustom events also have a map of properties that may also be selected under the `\"properties\"` scope. Values for the `\"properties\"` key may be string, Boolean, number, or an array of strings."
               },
               "deactivation_time": {
                 "description": "The [date-time](/developer/rest-api/ua/introduction/#date-time-format) indicating a time at which the trigger will automatically become inactive.\n",
@@ -5347,7 +5343,7 @@
                     "type": "object"
                   },
                   "hidden": {
-                    "description": "A boolean, when true, the thumbnail will be hidden.",
+                    "description": "A Boolean, when true, the thumbnail will be hidden.",
                     "type": "boolean"
                   },
                   "time": {
@@ -5386,7 +5382,7 @@
             "type": "number"
           },
           "sound": {
-            "description": "The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `\"name\"` (equivalent to the current sound string), `\"volume\"` (a number between 0 and 1 indicating the volume), and `\"critical\"` (a boolean indicating if the alert should override local device settings and still notify).",
+            "description": "The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `\"name\"` (equivalent to the current sound string), `\"volume\"` (a number between 0 and 1 indicating the volume), and `\"critical\"` (a Boolean indicating if the alert should override local device settings and still notify).",
             "type": "string"
           },
           "subtitle": {
@@ -5496,7 +5492,7 @@
                     "type": "object"
                   },
                   "hidden": {
-                    "description": "A boolean, when true, the thumbnail will be hidden.",
+                    "description": "A Boolean, when true, the thumbnail will be hidden.",
                     "type": "boolean"
                   },
                   "time": {
@@ -5528,7 +5524,7 @@
             "type": "integer"
           },
           "sound": {
-            "description": "The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `\"name\"` (equivalent to the current sound string), `\"volume\"` (a number between 0 and 1 indicating the volume), and `\"critical\"` (a boolean indicating if the alert should override local device settings and still notify).",
+            "description": "The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `\"name\"` (equivalent to the current sound string), `\"volume\"` (a number between 0 and 1 indicating the volume), and `\"critical\"` (a Boolean indicating if the alert should override local device settings and still notify).",
             "type": "string"
           },
           "template": {
@@ -6145,7 +6141,7 @@
               {
                 "properties": {
                   "bulk_id": {
-                    "description": "A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
+                    "description": "A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
                     "format": "uuid",
                     "type": "string"
                   }
@@ -6497,7 +6493,7 @@
           },
           "tags": {
             "$ref": "#/components/schemas/tagGroupObject",
-            "description": "One or more tag group objects associated with the named user. See [Named users tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags)."
+            "description": "One or more tag group objects associated with the named user. See [Modify named user tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags)."
           },
           "user_attributes": {
             "description": "User attributes consist of three values that are copied from the last channel associated with the named user.",
@@ -6670,7 +6666,7 @@
             "type": "object"
           }
         },
-        "title": "Named user update payload",
+        "title": "Create or update named user payload",
         "type": "object",
         "x-schema-tag": "Named User"
       },
@@ -6693,7 +6689,7 @@
         "required": [
           "ok"
         ],
-        "title": "Create/update named user response",
+        "title": "Create or update named user response",
         "type": "object",
         "x-inline-component": true
       },
@@ -6898,7 +6894,7 @@
         "x-weight": 9
       },
       "oauthScope": {
-        "description": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.\n  * `att`: Attachments\n  * `chn`: Channels\n  * `cnt`: Contacts\n  * `tpl`: Content\n  * `evt`: Events\n  * `jny`: Journeys\n  * `lst`: Lists\n  * `nu`: Named Users\n  * `pln`: Pipelines\n  * `psh`: Push\n  * `rpt`: Reports\n  * `sch`: Schedules",
+        "description": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/ua/api-auth-reference/#oauth-token-scopes) in the *Airship API Authorization Reference* documentation.\n  * `att`: Attachments\n  * `chn`: Channels\n  * `cnt`: Contacts\n  * `tpl`: Content\n  * `evt`: Events\n  * `jny`: Journeys\n  * `lst`: Lists\n  * `nu`: Named Users\n  * `pln`: Pipelines\n  * `psh`: Push\n  * `rpt`: Reports\n  * `sch`: Schedules\n  * `seg`: Segments",
         "enum": [
           "att",
           "chn",
@@ -6911,7 +6907,8 @@
           "pln",
           "psh",
           "rpt",
-          "sch"
+          "sch",
+          "seg"
         ],
         "title": "OAuth Scope",
         "type": "string",
@@ -6975,7 +6972,7 @@
               {
                 "properties": {
                   "bulk_id": {
-                    "description": "A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
+                    "description": "A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
                     "format": "uuid",
                     "type": "string"
                   }
@@ -7662,7 +7659,7 @@
             ]
           },
           "condition": {
-            "description": "One or more conditions, combined by operators. A\n  condition set may contain a maximum of 20 conditions. Taken together, the\n  operator and set of conditions form a boolean expression which must evaluate\n  to true for a pipeline to be activated and its outcomes executed. Valid\n  operators for a condition set are `and` and `or`. Nesting of operators\n  is not supported within a condition set, i.e., you may not combine `and`\n  logic with `or` logic.",
+            "description": "One or more conditions, combined by operators. A\n  condition set may contain a maximum of 20 conditions. Taken together, the\n  operator and set of conditions form a Boolean expression which must evaluate\n  to true for a pipeline to be activated and its outcomes executed. Valid\n  operators for a condition set are `and` and `or`. Nesting of operators\n  is not supported within a condition set, i.e., you may not combine `and`\n  logic with `or` logic.",
             "items": {
               "oneOf": [
                 {
@@ -7715,7 +7712,7 @@
             "type": "string"
           },
           "enabled": {
-            "description": "A boolean value indicating whether or not the pipeline is active.",
+            "description": "A Boolean value indicating whether or not the pipeline is active.",
             "type": "boolean"
           },
           "historical_trigger": {
@@ -8154,7 +8151,7 @@
           },
           "bypass_frequency_limits": {
             "default": false,
-            "description": "If true, the push ignores any [message limits](/guides/messaging/project/config/message-limits/) that would otherwise apply to your message.\n",
+            "description": "If true, the push ignores any [message limits](/guides/messaging/message-limits/) that would otherwise apply to your message.\n",
             "type": "boolean"
           },
           "bypass_holdout_groups": {
@@ -9000,7 +8997,7 @@
               {
                 "properties": {
                   "bulk_id": {
-                    "description": "A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
+                    "description": "A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.\n",
                     "format": "uuid",
                     "type": "string"
                   }
@@ -9408,7 +9405,7 @@
             "type": "string"
           },
           "negated": {
-            "description": "A boolean indicating the condition should match on the absence from the list.",
+            "description": "A Boolean indicating the condition should match on the absence from the list.",
             "type": "boolean"
           }
         },
@@ -10055,7 +10052,7 @@
         "x-inline-component": true
       },
       "templatedMessageContent": {
-        "description": "Customers may use a template to specify message content instead of using static specification.\nThe request format is consistent with Template Schemes. See description [Platform Override Templates](/developer/rest-api/ua/schemas/platform-overrides-with-templates/).\nAll columns (for CSV) or keys (for JSON) not prefixed with `ua_` are considered merge fields.\nPrefixed columns/keys are not usable in template evaluation. If the value of a delivery variable\nis also needed in the template, the requester should duplicate it into an unprefixed column.\n\nNo verification is done in this API that the provided set of merge values matches the fields\nof the template. Customers using the UI will pass through a step where they'll be alerted\nthat some template field has no matching column in the uploaded CSV. Custom Create and Send\nfields are not limited to strings and can contain numbers, booleans, arrays, hierarchical\nJSON, etc.\n\nMerge fields are allowed to use nested property names in CSV upload\nheaders by using a subset of legal [Handlebars](/guides/personalization/handlebars/) template expression syntax.\n",
+        "description": "Customers may use a template to specify message content instead of using static specification.\nThe request format is consistent with Template Schemes. See description [Platform Override Templates](/developer/rest-api/ua/schemas/platform-overrides-with-templates/).\nAll columns (for CSV) or keys (for JSON) not prefixed with `ua_` are considered merge fields.\nPrefixed columns/keys are not usable in template evaluation. If the value of a delivery variable\nis also needed in the template, the requester should duplicate it into an unprefixed column.\n\nNo verification is done in this API that the provided set of merge values matches the fields\nof the template. Customers using the UI will pass through a step where they'll be alerted\nthat some template field has no matching column in the uploaded CSV. Custom Create and Send\nfields are not limited to strings and can contain numbers, Booleans, arrays, hierarchical\nJSON, etc.\n\nMerge fields are allowed to use nested property names in CSV upload\nheaders by using a subset of legal [Handlebars](/guides/personalization/handlebars/) template expression syntax.\n",
         "properties": {
           "template": {
             "oneOf": [
@@ -10143,7 +10140,7 @@
         "x-inline-component": true
       },
       "triggeringId": {
-        "description": "Identifier of a Sequence's configured [API Entrance trigger](/guides/messaging/messages/sequences/triggers/#api-entrance).",
+        "description": "Identifier of a Sequence's configured [API Entrance trigger](/guides/messaging/messages/sequences/triggers/#api-entrance) or [API Exit event](/guides/messaging/messages/sequences/create/outcomes/#api-exit).",
         "maxLength": 256,
         "minLength": 1,
         "title": "Triggering Id",
@@ -10574,6 +10571,7 @@
               "rmc": "Remote Config",
               "rpt": "Reports",
               "sch": "Schedules",
+              "seg": "Segments",
               "tpl": "Content"
             },
             "tokenUrl": "http://oauth2.{domain}.com/token"
@@ -10594,13 +10592,14 @@
           "rmc": "Manage remote configuration.",
           "rpt": "Get report data",
           "sch": "Manage scheduled messages.",
+          "seg": "Manage audience segments.",
           "tpl": "Manage content templates."
         }
       }
     }
   },
   "info": {
-    "description": "\nAirship provides a number of REST API endpoints collectively known as the Airship API\nVersion 3, in support of our messaging product lines and related features. Version 3 is the\ncurrent and only supported version of the Airship API.\n\n## API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in [JSON](https://www.json.org/json-en.html)\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Date-Time Format\n\nAll date-time values are represented as a string according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) in UTC.\n\n  - The string must be in the format `YYYY-MM-dd['T']hh:mm:ss['Z']` where the `T` can be replaced by a space and the `Z` is optional.\n  - A `T` separator is preferred but not required. It will be included in all date-time values generated by the API. For example:\n    - 2023-11-13T09:42:30Z\n    - 2023-11-13T09:42:30\n    - 2023-11-13 09:42:30Z\n    - 2023-11-13 09:42:30\n  - A trailing time zone identifier or offset should not be included.\n  - UTC is implicit.\n\n### Color Format\nAll color values are represented by a string format reminiscent of CSS color values used for web programming. The format is `#rrggbb`,\na literal `#` character followed by 6 hexadecimal digits representing 3 values in the range `00` to `FF`. The values are red,\ngreen, and blue color components.\n\n## API Response Format\n\nAll API responses are HTTP responses, making use of appropriate HTTP response codes. When a body is present,\nit SHALL be in [JSON](https://www.json.org/json-en.html) format, except in certain cases where reporting data MAY be returned in CSV format.\nThe body of all JSON responses SHALL consist of a single JSON object, which SHALL contain a boolean `ok` attribute indicating overall success or failure.\nWhen a request results in a return value containing multiple entities, they SHALL be contained in an array-valued attribute, the name of which MAY vary by endpoint.\nFor example, `/api/tag` will return a list of tags in the `tags` attribute, while `/api/schedules` will return a list of schedules in the `schedules` attribute.\nThe name of the response object attribute containing the list of returned entities SHALL be contained in the Data-Attribute HTTP header.\n\n### Operation ID\nAll API calls that create or modify resources, or cause side effects, SHALL generate an operation ID. An operation ID is an opaque unique string\nthat identifies a single API call, and can be used to group multiple entities or side effects as related, in reporting and troubleshooting logs.\nFor example, the batch push API call can be used to send multiple pushes in one call. Each push has a unique push ID, but they will all share a common operation ID.\nThis enables roll-ups of multiple related operations (such as push to local time or push to language) and better end-to-end tracing in the push pipeline.\nOperation IDs are returned in the JSON body of the response, in the `operation_id` attribute of the root response object.\nAn operation ID will be generated even for error responses.\n\n### Response Codes\nThe API makes use of standard HTTP response codes, with standard HTTP semantics. Response codes in the 200 range indicate success.\nCodes in the 400 range indicate errors of a correctable nature. Codes in the 500 range indicate system errors.\n\nThis table lists general response definitions. Refer to the actual response definition per endpoint.\n\n| Response code | Description |\n|---|---|\n| **200 OK** | The payload was accepted. |\n| **201 Created**   | An API request to create a new entity or entities was successful, and the entities were created. |\n| **202 Accepted** | An API request was successfully accepted into a processing queue to be processed later. |\n| **204 No Content** | An entity was successfully deleted. |\n| **400 Bad Request** | Parsing or validating the request failed. |\n| **401 Unauthorized** | Authentication information (the app key and secret) was either incorrect or missing. |\n| **403 Forbidden** | Authentication was correct, but the user does not have permission to access the requested API. This can happen if a feature is not included in the user's Airship plan. |\n| **404 Not Found** | A request was made for a non-existent entity. |\n| **405 Method Not Allowed** | A request was made using an HTTP method not supported by the endpoint. For example, sending a DELETE to /api/schedules. |\n| **406 Unacceptable** | The client requested a version of the API that cannot be satisfied, because no compatible version is currently deployed. |\n| **409 Conflict** | An entity could not be updated due to state conflict. |\n| **429 Too Many Requests** | A request was denied because the app made too many requests to an API in a short period of time. |\n\n### Validation\nAll requests must be validated. Proper validation at the API level can prevent invalid pushes from using resources in our delivery pipeline\nand educate API users about their own mistakes without involving Support. In the event of an error processing the request, the response body\nwill contain one or more [error objects](/developer/rest-api/ua/schemas/responses). Parsing errors, arising from syntactically invalid JSON, should return\nan `HTTP 400 Bad Request` response. Semantic errors, arising from requests that are syntactically valid but otherwise malformed\n(for example, missing required fields), should return an `HTTP 400` response, with a JSON body indicating details about the validation failure.\n\nSome examples of specific validation cases that cause pushes to be rejected with an `HTTP 400` error:\n- **Invalid attributes** — Any additional JSON keys that are not explicitly allowed by the spec will result in an HTTP 400 error,\n  except where arbitrary keys are explicitly allowed (for example, the `extra` sections of a push payload).\n- **Unconfigured open platform** — Any open platform specified in the `device_types` array must be configured and active for the appKey.\n  If the open platform is not configured, we will return an `HTTP 400`.\n- **Missing payload** — A push that specifies delivery to a platform but does not supply a payload for that platform is invalid.\n- **Device identifier/restriction mismatch** — A push that includes a device identifier in the audience selection\n  but does not include the corresponding platform in the `device_types` specifier is invalid.\n- **Schedule times** — Requests to schedule pushes for times that have already passed will return an HTTP 400 response. However,\n  requests to schedule local time pushes for a time that has elapsed in a local time zone will be accepted.\n- **Unsupported platform feature** — A push that includes features not supported on all platforms must explicitly target the supported platforms.\n  Location is the only feature not supported across all platforms. This includes location expressions in predefined segments.\n  Location pushes must specify `device_types` : [ `ios`, `android` ], or either iOS or Android explicitly.\n\n### Pagination\nSome resource collections, such as tags and segments, may have a very large number of items, necessitating iterating through them\nin chunks (or pages) if an API consumer wishes to retrieve them all.\n\n**Request Parameters**\n\nThere are two methods for pagination results:\n- `start` and `limit`\n- `page` and `page_size`\n\nUsing a non-unique identifier for the `start` parameter is unsound and will not paginate correctly. For endpoints that support sorting,\nif sorting is applied to a non-unique field, a secondary sort on a unique field must be used internally to ensure stable pagination results.\n\n- `start` — Optional string or integer. Identifies the starting element for paginating results. It can be either a unique string identifier or a zero-based offset, depending on the API.\n- `limit` — Optional integer. The maximum number of elements to return.\n- `page` — Optional integer. Specifies which page to retrieve, starting with 1.\n- `page_size` — Optional integer. The number of elements to return per page. The last page may have fewer elements.\n- `sort` — Optional string. The name of the field to sort results by. This is not necessarily supported by all endpoints.\n- `order` — Optional `asc` or `desc`. If the `sort` parameter is available, this parameter may be used to specify the direction of the sort as ascending or descending.\n\n**Link Header**\n\nCollections of entities SHALL be paginated by specifying a start point and a limit on the number of returned items as parameters of the request.\nThe response SHALL include the requested items and a link to the next page of results. A link to the previous page MAY also be included if the underlying service\nsupports it. For example, the [Segments API](/developer/rest-api/ua/operations/segments/) supports previous page links. The links SHALL be provided in the `Link` HTTP header, as per\n[RFC 5988 Web Linking](https://datatracker.ietf.org/doc/html/rfc5988.html), using the relations `next` and `prev`.\n\n**Count and Total**\n\nThe number of items in the response SHALL be returned in the custom HTTP header `Count`, as well as in the `\"count\"` field of the response object.\nThe total number of items in the collection MAY be returned in the custom HTTP header `Total-Count`, as well as in the `\"total_count\"`\nfield of the response object, if the collection is countable and the total number of items is known.\n\n## Version Syntax\n\nYou must specify the version of the API you are using with the `Accept` HTTP header.\nIf you do not specify an API version in the `Accept` header, a 406 is returned.\n\nThe content type used is a vendor-specific media type\n(see [RFC 4288 Media Type Specifications and Registration Procedures](https://tools.ietf.org/html/rfc4288)) and must be specified as: `application/vnd.urbanairship+json; version=3`.\n\n## Transport Layer Security\n\nAs of October 6, 2020, Airship supports only Transport Layer Security (TLS) versions 1.2 and 1.3 in our APIs, in accordance with [PCI Security Standards Council](https://www.pcisecuritystandards.org/) recommendations.\n\nIf your API integration uses TLS 1.0 or 1.1, [contact our Support team](https://support.airship.com) for assistance migrating to TLS 1.2 or 1.3.\n\n### Certificate Pinning\n\nCertificate chains for Airship domains cannot be considered static. You should never pin or hardcode Intermediate or Root Certificate Authorities. Airship may rotate certificate chains at any time without notice, and pinning can cause service disruptions. This applies to all Airship-owned domains, not only the REST APIs.\n\n## Delivery Speed Options\n\nThe Airship push API is designed for extremely high throughput to ensure\ndelivery to your entire audience as fast as possible. Depending on the size and/or\ncomplexity of your audience and the urgency of the message, you may find that you need to either\nslow down or speed up the delivery. To that end, we offer the following add-on\nservices: Boost and Throttling.\n\nIf you are interested in enabling Boost or Throttling, [contact Support](https://support.airship.com/).\n\n### Boost\n\nBoost optimizes your segmented messages through parallel processing. Consider adding\nBoost if your notifications are extremely time-sensitive. Boost is a paid add-on. Contact\nyour Account Manager for details.\n\n### Throttling\n\nFor less time-sensitive messages, our standard delivery speed may cause undue pressure\non your internal systems or APIs, for example, when millions of users open your app at the\nsame time. Use Throttling to tune\ndelivery to a level that doesn't put strain on those systems.\n\n### Complex segments can cause delays in processing\n\nWhen creating segments or pushes with logical expressions, keep in mind that one or more NOT statements may cause latency when sending notifications,\nas NOT operations are inherently more expensive to perform than OR or AND operations.\nFor example, `tag_a AND NOT tag_b` is basically the same speed as\n`tag_a AND tag_b`, but just `NOT tag_b` is likely to be slower than just\n`tag_b`.\n\nLatency is more significant with larger audiences. We recommend using AND statements in place of NOT statements whenever possible as a best practice.\n\n### Device changes can take a few minutes\n\nSome requests to register or unregister information about a device may take a few minutes to process before you are able to see the changes.\nKeep this in mind when performing PUT or POST requests.\n",
+    "description": "\nAirship provides a number of REST API endpoints collectively known as the Airship API\nVersion 3, in support of our messaging product lines and related features. Version 3 is the\ncurrent and only supported version of the Airship API.\n\n## API Request Format\n\nAll API requests are HTTP requests. For all requests with a body, the body may be in [JSON](https://www.json.org/json-en.html)\nformat or other formats like CSV as specified for the endpoint. The proper Content-Type for\nJSON is `application/json` and the proper content type for CSV is `text/csv`.\n\n### Date-Time Format\n\nAll date-time values are represented as a string according to [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) in UTC.\n\n  - The string must be in the format `YYYY-MM-dd['T']hh:mm:ss['Z']` where the `T` can be replaced by a space and the `Z` is optional.\n  - A `T` separator is preferred but not required. It will be included in all date-time values generated by the API. For example:\n    - 2023-11-13T09:42:30Z\n    - 2023-11-13T09:42:30\n    - 2023-11-13 09:42:30Z\n    - 2023-11-13 09:42:30\n  - A trailing time zone identifier or offset should not be included.\n  - UTC is implicit.\n\n### Color Format\nAll color values are represented by a string format reminiscent of CSS color values used for web programming. The format is `#rrggbb`,\na literal `#` character followed by 6 hexadecimal digits representing 3 values in the range `00` to `FF`. The values are red,\ngreen, and blue color components.\n\n## API Response Format\n\nAll API responses are HTTP responses, making use of appropriate HTTP response codes. When a body is present,\nit SHALL be in [JSON](https://www.json.org/json-en.html) format, except in certain cases where reporting data MAY be returned in CSV format.\nThe body of all JSON responses SHALL consist of a single JSON object, which SHALL contain a Boolean `ok` attribute indicating overall success or failure.\nWhen a request results in a return value containing multiple entities, they SHALL be contained in an array-valued attribute, the name of which MAY vary by endpoint.\nFor example, `/api/tag` will return a list of tags in the `tags` attribute, while `/api/schedules` will return a list of schedules in the `schedules` attribute.\nThe name of the response object attribute containing the list of returned entities SHALL be contained in the Data-Attribute HTTP header.\n\n### Operation ID\nAll API calls that create or modify resources, or cause side effects, SHALL generate an operation ID. An operation ID is an opaque unique string\nthat identifies a single API call, and can be used to group multiple entities or side effects as related, in reporting and troubleshooting logs.\nFor example, the batch push API call can be used to send multiple pushes in one call. Each push has a unique push ID, but they will all share a common operation ID.\nThis enables roll-ups of multiple related operations (such as push to local time or push to language) and better end-to-end tracing in the push pipeline.\nOperation IDs are returned in the JSON body of the response, in the `operation_id` attribute of the root response object.\nAn operation ID will be generated even for error responses.\n\n### Response Codes\nThe API makes use of standard HTTP response codes, with standard HTTP semantics. Response codes in the 200 range indicate success.\nCodes in the 400 range indicate errors of a correctable nature. Codes in the 500 range indicate system errors.\n\nThis table lists general response definitions. Refer to the actual response definition per endpoint.\n\n| Response code | Description |\n|---|---|\n| **200 OK** | The payload was accepted. |\n| **201 Created**   | An API request to create a new entity or entities was successful, and the entities were created. |\n| **202 Accepted** | An API request was successfully accepted into a processing queue to be processed later. |\n| **204 No Content** | An entity was successfully deleted. |\n| **400 Bad Request** | Parsing or validating the request failed. |\n| **401 Unauthorized** | Authentication information (the app key and secret) was either incorrect or missing. |\n| **403 Forbidden** | Authentication was correct, but the user does not have permission to access the requested API. This can happen if a feature is not included in the user's Airship plan. |\n| **404 Not Found** | A request was made for a non-existent entity. |\n| **405 Method Not Allowed** | A request was made using an HTTP method not supported by the endpoint. For example, sending a DELETE to /api/schedules. |\n| **406 Unacceptable** | The client requested a version of the API that cannot be satisfied, because no compatible version is currently deployed. |\n| **409 Conflict** | An entity could not be updated due to state conflict. |\n| **429 Too Many Requests** | A request was denied because the app made too many requests to an API in a short period of time. |\n\n### Validation\nAll requests must be validated. Proper validation at the API level can prevent invalid pushes from using resources in our delivery pipeline\nand educate API users about their own mistakes without involving Support. In the event of an error processing the request, the response body\nwill contain one or more [error objects](/developer/rest-api/ua/schemas/responses). Parsing errors, arising from syntactically invalid JSON, should return\nan `HTTP 400 Bad Request` response. Semantic errors, arising from requests that are syntactically valid but otherwise malformed\n(for example, missing required fields), should return an `HTTP 400` response, with a JSON body indicating details about the validation failure.\n\nSome examples of specific validation cases that cause pushes to be rejected with an `HTTP 400` error:\n- **Invalid attributes** — Any additional JSON keys that are not explicitly allowed by the spec will result in an HTTP 400 error,\n  except where arbitrary keys are explicitly allowed (for example, the `extra` sections of a push payload).\n- **Unconfigured open platform** — Any open platform specified in the `device_types` array must be configured and active for the appKey.\n  If the open platform is not configured, we will return an `HTTP 400`.\n- **Missing payload** — A push that specifies delivery to a platform but does not supply a payload for that platform is invalid.\n- **Device identifier/restriction mismatch** — A push that includes a device identifier in the audience selection\n  but does not include the corresponding platform in the `device_types` specifier is invalid.\n- **Schedule times** — Requests to schedule pushes for times that have already passed will return an HTTP 400 response. However,\n  requests to schedule local time pushes for a time that has elapsed in a local time zone will be accepted.\n- **Unsupported platform feature** — A push that includes features not supported on all platforms must explicitly target the supported platforms.\n  Location is the only feature not supported across all platforms. This includes location expressions in predefined segments.\n  Location pushes must specify `device_types` : [ `ios`, `android` ], or either iOS or Android explicitly.\n\n### Pagination\nSome resource collections, such as tags and segments, may have a very large number of items, necessitating iterating through them\nin chunks (or pages) if an API consumer wishes to retrieve them all.\n\n**Request Parameters**\n\nThere are two methods for pagination results:\n- `start` and `limit`\n- `page` and `page_size`\n\nUsing a non-unique identifier for the `start` parameter is unsound and will not paginate correctly. For endpoints that support sorting,\nif sorting is applied to a non-unique field, a secondary sort on a unique field must be used internally to ensure stable pagination results.\n\n- `start` — Optional string or integer. Identifies the starting element for paginating results. It can be either a unique string identifier or a zero-based offset, depending on the API.\n- `limit` — Optional integer. The maximum number of elements to return.\n- `page` — Optional integer. Specifies which page to retrieve, starting with 1.\n- `page_size` — Optional integer. The number of elements to return per page. The last page may have fewer elements.\n- `sort` — Optional string. The name of the field to sort results by. This is not necessarily supported by all endpoints.\n- `order` — Optional `asc` or `desc`. If the `sort` parameter is available, this parameter may be used to specify the direction of the sort as ascending or descending.\n\n**Link Header**\n\nCollections of entities SHALL be paginated by specifying a start point and a limit on the number of returned items as parameters of the request.\nThe response SHALL include the requested items and a link to the next page of results. A link to the previous page MAY also be included if the underlying service\nsupports it. For example, the [Segments API](/developer/rest-api/ua/operations/segments/) supports previous page links. The links SHALL be provided in the `Link` HTTP header, as per\n[RFC 5988 Web Linking](https://datatracker.ietf.org/doc/html/rfc5988.html), using the relations `next` and `prev`.\n\n**Count and Total**\n\nThe number of items in the response SHALL be returned in the custom HTTP header `Count`, as well as in the `\"count\"` field of the response object.\nThe total number of items in the collection MAY be returned in the custom HTTP header `Total-Count`, as well as in the `\"total_count\"`\nfield of the response object, if the collection is countable and the total number of items is known.\n\n## Version Syntax\n\nYou must specify the version of the API you are using with the `Accept` HTTP header.\nIf you do not specify an API version in the `Accept` header, a 406 is returned.\n\nThe content type used is a vendor-specific media type\n(see [RFC 4288 Media Type Specifications and Registration Procedures](https://tools.ietf.org/html/rfc4288)) and must be specified as: `application/vnd.urbanairship+json; version=3`.\n\n## Transport Layer Security\n\nAs of October 6, 2020, Airship supports only Transport Layer Security (TLS) versions 1.2 and 1.3 in our APIs, in accordance with [PCI Security Standards Council](https://www.pcisecuritystandards.org/) recommendations.\n\nIf your API integration uses TLS 1.0 or 1.1, [contact our Support team](https://support.airship.com) for assistance migrating to TLS 1.2 or 1.3.\n\n### Certificate Pinning\n\nCertificate chains for Airship domains cannot be considered static. You should never pin or hardcode Intermediate or Root Certificate Authorities. Airship may rotate certificate chains at any time without notice, and pinning can cause service disruptions. This applies to all Airship-owned domains, not only the REST APIs.\n\n## Delivery Speed Options\n\nThe Airship push API is designed for extremely high throughput to ensure\ndelivery to your entire audience as fast as possible. Depending on the size and/or\ncomplexity of your audience and the urgency of the message, you may find that you need to either\nslow down or speed up the delivery. To that end, we offer the following add-on\nservices: Boost and Throttling.\n\nIf you are interested in enabling Boost or Throttling, [contact Support](https://support.airship.com/).\n\n### Boost\n\nBoost optimizes your segmented messages through parallel processing. Consider adding\nBoost if your notifications are extremely time-sensitive. Boost is a paid add-on. Contact\nyour Account Manager for details.\n\n### Throttling\n\nFor less time-sensitive messages, our standard delivery speed may cause undue pressure\non your internal systems or APIs, for example, when millions of users open your app at the\nsame time. Use Throttling to tune\ndelivery to a level that doesn't put strain on those systems.\n\n### Complex segments can cause delays in processing\n\nWhen creating segments or pushes with logical expressions, keep in mind that one or more NOT statements may cause latency when sending notifications,\nas NOT operations are inherently more expensive to perform than OR or AND operations.\nFor example, `tag_a AND NOT tag_b` is basically the same speed as\n`tag_a AND tag_b`, but just `NOT tag_b` is likely to be slower than just\n`tag_b`.\n\nLatency is more significant with larger audiences. We recommend using AND statements in place of NOT statements whenever possible as a best practice.\n\n### Device changes can take a few minutes\n\nSome requests to register or unregister information about a device may take a few minutes to process before you are able to see the changes.\nKeep this in mind when performing PUT or POST requests.\n",
     "title": "Airship API",
     "version": "V3"
   },
@@ -10703,7 +10702,8 @@
         "tags": [
           "Email"
         ],
-        "x-important": "* Attachments can be used for `transactional` sends only, not `commercial`.\n\n* Attachments cannot be used in Automations.\n\n* Attachment size is limited to 2.5 MB per attachment, with a 20 MB content size limit on each message, including content body and all attachments.\n\n* Attachment count is limited to 10 per email.\n\n* Sending attachments with malicious content is strictly prohibited. This is enforced in part by blocking file types with .bat and .exe extensions.\n\n* Attachments have a TTL (Time To Live) of 60 days.\n"
+        "x-important": "* Attachments can be used for `transactional` sends only, not `commercial`.\n\n* Attachments cannot be used in Automations.\n\n* Attachment size is limited to 2.5 MB per attachment, with a 20 MB content size limit on each message, including content body and all attachments.\n\n* Attachment count is limited to 10 per email.\n\n* Sending attachments with malicious content is strictly prohibited. This is enforced in part by blocking file types with .bat and .exe extensions.\n\n* Attachments have a TTL (Time To Live) of 60 days.\n",
+        "x-weight": 34
       }
     },
     "/api/attribute-lists": {
@@ -10751,10 +10751,11 @@
             ]
           }
         ],
-        "summary": "Retrieve lists",
+        "summary": "List attribute lists",
         "tags": [
           "Attribute Lists"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create an attributes list with a name, description, and optional metadata. After creating the list, populate it with a CSV of Text, Number, or Date attribute data using the [Upload attributes list](/developer/rest-api/ua/operations/attribute-lists/#uploadattributelist) endpoint.",
@@ -10845,7 +10846,8 @@
         "summary": "Create attributes list",
         "tags": [
           "Attribute Lists"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/api/attribute-lists/{list_name}/csv": {
@@ -10922,7 +10924,8 @@
           "Attribute Lists"
         ],
         "x-note": "A list can contain a maximum of 10 million rows and 101 columns: one identifier column and 100 attribute or internal header columns. `Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.",
-        "x-warning": "If your upload times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads."
+        "x-warning": "If your upload times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads.",
+        "x-weight": 40
       }
     },
     "/api/attribute-lists/{list_name}/errors": {
@@ -10975,12 +10978,13 @@
         "summary": "Download list errors",
         "tags": [
           "Attribute Lists"
-        ]
+        ],
+        "x-weight": 80
       }
     },
     "/api/bulk-send": {
       "post": {
-        "description": "Send an immediate message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.\n",
+        "description": "Send an immediate message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.\n",
         "operationId": "bulkSendPush",
         "requestBody": {
           "content": {
@@ -11037,12 +11041,13 @@
         "summary": "Send message with bulk ID",
         "tags": [
           "Bulk Sending"
-        ]
+        ],
+        "x-weight": 44
       }
     },
     "/api/bulk-send/validate": {
       "post": {
-        "description": "Accept the same range of payloads as POSTing to [`/api/bulk-send`](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush), but parse and validate only, without sending any messages. Before calling this endpoint, obtain a `bulk_id` using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) operation.",
+        "description": "Accept the same range of payloads as POSTing to [`/api/bulk-send`](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush), but parse and validate only, without sending any messages. Before calling this endpoint, obtain a `bulk_id` using the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) operation.",
         "operationId": "validateBulkSendPush",
         "requestBody": {
           "content": {
@@ -11095,7 +11100,8 @@
         "summary": "Validate message with bulk ID",
         "tags": [
           "Bulk Sending"
-        ]
+        ],
+        "x-weight": 42
       }
     },
     "/api/bulk/{platform_name}": {
@@ -11120,7 +11126,7 @@
         }
       ],
       "post": {
-        "description": "Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:\n- Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)\n- Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)\n\nSee [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.\n",
+        "description": "Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:\n- Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)\n- Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)\n\nSee [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.\n",
         "operationId": "bulkUploadCreateAndSendPlatform",
         "requestBody": {
           "content": {
@@ -11166,10 +11172,11 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Create bulk send audience",
+        "summary": "Upload bulk send audience",
         "tags": [
           "Bulk Sending"
-        ]
+        ],
+        "x-weight": 40
       }
     },
     "/api/channels": {
@@ -11247,11 +11254,12 @@
             ]
           }
         ],
-        "summary": "Channel listing",
+        "summary": "List channels",
         "tags": [
           "Channels"
         ],
-        "x-note": "Tags added to a channel via the [Named users tags endpoint](/developer/rest-api/ua/operations/tags/#modifynamedusertags) will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.\n"
+        "x-note": "Tags added to a channel via the [Modify named user tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags) endpoint will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.\n",
+        "x-weight": 90
       }
     },
     "/api/channels/attributes": {
@@ -11376,7 +11384,8 @@
         "tags": [
           "Channels"
         ],
-        "x-important": "Use the [Set or remove attributes on named users endpoint](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) to set or remove attributes on named users.\n"
+        "x-important": "Use the [Set or remove attributes on named user](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint to set or remove attributes on named users.\n",
+        "x-weight": 64
       }
     },
     "/api/channels/email": {
@@ -11507,7 +11516,8 @@
         "tags": [
           "Email"
         ],
-        "x-note": "Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors."
+        "x-note": "Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors.",
+        "x-weight": 30
       }
     },
     "/api/channels/email/custom-unsubscribe": {
@@ -11552,10 +11562,11 @@
             "$ref": "#/components/responses/400"
           }
         },
-        "summary": "Custom unsubscribe email channel",
+        "summary": "Unsubscribe email channel (custom)",
         "tags": [
           "Email"
-        ]
+        ],
+        "x-weight": 70
       }
     },
     "/api/channels/email/replace/{channel_id}": {
@@ -11650,7 +11661,8 @@
         "summary": "Replace email channel",
         "tags": [
           "Email"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/api/channels/email/suppress": {
@@ -11727,11 +11739,12 @@
             ]
           }
         ],
-        "summary": "Suppress an email channel",
+        "summary": "Suppress email channel",
         "tags": [
           "Email"
         ],
-        "x-note": "Suppression state types that only apply to commercial messages, such as `commercial_spam_complaint`, cannot overwrite suppression state types that also apply to transactional messages."
+        "x-note": "Suppression state types that only apply to commercial messages, such as `commercial_spam_complaint`, cannot overwrite suppression state types that also apply to transactional messages.",
+        "x-weight": 74
       }
     },
     "/api/channels/email/tags": {
@@ -11839,12 +11852,13 @@
             ]
           }
         ],
-        "summary": "Email tags",
+        "summary": "Modify email tags",
         "tags": [
           "Email",
           "Tags"
         ],
-        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative."
+        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.",
+        "x-weight": 60
       }
     },
     "/api/channels/email/uninstall": {
@@ -11908,7 +11922,8 @@
         "summary": "Uninstall email channel",
         "tags": [
           "Email"
-        ]
+        ],
+        "x-weight": 100
       }
     },
     "/api/channels/email/unsuppress": {
@@ -11972,11 +11987,12 @@
             ]
           }
         ],
-        "summary": "Remove suppression from an email channel",
+        "summary": "Remove suppression from email channel",
         "tags": [
           "Email"
         ],
-        "x-important": "Calling this endpoint will not modify commercial or transactional opt-in status to opted-in."
+        "x-important": "Calling this endpoint will not modify commercial or transactional opt-in status to opted-in.",
+        "x-weight": 64
       }
     },
     "/api/channels/email/{email}": {
@@ -12035,11 +12051,12 @@
             ]
           }
         ],
-        "summary": "Look up an email address",
+        "summary": "Look up email address",
         "tags": [
           "Email"
         ],
-        "x-note": "Emails with an `opted_out` date that is after or equal to the `opted_in` date will not be sent for that channel.\n\nA `commercial_opted_in` date is required for sending commercial emails. Transactional emails do not require a `transactional_opted_in`. This field is used in the case where a user has unsubscribed to transactional email and would like to reassert consent to receive transactional emails.\n\nThe `opt_in` property is always set to true for an email channel, so it should be ignored."
+        "x-note": "Emails with an `opted_out` date that is after or equal to the `opted_in` date will not be sent for that channel.\n\nA `commercial_opted_in` date is required for sending commercial emails. Transactional emails do not require a `transactional_opted_in`. This field is used in the case where a user has unsubscribed to transactional email and would like to reassert consent to receive transactional emails.\n\nThe `opt_in` property is always set to true for an email channel, so it should be ignored.",
+        "x-weight": 80
       },
       "put": {
         "description": "Update an email channel's opt-in and opt-out values for commercial email, transactional email, and open and click tracking.\n",
@@ -12125,11 +12142,12 @@
             ]
           }
         ],
-        "summary": "Update an email channel",
+        "summary": "Update email channel",
         "tags": [
           "Email"
         ],
-        "x-important": "If you provide an `address` in this request, it must be the one that is associated with the channel you are updating. You may not update the user's email address with this endpoint."
+        "x-important": "If you provide an `address` in this request, it must be the one that is associated with the channel you are updating. You may not update the user's email address with this endpoint.",
+        "x-weight": 50
       }
     },
     "/api/channels/open": {
@@ -12166,7 +12184,7 @@
                     "properties": {
                       "address": {
                         "description": "Where notifications sent to this `channel_id` will be sent. Examples: email address, phone number. If missing, `channel_id` must be present. The `address` is one-to-one with the `channel_id`. New addresses on existing channels will overwrite old associations.",
-                        "example": "+1 5558675309",
+                        "example": "+1 4155550123",
                         "type": "string"
                       },
                       "locale_country": {
@@ -12318,7 +12336,8 @@
           "Open Channels"
         ],
         "x-important": "The master secret is required to update an open channel, otherwise a 401 Unauthorized response is returned.",
-        "x-note": "A 200 status will be returned if an existing channel was found for the specified `open_platform_name` and address. Otherwise, a new channel will be created and a 200 status will be returned.\n"
+        "x-note": "A 200 status will be returned if an existing channel was found for the specified `open_platform_name` and address. Otherwise, a new channel will be created and a 200 status will be returned.\n",
+        "x-weight": 30
       }
     },
     "/api/channels/open/tags": {
@@ -12415,12 +12434,13 @@
             ]
           }
         ],
-        "summary": "Open channel tags",
+        "summary": "Modify open channel tags",
         "tags": [
           "Open Channels",
           "Tags"
         ],
-        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative."
+        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.",
+        "x-weight": 60
       }
     },
     "/api/channels/open/uninstall": {
@@ -12465,10 +12485,11 @@
             ]
           }
         ],
-        "summary": "Uninstall open channels",
+        "summary": "Uninstall open channel",
         "tags": [
           "Open Channels"
-        ]
+        ],
+        "x-weight": 100
       }
     },
     "/api/channels/sms": {
@@ -12611,11 +12632,12 @@
             ]
           }
         ],
-        "summary": "Register SMS channel",
+        "summary": "Register SMS channel and send opt-in prompt",
         "tags": [
           "SMS"
         ],
-        "x-note": "Avoid repeated registration attempts. Repeated registrations of the same MSISDN and sender without an `opted_in` value will result in multiple opt-in instruction messages being sent to the MSISDN."
+        "x-note": "Avoid repeated registration attempts. Repeated registrations of the same MSISDN and sender without an `opted_in` value will result in multiple opt-in instruction messages being sent to the MSISDN.",
+        "x-weight": 30
       }
     },
     "/api/channels/sms/opt-out": {
@@ -12717,7 +12739,8 @@
         "summary": "Opt-out of SMS messages",
         "tags": [
           "SMS"
-        ]
+        ],
+        "x-weight": 70
       }
     },
     "/api/channels/sms/tags": {
@@ -12830,12 +12853,13 @@
             ]
           }
         ],
-        "summary": "SMS tags",
+        "summary": "Modify SMS tags",
         "tags": [
           "SMS",
           "Tags"
         ],
-        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative."
+        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.",
+        "x-weight": 60
       }
     },
     "/api/channels/sms/uninstall": {
@@ -12937,7 +12961,8 @@
         "summary": "Uninstall SMS channel",
         "tags": [
           "SMS"
-        ]
+        ],
+        "x-weight": 100
       }
     },
     "/api/channels/sms/{channel_id}": {
@@ -13083,7 +13108,8 @@
         "summary": "Update SMS channel",
         "tags": [
           "SMS"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/api/channels/sms/{msisdn}/{sender}": {
@@ -13170,10 +13196,11 @@
             ]
           }
         ],
-        "summary": "SMS channel lookup",
+        "summary": "Look up SMS channel",
         "tags": [
           "SMS"
-        ]
+        ],
+        "x-weight": 80
       }
     },
     "/api/channels/subscription_lists": {
@@ -13257,7 +13284,8 @@
           "Channels"
         ],
         "x-important": "You must first [create a subscription list in the dashboard](/guides/audience/audience-lists/subscription/), then you can refer to its ID when subscribing users. When subscribing users, if the list has not already been created in the dashboard, then the list will be created at the same time but will not be accessible from the dashboard; the list will available for API use only.",
-        "x-note": "If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list. Otherwise, use the [Scoped named user batch operations endpoint](/developer/rest-api/ua/operations/named-users/#performnameduserscopedbatchoperations) to do so.\n"
+        "x-note": "If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list. Otherwise, use the [Perform scoped named user batch operations endpoint](/developer/rest-api/ua/operations/named-users/#performnameduserscopedbatchoperations) to do so.\n",
+        "x-weight": 68
       }
     },
     "/api/channels/tags": {
@@ -13388,12 +13416,13 @@
             ]
           }
         ],
-        "summary": "Channel tags",
+        "summary": "Modify channel tags",
         "tags": [
           "Channels",
           "Tags"
         ],
-        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative."
+        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.",
+        "x-weight": 60
       }
     },
     "/api/channels/uninstall": {
@@ -13483,7 +13512,8 @@
           "Channels",
           "Data Privacy Laws Compliance"
         ],
-        "x-note": "Channel uninstallation, like channel creation, is an asynchronous operation and may take some time to complete."
+        "x-note": "Channel uninstallation, like channel creation, is an asynchronous operation and may take some time to complete.",
+        "x-weight": 100
       }
     },
     "/api/channels/{channel_id}": {
@@ -13541,11 +13571,12 @@
             ]
           }
         ],
-        "summary": "Channel lookup",
+        "summary": "Look up channel",
         "tags": [
           "Channels"
         ],
-        "x-note": "Tags added to a channel via the [Named users tags endpoint](/developer/rest-api/ua/operations/tags/#modifynamedusertags) will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.\n"
+        "x-note": "Tags added to a channel via the [Modify named user tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags) endpoint will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.\n",
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -13582,7 +13613,7 @@
               }
             }
           },
-          "description": "Contact association requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors.",
+          "description": "Associating a contact requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors.",
           "required": true
         },
         "responses": {
@@ -13616,11 +13647,12 @@
             ]
           }
         ],
-        "summary": "Contact association",
+        "summary": "Associate contact",
         "tags": [
           "Contacts"
         ],
-        "x-note": "If the `channel_id`, `email_address`, or `msisdn` is already associated with a `contact_id`, this operation will do nothing and return a 200 status code and the existing `contact_id`."
+        "x-note": "If the `channel_id`, `email_address`, or `msisdn` is already associated with a `contact_id`, this operation will do nothing and return a 200 status code and the existing `contact_id`.",
+        "x-weight": 30
       }
     },
     "/api/contacts/attributes": {
@@ -13683,12 +13715,13 @@
             ]
           }
         ],
-        "summary": "Set or remove attributes on a contact",
+        "summary": "Set or remove attributes on contact",
         "tags": [
           "Contacts"
         ],
         "x-note": "Airship returns a `200` with a warning if you attempt to set attributes on a contact that does not exist.\n",
-        "x-tip": "If you wish to set attributes on multiple contact at once, we recommend\nusing [/api/channels/attributes](/developer/rest-api/ua/operations/channels/#modifychannelattributes) which\nsupports an `audience` object in the request body.\n"
+        "x-tip": "If you wish to set attributes on multiple contact at once, we recommend\nusing [/api/channels/attributes](/developer/rest-api/ua/operations/channels/#modifychannelattributes) which\nsupports an `audience` object in the request body.\n",
+        "x-weight": 62
       }
     },
     "/api/contacts/disassociate/{contact_id}": {
@@ -13800,10 +13833,11 @@
             ]
           }
         ],
-        "summary": "Contact disassociation",
+        "summary": "Disassociate contact",
         "tags": [
           "Contacts"
-        ]
+        ],
+        "x-weight": 70
       }
     },
     "/api/contacts/identify/v2": {},
@@ -13866,7 +13900,8 @@
         "summary": "Look up contact ID by channel ID",
         "tags": [
           "Contacts"
-        ]
+        ],
+        "x-weight": 82
       }
     },
     "/api/contacts/lookup/named_user/{named_user_id}": {
@@ -13927,7 +13962,8 @@
         "summary": "Look up contact ID by named user ID",
         "tags": [
           "Contacts"
-        ]
+        ],
+        "x-weight": 80
       }
     },
     "/api/contacts/scoped/{contact_id}": {
@@ -14002,12 +14038,13 @@
             ]
           }
         ],
-        "summary": "Scoped contact batch operations",
+        "summary": "Perform scoped contact batch operations",
         "tags": [
           "Contacts"
         ],
         "x-important": "The path parameter `contact_id` should be URL-encoded to ensure it is handled correctly.\n",
-        "x-note": "If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.\n"
+        "x-note": "If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.\n",
+        "x-weight": 52
       }
     },
     "/api/contacts/tags/": {
@@ -14127,12 +14164,13 @@
             ]
           }
         ],
-        "summary": "Contacts tags",
+        "summary": "Modify contact tags",
         "tags": [
           "Tags",
           "Contacts"
         ],
-        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per contact. Adding more than 1,000 tags per contact can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per contact, and they will help you find an alternative."
+        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per contact. Adding more than 1,000 tags per contact can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per contact, and they will help you find an alternative.",
+        "x-weight": 60
       }
     },
     "/api/content/templates": {
@@ -14251,7 +14289,8 @@
         "summary": "List content templates",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create a new content template.",
@@ -14328,7 +14367,8 @@
         "summary": "Create content template",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/api/content/templates/external/{type}/{external_id}": {
@@ -14381,7 +14421,8 @@
         "summary": "Delete content template by external ID",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 102
       },
       "get": {
         "description": "Fetch a single content template using external ID.",
@@ -14426,10 +14467,11 @@
             ]
           }
         ],
-        "summary": "Look up a content template by external ID",
+        "summary": "Look up content template by external ID",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -14518,7 +14560,8 @@
         "summary": "Create or update content template by external ID",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/api/content/templates/{template_id}": {
@@ -14571,7 +14614,8 @@
         "summary": "Delete content template",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Fetch a single content template using UUID.",
@@ -14616,10 +14660,11 @@
             ]
           }
         ],
-        "summary": "Look up a content template",
+        "summary": "Look up content template",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -14693,12 +14738,13 @@
         "summary": "Update content template",
         "tags": [
           "Content"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/api/create-and-send": {
       "post": {
-        "description": "Send messages to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).\n\n",
+        "description": "Send messages to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush).\n\n",
         "operationId": "createAndSend",
         "requestBody": {
           "content": {
@@ -14764,8 +14810,14 @@
             "description": "Because this operation sends messages, a successful response is nearly identical to a `/api/push` response."
           },
           "400": {
-            "$ref": "#/components/responses/400",
-            "description": "You can only Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response."
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "You can Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response. A `ua_msisdn` value that is malformed or does not have a real National Destination Code (NDC) will also cause a 400 response. In the US, an NDC is the area code."
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -14788,11 +14840,12 @@
             ]
           }
         ],
-        "summary": "Create and Send a message",
+        "summary": "Create and Send message",
         "tags": [
           "Bulk Sending"
         ],
-        "x-warning": "Duplicate addresses in the `create_and_send` array might receive redundant notifications or fewer notifications than expected. You should remove duplicate addresses from your request before sending a Create and Send message."
+        "x-warning": "Duplicate addresses in the `create_and_send` array might receive redundant notifications or fewer notifications than expected. You should remove duplicate addresses from your request before sending a Create and Send message.",
+        "x-weight": 20
       }
     },
     "/api/create-and-send/validate": {
@@ -14866,7 +14919,14 @@
             "description": "The payload was valid."
           },
           "400": {
-            "$ref": "#/components/responses/400"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "An invalid or missing header row will cause a 400 response. A `ua_msisdn` value that is malformed or does not have a real National Destination Code (NDC) will also cause a 400 response. In the US, an NDC is the area code."
           },
           "413": {
             "$ref": "#/components/responses/413",
@@ -14889,7 +14949,8 @@
         "summary": "Validate Create and Send payload",
         "tags": [
           "Bulk Sending"
-        ]
+        ],
+        "x-weight": 10
       }
     },
     "/api/custom-events": {
@@ -15010,7 +15071,8 @@
         "tags": [
           "Custom Events"
         ],
-        "x-note": "* Requests complete validation before returning a response.\n* Requests are authenticated with a bearer token, which can provide access to this resource alone or to this resource and others.\n* The `name` value inside `body` must not contain any uppercase characters, or the event will be rejected with a 400 status code.\n"
+        "x-note": "* Requests complete validation before returning a response.\n* Requests are authenticated with a bearer token, which can provide access to this resource alone or to this resource and others.\n* The `name` value inside `body` must not contain any uppercase characters, or the event will be rejected with a 400 status code.\n",
+        "x-weight": 30
       }
     },
     "/api/experiments": {
@@ -15090,10 +15152,11 @@
             "basicAuth": []
           }
         ],
-        "summary": "Experiment listing",
+        "summary": "List experiments",
         "tags": [
           "A/B Tests"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create an experiment. The body of the request should consist of a single experiment object. The experiment is processed and sent immediately unless a schedule is present.",
@@ -15200,11 +15263,12 @@
             "basicAuth": []
           }
         ],
-        "summary": "Create experiment (A/B Test)",
+        "summary": "Create and send experiment (A/B test)",
         "tags": [
           "A/B Tests"
         ],
-        "x-important": "The A/B Tests API is unrelated to the [current version of A/B testing](/guides/experimentation/a-b-tests/messages/). For more information about this API, including its dashboard equivalent, see [Legacy message A/B tests](/guides/experimentation/a-b-tests/messages-legacy/)."
+        "x-important": "The A/B Tests API is unrelated to the [current version of A/B testing](/guides/experimentation/a-b-tests/messages/). For more information about this API, including its dashboard equivalent, see [Legacy message A/B tests](/guides/experimentation/a-b-tests/messages-legacy/).",
+        "x-weight": 30
       }
     },
     "/api/experiments/scheduled": {
@@ -15284,10 +15348,11 @@
             "basicAuth": []
           }
         ],
-        "summary": "Scheduled experiment listing",
+        "summary": "List scheduled experiments",
         "tags": [
           "A/B Tests"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/api/experiments/scheduled/{experiment_id}": {
@@ -15337,10 +15402,11 @@
             "basicAuth": []
           }
         ],
-        "summary": "Delete experiment",
+        "summary": "Delete scheduled experiment",
         "tags": [
           "A/B Tests"
-        ]
+        ],
+        "x-weight": 100
       },
       "parameters": [
         {
@@ -15437,7 +15503,8 @@
         "summary": "Validate experiment",
         "tags": [
           "A/B Tests"
-        ]
+        ],
+        "x-weight": 10
       }
     },
     "/api/experiments/{experiment_id}": {
@@ -15479,10 +15546,11 @@
             "basicAuth": []
           }
         ],
-        "summary": "Experiment lookup",
+        "summary": "Look up experiment",
         "tags": [
           "A/B Tests"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -15499,7 +15567,7 @@
     },
     "/api/journeys/exit": {
       "post": {
-        "description": "Exits in-flight users from a [Sequence](/guides/messaging/messages/sequences/about/) identified by `triggering_id`.  Specify an `entrance_id` to exit only users from that specific entrance, or omit it to exit users that entered without an `entrance_id`.  This is a potentially long-running, asynchronous operation.",
+        "description": "Exits in-flight users from a Sequence using its configured [API Exit event](/guides/messaging/messages/sequences/create/outcomes/#api-exit) identified by `triggering_id`. Specify an `entrance_id` to exit only users that entered with that specific entrance, or omit it to exit users that entered without one. Unlike [Enter or exit users from Sequence](/developer/rest-api/ua/operations/journeys/#triggerjourneyssegment), this endpoint does not accept an audience and is a potentially long-running, asynchronous operation.",
         "operationId": "exitJourneys",
         "requestBody": {
           "content": {
@@ -15567,15 +15635,16 @@
             ]
           }
         ],
-        "summary": "Exit in-flight users from a Sequence",
+        "summary": "Exit users from Sequence",
         "tags": [
           "Journeys"
-        ]
+        ],
+        "x-weight": 100
       }
     },
     "/api/journeys/trigger": {
       "post": {
-        "description": "Enters an audience segment into a [Sequence](/guides/messaging/messages/sequences/about/) identified by `triggering_id`, or exits one from it. If multiple Sequences share a `triggering_id`, the call enters or exits audiences in all of them. Use `entrance_id` to run multiple concurrent, independent instances of the Sequence for the same users without overwriting earlier enrollments.",
+        "description": "Enters or exits the specified audience from a Sequence, based on its configured [API Entrance trigger](/guides/messaging/messages/sequences/triggers/#api-entrance) or [API Exit event](/guides/messaging/messages/sequences/create/outcomes/#api-exit) identified by `triggering_id`. If multiple Sequences share the same `triggering_id`, one call affects all of them. For an API Entrance trigger, use `entrance_id` to run multiple concurrent, independent instances of the same Sequence for the same users without overwriting earlier entries. To exit a specific user directly, provide an audience selector that identifies just them, along with the `triggering_id` of a configured API Exit event.",
         "operationId": "triggerJourneysSegment",
         "requestBody": {
           "content": {
@@ -15586,7 +15655,7 @@
                     "$ref": "#/components/schemas/audienceSelector1000"
                   },
                   "entrance_id": {
-                    "description": "A unique identifier for enrolling the same users in multiple concurrent, independent instances of a Sequence.  Each call with a different `entrance_id` creates a new enrollment without overwriting earlier ones.",
+                    "description": "A unique identifier for differentiating entries. For an API Entrance trigger, use a different `entrance_id` on each call to create concurrent, independent entries for the same user without overwriting earlier ones. For an API Exit event, `entrance_id` identifies which users to exit, based on their entrance. When omitted, users who entered without an `entrance_id` exit the Sequence, and users with an `entrance_id` remain.",
                     "maxLength": 64,
                     "minLength": 1,
                     "type": "string"
@@ -15655,10 +15724,11 @@
             ]
           }
         ],
-        "summary": "Enter or exit a Sequence",
+        "summary": "Enter or exit users from Sequence",
         "tags": [
           "Journeys"
-        ]
+        ],
+        "x-weight": 20
       }
     },
     "/api/lists": {
@@ -15706,10 +15776,11 @@
             ]
           }
         ],
-        "summary": "Retrieve lists",
+        "summary": "List static lists",
         "tags": [
           "Static Lists"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create a static list. The body of the request will contain several of the list object parameters, but the actual list content will be provided by a second call to the [upload](/developer/rest-api/ua/operations/static-lists/#updatestaticlist) endpoint. You can upload up to 100 lists per project.",
@@ -15783,7 +15854,8 @@
         "tags": [
           "Static Lists"
         ],
-        "x-note": "`Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic."
+        "x-note": "`Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.",
+        "x-weight": 30
       }
     },
     "/api/lists/{list_name}": {
@@ -15837,11 +15909,12 @@
             ]
           }
         ],
-        "summary": "Delete a list",
+        "summary": "Delete list",
         "tags": [
           "Static Lists"
         ],
-        "x-warning": "If you are attempting to update a current list by deleting it and then recreating it with new data, stop and go to the [upload endpoint](/developer/rest-api/ua/operations/static-lists/#updatestaticlist). There is no need to delete a list before uploading a new CSV file. Moreover, once you delete a list, you will be unable to create a list with the same name as the deleted list."
+        "x-warning": "If you are attempting to update a current list by deleting it and then recreating it with new data, stop and go to the [upload endpoint](/developer/rest-api/ua/operations/static-lists/#updatestaticlist). There is no need to delete a list before uploading a new CSV file. Moreover, once you delete a list, you will be unable to create a list with the same name as the deleted list.",
+        "x-weight": 100
       },
       "get": {
         "description": "Retrieve information about one static list, specified in the URL. When looking up lists, the returned information may actually be a combination of values from both the last uploaded list and the last successfully processed list. If you create a list successfully, and then you update it and the processing step fails, then the list `status` will read `failed`, but the `channel_count` and `last_modified` fields will contain information on the last successfully processed list.",
@@ -15889,10 +15962,11 @@
             ]
           }
         ],
-        "summary": "Get single list metadata",
+        "summary": "Look up static list metadata",
         "tags": [
           "Static Lists"
-        ]
+        ],
+        "x-weight": 80
       },
       "put": {
         "description": "Update the metadata (`description`, `extras`, etc.) of a static list.",
@@ -15982,7 +16056,8 @@
         "tags": [
           "Static Lists"
         ],
-        "x-note": "To update the list contents, use the [list upload](/developer/rest-api/ua/operations/static-lists/#updatestaticlist) endpoint. The update endpoint is used to update a list's metadata rather than the actual list of device identifiers."
+        "x-note": "To update the list contents, use the [list upload](/developer/rest-api/ua/operations/static-lists/#updatestaticlist) endpoint. The update endpoint is used to update a list's metadata rather than the actual list of device identifiers.",
+        "x-weight": 50
       }
     },
     "/api/lists/{list_name}/csv": {
@@ -16019,10 +16094,11 @@
             ]
           }
         ],
-        "summary": "Download a list of channels",
+        "summary": "Download list of mobile app channels",
         "tags": [
           "Static Lists"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -16097,7 +16173,8 @@
           "Static Lists"
         ],
         "x-note": "The maximum number of `identifier_type,identifier` pairs that may be uploaded to a list is 10 million. `Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.",
-        "x-warning": "If an attempt to upload a list times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads."
+        "x-warning": "If an attempt to upload a list times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads.",
+        "x-weight": 40
       }
     },
     "/api/named_users": {
@@ -16177,10 +16254,11 @@
             ]
           }
         ],
-        "summary": "Named user listing or lookup",
+        "summary": "List or look up named users",
         "tags": [
           "Named Users"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -16219,7 +16297,7 @@
               }
             }
           },
-          "description": "Named user association requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors.",
+          "description": "Associating a named user requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent \"channel does not exist\" errors.",
           "required": true
         },
         "responses": {
@@ -16262,11 +16340,12 @@
             ]
           }
         ],
-        "summary": "Named users association",
+        "summary": "Associate named user",
         "tags": [
           "Named Users"
         ],
-        "x-warning": "If a channel has an assigned named user and you make an additional call to associate that same channel with a new named user, the original named user association will be removed and the new named user and associated data will take its place. Additionally, all tags associated to the original named user cannot be used to address this channel unless they are also associated with the new named user."
+        "x-warning": "If a channel has an assigned named user and you make an additional call to associate that same channel with a new named user, the original named user association will be removed and the new named user and associated data will take its place. Additionally, all tags associated to the original named user cannot be used to address this channel unless they are also associated with the new named user.",
+        "x-weight": 30
       }
     },
     "/api/named_users/disassociate": {
@@ -16335,10 +16414,11 @@
             ]
           }
         ],
-        "summary": "Named users disassociation",
+        "summary": "Disassociate named user",
         "tags": [
           "Named Users"
-        ]
+        ],
+        "x-weight": 70
       }
     },
     "/api/named_users/scoped/{named_user_id}": {
@@ -16418,12 +16498,13 @@
             ]
           }
         ],
-        "summary": "Scoped named user batch operations",
+        "summary": "Perform scoped named user batch operations",
         "tags": [
           "Named Users"
         ],
         "x-important": "The path parameter `named_user_id` should be URL-encoded to ensure it is handled correctly.\nRequirements of `named_user_id` can be found [here](#operation-api-named_users-associate-post-associate-channel_id-with-named-user-named_user_id).\n",
-        "x-note": "If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.\n"
+        "x-note": "If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.\n",
+        "x-weight": 52
       }
     },
     "/api/named_users/tags": {
@@ -16555,12 +16636,13 @@
             ]
           }
         ],
-        "summary": "Named users tags",
+        "summary": "Modify named user tags",
         "tags": [
           "Named Users",
           "Tags"
         ],
-        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per named user. Adding more than 1,000 tags per named user can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per named user, and they will help you find an alternative."
+        "x-important": "A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.\nWe support up to 1,000 tags per named user. Adding more than 1,000 tags per named user can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per named user, and they will help you find an alternative.",
+        "x-weight": 60
       }
     },
     "/api/named_users/uninstall": {
@@ -16642,12 +16724,13 @@
             ]
           }
         ],
-        "summary": "Named users uninstall",
+        "summary": "Uninstall named users",
         "tags": [
           "Named Users",
           "Data Privacy Laws Compliance"
         ],
-        "x-note": "Channel uninstallation, like channel creation, is an asynchronous operation and may take some time to complete."
+        "x-note": "Channel uninstallation, like channel creation, is an asynchronous operation and may take some time to complete.",
+        "x-weight": 100
       }
     },
     "/api/named_users/{named_user_id}": {
@@ -16739,12 +16822,13 @@
             ]
           }
         ],
-        "summary": "Named user update",
+        "summary": "Create or update named user",
         "tags": [
           "Named Users"
         ],
         "x-important": "We support up to 1,000 tags per named user. Adding more than 1,000 tags per named user can cause latency and service interruptions.\nWe strongly recommend removing unused tags whenever possible, and using custom events when appropriate.\nPlease [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per named user, and they will help you find an alternative.\n",
-        "x-warning": "If a channel has an assigned named user and you make an additional\ncall to associate that same channel with a new named user, the\noriginal named user association will be removed and the new named user\nand associated data will take its place. Additionally, all tags\nassociated to the original named user cannot be used to address this\nchannel unless they are also associated with the new named user.\n"
+        "x-warning": "If a channel has an assigned named user and you make an additional\ncall to associate that same channel with a new named user, the\noriginal named user association will be removed and the new named user\nand associated data will take its place. Additionally, all tags\nassociated to the original named user cannot be used to address this\nchannel unless they are also associated with the new named user.\n",
+        "x-weight": 50
       }
     },
     "/api/named_users/{named_user_id}/attributes": {
@@ -16827,12 +16911,13 @@
             ]
           }
         ],
-        "summary": "Set or remove attributes on named users",
+        "summary": "Set or remove attributes on named user",
         "tags": [
           "Named Users"
         ],
         "x-note": "Airship returns a `200` with a warning if you attempt to set attributes on a named user that does not exist.\n",
-        "x-tip": "If you wish to set attributes on multiple named users at once, we recommend\nusing [/api/channels/attributes](/developer/rest-api/ua/operations/channels/#modifychannelattributes) which\nsupports an `audience` object in the request body.\n"
+        "x-tip": "If you wish to set attributes on multiple named users at once, we recommend\nusing [/api/channels/attributes](/developer/rest-api/ua/operations/channels/#modifychannelattributes) which\nsupports an `audience` object in the request body.\n",
+        "x-weight": 62
       }
     },
     "/api/pipelines": {
@@ -16906,7 +16991,8 @@
         "summary": "List existing pipelines",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create one or more pipelines. You can provide a single [pipeline object](/developer/rest-api/ua/schemas/pipeline-objects/#pipelineobject) or an array of [pipeline objects](/developer/rest-api/ua/schemas/pipeline-objects/#pipelineobject).",
@@ -16999,10 +17085,11 @@
             ]
           }
         ],
-        "summary": "Create pipeline (automated message)",
+        "summary": "Create pipelines (automated message)",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/api/pipelines/constraints": {
@@ -17056,7 +17143,8 @@
         "summary": "List pipelines constraints",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 98
       },
       "put": {
         "description": "Update the pipelines constraints.",
@@ -17116,7 +17204,8 @@
         "summary": "Update pipelines constraints",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/api/pipelines/deleted": {
@@ -17206,7 +17295,8 @@
         "summary": "List deleted pipelines",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 94
       }
     },
     "/api/pipelines/filtered": {
@@ -17247,7 +17337,8 @@
         "summary": "List filtered pipelines",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -17412,10 +17503,11 @@
             ]
           }
         ],
-        "summary": "List pipelines limits",
+        "summary": "Get pipelines limits and counts",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 96
       }
     },
     "/api/pipelines/validate": {
@@ -17501,10 +17593,11 @@
             ]
           }
         ],
-        "summary": "Validate pipeline",
+        "summary": "Validate pipelines",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 10
       }
     },
     "/api/pipelines/{pipeline_id}": {
@@ -17542,7 +17635,8 @@
         "summary": "Delete pipeline",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Fetch a single pipeline resource. Returns an array containing a single pipeline object in the `pipeline` attribute.",
@@ -17581,10 +17675,11 @@
             ]
           }
         ],
-        "summary": "Individual pipeline lookup",
+        "summary": "Look up pipeline",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -17681,7 +17776,8 @@
         "summary": "Update pipeline",
         "tags": [
           "Automation"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/api/push": {
@@ -17770,10 +17866,11 @@
             ]
           }
         ],
-        "summary": "Send a push",
+        "summary": "Send pushes",
         "tags": [
           "Push"
-        ]
+        ],
+        "x-weight": 20
       }
     },
     "/api/push/validate": {
@@ -17869,10 +17966,11 @@
             ]
           }
         ],
-        "summary": "Validate a push",
+        "summary": "Validate pushes",
         "tags": [
           "Push"
-        ]
+        ],
+        "x-weight": 10
       }
     },
     "/api/regions": {
@@ -17956,10 +18054,11 @@
             "basicAuth": []
           }
         ],
-        "summary": "Region listing",
+        "summary": "List regions",
         "tags": [
           "Regions"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/api/regions/{region_id}": {
@@ -18010,10 +18109,11 @@
             "basicAuth": []
           }
         ],
-        "summary": "Region lookup",
+        "summary": "Look up region",
         "tags": [
           "Regions"
-        ]
+        ],
+        "x-weight": 80
       }
     },
     "/api/reports/activity/details": {
@@ -18045,10 +18145,11 @@
             ]
           }
         ],
-        "summary": "Activity log report",
+        "summary": "Get activity log report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 99
       },
       "parameters": [
         {
@@ -18169,10 +18270,11 @@
             ]
           }
         ],
-        "summary": "Devices report",
+        "summary": "Get devices report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 94
       }
     },
     "/api/reports/events": {
@@ -18325,10 +18427,11 @@
             ]
           }
         ],
-        "summary": "Custom events detail listing",
+        "summary": "List custom events details",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 98
       }
     },
     "/api/reports/events/summary/pergroup/{group_id}": {
@@ -18401,10 +18504,11 @@
             ]
           }
         ],
-        "summary": "Custom events per group summary",
+        "summary": "Get custom events per group summary",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 89
       },
       "parameters": [
         {
@@ -18490,10 +18594,11 @@
             ]
           }
         ],
-        "summary": "Custom events per push summary",
+        "summary": "Get custom events per push summary",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 88
       },
       "parameters": [
         {
@@ -18594,10 +18699,11 @@
             ]
           }
         ],
-        "summary": "Experiment variant report",
+        "summary": "Get experiment variant report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 87
       },
       "parameters": [
         {
@@ -18753,10 +18859,11 @@
             ]
           }
         ],
-        "summary": "Experiment overview report",
+        "summary": "Get experiment overview report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 86
       },
       "parameters": [
         {
@@ -18870,10 +18977,11 @@
             ]
           }
         ],
-        "summary": "App opens report",
+        "summary": "Get app opens report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 95
       }
     },
     "/api/reports/optins": {
@@ -18974,10 +19082,11 @@
             ]
           }
         ],
-        "summary": "Opt-in report",
+        "summary": "Get opt-in report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 97
       }
     },
     "/api/reports/optouts": {
@@ -19078,10 +19187,11 @@
             ]
           }
         ],
-        "summary": "Opt-out report",
+        "summary": "Get opt-out report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 97
       }
     },
     "/api/reports/pergroup/detail/{group_id}": {
@@ -19113,10 +19223,11 @@
             ]
           }
         ],
-        "summary": "Per group push detail report",
+        "summary": "Get per group push detail report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 84
       },
       "parameters": [
         {
@@ -19160,10 +19271,11 @@
             ]
           }
         ],
-        "summary": "Per group push time series report",
+        "summary": "Get per group push time series report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 85
       },
       "parameters": [
         {
@@ -19243,10 +19355,11 @@
             ]
           }
         ],
-        "summary": "Per push detail report",
+        "summary": "Get per push detail report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 81
       },
       "parameters": [
         {
@@ -19295,10 +19408,11 @@
             ]
           }
         ],
-        "summary": "Push body per push",
+        "summary": "Get per push body report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -19342,10 +19456,11 @@
             ]
           }
         ],
-        "summary": "Per push time series report",
+        "summary": "Get per push time series report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 83
       },
       "parameters": [
         {
@@ -19489,10 +19604,11 @@
             ]
           }
         ],
-        "summary": "Response report",
+        "summary": "Get response report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 91
       }
     },
     "/api/reports/responses/list": {
@@ -19629,11 +19745,12 @@
             ]
           }
         ],
-        "summary": "Response listing",
+        "summary": "List pushes with response details",
         "tags": [
           "Reports"
         ],
-        "x-note": "If you don't specify a `start` and `end` time, the system\nassumes 00:00 UTC, which will provide results through\nthe previous day.\n\n\nUse timestamps to get results for a specific time period. If only using the date, set it in the future to ensure you\nwill see the most recent listing.\n"
+        "x-note": "If you don't specify a `start` and `end` time, the system\nassumes 00:00 UTC, which will provide results through\nthe previous day.\n\n\nUse timestamps to get results for a specific time period. If only using the date, set it in the future to ensure you\nwill see the most recent listing.\n",
+        "x-weight": 92
       }
     },
     "/api/reports/responses/{push_id}": {
@@ -19714,10 +19831,11 @@
             ]
           }
         ],
-        "summary": "Individual push response statistics",
+        "summary": "Get individual push response statistics",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -19831,10 +19949,11 @@
             ]
           }
         ],
-        "summary": "Push report",
+        "summary": "Get push report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/api/reports/timeinapp": {
@@ -19935,10 +20054,11 @@
             ]
           }
         ],
-        "summary": "Time in app report",
+        "summary": "Get time in app report",
         "tags": [
           "Reports"
-        ]
+        ],
+        "x-weight": 96
       }
     },
     "/api/reports/web/interaction": {
@@ -20028,11 +20148,12 @@
             ]
           }
         ],
-        "summary": "Web response report",
+        "summary": "Get web response report",
         "tags": [
           "Reports"
         ],
-        "x-note": "If you don't specify an `end` time, the system assumes 00:00 UTC, which will provide results through the previous day.\n"
+        "x-note": "If you don't specify an `end` time, the system assumes 00:00 UTC, which will provide results through the previous day.\n",
+        "x-weight": 93
       }
     },
     "/api/schedules": {
@@ -20119,7 +20240,8 @@
         "summary": "List schedules",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Scheduled notifications are created by POSTing to the schedule URI. The body of the request must be one of a single [schedule object](/developer/rest-api/ua/schemas/schedules/#scheduleobject) or an array of one or more schedule objects.",
@@ -20271,15 +20393,16 @@
             ]
           }
         ],
-        "summary": "Schedule a notification",
+        "summary": "Schedule notifications",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/api/schedules/bulk-send": {
       "post": {
-        "description": "Schedule a message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.\n",
+        "description": "Schedule a message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.\n",
         "operationId": "scheduleBulkSendPush",
         "requestBody": {
           "content": {
@@ -20336,12 +20459,13 @@
         "summary": "Schedule message with bulk ID",
         "tags": [
           "Bulk Sending"
-        ]
+        ],
+        "x-weight": 46
       }
     },
     "/api/schedules/create-and-send": {
       "post": {
-        "description": "Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).\n",
+        "description": "Schedule a [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend). Unknown identifiers are registered as new channels. This endpoint supports two audience methods:\n\n- `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.\n\n\n- `bulk_id`: For larger audiences, upload a CSV using the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.\n\n\nExisting channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.\n\n\nNote: This endpoint also accepts channel IDs for app or web via `bulk_id`, but this works identically to [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush).\n",
         "operationId": "scheduleCreateAndSendOperations",
         "requestBody": {
           "content": {
@@ -20444,8 +20568,14 @@
             "description": "Because this operation sends messages, a successful response is nearly identical to a `/api/push` response."
           },
           "400": {
-            "$ref": "#/components/responses/400",
-            "description": "You can only Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response."
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/error"
+                }
+              }
+            },
+            "description": "You can Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response. A `ua_msisdn` value that is malformed or does not have a real National Destination Code (NDC) will also cause a 400 response. In the US, an NDC is the area code."
           },
           "401": {
             "$ref": "#/components/responses/401"
@@ -20468,11 +20598,12 @@
             ]
           }
         ],
-        "summary": "Schedule a Create and Send message",
+        "summary": "Schedule Create and Send message",
         "tags": [
           "Bulk Sending"
         ],
-        "x-warning": "Duplicate addresses in the `create_and_send` array might receive redundant notifications or fewer notifications than expected. You should remove duplicate addresses from your request before sending a Create and Send message."
+        "x-warning": "Duplicate addresses in the `create_and_send` array might receive redundant notifications or fewer notifications than expected. You should remove duplicate addresses from your request before sending a Create and Send message.",
+        "x-weight": 22
       }
     },
     "/api/schedules/{schedule_id}": {
@@ -20510,7 +20641,8 @@
         "summary": "Delete schedule",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Fetch the current definition of a single schedule resource. Returns a single schedule object.",
@@ -20549,10 +20681,11 @@
             ]
           }
         ],
-        "summary": "List a specific schedule",
+        "summary": "Look up schedule",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -20677,7 +20810,8 @@
         "summary": "Update schedule",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/api/schedules/{schedule_id}/pause": {
@@ -20783,11 +20917,12 @@
             ]
           }
         ],
-        "summary": "Pause a schedule",
+        "summary": "Pause schedule",
         "tags": [
           "Schedules"
         ],
-        "x-note": "Paused schedules bear a `\"paused\": true` boolean.\n"
+        "x-note": "Paused schedules bear a `\"paused\": true` Boolean.\n",
+        "x-weight": 52
       }
     },
     "/api/schedules/{schedule_id}/resume": {
@@ -20893,11 +21028,12 @@
             ]
           }
         ],
-        "summary": "Resume a schedule",
+        "summary": "Resume schedule",
         "tags": [
           "Schedules"
         ],
-        "x-note": "Paused schedules bear a `\"paused\": true` boolean.\n"
+        "x-note": "Paused schedules bear a `\"paused\": true` Boolean.\n",
+        "x-weight": 54
       }
     },
     "/api/segments": {
@@ -20990,12 +21126,18 @@
           },
           {
             "bearerAuth": []
+          },
+          {
+            "oauth2Token": [
+              "seg"
+            ]
           }
         ],
-        "summary": "Segment listing",
+        "summary": "List segments",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create a new segment.",
@@ -21077,12 +21219,18 @@
           },
           {
             "bearerAuth": []
+          },
+          {
+            "oauth2Token": [
+              "seg"
+            ]
           }
         ],
         "summary": "Create segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/api/segments/{segment_id}": {
@@ -21107,12 +21255,18 @@
           },
           {
             "bearerAuth": []
+          },
+          {
+            "oauth2Token": [
+              "seg"
+            ]
           }
         ],
         "summary": "Delete segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Lookup a segment.",
@@ -21141,12 +21295,18 @@
           },
           {
             "bearerAuth": []
+          },
+          {
+            "oauth2Token": [
+              "seg"
+            ]
           }
         ],
-        "summary": "Segment lookup",
+        "summary": "Look up segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -21214,13 +21374,19 @@
           },
           {
             "bearerAuth": []
+          },
+          {
+            "oauth2Token": [
+              "seg"
+            ]
           }
         ],
         "summary": "Update segment",
         "tags": [
           "Segments"
         ],
-        "x-note": "Segmentation data is evaluated at send time. If you schedule a message that targets a segment and then edit that segment, the scheduled message automatically uses the updated segment criteria. \"Scheduled\" includes recurring messages."
+        "x-note": "Segmentation data is evaluated at send time. If you schedule a message that targets a segment and then edit that segment, the scheduled message automatically uses the updated segment criteria. \"Scheduled\" includes recurring messages.",
+        "x-weight": 50
       }
     },
     "/api/sms/custom-response": {
@@ -21343,10 +21509,11 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Custom SMS response",
+        "summary": "Send custom SMS response",
         "tags": [
           "SMS"
-        ]
+        ],
+        "x-weight": 22
       }
     },
     "/api/sms/{msisdn}/keywords": {
@@ -21445,10 +21612,11 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Manually trigger a keyword interaction",
+        "summary": "Trigger keyword interaction manually",
         "tags": [
           "SMS"
-        ]
+        ],
+        "x-weight": 20
       }
     },
     "/api/subscription_lists": {
@@ -21496,10 +21664,11 @@
             ]
           }
         ],
-        "summary": "Subscription lists listing",
+        "summary": "List subscription lists",
         "tags": [
           "Subscription Lists"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/api/subscription_lists/named_users/{named_user_id}": {
@@ -21556,10 +21725,11 @@
             ]
           }
         ],
-        "summary": "Named user subscription lists listing",
+        "summary": "List named user subscription lists",
         "tags": [
           "Subscription Lists"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -21618,11 +21788,12 @@
             ]
           }
         ],
-        "summary": "Retrieve lists",
+        "summary": "List tag lists",
         "tags": [
           "Tag Lists"
         ],
-        "x-note": "The tag list content will return the data provided in the [tag list creation](/developer/rest-api/ua/operations/tag-lists/#createtaglist) operation. Although `add`, `remove`, and `set` are optional, one or more must be present."
+        "x-note": "The tag list content will return the data provided in the [tag list creation](/developer/rest-api/ua/operations/tag-lists/#createtaglist) operation. Although `add`, `remove`, and `set` are optional, one or more must be present.",
+        "x-weight": 90
       },
       "post": {
         "description": "Add tags to your contacts by creating a list and uploading CSV file with user identifiers. The body of the request contains the name, description, and optional metadata for the list. After you define a list, you populate it with a call to the [Upload Tag List](/developer/rest-api/ua/operations/tag-lists/#uploadtaglist) endpoint.",
@@ -21694,11 +21865,12 @@
             ]
           }
         ],
-        "summary": "Create a tag list",
+        "summary": "Create tag list",
         "tags": [
           "Tag Lists"
         ],
-        "x-important": "You must prefix tag list names with `\"ua_tags_\"`."
+        "x-important": "You must prefix tag list names with `\"ua_tags_\"`.",
+        "x-weight": 30
       }
     },
     "/api/tag-lists/{list_name}": {
@@ -21744,7 +21916,8 @@
         "summary": "Delete tag list",
         "tags": [
           "Tag Lists"
-        ]
+        ],
+        "x-weight": 100
       }
     },
     "/api/tag-lists/{list_name}/csv": {
@@ -21821,7 +21994,8 @@
           "Tag Lists"
         ],
         "x-note": "The maximum number of rows that may be uploaded to a list is 10 million. `Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.",
-        "x-warning": "If your upload times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads."
+        "x-warning": "If your upload times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads.",
+        "x-weight": 40
       }
     },
     "/api/tag-lists/{list_name}/errors": {
@@ -21874,7 +22048,8 @@
         "summary": "Download list errors",
         "tags": [
           "Tag Lists"
-        ]
+        ],
+        "x-weight": 80
       }
     },
     "/api/templates": {
@@ -21991,7 +22166,8 @@
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 90
       },
       "post": {
         "description": "Create a new template.",
@@ -22093,7 +22269,8 @@
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 30
       }
     },
     "/api/templates/push": {
@@ -22188,11 +22365,12 @@
             ]
           }
         ],
-        "summary": "Push to template",
+        "summary": "Send templated pushes",
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 20
       }
     },
     "/api/templates/push/validate": {
@@ -22267,11 +22445,12 @@
             ]
           }
         ],
-        "summary": "Validate a template",
+        "summary": "Validate templated pushes",
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 10
       }
     },
     "/api/templates/schedules": {
@@ -22443,11 +22622,12 @@
             ]
           }
         ],
-        "summary": "Schedule a templated push",
+        "summary": "Schedule templated pushes",
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 22
       }
     },
     "/api/templates/{template_id}": {
@@ -22496,7 +22676,8 @@
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 100
       },
       "get": {
         "description": "Fetch the current definition of a single template.",
@@ -22536,11 +22717,12 @@
             "basicAuth": []
           }
         ],
-        "summary": "Look up a template",
+        "summary": "Look up template",
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -22641,7 +22823,8 @@
         "tags": [
           "Personalization"
         ],
-        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n"
+        "x-note": "The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.\n",
+        "x-weight": 50
       }
     },
     "/api/user/messages/batch-delete": {
@@ -22760,7 +22943,8 @@
         "summary": "Delete multiple messages from inbox",
         "tags": [
           "Push"
-        ]
+        ],
+        "x-weight": 110
       }
     },
     "/api/user/messages/{push_id}": {
@@ -22795,7 +22979,8 @@
         "tags": [
           "Push"
         ],
-        "x-note": "For time-sensitive messages, set an `expiry` on the [In-app message object](/developer/rest-api/ua/schemas/push/#inappobject) so you don't have to delete them manually."
+        "x-note": "For time-sensitive messages, set an `expiry` on the [In-app message object](/developer/rest-api/ua/schemas/push/#inappobject) so you don't have to delete them manually.",
+        "x-weight": 100
       }
     },
     "/token": {
@@ -22914,7 +23099,8 @@
         "tags": [
           "OAuth"
         ],
-        "x-note": "When using the OAuth token for Airship API endpoints, make sure your requests are using the appropriate [domain in the base URL](/developer/rest-api/ua/introduction/#servers).\n\nThis example uses the OAuth token to list channels on Airship's North American cloud site: {{< highlight \"bash\" >}} curl --location 'https://api.asnapius.com/api/channels/' \\\n --header 'Accept: application/vnd.urbanairship+json; version=3;' \\\n --header 'Authorization: Bearer {OAUTH_ACCESS_TOKEN}'\n{{< /highlight >}}\n\n"
+        "x-note": "When using the OAuth token for Airship API endpoints, make sure your requests are using the appropriate [domain in the base URL](/developer/rest-api/ua/introduction/#servers).\n\nThis example uses the OAuth token to list channels on Airship's North American cloud site: {{< highlight \"bash\" >}} curl --location 'https://api.asnapius.com/api/channels/' \\\n --header 'Accept: application/vnd.urbanairship+json; version=3;' \\\n --header 'Authorization: Bearer {OAUTH_ACCESS_TOKEN}'\n{{< /highlight >}}\n\n",
+        "x-weight": 30
       }
     },
     "/verify/public_key/{kid}": {
@@ -22952,10 +23138,11 @@
             "description": "The requested resource doesn't exist."
           }
         },
-        "summary": "Verify public key",
+        "summary": "Look up public key",
         "tags": [
           "OAuth"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -23044,7 +23231,7 @@
       "x-card-description": "Manage app and web channels"
     },
     {
-      "description": "Open channels are custom communication channels that you can configure for messaging, using the same segmentation and scheduling tools available on natively-supported platforms (iOS, Android, etc.). With open channels, you define a new open platform, e.g., SMS, Slack, Acme™ Smart Toasters, and register the new platform with Airship.\n\n  If you are sending through the [Push API](/developer/rest-api/ua/operations/push/), platform overrides for open platforms are covered in [Open Channel Overrides](/developer/rest-api/ua/schemas/platform-overrides/#openchanneloverrideobject). For open channel lookup, use the [Channel Lookup endpoint](/developer/rest-api/ua/operations/channels/#getchannel).",
+      "description": "Open channels are custom communication channels that you can configure for messaging, using the same segmentation and scheduling tools available on natively-supported platforms (iOS, Android, etc.). With open channels, you define a new open platform, e.g., SMS, Slack, Acme™ Smart Toasters, and register the new platform with Airship.\n\n  If you are sending through the [Push API](/developer/rest-api/ua/operations/push/), platform overrides for open platforms are covered in [Open Channel Overrides](/developer/rest-api/ua/schemas/platform-overrides/#openchanneloverrideobject). For open channel lookup, use the [Look up channel](/developer/rest-api/ua/operations/channels/#getchannel) endpoint.",
       "name": "Open Channels",
       "x-card-description": "Configure custom messaging channels"
     },
@@ -23078,7 +23265,7 @@
       "description": "Set Text, Number, and Date attributes on channels or named users in bulk by uploading a CSV.",
       "name": "Attribute Lists",
       "x-card-description": "Set attributes in bulk by CSV upload",
-      "x-note": "To set JSON attributes, use the [Set or remove attributes on channels](/developer/rest-api/ua/operations/channels/#modifychannelattributes) or [Set or remove attributes on named users](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint, or the Airship SDKs. For more information, see [Setting and removing JSON attributes](/guides/audience/attributes/setting/#setting-and-removing-json-attributes)."
+      "x-note": "To set JSON attributes, use the [Set or remove attributes on channels](/developer/rest-api/ua/operations/channels/#modifychannelattributes) or [Set or remove attributes on named user](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint, or the Airship SDKs. For more information, see [Setting and removing JSON attributes](/guides/audience/attributes/setting/#setting-and-removing-json-attributes)."
     },
     {
       "description": "With the Static List API endpoint, you can target and manage lists of devices that are defined in systems outside of Airship. Any list or grouping of devices for which the canonical source of data about the members is elsewhere is a good candidate for Static Lists, e.g., members of a customer loyalty program. In the dashboard, they are referred to as [uploaded lists](/guides/audience/audience-lists/uploaded/).\n\nAirship automatically deletes a Static list and all its versions after 90 days of inactivity. Timestamps used to calculate the 90-day period are the creation date, when updating list contents or metadata, and when sending a message (pushing) to the list. The creation date is the initial day one of the 90-day period. Each instance of updating or sending to the list resets the timestamp to day one.\n\nAfter automatic deletion or deleting from the Airship dashboard, the list is removed from the upload history, is no longer visible in the Airship dashboard or through API calls, and is no longer available for audience segmentation.",
@@ -23086,7 +23273,7 @@
       "x-card-description": "Manage static device lists"
     },
     {
-      "description": "Target recipients of a single channel type by providing audience identifiers at send time. Bulk sending supports two methods:\n\n* **Upload and Send** targets existing channels by channel ID across app, web, email, SMS, and open channels. Upload a CSV of channel IDs to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush) endpoint.\n\n* **Create and Send** sends to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels.\n\n  * For smaller audiences, use the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoints to provide email addresses, MSISDNs, or open channel addresses in an array.\n\n  * For larger audiences, upload identifiers in CSV format to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoint.\n\n\nSee the [Bulk sending](/guides/messaging/bulk-sending/) guide for more information.\n",
+      "description": "Target recipients of a single channel type by providing audience identifiers at send time. Bulk sending supports two methods:\n\n* **Upload and Send** targets existing channels by channel ID across app, web, email, SMS, and open channels. Upload a CSV of channel IDs to the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush) endpoint.\n\n* **Create and Send** sends to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels.\n\n  * For smaller audiences, use the [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoints to provide email addresses, MSISDNs, or open channel addresses in an array.\n\n  * For larger audiences, upload identifiers in CSV format to the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoint.\n\n\nSee the [Bulk sending](/guides/messaging/bulk-sending/) guide for more information.\n",
       "name": "Bulk Sending",
       "x-card-description": "Send to audiences via CSV upload"
     },
@@ -23122,7 +23309,7 @@
       "x-card-description": "Query billable audience counts"
     },
     {
-      "description": "Manage audience entry and exit for [Sequences](/guides/messaging/messages/sequences/about/) using the `/api/journeys` endpoints.",
+      "description": "Manage audience entry and exit for [Sequences](/guides/messaging/messages/sequences/about/) using the `/api/journeys` endpoints:\n\n* **[Enter or exit users from Sequence](/developer/rest-api/ua/operations/journeys/#triggerjourneyssegment)** can be used for either direction.\n\n* **[Exit users from Sequence](/developer/rest-api/ua/operations/journeys/#exitjourneys)** is exclusively for removing users already entered into the Sequence, and supports asynchronous bulk removal.\n",
       "name": "Journeys",
       "x-card-description": "Manage audience entry and exit for Sequences"
     }

@@ -292,7 +292,7 @@ components:
               type: object
           type: object
         experiment:
-          description: A boolean value indicating whether or not the push is an experiment.
+          description: A Boolean value indicating whether or not the push is an experiment.
           type: boolean
         push_id:
           description: Unique identifier that represents a specific push message delivery.
@@ -1159,7 +1159,7 @@ components:
           description: The user's work phone number — similar to an SMS channel `msisdn`.
           type: integer
         zipcode:
-          description: A user's zipcode. This is different from the SMS channel `ua_ndc` attribute, that records user's area code or phone number prefix.
+          description: A user's zipcode. This is different from the SMS channel `ua_ndc` attribute, which records a user's National Destination Code (NDC) or phone number prefix.
           type: integer
       title: Custom and predefined attributes
       type: object
@@ -1167,7 +1167,7 @@ components:
       x-weight: 2
     attributesArray:
       description: |
-        The array can hold string, number, boolean, objects, and array.  Accepts numbers and strings for integer/number type attributes, but your string must be convertible to a number or the request will fail. Objects must be valid JSON or the request will fail.
+        The array can hold string, number, Boolean, objects, and array.  Accepts numbers and strings for integer/number type attributes, but your string must be convertible to a number or the request will fail. Objects must be valid JSON or the request will fail.
       items:
         oneOf:
           - type: string
@@ -1253,7 +1253,7 @@ components:
           properties:
             bulk_id:
               description: |
-                A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
+                A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
               format: uuid
               type: string
           required:
@@ -1381,7 +1381,7 @@ components:
       required:
         - contact_id
         - channel_id
-      title: Contact association payload with channel ID
+      title: Associate contact payload with channel ID
       type: object
       x-inline-component: true
     channelIdNamedUserAssociation:
@@ -1403,7 +1403,7 @@ components:
       required:
         - named_user_id
         - channel_id
-      title: Named user association payload with channel ID
+      title: Associate named user payload with channel ID
       type: object
       x-inline-component: true
     channelIdNamedUserDisassociation:
@@ -1433,7 +1433,7 @@ components:
           type: string
       required:
         - channel_id
-      title: Named user disassociation payload with channel ID
+      title: Disassociate named user payload with channel ID
       type: object
       x-inline-component: true
     channelListingObject:
@@ -1678,7 +1678,7 @@ components:
               title: substitutions
             properties:
               ua_msisdn:
-                description: The phone number of a mobile device. Include the numeric country code, using digits only and no leading `+`. For example, a US number is `15558675309`. Entries with `ua_msisdn` values that are not reachable by `ua_sender` values will be silently dropped.
+                description: The phone number of a mobile device. Include the numeric country code, using digits only and no leading `+`. For example, a US number is `14155550123`. A properly formatted `ua_msisdn` value that is not reachable by the `ua_sender` value is accepted, but the message is silently dropped.
                 type: string
               ua_opted_in:
                 description: |
@@ -1790,7 +1790,7 @@ components:
       title: Event selector
       x-schema-tag: Pipeline objects
     compoundSelector:
-      description: Compound selectors combine boolean operators (AND, OR, or NOT) with atomic or nested compound selectors.
+      description: Compound selectors combine Boolean operators (AND, OR, or NOT) with atomic or nested compound selectors.
       oneOf:
         - description: AND selector
           properties:
@@ -1841,7 +1841,7 @@ components:
         A single condition set or array of condition sets. It is a collection of one or more conditions and an operator for combining them, in the case
         that there are multiple conditions. A condition set follows the same general syntax as a compound selector. It is a JSON dictionary with a single
         key indicating the operator. The key's value is an array of one or more condition objects. Taken together, the operator and set of conditions form
-        a boolean expression which must evaluate to true for a pipeline to be activated and its outcomes executed. Valid operators for a condition set are
+        a Boolean expression which must evaluate to true for a pipeline to be activated and its outcomes executed. Valid operators for a condition set are
         `and` and `or`. This field is evaluated before the pipeline is `entered` and only evaluated against events for the triggers on which they are set,
         which is noticeable when using multiple triggers.
       items:
@@ -2440,9 +2440,6 @@ components:
         ua_browser_version:
           description: The browser version associated with a web channel.
           type: string
-        ua_carrier:
-          description: The cellular carrier of the device associated with an app channel.
-          type: string
         ua_country:
           description: The 2-letter country code for an app or web channel.
           type: string
@@ -2471,7 +2468,7 @@ components:
             - 'false'
           type: string
         ua_ndc:
-          description: The National Destination Code aka area code derived from the MSISDN on an SMS channel.
+          description: The National Destination Code (NDC) derived from the MSISDN on an SMS channel. In the US, an NDC is the area code.
           type: string
         ua_rcs_enabled:
           description: Rich Communication Services (RCS) capability for an SMS channel. Set to `true` when an RCS upgrade delivery receipt is received.
@@ -2520,7 +2517,7 @@ components:
             - properties:
                 bulk_id:
                   description: |
-                    A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
+                    A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
                   format: uuid
                   type: string
               required:
@@ -2563,7 +2560,7 @@ components:
       required:
         - contact_id
         - email_address
-      title: Contact association payload with email address
+      title: Associate contact payload with email address
       type: object
       x-inline-component: true
     emailAddressNamedUserAssociation:
@@ -2583,7 +2580,7 @@ components:
       required:
         - named_user_id
         - email_address
-      title: Named user association payload with email address
+      title: Associate named user payload with email address
       type: object
       x-inline-component: true
     emailAddressNamedUserDisassociation:
@@ -2602,7 +2599,7 @@ components:
           type: string
       required:
         - email_address
-      title: Named user disassociation payload with email address
+      title: Disassociate named user payload with email address
       type: object
       x-inline-component: true
     emailChannelObject:
@@ -3030,7 +3027,7 @@ components:
                 A custom event selector is an event selector that describes the
                 specific criteria a custom event must fulfill in order to trigger an automation.
                 Supported custom event fields in the default scope are `"name"` (string) and `["value"]`.
-                custom events also have a map of properties that may also be selected under the `"properties"` scope. Values for the `"properties"` key may be string, boolean, number, or an array of strings.
+                custom events also have a map of properties that may also be selected under the `"properties"` scope. Values for the `"properties"` key may be string, Boolean, number, or an array of strings.
             deactivation_time:
               description: |
                 The [date-time](/developer/rest-api/ua/introduction/#date-time-format) indicating a time at which the trigger will automatically become inactive.
@@ -4094,7 +4091,7 @@ components:
                       type: number
                   type: object
                 hidden:
-                  description: A boolean, when true, the thumbnail will be hidden.
+                  description: A Boolean, when true, the thumbnail will be hidden.
                   type: boolean
                 time:
                   description: A decimal, the frame of the animated resource that should be [used in the thumbnail](https://developer.apple.com/reference/usernotifications/unnotificationattachmentoptionsthumbnailtimekey). For GIFs, this value should be the frame number (an integer, with the first frame being frame 1) to show in the thumbnail. For video, the value should be the time (in seconds) into the video from which to grab the thumbnail. This value should not be set for static resources like JPGs. If the time does not exist in the resource, either because it is out of bounds or because the resource is static, the thumbnail will not show.
@@ -4123,7 +4120,7 @@ components:
           format: double
           type: number
         sound:
-          description: The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `"name"` (equivalent to the current sound string), `"volume"` (a number between 0 and 1 indicating the volume), and `"critical"` (a boolean indicating if the alert should override local device settings and still notify).
+          description: The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `"name"` (equivalent to the current sound string), `"volume"` (a number between 0 and 1 indicating the volume), and `"critical"` (a Boolean indicating if the alert should override local device settings and still notify).
           type: string
         subtitle:
           description: A string that will display below the title of the notification. This is provided as a convenience for setting the subtitle in the alert JSON object. If a subtitle is also defined in the alert JSON object, this value is ignored. iOS 10.
@@ -4209,7 +4206,7 @@ components:
                       type: number
                   type: object
                 hidden:
-                  description: A boolean, when true, the thumbnail will be hidden.
+                  description: A Boolean, when true, the thumbnail will be hidden.
                   type: boolean
                 time:
                   description: A decimal, the frame of the animated resource that should be [used in the thumbnail](https://developer.apple.com/reference/usernotifications/unnotificationattachmentoptionsthumbnailtimekey). For GIFs, this value should be the frame number (an integer, with the first frame being frame 1) to show in the thumbnail. For video, the value should be the time (in seconds) into the video from which to grab the thumbnail. This value should not be set for static resources like JPGs. If the time does not exist in the resource, either because it is out of bounds or because the resource is static, the thumbnail will not show.
@@ -4232,7 +4229,7 @@ components:
           format: int32
           type: integer
         sound:
-          description: The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `"name"` (equivalent to the current sound string), `"volume"` (a number between 0 and 1 indicating the volume), and `"critical"` (a boolean indicating if the alert should override local device settings and still notify).
+          description: The name of the sound file in your app's bundle that you want to play for the alert. If the notification is critical, the dictionary has a key for `"name"` (equivalent to the current sound string), `"volume"` (a number between 0 and 1 indicating the volume), and `"critical"` (a Boolean indicating if the alert should override local device settings and still notify).
           type: string
         template:
           oneOf:
@@ -4682,7 +4679,7 @@ components:
             - properties:
                 bulk_id:
                   description: |
-                    A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
+                    A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
                   format: uuid
                   type: string
               required:
@@ -4969,7 +4966,7 @@ components:
           type: array
         tags:
           $ref: '#/components/schemas/tagGroupObject'
-          description: One or more tag group objects associated with the named user. See [Named users tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags).
+          description: One or more tag group objects associated with the named user. See [Modify named user tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags).
         user_attributes:
           description: User attributes consist of three values that are copied from the last channel associated with the named user.
           properties:
@@ -5120,7 +5117,7 @@ components:
         tags:
           $ref: '#/components/schemas/namedUserTags'
           type: object
-      title: Named user update payload
+      title: Create or update named user payload
       type: object
       x-schema-tag: Named User
     namedUserUpdateResponse:
@@ -5142,7 +5139,7 @@ components:
           type: string
       required:
         - ok
-      title: Create/update named user response
+      title: Create or update named user response
       type: object
       x-inline-component: true
     named_user:
@@ -5281,6 +5278,7 @@ components:
           * `psh`: Push
           * `rpt`: Reports
           * `sch`: Schedules
+          * `seg`: Segments
       enum:
         - att
         - chn
@@ -5294,6 +5292,7 @@ components:
         - psh
         - rpt
         - sch
+        - seg
       title: OAuth Scope
       type: string
       x-schema-tag: OAuth
@@ -5341,7 +5340,7 @@ components:
             - properties:
                 bulk_id:
                   description: |
-                    A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
+                    A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
                   format: uuid
                   type: string
               required:
@@ -5847,7 +5846,7 @@ components:
           description: |-
             One or more conditions, combined by operators. A
               condition set may contain a maximum of 20 conditions. Taken together, the
-              operator and set of conditions form a boolean expression which must evaluate
+              operator and set of conditions form a Boolean expression which must evaluate
               to true for a pipeline to be activated and its outcomes executed. Valid
               operators for a condition set are `and` and `or`. Nesting of operators
               is not supported within a condition set, i.e., you may not combine `and`
@@ -5893,7 +5892,7 @@ components:
           format: date-time
           type: string
         enabled:
-          description: A boolean value indicating whether or not the pipeline is active.
+          description: A Boolean value indicating whether or not the pipeline is active.
           type: boolean
         historical_trigger:
           oneOf:
@@ -6211,7 +6210,7 @@ components:
         bypass_frequency_limits:
           default: false
           description: |
-            If true, the push ignores any [message limits](/guides/messaging/project/config/message-limits/) that would otherwise apply to your message.
+            If true, the push ignores any [message limits](/guides/messaging/message-limits/) that would otherwise apply to your message.
           type: boolean
         bypass_holdout_groups:
           default: false
@@ -6863,7 +6862,7 @@ components:
             - properties:
                 bulk_id:
                   description: |
-                    A unique string obtained from the [Create bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
+                    A unique string obtained from the [Upload bulk send audience operation](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) to target an audience for bulk sending.
                   format: uuid
                   type: string
               required:
@@ -7160,7 +7159,7 @@ components:
           description: The name of the subscription list to be matched.
           type: string
         negated:
-          description: A boolean indicating the condition should match on the absence from the list.
+          description: A Boolean indicating the condition should match on the absence from the list.
           type: boolean
       required:
         - list_name
@@ -7649,7 +7648,7 @@ components:
         No verification is done in this API that the provided set of merge values matches the fields
         of the template. Customers using the UI will pass through a step where they'll be alerted
         that some template field has no matching column in the uploaded CSV. Custom Create and Send
-        fields are not limited to strings and can contain numbers, booleans, arrays, hierarchical
+        fields are not limited to strings and can contain numbers, Booleans, arrays, hierarchical
         JSON, etc.
 
         Merge fields are allowed to use nested property names in CSV upload
@@ -7731,7 +7730,7 @@ components:
       type: string
       x-inline-component: true
     triggeringId:
-      description: Identifier of a Sequence's configured [API Entrance trigger](/guides/messaging/messages/sequences/triggers/#api-entrance).
+      description: Identifier of a Sequence's configured [API Entrance trigger](/guides/messaging/messages/sequences/triggers/#api-entrance) or [API Exit event](/guides/messaging/messages/sequences/create/outcomes/#api-exit).
       maxLength: 256
       minLength: 1
       title: Triggering Id
@@ -8060,6 +8059,7 @@ components:
             rmc: Remote Config
             rpt: Reports
             sch: Schedules
+            seg: Segments
             tpl: Content
           tokenUrl: http://oauth2.{domain}.com/token
       type: oauth2
@@ -8077,6 +8077,7 @@ components:
         rmc: Manage remote configuration.
         rpt: Get report data
         sch: Manage scheduled messages.
+        seg: Manage audience segments.
         tpl: Manage content templates.
 info:
   description: |
@@ -8113,7 +8114,7 @@ info:
 
     All API responses are HTTP responses, making use of appropriate HTTP response codes. When a body is present,
     it SHALL be in [JSON](https://www.json.org/json-en.html) format, except in certain cases where reporting data MAY be returned in CSV format.
-    The body of all JSON responses SHALL consist of a single JSON object, which SHALL contain a boolean `ok` attribute indicating overall success or failure.
+    The body of all JSON responses SHALL consist of a single JSON object, which SHALL contain a Boolean `ok` attribute indicating overall success or failure.
     When a request results in a return value containing multiple entities, they SHALL be contained in an array-valued attribute, the name of which MAY vary by endpoint.
     For example, `/api/tag` will return a list of tags in the `tags` attribute, while `/api/schedules` will return a list of schedules in the `schedules` attribute.
     The name of the response object attribute containing the list of returned entities SHALL be contained in the Data-Attribute HTTP header.
@@ -8339,6 +8340,7 @@ paths:
         * Sending attachments with malicious content is strictly prohibited. This is enforced in part by blocking file types with .bat and .exe extensions.
 
         * Attachments have a TTL (Time To Live) of 60 days.
+      x-weight: 34
   /api/attribute-lists:
     get:
       description: Retrieve information about all attributes lists. This call returns a list of metadata that will not contain the actual lists of users.
@@ -8366,9 +8368,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Retrieve lists
+      summary: List attribute lists
       tags:
         - Attribute Lists
+      x-weight: 90
     post:
       description: Create an attributes list with a name, description, and optional metadata. After creating the list, populate it with a CSV of Text, Number, or Date attribute data using the [Upload attributes list](/developer/rest-api/ua/operations/attribute-lists/#uploadattributelist) endpoint.
       operationId: createAttributeList
@@ -8427,6 +8430,7 @@ paths:
       summary: Create attributes list
       tags:
         - Attribute Lists
+      x-weight: 30
   /api/attribute-lists/{list_name}/csv:
     parameters:
       - description: The `name` of the list you want to upload.
@@ -8517,6 +8521,7 @@ paths:
         - Attribute Lists
       x-note: 'A list can contain a maximum of 10 million rows and 101 columns: one identifier column and 100 attribute or internal header columns. `Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.'
       x-warning: If your upload times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads.
+      x-weight: 40
   /api/attribute-lists/{list_name}/errors:
     get:
       description: During processing, after a list is uploaded, errors can occur. Depending on the type of list processing, an error file may be created, showing a user exactly what went wrong.
@@ -8548,10 +8553,11 @@ paths:
       summary: Download list errors
       tags:
         - Attribute Lists
+      x-weight: 80
   /api/bulk-send:
     post:
       description: |
-        Send an immediate message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.
+        Send an immediate message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.
       operationId: bulkSendPush
       requestBody:
         content:
@@ -8586,9 +8592,10 @@ paths:
       summary: Send message with bulk ID
       tags:
         - Bulk Sending
+      x-weight: 44
   /api/bulk-send/validate:
     post:
-      description: Accept the same range of payloads as POSTing to [`/api/bulk-send`](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush), but parse and validate only, without sending any messages. Before calling this endpoint, obtain a `bulk_id` using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) operation.
+      description: Accept the same range of payloads as POSTing to [`/api/bulk-send`](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush), but parse and validate only, without sending any messages. Before calling this endpoint, obtain a `bulk_id` using the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) operation.
       operationId: validateBulkSendPush
       requestBody:
         content:
@@ -8620,6 +8627,7 @@ paths:
       summary: Validate message with bulk ID
       tags:
         - Bulk Sending
+      x-weight: 42
   /api/bulk/{platform_name}:
     parameters:
       - description: |
@@ -8641,7 +8649,7 @@ paths:
       description: |
         Upload a CSV to obtain a `bulk_id` for sending messages. The CSV can contain:
         - Channel IDs for Upload and Send endpoints: [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush)
-        - Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)
+        - Email addresses, phone numbers, or open channel addresses for Create and Send endpoints: [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations)
 
         See [Bulk sending](/guides/messaging/bulk-sending/) for CSV formatting requirements.
       operationId: bulkUploadCreateAndSendPlatform
@@ -8672,9 +8680,10 @@ paths:
       security:
         - basicAuth: []
         - bearerAuth: []
-      summary: Create bulk send audience
+      summary: Upload bulk send audience
       tags:
         - Bulk Sending
+      x-weight: 40
   /api/channels:
     get:
       description: List all channels registered to this app key, along with associated data and metadata.
@@ -8723,11 +8732,12 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Channel listing
+      summary: List channels
       tags:
         - Channels
       x-note: |
-        Tags added to a channel via the [Named users tags endpoint](/developer/rest-api/ua/operations/tags/#modifynamedusertags) will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.
+        Tags added to a channel via the [Modify named user tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags) endpoint will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.
+      x-weight: 90
   /api/channels/attributes:
     post:
       description: |
@@ -8807,7 +8817,8 @@ paths:
       tags:
         - Channels
       x-important: |
-        Use the [Set or remove attributes on named users endpoint](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) to set or remove attributes on named users.
+        Use the [Set or remove attributes on named user](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint to set or remove attributes on named users.
+      x-weight: 64
   /api/channels/email:
     post:
       description: |-
@@ -8898,6 +8909,7 @@ paths:
       tags:
         - Email
       x-note: Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
+      x-weight: 30
   /api/channels/email/custom-unsubscribe:
     get:
       description: |-
@@ -8930,9 +8942,10 @@ paths:
                 type: string
         '400':
           $ref: '#/components/responses/400'
-      summary: Custom unsubscribe email channel
+      summary: Unsubscribe email channel (custom)
       tags:
         - Email
+      x-weight: 70
   /api/channels/email/replace/{channel_id}:
     post:
       description: |-
@@ -9001,6 +9014,7 @@ paths:
       summary: Replace email channel
       tags:
         - Email
+      x-weight: 52
   /api/channels/email/suppress:
     post:
       description: |
@@ -9050,10 +9064,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Suppress an email channel
+      summary: Suppress email channel
       tags:
         - Email
       x-note: Suppression state types that only apply to commercial messages, such as `commercial_spam_complaint`, cannot overwrite suppression state types that also apply to transactional messages.
+      x-weight: 74
   /api/channels/email/tags:
     post:
       description: Add, remove, or set tags for a single email channel.
@@ -9124,13 +9139,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Email tags
+      summary: Modify email tags
       tags:
         - Email
         - Tags
       x-important: |-
         A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.
         We support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.
+      x-weight: 60
   /api/channels/email/uninstall:
     post:
       description: '**Removes an email address from Airship. Use with caution.** If the uninstalled email address opts-in again, it might generate a new channel_id. If a user generates a new `channel_id` when they opt-in again, the new `channel_id` cannot be reassociated with any opt-in information, tags, named users, Performance Analytics reports, or other information from the that belonged to the previously-uninstalled email channel.'
@@ -9169,6 +9185,7 @@ paths:
       summary: Uninstall email channel
       tags:
         - Email
+      x-weight: 100
   /api/channels/email/unsuppress:
     post:
       description: |
@@ -9207,10 +9224,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Remove suppression from an email channel
+      summary: Remove suppression from email channel
       tags:
         - Email
       x-important: Calling this endpoint will not modify commercial or transactional opt-in status to opted-in.
+      x-weight: 64
   /api/channels/email/{email}:
     get:
       description: |
@@ -9249,7 +9267,7 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Look up an email address
+      summary: Look up email address
       tags:
         - Email
       x-note: |-
@@ -9258,6 +9276,7 @@ paths:
         A `commercial_opted_in` date is required for sending commercial emails. Transactional emails do not require a `transactional_opted_in`. This field is used in the case where a user has unsubscribed to transactional email and would like to reassert consent to receive transactional emails.
 
         The `opt_in` property is always set to true for an email channel, so it should be ignored.
+      x-weight: 80
     put:
       description: |
         Update an email channel's opt-in and opt-out values for commercial email, transactional email, and open and click tracking.
@@ -9312,10 +9331,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Update an email channel
+      summary: Update email channel
       tags:
         - Email
       x-important: If you provide an `address` in this request, it must be the one that is associated with the channel you are updating. You may not update the user's email address with this endpoint.
+      x-weight: 50
   /api/channels/open:
     post:
       description: |
@@ -9346,7 +9366,7 @@ paths:
                   properties:
                     address:
                       description: 'Where notifications sent to this `channel_id` will be sent. Examples: email address, phone number. If missing, `channel_id` must be present. The `address` is one-to-one with the `channel_id`. New addresses on existing channels will overwrite old associations.'
-                      example: +1 5558675309
+                      example: +1 4155550123
                       type: string
                     locale_country:
                       description: The two-letter country locale short code. Will set the `ua_locale_country` tag group to the specified value.
@@ -9450,6 +9470,7 @@ paths:
       x-important: The master secret is required to update an open channel, otherwise a 401 Unauthorized response is returned.
       x-note: |
         A 200 status will be returned if an existing channel was found for the specified `open_platform_name` and address. Otherwise, a new channel will be created and a 200 status will be returned.
+      x-weight: 30
   /api/channels/open/tags:
     post:
       description: Manipulate a single open channel's tags. Open channels are identified by `address`, not by their `channel_id`.
@@ -9512,13 +9533,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Open channel tags
+      summary: Modify open channel tags
       tags:
         - Open Channels
         - Tags
       x-important: |-
         A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.
         We support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.
+      x-weight: 60
   /api/channels/open/uninstall:
     post:
       description: |
@@ -9545,9 +9567,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Uninstall open channels
+      summary: Uninstall open channel
       tags:
         - Open Channels
+      x-weight: 100
   /api/channels/sms:
     post:
       description: |
@@ -9639,10 +9662,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Register SMS channel
+      summary: Register SMS channel and send opt-in prompt
       tags:
         - SMS
       x-note: Avoid repeated registration attempts. Repeated registrations of the same MSISDN and sender without an `opted_in` value will result in multiple opt-in instruction messages being sent to the MSISDN.
+      x-weight: 30
   /api/channels/sms/opt-out:
     post:
       description: |
@@ -9708,6 +9732,7 @@ paths:
       summary: Opt-out of SMS messages
       tags:
         - SMS
+      x-weight: 70
   /api/channels/sms/tags:
     post:
       description: Add, remove, or set tags for a single SMS channel.
@@ -9782,13 +9807,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: SMS tags
+      summary: Modify SMS tags
       tags:
         - SMS
         - Tags
       x-important: |-
         A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.
         We support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.
+      x-weight: 60
   /api/channels/sms/uninstall:
     post:
       description: |
@@ -9854,6 +9880,7 @@ paths:
       summary: Uninstall SMS channel
       tags:
         - SMS
+      x-weight: 100
   /api/channels/sms/{channel_id}:
     parameters:
       - description: The identifier for the SMS channel you want to update.
@@ -9953,6 +9980,7 @@ paths:
       summary: Update SMS channel
       tags:
         - SMS
+      x-weight: 50
   /api/channels/sms/{msisdn}/{sender}:
     get:
       description: Lookup an SMS channel by `msisdn` and `sender`.
@@ -10008,9 +10036,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: SMS channel lookup
+      summary: Look up SMS channel
       tags:
         - SMS
+      x-weight: 80
   /api/channels/subscription_lists:
     post:
       description: |
@@ -10058,7 +10087,8 @@ paths:
         - Channels
       x-important: You must first [create a subscription list in the dashboard](/guides/audience/audience-lists/subscription/), then you can refer to its ID when subscribing users. When subscribing users, if the list has not already been created in the dashboard, then the list will be created at the same time but will not be accessible from the dashboard; the list will available for API use only.
       x-note: |
-        If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list. Otherwise, use the [Scoped named user batch operations endpoint](/developer/rest-api/ua/operations/named-users/#performnameduserscopedbatchoperations) to do so.
+        If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list. Otherwise, use the [Perform scoped named user batch operations endpoint](/developer/rest-api/ua/operations/named-users/#performnameduserscopedbatchoperations) to do so.
+      x-weight: 68
   /api/channels/tags:
     post:
       description: Add, remove, or set tags on a channel.
@@ -10144,13 +10174,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Channel tags
+      summary: Modify channel tags
       tags:
         - Channels
         - Tags
       x-important: |-
         A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.
         We support up to 1,000 tags per channel. Adding more than 1,000 tags per channel can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per channel, and they will help you find an alternative.
+      x-weight: 60
   /api/channels/uninstall:
     post:
       description: |-
@@ -10214,6 +10245,7 @@ paths:
         - Channels
         - Data Privacy Laws Compliance
       x-note: Channel uninstallation, like channel creation, is an asynchronous operation and may take some time to complete.
+      x-weight: 100
   /api/channels/{channel_id}:
     get:
       description: Fetch an individual channel registered to the app key, along with associated data and metadata.
@@ -10244,11 +10276,12 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - chn
-      summary: Channel lookup
+      summary: Look up channel
       tags:
         - Channels
       x-note: |
-        Tags added to a channel via the [Named users tags endpoint](/developer/rest-api/ua/operations/tags/#modifynamedusertags) will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.
+        Tags added to a channel via the [Modify named user tags](/developer/rest-api/ua/operations/tags/#modifynamedusertags) endpoint will not appear with a request to this endpoint. To view those tags, you must [look up the named user](/developer/rest-api/ua/operations/named-users/#getnameduser) associated with the channel.
+      x-weight: 80
     parameters:
       - description: The unique channel identifier.
         in: path
@@ -10270,7 +10303,7 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/channelIdContactIdAssociation'
                 - $ref: '#/components/schemas/emailAddressContactIdAssociation'
-        description: Contact association requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
+        description: Associating a contact requires a `channel_id`, `email_address`, or `msisdn`. Do not provide more than one identifier type in the same request. You can associate up to 100 channel IDs to a contact. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
         required: true
       responses:
         '200':
@@ -10290,10 +10323,11 @@ paths:
       security:
         - oauth2Token:
             - cnt
-      summary: Contact association
+      summary: Associate contact
       tags:
         - Contacts
       x-note: If the `channel_id`, `email_address`, or `msisdn` is already associated with a `contact_id`, this operation will do nothing and return a 200 status code and the existing `contact_id`.
+      x-weight: 30
   /api/contacts/attributes:
     post:
       description: |
@@ -10339,7 +10373,7 @@ paths:
       security:
         - oauth2Token:
             - cnt
-      summary: Set or remove attributes on a contact
+      summary: Set or remove attributes on contact
       tags:
         - Contacts
       x-note: |
@@ -10348,6 +10382,7 @@ paths:
         If you wish to set attributes on multiple contact at once, we recommend
         using [/api/channels/attributes](/developer/rest-api/ua/operations/channels/#modifychannelattributes) which
         supports an `audience` object in the request body.
+      x-weight: 62
   /api/contacts/disassociate/{contact_id}:
     post:
       description: Disassociates channel from a contact with the option of also opting out. You can identify a channel by MSISDN, email address, or channel ID.
@@ -10425,9 +10460,10 @@ paths:
       security:
         - oauth2Token:
             - cnt
-      summary: Contact disassociation
+      summary: Disassociate contact
       tags:
         - Contacts
+      x-weight: 70
   /api/contacts/identify/v2: {}
   /api/contacts/lookup/channel/{channel_id}:
     get:
@@ -10467,6 +10503,7 @@ paths:
       summary: Look up contact ID by channel ID
       tags:
         - Contacts
+      x-weight: 82
   /api/contacts/lookup/named_user/{named_user_id}:
     get:
       description: |
@@ -10504,6 +10541,7 @@ paths:
       summary: Look up contact ID by named user ID
       tags:
         - Contacts
+      x-weight: 80
   /api/contacts/scoped/{contact_id}:
     post:
       description: |
@@ -10560,13 +10598,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - cnt
-      summary: Scoped contact batch operations
+      summary: Perform scoped contact batch operations
       tags:
         - Contacts
       x-important: |
         The path parameter `contact_id` should be URL-encoded to ensure it is handled correctly.
       x-note: |
         If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.
+      x-weight: 52
   /api/contacts/tags/:
     post:
       description: Add, remove, or set tags on a contact. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.
@@ -10649,13 +10688,14 @@ paths:
       security:
         - oauth2Token:
             - cnt
-      summary: Contacts tags
+      summary: Modify contact tags
       tags:
         - Tags
         - Contacts
       x-important: |-
         A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.
         We support up to 1,000 tags per contact. Adding more than 1,000 tags per contact can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per contact, and they will help you find an alternative.
+      x-weight: 60
   /api/content/templates:
     get:
       description: List all existing content templates. Returns an array of content template objects in the `content_templates` attribute.
@@ -10736,6 +10776,7 @@ paths:
       summary: List content templates
       tags:
         - Content
+      x-weight: 90
     post:
       description: Create a new content template.
       operationId: createContentTemplate
@@ -10786,6 +10827,7 @@ paths:
       summary: Create content template
       tags:
         - Content
+      x-weight: 30
   /api/content/templates/external/{type}/{external_id}:
     delete:
       description: Delete a content template.
@@ -10819,6 +10861,7 @@ paths:
       summary: Delete content template by external ID
       tags:
         - Content
+      x-weight: 102
     get:
       description: Fetch a single content template using external ID.
       operationId: getContentTemplateByExternalId
@@ -10845,9 +10888,10 @@ paths:
         - basicAuth: []
         - oauth2Token:
             - tpl
-      summary: Look up a content template by external ID
+      summary: Look up content template by external ID
       tags:
         - Content
+      x-weight: 82
     parameters:
       - description: The message type for the template.
         in: path
@@ -10906,6 +10950,7 @@ paths:
       summary: Create or update content template by external ID
       tags:
         - Content
+      x-weight: 52
   /api/content/templates/{template_id}:
     delete:
       description: Delete a content template.
@@ -10939,6 +10984,7 @@ paths:
       summary: Delete content template
       tags:
         - Content
+      x-weight: 100
     get:
       description: Fetch a single content template using UUID.
       operationId: getContentTemplate
@@ -10965,9 +11011,10 @@ paths:
         - basicAuth: []
         - oauth2Token:
             - tpl
-      summary: Look up a content template
+      summary: Look up content template
       tags:
         - Content
+      x-weight: 80
     parameters:
       - description: The UUID of the template.
         in: path
@@ -11015,13 +11062,14 @@ paths:
       summary: Update content template
       tags:
         - Content
+      x-weight: 50
   /api/create-and-send:
     post:
       description: |+
         Send messages to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels. This endpoint supports two audience methods:
         - `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.
 
-        - `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.
+        - `bulk_id`: For larger audiences, upload a CSV using the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.
 
         Existing channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.
 
@@ -11065,8 +11113,11 @@ paths:
                 $ref: '#/components/schemas/pushAccepted'
           description: Because this operation sends messages, a successful response is nearly identical to a `/api/push` response.
         '400':
-          $ref: '#/components/responses/400'
-          description: You can only Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: You can Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response. A `ua_msisdn` value that is malformed or does not have a real National Destination Code (NDC) will also cause a 400 response. In the US, an NDC is the area code.
         '401':
           $ref: '#/components/responses/401'
         '413':
@@ -11077,10 +11128,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Create and Send a message
+      summary: Create and Send message
       tags:
         - Bulk Sending
       x-warning: Duplicate addresses in the `create_and_send` array might receive redundant notifications or fewer notifications than expected. You should remove duplicate addresses from your request before sending a Create and Send message.
+      x-weight: 20
   /api/create-and-send/validate:
     post:
       description: Validate a [Create and Send](/developer/rest-api/ua/operations/bulk-sending/#createandsend) payload without creating channels or sending messages. It only parses and validates your payload.
@@ -11124,7 +11176,11 @@ paths:
                 $ref: '#/components/schemas/okResponseObject'
           description: The payload was valid.
         '400':
-          $ref: '#/components/responses/400'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: An invalid or missing header row will cause a 400 response. A `ua_msisdn` value that is malformed or does not have a real National Destination Code (NDC) will also cause a 400 response. In the US, an NDC is the area code.
         '413':
           $ref: '#/components/responses/413'
           description: The request included a payload larger than the maximum size of 5 MiB.
@@ -11136,6 +11192,7 @@ paths:
       summary: Validate Create and Send payload
       tags:
         - Bulk Sending
+      x-weight: 10
   /api/custom-events:
     parameters:
       - $ref: '#/components/parameters/appKeyHeader'
@@ -11217,6 +11274,7 @@ paths:
         * Requests complete validation before returning a response.
         * Requests are authenticated with a bearer token, which can provide access to this resource alone or to this resource and others.
         * The `name` value inside `body` must not contain any uppercase characters, or the event will be rejected with a 400 status code.
+      x-weight: 30
   /api/experiments:
     get:
       description: List experiments, sorted by `created_at` [date-time](/developer/rest-api/ua/introduction/#date-time-format) from newest to oldest. Responses are paginated. Use optional `limit` and `offset` parameters to navigate results.
@@ -11270,9 +11328,10 @@ paths:
           $ref: '#/components/responses/401'
       security:
         - basicAuth: []
-      summary: Experiment listing
+      summary: List experiments
       tags:
         - A/B Tests
+      x-weight: 90
     post:
       description: Create an experiment. The body of the request should consist of a single experiment object. The experiment is processed and sent immediately unless a schedule is present.
       operationId: createExperiment
@@ -11341,10 +11400,11 @@ paths:
           $ref: '#/components/responses/401'
       security:
         - basicAuth: []
-      summary: Create experiment (A/B Test)
+      summary: Create and send experiment (A/B test)
       tags:
         - A/B Tests
       x-important: The A/B Tests API is unrelated to the [current version of A/B testing](/guides/experimentation/a-b-tests/messages/). For more information about this API, including its dashboard equivalent, see [Legacy message A/B tests](/guides/experimentation/a-b-tests/messages-legacy/).
+      x-weight: 30
   /api/experiments/scheduled:
     get:
       description: List scheduled experiments in order, from closest to the current [date-time](/developer/rest-api/ua/introduction/#date-time-format) to farthest (i.e., the experiments scheduled to occur soonest will appear at the top of the list). Responses are paginated, using optional `limit` and `offset` parameters.
@@ -11398,9 +11458,10 @@ paths:
           $ref: '#/components/responses/401'
       security:
         - basicAuth: []
-      summary: Scheduled experiment listing
+      summary: List scheduled experiments
       tags:
         - A/B Tests
+      x-weight: 90
   /api/experiments/scheduled/{experiment_id}:
     delete:
       description: Delete a scheduled experiment. You can only delete experiments before they start; attempting to delete an experiment that has already started or completed will return an HTTP 405 response ("Method not allowed").
@@ -11433,9 +11494,10 @@ paths:
           description: Experiments can only be deleted before they start; afterwards, a HTTP 405 is returned.
       security:
         - basicAuth: []
-      summary: Delete experiment
+      summary: Delete scheduled experiment
       tags:
         - A/B Tests
+      x-weight: 100
     parameters:
       - description: The unique identifier of the experiment.
         in: path
@@ -11496,6 +11558,7 @@ paths:
       summary: Validate experiment
       tags:
         - A/B Tests
+      x-weight: 10
   /api/experiments/{experiment_id}:
     get:
       description: Look up an experiment (A/B Test).
@@ -11521,9 +11584,10 @@ paths:
           $ref: '#/components/responses/404'
       security:
         - basicAuth: []
-      summary: Experiment lookup
+      summary: Look up experiment
       tags:
         - A/B Tests
+      x-weight: 80
     parameters:
       - description: The ID of the experiment you want to look up.
         in: path
@@ -11534,7 +11598,7 @@ paths:
           type: string
   /api/journeys/exit:
     post:
-      description: Exits in-flight users from a [Sequence](/guides/messaging/messages/sequences/about/) identified by `triggering_id`.  Specify an `entrance_id` to exit only users from that specific entrance, or omit it to exit users that entered without an `entrance_id`.  This is a potentially long-running, asynchronous operation.
+      description: Exits in-flight users from a Sequence using its configured [API Exit event](/guides/messaging/messages/sequences/create/outcomes/#api-exit) identified by `triggering_id`. Specify an `entrance_id` to exit only users that entered with that specific entrance, or omit it to exit users that entered without one. Unlike [Enter or exit users from Sequence](/developer/rest-api/ua/operations/journeys/#triggerjourneyssegment), this endpoint does not accept an audience and is a potentially long-running, asynchronous operation.
       operationId: exitJourneys
       requestBody:
         content:
@@ -11575,12 +11639,13 @@ paths:
       security:
         - oauth2Token:
             - jny
-      summary: Exit in-flight users from a Sequence
+      summary: Exit users from Sequence
       tags:
         - Journeys
+      x-weight: 100
   /api/journeys/trigger:
     post:
-      description: Enters an audience segment into a [Sequence](/guides/messaging/messages/sequences/about/) identified by `triggering_id`, or exits one from it. If multiple Sequences share a `triggering_id`, the call enters or exits audiences in all of them. Use `entrance_id` to run multiple concurrent, independent instances of the Sequence for the same users without overwriting earlier enrollments.
+      description: Enters or exits the specified audience from a Sequence, based on its configured [API Entrance trigger](/guides/messaging/messages/sequences/triggers/#api-entrance) or [API Exit event](/guides/messaging/messages/sequences/create/outcomes/#api-exit) identified by `triggering_id`. If multiple Sequences share the same `triggering_id`, one call affects all of them. For an API Entrance trigger, use `entrance_id` to run multiple concurrent, independent instances of the same Sequence for the same users without overwriting earlier entries. To exit a specific user directly, provide an audience selector that identifies just them, along with the `triggering_id` of a configured API Exit event.
       operationId: triggerJourneysSegment
       requestBody:
         content:
@@ -11590,7 +11655,7 @@ paths:
                 audience:
                   $ref: '#/components/schemas/audienceSelector1000'
                 entrance_id:
-                  description: A unique identifier for enrolling the same users in multiple concurrent, independent instances of a Sequence.  Each call with a different `entrance_id` creates a new enrollment without overwriting earlier ones.
+                  description: A unique identifier for differentiating entries. For an API Entrance trigger, use a different `entrance_id` on each call to create concurrent, independent entries for the same user without overwriting earlier ones. For an API Exit event, `entrance_id` identifies which users to exit, based on their entrance. When omitted, users who entered without an `entrance_id` exit the Sequence, and users with an `entrance_id` remain.
                   maxLength: 64
                   minLength: 1
                   type: string
@@ -11630,9 +11695,10 @@ paths:
       security:
         - oauth2Token:
             - jny
-      summary: Enter or exit a Sequence
+      summary: Enter or exit users from Sequence
       tags:
         - Journeys
+      x-weight: 20
   /api/lists:
     get:
       description: Retrieve information about all static lists. This call returns a list of metadata that will not contain the actual lists of users.
@@ -11660,9 +11726,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Retrieve lists
+      summary: List static lists
       tags:
         - Static Lists
+      x-weight: 90
     post:
       description: Create a static list. The body of the request will contain several of the list object parameters, but the actual list content will be provided by a second call to the [upload](/developer/rest-api/ua/operations/static-lists/#updatestaticlist) endpoint. You can upload up to 100 lists per project.
       operationId: createStaticList
@@ -11709,6 +11776,7 @@ paths:
       tags:
         - Static Lists
       x-note: '`Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.'
+      x-weight: 30
   /api/lists/{list_name}:
     delete:
       description: Delete a static list.
@@ -11740,10 +11808,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Delete a list
+      summary: Delete list
       tags:
         - Static Lists
       x-warning: If you are attempting to update a current list by deleting it and then recreating it with new data, stop and go to the [upload endpoint](/developer/rest-api/ua/operations/static-lists/#updatestaticlist). There is no need to delete a list before uploading a new CSV file. Moreover, once you delete a list, you will be unable to create a list with the same name as the deleted list.
+      x-weight: 100
     get:
       description: Retrieve information about one static list, specified in the URL. When looking up lists, the returned information may actually be a combination of values from both the last uploaded list and the last successfully processed list. If you create a list successfully, and then you update it and the processing step fails, then the list `status` will read `failed`, but the `channel_count` and `last_modified` fields will contain information on the last successfully processed list.
       operationId: getStaticListMetadata
@@ -11771,9 +11840,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Get single list metadata
+      summary: Look up static list metadata
       tags:
         - Static Lists
+      x-weight: 80
     put:
       description: Update the metadata (`description`, `extras`, etc.) of a static list.
       operationId: updateStaticListMetadata
@@ -11829,6 +11899,7 @@ paths:
       tags:
         - Static Lists
       x-note: To update the list contents, use the [list upload](/developer/rest-api/ua/operations/static-lists/#updatestaticlist) endpoint. The update endpoint is used to update a list's metadata rather than the actual list of device identifiers.
+      x-weight: 50
   /api/lists/{list_name}/csv:
     get:
       description: |
@@ -11851,9 +11922,10 @@ paths:
         - basicAuth: []
         - oauth2Token:
             - lst
-      summary: Download a list of channels
+      summary: Download list of mobile app channels
       tags:
         - Static Lists
+      x-weight: 82
     parameters:
       - description: The `name` of the list you want to retrieve or update.
         in: path
@@ -11928,6 +12000,7 @@ paths:
         - Static Lists
       x-note: 'The maximum number of `identifier_type,identifier` pairs that may be uploaded to a list is 10 million. `Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.'
       x-warning: If an attempt to upload a list times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads.
+      x-weight: 40
   /api/named_users:
     get:
       description: Return a list of named users or look up a single named user by `named_user_id`.
@@ -11975,9 +12048,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named user listing or lookup
+      summary: List or look up named users
       tags:
         - Named Users
+      x-weight: 90
     parameters:
       - description: The `named_user_id` you want to look up. When querying a `named_user_id`, the response contains a single `named_user` object.  If you do not query a specific `named_user_id`, the response returns an array of `named_users`, in which each object represents an individual named user.
         in: query
@@ -12001,7 +12075,7 @@ paths:
               oneOf:
                 - $ref: '#/components/schemas/channelIdNamedUserAssociation'
                 - $ref: '#/components/schemas/emailAddressNamedUserAssociation'
-        description: Named user association requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
+        description: Associating a named user requires a `channel_id` or `email_address`. Do not provide both in the same request. You can associate up to 100 channel IDs to a named user. Channel creation is asynchronous, so when associating a newly created channel, both a channel ID and a device type are required to prevent "channel does not exist" errors.
         required: true
       responses:
         '200':
@@ -12026,10 +12100,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named users association
+      summary: Associate named user
       tags:
         - Named Users
       x-warning: If a channel has an assigned named user and you make an additional call to associate that same channel with a new named user, the original named user association will be removed and the new named user and associated data will take its place. Additionally, all tags associated to the original named user cannot be used to address this channel unless they are also associated with the new named user.
+      x-weight: 30
   /api/named_users/disassociate:
     post:
       description: Disassociate a channel or an email address from a `named_user_id`.
@@ -12067,9 +12142,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named users disassociation
+      summary: Disassociate named user
       tags:
         - Named Users
+      x-weight: 70
   /api/named_users/scoped/{named_user_id}:
     post:
       description: |
@@ -12121,7 +12197,7 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Scoped named user batch operations
+      summary: Perform scoped named user batch operations
       tags:
         - Named Users
       x-important: |
@@ -12129,6 +12205,7 @@ paths:
         Requirements of `named_user_id` can be found [here](#operation-api-named_users-associate-post-associate-channel_id-with-named-user-named_user_id).
       x-note: |
         If you are using a single-channel Preference Center created before October 10, 2022, that has not been [migrated to user-level](/guides/messaging/features/preference-centers/#migrating-to-a-user-level-preference-center), use the [`/api/channels/subscription_lists` endpoint](/developer/rest-api/ua/operations/channels/#modifychannelsubscriptions) to add or remove individual channels to/from your subscription list.
+      x-weight: 52
   /api/named_users/tags:
     post:
       description: Add, remove, or set tags on a named user. A single request body may contain add and/or remove objects or a single set field. At least one of the add, remove, or set objects must be present in a request.
@@ -12217,13 +12294,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named users tags
+      summary: Modify named user tags
       tags:
         - Named Users
         - Tags
       x-important: |-
         A tag must be < 128 characters. A request with one or more tags longer than 128 characters will return a 400 response.
         We support up to 1,000 tags per named user. Adding more than 1,000 tags per named user can cause latency and service interruptions. We strongly recommend removing unused tags whenever possible, and using custom events when appropriate. Please [contact Support](https://support.airship.com/) if you believe your use case requires more than 1,000 tags per named user, and they will help you find an alternative.
+      x-weight: 60
   /api/named_users/uninstall:
     post:
       description: |-
@@ -12280,11 +12358,12 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named users uninstall
+      summary: Uninstall named users
       tags:
         - Named Users
         - Data Privacy Laws Compliance
       x-note: Channel uninstallation, like channel creation, is an asynchronous operation and may take some time to complete.
+      x-weight: 100
   /api/named_users/{named_user_id}:
     post:
       description: |
@@ -12342,7 +12421,7 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named user update
+      summary: Create or update named user
       tags:
         - Named Users
       x-important: |
@@ -12356,6 +12435,7 @@ paths:
         and associated data will take its place. Additionally, all tags
         associated to the original named user cannot be used to address this
         channel unless they are also associated with the new named user.
+      x-weight: 50
   /api/named_users/{named_user_id}/attributes:
     post:
       description: |
@@ -12411,7 +12491,7 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Set or remove attributes on named users
+      summary: Set or remove attributes on named user
       tags:
         - Named Users
       x-note: |
@@ -12420,6 +12500,7 @@ paths:
         If you wish to set attributes on multiple named users at once, we recommend
         using [/api/channels/attributes](/developer/rest-api/ua/operations/channels/#modifychannelattributes) which
         supports an `audience` object in the request body.
+      x-weight: 62
   /api/pipelines:
     get:
       description: List existing pipelines. Pipelines are ordered by `creation_date` from newest to oldest.
@@ -12466,6 +12547,7 @@ paths:
       summary: List existing pipelines
       tags:
         - Automation
+      x-weight: 90
     post:
       description: Create one or more pipelines. You can provide a single [pipeline object](/developer/rest-api/ua/schemas/pipeline-objects/#pipelineobject) or an array of [pipeline objects](/developer/rest-api/ua/schemas/pipeline-objects/#pipelineobject).
       operationId: createPipeline
@@ -12520,9 +12602,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - pln
-      summary: Create pipeline (automated message)
+      summary: Create pipelines (automated message)
       tags:
         - Automation
+      x-weight: 30
   /api/pipelines/constraints:
     get:
       description: Returns an array of cross-pipeline rate limit constraints. These are the rates that the combination of all pipelines for an app may not exceed.
@@ -12555,6 +12638,7 @@ paths:
       summary: List pipelines constraints
       tags:
         - Automation
+      x-weight: 98
     put:
       description: Update the pipelines constraints.
       operationId: updatePipelineConstraints
@@ -12592,6 +12676,7 @@ paths:
       summary: Update pipelines constraints
       tags:
         - Automation
+      x-weight: 50
   /api/pipelines/deleted:
     get:
       description: Produces a list of all deleted pipelines starting with the most recently deleted entry.
@@ -12650,6 +12735,7 @@ paths:
       summary: List deleted pipelines
       tags:
         - Automation
+      x-weight: 94
   /api/pipelines/filtered:
     get:
       description: Lists all pipelines, which fulfill the provided filter criteria. Returns a response container, which contains an array of pipeline objects in the `pipelines` attribute. The response container also provides total count and links to the next page `next_page` and previous page `prev_page`, if applicable. We also always apply a sort order. By default we apply an ascending sort order on the name `name` field, but we also support a sort order on the started date `started_date` field. Pagination is always applied, which means that the pipeline result list is not the complete list of pipelines if the total count is greater than the page limit.
@@ -12673,6 +12759,7 @@ paths:
       summary: List filtered pipelines
       tags:
         - Automation
+      x-weight: 92
     parameters:
       - description: Non-negative zero-based index of the starting element for paginating results. Default value 0.
         in: query
@@ -12784,9 +12871,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - pln
-      summary: List pipelines limits
+      summary: Get pipelines limits and counts
       tags:
         - Automation
+      x-weight: 96
   /api/pipelines/validate:
     post:
       description: This endpoint accepts the same range of payloads as a `POST` to `/api/pipelines`, but only parses and validates the payload, without creating the pipeline. The body of the request must be a single pipeline object or an array of pipeline objects.
@@ -12837,9 +12925,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - pln
-      summary: Validate pipeline
+      summary: Validate pipelines
       tags:
         - Automation
+      x-weight: 10
   /api/pipelines/{pipeline_id}:
     delete:
       description: Delete a pipeline.
@@ -12862,6 +12951,7 @@ paths:
       summary: Delete pipeline
       tags:
         - Automation
+      x-weight: 100
     get:
       description: Fetch a single pipeline resource. Returns an array containing a single pipeline object in the `pipeline` attribute.
       operationId: getPipeline
@@ -12883,9 +12973,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - pln
-      summary: Individual pipeline lookup
+      summary: Look up pipeline
       tags:
         - Automation
+      x-weight: 80
     parameters:
       - description: The pipeline you want to return or modify.
         in: path
@@ -12946,6 +13037,7 @@ paths:
       summary: Update pipeline
       tags:
         - Automation
+      x-weight: 50
   /api/push:
     post:
       description: |
@@ -13001,9 +13093,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Send a push
+      summary: Send pushes
       tags:
         - Push
+      x-weight: 20
   /api/push/validate:
     post:
       description: Accept the same range of payloads as POSTing to `/api/push`, but parse and validate only, without sending any pushes. The body of the request must be a [Push Object](/developer/rest-api/ua/schemas/others/#pushobject) or an array of push objects.
@@ -13059,9 +13152,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Validate a push
+      summary: Validate pushes
       tags:
         - Push
+      x-weight: 10
   /api/regions:
     get:
       description: Get a paginated list regions. The result is an array of [Region objects](/developer/rest-api/ua/schemas/regions/#regionobject) under the `"regions"` key.
@@ -13116,9 +13210,10 @@ paths:
           $ref: '#/components/responses/404'
       security:
         - basicAuth: []
-      summary: Region listing
+      summary: List regions
       tags:
         - Regions
+      x-weight: 90
   /api/regions/{region_id}:
     get:
       description: Get details for a specific region.
@@ -13150,9 +13245,10 @@ paths:
           $ref: '#/components/responses/404'
       security:
         - basicAuth: []
-      summary: Region lookup
+      summary: Look up region
       tags:
         - Regions
+      x-weight: 80
   /api/reports/activity/details:
     get:
       description: Returns the activity log data, including non-unicast pushes. The series begins with the earliest time given in which the group of pushes were sent.
@@ -13169,9 +13265,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Activity log report
+      summary: Get activity log report
       tags:
         - Reports
+      x-weight: 99
     parameters:
       - description: A [date-time](/developer/rest-api/ua/introduction/#date-time-format) for start of report.
         in: query
@@ -13251,9 +13348,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Devices report
+      summary: Get devices report
       tags:
         - Reports
+      x-weight: 94
   /api/reports/events:
     get:
       description: Get a summary of custom event counts and values, by custom event, within the specified time period.
@@ -13358,9 +13456,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Custom events detail listing
+      summary: List custom events details
       tags:
         - Reports
+      x-weight: 98
   /api/reports/events/summary/pergroup/{group_id}:
     get:
       description: Get a summary of custom event counts and values associated with the provided `group_id`. Includes all custom events from the time of the push up to current time.
@@ -13405,9 +13504,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Custom events per group summary
+      summary: Get custom events per group summary
       tags:
         - Reports
+      x-weight: 89
     parameters:
       - description: The UUID for the requested group push ID.
         in: path
@@ -13461,9 +13561,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Custom events per push summary
+      summary: Get custom events per push summary
       tags:
         - Reports
+      x-weight: 88
     parameters:
       - description: The UUID for the requested push.
         in: path
@@ -13530,9 +13631,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Experiment variant report
+      summary: Get experiment variant report
       tags:
         - Reports
+      x-weight: 87
     parameters:
       - description: The `push_id` of the requested experiment.
         in: path
@@ -13641,9 +13743,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Experiment overview report
+      summary: Get experiment overview report
       tags:
         - Reports
+      x-weight: 86
     parameters:
       - description: The `push_id` of the requested experiment.
         in: path
@@ -13718,9 +13821,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: App opens report
+      summary: Get app opens report
       tags:
         - Reports
+      x-weight: 95
   /api/reports/optins:
     get:
       description: Get the number of opted-in Push users who access the app within the specified time period.
@@ -13786,9 +13890,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Opt-in report
+      summary: Get opt-in report
       tags:
         - Reports
+      x-weight: 97
   /api/reports/optouts:
     get:
       description: Get the number of opted-out Push users who access the app within the specified time period.
@@ -13854,9 +13959,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Opt-out report
+      summary: Get opt-out report
       tags:
         - Reports
+      x-weight: 97
   /api/reports/pergroup/detail/{group_id}:
     get:
       description: Returns statistics and other information for a given group push message.
@@ -13873,9 +13979,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Per group push detail report
+      summary: Get per group push detail report
       tags:
         - Reports
+      x-weight: 84
     parameters:
       - description: The `group_id` of the requested report.
         in: path
@@ -13900,9 +14007,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Per group push time series report
+      summary: Get per group push time series report
       tags:
         - Reports
+      x-weight: 85
     parameters:
       - description: The `group_id` of the requested report.
         in: path
@@ -13953,9 +14061,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Per push detail report
+      summary: Get per push detail report
       tags:
         - Reports
+      x-weight: 81
     parameters:
       - description: The `push_id` of the requested report.
         in: path
@@ -13983,9 +14092,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Push body per push
+      summary: Get per push body report
       tags:
         - Reports
+      x-weight: 82
     parameters:
       - description: The `push_id` of the requested push body.
         in: path
@@ -14010,9 +14120,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Per push time series report
+      summary: Get per push time series report
       tags:
         - Reports
+      x-weight: 83
     parameters:
       - description: The `push_id` of the requested report.
         in: path
@@ -14107,9 +14218,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Response report
+      summary: Get response report
       tags:
         - Reports
+      x-weight: 91
   /api/reports/responses/list:
     get:
       description: Get a listing of all pushes, plus basic response information, for a given time period. Start and end date times are required parameters. The time defaults to 00:00 UTC if not specified.
@@ -14205,7 +14317,7 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Response listing
+      summary: List pushes with response details
       tags:
         - Reports
       x-note: |
@@ -14216,6 +14328,7 @@ paths:
 
         Use timestamps to get results for a specific time period. If only using the date, set it in the future to ensure you
         will see the most recent listing.
+      x-weight: 92
   /api/reports/responses/{push_id}:
     get:
       description: Returns detailed reports information about a specific push notification. Use the `push_id`, which is the identifier returned by the API that represents a specific push message delivery.
@@ -14270,9 +14383,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Individual push response statistics
+      summary: Get individual push response statistics
       tags:
         - Reports
+      x-weight: 80
     parameters:
       - description: The UUID for the requested push.
         in: path
@@ -14347,9 +14461,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Push report
+      summary: Get push report
       tags:
         - Reports
+      x-weight: 90
   /api/reports/timeinapp:
     get:
       description: Get the average amount of time users have spent in your app within the specified time period.
@@ -14415,9 +14530,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Time in app report
+      summary: Get time in app report
       tags:
         - Reports
+      x-weight: 96
   /api/reports/web/interaction:
     get:
       description: Get the web interaction data for the given app key. Accepts a required start time and optional end time and precision parameters.
@@ -14475,11 +14591,12 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - rpt
-      summary: Web response report
+      summary: Get web response report
       tags:
         - Reports
       x-note: |
         If you don't specify an `end` time, the system assumes 00:00 UTC, which will provide results through the previous day.
+      x-weight: 93
   /api/schedules:
     get:
       description: List all existing schedules. Returns an array of schedule objects in the `schedules` attribute.
@@ -14535,6 +14652,7 @@ paths:
       summary: List schedules
       tags:
         - Schedules
+      x-weight: 90
     post:
       description: Scheduled notifications are created by POSTing to the schedule URI. The body of the request must be one of a single [schedule object](/developer/rest-api/ua/schemas/schedules/#scheduleobject) or an array of one or more schedule objects.
       operationId: scheduleNotification
@@ -14628,13 +14746,14 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Schedule a notification
+      summary: Schedule notifications
       tags:
         - Schedules
+      x-weight: 30
   /api/schedules/bulk-send:
     post:
       description: |
-        Schedule a message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.
+        Schedule a message to existing channels using a `bulk_id`. Inactive channels are dropped. Before calling this endpoint, obtain a `bulk_id` from the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint.
       operationId: scheduleBulkSendPush
       requestBody:
         content:
@@ -14669,6 +14788,7 @@ paths:
       summary: Schedule message with bulk ID
       tags:
         - Bulk Sending
+      x-weight: 46
   /api/schedules/create-and-send:
     post:
       description: |
@@ -14677,7 +14797,7 @@ paths:
         - `create_and_send` array: For smaller audiences, provide email addresses, MSISDNs, or open channel addresses directly in the request.
 
 
-        - `bulk_id`: For larger audiences, upload a CSV using the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.
+        - `bulk_id`: For larger audiences, upload a CSV using the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, then reference it in this request.
 
 
         Existing channels that are `opted_in` or have a newer `opted_in` value in the payload receive the message but are not re-registered. You cannot update `opted_in` values for existing channels through this endpoint.
@@ -14748,8 +14868,11 @@ paths:
                 $ref: '#/components/schemas/pushAccepted'
           description: Because this operation sends messages, a successful response is nearly identical to a `/api/push` response.
         '400':
-          $ref: '#/components/responses/400'
-          description: You can only Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/error'
+          description: You can Create and Send to a single platform per request. Attempting to send notifications for multiple `device_types` in the same request will cause a 400 response. An invalid or missing header row will also cause a 400 response. A `ua_msisdn` value that is malformed or does not have a real National Destination Code (NDC) will also cause a 400 response. In the US, an NDC is the area code.
         '401':
           $ref: '#/components/responses/401'
         '413':
@@ -14760,10 +14883,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - psh
-      summary: Schedule a Create and Send message
+      summary: Schedule Create and Send message
       tags:
         - Bulk Sending
       x-warning: Duplicate addresses in the `create_and_send` array might receive redundant notifications or fewer notifications than expected. You should remove duplicate addresses from your request before sending a Create and Send message.
+      x-weight: 22
   /api/schedules/{schedule_id}:
     delete:
       description: Delete a schedule resource, which will result in no more pushes being sent. If the resource is successfully deleted, the response does not include a body.
@@ -14786,6 +14910,7 @@ paths:
       summary: Delete schedule
       tags:
         - Schedules
+      x-weight: 100
     get:
       description: Fetch the current definition of a single schedule resource. Returns a single schedule object.
       operationId: getSchedule
@@ -14807,9 +14932,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - sch
-      summary: List a specific schedule
+      summary: Look up schedule
       tags:
         - Schedules
+      x-weight: 80
     parameters:
       - description: The ID of a schedule.
         in: path
@@ -14890,6 +15016,7 @@ paths:
       summary: Update schedule
       tags:
         - Schedules
+      x-weight: 50
   /api/schedules/{schedule_id}/pause:
     parameters:
       - description: The ID of the schedule you want to pause.
@@ -14958,11 +15085,12 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - sch
-      summary: Pause a schedule
+      summary: Pause schedule
       tags:
         - Schedules
       x-note: |
-        Paused schedules bear a `"paused": true` boolean.
+        Paused schedules bear a `"paused": true` Boolean.
+      x-weight: 52
   /api/schedules/{schedule_id}/resume:
     parameters:
       - description: The ID of the schedule you want to resume.
@@ -15031,11 +15159,12 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - sch
-      summary: Resume a schedule
+      summary: Resume schedule
       tags:
         - Schedules
       x-note: |
-        Paused schedules bear a `"paused": true` boolean.
+        Paused schedules bear a `"paused": true` Boolean.
+      x-weight: 54
   /api/segments:
     get:
       description: List all segments for the application.
@@ -15099,9 +15228,12 @@ paths:
       security:
         - basicAuth: []
         - bearerAuth: []
-      summary: Segment listing
+        - oauth2Token:
+            - seg
+      summary: List segments
       tags:
         - Segments
+      x-weight: 90
     post:
       description: Create a new segment.
       operationId: createSegment
@@ -15153,9 +15285,12 @@ paths:
       security:
         - basicAuth: []
         - bearerAuth: []
+        - oauth2Token:
+            - seg
       summary: Create segment
       tags:
         - Segments
+      x-weight: 30
   /api/segments/{segment_id}:
     delete:
       description: Remove the segment.
@@ -15171,9 +15306,12 @@ paths:
       security:
         - basicAuth: []
         - bearerAuth: []
+        - oauth2Token:
+            - seg
       summary: Delete segment
       tags:
         - Segments
+      x-weight: 100
     get:
       description: Lookup a segment.
       operationId: getSegment
@@ -15191,9 +15329,12 @@ paths:
       security:
         - basicAuth: []
         - bearerAuth: []
-      summary: Segment lookup
+        - oauth2Token:
+            - seg
+      summary: Look up segment
       tags:
         - Segments
+      x-weight: 80
     parameters:
       - description: The segment you want to retrieve.
         in: path
@@ -15233,10 +15374,13 @@ paths:
       security:
         - basicAuth: []
         - bearerAuth: []
+        - oauth2Token:
+            - seg
       summary: Update segment
       tags:
         - Segments
       x-note: Segmentation data is evaluated at send time. If you schedule a message that targets a segment and then edit that segment, the scheduled message automatically uses the updated segment criteria. "Scheduled" includes recurring messages.
+      x-weight: 50
   /api/sms/custom-response:
     post:
       description: |
@@ -15312,9 +15456,10 @@ paths:
           description: The mobile_originated_id could not be found.
       security:
         - bearerAuth: []
-      summary: Custom SMS response
+      summary: Send custom SMS response
       tags:
         - SMS
+      x-weight: 22
   /api/sms/{msisdn}/keywords:
     post:
       description: |
@@ -15377,9 +15522,10 @@ paths:
         - basicAppAuth: []
         - basicAuth: []
         - bearerAuth: []
-      summary: Manually trigger a keyword interaction
+      summary: Trigger keyword interaction manually
       tags:
         - SMS
+      x-weight: 20
   /api/subscription_lists:
     get:
       description: Provides a list of subscription lists IDs that are associated with this app key.
@@ -15407,9 +15553,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Subscription lists listing
+      summary: List subscription lists
       tags:
         - Subscription Lists
+      x-weight: 90
   /api/subscription_lists/named_users/{named_user_id}:
     get:
       description: Provides the subscription lists that are associated with a given named user.
@@ -15442,9 +15589,10 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - nu
-      summary: Named user subscription lists listing
+      summary: List named user subscription lists
       tags:
         - Subscription Lists
+      x-weight: 80
     parameters:
       - description: The named user being looked up.
         in: path
@@ -15479,10 +15627,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Retrieve lists
+      summary: List tag lists
       tags:
         - Tag Lists
       x-note: The tag list content will return the data provided in the [tag list creation](/developer/rest-api/ua/operations/tag-lists/#createtaglist) operation. Although `add`, `remove`, and `set` are optional, one or more must be present.
+      x-weight: 90
     post:
       description: Add tags to your contacts by creating a list and uploading CSV file with user identifiers. The body of the request contains the name, description, and optional metadata for the list. After you define a list, you populate it with a call to the [Upload Tag List](/developer/rest-api/ua/operations/tag-lists/#uploadtaglist) endpoint.
       operationId: createTagList
@@ -15527,10 +15676,11 @@ paths:
         - bearerAuth: []
         - oauth2Token:
             - lst
-      summary: Create a tag list
+      summary: Create tag list
       tags:
         - Tag Lists
       x-important: You must prefix tag list names with `"ua_tags_"`.
+      x-weight: 30
   /api/tag-lists/{list_name}:
     delete:
       description: Delete a list. Deleting a list will not affect any previous uploads but will prevent new uploads to the deleted list. For example, this does not remove the tags associated with the previously-uploaded file from the channels in that file.
@@ -15558,6 +15708,7 @@ paths:
       summary: Delete tag list
       tags:
         - Tag Lists
+      x-weight: 100
   /api/tag-lists/{list_name}/csv:
     parameters:
       - description: The `name` of the list you want to retrieve or update.
@@ -15645,6 +15796,7 @@ paths:
         - Tag Lists
       x-note: 'The maximum number of rows that may be uploaded to a list is 10 million. `Content-Encoding: gzip` is supported and recommended on this endpoint to reduce network traffic.'
       x-warning: If your upload times out due to a poor connection, you must re-upload the list from scratch. Because we want to ensure that the entirety of a given list is successfully uploaded, we do not support partial list uploads.
+      x-weight: 40
   /api/tag-lists/{list_name}/errors:
     get:
       description: During processing, after a list is uploaded, errors can occur. Depending on the type of list processing, an error file may be created, showing a user exactly what went wrong.
@@ -15676,6 +15828,7 @@ paths:
       summary: Download list errors
       tags:
         - Tag Lists
+      x-weight: 80
   /api/templates:
     get:
       description: List all existing templates. Returns an array of template objects in the `templates` attribute.
@@ -15758,6 +15911,7 @@ paths:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 90
     post:
       description: Create a new template.
       operationId: createTemplate
@@ -15827,6 +15981,7 @@ paths:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 30
   /api/templates/push:
     post:
       description: Send a push notification based on a template to a list of devices. The body of the request must be a single push template payload or an array of one or more push template payloads.
@@ -15885,11 +16040,12 @@ paths:
         - basicAuth: []
         - oauth2Token:
             - psh
-      summary: Push to template
+      summary: Send templated pushes
       tags:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 20
   /api/templates/push/validate:
     post:
       description: This endpoint accepts the same range of payloads as `/api/template/push`, but only parses and validates the payload. It does not actually send a push.
@@ -15933,11 +16089,12 @@ paths:
         - basicAuth: []
         - oauth2Token:
             - psh
-      summary: Validate a template
+      summary: Validate templated pushes
       tags:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 10
   /api/templates/schedules:
     post:
       description: Schedule a push notification based on a template to a list of devices.  Like a standard template-based push, the body of the request includes one or more push template payloads along with a schedule object determining when the template-based push should be sent.
@@ -16052,11 +16209,12 @@ paths:
         - basicAuth: []
         - oauth2Token:
             - psh
-      summary: Schedule a templated push
+      summary: Schedule templated pushes
       tags:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 22
   /api/templates/{template_id}:
     delete:
       description: Delete a template. If the template is successfully deleted, the response does not include a body.
@@ -16090,6 +16248,7 @@ paths:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 100
     get:
       description: Fetch the current definition of a single template.
       operationId: getTemplate
@@ -16114,11 +16273,12 @@ paths:
           $ref: '#/components/responses/404'
       security:
         - basicAuth: []
-      summary: Look up a template
+      summary: Look up template
       tags:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 80
     parameters:
       - description: A required string ID of the template.
         in: path
@@ -16187,6 +16347,7 @@ paths:
         - Personalization
       x-note: |
         The Personalization (`/templates`) API is deprecated. Instead, [create templates in the Airship dashboard](/guides/personalization/content/templates/) or use the [Content API](/developer/rest-api/ua/operations/content/), and send using the [Bulk sending](/developer/rest-api/ua/operations/bulk-sending/) or [Automation](/developer/rest-api/ua/operations/automation/) APIs.
+      x-weight: 50
   /api/user/messages/batch-delete:
     post:
       description: |-
@@ -16269,6 +16430,7 @@ paths:
       summary: Delete multiple messages from inbox
       tags:
         - Push
+      x-weight: 110
   /api/user/messages/{push_id}:
     delete:
       description: |-
@@ -16296,6 +16458,7 @@ paths:
       tags:
         - Push
       x-note: For time-sensitive messages, set an `expiry` on the [In-app message object](/developer/rest-api/ua/schemas/push/#inappobject) so you don't have to delete them manually.
+      x-weight: 100
   /token:
     post:
       description: |-
@@ -16376,6 +16539,7 @@ paths:
          --header 'Authorization: Bearer {OAUTH_ACCESS_TOKEN}'
         {{< /highlight >}}
 
+      x-weight: 30
   /verify/public_key/{kid}:
     get:
       description: Retrieve the public key of a key ID. Use `oauth2.asnapius.com` for Airship's North American cloud site and `oauth2.asnapieu.com` for Airship's European cloud site when verifying an OAuth public key.
@@ -16399,9 +16563,10 @@ paths:
               schema:
                 description: The error includes as much information as possible to help you understand the reason for the failure.
           description: The requested resource doesn't exist.
-      summary: Verify public key
+      summary: Look up public key
       tags:
         - OAuth
+      x-weight: 80
     parameters:
       - description: 'The private key ID used to sign the token. Example: `8817e96`'
         in: path
@@ -16458,7 +16623,7 @@ tags:
   - description: |-
       Open channels are custom communication channels that you can configure for messaging, using the same segmentation and scheduling tools available on natively-supported platforms (iOS, Android, etc.). With open channels, you define a new open platform, e.g., SMS, Slack, Acme™ Smart Toasters, and register the new platform with Airship.
 
-        If you are sending through the [Push API](/developer/rest-api/ua/operations/push/), platform overrides for open platforms are covered in [Open Channel Overrides](/developer/rest-api/ua/schemas/platform-overrides/#openchanneloverrideobject). For open channel lookup, use the [Channel Lookup endpoint](/developer/rest-api/ua/operations/channels/#getchannel).
+        If you are sending through the [Push API](/developer/rest-api/ua/operations/push/), platform overrides for open platforms are covered in [Open Channel Overrides](/developer/rest-api/ua/schemas/platform-overrides/#openchanneloverrideobject). For open channel lookup, use the [Look up channel](/developer/rest-api/ua/operations/channels/#getchannel) endpoint.
     name: Open Channels
     x-card-description: Configure custom messaging channels
   - description: Register email channels, set opt-in status, and manipulate tags on email channels.
@@ -16481,7 +16646,7 @@ tags:
   - description: Set Text, Number, and Date attributes on channels or named users in bulk by uploading a CSV.
     name: Attribute Lists
     x-card-description: Set attributes in bulk by CSV upload
-    x-note: To set JSON attributes, use the [Set or remove attributes on channels](/developer/rest-api/ua/operations/channels/#modifychannelattributes) or [Set or remove attributes on named users](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint, or the Airship SDKs. For more information, see [Setting and removing JSON attributes](/guides/audience/attributes/setting/#setting-and-removing-json-attributes).
+    x-note: To set JSON attributes, use the [Set or remove attributes on channels](/developer/rest-api/ua/operations/channels/#modifychannelattributes) or [Set or remove attributes on named user](/developer/rest-api/ua/operations/named-users/#modifynameduserattributes) endpoint, or the Airship SDKs. For more information, see [Setting and removing JSON attributes](/guides/audience/attributes/setting/#setting-and-removing-json-attributes).
   - description: |-
       With the Static List API endpoint, you can target and manage lists of devices that are defined in systems outside of Airship. Any list or grouping of devices for which the canonical source of data about the members is elsewhere is a good candidate for Static Lists, e.g., members of a customer loyalty program. In the dashboard, they are referred to as [uploaded lists](/guides/audience/audience-lists/uploaded/).
 
@@ -16493,13 +16658,13 @@ tags:
   - description: |
       Target recipients of a single channel type by providing audience identifiers at send time. Bulk sending supports two methods:
 
-      * **Upload and Send** targets existing channels by channel ID across app, web, email, SMS, and open channels. Upload a CSV of channel IDs to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush) endpoint.
+      * **Upload and Send** targets existing channels by channel ID across app, web, email, SMS, and open channels. Upload a CSV of channel IDs to the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Send message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#bulksendpush) or [Schedule message with bulk ID](/developer/rest-api/ua/operations/bulk-sending/#schedulebulksendpush) endpoint.
 
       * **Create and Send** sends to email addresses, MSISDNs, or open channel addresses. Unknown identifiers are registered as new channels.
 
-        * For smaller audiences, use the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoints to provide email addresses, MSISDNs, or open channel addresses in an array.
+        * For smaller audiences, use the [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoints to provide email addresses, MSISDNs, or open channel addresses in an array.
 
-        * For larger audiences, upload identifiers in CSV format to the [Create bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Create and Send a message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule a Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoint.
+        * For larger audiences, upload identifiers in CSV format to the [Upload bulk send audience](/developer/rest-api/ua/operations/bulk-sending/#bulkuploadcreateandsendplatform) endpoint to obtain a `bulk_id`, and then send your message using the [Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#createandsend) or [Schedule Create and Send message](/developer/rest-api/ua/operations/bulk-sending/#schedulecreateandsendoperations) endpoint.
 
 
       See the [Bulk sending](/guides/messaging/bulk-sending/) guide for more information.
@@ -16524,7 +16689,12 @@ tags:
   - description: The phrases "total audience" and "billable count" are interchangeable. They both refer to the number of channels that were in an installed state at any point in a given month. A channel's billable state differs from its installed state only in that a device is billable until the last day of the calendar month in which it is uninstalled. Month boundaries are determined using UTC time zones, and all provided timestamps and dates are UTC as well. Customers can choose to be billed on their total audience. These endpoints allow them to query for the counts that we use to calculate their bill.
     name: Billing
     x-card-description: Query billable audience counts
-  - description: Manage audience entry and exit for [Sequences](/guides/messaging/messages/sequences/about/) using the `/api/journeys` endpoints.
+  - description: |
+      Manage audience entry and exit for [Sequences](/guides/messaging/messages/sequences/about/) using the `/api/journeys` endpoints:
+
+      * **[Enter or exit users from Sequence](/developer/rest-api/ua/operations/journeys/#triggerjourneyssegment)** can be used for either direction.
+
+      * **[Exit users from Sequence](/developer/rest-api/ua/operations/journeys/#exitjourneys)** is exclusively for removing users already entered into the Sequence, and supports asynchronous bulk removal.
     name: Journeys
     x-card-description: Manage audience entry and exit for Sequences
 x-schema-tags:

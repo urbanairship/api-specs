@@ -2,7 +2,7 @@
   "components": {
     "parameters": {
       "Api-Revision": {
-        "description": "The particular API revision you want to use. In general, this is `1.2`.",
+        "description": "The API revision.",
         "explode": false,
         "in": "header",
         "name": "Api-Revision",
@@ -267,6 +267,14 @@
           },
           {
             "properties": {
+              "barcodes": {
+                "description": "An array of fallback barcode objects for passes generated from this adaptive link. Requires a primary barcode set with `barcode_type`.\n",
+                "items": {
+                  "$ref": "#/components/schemas/barcodeObject"
+                },
+                "type": "array",
+                "x-apple": true
+              },
               "expirationDate": {
                 "description": "When set, indicates the date this adaptive link expires. An expired adaptive link will return a JSON object with an error message instead of a pass.\n",
                 "format": "date-time",
@@ -451,7 +459,7 @@
         "required": [
           "tags"
         ],
-        "title": "Add Tags to PassRequest",
+        "title": "Modify pass tags request",
         "type": "object",
         "x-inline-component": true
       },
@@ -464,7 +472,7 @@
             "$ref": "#/components/schemas/assertionJwtClaims"
           }
         ],
-        "description": "A JSON Web Token (JWT) used for authorization in [OAuth token requests](/developer/rest-api/wallet/operations/oauth/#requestoauthtoken). The JWT must be signed with the private key corresponding to the `client_id` in the `kid` header using the ES384 algorithm.",
+        "description": "A JSON Web Token (JWT) used for authorization in [Request token](/developer/rest-api/wallet/operations/oauth/#requestoauthtoken). The JWT must be signed with the private key corresponding to the `client_id` in the `kid` header using the ES384 algorithm.",
         "title": "Assertion JWT",
         "type": "object",
         "x-schema-tag": "OAuth"
@@ -780,6 +788,42 @@
         ],
         "type": "string",
         "x-inline-component": true
+      },
+      "barcodeObject": {
+        "description": "Apple Wallet only. Represents a fallback barcode on a template or pass. Use fallbacks when the primary barcode uses a format that requires iOS 27 or later, so the pass also works on earlier iOS versions. See [Configure fallback barcodes](/guides/wallet/user-guide/design-template/fallback-barcodes/).\n",
+        "properties": {
+          "altText": {
+            "description": "The alternate text displayed below the barcode.",
+            "type": "string"
+          },
+          "encoding": {
+            "description": "The character encoding of the barcode value. Defaults to `iso-8859-1`.",
+            "type": "string"
+          },
+          "type": {
+            "description": "The barcode format.\n",
+            "enum": [
+              "AZTEC",
+              "CODABAR",
+              "CODE_128",
+              "CODE_39",
+              "EAN_13",
+              "ITF_14",
+              "PDF_417",
+              "QR_CODE"
+            ],
+            "type": "string"
+          },
+          "value": {
+            "description": "The value encoded in the barcode. If omitted, the value from the primary barcode or template is used.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type"
+        ],
+        "title": "Barcode object",
+        "type": "object"
       },
       "beacon": {
         "description": "Associates a pass with an iBeacon. Apple Wallet supports up to 10 beacons per pass. When the pass holder comes into proximity with an iBeacon bearing the same UUID, the pass becomes relevant (displayed on the lock screen).",
@@ -1118,7 +1162,7 @@
         "x-inline-component": true
       },
       "compoundSelector": {
-        "description": "Compound selectors combine boolean operators (AND, OR, or NOT) with atomic or nested compound selectors. The syntax can be either implicit, using an array of values associated with an atomic selector, or explicit, employing a boolean operator followed by an array of atomic expression objects.",
+        "description": "Compound selectors combine Boolean operators (AND, OR, or NOT) with atomic or nested compound selectors. The syntax can be either implicit, using an array of values associated with an atomic selector, or explicit, employing a Boolean operator followed by an array of atomic expression objects.",
         "oneOf": [
           {
             "$ref": "#/components/schemas/atomicSelector"
@@ -1187,6 +1231,14 @@
       "createPassAndroidPayRequest": {
         "description": "A pass for Google Wallet. Unlike templates, in which the `fieldsModel` contains fields nested inside `module` objects, fields are collapsed in pass requests and responses. The `fieldType` corresponds to the template field module that the field belongs to.\n\nAside from differences in field composition, and a lack of beacons, Google Wallet passes are very similar to Apple Wallet passes.\n",
         "properties": {
+          "customActions": {
+            "description": "An array of action objects for a template or pass.\n",
+            "items": {
+              "$ref": "#/components/schemas/customActionObject"
+            },
+            "maxItems": 2,
+            "type": "array"
+          },
           "fields": {
             "additionalProperties": {
               "$ref": "#/components/schemas/fields"
@@ -1234,6 +1286,14 @@
         "properties": {
           "createdAt": {
             "$ref": "#/components/schemas/createdAt"
+          },
+          "customActions": {
+            "description": "An array of action objects for a template or pass.\n",
+            "items": {
+              "$ref": "#/components/schemas/customActionObject"
+            },
+            "maxItems": 2,
+            "type": "array"
           },
           "externalId": {
             "description": "The external ID for the pass, returned only if you created the pass using an external ID.",
@@ -1303,11 +1363,27 @@
       "createPassAppleWalletRequest": {
         "description": "A pass for Apple Wallet.",
         "properties": {
+          "barcodes": {
+            "description": "An array of fallback barcode objects for the pass. If provided, overrides the template's barcodes. Requires a primary barcode set with `barcode_type`.\n",
+            "items": {
+              "$ref": "#/components/schemas/barcodeObject"
+            },
+            "type": "array",
+            "x-apple": true
+          },
           "beacons": {
             "description": "Beacons for an Apple pass.",
             "items": {
               "$ref": "#/components/schemas/beacon"
             },
+            "type": "array"
+          },
+          "customActions": {
+            "description": "An array of action objects for a template or pass.\n",
+            "items": {
+              "$ref": "#/components/schemas/customActionObject"
+            },
+            "maxItems": 2,
             "type": "array"
           },
           "fields": {
@@ -1463,6 +1539,46 @@
         "type": "string",
         "x-inline-component": true
       },
+      "customActionObject": {
+        "description": "Represents an action that links a pass holder to relevant content or services, mapped to an Apple Wallet Featured Action or a Google Wallet Value Added Opportunity module. See [Add actions to a pass](/guides/wallet/user-guide/design-template/actions/).\n",
+        "properties": {
+          "id": {
+            "description": "An optional identifier for the action. Airship does not send this value to Apple or Google.",
+            "type": "string"
+          },
+          "type": {
+            "description": "The action type.\n",
+            "enum": [
+              "addToBalance",
+              "bookAppointment",
+              "bookCar",
+              "bookFlight",
+              "bookStay",
+              "call",
+              "listenToMusic",
+              "membershipBenefits",
+              "order",
+              "place",
+              "shop",
+              "viewOffersRewards",
+              "viewSchedule",
+              "watchTrailer"
+            ],
+            "type": "string"
+          },
+          "url": {
+            "description": "The target URL for the action when tapped.",
+            "format": "url",
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "url"
+        ],
+        "title": "Action object",
+        "type": "object"
+      },
       "date": {
         "description": "The date for a specific activity instance in wallet statistics.",
         "format": "date",
@@ -1536,6 +1652,14 @@
           "fields": {
             "description": "Contains the objects representing an event.",
             "properties": {
+              "customActions": {
+                "description": "An array of action objects for a template or pass.\n",
+                "items": {
+                  "$ref": "#/components/schemas/customActionObject"
+                },
+                "maxItems": 2,
+                "type": "array"
+              },
               "doorsOpen": {
                 "description": "The date and time when ticket holders can begin to enter the venue.",
                 "properties": {
@@ -2041,6 +2165,14 @@
                   }
                 },
                 "type": "object"
+              },
+              "customActions": {
+                "description": "An array of action objects for a template or pass.\n",
+                "items": {
+                  "$ref": "#/components/schemas/customActionObject"
+                },
+                "maxItems": 2,
+                "type": "array"
               },
               "departureAirport": {
                 "description": "The airport that the flight departs from.",
@@ -2551,15 +2683,17 @@
                     "$ref": "#/components/schemas/googleHeaderFormatType"
                   },
                   "value": {
-                    "description": "The format of the barcode supported by the project and resulting passes.\n",
+                    "description": "The barcode format. Values are case-insensitive.\n",
                     "enum": [
-                      "pdf417",
-                      "aztec",
-                      "code128",
-                      "qr",
-                      "upc-a",
-                      "ean-13",
-                      "code-39"
+                      "PDF_417",
+                      "AZTEC",
+                      "CODE_128",
+                      "QR_CODE",
+                      "UPC_A",
+                      "EAN_13",
+                      "CODE_39",
+                      "CODABAR",
+                      "ITF_14"
                     ],
                     "type": "string"
                   }
@@ -2567,7 +2701,7 @@
                 "type": "object"
               }
             ],
-            "description": "The type of barcode supported by the template. This value must be the same as the `barcode_type` set at the project level.\n"
+            "description": "The primary barcode format for the template. Passes inherit the template value unless an Adaptive Link or pass payload overrides it.\n"
           },
           "barcode_value": {
             "allOf": [
@@ -2921,6 +3055,39 @@
         "type": "boolean",
         "x-inline-component": true
       },
+      "imageMetaData": {
+        "description": "Metadata about an uploaded image.",
+        "properties": {
+          "height": {
+            "description": "The height of the image in pixels.",
+            "type": "integer"
+          },
+          "imageType": {
+            "description": "The type of the image, if known.",
+            "type": "string"
+          },
+          "path": {
+            "description": "The storage path of the uploaded image.",
+            "type": "string"
+          },
+          "source": {
+            "description": "The source of the uploaded image.",
+            "type": "string"
+          },
+          "width": {
+            "description": "The width of the image in pixels.",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "path",
+          "source",
+          "width",
+          "height"
+        ],
+        "title": "Image Metadata",
+        "type": "object"
+      },
       "iosColorHeader": {
         "properties": {
           "fieldType": {
@@ -2955,6 +3122,9 @@
                 },
                 "currencyCode": {
                   "$ref": "#/components/schemas/currencyCode"
+                },
+                "fieldType": {
+                  "$ref": "#/components/schemas/iosFieldType"
                 },
                 "formatType": {
                   "$ref": "#/components/schemas/formatType"
@@ -2995,6 +3165,19 @@
         },
         "title": "iOS fields",
         "type": "object"
+      },
+      "iosFieldType": {
+        "description": "The field placement on an Apple Wallet pass.\n* `header`: Appears in the top header section of the pass.\n* `primary`: Appears prominently in the primary section.\n* `secondary`: Appears in the secondary section.\n* `auxiliary`: Appears in the auxiliary section.\n* `back`: Appears on the back of the pass.\n* `footer`: Appears in the footer section. On Generic passes (`type: Generic`), when a template or pass includes both a `background_image` and one or more `footer` fields, Apple Wallet renders the pass in the Poster Generic (`posterGeneric`) layout style. In Poster Generic layout, `header`, `primary`, and `footer` fields appear on the front over the background image, while `secondary` and `auxiliary` fields are placed on the back of the pass.\n",
+        "enum": [
+          "header",
+          "primary",
+          "secondary",
+          "auxiliary",
+          "back",
+          "footer"
+        ],
+        "type": "string",
+        "x-inline-component": true
       },
       "iosHeaders": {
         "description": "The iOS template `headers` object can contain the following objects. Each object\nhas a `formatType`, `fieldType`, and `value`.\n\n* `formatType` is always `1`, indicating that the `value` is a string.\n\n* `fieldType` is `topLevel` — a text or color value on the top-front of the pass, `image`, or `barcode`.\n\n* `value` is the default value for the header field.",
@@ -3043,7 +3226,7 @@
             "type": "object"
           },
           "barcode_type": {
-            "description": "The type of barcode supported by the template. This value must be the same as the `barcode_type` set at the project level.\n",
+            "description": "The primary barcode format for the template. Passes inherit the template value unless an Adaptive Link or pass payload overrides it.\n",
             "properties": {
               "fieldType": {
                 "$ref": "#/components/schemas/barcodeFieldType"
@@ -3052,15 +3235,17 @@
                 "$ref": "#/components/schemas/headerFormatType"
               },
               "value": {
-                "description": "The format of the barcode supported by the project and resulting passes.\n",
+                "description": "The barcode format. Values are case-insensitive.\n",
                 "enum": [
-                  "pdf417",
-                  "aztec",
-                  "code128",
-                  "qr",
-                  "upc-a",
-                  "ean-13",
-                  "code-39"
+                  "PDF_417",
+                  "AZTEC",
+                  "CODE_128",
+                  "QR_CODE",
+                  "UPC_A",
+                  "EAN_13",
+                  "CODE_39",
+                  "CODABAR",
+                  "ITF_14"
                 ],
                 "type": "string"
               }
@@ -3227,7 +3412,7 @@
             "$ref": "#/components/schemas/passURIs"
           }
         },
-        "title": "Linked Passes",
+        "title": "Linked passes",
         "type": "object"
       },
       "locationObject": {
@@ -3458,11 +3643,12 @@
         "x-inline-component": true
       },
       "oauthScope": {
-        "description": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/wallet/api-auth-reference/#oauth-token-scopes) in the *Wallet API Authorization Reference* documentation.\n  * `wadl`: Adaptive Links\n  * `wevt`: Events\n  * `wfli`: Flights\n  * `wnot`: Notifications\n  * `wpas`: Passes\n  * `wprj`: Projects\n  * `wsch`: Schedules\n  * `wseg`: Segments\n  * `wrpt`: Statistics\n  * `wtmp`: Templates",
+        "description": "The value of the scope parameter is a list of space-delimited, case-sensitive strings. If multiple scopes are specified, their order does not matter. Each string adds an additional access range to the requested scope. For more information about scope values, see [OAuth token scopes](/developer/rest-api/wallet/api-auth-reference/#oauth-token-scopes) in the *Wallet API Authorization Reference* documentation.\n  * `wadl`: Adaptive Links\n  * `wevt`: Events\n  * `wfli`: Flights\n  * `wimg`: Images\n  * `wnot`: Notifications\n  * `wpas`: Passes\n  * `wprj`: Projects\n  * `wsch`: Schedules\n  * `wseg`: Segments\n  * `wrpt`: Statistics\n  * `wtmp`: Templates",
         "enum": [
           "wadl",
           "wevt",
           "wfli",
+          "wimg",
           "wnot",
           "wpas",
           "wprj",
@@ -3588,6 +3774,14 @@
       "passMetadata": {
         "description": "Meta information about passes.",
         "properties": {
+          "barcodes": {
+            "description": "An array of fallback barcode objects associated with the pass.",
+            "items": {
+              "$ref": "#/components/schemas/barcodeObject"
+            },
+            "type": "array",
+            "x-apple": true
+          },
           "createdAt": {
             "$ref": "#/components/schemas/updatedAt"
           },
@@ -4184,7 +4378,7 @@
             "type": "string"
           },
           "barcode_encoding": {
-            "description": "Barcode encoding is set at the project level and inherited by templates\nand passes.\n",
+            "description": "Barcode encoding is set at the project level and inherited by templates\nand passes. You can override it on a template.\n",
             "enum": [
               "iso-8859-1"
             ],
@@ -4195,15 +4389,15 @@
             "type": "string"
           },
           "barcode_type": {
-            "description": "The format of the barcode supported by the project and resulting passes.",
+            "description": "The barcode format supported by the project and resulting passes. Values are case-insensitive.",
             "enum": [
-              "pdf417",
-              "aztec",
-              "code128",
-              "qr",
-              "upc-a",
-              "ean-13",
-              "code-39"
+              "PDF_417",
+              "AZTEC",
+              "CODE_128",
+              "QR_CODE",
+              "UPC_A",
+              "EAN_13",
+              "CODE_39"
             ],
             "type": "string"
           }
@@ -4593,7 +4787,7 @@
           },
           "value": {
             "default": "multipleHolders",
-            "description": "Determines whether a pass supports sharing across users, devices, or both. iOS interprets this as a boolean setting: `oneUserOneDevice` prohibits sharing; all other values allow sharing.\n",
+            "description": "Determines whether a pass supports sharing across users, devices, or both. iOS interprets this as a Boolean setting: `oneUserOneDevice` prohibits sharing; all other values allow sharing.\n",
             "enum": [
               "multipleHolders",
               "oneUserAllDevices",
@@ -4692,6 +4886,22 @@
       "templateRequestHeaders": {
         "description": "Meta information about templates; this object appears on all templates and identifies templates associated with a project.",
         "properties": {
+          "barcodes": {
+            "description": "An array of fallback barcode objects for the template. Passes created from this template inherit these barcodes unless overridden. Requires a primary barcode set with `barcode_type`.\n",
+            "items": {
+              "$ref": "#/components/schemas/barcodeObject"
+            },
+            "type": "array",
+            "x-apple": true
+          },
+          "customActions": {
+            "description": "An array of action objects for a template or pass.\n",
+            "items": {
+              "$ref": "#/components/schemas/customActionObject"
+            },
+            "maxItems": 2,
+            "type": "array"
+          },
           "deleted": {
             "$ref": "#/components/schemas/deleted"
           },
@@ -4909,6 +5119,14 @@
       },
       "updatePassRequest": {
         "properties": {
+          "barcodes": {
+            "description": "An array of fallback barcode objects to update on the pass. Overrides the pass's existing barcodes. Requires a primary barcode set with `barcode_type`.\n",
+            "items": {
+              "$ref": "#/components/schemas/barcodeObject"
+            },
+            "type": "array",
+            "x-apple": true
+          },
           "beacons": {
             "description": "An array of beacon objects you want to update for this pass.",
             "items": {
@@ -4916,6 +5134,14 @@
             },
             "type": "array",
             "x-apple": true
+          },
+          "customActions": {
+            "description": "An array of action objects for a template or pass.\n",
+            "items": {
+              "$ref": "#/components/schemas/customActionObject"
+            },
+            "maxItems": 2,
+            "type": "array"
           },
           "fields": {
             "additionalProperties": {
@@ -5000,6 +5226,7 @@
               "wadl": "Adaptive Links",
               "wevt": "Events",
               "wfli": "Flights",
+              "wimg": "Images",
               "wnot": "Notifications",
               "wpas": "Passes",
               "wprj": "Projects",
@@ -5017,6 +5244,7 @@
           "wadl": "Manage adaptive links.",
           "wevt": "Manage events for event tickets.",
           "wfli": "Manage flights for boarding passes.",
+          "wimg": "Manage images.",
           "wnot": "Send pass notifications.",
           "wpas": "Manage passes.",
           "wprj": "Manage projects.",
@@ -5143,10 +5371,11 @@
         "summary": "List certificates",
         "tags": [
           "Certificates"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
-        "description": "Adds a new Apple Wallet certificate to the wallet system. If the specified certificate exists in our system, and the baseName and teamIdentifier match the existing certificate, we will renew/update the existing certificate.\n\n\nWhen adding a certificate, you must paste the contents of your p12 certificate into the certificate field in the request payload. You can get the contents of your p12 file with the two following commands:\n\n* `openssl base64 -in wallet-prod.p12 -out wallet-prod.pem`\n* `cat wallet-prod.pem | tr -d \"\\n\\r\" | less`\n\n\nThe response contains the ID of your new certificate. You will use the ID to perform subsequent actions (GET, PUT, or DELETE) against this certificate. The response will also contain other information gathered from the certificate. You can find information about these additional fields under Get Certificate.",
+        "description": "Adds a new Apple Wallet certificate to the wallet system. If the specified certificate exists in our system, and the baseName and teamIdentifier match the existing certificate, we will renew/update the existing certificate.\n\n\nWhen adding a certificate, you must paste the contents of your p12 certificate into the certificate field in the request payload. You can get the contents of your p12 file with the two following commands:\n\n* `openssl base64 -in wallet-prod.p12 -out wallet-prod.pem`\n* `cat wallet-prod.pem | tr -d \"\\n\\r\" | less`\n\n\nThe response contains the ID of your new certificate. You will use the ID to perform subsequent actions (GET, PUT, or DELETE) against this certificate. The response will also contain other information gathered from the certificate. You can find information about these additional fields under [Look up certificate](/developer/rest-api/wallet/operations/certificates/#getcertificate).",
         "operationId": "addCertificate",
         "parameters": [
           {
@@ -5179,10 +5408,11 @@
             "httpBasic": []
           }
         ],
-        "summary": "Add new certificate",
+        "summary": "Create or update certificate",
         "tags": [
           "Certificates"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/certificates/{id}": {
@@ -5199,10 +5429,11 @@
             "httpBasic": []
           }
         ],
-        "summary": "Remove certificate",
+        "summary": "Delete certificate",
         "tags": [
           "Certificates"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Returns information about a certificate, including an array of templates that use the certificate.",
@@ -5224,10 +5455,11 @@
             "httpBasic": []
           }
         ],
-        "summary": "Get certificate",
+        "summary": "Look up certificate",
         "tags": [
           "Certificates"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -5275,7 +5507,8 @@
         "summary": "Update certificate",
         "tags": [
           "Certificates"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/events/project/id/{projectExternalId}/id/{eventExternalId}": {
@@ -5343,7 +5576,8 @@
         "summary": "Create event with external ID",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/events/project/{projectId}": {
@@ -5400,7 +5634,8 @@
         "summary": "Create event",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/events/project/{projectId}/passGroups/{passGroup}": {
@@ -5498,10 +5733,11 @@
             ]
           }
         ],
-        "summary": "Update events in a pass group",
+        "summary": "Update events in pass group",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/events/project/{projectId}/{eventId}": {
@@ -5539,7 +5775,8 @@
         "summary": "Delete event",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Returns information about a single event.",
@@ -5566,10 +5803,11 @@
             ]
           }
         ],
-        "summary": "Get event",
+        "summary": "Look up event",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -5641,7 +5879,8 @@
         "summary": "Update event",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/events/project/{projectId}/{eventId}/passGroups": {
@@ -5692,7 +5931,8 @@
         "summary": "List pass groups for event",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -5783,10 +6023,11 @@
             ]
           }
         ],
-        "summary": "Add event to pass group",
+        "summary": "Associate event with pass groups",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 34
       }
     },
     "/events/project/{projectId}/{eventId}/passGroups/{passGroup}": {
@@ -5811,10 +6052,11 @@
             ]
           }
         ],
-        "summary": "Remove event from pass group",
+        "summary": "Disassociate event from pass group",
         "tags": [
           "Events"
-        ]
+        ],
+        "x-weight": 70
       },
       "parameters": [
         {
@@ -5901,7 +6143,8 @@
         "summary": "List event passes",
         "tags": [
           "Event Passes"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -6019,7 +6262,7 @@
         }
       ],
       "put": {
-        "description": "Update fields common to a group of flights. Provide only the keys that you want to update from `fields` object of an [flight Request](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/#flightrequest); any fields that you omit from the payload remain unchanged.\nSee also [Update flights in a pass group](#operation-flights-project-projectid-passgroups-passgroup-put).\n",
+        "description": "Update fields common to a group of flights. Provide only the keys that you want to update from `fields` object of an [flight Request](/developer/rest-api/wallet/schemas/flights-and-boarding-passes/#flightrequest); any fields that you omit from the payload remain unchanged.\nSee also [Update flights in pass group](#operation-flights-project-projectid-passgroups-passgroup-put).\n",
         "operationId": "updateFlightsInPassGroupExternalId",
         "requestBody": {
           "content": {
@@ -6085,10 +6328,11 @@
             ]
           }
         ],
-        "summary": "Update flights with external ID in a pass group",
+        "summary": "Update flights with external ID in pass group",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 54
       }
     },
     "/flights/project/id/{projectExternalId}/id/{flightExternalId}": {
@@ -6156,7 +6400,8 @@
         "summary": "Create flight with external ID",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/flights/project/{projectId}": {
@@ -6213,7 +6458,8 @@
         "summary": "Create flight",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/flights/project/{projectId}/passGroups/{passGroup}": {
@@ -6245,7 +6491,7 @@
         }
       ],
       "put": {
-        "description": "Update all of the flights in a pass group. See also [Update flights with external ID in a pass group](#operation-flights-project-id-projectexternalid-id-passgroups-passgroup-put).\n",
+        "description": "Update all of the flights in a pass group. See also [Update flights with external ID in pass group](#operation-flights-project-id-projectexternalid-id-passgroups-passgroup-put).\n",
         "operationId": "updateFlightsInPassGroup",
         "requestBody": {
           "content": {
@@ -6311,10 +6557,11 @@
             ]
           }
         ],
-        "summary": "Update flights in a pass group",
+        "summary": "Update flights in pass group",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/flights/project/{projectId}/{flightId}": {
@@ -6352,7 +6599,8 @@
         "summary": "Delete flight",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Returns information for a single flight.",
@@ -6379,10 +6627,11 @@
             ]
           }
         ],
-        "summary": "Get flight",
+        "summary": "Look up flight",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -6448,7 +6697,8 @@
         "summary": "Update flight",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/flights/project/{projectId}/{flightId}/passGroups": {
@@ -6496,10 +6746,11 @@
             ]
           }
         ],
-        "summary": "List pass groups for a flight",
+        "summary": "List pass groups for flight",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -6590,10 +6841,11 @@
             ]
           }
         ],
-        "summary": "Add flight to a pass group",
+        "summary": "Associate flight with pass groups",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 34
       }
     },
     "/flights/project/{projectId}/{flightId}/passGroups/{passGroup}": {
@@ -6618,10 +6870,11 @@
             ]
           }
         ],
-        "summary": "Remove flight from pass group",
+        "summary": "Disassociate flight from pass group",
         "tags": [
           "Flights"
-        ]
+        ],
+        "x-weight": 70
       },
       "parameters": [
         {
@@ -6708,7 +6961,8 @@
         "summary": "List flight passes",
         "tags": [
           "Flight Passes"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -6797,6 +7051,91 @@
         }
       ]
     },
+    "/images/projects/{projectId}/{imageNameIdentifier}": {
+      "post": {
+        "description": "Uploads a PNG and stores it as a [private image](/guides/wallet/user-guide/design-template/private-images/) for use in a pass. Private images are primarily used for Google Wallet passes, where the `mainImage` must be hosted by Airship.\n\nThis endpoint also supports the Apple Wallet image types `thumbnail_image` and `strip_image`, but private images aren't required for those fields.",
+        "operationId": "uploadImagePrivate",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/Api-Revision"
+          },
+          {
+            "description": "The ID of the project.",
+            "in": "path",
+            "name": "projectId",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The unique identifier for the image. Usually consists of an alphanumeric name and a `.png` extension. Can be used as part of the image URL.",
+            "in": "path",
+            "name": "imageNameIdentifier",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "The image type. This determines the dimensions the image is resized to on upload.\n\n* `mainImage` — The main image in the `imageModulesData` field for Google Wallet passes. The uploaded image is resized to 180×180 pixels. Google only supports private images on `imageModulesData`. If used on any other Google Wallet pass field, the image is dropped.\n* `thumbnail_image` — The thumbnail image for an Apple Wallet pass. The uploaded image is resized to 180×180 pixels.\n* `strip_image` — The strip image for an Apple Wallet pass. The uploaded image is resized to 624×246 pixels.\n\nFor Apple Wallet, you can use the uploaded image in any pass field, but it may not be the correct size if used outside the type specified here.\n",
+            "in": "query",
+            "name": "imageType",
+            "required": true,
+            "schema": {
+              "enum": [
+                "mainImage",
+                "thumbnail_image",
+                "strip_image"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "image/png": {
+              "schema": {
+                "format": "binary",
+                "type": "string"
+              }
+            }
+          },
+          "description": "The raw binary data of the image to upload. Only PNG is supported.",
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/imageMetaData"
+                }
+              }
+            },
+            "description": "Successful upload. Returns metadata about the uploaded image.\n\nUse the `path` value returned in this response as the image field's value in a pass creation or update payload. See [Use a private image in a pass](/guides/wallet/user-guide/design-template/private-images/#use-a-private-image-in-a-pass) in *Add private images to wallet passes*."
+          },
+          "400": {
+            "description": "Missing or malformed input, invalid image format, or invalid image type."
+          }
+        },
+        "security": [
+          {
+            "httpBasic": []
+          },
+          {
+            "oauth2Token": [
+              "wimg"
+            ]
+          }
+        ],
+        "summary": "Upload image",
+        "tags": [
+          "Images"
+        ],
+        "x-weight": 40
+      }
+    },
     "/links/adaptive": {
       "get": {
         "description": "Returns a list of adaptive links.",
@@ -6829,7 +7168,8 @@
         "summary": "List Adaptive Links",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -6876,7 +7216,8 @@
         "summary": "Create Adaptive Link",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/links/adaptive/multiple/project/{projectId}": {
@@ -6957,12 +7298,13 @@
         "summary": "Create boarding pass or event ticket Adaptive Links",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}": {
       "get": {
-        "description": "Get an adaptive link with an external ID from a project that also has an external ID.",
+        "description": "Returns an Adaptive Link with an external ID from a project that also has an external ID.",
         "operationId": "getAdaptiveLinkExternalProjectId",
         "responses": {
           "200": {
@@ -6989,10 +7331,11 @@
             ]
           }
         ],
-        "summary": "Get Adaptive Link from project",
+        "summary": "Look up Adaptive Link from project",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -7061,7 +7404,8 @@
         "summary": "Create Adaptive Link in project",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/links/adaptive/project/id/{projectExternalId}/id/{adaptiveLinkExternalId}/passes": {
@@ -7109,10 +7453,11 @@
             ]
           }
         ],
-        "summary": "List passes for an Adaptive Link for an external project",
+        "summary": "List passes for Adaptive Link for external project",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 99
       },
       "parameters": [
         {
@@ -7210,10 +7555,11 @@
             ]
           }
         ],
-        "summary": "Get pass from Adaptive Link",
+        "summary": "Look up pass from Adaptive Link",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 86
       },
       "parameters": [
         {
@@ -7309,15 +7655,16 @@
             ]
           }
         ],
-        "summary": "Update passes from Adaptive Link for an external project",
+        "summary": "Update passes from Adaptive Link for external project",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}": {
       "get": {
-        "description": "Get an adaptive link with an external ID.",
+        "description": "Returns an Adaptive Link with an external ID.",
         "operationId": "getAdaptiveLinkExternalId",
         "responses": {
           "200": {
@@ -7344,10 +7691,11 @@
             ]
           }
         ],
-        "summary": "Get Adaptive Link",
+        "summary": "Look up Adaptive Link",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 84
       },
       "parameters": [
         {
@@ -7416,7 +7764,8 @@
         "summary": "Create Adaptive Link",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/links/adaptive/project/{projectId}/id/{adaptiveLinkExternalId}/passes": {
@@ -7464,10 +7813,11 @@
             ]
           }
         ],
-        "summary": "List passes for an Adaptive Link for a project",
+        "summary": "List passes for Adaptive Link for project",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 98
       },
       "parameters": [
         {
@@ -7547,10 +7897,11 @@
             ]
           }
         ],
-        "summary": "List Adaptive Links for a project",
+        "summary": "List Adaptive Links for project",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -7621,10 +7972,11 @@
             ]
           }
         ],
-        "summary": "List Adaptive Links for a template",
+        "summary": "List Adaptive Links for template",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 94
       },
       "parameters": [
         {
@@ -7696,7 +8048,8 @@
         "summary": "Delete Adaptive Link",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Returns information about a single adaptive link.",
@@ -7726,10 +8079,11 @@
             ]
           }
         ],
-        "summary": "Get Adaptive Link",
+        "summary": "Look up Adaptive Link",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -7788,7 +8142,8 @@
         "summary": "Update Adaptive Link",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/links/adaptive/{adaptiveLinkId}/passes": {
@@ -7836,11 +8191,12 @@
             ]
           }
         ],
-        "summary": "List passes for an Adaptive Link",
+        "summary": "List passes for Adaptive Link",
         "tags": [
           "Passes",
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 96
       },
       "parameters": [
         {
@@ -7920,8 +8276,8 @@
     },
     "/links/adaptive/{adaptiveLinkId}/passes/id/{passExternalId}": {
       "get": {
-        "description": "Get passes with an external IDs that were created from an adaptive link.\n",
-        "operationId": "getPassesExternalId",
+        "description": "List passes with external IDs that were created from an Adaptive Link.\n",
+        "operationId": "getPassesByAdaptiveLinkExternalId",
         "parameters": [
           {
             "description": "The external ID of the pass you want to get.",
@@ -7971,10 +8327,11 @@
             ]
           }
         ],
-        "summary": "Get passes from Adaptive Link",
+        "summary": "List passes for Adaptive Link",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -8062,7 +8419,8 @@
         "summary": "Update passes from Adaptive Link",
         "tags": [
           "Adaptive Links with external IDs"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/pass": {
@@ -8183,12 +8541,13 @@
         "summary": "List passes",
         "tags": [
           "Passes"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/pass/adaptive": {
       "get": {
-        "description": "Generates a multi-pass bundle from an Adaptive Link.\n",
+        "description": "Creates a multi-pass bundle from an Adaptive Link.\n",
         "operationId": "generateMultiPassFromAdaptiveLink",
         "responses": {
           "200": {
@@ -8212,10 +8571,11 @@
             "description": "Could not find an entry with specified `adaptiveLinkId`.\n"
           }
         },
-        "summary": "Generate multiple passes from a single Adaptive Link",
+        "summary": "Create passes from Adaptive Link",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 22
       },
       "parameters": [
         {
@@ -8248,7 +8608,7 @@
     },
     "/pass/adaptive/{adaptiveLinkId}/{deviceType}": {
       "get": {
-        "description": "Generates a pass from an adaptive link.\n\n\nWhen generating passes this way, you can append request parameters mapping to pass fields to the URL to add or update values to the pass at creation time. While this document lists reserved parameters, you can provide the `fieldName=value` for any field contained in the adaptive link.\n\n\nIf you configured your adaptive link object with the `isPersonalized` flag set to false (or the flag is absent), the first request will create a pass, and subsequent requests will create new instances of this same pass. If the `isPersonalized` flag is true, every request will create a new pass. If a request includes url-encoded parameters, the `isPersonalized` flag is considered true and Airship will always create a new pass for every request (instead of a pass instance).\n",
+        "description": "Creates a pass from an Adaptive Link.\n\n\nWhen creating passes this way, you can append request parameters mapping to pass fields to the URL to add or update values to the pass at creation time. While this document lists reserved parameters, you can provide the `fieldName=value` for any field contained in the adaptive link.\n\n\nIf you configured your adaptive link object with the `isPersonalized` flag set to false (or the flag is absent), the first request will create a pass, and subsequent requests will create new instances of this same pass. If the `isPersonalized` flag is true, every request will create a new pass. If a request includes url-encoded parameters, the `isPersonalized` flag is considered true and Airship will always create a new pass for every request (instead of a pass instance).\n",
         "operationId": "generatePassFromAdaptiveLink",
         "responses": {
           "200": {
@@ -8272,10 +8632,11 @@
             "description": "Could not find an entry with specified `adaptiveLinkId`.\n"
           }
         },
-        "summary": "Generate pass from Adaptive Link",
+        "summary": "Create pass from Adaptive Link",
         "tags": [
           "Adaptive Links"
-        ]
+        ],
+        "x-weight": 20
       },
       "parameters": [
         {
@@ -8371,7 +8732,7 @@
     },
     "/pass/download": {
       "get": {
-        "description": "Download multiple Apple Wallet passes bundled into a single .pkpasses file, using their pass IDs provided as a comma-separated query parameter. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download multiple passes using external IDs, see [Download multiple Apple Wallet passes in a single .pkpasses file by external ID](#operation-pass-template-templateid-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.",
+        "description": "Download multiple Apple Wallet passes bundled into a single .pkpasses file, using their pass IDs provided as a comma-separated query parameter. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download multiple passes using external IDs, see [Download Apple Wallet .pkpasses file by external ID](#operation-pass-template-templateid-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.",
         "operationId": "getAppleWalletPasses",
         "responses": {
           "200": {
@@ -8388,10 +8749,11 @@
             ]
           }
         ],
-        "summary": "Download multiple Apple Wallet passes in a single .pkpasses file",
+        "summary": "Download Apple Wallet .pkpasses file",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 88
       },
       "parameters": [
         {
@@ -8499,11 +8861,12 @@
             ]
           }
         ],
-        "summary": "Update pass",
+        "summary": "Update pass with external ID",
         "tags": [
           "Passes with external IDs"
         ],
-        "x-note": "You can also update a pass to include an expiration date using the `expirationDate` key."
+        "x-note": "You can also update a pass to include an expiration date using the `expirationDate` key.",
+        "x-weight": 50
       }
     },
     "/pass/id/{externalId}/stats": {
@@ -8567,10 +8930,11 @@
             ]
           }
         ],
-        "summary": "Pass statistics with external ID",
+        "summary": "Get pass statistics with external ID",
         "tags": [
           "Statistics"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -8613,10 +8977,11 @@
             ]
           }
         ],
-        "summary": "View Apple Wallet JSON with external ID",
+        "summary": "Look up Apple Wallet JSON with external ID",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -8718,10 +9083,11 @@
             ]
           }
         ],
-        "summary": "Create pass from a template",
+        "summary": "Create pass from template",
         "tags": [
           "Passes with external IDs"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/pass/template/id/{templateExternalId}/id/{passExternalId}/linkedPasses": {
@@ -8799,15 +9165,16 @@
             ]
           }
         ],
-        "summary": "Auto link passes to Google Pass with external template ID",
+        "summary": "Associate passes with Google Pass with external template ID",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 40
       }
     },
     "/pass/template/{templateId}/download": {
       "get": {
-        "description": "Download multiple Apple Wallet passes bundled into a single .pkpasses file, using their external IDs provided as a comma-separated query parameter and a template ID. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download multiple passes using pass IDs, see [Download multiple Apple Wallet passes in a single .pkpasses file](#operation-pass-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.\n",
+        "description": "Download multiple Apple Wallet passes bundled into a single .pkpasses file, using their external IDs provided as a comma-separated query parameter and a template ID. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download multiple passes using pass IDs, see [Download Apple Wallet .pkpasses file](#operation-pass-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.\n",
         "operationId": "getAppleWalletMultiPassForTemplateExternalId",
         "responses": {
           "200": {
@@ -8827,10 +9194,11 @@
             ]
           }
         ],
-        "summary": "Download multiple Apple Wallet passes in a single .pkpasses file by external ID",
+        "summary": "Download Apple Wallet .pkpasses file by external ID",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 89
       },
       "parameters": [
         {
@@ -8916,10 +9284,11 @@
         "tags": [
           "Passes with external IDs"
         ],
-        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
+        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device.",
+        "x-weight": 100
       },
       "get": {
-        "description": "Get a pass with an external ID.",
+        "description": "Returns a pass with an external ID.",
         "operationId": "getPassFromTemplateExternalId",
         "parameters": [
           {
@@ -8969,10 +9338,11 @@
             ]
           }
         ],
-        "summary": "Get pass",
+        "summary": "Look up pass",
         "tags": [
           "Passes with external IDs"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -9064,7 +9434,8 @@
         "summary": "Create pass",
         "tags": [
           "Passes with external IDs"
-        ]
+        ],
+        "x-weight": 30
       },
       "put": {
         "description": "Update a pass with an external ID.",
@@ -9136,10 +9507,11 @@
             ]
           }
         ],
-        "summary": "Update pass for a template",
+        "summary": "Update pass for template with external ID",
         "tags": [
           "Passes with external IDs"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/pass/template/{templateId}/id/{passExternalId}/beacons": {
@@ -9207,7 +9579,8 @@
         "summary": "List beacons on Apple Wallet pass",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -9292,15 +9665,16 @@
             ]
           }
         ],
-        "summary": "Add or update beacons for Apple Wallet pass",
+        "summary": "Create or update beacons for Apple Wallet pass",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/pass/template/{templateId}/id/{passExternalId}/download": {
       "get": {
-        "description": "Download an Apple Wallet pass as a .pkpass file, using its external ID and template ID. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download a pass using its pass ID, see [Download an Apple Wallet .pkpass](#operation-pass-passid-download-get).\n\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.\n",
+        "description": "Download an Apple Wallet pass as a .pkpass file, using its external ID and template ID. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download a pass using its pass ID, see [Download Apple Wallet .pkpass](#operation-pass-passid-download-get).\n\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.\n",
         "operationId": "getAppleWalletPassForTemplateExternalId",
         "responses": {
           "200": {
@@ -9320,10 +9694,11 @@
             ]
           }
         ],
-        "summary": "Download an Apple Wallet .pkpass by external ID",
+        "summary": "Download Apple Wallet .pkpass by external ID",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 86
       },
       "parameters": [
         {
@@ -9428,10 +9803,11 @@
             ]
           }
         ],
-        "summary": "Auto link passes to Google Pass with external ID",
+        "summary": "Associate passes with Google Pass with external ID",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 38
       }
     },
     "/pass/template/{templateId}/id/{passExternalId}/location/{locationId}": {
@@ -9471,10 +9847,11 @@
             ]
           }
         ],
-        "summary": "Delete locations from pass",
+        "summary": "Delete location from pass",
         "tags": [
           "Passes with external IDs"
-        ]
+        ],
+        "x-weight": 102
       },
       "parameters": [
         {
@@ -9600,10 +9977,11 @@
             ]
           }
         ],
-        "summary": "Add locations to pass",
+        "summary": "Create locations on pass",
         "tags": [
           "Passes with external IDs"
-        ]
+        ],
+        "x-weight": 36
       }
     },
     "/pass/template/{templateId}/id/{passExternalId}/message": {
@@ -9668,10 +10046,11 @@
             ]
           }
         ],
-        "summary": "Get messages for Google Pass with external ID",
+        "summary": "List messages for Google Pass with external ID",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -9778,10 +10157,11 @@
             ]
           }
         ],
-        "summary": "Add message to Google Pass with external ID",
+        "summary": "Create Google Pass message with external ID",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 34
       }
     },
     "/pass/template/{templateId}/id/{passExternalId}/notify": {
@@ -9822,7 +10202,8 @@
         "summary": "Delete notification by pass with external ID",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 102
       },
       "parameters": [
         {
@@ -9895,13 +10276,14 @@
         "summary": "Send notification by pass with external ID",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 22
       },
       "x-weight": 2
     },
     "/pass/template/{templateId}/id/{passExternalId}/tags": {
       "get": {
-        "description": "List tags assigned to the specified pass. See also [List tags for pass](#operation-pass-passid-tags-get).",
+        "description": "List tags assigned to the specified pass. See also [Look up pass tags](#operation-pass-passid-tags-get).",
         "operationId": "getTagsForPassExternalId",
         "parameters": [
           {
@@ -9958,10 +10340,11 @@
             ]
           }
         ],
-        "summary": "List tags for pass with external ID",
+        "summary": "Look up pass tags with external ID",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -10050,10 +10433,11 @@
             ]
           }
         ],
-        "summary": "Update tags for pass with external ID",
+        "summary": "Modify pass tags with external ID",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 62
       }
     },
     "/pass/{id}": {
@@ -10114,10 +10498,11 @@
         "tags": [
           "Passes"
         ],
-        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device."
+        "x-note": "The Delete function does not remove passes from the end-user's device, but removes from our system. Deleted passes no longer count towards billing. See [Editing Wallet Pass Expiration](/guides/wallet/user-guide/updating-passes/edit-expiration/) to deactivate the pass on the end-user's device.",
+        "x-weight": 100
       },
       "get": {
-        "description": "Get the specified pass. This endpoint will return the external ID of a pass, but only if there is one associated with it.",
+        "description": "Returns the specified pass. This endpoint will return the external ID of a pass, but only if there is one associated with it.",
         "operationId": "getPass",
         "parameters": [
           {
@@ -10164,10 +10549,11 @@
             ]
           }
         ],
-        "summary": "Get pass",
+        "summary": "Look up pass",
         "tags": [
           "Passes"
-        ]
+        ],
+        "x-weight": 80
       },
       "post": {
         "description": "Create a pass from the specified template.\n\nYou can optionally assign an external ID to the pass or generate the pass from templates with external IDs. See the appropriate endpoints to assign or use external IDs.",
@@ -10243,7 +10629,8 @@
         "summary": "Create pass",
         "tags": [
           "Passes"
-        ]
+        ],
+        "x-weight": 30
       },
       "put": {
         "description": "Update the specified pass. You need only include the fields that you want to update for the pass.\n\n\n  Optionally, you can also Schedule an update if you want to update a pass at a later date and time. See the `/schedules` endpoints for information about scheduling updates.\n\n\n  Do not use the response payload from the `GET /v1/pass/(id)` endpoint to update a pass, as it contains information from both the pass itself and the template used to create the pass, and you cannot update a template from the  `/v1/pass endpoint`. You should only populate the JSON Parameters below. Within the headers and fields objects, these are the changeMessage,  value, and label fields.\n\n\n  You can update `locations` on a pass, but doing so will replace all locations on the pass. See the Location Object for more about the fields you should provide in the locations array.",
@@ -10310,7 +10697,8 @@
         "tags": [
           "Passes"
         ],
-        "x-note": "You can also update a pass to include an expiration date using the `expirationDate` key."
+        "x-note": "You can also update a pass to include an expiration date using the `expirationDate` key.",
+        "x-weight": 50
       }
     },
     "/pass/{id}/dynamic": {
@@ -10340,7 +10728,7 @@
         }
       ],
       "post": {
-        "description": "Generates a pass link containing the pass serial number with an optional expiration date. You can also assign an external ID to passes generated from this endpoint.",
+        "description": "Creates a pass link containing the pass serial number with an optional expiration date. You can also assign an external ID to passes created from this endpoint.",
         "operationId": "createDynamicLink",
         "requestBody": {
           "content": {
@@ -10394,15 +10782,16 @@
             ]
           }
         ],
-        "summary": "Generates a pass dynamic link",
+        "summary": "Create pass dynamic link",
         "tags": [
           "Passes"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/pass/{passId}/download": {
       "get": {
-        "description": "Download an Apple Wallet pass as a .pkpass file, using its pass ID. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download a pass using an external ID, see [Download an Apple Wallet .pkpass by external ID](#operation-pass-template-templateid-id-passexternalid-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.",
+        "description": "Download an Apple Wallet pass as a .pkpass file, using its pass ID. Direct the output to a file with a .zip extension. This is a utility API to help you debug passes. To download a pass using an external ID, see [Download Apple Wallet .pkpass by external ID](#operation-pass-template-templateid-id-passexternalid-download-get).\n\nSee [Apple's developer documentation](https://developer.apple.com/wallet/) for information about .pkpass files and contents.",
         "operationId": "getAppleWalletPass",
         "responses": {
           "200": {
@@ -10419,10 +10808,11 @@
             ]
           }
         ],
-        "summary": "Download an Apple Wallet .pkpass",
+        "summary": "Download Apple Wallet .pkpass",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 84
       },
       "parameters": [
         {
@@ -10505,10 +10895,11 @@
             ]
           }
         ],
-        "summary": "Auto link passes to existing Google Pass",
+        "summary": "Associate passes with Google Pass",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 36
       }
     },
     "/pass/{passId}/location/{passLocationId}": {
@@ -10545,10 +10936,11 @@
             ]
           }
         ],
-        "summary": "Delete locations from pass",
+        "summary": "Delete location from pass",
         "tags": [
           "Passes"
-        ]
+        ],
+        "x-weight": 102
       },
       "parameters": [
         {
@@ -10649,10 +11041,11 @@
             ]
           }
         ],
-        "summary": "Add locations to pass",
+        "summary": "Create locations on pass",
         "tags": [
           "Passes"
-        ]
+        ],
+        "x-weight": 34
       }
     },
     "/pass/{passId}/message": {
@@ -10706,10 +11099,11 @@
             ]
           }
         ],
-        "summary": "Get messages for Google Pass",
+        "summary": "List messages for Google Pass",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -10805,10 +11199,11 @@
             ]
           }
         ],
-        "summary": "Add message to Google Pass",
+        "summary": "Create Google Pass message",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/pass/{passId}/notify": {
@@ -10849,7 +11244,8 @@
         "summary": "Delete notification by pass",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 100
       },
       "parameters": [
         {
@@ -10911,13 +11307,14 @@
         "summary": "Send notification by pass",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 20
       },
       "x-weight": 1
     },
     "/pass/{passId}/tags": {
       "get": {
-        "description": "List tags assigned to the specified pass. See also [List tags for pass with external ID](#operation-pass-template-templateid-id-passexternalid-tags-get).",
+        "description": "List tags assigned to the specified pass. See also [Look up pass tags with external ID](#operation-pass-template-templateid-id-passexternalid-tags-get).",
         "operationId": "listTagsForPass",
         "parameters": [
           {
@@ -10966,10 +11363,11 @@
             ]
           }
         ],
-        "summary": "List tags for pass",
+        "summary": "Look up pass tags",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 80
       },
       "put": {
         "description": "Add tags to a pass, limited to 15 tags per pass.",
@@ -11042,10 +11440,11 @@
             ]
           }
         ],
-        "summary": "Add tags to pass",
+        "summary": "Modify pass tags",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 60
       }
     },
     "/pass/{passId}/viewJSONPass": {
@@ -11074,10 +11473,11 @@
             ]
           }
         ],
-        "summary": "View Apple Wallet JSON",
+        "summary": "Look up Apple Wallet JSON",
         "tags": [
           "Apple Passes Only"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -11202,10 +11602,11 @@
             ]
           }
         ],
-        "summary": "Save to Google Wallet",
+        "summary": "Create pass (Save to Google Wallet)",
         "tags": [
           "Google Passes Only"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/project": {
@@ -11295,7 +11696,8 @@
         "summary": "List projects",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 90
       },
       "post": {
         "description": "Create an empty project. Your project is based around the type of passes you want to create and the type of barcode you will include on your passes.\n\nThe response includes an `id` and `contextId`. Use these values to access your project via the API and dashboard, respectively.\nSee also [Create project with external ID](#operation-project-id-externalid-post).",
@@ -11335,7 +11737,8 @@
         "summary": "Create project",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/project/duplicate/{projectId}": {
@@ -11356,7 +11759,7 @@
         }
       ],
       "post": {
-        "description": "Duplicate a project by ID. The duplicate project will be named \"Copy of [ProjectName]\" and have a new `id` but will otherwise use the same settings and templates as the original project. The response payload returns the same information as a [Get Project](#operation-project-projectid-get) call, with new identifiers for the new project.",
+        "description": "Duplicate a project by ID. The duplicate project will be named \"Copy of [ProjectName]\" and have a new `id` but will otherwise use the same settings and templates as the original project. The response payload returns the same information as a [Look up project](#operation-project-projectid-get) call, with new identifiers for the new project.",
         "operationId": "duplicateProject",
         "responses": {
           "200": {
@@ -11378,7 +11781,8 @@
         "summary": "Duplicate project",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 34
       }
     },
     "/project/id/{externalId}": {
@@ -11429,12 +11833,13 @@
         "summary": "Create project with external ID",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/project/{projectId}": {
       "get": {
-        "description": "Get the project with the specified `id`. The response includes information about the project (set when [Creating a Project](/developer/rest-api/wallet/operations/projects/#createproject)) and an array of templates associated with the project. The templates array contains all the information found in the `templateHeader` object.",
+        "description": "Returns the project with the specified `id`. The response includes information about the project (set when [Create project](/developer/rest-api/wallet/operations/projects/#createproject)) and an array of templates associated with the project. The templates array contains all the information found in the `templateHeader` object.",
         "operationId": "getProject",
         "responses": {
           "200": {
@@ -11453,10 +11858,11 @@
             "httpBasic": []
           }
         ],
-        "summary": "Get project",
+        "summary": "Look up project",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -11509,7 +11915,8 @@
         "tags": [
           "Projects"
         ],
-        "x-note": "Provide only the fields you want to update. While this payload takes any of the keys used when creating a project, any keys you do not provide will remain unchanged."
+        "x-note": "Provide only the fields you want to update. While this payload takes any of the keys used when creating a project, any keys you do not provide will remain unchanged.",
+        "x-weight": 50
       }
     },
     "/project/{projectId}/activity": {
@@ -11531,10 +11938,11 @@
             ]
           }
         ],
-        "summary": "Project activity",
+        "summary": "Get project activity",
         "tags": [
           "Statistics"
-        ]
+        ],
+        "x-weight": 96
       },
       "parameters": [
         {
@@ -11588,7 +11996,8 @@
         "summary": "List NFC merchants",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -11634,10 +12043,11 @@
             ]
           }
         ],
-        "summary": "Add NFC merchant",
+        "summary": "Create NFC merchant",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 36
       }
     },
     "/project/{projectId}/nfcMerchants/{merchantId}": {
@@ -11681,7 +12091,8 @@
         "summary": "Delete NFC merchant",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Get an individual NFC merchant.\n",
@@ -11702,10 +12113,11 @@
             ]
           }
         ],
-        "summary": "Get NFC merchant",
+        "summary": "Look up NFC merchant",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 82
       },
       "parameters": [
         {
@@ -11771,10 +12183,11 @@
             ]
           }
         ],
-        "summary": "Update NFC merchant information",
+        "summary": "Update NFC merchant",
         "tags": [
           "Projects"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/project/{projectId}/settings/callback": {
@@ -11794,7 +12207,8 @@
         "summary": "Delete callback specification",
         "tags": [
           "Callbacks"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Return the callback specification for a project.",
@@ -11816,10 +12230,11 @@
             "httpBasic": []
           }
         ],
-        "summary": "Get callback specification",
+        "summary": "Look up callback specification",
         "tags": [
           "Callbacks"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -11938,7 +12353,8 @@
         "summary": "Create callback specification",
         "tags": [
           "Callbacks"
-        ]
+        ],
+        "x-weight": 30
       },
       "put": {
         "description": "Update a callback specification. The payload to update a callback is identical to the payload to create a callback.",
@@ -11972,7 +12388,8 @@
         "summary": "Update callback specification",
         "tags": [
           "Callbacks"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/project/{projectId}/stats": {
@@ -11994,10 +12411,11 @@
             ]
           }
         ],
-        "summary": "Project statistics",
+        "summary": "Get project statistics",
         "tags": [
           "Statistics"
-        ]
+        ],
+        "x-weight": 94
       },
       "parameters": [
         {
@@ -12069,7 +12487,8 @@
         "summary": "List schedules",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -12154,10 +12573,11 @@
             ]
           }
         ],
-        "summary": "Schedule an update or push notification",
+        "summary": "Schedule update or push notification",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/schedules/{projectId}/{scheduleId}": {
@@ -12182,7 +12602,8 @@
         "summary": "Delete schedule",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Return a single project's schedule.",
@@ -12209,10 +12630,11 @@
             ]
           }
         ],
-        "summary": "Get schedule",
+        "summary": "Look up schedule",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -12303,7 +12725,8 @@
         "summary": "Update schedule",
         "tags": [
           "Schedules"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/segments/{projectId}": {
@@ -12365,7 +12788,8 @@
         "summary": "List segments",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -12448,7 +12872,8 @@
         "summary": "Create segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/segments/{projectId}/{segmentId}": {
@@ -12473,7 +12898,8 @@
         "summary": "Delete segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
         "description": "Returns the selector criteria for a segment.",
@@ -12512,7 +12938,8 @@
         "summary": "Look up segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -12603,7 +13030,8 @@
         "summary": "Update segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 50
       }
     },
     "/segments/{projectId}/{segmentId}/notify": {
@@ -12676,7 +13104,8 @@
         "summary": "Delete notification by segment",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 106
       },
       "post": {
         "description": "Send a notification to all passes for a segment.",
@@ -12758,7 +13187,8 @@
         "summary": "Send notification by segment",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 26
       },
       "x-weight": 5
     },
@@ -12856,7 +13286,8 @@
         "summary": "Update passes by segment",
         "tags": [
           "Segments"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/system/status": {
@@ -12892,7 +13323,8 @@
         "summary": "Check system status",
         "tags": [
           "Tickets"
-        ]
+        ],
+        "x-weight": 82
       }
     },
     "/tag": {
@@ -12983,7 +13415,8 @@
         "summary": "List all tags",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/tag/{tag}": {
@@ -13043,7 +13476,8 @@
         "summary": "Delete tag",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 100
       }
     },
     "/tag/{tag}/notify": {
@@ -13084,7 +13518,8 @@
         "summary": "Delete notification by tag",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 108
       },
       "parameters": [
         {
@@ -13155,7 +13590,8 @@
         "summary": "Send notification by tag",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 28
       },
       "x-weight": 6
     },
@@ -13229,10 +13665,11 @@
             ]
           }
         ],
-        "summary": "Remove tag from a pass",
+        "summary": "Remove tag from pass",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 70
       }
     },
     "/tag/{tag}/passes": {
@@ -13297,7 +13734,8 @@
         "summary": "Remove tag from all passes",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 72
       },
       "get": {
         "description": "List the passes associated with the specified tag.",
@@ -13411,11 +13849,12 @@
             ]
           }
         ],
-        "summary": "List passes for a tag",
+        "summary": "List passes for tag",
         "tags": [
           "Tags",
           "Passes"
-        ]
+        ],
+        "x-weight": 92
       },
       "put": {
         "description": "Update all of the passes that have a given tag.",
@@ -13491,7 +13930,8 @@
         "summary": "Update passes by tag",
         "tags": [
           "Tags"
-        ]
+        ],
+        "x-weight": 52
       }
     },
     "/tag/{tag}/stats": {
@@ -13513,10 +13953,11 @@
             ]
           }
         ],
-        "summary": "Tag statistics",
+        "summary": "Get tag statistics",
         "tags": [
           "Statistics"
-        ]
+        ],
+        "x-weight": 98
       },
       "parameters": [
         {
@@ -13584,7 +14025,8 @@
         "summary": "Duplicate template",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 34
       }
     },
     "/template/headers": {
@@ -13701,7 +14143,8 @@
         "summary": "List templates",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 90
       }
     },
     "/template/{id}": {
@@ -13762,10 +14205,11 @@
         "summary": "Delete template",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 100
       },
       "get": {
-        "description": "Get the template specified by the `templateId`. To get the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](/developer/rest-api/wallet/operations/templates/#gettemplatesv2) endpoint instead.",
+        "description": "Returns the template specified by the `templateId`. To return the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [Look up template v2](/developer/rest-api/wallet/operations/templates/#gettemplatesv2) endpoint instead.",
         "operationId": "getTemplate",
         "parameters": [
           {
@@ -13833,10 +14277,11 @@
             ]
           }
         ],
-        "summary": "Get template",
+        "summary": "Look up template",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 80
       },
       "post": {
         "description": "Create a template within the specified project. A template is specific to a vendor platform, Apple or Google.\nSee also [Create template with external ID](#operation-template-projectid-id-templateexternalid-post).",
@@ -13907,10 +14352,11 @@
         "summary": "Create template",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 30
       },
       "put": {
-        "description": "Update the specified template. This endpoint takes any of the parameters used for Creating a Template. You can also add or remove fields from the template with this call by adding or omitting those fields from the request.\n\nTo update the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [/templates](/developer/rest-api/wallet/operations/templates/#updatetemplatesv2) endpoint instead.",
+        "description": "Update the specified template. This endpoint takes any of the parameters used for [Create template](/developer/rest-api/wallet/operations/templates/#createtemplate). You can also add or remove fields from the template with this call by adding or omitting those fields from the request.\n\nTo update the template payload in the same format as you would use in a `POST` or `PUT` operation, use the [Update template v2](/developer/rest-api/wallet/operations/templates/#updatetemplatesv2) endpoint instead.",
         "operationId": "updateTemplate",
         "parameters": [
           {
@@ -13980,7 +14426,8 @@
         "tags": [
           "Templates"
         ],
-        "x-note": "Provide a complete template object when updating a template. This call replaces the existing template object in its entirety. You must include all keys and fields that should remain in the template, otherwise they are removed."
+        "x-note": "Provide a complete template object when updating a template. This call replaces the existing template object in its entirety. You must include all keys and fields that should remain in the template, otherwise they are removed.",
+        "x-weight": 50
       }
     },
     "/template/{projectId}/id/{templateExternalId}": {
@@ -14064,7 +14511,8 @@
         "summary": "Create template with external ID",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 32
       }
     },
     "/template/{templateId}/activity": {
@@ -14086,10 +14534,11 @@
             ]
           }
         ],
-        "summary": "Template activity",
+        "summary": "Get template activity",
         "tags": [
           "Statistics"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -14135,7 +14584,8 @@
         "summary": "Delete location from template",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 102
       },
       "parameters": [
         {
@@ -14256,10 +14706,11 @@
             ]
           }
         ],
-        "summary": "Add locations to template",
+        "summary": "Create locations on template",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 36
       }
     },
     "/template/{templateId}/notify": {
@@ -14300,7 +14751,8 @@
         "summary": "Delete notification by template",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 104
       },
       "parameters": [
         {
@@ -14362,13 +14814,14 @@
         "summary": "Send notification by template",
         "tags": [
           "Push Notifications"
-        ]
+        ],
+        "x-weight": 24
       },
       "x-weight": 3
     },
     "/template/{templateId}/passes": {
       "get": {
-        "description": "Get passes for a template.\n\n`/v1/template/id/{templateExternalId}/passes` get passes associated with a template identified by external ID.\n",
+        "description": "Lists passes for a template.\n\n`/v1/template/id/{templateExternalId}/passes` lists passes associated with a template identified by external ID.\n",
         "operationId": "getPassesByTemplate",
         "responses": {
           "200": {
@@ -14407,10 +14860,11 @@
             ]
           }
         ],
-        "summary": "Get template passes",
+        "summary": "List template passes",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 92
       },
       "parameters": [
         {
@@ -14546,11 +15000,12 @@
             ]
           }
         ],
-        "summary": "Publish a bulk update to passes",
+        "summary": "Update passes in bulk",
         "tags": [
           "Templates"
         ],
-        "x-important": "Updating the `order` value for `linkModulesData` can only be done in an Event or Boarding Pass template.\n"
+        "x-important": "Updating the `order` value for `linkModulesData` can only be done in an Event or Boarding Pass template.\n",
+        "x-weight": 58
       }
     },
     "/template/{templateId}/personalization": {
@@ -14582,7 +15037,8 @@
         "summary": "Delete personalization requirements",
         "tags": [
           "Apple Wallet Pass Personalization"
-        ]
+        ],
+        "x-weight": 104
       },
       "description": "Adding personalization to an Apple Wallet `loyalty` template creates a pass that prompts the user for relevant personal information when signing up for a rewards program. These endpoints help you manage the personalizable information that you require users to provide when signing up for your loyalty/rewards program.",
       "get": {
@@ -14610,10 +15066,11 @@
             ]
           }
         ],
-        "summary": "Get personalization requirements",
+        "summary": "Look up personalization requirements",
         "tags": [
           "Apple Wallet Pass Personalization"
-        ]
+        ],
+        "x-weight": 84
       },
       "parameters": [
         {
@@ -14665,10 +15122,11 @@
             ]
           }
         ],
-        "summary": "Add personalization requirements",
+        "summary": "Create personalization requirements",
         "tags": [
           "Apple Wallet Pass Personalization"
-        ]
+        ],
+        "x-weight": 38
       },
       "put": {
         "description": "When updating personalization requirements for a template, you must provide a complete payload. This request overwrites all previous personalization requirements attached to the template; any information you leave out of this request will be removed from the personalization requirements for the template.",
@@ -14707,7 +15165,8 @@
         "summary": "Update personalization requirements",
         "tags": [
           "Apple Wallet Pass Personalization"
-        ]
+        ],
+        "x-weight": 56
       },
       "summary": "Apple wallet pass personalization"
     },
@@ -14730,10 +15189,11 @@
             ]
           }
         ],
-        "summary": "Template statistics",
+        "summary": "Get template statistics",
         "tags": [
           "Statistics"
-        ]
+        ],
+        "x-weight": 90
       },
       "parameters": [
         {
@@ -14752,7 +15212,7 @@
     },
     "/templates/{id}": {
       "get": {
-        "description": "Get the template specified by the `templateId`. The template payload returned will be in the same format you would use in a `POST` or `PUT` operation unlike the [/template](/developer/rest-api/wallet/operations/templates/#gettemplate) endpoint.",
+        "description": "Returns the template specified by the `templateId`. The template payload returned will be in the same format you would use in a `POST` or `PUT` operation unlike the [Look up template](/developer/rest-api/wallet/operations/templates/#gettemplate) endpoint.",
         "operationId": "getTemplatesV2",
         "parameters": [
           {
@@ -14817,10 +15277,11 @@
             ]
           }
         ],
-        "summary": "Get template v2",
+        "summary": "Look up template v2",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 82
       },
       "patch": {
         "description": "Update the template with the `overrides` object, performing a partial update. In the payload, you only need to provide the fields in your template that you want to override.",
@@ -14886,13 +15347,14 @@
             ]
           }
         ],
-        "summary": "Patch template",
+        "summary": "Update template (partial)",
         "tags": [
           "Templates"
-        ]
+        ],
+        "x-weight": 54
       },
       "put": {
-        "description": "Update the template with the whole resource specified in the request, performing a complete replacement. You can also add or remove fields from the template with this call by adding or omitting those fields from the request. The template payload will be in the same format as in a `POST` or `PUT` operation, unlike the [/template](/developer/rest-api/wallet/operations/templates/#updatetemplate) endpoint.",
+        "description": "Update the template with the whole resource specified in the request, performing a complete replacement. You can also add or remove fields from the template with this call by adding or omitting those fields from the request. The template payload will be in the same format as in a `POST` or `PUT` operation, unlike the [Update template](/developer/rest-api/wallet/operations/templates/#updatetemplate) endpoint.",
         "operationId": "updateTemplatesV2",
         "parameters": [
           {
@@ -14959,12 +15421,13 @@
         "tags": [
           "Templates"
         ],
-        "x-note": "Provide a complete template object when updating a template. This call replaces the existing template object in its entirety. You must include all keys and fields that should remain in the template, otherwise they will be removed."
+        "x-note": "Provide a complete template object when updating a template. This call replaces the existing template object in its entirety. You must include all keys and fields that should remain in the template, otherwise they will be removed.",
+        "x-weight": 52
       }
     },
     "/ticket/{ticketId}": {
       "get": {
-        "description": "Get the status of a ticket. Some operations can't complete immediately and return a `ticketId`. Use this item to determine the true status of the operation.",
+        "description": "Returns the status of a ticket. Some operations can't complete immediately and return a `ticketId`. Use this item to determine the true status of the operation.",
         "operationId": "getTicketStatus",
         "responses": {
           "200": {
@@ -14999,7 +15462,7 @@
             "httpBasic": []
           }
         ],
-        "summary": "Get ticket status",
+        "summary": "Look up ticket status",
         "tags": [
           "Tickets"
         ],
@@ -15008,7 +15471,8 @@
           "AllowDynamicQueryParameters": false,
           "CollectParameters": false,
           "IsMultiContentStreaming": false
-        }
+        },
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -15139,7 +15603,8 @@
         "summary": "Request token",
         "tags": [
           "OAuth"
-        ]
+        ],
+        "x-weight": 30
       }
     },
     "/verify/public_key/{kid}": {
@@ -15177,10 +15642,11 @@
             "description": "The requested resource doesn't exist."
           }
         },
-        "summary": "Verify public key",
+        "summary": "Look up public key",
         "tags": [
           "OAuth"
-        ]
+        ],
+        "x-weight": 80
       },
       "parameters": [
         {
@@ -15265,7 +15731,7 @@
       "x-card-description": "Tag passes for targeting"
     },
     {
-      "description": "A Segment identifies a group/set of wallet passes that contains a tag or combination of tags, using boolean `and`, `or`, and `not` operators. Use segments to group and target passes for subsequent updates.",
+      "description": "A Segment identifies a group/set of wallet passes that contains a tag or combination of tags, using Boolean `and`, `or`, and `not` operators. Use segments to group and target passes for subsequent updates.",
       "name": "Segments",
       "x-card-description": "Create pass segments"
     },
@@ -15328,6 +15794,11 @@
       "description": "Schedule pass updates for future delivery.",
       "name": "Schedules",
       "x-card-description": "Schedule pass updates"
+    },
+    {
+      "description": "Upload images.",
+      "name": "Images",
+      "x-card-description": "Upload images"
     }
   ],
   "x-schema-tags": [

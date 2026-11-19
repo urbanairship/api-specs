@@ -1342,7 +1342,7 @@
                           "type": "string"
                         },
                         "is_rcs": {
-                          "description": "A boolean describing if the message was delivered as RCS or not.",
+                          "description": "A Boolean describing if the message was delivered as RCS or not.",
                           "type": "boolean"
                         },
                         "sender": {
@@ -1386,7 +1386,7 @@
                           "type": "string"
                         },
                         "is_rcs": {
-                          "description": "A boolean describing if the message was delivered as RCS or not.",
+                          "description": "A Boolean describing if the message was delivered as RCS or not.",
                           "type": "boolean"
                         },
                         "result_code": {
@@ -1590,7 +1590,7 @@
                 "properties": {
                   "properties": {
                     "is_rcs": {
-                      "description": "A boolean describing whether the message was delivered as RCS.",
+                      "description": "A Boolean describing whether the message was delivered as RCS.",
                       "type": "boolean"
                     },
                     "number_of_message_parts": {

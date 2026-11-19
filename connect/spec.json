@@ -1222,7 +1222,7 @@
                         "type": "string"
                       },
                       "is_rcs": {
-                        "description": "A boolean describing if the message was delivered as RCS or not.",
+                        "description": "A Boolean describing if the message was delivered as RCS or not.",
                         "type": "boolean"
                       },
                       "sender": {
@@ -1266,7 +1266,7 @@
                         "type": "string"
                       },
                       "is_rcs": {
-                        "description": "A boolean describing if the message was delivered as RCS or not.",
+                        "description": "A Boolean describing if the message was delivered as RCS or not.",
                         "type": "boolean"
                       },
                       "result_code": {
@@ -2196,7 +2196,7 @@
         "x-inline-component": true
       },
       "feature_flag_interaction": {
-        "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
+        "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
         "properties": {
           "body": {
             "properties": {
@@ -4688,7 +4688,7 @@
               "properties": {
                 "properties": {
                   "is_rcs": {
-                    "description": "A boolean describing whether the message was delivered as RCS.",
+                    "description": "A Boolean describing whether the message was delivered as RCS.",
                     "type": "boolean"
                   },
                   "number_of_message_parts": {
@@ -5474,7 +5474,7 @@
         "x-schema-tag": "Events"
       },
       "send_aborted": {
-        "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
+        "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [message limit](/guides/messaging/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
         "properties": {
           "body": {
             "properties": {
@@ -5491,7 +5491,7 @@
                 "description": "The push that was aborted."
               },
               "reason": {
-                "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/project/config/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/project/config/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
+                "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
                 "enum": [
                   "FEED_BANNED_RESPONSE",
                   "FEED_REQUEST_REJECTED",
@@ -7069,7 +7069,8 @@
           "Event Stream"
         ],
         "x-important": "Airship will occasionally add:\n\n* New properties to existing objects.\n\n* New event types, which will be JSON objects with new values for the type field.\n\nYour integration must be tolerant of these kinds of changes.\n",
-        "x-note": "In the request specification, JSON collection types have semantic meaning.\n\n**array**: Arrays indicate a boolean `\"OR\"`. Wherever an array appears in the specification, the resulting stream will contain the events passing any of the conditions defined by the array. An empty array results in a `400` response.\n\n**object**: Object attributes indicate a boolean `\"AND\"`. All conditions in the object must be satisfied in order for an event to be written to the response. If you would like all events to pass the condition the attribute defines, omit the attribute. If an unexpected attribute appears on an event, a status code `400` response will be returned.\n"
+        "x-note": "In the request specification, JSON collection types have semantic meaning.\n\n**array**: Arrays indicate a Boolean `\"OR\"`. Wherever an array appears in the specification, the resulting stream will contain the events passing any of the conditions defined by the array. An empty array results in a `400` response.\n\n**object**: Object attributes indicate a Boolean `\"AND\"`. All conditions in the object must be satisfied in order for an event to be written to the response. If you would like all events to pass the condition the attribute defines, omit the attribute. If an unexpected attribute appears on an event, a status code `400` response will be returned.\n",
+        "x-weight": 80
       }
     },
     "/api/events/general": {
@@ -7117,7 +7118,8 @@
         "summary": "Open a compliance event stream",
         "tags": [
           "Compliance Event Stream"
-        ]
+        ],
+        "x-weight": 80
       }
     }
   },

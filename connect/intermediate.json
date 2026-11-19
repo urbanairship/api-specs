@@ -96,7 +96,7 @@
           "description": "Opens a stream delivering events proving data-safety regulation compliance for email and SMS channel-related events (registration, unsubscription, etc.).\n\nUnlike a standard event stream, a compliance event stream uses basic authorization, like API calls to `https://go.urbanairship.com/api`.\n",
           "deprecated": false,
           "isInternal": false,
-          "weight": null,
+          "weight": 80,
           "tags": [
             "Compliance Event Stream"
           ],
@@ -527,7 +527,7 @@
           "description": "Opens a new event stream according to your request filters. Unlike our other APIs, a request to /api/events/ returns a stream of data, where each line is a JSON object. The response body contains all the events in that stream. Since streams by definition go on forever, Real-Time Data Streaming will never end the response without some external reason.\n",
           "deprecated": false,
           "isInternal": false,
-          "weight": null,
+          "weight": 80,
           "tags": [
             "Event Stream"
           ],
@@ -925,7 +925,7 @@
                         "type": "ref",
                         "schemaRef": "#/components/schemas/feature_flag_interaction",
                         "title": "Feature flag interaction event",
-                        "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n"
+                        "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n"
                       },
                       {
                         "type": "ref",
@@ -1093,7 +1093,7 @@
                         "type": "ref",
                         "schemaRef": "#/components/schemas/send_aborted",
                         "title": "Send aborted",
-                        "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n"
+                        "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [message limit](/guides/messaging/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n"
                       },
                       {
                         "type": "ref",
@@ -1190,7 +1190,7 @@
           "notes": [
             {
               "type": "note",
-              "content": "In the request specification, JSON collection types have semantic meaning.\n\n**array**: Arrays indicate a boolean `\"OR\"`. Wherever an array appears in the specification, the resulting stream will contain the events passing any of the conditions defined by the array. An empty array results in a `400` response.\n\n**object**: Object attributes indicate a boolean `\"AND\"`. All conditions in the object must be satisfied in order for an event to be written to the response. If you would like all events to pass the condition the attribute defines, omit the attribute. If an unexpected attribute appears on an event, a status code `400` response will be returned.\n"
+              "content": "In the request specification, JSON collection types have semantic meaning.\n\n**array**: Arrays indicate a Boolean `\"OR\"`. Wherever an array appears in the specification, the resulting stream will contain the events passing any of the conditions defined by the array. An empty array results in a `400` response.\n\n**object**: Object attributes indicate a Boolean `\"AND\"`. All conditions in the object must be satisfied in order for an event to be written to the response. If you would like all events to pass the condition the attribute defines, omit the attribute. If an unexpected attribute appears on an event, a status code `400` response will be returned.\n"
             },
             {
               "type": "important",
@@ -1883,6 +1883,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email bounce custom event",
@@ -2707,6 +2709,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email click custom event",
@@ -3209,6 +3213,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email delay custom event",
@@ -3711,6 +3717,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email delivery custom event",
@@ -4461,6 +4469,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email initial_open custom event",
@@ -4968,6 +4978,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email injection custom event",
@@ -5718,6 +5730,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email open custom event",
@@ -6162,6 +6176,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email unsubscribe event from an email body link click",
@@ -6349,7 +6365,7 @@
                       "itemType": null,
                       "items": null,
                       "required": false,
-                      "description": "A boolean describing whether the message was delivered as RCS.",
+                      "description": "A Boolean describing whether the message was delivered as RCS.",
                       "deprecated": false,
                       "enum": null,
                       "example": null,
@@ -7065,6 +7081,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -7269,7 +7287,7 @@
                           "itemType": null,
                           "items": null,
                           "required": false,
-                          "description": "A boolean describing if the message was delivered as RCS or not.",
+                          "description": "A Boolean describing if the message was delivered as RCS or not.",
                           "deprecated": false,
                           "enum": null,
                           "example": null,
@@ -7511,7 +7529,7 @@
                           "itemType": null,
                           "items": null,
                           "required": false,
-                          "description": "A boolean describing if the message was delivered as RCS or not.",
+                          "description": "A Boolean describing if the message was delivered as RCS or not.",
                           "deprecated": false,
                           "enum": null,
                           "example": null,
@@ -8310,12 +8328,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS delivery report custom event",
               "code": {
                 "json": [
-                  "{\n  \"body\": {\n    \"interaction_type\": \"delivery_report\",\n    \"name\": \"dispatched\",\n    \"properties\": {\n      \"sender\": 15551234567,\n      \"vendor\": \"CLX\",\n      \"vendorDeliveryId\": \"FENhObMKbCjMOwtw\"\n    },\n    \"source\": \"API\",\n    \"triggering_push\": {\n      \"campaigns\": {\n        \"categories\": [\n          \"New Users\"\n        ]\n      },\n      \"push_id\": \"9323b708-7741-4a85-8b1b-e55ad8ce64fc\"\n    }\n  },\n  \"device\": {\n    \"channel\": \"db7576c7-6b3d-4f07-b13a-ea3824fea262\",\n    \"delivery_address\": \"15558675309\",\n    \"device_type\": \"SMS\"\n  },\n  \"id\": \"48af12e8-6920-4e4e-bef8-b5a6918eec35\",\n  \"occurred\": \"2019-01-31T17:45:38.700Z\",\n  \"offset\": \"1000002098217\",\n  \"processed\": \"2019-01-31T17:45:41.285Z\",\n  \"type\": \"CUSTOM\"\n}\n"
+                  "{\n  \"body\": {\n    \"interaction_type\": \"delivery_report\",\n    \"name\": \"dispatched\",\n    \"properties\": {\n      \"sender\": 15551234567,\n      \"vendor\": \"CLX\",\n      \"vendorDeliveryId\": \"FENhObMKbCjMOwtw\"\n    },\n    \"source\": \"API\",\n    \"triggering_push\": {\n      \"campaigns\": {\n        \"categories\": [\n          \"New Users\"\n        ]\n      },\n      \"push_id\": \"9323b708-7741-4a85-8b1b-e55ad8ce64fc\"\n    }\n  },\n  \"device\": {\n    \"channel\": \"db7576c7-6b3d-4f07-b13a-ea3824fea262\",\n    \"delivery_address\": \"14155550123\",\n    \"device_type\": \"SMS\"\n  },\n  \"id\": \"48af12e8-6920-4e4e-bef8-b5a6918eec35\",\n  \"occurred\": \"2019-01-31T17:45:38.700Z\",\n  \"offset\": \"1000002098217\",\n  \"processed\": \"2019-01-31T17:45:41.285Z\",\n  \"type\": \"CUSTOM\"\n}\n"
                 ]
               }
             }
@@ -9266,6 +9286,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example device information object",
@@ -9429,6 +9451,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -9481,6 +9505,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -9634,6 +9660,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -10152,6 +10180,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         }
@@ -10694,6 +10724,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email bounce event",
@@ -10995,7 +11027,7 @@
               "itemType": null,
               "items": null,
               "required": true,
-              "description": "Holds information about the email `device` (an individual email channel) the event occurred against.",
+              "description": "Describes the device involved in the `create_and_send` email event.\n\nHolds information about the email `device` (an individual email channel) the event occurred against.",
               "deprecated": false,
               "enum": null,
               "example": null,
@@ -11163,6 +11195,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email Create and Send event",
@@ -11713,6 +11747,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email registration event",
@@ -12234,6 +12270,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example email unsubscribe event for a commercial opt-out",
@@ -12773,6 +12811,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example Attribute operation event",
@@ -13102,6 +13142,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example close event",
@@ -13534,6 +13576,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example contact change event",
@@ -14050,6 +14094,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example control event",
@@ -15085,6 +15131,8 @@
           ],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example custom event (entire payload on Android channel)",
@@ -15118,7 +15166,7 @@
           "name": "feature_flag_interaction",
           "title": "Feature flag interaction event",
           "anchor": "feature-flag-interaction",
-          "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
+          "description": "Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.\n",
           "deprecated": false,
           "isInternal": false,
           "type": "object",
@@ -15511,6 +15559,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example feature flag interaction event",
@@ -15754,6 +15804,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example first open event",
@@ -15997,6 +16049,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example first opt-in event",
@@ -16663,6 +16717,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app button tap event",
@@ -17339,6 +17395,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app experiences event",
@@ -18042,6 +18100,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app form display event",
@@ -19094,6 +19154,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app form result event",
@@ -19729,6 +19791,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app message control event",
@@ -20329,6 +20393,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app message display event",
@@ -20972,6 +21038,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app message exclusion event",
@@ -21609,6 +21677,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app message expiration event",
@@ -22412,6 +22482,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app message resolution event",
@@ -23218,6 +23290,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app page swipe event",
@@ -24049,6 +24123,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app page view event",
@@ -24814,6 +24890,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app pager completed event",
@@ -25713,6 +25791,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app pager summary event",
@@ -26115,6 +26195,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example label event",
@@ -26543,6 +26625,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example location event",
@@ -26975,12 +27059,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example mobile-originated SMS event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_originated_sms\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Thanks for joining!\",\n      \"keyword\": \"join\"\n    }\n  },\n  \"type\": \"MOBILE_ORIGINATED\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_originated_sms\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Thanks for joining!\",\n      \"keyword\": \"join\"\n    }\n  },\n  \"type\": \"MOBILE_ORIGINATED\"\n}\n"
                 ]
               }
             }
@@ -27577,6 +27663,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example open event",
@@ -28051,6 +28139,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example push body event",
@@ -28583,6 +28673,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example region event",
@@ -29051,6 +29143,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example event body - message not delivered due to user being in a control group",
@@ -29519,6 +29613,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example event body - indicates the `push_id` that was deleted",
@@ -29987,6 +30083,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example event body — indicates the `push_id` that reached the user",
@@ -30455,6 +30553,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example event body — indicates the `push_id` that the user read",
@@ -30898,6 +30998,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example screen viewed event",
@@ -31831,6 +31933,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example send event",
@@ -31848,7 +31952,7 @@
           "name": "send_aborted",
           "title": "Send aborted",
           "anchor": "send-aborted",
-          "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
+          "description": "Occurs when a push is dropped from our system before delivery is attempted. This can happen:\n\n  * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response\n  * When a [message limit](/guides/messaging/message-limits/) is met\n  * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user\n\nDevice information for the device that did not receive the push is included with `SEND_ABORTED` events.\n",
           "deprecated": false,
           "isInternal": false,
           "type": "object",
@@ -31893,7 +31997,7 @@
                   "itemType": null,
                   "items": null,
                   "required": false,
-                  "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
+                  "description": "Appears if the aborted push was associated with one or more campaigns.\n\nAn object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -31966,7 +32070,7 @@
                   "itemType": null,
                   "items": null,
                   "required": false,
-                  "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                  "description": "Appears if the aborted push belonged to a group.\n\nIdentifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -31999,7 +32103,7 @@
                   "itemType": null,
                   "items": null,
                   "required": true,
-                  "description": "A unique identifier for a push operation.",
+                  "description": "The push that was aborted.\n\nA unique identifier for a push operation.",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -32032,7 +32136,7 @@
                   "itemType": null,
                   "items": null,
                   "required": true,
-                  "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/project/config/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/project/config/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
+                  "description": "Describes the reason this push was aborted.\n\n* `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).\n* `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.\n* `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.\n* `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/message-limits/) retrieval failed.\n* `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/message-limits/) was exceeded.\n* `UNKNOWN`: The error occurred due to another problem.",
                   "deprecated": false,
                   "enum": [
                     "FEED_BANNED_RESPONSE",
@@ -32273,6 +32377,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example send aborted event",
@@ -32343,7 +32449,7 @@
                   "itemType": null,
                   "items": null,
                   "required": false,
-                  "description": "An object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
+                  "description": "Appears if the rejected push was associated with one or more campaigns.\n\nAn object listing the campaigns a push specification is associated with. The campaigns object includes an array of categories that must have between 1 and 10 elements, each of which is a string with a 64-byte and -character limit.",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -32416,7 +32522,7 @@
                   "itemType": null,
                   "items": null,
                   "required": false,
-                  "description": "Identifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
+                  "description": "Appears if the rejected push belonged to a group.\n\nIdentifies a push specification delivered over an interval of time, e.g., multiple push_ids as part of the fulfillment of an automation pipeline or a push-to-local-time specification.\n",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -32449,7 +32555,7 @@
                   "itemType": null,
                   "items": null,
                   "required": true,
-                  "description": "A unique identifier for a push operation.",
+                  "description": "The push that was rejected.\n\nA unique identifier for a push operation.",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -32526,7 +32632,7 @@
                   "itemType": null,
                   "items": null,
                   "required": false,
-                  "description": "The ID of the variant that a push is associated with, if the push was a part of an A/B test (experiment).",
+                  "description": "Appears if the rejected push was a part of an experiment (A/B Test).\n\nThe ID of the variant that a push is associated with, if the push was a part of an A/B test (experiment).",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -32760,6 +32866,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example send rejected event body",
@@ -33469,12 +33577,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example short_link_click event",
               "code": {
                 "json": [
-                  "{\n    \"id\": \"31549b7d-a435-4b04-abca-69bfd4fb6aaa\",\n    \"offset\": \"1000005313850\",\n    \"occurred\": \"2019-07-10T23:18:57.465Z\",\n    \"processed\": \"2019-07-10T23:18:58.148Z\",\n    \"device\": {\n        \"channel\": \"ec71312b-42e4-4bcd-b742-581a84941793\",\n        \"device_type\": \"SMS\",\n        \"delivery_address\": \"15551234567\",\n        \"identifiers\": {\n            \"sender\": \"15558647425\"\n        },\n        \"attributes\": {\n            \"web_user_agent_string\": \"Mozilla\\/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/75.0.3770.100 Safari\\/537.36\"\n        }\n    },\n    \"body\": {\n        \"push_id\": \"f4b4201a-70e2-4a8d-bc8f-f35ddfa7d0e7\",\n        \"group_id\": \"47f01bbf-2efa-4743-acd8-fd1023a36744\",\n        \"properties\": {\n          \"original_url\": \"api/connect#schemas-short_link_click\"\n        }\n    },\n    \"type\": \"SHORT_LINK_CLICK\"\n}\n"
+                  "{\n    \"id\": \"31549b7d-a435-4b04-abca-69bfd4fb6aaa\",\n    \"offset\": \"1000005313850\",\n    \"occurred\": \"2019-07-10T23:18:57.465Z\",\n    \"processed\": \"2019-07-10T23:18:58.148Z\",\n    \"device\": {\n        \"channel\": \"ec71312b-42e4-4bcd-b742-581a84941793\",\n        \"device_type\": \"SMS\",\n        \"delivery_address\": \"12025550123\",\n        \"identifiers\": {\n            \"sender\": \"14155550123\"\n        },\n        \"attributes\": {\n            \"web_user_agent_string\": \"Mozilla\\/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/75.0.3770.100 Safari\\/537.36\"\n        }\n    },\n    \"body\": {\n        \"push_id\": \"f4b4201a-70e2-4a8d-bc8f-f35ddfa7d0e7\",\n        \"group_id\": \"47f01bbf-2efa-4743-acd8-fd1023a36744\",\n        \"properties\": {\n          \"original_url\": \"api/connect#schemas-short_link_click\"\n        }\n    },\n    \"type\": \"SHORT_LINK_CLICK\"\n}\n"
                 ]
               }
             }
@@ -34420,6 +34530,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example subscription event for an email opt-in",
@@ -35017,6 +35129,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example subscription list event",
@@ -35542,6 +35656,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example tag change event",
@@ -35886,6 +36002,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example uninstall event",
@@ -36549,6 +36667,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example web click event",
@@ -37151,6 +37271,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example web session event",
@@ -37308,6 +37430,8 @@
           ],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example find only push body objects with the campaign category \"spring_sale\"",
@@ -37436,6 +37560,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example find SMS delivery errors with equals matcher",
@@ -37695,7 +37821,7 @@
                   "itemType": null,
                   "items": null,
                   "required": true,
-                  "description": "The value you are filtering for in the JSON Predicate.",
+                  "description": "The match that the value is checked against.\n\nThe value you are filtering for in the JSON Predicate.",
                   "deprecated": false,
                   "enum": null,
                   "example": null,
@@ -37760,6 +37886,8 @@
           ],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example JSON Predicate to filter the stream to only Android Open events",
@@ -37944,6 +38072,8 @@
           ],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example find custom events with name \"purchase\" and a \"value\" of at least 100",
@@ -38005,6 +38135,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example find only direct open events",
@@ -38066,6 +38198,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example find custom events of type \"purchase\" performed by Android users on app versions between 18.4.1 and 19.2.3",
@@ -38483,6 +38617,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS API-initiated opt-in event",
@@ -38753,12 +38889,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS carrier deactivation event that uninstalls the channel",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"action\": \"uninstalled\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"action\": \"uninstalled\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             },
@@ -38766,7 +38904,7 @@
               "description": "Example SMS carrier deactivation event that suppresses the channel",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"action\": \"suppressed\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"action\": \"suppressed\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -39062,7 +39200,7 @@
               "itemType": null,
               "items": null,
               "required": true,
-              "description": "Holds information about an SMS `device` (an individual SMS channel).",
+              "description": "Describes the device involved in the `create_and_send` SMS event.\n\nHolds information about an SMS `device` (an individual SMS channel).",
               "deprecated": false,
               "enum": null,
               "example": null,
@@ -39265,12 +39403,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS Create and Send event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"create_and_send\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"channel_registered\": \"true\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"create_and_send\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"channel_registered\": \"true\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -39769,6 +39909,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS custom keyword response event",
@@ -40275,12 +40417,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS mobile_create_channel event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_create_channel\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"JOIN\",\n      \"outbound_message\": \"Your order number is #123456789. Text 'JOIN' to learn about new offers from us.\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_create_channel\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"JOIN\",\n      \"outbound_message\": \"Your order number is #123456789. Text 'JOIN' to learn about new offers from us.\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -40812,12 +40956,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS mobile_keyword_matched event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_matched\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Wanna join the club?\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_matched\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Wanna join the club?\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -41316,12 +41462,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS mobile_keyword_unmatched event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_unmatched\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"@%#!&@&#\",\n      \"outbound_message\": \"Wanna join the club?\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_unmatched\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"@%#!&@&#\",\n      \"outbound_message\": \"Wanna join the club?\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -41853,12 +42001,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS mobile_opt_in event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_in\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"y\",\n      \"outbound_message\": \"Do you want to get text alerts from us?\",\n      \"keyword\": \"Y\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_in\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"y\",\n      \"outbound_message\": \"Do you want to get text alerts from us?\",\n      \"keyword\": \"Y\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -42398,12 +42548,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS mobile_opt_out event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_out\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"STOP\",\n      \"outbound_message\": \"Text STOP to opt out of text messages from us.\",\n      \"keyword\": \"STOP\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_out\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"STOP\",\n      \"outbound_message\": \"Text STOP to opt out of text messages from us.\",\n      \"keyword\": \"STOP\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -42801,12 +42953,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS mobile_terminated_message event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_terminated_message\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_terminated_message\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -43387,12 +43541,14 @@
           ],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS opted_out event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": { \"sender\": \"15558675309\" }\n  },\n  \"body\": {\n    \"event_type\": \"opted_out\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": { \"sender\": \"14155550123\" }\n  },\n  \"body\": {\n    \"event_type\": \"opted_out\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -43894,12 +44050,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS registration event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"create\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"create\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -44471,12 +44629,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS RND scan event for a monthly scan that uninstalls a reassigned channel",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             },
@@ -44484,7 +44644,7 @@
               "description": "Example SMS RND scan event for a monthly scan that removes suppression when the channel was not reassigned",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"suppression_removed\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"suppression_removed\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             },
@@ -44492,7 +44652,7 @@
               "description": "Example SMS RND scan event for an app scan that uninstalls a reassigned channel",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             },
@@ -44500,7 +44660,7 @@
               "description": "Example SMS RND scan event for an app scan with no action when the channel was not reassigned",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"none\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"none\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -44968,12 +45128,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS suppression removal event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"suppression_removed\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"source\": \"ui\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"suppression_removed\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"source\": \"ui\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -45371,12 +45533,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS uninstalled event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"uninstall\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"uninstall\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -45877,12 +46041,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example SMS update event",
               "code": {
                 "json": [
-                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"registration_type\": \"update\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+                  "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"registration_type\": \"update\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
                 ]
               }
             }
@@ -45952,6 +46118,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -46037,6 +46205,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         }
@@ -46272,6 +46442,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Push sent to an audience at a defined date-time",
@@ -46440,6 +46612,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -46533,6 +46707,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example compliance request filter",
@@ -46696,6 +46872,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         },
@@ -47199,6 +47377,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example in-app context",
@@ -47497,12 +47677,14 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example mobile_originated_sms event body",
               "code": {
                 "json": [
-                  "{\n  \"event_type\": \"mobile_originated_sms\",\n  \"identifiers\": {\n    \"sender\": \"15558675309\",\n    \"msisdn\": \"15558968663\"\n  },\n  \"properties\": {\n    \"inbound_message\": \"join\",\n    \"outbound_message\": \"Thanks for joining!\",\n    \"keyword\": \"join\"\n  }\n}\n"
+                  "{\n  \"event_type\": \"mobile_originated_sms\",\n  \"identifiers\": {\n    \"sender\": \"14155550123\",\n    \"msisdn\": \"12025550123\"\n  },\n  \"properties\": {\n    \"inbound_message\": \"join\",\n    \"outbound_message\": \"Thanks for joining!\",\n    \"keyword\": \"join\"\n  }\n}\n"
                 ]
               }
             }
@@ -48057,6 +48239,8 @@
               }
             ]
           },
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Example filter",
@@ -48230,6 +48414,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [
             {
               "description": "Subset `SAMPLE`",
@@ -48299,6 +48485,8 @@
           "compositeOptions": [],
           "enum": null,
           "items": null,
+          "minItems": null,
+          "maxItems": null,
           "examples": [],
           "notes": []
         }

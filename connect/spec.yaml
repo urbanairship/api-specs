@@ -881,7 +881,7 @@ components:
                       description: An error code from the short message service center, if applicable.
                       type: string
                     is_rcs:
-                      description: A boolean describing if the message was delivered as RCS or not.
+                      description: A Boolean describing if the message was delivered as RCS or not.
                       type: boolean
                     sender:
                       description: The number or short code that the message originated from.
@@ -913,7 +913,7 @@ components:
                       description: The profile of the handset that received the message. This information is only present if the `result_status` is `N102`.
                       type: string
                     is_rcs:
-                      description: A boolean describing if the message was delivered as RCS or not.
+                      description: A Boolean describing if the message was delivered as RCS or not.
                       type: boolean
                     result_code:
                       description: A status code from the vendor, if applicable.
@@ -1571,7 +1571,7 @@ components:
       x-inline-component: true
     feature_flag_interaction:
       description: |
-        Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.
+        Occurs when a user interacts with a tracked flagged feature. See [Feature Flags](/guides/experimentation/feature-flags/#interaction-events). The events have a flag ID and flag name, which identify which flagged feature a user interacted with. They also have a Boolean `eligible` field, which indicates whether or not the user was in the feature flag audience and had access to the feature.
       properties:
         body:
           properties:
@@ -3428,7 +3428,7 @@ components:
             properties:
               properties:
                 is_rcs:
-                  description: A boolean describing whether the message was delivered as RCS.
+                  description: A Boolean describing whether the message was delivered as RCS.
                   type: boolean
                 number_of_message_parts:
                   description: The number of message parts delivered.
@@ -4001,7 +4001,7 @@ components:
         Occurs when a push is dropped from our system before delivery is attempted. This can happen:
 
           * When using [external data feeds](/guides/personalization/sources/external-data-feeds/) to personalize a message and an error was encountered or the feed returned a non-successful response
-          * When a [Message Limit](/guides/messaging/project/config/message-limits/) is met
+          * When a [message limit](/guides/messaging/message-limits/) is met
           * When a [ban list](/guides/messaging/messages/delivery/ban-lists/) webhook issues a `drop` response for a user
 
         Device information for the device that did not receive the push is included with `SEND_ABORTED` events.
@@ -4024,8 +4024,8 @@ components:
                 * `FEED_BANNED_RESPONSE`: The response from the endpoint indicated a channel was banned. See [Ban Lists](/guides/messaging/messages/delivery/ban-lists/).
                 * `FEED_REQUEST_REJECTED`: The request to the specified server was rejected. Occurs when a 4xx HTTP response code is returned when Airship calls the webhook.
                 * `FEED_RESOLVE_FAILURE`: The URI of the feed could not be resolved.
-                * `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/project/config/message-limits/) retrieval failed.
-                * `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/project/config/message-limits/) was exceeded.
+                * `FREQUENCY_LIMIT_FAILURE`: A [Message Limit](/guides/messaging/message-limits/) retrieval failed.
+                * `FREQUENCY_LIMIT_REACHED`: A [Message Limit](/guides/messaging/message-limits/) was exceeded.
                 * `UNKNOWN`: The error occurred due to another problem.
               enum:
                 - FEED_BANNED_RESPONSE
@@ -5153,9 +5153,10 @@ paths:
       x-note: |
         In the request specification, JSON collection types have semantic meaning.
 
-        **array**: Arrays indicate a boolean `"OR"`. Wherever an array appears in the specification, the resulting stream will contain the events passing any of the conditions defined by the array. An empty array results in a `400` response.
+        **array**: Arrays indicate a Boolean `"OR"`. Wherever an array appears in the specification, the resulting stream will contain the events passing any of the conditions defined by the array. An empty array results in a `400` response.
 
-        **object**: Object attributes indicate a boolean `"AND"`. All conditions in the object must be satisfied in order for an event to be written to the response. If you would like all events to pass the condition the attribute defines, omit the attribute. If an unexpected attribute appears on an event, a status code `400` response will be returned.
+        **object**: Object attributes indicate a Boolean `"AND"`. All conditions in the object must be satisfied in order for an event to be written to the response. If you would like all events to pass the condition the attribute defines, omit the attribute. If an unexpected attribute appears on an event, a status code `400` response will be returned.
+      x-weight: 80
   /api/events/general:
     post:
       description: |
@@ -5195,6 +5196,7 @@ paths:
       summary: Open a compliance event stream
       tags:
         - Compliance Event Stream
+      x-weight: 80
 servers:
   - description: The North American base URL for Airship's Real-Time Data Streaming API
     url: https://connect.urbanairship.com

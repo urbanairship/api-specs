@@ -320,7 +320,7 @@ components:
                   "audience" : {
                       "sms_id" :  {
                           "sender" : "12345",
-                          "msisdn" : "15552243311"
+                          "msisdn" : "14155550123"
                       }
                   }
               }
@@ -365,8 +365,7 @@ components:
                     "ua_app_version": "2020-02-01T002322-goat",
                     "ua_location_settings": "true",
                     "ua_language": "en",
-                    "ua_sdk_version": "13.1.0",
-                    "ua_carrier": "Verizon "
+                    "ua_sdk_version": "13.1.0"
                  },
                  "attributes": {
                     "first_name": "Cool",
@@ -2012,7 +2011,7 @@ components:
                 "audience": {
                   "create_and_send": [
                       {
-                          "ua_msisdn": "15558675309",
+                          "ua_msisdn": "14155550123",
                           "ua_sender": "15551234567",
                           "ua_opted_in": "2020-11-11T18:45:30",
                       }
@@ -2071,7 +2070,7 @@ components:
                   "create_and_send" : [
                     {
                       "ua_sender" : "12345",
-                      "ua_msisdn" : "15558675309",
+                      "ua_msisdn" : "14155550123",
                       "ua_opted_in" : "2020-08-30T22:35:00",
                       "delivery_image": "url",
                       "customer": {
@@ -2121,7 +2120,7 @@ components:
                   "create_and_send" : [
                     {
                       "ua_sender" : "12345",
-                      "ua_msisdn" : "15558675309",
+                      "ua_msisdn" : "14155550123",
                       "ua_opted_in" : "2020-08-30T22:35:00",
                       "delivery_image": "https://www.example.com/order12345.jpg",
                       "content-length": "1234567",
@@ -2172,7 +2171,7 @@ components:
                   "create_and_send" : [
                     {
                       "ua_sender" : "12345",
-                      "ua_msisdn" : "15558675309",
+                      "ua_msisdn" : "14155550123",
                       "ua_opted_in" : "2020-08-30T22:35:00",
                       "delivery_image": "https://www.example.com/order12345.jpg",
                       "content-length": "1234567",
@@ -2975,7 +2974,7 @@ components:
                "audience": {
                   "create_and_send" : [
                     {
-                      "ua_msisdn": "15558675309",
+                      "ua_msisdn": "14155550123",
                       "ua_sender": "12345",
                       "ua_opted_in": "2020-11-11T18:45:30"
                     }
@@ -3034,7 +3033,7 @@ components:
                   "create_and_send" : [
                     {
                       "ua_sender" : "12345",
-                      "ua_msisdn" : "15558675309",
+                      "ua_msisdn" : "14155550123",
                       "ua_opted_in" : "2020-08-30T22:35:00",
                       "customer": {
                           "first_name": "Jenny",
@@ -3075,7 +3074,7 @@ components:
                   "create_and_send" : [
                     {
                       "ua_sender" : "12345",
-                      "ua_msisdn" : "15558675309",
+                      "ua_msisdn" : "14155550123",
                       "ua_opted_in" : "2020-08-30T22:35:00",
                       "customer": {
                           "first_name": "Jenny",
@@ -4485,8 +4484,7 @@ paths:
                            "ua_app_version": "2020-02-01T002322-goat",
                            "ua_location_settings": "true",
                            "ua_language": "en",
-                           "ua_sdk_version": "12.2.0",
-                           "ua_carrier": "Verizon "
+                           "ua_sdk_version": "12.2.0"
                         },
                         "attributes": {
                            "first_name": "Cool",

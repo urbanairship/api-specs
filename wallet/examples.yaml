@@ -1347,6 +1347,18 @@ components:
                   }
                 }
               }
+    imageMetaData:
+      - description: Example image metadata
+        examples:
+          - lang: json
+            source: |
+              {
+                "path": "passtools_prod/1/images/587ac4e3d188b0fcd4f05038d8814fefd82ac834_test_image.png",
+                "source": "uploaded",
+                "imageType": "thumbnail_image",
+                "width": 180,
+                "height": 180
+              }
     iosFieldObject:
       - description: Example iOS field
         examples:
@@ -2022,7 +2034,17 @@ paths:
                   "endTime": {
                     "label": "End Time",
                     "value": "2019-09-25T11:00:00"
-                  }
+                  },
+                  "customActions": [
+                    {
+                      "type": "viewSchedule",
+                      "url": "https://example.com/schedule"
+                    },
+                    {
+                      "type": "watchTrailer",
+                      "url": "https://example.com/trailer"
+                    }
+                  ]
                 }
               }
       - description: Response
@@ -2062,7 +2084,17 @@ paths:
                   "endTime": {
                     "label": "End Time",
                     "value": "2019-09-25T11:00:00"
-                  }
+                  },
+                  "customActions": [
+                    {
+                      "type": "viewSchedule",
+                      "url": "https://example.com/schedule"
+                    },
+                    {
+                      "type": "watchTrailer",
+                      "url": "https://example.com/trailer"
+                    }
+                  ]
                 }
               }
   /events/project/{projectId}/passGroups/{passGroup}:
@@ -2694,7 +2726,17 @@ paths:
                        },
                        "destinationGate": "6",
                        "destinationTerminal": "1"
-                 }
+                 },
+                 "customActions": [
+                   {
+                     "type": "bookFlight",
+                     "url": "https://example.com/flights"
+                   },
+                   {
+                     "type": "call",
+                     "url": "tel:+18005551234"
+                   }
+                 ]
                 }
               }
       - description: Response
@@ -2782,7 +2824,17 @@ paths:
                        },
                        "destinationGate": "6",
                        "destinationTerminal": "1"
-                 }
+                 },
+                 "customActions": [
+                   {
+                     "type": "bookFlight",
+                     "url": "https://example.com/flights"
+                   },
+                   {
+                     "type": "call",
+                     "url": "tel:+18005551234"
+                   }
+                 ]
                 }
               }
   /flights/project/{projectId}/passGroups/{passGroup}:
@@ -3302,6 +3354,32 @@ paths:
                           "start": 0,
                           "pageSize": 2
                         }
+              }
+  /images/projects/{projectId}/{imageNameIdentifier}:
+    post:
+      - description: Example request
+        examples:
+          - lang: HTTP
+            source: |
+              POST /v1/images/projects/12345/test_image.png?imageType=thumbnail_image HTTP/1.1
+              Authorization: Basic <authorization string>
+              Content-Type: image/png
+              Api-Revision: 1.2
+
+              [Binary PNG data]
+      - description: Response
+        examples:
+          - lang: HTTP
+            source: |
+              HTTP/1.1 200 OK
+              Content-Type: application/json; charset=utf-8
+
+              {
+                "path": "passtools_prod/1/images/587ac4e3d188b0fcd4f05038d8814fefd82ac834_test_image.png",
+                "source": "uploaded",
+                "imageType": "thumbnail_image",
+                "width": 180,
+                "height": 180
               }
   /links/adaptive:
     get:
@@ -5776,6 +5854,28 @@ paths:
                          "country": "US"
                       }
                   ],
+                  "customActions": [
+                      {
+                         "type": "viewOffersRewards",
+                         "url": "https://example.com/rewards"
+                      },
+                      {
+                         "type": "shop",
+                         "url": "https://example.com/shop"
+                      }
+                  ],
+                  "barcodes": [
+                      {
+                         "type": "QR_CODE",
+                         "value": "https://example.com/loyalty/12345",
+                         "altText": "Scan QR Code"
+                      },
+                      {
+                         "type": "CODE_128",
+                         "value": "123456789012",
+                         "altText": "123456789012"
+                      }
+                  ],
                   "publicUrl": {
                       "type": "single"
                   }
@@ -5798,6 +5898,18 @@ paths:
                         "type": "Single",
                         "installs": 0
                   },
+                  "customActions": [
+                      {
+                         "id": "action-1",
+                         "type": "viewOffersRewards",
+                         "url": "https://example.com/rewards"
+                      },
+                      {
+                         "id": "action-2",
+                         "type": "shop",
+                         "url": "https://example.com/shop"
+                      }
+                  ],
                   "passFields": {
                       "gate": {
                           "changeMessage": "Your gate has changed to %@",
@@ -8531,9 +8643,130 @@ paths:
                 "description": "Description",
                 "name": "Loyalty Card",
                 "disabled": "False",
+                "customActions": [
+                  {
+                    "type": "membershipBenefits",
+                    "url": "https://example.com/benefits"
+                  },
+                  {
+                    "type": "addToBalance",
+                    "url": "https://example.com/reload"
+                  }
+                ],
+                "barcodes": [
+                  {
+                    "type": "QR_CODE",
+                    "value": "https://example.com/loyalty/1234",
+                    "altText": "Scan QR Code"
+                  },
+                  {
+                    "type": "CODE_128",
+                    "value": "123456789012",
+                    "altText": "123456789012"
+                  }
+                ],
                 "expiryInfo": {
                   "expiryDuration": 365
                 }
+              }
+      - description: Example Apple Poster Generic template
+        examples:
+          - lang: HTTP
+            source: |
+              POST /v1/template/1234 HTTP/1.1
+              Content-Type: application/json
+              Authorization: Basic <Base64 key>
+              Api-Revision: 1.2
+
+              {
+                "headers": {
+                  "logo_color": {
+                    "formatType": 1,
+                    "fieldType": "topLevel",
+                    "value": "rgb(255,255,255)"
+                  },
+                  "icon_image": {
+                    "formatType": 1,
+                    "fieldType": "image",
+                    "value": "https://example.com/images/icon.png"
+                  },
+                  "logo_image": {
+                    "formatType": 1,
+                    "fieldType": "image",
+                    "value": "https://example.com/images/logo.png"
+                  },
+                  "background_image": {
+                    "formatType": 1,
+                    "fieldType": "image",
+                    "value": "https://example.com/images/poster-background.png"
+                  },
+                  "barcode_type": {
+                    "formatType": 1,
+                    "fieldType": "barcode",
+                    "value": "QR_CODE"
+                  },
+                  "barcode_value": {
+                    "formatType": 1,
+                    "fieldType": "barcode",
+                    "value": "https://example.com/generic/pass/1234"
+                  },
+                  "barcodeAltText": {
+                    "formatType": 1,
+                    "fieldType": "barcode",
+                    "value": "Scan Pass"
+                  }
+                },
+                "fields": {
+                  "EventTitle": {
+                    "formatType": "String",
+                    "order": 1,
+                    "fieldType": "header",
+                    "value": "VIP Access",
+                    "label": "Pass"
+                  },
+                  "MemberName": {
+                    "formatType": "String",
+                    "order": 1,
+                    "fieldType": "primary",
+                    "value": "Alex Smith",
+                    "label": "Member"
+                  },
+                  "FooterInfo": {
+                    "formatType": "String",
+                    "order": 1,
+                    "fieldType": "footer",
+                    "value": "Valid until Dec 2026",
+                    "label": "Status"
+                  },
+                  "PassDetails": {
+                    "formatType": "String",
+                    "order": 1,
+                    "fieldType": "secondary",
+                    "value": "Tier 1 Benefits Included",
+                    "label": "Details"
+                  }
+                },
+                "vendor": "Apple",
+                "projectType": "generic",
+                "projectId": 1234,
+                "type": "Generic",
+                "vendorId": 1,
+                "deleted": "False",
+                "description": "Poster Generic Pass Template",
+                "name": "VIP Poster Pass",
+                "disabled": "False",
+                "barcodes": [
+                  {
+                    "type": "QR_CODE",
+                    "value": "https://example.com/generic/pass/1234",
+                    "altText": "Scan Pass"
+                  },
+                  {
+                    "type": "CODE_128",
+                    "value": "987654321098",
+                    "altText": "987654321098"
+                  }
+                ]
               }
       - description: Example Google template
         examples:

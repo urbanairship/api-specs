@@ -73,7 +73,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"action\": \"uninstalled\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"action\": \"uninstalled\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         },
@@ -82,7 +82,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"action\": \"suppressed\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"carrier_deactivation\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"action\": \"suppressed\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -177,7 +177,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"body\": {\n    \"interaction_type\": \"delivery_report\",\n    \"name\": \"dispatched\",\n    \"properties\": {\n      \"sender\": 15551234567,\n      \"vendor\": \"CLX\",\n      \"vendorDeliveryId\": \"FENhObMKbCjMOwtw\"\n    },\n    \"source\": \"API\",\n    \"triggering_push\": {\n      \"campaigns\": {\n        \"categories\": [\n          \"New Users\"\n        ]\n      },\n      \"push_id\": \"9323b708-7741-4a85-8b1b-e55ad8ce64fc\"\n    }\n  },\n  \"device\": {\n    \"channel\": \"db7576c7-6b3d-4f07-b13a-ea3824fea262\",\n    \"delivery_address\": \"15558675309\",\n    \"device_type\": \"SMS\"\n  },\n  \"id\": \"48af12e8-6920-4e4e-bef8-b5a6918eec35\",\n  \"occurred\": \"2019-01-31T17:45:38.700Z\",\n  \"offset\": \"1000002098217\",\n  \"processed\": \"2019-01-31T17:45:41.285Z\",\n  \"type\": \"CUSTOM\"\n}\n"
+              "source": "{\n  \"body\": {\n    \"interaction_type\": \"delivery_report\",\n    \"name\": \"dispatched\",\n    \"properties\": {\n      \"sender\": 15551234567,\n      \"vendor\": \"CLX\",\n      \"vendorDeliveryId\": \"FENhObMKbCjMOwtw\"\n    },\n    \"source\": \"API\",\n    \"triggering_push\": {\n      \"campaigns\": {\n        \"categories\": [\n          \"New Users\"\n        ]\n      },\n      \"push_id\": \"9323b708-7741-4a85-8b1b-e55ad8ce64fc\"\n    }\n  },\n  \"device\": {\n    \"channel\": \"db7576c7-6b3d-4f07-b13a-ea3824fea262\",\n    \"delivery_address\": \"14155550123\",\n    \"device_type\": \"SMS\"\n  },\n  \"id\": \"48af12e8-6920-4e4e-bef8-b5a6918eec35\",\n  \"occurred\": \"2019-01-31T17:45:38.700Z\",\n  \"offset\": \"1000002098217\",\n  \"processed\": \"2019-01-31T17:45:41.285Z\",\n  \"type\": \"CUSTOM\"\n}\n"
             }
           ]
         }
@@ -573,7 +573,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_create_channel\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"JOIN\",\n      \"outbound_message\": \"Your order number is #123456789. Text 'JOIN' to learn about new offers from us.\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_create_channel\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"JOIN\",\n      \"outbound_message\": \"Your order number is #123456789. Text 'JOIN' to learn about new offers from us.\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -584,7 +584,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_matched\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Wanna join the club?\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_matched\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Wanna join the club?\",\n      \"keyword\": \"JOIN\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -595,7 +595,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_unmatched\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"@%#!&@&#\",\n      \"outbound_message\": \"Wanna join the club?\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_keyword_unmatched\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"@%#!&@&#\",\n      \"outbound_message\": \"Wanna join the club?\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -606,7 +606,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_in\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"y\",\n      \"outbound_message\": \"Do you want to get text alerts from us?\",\n      \"keyword\": \"Y\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_in\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"y\",\n      \"outbound_message\": \"Do you want to get text alerts from us?\",\n      \"keyword\": \"Y\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -617,7 +617,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_out\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"STOP\",\n      \"outbound_message\": \"Text STOP to opt out of text messages from us.\",\n      \"keyword\": \"STOP\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_opt_out\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"STOP\",\n      \"outbound_message\": \"Text STOP to opt out of text messages from us.\",\n      \"keyword\": \"STOP\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -628,7 +628,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_originated_sms\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Thanks for joining!\",\n      \"keyword\": \"join\"\n    }\n  },\n  \"type\": \"MOBILE_ORIGINATED\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_originated_sms\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"inbound_message\": \"join\",\n      \"outbound_message\": \"Thanks for joining!\",\n      \"keyword\": \"join\"\n    }\n  },\n  \"type\": \"MOBILE_ORIGINATED\"\n}\n"
             }
           ]
         }
@@ -639,7 +639,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"event_type\": \"mobile_originated_sms\",\n  \"identifiers\": {\n    \"sender\": \"15558675309\",\n    \"msisdn\": \"15558968663\"\n  },\n  \"properties\": {\n    \"inbound_message\": \"join\",\n    \"outbound_message\": \"Thanks for joining!\",\n    \"keyword\": \"join\"\n  }\n}\n"
+              "source": "{\n  \"event_type\": \"mobile_originated_sms\",\n  \"identifiers\": {\n    \"sender\": \"14155550123\",\n    \"msisdn\": \"12025550123\"\n  },\n  \"properties\": {\n    \"inbound_message\": \"join\",\n    \"outbound_message\": \"Thanks for joining!\",\n    \"keyword\": \"join\"\n  }\n}\n"
             }
           ]
         }
@@ -650,7 +650,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_terminated_message\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"mobile_terminated_message\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -683,7 +683,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": { \"sender\": \"15558675309\" }\n  },\n  \"body\": {\n    \"event_type\": \"opted_out\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": { \"sender\": \"14155550123\" }\n  },\n  \"body\": {\n    \"event_type\": \"opted_out\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -791,7 +791,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         },
@@ -800,7 +800,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"suppression_removed\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"suppression_removed\",\n      \"source\": \"monthly_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         },
@@ -809,7 +809,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": true,\n      \"action\": \"uninstalled\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         },
@@ -818,7 +818,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"none\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"rnd_scan\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"reassigned\": false,\n      \"action\": \"none\",\n      \"source\": \"app_scan\",\n      \"scan_id\": \"786e06ec-a58a-4117-bb24-b37089b84169\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -882,7 +882,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n    \"id\": \"31549b7d-a435-4b04-abca-69bfd4fb6aaa\",\n    \"offset\": \"1000005313850\",\n    \"occurred\": \"2019-07-10T23:18:57.465Z\",\n    \"processed\": \"2019-07-10T23:18:58.148Z\",\n    \"device\": {\n        \"channel\": \"ec71312b-42e4-4bcd-b742-581a84941793\",\n        \"device_type\": \"SMS\",\n        \"delivery_address\": \"15551234567\",\n        \"identifiers\": {\n            \"sender\": \"15558647425\"\n        },\n        \"attributes\": {\n            \"web_user_agent_string\": \"Mozilla\\/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/75.0.3770.100 Safari\\/537.36\"\n        }\n    },\n    \"body\": {\n        \"push_id\": \"f4b4201a-70e2-4a8d-bc8f-f35ddfa7d0e7\",\n        \"group_id\": \"47f01bbf-2efa-4743-acd8-fd1023a36744\",\n        \"properties\": {\n          \"original_url\": \"api/connect#schemas-short_link_click\"\n        }\n    },\n    \"type\": \"SHORT_LINK_CLICK\"\n}\n"
+              "source": "{\n    \"id\": \"31549b7d-a435-4b04-abca-69bfd4fb6aaa\",\n    \"offset\": \"1000005313850\",\n    \"occurred\": \"2019-07-10T23:18:57.465Z\",\n    \"processed\": \"2019-07-10T23:18:58.148Z\",\n    \"device\": {\n        \"channel\": \"ec71312b-42e4-4bcd-b742-581a84941793\",\n        \"device_type\": \"SMS\",\n        \"delivery_address\": \"12025550123\",\n        \"identifiers\": {\n            \"sender\": \"14155550123\"\n        },\n        \"attributes\": {\n            \"web_user_agent_string\": \"Mozilla\\/5.0 (Macintosh; Intel Mac OS X 10_14_5) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/75.0.3770.100 Safari\\/537.36\"\n        }\n    },\n    \"body\": {\n        \"push_id\": \"f4b4201a-70e2-4a8d-bc8f-f35ddfa7d0e7\",\n        \"group_id\": \"47f01bbf-2efa-4743-acd8-fd1023a36744\",\n        \"properties\": {\n          \"original_url\": \"api/connect#schemas-short_link_click\"\n        }\n    },\n    \"type\": \"SHORT_LINK_CLICK\"\n}\n"
             }
           ]
         }
@@ -893,7 +893,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\"\n  },\n  \"body\": {\n    \"event_type\": \"create_and_send\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"channel_registered\": \"true\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\"\n  },\n  \"body\": {\n    \"event_type\": \"create_and_send\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"channel_registered\": \"true\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -904,7 +904,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"create\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\"\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"opted_in\": \"2018-12-03T19:31:10.000Z\",\n      \"registration_type\": \"create\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -915,7 +915,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"registration_type\": \"update\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"registration\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"registration_type\": \"update\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -926,7 +926,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"uninstall\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"uninstall\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }
@@ -988,7 +988,7 @@
           "examples": [
             {
               "lang": "json",
-              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"15558968663\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"suppression_removed\",\n    \"identifiers\": {\n      \"sender\": \"15558675309\",\n      \"msisdn\": \"15558968663\"\n    },\n    \"properties\": {\n      \"source\": \"ui\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
+              "source": "{\n  \"id\": \"a7086338-0473-46fe-8d9b-cb61305c3c0d\",\n  \"offset\": \"1000000701505\",\n  \"occurred\": \"2018-12-03T19:31:10.000Z\",\n  \"processed\": \"2018-12-03T19:31:11.302Z\",\n  \"device\": {\n    \"channel\": \"a828de17-b315-4e80-9d2d-35a906afeacf\",\n    \"device_type\": \"SMS\",\n    \"delivery_address\": \"12025550123\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\"\n    }\n  },\n  \"body\": {\n    \"event_type\": \"suppression_removed\",\n    \"identifiers\": {\n      \"sender\": \"14155550123\",\n      \"msisdn\": \"12025550123\"\n    },\n    \"properties\": {\n      \"source\": \"ui\"\n    }\n  },\n  \"type\": \"COMPLIANCE\"\n}\n"
             }
           ]
         }

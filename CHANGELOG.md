@@ -1,5 +1,17 @@
 # Airship API Specs Changelog
 
+## Version 9 (November 19, 2026)
+
+### Changes
+
+- Renamed summaries of some Airship API and Wallet API endpoints
+- Added actions to Apple Wallet and Google Wallet passes
+- Removed `ua_carrier` from Airship channel's device_attributes
+- Added Upload private image for passes endpoint
+- Added OAuth scope support for Airship segments-api
+- Clarified the Create and Send `ua_msisdn` 400 error behavior
+- Added Wallet API support for iOS 27 Poster Generic pass types and new barcode formats
+
 ## Version 8 (August 20, 2026)
 
 ### Changes
